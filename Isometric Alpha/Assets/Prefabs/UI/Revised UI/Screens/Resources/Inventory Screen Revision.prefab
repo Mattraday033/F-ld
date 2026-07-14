@@ -1706,7 +1706,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 127.5, y: -20}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 215, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &6430496007046237466
 MonoBehaviour:
@@ -4910,6 +4910,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right Section Parent
       objectReference: {fileID: 0}
+    - target: {fileID: 1594936102191279497, guid: dd0d310db207f40488ad42fba92a2c2c,
+        type: 3}
+      propertyPath: m_TagString
+      value: ItemUseTarget
+      objectReference: {fileID: 0}
     - target: {fileID: 1692195369613395054, guid: dd0d310db207f40488ad42fba92a2c2c,
         type: 3}
       propertyPath: m_IsActive
@@ -6542,7 +6547,7 @@ PrefabInstance:
     - target: {fileID: 6600302386269410421, guid: c682e00441168064c8b07b09fbd70a16,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 6600302386269410421, guid: c682e00441168064c8b07b09fbd70a16,
         type: 3}
@@ -6923,7 +6928,7 @@ PrefabInstance:
     - target: {fileID: 6600302386269410421, guid: c682e00441168064c8b07b09fbd70a16,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 6600302386269410421, guid: c682e00441168064c8b07b09fbd70a16,
         type: 3}
@@ -7304,7 +7309,7 @@ PrefabInstance:
     - target: {fileID: 6600302386269410421, guid: c682e00441168064c8b07b09fbd70a16,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 6600302386269410421, guid: c682e00441168064c8b07b09fbd70a16,
         type: 3}

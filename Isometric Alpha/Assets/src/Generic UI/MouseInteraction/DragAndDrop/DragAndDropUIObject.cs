@@ -112,30 +112,14 @@ public class DragAndDropUIObject : MonoBehaviour, IDragAndDropContainer
 
     public bool handleUsableItemDrop(GameObject target)
     {
-        DescriptionPanel partyMemberGridRow = target.GetComponent<DescriptionPanel>();
+        DragAndDropItemReceiver receiver = target.GetComponent<DragAndDropItemReceiver>();
 
-        UsableItem item = getItemBeingDragged() as UsableItem;
-
-        if (item == null)
+        if(receiver == null)
         {
             return false;
         }
 
-        Stats targetStats = Stats.convertIDescribableToStats(partyMemberGridRow.getObjectBeingDescribed());
-
-        if (!item.fitsUseCriteria(targetStats))
-        {
-            return false;
-        }
-
-        item.use(targetStats);
-
-        if (!item.infiniteUses())
-        {
-            Inventory.removeItem(item, 1);
-        }
-
-        return true;
+        return receiver.handleItemDrop(getItemBeingDragged() as UsableItem);
     }
 
 }

@@ -424,6 +424,7 @@ GameObject:
   - component: {fileID: 4426734861697344549}
   - component: {fileID: 5235567982660180143}
   - component: {fileID: 7650451519715035781}
+  - component: {fileID: 5793756068149403905}
   m_Layer: 5
   m_Name: Party Member Sprite Row
   m_TagString: ItemUseTarget
@@ -680,6 +681,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 80, y: 130}
   m_EdgeRadius: 0
+--- !u!114 &5793756068149403905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4720634122029854215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 649a6e7bf9e233f4188d336be19869fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 5524244949949089457}
 --- !u!1 &6424313849712492669
 GameObject:
   m_ObjectHideFlags: 0

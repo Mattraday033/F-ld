@@ -708,8 +708,10 @@ MonoBehaviour:
   contentsText: {fileID: 0}
   worthText: {fileID: 0}
   slotText: {fileID: 0}
+  slotsUsedText: {fileID: 0}
   weaponNameText: {fileID: 0}
   rangeText: {fileID: 0}
+  invulnerabilityText: {fileID: 0}
   armorRatingText: {fileID: 0}
   damageText: {fileID: 0}
   offHandDamageText: {fileID: 0}
@@ -724,8 +726,7 @@ MonoBehaviour:
   wisText: {fileID: 0}
   chaText: {fileID: 0}
   nestedDescriptionPanel: {fileID: 0}
-  gameObjectDisplayCanvas: {fileID: 0}
-  displayAdjustmentCoords: 0000000000000000
+  inventoryGridRowButton: {fileID: 0}
 --- !u!114 &1984960761692409040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +748,7 @@ MonoBehaviour:
   descriptionPanel: {fileID: 786713196492246898}
   wipeIfIneligible: 0
   buttonTexts: []
+  inventoryGridRowButton: {fileID: 0}
 --- !u!222 &2716761341333396534
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -95,10 +95,12 @@ MonoBehaviour:
   formatter: {fileID: 5462414034071002763}
   statGridLayout: {fileID: 0}
   nextBuilder: {fileID: 0}
+  inspectNodesAllowed: 1
   primaryStatParent: {fileID: 6434613136937206454}
   secondaryStatParent: {fileID: 1424782763857597878}
   primaryGridLayout: {fileID: 6819067121952504262}
   secondaryGridLayout: {fileID: 3618982117652726289}
+  moreInfoNode: {fileID: 0}
   numberOfTilesPerRow: 4
 --- !u!114 &5462414034071002763
 MonoBehaviour:

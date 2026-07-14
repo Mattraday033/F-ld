@@ -1000,6 +1000,7 @@ MonoBehaviour:
   formatter: {fileID: 7296700196902700887}
   statGridLayout: {fileID: 0}
   nextBuilder: {fileID: 2580468908390234617}
+  inspectNodesAllowed: 1
   setNamePivot: 0
   maxChildren: 3
   nameParent: {fileID: 2965306967946401831}
@@ -1007,6 +1008,8 @@ MonoBehaviour:
   bonusDamageParent: {fileID: 8419197062011041120}
   levelParent: {fileID: 8419197062011041120}
   descriptionParent: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  interiorImage: {fileID: 0}
   inspectNode: {fileID: 0}
   moreInfoNode: {fileID: 0}
 --- !u!114 &6770425018741148724

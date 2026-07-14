@@ -681,13 +681,18 @@ MonoBehaviour:
   formatter: {fileID: 7296700196902700887}
   statGridLayout: {fileID: 0}
   nextBuilder: {fileID: 5347410134021113176}
+  inspectNodesAllowed: 1
   setNamePivot: 0
   maxChildren: 3
   nameParent: {fileID: 7870940418150288260}
   healthParent: {fileID: 3515956146892269251}
+  bonusDamageParent: {fileID: 0}
   levelParent: {fileID: 0}
   descriptionParent: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  interiorImage: {fileID: 0}
   inspectNode: {fileID: 0}
+  moreInfoNode: {fileID: 0}
 --- !u!114 &6770425018741148724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1525,10 +1530,12 @@ MonoBehaviour:
   formatter: {fileID: 2970838710676886844}
   statGridLayout: {fileID: 0}
   nextBuilder: {fileID: 0}
+  inspectNodesAllowed: 1
   primaryStatParent: {fileID: 4303391754364471553}
   secondaryStatParent: {fileID: 8156360674639732225}
   primaryGridLayout: {fileID: 4347908666415854193}
   secondaryGridLayout: {fileID: 5822551242859579814}
+  moreInfoNode: {fileID: 0}
   numberOfTilesPerRow: 4
 --- !u!114 &2970838710676886844
 MonoBehaviour:
