@@ -289,7 +289,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -740,6 +740,12 @@ MonoBehaviour:
   middleRing: {fileID: 1426825455069350688}
   midRingResting: {x: 0, y: 2, z: 0}
   topRingResting: {x: 0, y: 3, z: 0}
+  bottomRingImage: {fileID: 4618681425288847220}
+  middleRingImage: {fileID: 266205060965312138}
+  topRingImage: {fileID: 8167906906158448118}
+  iconBackground: {fileID: 8464658162559548995}
+  icon: {fileID: 7731222575591200452}
+  iconText: {fileID: 1200145878457257178}
 --- !u!114 &2940347305784251428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1811,7 +1817,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2583,6 +2589,12 @@ MonoBehaviour:
   middleRing: {fileID: 6491479803775474000}
   midRingResting: {x: 0, y: 2, z: 0}
   topRingResting: {x: 0, y: 3, z: 0}
+  bottomRingImage: {fileID: 7683853686861011829}
+  middleRingImage: {fileID: 1025444668502259376}
+  topRingImage: {fileID: 3748029151642199159}
+  iconBackground: {fileID: 417731557881728647}
+  icon: {fileID: 872060048506962836}
+  iconText: {fileID: 3070343388724381581}
 --- !u!114 &3238978295835115351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2729,7 +2741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4371,7 +4383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

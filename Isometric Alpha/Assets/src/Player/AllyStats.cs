@@ -9,6 +9,8 @@ using System.Linq;
 
 public enum PrimaryStat{Strength = 0, Dexterity = 1, Wisdom = 2, Charisma = 3, None = 4}
 
+
+
 public class AllyStats : Stats
 {
     #region Constants
@@ -233,7 +235,7 @@ public class AllyStats : Stats
 
     // public int getAllStatBoosts
 
-    private int[] getStatsAsArray()
+    public int[] getStatsAsArray()
     {
         return new int[] { strength, dexterity, wisdom, charisma };
     }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -11,8 +12,15 @@ public class ThreeRingButton : Button, IPointerDownHandler, IPointerUpHandler
     public Transform middleRing;
 
     public Vector3 midRingResting;
-    public Vector3 topRingResting;
+    public Vector3 topRingResting; 
 
+    public Image bottomRingImage;
+    public Image middleRingImage;
+    public Image topRingImage;
+
+    public Image iconBackground;
+    public Image icon;
+    public TextMeshProUGUI iconText;
 
     protected override void Awake()
     {
@@ -60,11 +68,12 @@ public class ThreeRingButton : Button, IPointerDownHandler, IPointerUpHandler
         }
     }
 
-    public void setInteractable(bool newInteractable)
+    protected override void DoStateTransition(SelectionState state, bool instant)
     {
-        interactable = newInteractable;
+        base.DoStateTransition(state,instant);
 
         setPositionByInteractability();
+        setColorByInteractability();
     }
 
     private void setPositionByInteractability()
@@ -88,5 +97,29 @@ public class ThreeRingButton : Button, IPointerDownHandler, IPointerUpHandler
     {
         topRing.localPosition = Vector2.zero;
         middleRing.localPosition = Vector2.zero;
+    }
+
+    public void setColorByInteractability()
+    {
+        
+        if(interactable)
+        {
+        //     bottomRingImage.color = ;
+
+            // iconBackground.color = ;            
+            icon.color = ColorList.grey245;
+            iconText.color = ColorList.grey245;
+        } else
+        {
+        //     bottomRingImage.color = ;
+
+            // iconBackground.color = ;
+
+            icon.color = ColorList.grey155;
+            iconText.color = ColorList.grey155;
+        }
+
+        middleRingImage.enabled = interactable;
+        topRingImage.enabled = interactable;
     }
 }

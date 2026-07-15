@@ -258,6 +258,12 @@ MonoBehaviour:
   middleRing: {fileID: 458947025956581238}
   midRingResting: {x: 0, y: 1, z: 0}
   topRingResting: {x: 0, y: 1.5, z: 0}
+  bottomRingImage: {fileID: 0}
+  middleRingImage: {fileID: 0}
+  topRingImage: {fileID: 0}
+  iconBackground: {fileID: 0}
+  icon: {fileID: 0}
+  iconText: {fileID: 0}
 --- !u!114 &778326344933110412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2468,6 +2474,12 @@ MonoBehaviour:
   middleRing: {fileID: 656936972694653573}
   midRingResting: {x: 0, y: 0, z: 0}
   topRingResting: {x: 0, y: 0, z: 0}
+  bottomRingImage: {fileID: 0}
+  middleRingImage: {fileID: 0}
+  topRingImage: {fileID: 0}
+  iconBackground: {fileID: 0}
+  icon: {fileID: 0}
+  iconText: {fileID: 0}
 --- !u!114 &496317666776199227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2701,6 +2713,12 @@ MonoBehaviour:
   middleRing: {fileID: 2171133939362052327}
   midRingResting: {x: 0, y: 1, z: 0}
   topRingResting: {x: 0, y: 1.5, z: 0}
+  bottomRingImage: {fileID: 0}
+  middleRingImage: {fileID: 0}
+  topRingImage: {fileID: 0}
+  iconBackground: {fileID: 0}
+  icon: {fileID: 0}
+  iconText: {fileID: 0}
 --- !u!114 &1347351015434085661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3930,7 +3948,7 @@ GameObject:
   - component: {fileID: 1389940971344446560}
   - component: {fileID: 9222102915911195501}
   m_Layer: 5
-  m_Name: Character Creation PopUp Revision
+  m_Name: Old Character Creation PopUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3974,20 +3992,19 @@ MonoBehaviour:
   popupProgenitor: {fileID: 0}
   nameField: {fileID: 2488819404772177787}
   currentStats: {fileID: 0}
-  incrementButtonParents:
-  - {fileID: 6245666072719673818}
-  - {fileID: 4320050921396766424}
-  - {fileID: 5679878058451885643}
-  - {fileID: 1362402319916253651}
-  decrementButtonParents:
-  - {fileID: 4902554491535133754}
-  - {fileID: 2979034442261906232}
-  - {fileID: 6662711049799048107}
-  - {fileID: 21522764055577651}
+  pageButtons: []
+  plusButton: {fileID: 0}
+  minusButton: {fileID: 0}
   pointsToSpend: 1
   pointsSpent: 0
   pointsToSpendDisplay: {fileID: 6160408309050189517}
-  primaryStatsPanel: {fileID: 1056025454871907204}
+  statPageTitle: {fileID: 0}
+  statAmount: {fileID: 0}
+  statCombatDescription: {fileID: 0}
+  statDialogueDescription: {fileID: 0}
+  statMobilityDescription: {fileID: 0}
+  statIcon: {fileID: 0}
+  currentPrimaryStatPage: 0
   portraitNameIndex: 0
   spriteNameIndex: 0
   portraitImage: {fileID: 7828165097984690537}
@@ -6587,6 +6604,12 @@ MonoBehaviour:
   middleRing: {fileID: 2307591712060198286}
   midRingResting: {x: 0, y: 0, z: 0}
   topRingResting: {x: 0, y: 0, z: 0}
+  bottomRingImage: {fileID: 0}
+  middleRingImage: {fileID: 0}
+  topRingImage: {fileID: 0}
+  iconBackground: {fileID: 0}
+  icon: {fileID: 0}
+  iconText: {fileID: 0}
 --- !u!114 &3456680477128193840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7601,6 +7624,12 @@ MonoBehaviour:
   middleRing: {fileID: 4763586168546764671}
   midRingResting: {x: 0, y: 1, z: 0}
   topRingResting: {x: 0, y: 1.5, z: 0}
+  bottomRingImage: {fileID: 0}
+  middleRingImage: {fileID: 0}
+  topRingImage: {fileID: 0}
+  iconBackground: {fileID: 0}
+  icon: {fileID: 0}
+  iconText: {fileID: 0}
 --- !u!114 &5658775324372793989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11078,6 +11107,12 @@ MonoBehaviour:
   middleRing: {fileID: 8952299396539765270}
   midRingResting: {x: 0, y: 0, z: 0}
   topRingResting: {x: 0, y: 0, z: 0}
+  bottomRingImage: {fileID: 0}
+  middleRingImage: {fileID: 0}
+  topRingImage: {fileID: 0}
+  iconBackground: {fileID: 0}
+  icon: {fileID: 0}
+  iconText: {fileID: 0}
 --- !u!114 &8341328576196995240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12131,6 +12166,12 @@ MonoBehaviour:
   middleRing: {fileID: 7710293112211595380}
   midRingResting: {x: 0, y: 1, z: 0}
   topRingResting: {x: 0, y: 1.5, z: 0}
+  bottomRingImage: {fileID: 0}
+  middleRingImage: {fileID: 0}
+  topRingImage: {fileID: 0}
+  iconBackground: {fileID: 0}
+  icon: {fileID: 0}
+  iconText: {fileID: 0}
 --- !u!114 &7463551933959028110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13103,6 +13144,12 @@ MonoBehaviour:
   middleRing: {fileID: 7224653331444483463}
   midRingResting: {x: 0, y: 0, z: 0}
   topRingResting: {x: 0, y: 0, z: 0}
+  bottomRingImage: {fileID: 0}
+  middleRingImage: {fileID: 0}
+  topRingImage: {fileID: 0}
+  iconBackground: {fileID: 0}
+  icon: {fileID: 0}
+  iconText: {fileID: 0}
 --- !u!114 &7763556043533877049
 MonoBehaviour:
   m_ObjectHideFlags: 0

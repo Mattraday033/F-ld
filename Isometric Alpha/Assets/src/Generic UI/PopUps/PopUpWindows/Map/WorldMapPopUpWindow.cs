@@ -127,16 +127,16 @@ public class WorldMapPopUpWindow : PopUpWindow, IEscapable
         switch(currentZoomLevel)
         {
             case ZoomLevel.FarthestOut:
-                zoomOutButton.setInteractable(false);
-                zoomInButton.setInteractable(true);
+                zoomOutButton.interactable = false;
+                zoomInButton.interactable = true;
                 return;
             case ZoomLevel.Middle:
-                zoomOutButton.setInteractable(true);
-                zoomInButton.setInteractable(true);
+                zoomOutButton.interactable = true;
+                zoomInButton.interactable = true;
                 return;
             case ZoomLevel.FarthestIn:
-                zoomOutButton.setInteractable(true);
-                zoomInButton.setInteractable(false);
+                zoomOutButton.interactable = true;
+                zoomInButton.interactable = false;
                 return;
         }
     }

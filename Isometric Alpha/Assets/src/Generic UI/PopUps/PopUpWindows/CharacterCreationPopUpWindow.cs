@@ -19,13 +19,25 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
     public AllyStats currentStats;
 
-    public GameObject[] incrementButtonParents;
-    public GameObject[] decrementButtonParents;
+    public Button[] pageButtons;
+
+    public ThreeRingButton plusButton;
+    public ThreeRingButton minusButton;
 
     public int pointsToSpend;
     public int pointsSpent;
 
     public TextMeshProUGUI pointsToSpendDisplay;
+    public TextMeshProUGUI statPageTitle;
+    public TextMeshProUGUI statAmount;
+
+    public TextMeshProUGUI statCombatDescription;
+    public TextMeshProUGUI statDialogueDescription;
+    public TextMeshProUGUI statMobilityDescription;
+
+    public SlotIconHover statIcon;
+
+    public PrimaryStat currentPrimaryStatPage = PrimaryStat.Strength;
 
     public PrimaryStatsPanel primaryStatsPanel;
 
@@ -94,12 +106,19 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         EventSystem.current.SetSelectedGameObject(nameField.gameObject);
     }
 
-    public void incrementStat(EnumButtonPasser passer)
+    public void setPage(int primaryStat)
+    {
+        currentPrimaryStatPage = (PrimaryStat) primaryStat;
+
+        populate();
+    }
+
+    public void incrementStat()
     {
         pointsToSpend--;
         pointsSpent++;
 
-        switch (passer.PrimaryStat)
+        switch (currentPrimaryStatPage)
         {
             case PrimaryStat.Strength:
                 currentStats.strength = currentStats.getStrength() + 1;
@@ -110,22 +129,20 @@ public class CharacterCreationPopUpWindow : PopUpWindow
             case PrimaryStat.Wisdom:
                 currentStats.wisdom = currentStats.getWisdom() + 1;
                 break;
-            case PrimaryStat.Charisma:
+            default:
                 currentStats.charisma = currentStats.getCharisma() + 1;
                 break;
-            default:
-                throw new IOException("Unknown PrimaryStat: " + passer.PrimaryStat.ToString());
         }
 
         populate();
     }
 
-    public void decrementStat(EnumButtonPasser passer)
+    public void decrementStat()
     {
         pointsToSpend++;
         pointsSpent--;
 
-        switch (passer.PrimaryStat)
+        switch (currentPrimaryStatPage)
         {
             case PrimaryStat.Strength:
                 currentStats.strength = currentStats.getStrength() - 1;
@@ -136,11 +153,9 @@ public class CharacterCreationPopUpWindow : PopUpWindow
             case PrimaryStat.Wisdom:
                 currentStats.wisdom = currentStats.getWisdom() - 1;
                 break;
-            case PrimaryStat.Charisma:
+            default:
                 currentStats.charisma = currentStats.getCharisma() - 1;
                 break;
-            default:
-                throw new IOException("Unknown PrimaryStat: " + passer.PrimaryStat.ToString());
         }
 
         populate();
@@ -160,7 +175,6 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
     public void populate()
     {
-        primaryStatsPanel.updateStatsPanel(currentStats);
         setAcceptButtonInteractability();
 
         setInteractability();
@@ -168,6 +182,23 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         pointsToSpendDisplay.text = "" + pointsToSpend;
 
         updatePortraitSpriteImages();
+
+        statPageTitle.text = currentPrimaryStatPage.ToString() + ":";
+        statAmount.text = "" + getStatAmount();
+
+        showPageDetails();
+
+        statIcon.setHoverMessage(currentPrimaryStatPage.ToString(), HoverMessageList.getMessage(currentPrimaryStatPage.ToString()));
+        statIcon.iconImage.sprite = Helpers.loadSpriteFromResources(currentPrimaryStatPage.ToString());
+
+        primaryStatsPanel.updateStatsPanel(currentStats);
+    }
+
+    public void showPageDetails()
+    {
+        statCombatDescription.text = currentPrimaryStatPage.getPrimaryStatCharGenCombatDescription();
+        statDialogueDescription.text = currentPrimaryStatPage.getPrimaryStatCharGenDialogueDescription();
+        statMobilityDescription.text = currentPrimaryStatPage.getPrimaryStatCharGenMobilityDescription();
     }
 
     private void updatePortraitSpriteImages()
@@ -178,34 +209,31 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
     public void setInteractability()
     {
-        for (int buttonIndex = 0; buttonIndex < incrementButtonParents.Length && buttonIndex < decrementButtonParents.Length; buttonIndex++)
+        setPageButtonInteractability();
+
+        setPlusMinusButtonInteractability();
+    }
+
+    public void setPageButtonInteractability()
+    {
+        for(int i = 0; i < pageButtons.Length; i++)
         {
-            if (pointsToSpend > 0)
-            {
-                incrementButtonParents[buttonIndex].SetActive(true);
-            }
-            else
-            {
-                incrementButtonParents[buttonIndex].SetActive(false);
-            }
-
-            switch ((PrimaryStat) buttonIndex)
-            {
-                case PrimaryStat.Strength:
-                    decrementButtonParents[buttonIndex].SetActive(currentStats.getStrength() > 1);
-                    break;
-                case PrimaryStat.Dexterity:
-                    decrementButtonParents[buttonIndex].SetActive(currentStats.getDexterity() > 1);
-                    break;
-                case PrimaryStat.Wisdom:
-                    decrementButtonParents[buttonIndex].SetActive(currentStats.getWisdom() > 1);
-                    break;
-                case PrimaryStat.Charisma:
-                    decrementButtonParents[buttonIndex].SetActive(currentStats.getCharisma() > 1);
-                    break;
-            }
-
+            pageButtons[i].interactable = i != (int) currentPrimaryStatPage;
         }
+    }
+
+    public void setPlusMinusButtonInteractability()
+    {
+        plusButton.interactable = pointsToSpend > 0;
+
+        minusButton.interactable = getStatAmount() > 1;
+    }
+
+    public int getStatAmount()
+    {
+        int[] statsAsArray = currentStats.getStatsAsArray();
+
+        return statsAsArray[(int) currentPrimaryStatPage];
     }
 
     private const float newGameFadeOutDuration = 6f;

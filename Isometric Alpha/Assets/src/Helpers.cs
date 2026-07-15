@@ -488,14 +488,6 @@ public static class Helpers
         return dictionary;
     }
 
-    public static void nullSafeSetInteractable(Button button, bool active)
-    {
-        if (button != null && !(button is null))
-        {
-            button.interactable = active;
-        }
-    }
-
     public static void nullSafeSetActive(MonoBehaviour component, bool active)
     {
         if (component != null && !(component is null))

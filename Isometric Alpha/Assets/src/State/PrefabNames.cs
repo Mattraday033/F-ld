@@ -95,7 +95,7 @@ public static class PrefabNames
     public const string partyScreenMainDescPanel = "Party Screen Main Description Panel";
 
     public const string levelUpPopUpWindow = "LevelUp PopUp Window";
-    public const string characterCreationPopUpWindow = "Character Creation PopUp Revision";
+    public const string characterCreationPopUpWindow = "Character Creation PopUp";
     public const string actionLevelUpDescriptionPanels = "Action LevelUp Description Panels";
     public const string skillLevelUpDescriptionPanels = "Skill LevelUp Description Panels";
 
