@@ -79,9 +79,9 @@ public static class EnumDescriptionList
             case PrimaryStat.Dexterity:
                 return "Training Dexterity unlocks Abilities that focus on debilitation, damage over time, and the element of surprise. Dexterity also increases a Character's own Armor Score, their Armor Penetration, and provides a damage boost during a surprise round.\n\nMost Actions have their Critical Hit chance determined by a Character's Dexterity.";
             case PrimaryStat.Wisdom:
-                return "Raising Wisdom teaches Abilities that are more tactical. A Wise Character can reposition their opponents to better deal with them, or interrupt a foes' plans with a well placed strike.\n\nWisdom governs the number of Weapons that can be held at once, and the number of Passive Abilities that can be equipped.";
+                return "Raising Wisdom teaches Abilities that are more tactical. A Wise Character can reposition their opponents to better deal with them, or interrupt a foe's plans with a well placed strike.\n\nWisdom governs the number of Weapons that can be held at once, and the number of Passive Abilities that can be equipped.";
             default:
-                return "In Combat, Charisma measures a Character's ability to lead and coordinate with their Party Members. Charisma has Abilities that bolster their allies, and expose the weaknesses of their enemies.\n\nCharisma also provides access to Exuberances, which are a resource that is used to activate certain powerful Abilities.";
+                return "In Combat, Charisma measures a Character's ability to lead and coordinate with their Party Members. Charisma has Abilities that bolster one's allies, and expose the weaknesses of one's enemies.\n\nCharisma also provides access to Exuberances, which are a resource that is used to activate certain powerful Abilities.";
         }
     }
 

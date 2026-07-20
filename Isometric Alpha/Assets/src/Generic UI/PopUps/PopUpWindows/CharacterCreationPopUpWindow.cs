@@ -47,6 +47,8 @@ public class CharacterCreationPopUpWindow : PopUpWindow
     public Image portraitImage;
     public Image spriteImage;
 
+    public CharGenDescriptionPanel starPanel;
+
     public Canvas windowCanvas;
 
     [RuntimeInitializeOnLoadMethod]
@@ -192,6 +194,8 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         statIcon.iconImage.sprite = Helpers.loadSpriteFromResources(currentPrimaryStatPage.ToString());
 
         primaryStatsPanel.updateStatsPanel(currentStats);
+
+        starPanel.spawnStars(currentPrimaryStatPage);
     }
 
     public void showPageDetails()
@@ -239,7 +243,12 @@ public class CharacterCreationPopUpWindow : PopUpWindow
     private const float newGameFadeOutDuration = 6f;
     private bool isFadingToMonologue;
 
-    public void newGameSetCharacterNameAndStats()
+    public override void acceptButtonPress()
+    {
+        newGameSetCharacterNameAndStats();
+    }
+
+    private void newGameSetCharacterNameAndStats()
     {
         if (isFadingToMonologue)
         {

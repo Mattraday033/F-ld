@@ -6,63 +6,51 @@ using TMPro;
 
 public class CharGenDescriptionPanel : MonoBehaviour
 {
-
-    public TextMeshProUGUI title;
-    public TextMeshProUGUI description;
-
     public Transform dialogueStarParent;
     public Transform combatStarParent;
     public Transform mobilityStarParent;
 
-    private void Awake()
+    public void spawnStars(PrimaryStat currentPrimaryStat)
     {
-        title.text = getTitle();
-        description.text = getDescription();
-        
-        spawnStars();
-    }
+        destroyAllStars();
 
-    private void spawnStars()
-    {
-        for(int starIndex = 0; starIndex < getDialogueStarAmount(); starIndex++)
+        for(int starIndex = 0; starIndex < getDialogueStarAmount(currentPrimaryStat); starIndex++)
         {
             Instantiate(Resources.Load<GameObject>(PrefabNames.star), dialogueStarParent);
         }
 
-        for(int starIndex = 0; starIndex < getCombatStarAmount(); starIndex++)
+        for(int starIndex = 0; starIndex < getCombatStarAmount(currentPrimaryStat); starIndex++)
         {
             Instantiate(Resources.Load<GameObject>(PrefabNames.star), combatStarParent);
         }
 
-        for(int starIndex = 0; starIndex < getMobilityStarAmount(); starIndex++)
+        for(int starIndex = 0; starIndex < getMobilityStarAmount(currentPrimaryStat); starIndex++)
         {
             Instantiate(Resources.Load<GameObject>(PrefabNames.star), mobilityStarParent);
         }
     }
 
-    private static string getTitle()
+    private void destroyAllStars()
     {
-        return CharGenStatHover.currentPrimaryStat.ToString();
-    }
-
-    private static string getDescription()
-    {
-        switch(CharGenStatHover.currentPrimaryStat)
+        foreach(Transform child in combatStarParent)
         {
-            case PrimaryStat.Strength:
-                return Strength.startingDescription;
-            case PrimaryStat.Dexterity:
-                return Dexterity.startingDescription;
-            case PrimaryStat.Wisdom:
-                return Wisdom.startingDescription;
-            default:
-                return Charisma.startingDescription;
+            Destroy(child.gameObject);
+        }
+
+        foreach(Transform child in dialogueStarParent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach(Transform child in mobilityStarParent)
+        {
+            Destroy(child.gameObject);
         }
     }
 
-    private static int getDialogueStarAmount()
+    private int getDialogueStarAmount(PrimaryStat currentPrimaryStat)
     {
-        switch(CharGenStatHover.currentPrimaryStat)
+        switch(currentPrimaryStat)
         {
             case PrimaryStat.Strength:
                 return Constants.sizeThree;
@@ -75,9 +63,9 @@ public class CharGenDescriptionPanel : MonoBehaviour
         }
     }
 
-    private static int getCombatStarAmount()
+    private int getCombatStarAmount(PrimaryStat currentPrimaryStat)
     {
-        switch(CharGenStatHover.currentPrimaryStat)
+        switch(currentPrimaryStat)
         {
             case PrimaryStat.Strength:
                 return Constants.sizeFive;
@@ -90,9 +78,9 @@ public class CharGenDescriptionPanel : MonoBehaviour
         }
     }
 
-    private static int getMobilityStarAmount()
+    private int getMobilityStarAmount(PrimaryStat currentPrimaryStat)
     {
-        switch(CharGenStatHover.currentPrimaryStat)
+        switch(currentPrimaryStat)
         {
             case PrimaryStat.Strength:
                 return Constants.sizeTwo;

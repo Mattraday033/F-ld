@@ -74,6 +74,16 @@ public class ThreeRingButton : Button, IPointerDownHandler, IPointerUpHandler
 
         setPositionByInteractability();
         setColorByInteractability();
+
+        switch(state)
+        {
+            case SelectionState.Highlighted:
+                iconText.color = ColorList.grey215;
+                return;
+            case SelectionState.Normal:
+                iconText.color = Color.white;
+                return;
+        }
     }
 
     private void setPositionByInteractability()
@@ -122,4 +132,5 @@ public class ThreeRingButton : Button, IPointerDownHandler, IPointerUpHandler
         middleRingImage.enabled = interactable;
         topRingImage.enabled = interactable;
     }
+
 }
