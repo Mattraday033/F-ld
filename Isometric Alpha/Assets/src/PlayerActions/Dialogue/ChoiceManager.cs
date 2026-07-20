@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ChoiceManager // KastorPlan // 3a.0.2.b.1.8
+public static class ChoiceManager
 {
 	public static Dictionary<string, ChoiceKey> choices;
 

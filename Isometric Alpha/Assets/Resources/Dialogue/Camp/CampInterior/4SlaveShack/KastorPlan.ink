@@ -1687,6 +1687,7 @@ What happened?
         ->4a
 -else:
     +Nevermind. I'll be back.
+
         ->Close
 }
     
@@ -2901,6 +2902,8 @@ fadeBackIn(60,false)
 ->Close
 
 === Close ===
+
+removeChoice(KastorPlan,3a.0.2.b.1.8)
 
 {
 -broughtNandorToKastor and not deathFlagGuardMárcos and not (kastorStartedRevolt and convincedSlavesToHelpYou):
