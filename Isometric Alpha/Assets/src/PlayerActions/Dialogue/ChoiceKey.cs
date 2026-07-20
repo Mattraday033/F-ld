@@ -18,8 +18,6 @@ public class ChoiceKey: IJSONConvertable
 		return storyName + "+" + sourcePath;
 	}
 	
-//KastorPlan // 3a.0.2.b.1.8
-
 	public override bool Equals(object o)
 	{
         ChoiceKey otherChoice = o as ChoiceKey;

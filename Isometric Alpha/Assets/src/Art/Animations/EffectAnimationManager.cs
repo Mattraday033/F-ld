@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,9 @@ public enum EffectAnimationType
     FrontLvlUp,
     BackLvlUp,
     TransitionIndicator,
-    Gem
+    Gem,
+    FrontSelector,
+    BackSelector
 }
 
 
@@ -97,12 +100,19 @@ public class EffectAnimationManager : AnimationManager
 
     private void determineOutline(string effectType)
     {
-        if(EffectAnimationType.BatSwarm.ToString().Equals(effectType))
+        if(Enum.TryParse(effectType, ignoreCase: true, out EffectAnimationType animationType))
         {
-            return;
+            switch(animationType)
+            {
+                case EffectAnimationType.BatSwarm:
+                case EffectAnimationType.FrontSelector:
+                case EffectAnimationType.BackSelector:
+                    return;
+                default:
+                    spriteRenderer.material = Resources.Load<Material>(PrefabNames.outlineMaterial);
+                    return;
+            }
         }
-
-        spriteRenderer.material = Resources.Load<Material>(PrefabNames.outlineMaterial);
     }
 
     private IEnumerator waitThenPlaySFX(string effectType)

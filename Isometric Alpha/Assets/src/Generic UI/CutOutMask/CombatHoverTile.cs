@@ -13,7 +13,11 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     private Color currentColor;
 
-    public SpriteRenderer spriteRenderer;
+    public SpriteRenderer frontSpriteRenderer;
+    public SpriteRenderer backSpriteRenderer;
+
+    public EffectAnimationManager frontEffectManager;
+    public EffectAnimationManager backEffectManager;
 
     private bool inVisibleSelector = false;
 
@@ -40,6 +44,15 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         }
     }
 
+    private void Awake()
+    {
+        backEffectManager.loops = true;
+        backEffectManager.setAnimations(EffectAnimationType.BackSelector);
+
+        frontEffectManager.loops = true;
+        frontEffectManager.setAnimations(EffectAnimationType.FrontSelector);
+    }
+
     private void OnEnable()
     {
         SelectorManager.SelectorMoved.AddListener(determineVisbility);
@@ -61,15 +74,21 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     private void setToPressedColor()
     {
-        spriteRenderer.color = currentColor;
-        spriteRenderer.color = new Color(spriteRenderer.color.r - .25f, 
-                                         spriteRenderer.color.g - .25f, 
-                                         spriteRenderer.color.b - .25f);
+        frontSpriteRenderer.color = currentColor;
+        frontSpriteRenderer.color = new Color(frontSpriteRenderer.color.r - .25f, 
+                                              frontSpriteRenderer.color.g - .25f, 
+                                              frontSpriteRenderer.color.b - .25f);
+
+        backSpriteRenderer.color = currentColor;
+        backSpriteRenderer.color = new Color(backSpriteRenderer.color.r - .25f, 
+                                             backSpriteRenderer.color.g - .25f, 
+                                             backSpriteRenderer.color.b - .25f);
     }
 
     public void hideTile()
     {
-        spriteRenderer.color = Color.clear;
+        backSpriteRenderer.color = Color.clear;
+        frontSpriteRenderer.color = Color.clear;
         inVisibleSelector = false;
     }
 
@@ -82,7 +101,8 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
             if(selector.containsTarget(targetCoords))
             {
                 selector.setToColor();
-                spriteRenderer.color = currentColor;
+                backSpriteRenderer.color = currentColor;
+                frontSpriteRenderer.color = currentColor;
                 inVisibleSelector = true;
                 updated = true;
             }
