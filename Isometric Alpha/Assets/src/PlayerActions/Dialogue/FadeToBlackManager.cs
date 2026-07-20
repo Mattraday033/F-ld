@@ -81,13 +81,14 @@ public class FadeToBlackManager : MonoBehaviour
 
     public void startOnSceneLoadOOCFade()
     {
+        StartCoroutine(waitTwoFramesThenStartFadeBackIn(new FadeBackInTransition(exitActivity: PlayerOOCStateManager.currentActivity)));
+
         if(PlayerOOCStateManager.currentActivity == OOCActivity.walking && !Flags.isInNewGameMode())
         {
             PlayerOOCStateManager.setCurrentActivity(OOCActivity.inFade);
         }
 
         setToMaxOpacity();
-        StartCoroutine(waitTwoFramesThenStartFadeBackIn(new FadeBackInTransition()));
     }
 
     private IEnumerator waitTwoFramesThenStartFadeBackIn(ScreenFade fade)

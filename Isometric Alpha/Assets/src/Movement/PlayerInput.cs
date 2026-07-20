@@ -21,7 +21,7 @@ public class PlayerInput : MonoBehaviour
 
         //While a scripted animation is playing (e.g. a transition cutscene) no keyboard/mouse
         //input should cause any behaviour, including walking onto other transitions.
-        if (PlayerOOCStateManager.currentActivity == OOCActivity.InAnimation)
+        if (PlayerOOCStateManager.currentActivity == OOCActivity.inAnimation)
         {
             return;
         }
@@ -109,7 +109,7 @@ public class PlayerInput : MonoBehaviour
                 case OOCActivity.preCombat:
                 case OOCActivity.Defeat:
                 case OOCActivity.Loading:
-                case OOCActivity.InAnimation:
+                case OOCActivity.inAnimation:
                     return;
                 default:
                     Debug.LogError("Unrecognized OOCActivity: " + PlayerOOCStateManager.currentActivity.ToString());

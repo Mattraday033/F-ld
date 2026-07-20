@@ -77,7 +77,11 @@ public class LoadingBarProgressTracker : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.inDialogue)
+        {
+            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        }
+
         HeartBeatManager.MediumHeartBeat.RemoveListener(animateProtagRunSprite);
         runFrontSprites = null;
         loadSaveFile = null;

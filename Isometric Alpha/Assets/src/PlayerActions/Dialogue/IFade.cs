@@ -172,9 +172,12 @@ public class FadeToBlackTransition : FullScreenTransition
 
 public class FadeBackInTransition : FullScreenTransition
 {
-    public FadeBackInTransition(float fadeTimeMultiplier = 1f)
+    private OOCActivity exitActivity;
+
+    public FadeBackInTransition(float fadeTimeMultiplier = 1f, OOCActivity exitActivity = OOCActivity.walking)
     {
         fadeTime *= fadeTimeMultiplier;
+        this.exitActivity = exitActivity;
     }
 
 	public override bool isFinished()
@@ -233,7 +236,7 @@ public class FadeBackInTransition : FullScreenTransition
 
         if(PlayerOOCStateManager.currentActivity == OOCActivity.inFade)
         {
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+            PlayerOOCStateManager.setCurrentActivity(exitActivity);
         }
 	}
 }

@@ -576,6 +576,18 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "removechoice":
+                case "updatechoice":
+
+                    string storyName = getArgument(buffer, Constants.indexZero);
+                    string storyPath = getArgument(buffer, Constants.indexOne);
+
+                    ChoiceManager.removeChoice(storyName, storyPath);
+
+                    continueStory();
+
+                    break;
+
                 case "settotrue":
 
                     buffer = getArgument(buffer);

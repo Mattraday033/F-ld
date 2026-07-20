@@ -18,12 +18,25 @@ public class ChoiceKey: IJSONConvertable
 		return storyName + "+" + sourcePath;
 	}
 	
-	public bool Equals(ChoiceKey other)
+//KastorPlan // 3a.0.2.b.1.8
+
+	public override bool Equals(object o)
 	{
-		return getKey().Equals(other.getKey());
+        ChoiceKey otherChoice = o as ChoiceKey;
+
+        if(otherChoice == null)
+        {
+            return false;
+        }
+
+		return getKey().Equals(otherChoice.getKey());
+	}
+
+	public override int GetHashCode()
+	{
+		return getKey().GetHashCode();
 	}
 	
-
 	public string convertToJson()
 	{
 		return "{\"key\":\"" + getKey() + "}";

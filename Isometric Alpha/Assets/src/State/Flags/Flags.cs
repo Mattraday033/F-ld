@@ -36,7 +36,23 @@ public static class Flags
 		{
 			flags[flagName] = flagStatus;
 		}
+
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.inDialogue)
+        {
+            
+        }
 	}
+
+    public static void updateChoicesOnFlagSet(string flagName, bool flagStatus)
+    {
+        switch(flagName)
+        {
+            case FlagNameList.finishedBalintsTask:
+            case FlagNameList.finishedErvinsTask:
+            case FlagNameList.obtainedMineArmoryKey:
+                return;
+        }
+    }
 
     public static void printAll()
     {   // Get and display values  

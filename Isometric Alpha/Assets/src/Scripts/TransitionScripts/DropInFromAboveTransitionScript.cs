@@ -11,7 +11,7 @@ public class DropInFromAboveTransitionScript : PlayerInteractionScript
 
     public override void runScript(GameObject target = null)
     {
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.InAnimation);
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inAnimation);
 
         PlayerObject player = PlayerObject.getInstance();
 
