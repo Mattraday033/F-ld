@@ -9,7 +9,7 @@ public abstract class SkillIndicator : MonoBehaviour
     public EffectAnimationManager frontSelector;
     public EffectAnimationManager backSelector;
 
-    public GameObject tileMapCollider;
+    public GameObject tileMapGameObject;
 
     private void Awake()
     {        
@@ -33,31 +33,13 @@ public abstract class SkillIndicator : MonoBehaviour
 	
     public void updateColliderPosition()
     {
-        Helpers.updateColliderPosition(tileMapCollider);
+        Helpers.updateColliderPosition(tileMapGameObject);
     }
 
-    public bool collidedWithTarget(GameObject tile, ContactFilter2D filterCollider)
+    public void setColor(Color color)
     {
-        Collider2D[] collisions = Helpers.getCollisions(tile.GetComponent<Collider2D>(), filterCollider);
-
-        foreach (Collider2D collision in collisions)
-        {
-            if (collision == null || collision is null)
-            {
-                continue;
-            }
-
-            if (collision.GetComponent<ISkillTarget>() != null)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        frontSelector.spriteRenderer.color = color;
+        backSelector.spriteRenderer.color = color;
     }
 
-    protected abstract ContactFilter2D getFilterCollider();
-
-    public abstract void setColor();
-    
 }

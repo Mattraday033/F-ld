@@ -29,7 +29,7 @@ public abstract class SkillManager
     public const int skillImprovedLevel = 5;
     public const int skillExtraordinaryLevel = 8;
 
-    public static ContactFilter2D getCollisionFilter()
+    public virtual ContactFilter2D getCollisionFilter()
     {
         ContactFilter2D filterCollider = new ContactFilter2D();
         filterCollider.useTriggers = true;
@@ -79,25 +79,16 @@ public abstract class SkillManager
         return (Math.Abs(row - getCurrentPlayerSkillGridCoords().row) + Math.Abs(col - getCurrentPlayerSkillGridCoords().col)) <= getCurrentPlayerSkillGridCoords().row;
     }
 
-    public virtual string getTilePrefabName()
-    {
-        throw new IOException("Base version of getTilePrefabName() called erroneously");
-    }
+    public abstract string getTilePrefabName();
 
     private Transform getTileParent()
     {
         return PlayerMovement.getInstance().gameObject.transform.parent;
     }
-    public virtual Color getTileBaseColor()
-    {
-        throw new IOException("Base version of getTileBaseColor() called erroneously");
-    }
-    public virtual Color getTileTargetColor()
-    {
-        throw new IOException("Base version of getTileTargetColor() called erroneously");
-    }
+    public abstract Color getTileBaseColor();
+    public abstract Color getTileTargetColor();
 
-    public Color getTileColor(GameObject tile)
+    public Color getTileColor(SkillIndicator tile)
     {
         if (collidedWithTarget(tile))
         {
@@ -110,9 +101,9 @@ public abstract class SkillManager
         }
     }
 
-    public virtual bool collidedWithTarget(GameObject tile)
+    public virtual bool collidedWithTarget(SkillIndicator tile)
     {
-        Collider2D[] collisions = Helpers.getCollisions(tile.GetComponent<Collider2D>(), getCollisionFilter());
+        Collider2D[] collisions = Helpers.getCollisions(tile.collider, getCollisionFilter());
 
         foreach (Collider2D collision in collisions)
         {
@@ -146,7 +137,7 @@ public abstract class SkillManager
             return;
         }
 
-        GameObject.Destroy(skillGrid[row, col]);
+        GameObject.Destroy(skillGrid[row, col].gameObject);
         skillGrid[row, col] = null;
     }
 

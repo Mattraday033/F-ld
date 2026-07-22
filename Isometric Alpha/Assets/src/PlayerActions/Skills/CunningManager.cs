@@ -114,7 +114,7 @@ public class CunningManager : SkillManager
                     continue;
                 }
 
-                skillGrid[row, col].GetComponent<SpriteRenderer>().color = getTileColor(skillGrid[row, col]);
+                skillGrid[row, col].setColor(getTileColor(skillGrid[row, col]));
             }
         }
 
@@ -144,7 +144,7 @@ public class CunningManager : SkillManager
         {
             if (skillGrid[coords.x, coords.y] != null)
             {
-                GameObject.Destroy(skillGrid[coords.x, coords.y]);
+                GameObject.Destroy(skillGrid[coords.x, coords.y].gameObject);
                 skillGrid[coords.x, coords.y] = null;
             }
         }
@@ -188,8 +188,7 @@ public class CunningManager : SkillManager
                 continue; //ignore the null
 
             }
-            Collider2D currentCollider = skillGrid[currentCoords.x, currentCoords.y].GetComponent<Collider2D>();
-
+            Collider2D currentCollider = skillGrid[currentCoords.x, currentCoords.y].collider;
 
             if (skillGrid[currentCoords.x, currentCoords.y] != null &&
                         Helpers.hasCollision(currentCollider) &&
@@ -206,7 +205,7 @@ public class CunningManager : SkillManager
             }
             else if (foundCollider && skillGrid[currentCoords.x, currentCoords.y] != null)
             {
-                GameObject.Destroy(skillGrid[currentCoords.x, currentCoords.y]);
+                GameObject.Destroy(skillGrid[currentCoords.x, currentCoords.y].gameObject);
                 skillGrid[currentCoords.x, currentCoords.y] = null;   // destroy the indicator because it's on the other side of a wall
             }
         }
@@ -380,12 +379,12 @@ public class CunningManager : SkillManager
 
     public override Color getTileBaseColor()
     {
-        return Color.yellow;
+        return ColorList.cunningTileBaseColor;
     }
 
     public override Color getTileTargetColor()
     {
-        return Color.red;
+        return ColorList.skillIndicatorTargetableColor;
     }
 
     public override int getRange()
@@ -447,9 +446,9 @@ public class CunningManager : SkillManager
         }
     }
 
-    public ISkillTarget getTargetFromTile(GameObject tile)
+    public ISkillTarget getTargetFromTile(SkillIndicator tile)
     {
-        Collider2D selectorCollider = tile.GetComponent<Collider2D>();
+        Collider2D selectorCollider = tile.collider;
         ISkillTarget target = null;
 
         if (!Helpers.hasCollision(selectorCollider))

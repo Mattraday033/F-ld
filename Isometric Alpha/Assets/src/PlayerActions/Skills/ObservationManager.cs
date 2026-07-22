@@ -29,7 +29,7 @@ public class ObservationManager : SkillManager
         OnSkillUse.Invoke();
     }
 
-    public static ContactFilter2D getObservationCollisionFilter()
+    public override ContactFilter2D getCollisionFilter()
     {
         ContactFilter2D filterCollider = new ContactFilter2D();
         filterCollider.useTriggers = true;
@@ -82,7 +82,7 @@ public class ObservationManager : SkillManager
         {
             if (skillGrid[coords.x, coords.y] != null)
             {
-                GameObject.Destroy(skillGrid[coords.x, coords.y]);
+                GameObject.Destroy(skillGrid[coords.x, coords.y].gameObject);
                 skillGrid[coords.x, coords.y] = null;
             }
         }
@@ -115,7 +115,7 @@ public class ObservationManager : SkillManager
     {
         bool foundCollider = false;
         List<Vector2Int> colliderIndicators = new List<Vector2Int>();
-        ContactFilter2D filterCollider = getObservationCollisionFilter();
+        ContactFilter2D filterCollider = getCollisionFilter();
 
         for (int i = snake.Count - 1; i >= 0; i--)
         {
@@ -128,8 +128,7 @@ public class ObservationManager : SkillManager
 
             }
             
-            Collider2D currentCollider = skillGrid[currentCoords.x, currentCoords.y].GetComponent<ObservationIndicator>().collider;
-
+            Collider2D currentCollider = skillGrid[currentCoords.x, currentCoords.y].collider;
 
             if (skillGrid[currentCoords.x, currentCoords.y] != null &&
                         Helpers.hasCollision(currentCollider, filterCollider) &&

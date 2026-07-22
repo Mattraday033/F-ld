@@ -122,7 +122,7 @@ public class IntimidateManager : CunningManager
         Vector3Int playerCoords = getPlayerCoords();
 
         int range = getRange();
-        skillGrid = new GameObject[range, range];
+        skillGrid = new SkillIndicator[range, range];
 
         for (int row = 0; row < range; row++)
         {
@@ -130,15 +130,15 @@ public class IntimidateManager : CunningManager
             {
                 if (coordsWithinRange(row, col))
                 {
-                    skillGrid[row, col] = instantiateTile(playerCoords, row, col);
-                    Helpers.updateColliderPosition(skillGrid[row, col]);
+                    skillGrid[row, col] = instantiateTile(playerCoords, row, col).GetComponent<SkillIndicator>();
+                    skillGrid[row, col].updateColliderPosition();
                 }
                 else
                 {
                     continue;
                 }
 
-                skillGrid[row, col].GetComponent<SpriteRenderer>().color = getTileColor(skillGrid[row, col]);
+                skillGrid[row, col].setColor(getTileColor(skillGrid[row, col]));
             }
         }
 
@@ -162,7 +162,7 @@ public class IntimidateManager : CunningManager
 
     public override Color getTileTargetColor()
     {
-        return Color.red;
+        return ColorList.skillIndicatorTargetableColor;
     }
 
     public override int getRange()
@@ -179,7 +179,7 @@ public class IntimidateManager : CunningManager
 
         List<ISkillTarget> listOfTargets = new List<ISkillTarget>();
 
-        foreach (GameObject tile in skillGrid)
+        foreach (SkillIndicator tile in skillGrid)
         {
             if (tile == null || tile is null)
             {

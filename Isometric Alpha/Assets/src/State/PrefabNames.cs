@@ -135,8 +135,8 @@ public static class PrefabNames
 
     public const string formationEditorPanel = "Formation Editor Panel";
 
-    public const string intimidateTileName = "Intimidate Cunning Indicator";
-    public const string cunningTileName = "Intimidate Cunning Indicator";
+    public const string intimidateTileName = "Intimidate Indicator";
+    public const string cunningTileName = "Cunning Indicator";
     public const string observationTileName = "Observation Indicator";
     public const string leadershipTileName = "Leadership Indicator";
 

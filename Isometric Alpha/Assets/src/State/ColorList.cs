@@ -60,6 +60,16 @@ public static class ColorList
 
     #endregion
 
+    #region Skill Indicator Colors
+
+
+    public readonly static Color intimidateIndicatorOrange = new Color32(255, 175, 25, 255);
+    public readonly static Color skillIndicatorTargetableColor = new Color32(235,0,0,235);
+    public readonly static Color cunningTileBaseColor = new Color32(235,235,0,235);
+    public readonly static Color observationColor = new Color32(225,0,245,235);
+
+    #endregion
+
     #region Outline Colors
 	public readonly static Color attacksOnSight = Color.red;
 	public readonly static Color canBeInteractedWith = Color.green;
@@ -93,12 +103,6 @@ public static class ColorList
 
     public readonly static Color blueShieldTextColor = new Color32(25, 100, 255, 255); // color is a lighter blue than default Color.blue
 	public readonly static Color greenLeafTextColor = new Color32(25, 255, 0, 255); // color is a lighter green than default Color.green
-
-	public readonly static Color cunningStunnedColor = Color.red;
-	public readonly static Color intimidatedColor = Color.magenta;
-	public readonly static Color retreatStunnedColor = Color.cyan;
-
-    public readonly static Color intimidateIndicatorOrange = new Color32(255, 175, 25, 255);
 
     public readonly static Color greyedOutIconColor = new Color32(255, 255, 255, 75);
     public readonly static Color greyedOutBackgroundColor = grey75;

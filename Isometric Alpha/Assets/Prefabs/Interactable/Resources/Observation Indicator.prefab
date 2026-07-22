@@ -51,7 +51,7 @@ MonoBehaviour:
   collider: {fileID: 2261191870349253907}
   frontSelector: {fileID: 5998285520180339526}
   backSelector: {fileID: 5460493605746288347}
-  tileMapCollider: {fileID: 9025778611945512778}
+  tileMapGameObject: {fileID: 9025778611945512778}
 --- !u!212 &2760446233369655653
 SpriteRenderer:
   m_ObjectHideFlags: 0
