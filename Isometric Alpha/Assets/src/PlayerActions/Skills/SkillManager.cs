@@ -23,24 +23,19 @@ public abstract class SkillManager
 
     public static Vector2Int selectorPosition;
     public static Color oldColor;
-    public static GameObject[,] skillGrid;
-
-    public ContactFilter2D filterCollider;
+    protected static SkillIndicator[,] skillGrid;
 
     public const int skillUnlockLevel = 2;
     public const int skillImprovedLevel = 5;
     public const int skillExtraordinaryLevel = 8;
 
-    public SkillManager()
+    public static ContactFilter2D getCollisionFilter()
     {
-        setCollisionFilter();
-    }
-
-    public virtual void setCollisionFilter()
-    {
-        filterCollider = new ContactFilter2D();
+        ContactFilter2D filterCollider = new ContactFilter2D();
         filterCollider.useTriggers = true;
         filterCollider.SetLayerMask(LayerAndTagManager.blocksSkillsLayerMask);
+
+        return filterCollider;
     }
 
     public virtual void createSkillArea()
@@ -60,11 +55,11 @@ public abstract class SkillManager
             return;
         }
 
-        foreach (GameObject tile in skillGrid)
+        foreach (SkillIndicator tile in skillGrid)
         {
             if (tile != null)
             {
-                GameObject.Destroy(tile);
+                GameObject.Destroy(tile.gameObject);
             }
         }
     }
@@ -117,7 +112,7 @@ public abstract class SkillManager
 
     public virtual bool collidedWithTarget(GameObject tile)
     {
-        Collider2D[] collisions = Helpers.getCollisions(tile.GetComponent<Collider2D>(), filterCollider);
+        Collider2D[] collisions = Helpers.getCollisions(tile.GetComponent<Collider2D>(), getCollisionFilter());
 
         foreach (Collider2D collision in collisions)
         {

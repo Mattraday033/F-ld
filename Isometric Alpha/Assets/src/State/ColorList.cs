@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class ColorList
 {
-    public const float hoverSelectorAlpha = .5f;
+    public const float hoverSelectorAlpha = .65f;
 
     #region Private Colors
 

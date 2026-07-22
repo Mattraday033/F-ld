@@ -59,18 +59,6 @@ public abstract class CombatMouseHover : MonoBehaviour
                     break;
                 case CurrentActivity.ChoosingTertiary:
 
-                    // if (currentSelectorContainsTarget())
-                    // {
-                    //     SelectorManager.handleChoosingTertiary();
-                    // }
-                    // else
-                    // {
-                    //     if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAction()))
-                    //     {
-                    //         moveSelectorToTarget();
-                    //     }
-                    // }
-
                     if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAction()))
                     {
                         moveSelectorToTarget();

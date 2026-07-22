@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarkObservableObject : MonoBehaviour
+public class ObservationIndicator : SkillIndicator
 {
-	public ContactFilter2D filterObservable;
-	
-	public Collider2D collider;
-
 	public void detectObservableObject()
     {
 		if(Helpers.hasCollision(collider, LayerAndTagManager.observableLayerMask))
@@ -24,27 +20,6 @@ public class MarkObservableObject : MonoBehaviour
 		{
 			disableSelf(false);
 		}
-			
-		
     }
-	
-	private void disableSelf(bool deactivate)
-	{
-		if(deactivate)
-		{
-			gameObject.SetActive(false);
-		} else
-		{
-			gameObject.GetComponent<MarkObservableObject>().enabled = false;
-		}
-		
-	}
-	
 
-	
-	private void disableSelf()
-	{
-		
-	}
-	
 }

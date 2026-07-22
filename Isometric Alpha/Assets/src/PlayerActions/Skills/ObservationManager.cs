@@ -29,16 +29,18 @@ public class ObservationManager : SkillManager
         OnSkillUse.Invoke();
     }
 
-    public override void setCollisionFilter()
+    public static ContactFilter2D getObservationCollisionFilter()
     {
-        filterCollider = new ContactFilter2D();
+        ContactFilter2D filterCollider = new ContactFilter2D();
         filterCollider.useTriggers = true;
         filterCollider.SetLayerMask(LayerAndTagManager.blocksObservationLayerMask);
+
+        return filterCollider;
     }
 
     public override void createSkillArea()
     {
-        skillGrid = new GameObject[getRange(), getRange()];
+        skillGrid = new SkillIndicator[getRange(), getRange()];
         Vector3Int playerCoords = getPlayerCoords();
 
         for (int row = 0; row < observeRange; row++)
@@ -48,17 +50,9 @@ public class ObservationManager : SkillManager
 
                 if (gridTileIsInSight(row, col))
                 {
-                    skillGrid[row, col] = instantiateTile(playerCoords, row, col);
-                    Helpers.updateColliderPosition(skillGrid[row, col]);
+                    skillGrid[row, col] = instantiateTile(playerCoords, row, col).GetComponent<SkillIndicator>();
+                    skillGrid[row, col].updateColliderPosition();
                 }
-
-                /*if(skillGrid[row,col] != null && 
-					((Helpers.hasCollision(skillGrid[row,col].GetComponent<Collider2D>()) && !Helpers.hasCollision(skillGrid[row,col].GetComponent<Collider2D>(), layersToIgnore)) 
-					|| (row == playerObserveCoords && col == playerObserveCoords)))
-				{
-					skillGrid[row,col].GetComponent<SpriteRenderer>().color = Color.cyan;
-				}*/
-
             }
         }
 
@@ -121,6 +115,7 @@ public class ObservationManager : SkillManager
     {
         bool foundCollider = false;
         List<Vector2Int> colliderIndicators = new List<Vector2Int>();
+        ContactFilter2D filterCollider = getObservationCollisionFilter();
 
         for (int i = snake.Count - 1; i >= 0; i--)
         {
@@ -132,7 +127,8 @@ public class ObservationManager : SkillManager
                 continue; //ignore the null
 
             }
-            Collider2D currentCollider = skillGrid[currentCoords.x, currentCoords.y].GetComponent<Collider2D>();
+            
+            Collider2D currentCollider = skillGrid[currentCoords.x, currentCoords.y].GetComponent<ObservationIndicator>().collider;
 
 
             if (skillGrid[currentCoords.x, currentCoords.y] != null &&
@@ -195,14 +191,16 @@ public class ObservationManager : SkillManager
     }
     public void observeWithinRange()
     {
-        foreach (GameObject tile in skillGrid)
+        foreach (SkillIndicator tile in skillGrid)
         {
-            if (tile == null || tile is null)
+            ObservationIndicator observationIndicator = tile as ObservationIndicator;
+
+            if (observationIndicator == null || observationIndicator is null)
             {
                 continue;
             }
 
-            tile.GetComponent<MarkObservableObject>().detectObservableObject();
+            observationIndicator.detectObservableObject();
         }
     }
 

@@ -189,7 +189,6 @@ public class Selector : ICloneable
         if(declareSelectors && visible)
         {
             SelectorManager.declareSelectors();
-            // CombatHoverTileManager.GetHoverSelector.RemoveAllListeners();
         }
 	}
 	

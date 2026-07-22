@@ -98,7 +98,7 @@ public class CunningManager : SkillManager
         Vector3Int playerCoords = getPlayerCoords();
 
         int range = getRange();
-        skillGrid = new GameObject[range, range];
+        skillGrid = new SkillIndicator[range, range];
 
         for (int row = 0; row < range; row++)
         {
@@ -106,8 +106,8 @@ public class CunningManager : SkillManager
             {
                 if (coordsWithinRange(row, col))
                 {
-                    skillGrid[row, col] = instantiateTile(playerCoords, row, col);
-                    Helpers.updateColliderPosition(skillGrid[row, col]);
+                    skillGrid[row, col] = instantiateTile(playerCoords, row, col).GetComponent<SkillIndicator>();
+                    skillGrid[row, col].updateColliderPosition();
                 }
                 else
                 {
