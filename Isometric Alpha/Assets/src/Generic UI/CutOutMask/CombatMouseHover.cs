@@ -51,21 +51,11 @@ public abstract class CombatMouseHover : MonoBehaviour
 
                     break;
                 case CurrentActivity.ChoosingLocation:
-
-                    // if (currentSelectorContainsTarget())
-                    // {
-                    //     SelectorManager.handleChoosingLocation();
-                    // }
-                    // else
-                    // {
-                    //     if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAction()))
-                    //     {
-                    //         moveSelectorToTarget();
-                    //     }
-                    // }
-
-                    moveSelectorToTarget();
-                    SelectorManager.handleChoosingLocation();
+                    if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAction()))
+                    {
+                        moveSelectorToTarget();
+                        SelectorManager.handleChoosingLocation();
+                    }
                     break;
                 case CurrentActivity.ChoosingTertiary:
 
@@ -80,8 +70,12 @@ public abstract class CombatMouseHover : MonoBehaviour
                     //         moveSelectorToTarget();
                     //     }
                     // }
-                    moveSelectorToTarget();
-                    SelectorManager.handleChoosingLocation();
+
+                    if (canMoveToLocation(AbilityMenuManager.getInstance().getCurrentlySelectedAction()))
+                    {
+                        moveSelectorToTarget();
+                        SelectorManager.handleChoosingTertiary();
+                    }
                     break;
                 default:
                     break;

@@ -360,7 +360,7 @@ public class Selector : ICloneable
 
         if(alwaysRed)
         {
-		    color = Color.red;
+		    color = ColorList.intimidateIndicatorOrange;
         } else if(alwaysWhite)
         {
 		    color = Color.white;
@@ -370,7 +370,7 @@ public class Selector : ICloneable
             {
                 case CurrentActivity.ChoosingAbility:
                 case CurrentActivity.ChoosingLocation:
-                    color = Color.red;
+                    color = ColorList.intimidateIndicatorOrange;
                     break;
                 case CurrentActivity.ChoosingTertiary:
                     color = Color.yellow;

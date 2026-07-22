@@ -22,6 +22,10 @@ public class CombatEscapeMenuPopUpButton : PopUpButton
         previousActivity = CombatStateManager.currentActivity;
 
         CombatStateManager.setCurrentActivity(CurrentActivity.InEscapeMenu);
+
+        CombatHoverTileManager.GetHoverSelector.RemoveAllListeners();
+        
+        SelectorManager.declareSelectors();
     }
 
     public override void destroyPopUp()

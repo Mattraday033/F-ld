@@ -278,7 +278,7 @@ public class OpeningMonologueManager : MonoBehaviour
         while (true)
         {
             float t = Mathf.PingPong(elapsed * (2f / 2.5f), 1f);
-            continuePromptText.color = Color.Lerp(baseColor, Color.white, t);
+            continuePromptText.color = Color.Lerp(baseColor, Color.black, t);
 
             elapsed += Time.deltaTime;
             yield return null;

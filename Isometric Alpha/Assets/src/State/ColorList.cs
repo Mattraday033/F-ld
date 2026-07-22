@@ -98,7 +98,7 @@ public static class ColorList
 	public readonly static Color intimidatedColor = Color.magenta;
 	public readonly static Color retreatStunnedColor = Color.cyan;
 
-    public readonly static Color intimidateIndicatorOrange = new Color32(225, 115, 0, 255);
+    public readonly static Color intimidateIndicatorOrange = new Color32(255, 175, 25, 255);
 
     public readonly static Color greyedOutIconColor = new Color32(255, 255, 255, 75);
     public readonly static Color greyedOutBackgroundColor = grey75;
