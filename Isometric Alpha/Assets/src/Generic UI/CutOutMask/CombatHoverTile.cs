@@ -47,10 +47,10 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     private void Awake()
     {
         backEffectManager.loops = true;
-        backEffectManager.setAnimations(EffectAnimationType.BackSelector);
+        backEffectManager.setAnimations(EffectAnimationType.BackSelector2);
 
         frontEffectManager.loops = true;
-        frontEffectManager.setAnimations(EffectAnimationType.FrontSelector);
+        frontEffectManager.setAnimations(EffectAnimationType.FrontSelector2);
     }
 
     private void OnEnable()
@@ -105,18 +105,6 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
                 frontSpriteRenderer.color = currentColor;
                 inVisibleSelector = true;
                 updated = true;
-
-                Stats targetStats = getTargetStats();
-
-                if(targetStats != null && 
-                    targetStats.positions.Count > 1)
-                {
-                    SortingLayerManager.firstSortingLayerInfo.setRendererSortingLayer(backSpriteRenderer);
-                } else if(targetStats != null && 
-                    targetStats.positions.Count <= 1)
-                {
-                    SortingLayerManager.groundTwoSortingLayerInfo.setRendererSortingLayer(backSpriteRenderer);
-                }
             }
         }
 

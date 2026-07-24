@@ -24,7 +24,9 @@ public enum EffectAnimationType
     TransitionIndicator,
     Gem,
     FrontSelector,
-    BackSelector
+    BackSelector,    
+    FrontSelector2,
+    BackSelector2
 }
 
 
@@ -106,7 +108,9 @@ public class EffectAnimationManager : AnimationManager
             {
                 case EffectAnimationType.BatSwarm:
                 case EffectAnimationType.FrontSelector:
-                case EffectAnimationType.BackSelector:
+                case EffectAnimationType.BackSelector:                
+                case EffectAnimationType.FrontSelector2:
+                case EffectAnimationType.BackSelector2:
                     return;
                 default:
                     spriteRenderer.material = Resources.Load<Material>(PrefabNames.outlineMaterial);

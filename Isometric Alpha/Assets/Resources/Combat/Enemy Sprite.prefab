@@ -215,7 +215,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!60 &6229417721281125706
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -311,8 +311,8 @@ MonoBehaviour:
   shadowSprite: {fileID: 0}
   polygonCollider2D: {fileID: 6229417721281125706}
   healthBarManager: {fileID: 5236143345995560246}
-  linkedStats: {fileID: 0}
-  characterToAnimate: 
+  npcName: 
+  animationName: 
   heartBeatRow: 0
   animancer: {fileID: 5092550638677199902}
   key: 0
