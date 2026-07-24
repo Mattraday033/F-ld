@@ -150,11 +150,6 @@ public class IntimidateManager : CunningManager
         return targetsFound > 0 && getIntimidatesRemaining() > 0;
     }
 
-    public override string getTilePrefabName()
-    {
-        return PrefabNames.intimidateTileName;
-    }
-
     public override Color getTileBaseColor()
     {
         return ColorList.intimidateIndicatorOrange;

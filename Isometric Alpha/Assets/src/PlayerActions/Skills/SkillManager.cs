@@ -79,7 +79,10 @@ public abstract class SkillManager
         return (Math.Abs(row - getCurrentPlayerSkillGridCoords().row) + Math.Abs(col - getCurrentPlayerSkillGridCoords().col)) <= getCurrentPlayerSkillGridCoords().row;
     }
 
-    public abstract string getTilePrefabName();
+    public string getTilePrefabName()
+    {
+        return PrefabNames.skillIndicator;
+    }
 
     private Transform getTileParent()
     {
@@ -93,10 +96,12 @@ public abstract class SkillManager
         if (collidedWithTarget(tile))
         {
             OnSkillTargetFound.Invoke();
+            tile.setToTargetFoundSelector();
             return getTileTargetColor();
         }
         else
         {
+            tile.setToNoTargetFoundSelector();
             return getTileBaseColor();
         }
     }

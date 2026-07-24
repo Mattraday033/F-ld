@@ -93,9 +93,19 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     }
 
+    private void setHealthBarHovered(bool isHovered)
+    {
+        if(linkedStats != null && linkedStats.healthBarManager != null)
+        {
+            linkedStats.healthBarManager.setHovered(isHovered);
+        }
+    }
+
     public virtual void OnMouseEnter()
     {
-        if(TutorialSequence.blockMouseHovers() || 
+        setHealthBarHovered(true);
+
+        if(TutorialSequence.blockMouseHovers() ||
             AbilityMenuButton.hoveringOverAbilityMenuButton || 
             CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
@@ -125,6 +135,8 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     public virtual void OnMouseExit()
     {
+        setHealthBarHovered(false);
+
         revealPriorityHeld = false;
 
         if(TutorialSequence.blockMouseHovers() || 

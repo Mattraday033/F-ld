@@ -192,20 +192,13 @@ public class ObservationManager : SkillManager
     {
         foreach (SkillIndicator tile in skillGrid)
         {
-            ObservationIndicator observationIndicator = tile as ObservationIndicator;
-
-            if (observationIndicator == null || observationIndicator is null)
+            if (tile == null || tile is null)
             {
                 continue;
             }
 
-            observationIndicator.detectObservableObject();
+            tile.detectObservableObject();
         }
-    }
-
-    public override string getTilePrefabName()
-    {
-        return PrefabNames.observationTileName;
     }
 
     public override Color getTileBaseColor()

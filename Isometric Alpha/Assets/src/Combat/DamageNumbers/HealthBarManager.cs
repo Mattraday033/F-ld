@@ -23,15 +23,21 @@ public class HealthBarManager : MonoBehaviour
 	
     public Stats linkedStats;
 
+    // Whether game logic wants this bar shown (set by show()/hide()). The bar is only
+    // actually revealed while eligible AND (its owner is hovered OR the show-formula/Alt key is held).
+    private bool eligible;
+    private bool hovered;
+
     private void Awake()
     {
         Trait.OnTraitApplication.AddListener(updateHealthBarColor);
         Trait.OnTraitRemoval.AddListener(updateHealthBarColor);
         LargeEnemyStats.OnLargeEnemySpawn.AddListener(cleanUpHiddenHealthBars);
         DescriptionPanelBuilder.OnFormulaSwap.AddListener(updateCreatureTypeSymbols);
+        DescriptionPanelBuilder.OnFormulaSwap.AddListener(applyConcealment);
         CombatUIModule.OnHideCombatUI.AddListener(hide);
 
-        if(CombatStateManager.whoseTurn == WhoseTurn.Won || 
+        if(CombatStateManager.whoseTurn == WhoseTurn.Won ||
                     CombatStateManager.whoseTurn == WhoseTurn.Lost)
         {
             hide();
@@ -44,7 +50,21 @@ public class HealthBarManager : MonoBehaviour
         Trait.OnTraitRemoval.RemoveListener(updateHealthBarColor);
         LargeEnemyStats.OnLargeEnemySpawn.RemoveListener(cleanUpHiddenHealthBars);
         DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(updateCreatureTypeSymbols);
+        DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(applyConcealment);
         CombatUIModule.OnHideCombatUI.RemoveListener(hide);
+    }
+
+    // Called by CombatantHover when the mouse enters/leaves this bar's owner.
+    public void setHovered(bool isHovered)
+    {
+        hovered = isHovered;
+        applyConcealment();
+    }
+
+    // Reveal the bar only when it is eligible and either hovered or the Alt/show-formula key is held.
+    private void applyConcealment()
+    {
+        gameObject.SetActive(eligible && (hovered || OverallUIManager.showFormula));
     }
 
     private void updateCreatureTypeSymbols()
@@ -107,20 +127,24 @@ public class HealthBarManager : MonoBehaviour
 
     public void hide()
     {
+        eligible = false;
         gameObject.SetActive(false);
     }
 
     public void show()
     {
-        if(linkedStats == null || linkedStats.isDead() || 
-            CombatStateManager.whoseTurn == WhoseTurn.Won || 
+        if(linkedStats == null || linkedStats.isDead() ||
+            CombatStateManager.whoseTurn == WhoseTurn.Won ||
                     CombatStateManager.whoseTurn == WhoseTurn.Lost)
         {
+            eligible = false;
+            gameObject.SetActive(false);
             return;
         }
-        
+
+        eligible = true;
         updateHealthBarColor(null);
-        gameObject.SetActive(true);
+        applyConcealment();
     }
 
     public void setTotalHealth(int totalHealth)

@@ -135,10 +135,7 @@ public static class PrefabNames
 
     public const string formationEditorPanel = "Formation Editor Panel";
 
-    public const string intimidateTileName = "Intimidate Indicator";
-    public const string cunningTileName = "Cunning Indicator";
-    public const string observationTileName = "Observation Indicator";
-    public const string leadershipTileName = "Leadership Indicator";
+    public const string skillIndicator = "Skill Indicator";
 
     public const string npcNameTag = "NPC Name Tag";
     public const string oldNPCNameTag = "OLD NPC Name Tag";

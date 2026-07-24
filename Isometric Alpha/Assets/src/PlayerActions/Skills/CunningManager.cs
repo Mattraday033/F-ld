@@ -299,13 +299,14 @@ public class CunningManager : SkillManager
             return;
         }
 
-        skillGrid[selectorPosition.x, selectorPosition.y].GetComponent<SpriteRenderer>().color = oldColor;
+        skillGrid[selectorPosition.x, selectorPosition.y].setColor(oldColor);
+        skillGrid[selectorPosition.x, selectorPosition.y].setToNoTargetFoundSelector();
 
         selectorPosition = selectorPosition + directionalModifier;
 
-        oldColor = skillGrid[selectorPosition.x, selectorPosition.y].GetComponent<SpriteRenderer>().color;
-
-        skillGrid[selectorPosition.x, selectorPosition.y].GetComponent<SpriteRenderer>().color = Color.green;
+        oldColor = getTileColor(skillGrid[selectorPosition.x, selectorPosition.y]);
+        skillGrid[selectorPosition.x, selectorPosition.y].setToTargetFoundSelector();
+        skillGrid[selectorPosition.x, selectorPosition.y].setColor(Color.green);
 
         AudioManager.playSelectorMovedSFX();
     }
@@ -314,8 +315,9 @@ public class CunningManager : SkillManager
     {
         selectorPosition = getClosestStartingTileToFacingCoords(State.playerFacing.getFacing());
 
-        oldColor = skillGrid[selectorPosition.x, selectorPosition.y].GetComponent<SpriteRenderer>().color;
-        skillGrid[selectorPosition.x, selectorPosition.y].GetComponent<SpriteRenderer>().color = Color.green;
+        oldColor = getTileColor(skillGrid[selectorPosition.x, selectorPosition.y]);
+        skillGrid[selectorPosition.x, selectorPosition.y].setColor(Color.green);
+        skillGrid[selectorPosition.x, selectorPosition.y].setToTargetFoundSelector();
     }
 
     private Vector2Int getClosestStartingTileToFacingCoords(Facing direction)
@@ -370,11 +372,6 @@ public class CunningManager : SkillManager
         }
 
         throw new IOException("Player isn't facing anywhere?");
-    }
-
-    public override string getTilePrefabName()
-    {
-        return PrefabNames.cunningTileName;
     }
 
     public override Color getTileBaseColor()
