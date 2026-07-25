@@ -22,7 +22,6 @@ public abstract class SkillManager
     public readonly static UnityEvent OnSkillTargetFound = new UnityEvent();
 
     public static Vector2Int selectorPosition;
-    public static Color oldColor;
     protected static SkillIndicator[,] skillGrid;
 
     public const int skillUnlockLevel = 2;
@@ -91,23 +90,28 @@ public abstract class SkillManager
     public abstract Color getTileBaseColor();
     public abstract Color getTileTargetColor();
 
-    public Color getTileColor(SkillIndicator tile)
+    public void setTileColor(SkillIndicator tile)
     {
         if (collidedWithTarget(tile))
         {
             OnSkillTargetFound.Invoke();
+            tile.setColor(getTileTargetColor());
             tile.setToTargetFoundSelector();
-            return getTileTargetColor();
         }
         else
         {
+            tile.setColor(getTileBaseColor());
             tile.setToNoTargetFoundSelector();
-            return getTileBaseColor();
         }
     }
 
     public virtual bool collidedWithTarget(SkillIndicator tile)
     {
+        if(tile.previousCollision)
+        {
+            return true;
+        }
+
         Collider2D[] collisions = Helpers.getCollisions(tile.collider, getCollisionFilter());
 
         foreach (Collider2D collision in collisions)
@@ -119,6 +123,7 @@ public abstract class SkillManager
 
             if (collision.GetComponent<ISkillTarget>() != null)
             {
+                tile.previousCollision = true;
                 return true;
             }
         }

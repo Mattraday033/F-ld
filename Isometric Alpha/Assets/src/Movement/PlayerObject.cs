@@ -57,7 +57,7 @@ public class PlayerObject : MonoBehaviour
         MovementManager.OnMoveFinished.AddListener(setButtonPromptVisibility);
         FadeToBlackManager.OnFadeBackInFinished.AddListener(setButtonPromptVisibility);
         PlayerOOCStateManager.OnStateChange.AddListener(setButtonPromptVisibility);
-
+        EnemyMovement.ToggleHoverColliders.AddListener(toggleHover);
     }
 
     void Start()
@@ -85,6 +85,14 @@ public class PlayerObject : MonoBehaviour
         MovementManager.OnMoveFinished.RemoveListener(setButtonPromptVisibility);
         FadeToBlackManager.OnFadeBackInFinished.RemoveListener(setButtonPromptVisibility);
         PlayerOOCStateManager.OnStateChange.RemoveListener(setButtonPromptVisibility);
+        EnemyMovement.ToggleHoverColliders.RemoveListener(toggleHover);
+    }
+
+    public void toggleHover(bool toggleHover)
+    {
+        transitionCollider.enabled = toggleHover;
+        terrainCollider.enabled = toggleHover;
+        animationManager.polygonCollider2D.enabled = toggleHover;
     }
 
     private void setAsCameraTarget()
@@ -287,10 +295,10 @@ public class PlayerObject : MonoBehaviour
                     return "Need More Charges";
                 } else
                 {
-            return KeyBindingList.moveNorthKey.ToString() + "/" + 
-                    KeyBindingList.moveWestKey.ToString() + "/" + 
-                    KeyBindingList.moveSouthKey.ToString() + "/" + 
-                    KeyBindingList.moveEastKey.ToString() + ": Move";
+                    return KeyBindingList.moveNorthKey.ToString() + "/" + 
+                            KeyBindingList.moveWestKey.ToString() + "/" + 
+                            KeyBindingList.moveSouthKey.ToString() + "/" + 
+                            KeyBindingList.moveEastKey.ToString() + ": Move";
                 }
             case OOCActivity.intimidating:
                 if (IntimidateManager.getInstance().canUseSkill())

@@ -117,32 +117,42 @@ public class IntimidateManager : CunningManager
         PlayerObject.setButtonPromptVisibility();
     }
 
-    public override void createSkillArea()
+    // public override void createSkillArea()
+    // {
+    //     Vector3Int playerCoords = getPlayerCoords();
+
+    //     int range = getRange();
+    //     skillGrid = new SkillIndicator[range, range];
+
+    //     for (int row = 0; row < range; row++)
+    //     {
+    //         for (int col = 0; col < range; col++)
+    //         {
+    //             if (coordsWithinRange(row, col))
+    //             {
+    //                 skillGrid[row, col] = instantiateTile(playerCoords, row, col).GetComponent<SkillIndicator>();
+    //                 skillGrid[row, col].updateColliderPosition();
+    //             }
+    //             else
+    //             {
+    //                 continue;
+    //             }
+
+    //             setTileColor(skillGrid[row, col]);
+    //         }
+    //     }
+
+    //     cullSkillArea();
+    // }
+
+    protected override bool allowHovers()
     {
-        Vector3Int playerCoords = getPlayerCoords();
+        return false;
+    }
 
-        int range = getRange();
-        skillGrid = new SkillIndicator[range, range];
-
-        for (int row = 0; row < range; row++)
-        {
-            for (int col = 0; col < range; col++)
-            {
-                if (coordsWithinRange(row, col))
-                {
-                    skillGrid[row, col] = instantiateTile(playerCoords, row, col).GetComponent<SkillIndicator>();
-                    skillGrid[row, col].updateColliderPosition();
-                }
-                else
-                {
-                    continue;
-                }
-
-                skillGrid[row, col].setColor(getTileColor(skillGrid[row, col]));
-            }
-        }
-
-        cullSkillArea();
+    protected override void setSelectorOriginTile()
+    {
+        //empty on purpose
     }
 
     public override bool canUseSkill()

@@ -24,6 +24,12 @@ public class CunningManager : SkillManager
         cunningsRemaining = -1;
 
         LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
+        PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(enableAllHoverColliders);
+    }
+
+    private static void enableAllHoverColliders()
+    {
+        EnemyMovement.ToggleHoverColliders.Invoke(true);
     }
 
     private static void readSaveBlueprint(SaveBlueprint blueprint)
@@ -85,6 +91,7 @@ public class CunningManager : SkillManager
         destroyAllSkillGrids();
         getInstance().createSkillArea();
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.cunning);
+        EnemyMovement.ToggleHoverColliders.Invoke(false);
     }
 
     public static void leaveCunningMode()
@@ -108,18 +115,25 @@ public class CunningManager : SkillManager
                 {
                     skillGrid[row, col] = instantiateTile(playerCoords, row, col).GetComponent<SkillIndicator>();
                     skillGrid[row, col].updateColliderPosition();
+                    skillGrid[row, col].allowHover = allowHovers();
+                    skillGrid[row, col].coords = new Vector2Int(row, col);
                 }
                 else
                 {
                     continue;
                 }
 
-                skillGrid[row, col].setColor(getTileColor(skillGrid[row, col]));
+                setTileColor(skillGrid[row, col]);
             }
         }
 
         cullSkillArea();
         setSelectorOriginTile();
+    }
+
+    protected virtual bool allowHovers()
+    {
+        return true;
     }
 
     public void cullSkillArea()
@@ -284,6 +298,35 @@ public class CunningManager : SkillManager
         moveCurrentSelector((Vector2Int)MovementManager.distance1TileSouthEastGrid);
     }
 
+    public static void setCurrentSelector(Vector2Int newPosition)
+    {
+        if (newPosition.x < 0 ||
+            newPosition.x >= getInstance().getRange() ||
+            newPosition.y < 0 ||
+            newPosition.y >= getInstance().getRange())
+        {
+            return;
+        }
+
+        if (skillGrid[newPosition.x, newPosition.y] == null)
+        {
+            return;
+        }
+
+        getInstance().setTileColor(skillGrid[selectorPosition.x, selectorPosition.y]);
+        skillGrid[selectorPosition.x, selectorPosition.y].currentCursor = false;
+        // skillGrid[selectorPosition.x, selectorPosition.y].setToNoTargetFoundSelector();
+
+        selectorPosition = newPosition;
+
+        skillGrid[selectorPosition.x, selectorPosition.y].setColor(Color.green);
+        skillGrid[selectorPosition.x, selectorPosition.y].setToTargetFoundSelector();
+        skillGrid[selectorPosition.x, selectorPosition.y].currentCursor = true;
+
+        PlayerObject.setButtonPromptVisibility();
+        AudioManager.playSelectorMovedSFX();
+    }
+
     private void moveCurrentSelector(Vector2Int directionalModifier)
     {
         if (selectorPosition.x + directionalModifier.x < 0 ||
@@ -299,25 +342,26 @@ public class CunningManager : SkillManager
             return;
         }
 
-        skillGrid[selectorPosition.x, selectorPosition.y].setColor(oldColor);
-        skillGrid[selectorPosition.x, selectorPosition.y].setToNoTargetFoundSelector();
+        setTileColor(skillGrid[selectorPosition.x, selectorPosition.y]);
+        skillGrid[selectorPosition.x, selectorPosition.y].currentCursor = false;
+        // skillGrid[selectorPosition.x, selectorPosition.y].setToNoTargetFoundSelector();
 
         selectorPosition = selectorPosition + directionalModifier;
 
-        oldColor = getTileColor(skillGrid[selectorPosition.x, selectorPosition.y]);
-        skillGrid[selectorPosition.x, selectorPosition.y].setToTargetFoundSelector();
         skillGrid[selectorPosition.x, selectorPosition.y].setColor(Color.green);
+        skillGrid[selectorPosition.x, selectorPosition.y].setToTargetFoundSelector();
+        skillGrid[selectorPosition.x, selectorPosition.y].currentCursor = true;
 
         AudioManager.playSelectorMovedSFX();
     }
 
-    public void setSelectorOriginTile()
+    protected virtual void setSelectorOriginTile()
     {
         selectorPosition = getClosestStartingTileToFacingCoords(State.playerFacing.getFacing());
 
-        oldColor = getTileColor(skillGrid[selectorPosition.x, selectorPosition.y]);
         skillGrid[selectorPosition.x, selectorPosition.y].setColor(Color.green);
         skillGrid[selectorPosition.x, selectorPosition.y].setToTargetFoundSelector();
+        skillGrid[selectorPosition.x, selectorPosition.y].currentCursor = true;
     }
 
     private Vector2Int getClosestStartingTileToFacingCoords(Facing direction)
@@ -445,12 +489,14 @@ public class CunningManager : SkillManager
 
     public ISkillTarget getTargetFromTile(SkillIndicator tile)
     {
+        EnemyMovement.ToggleHoverColliders.Invoke(true);
         Collider2D selectorCollider = tile.collider;
         ISkillTarget target = null;
 
         if (!Helpers.hasCollision(selectorCollider))
         {
 
+            EnemyMovement.ToggleHoverColliders.Invoke(false);
             return target;
         }
         else
@@ -470,6 +516,7 @@ public class CunningManager : SkillManager
                 }
             }
 
+            EnemyMovement.ToggleHoverColliders.Invoke(false);
             return target;
         }
     }

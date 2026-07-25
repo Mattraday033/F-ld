@@ -6,31 +6,26 @@ public class SkillIndicator : MonoBehaviour
 {
 	public Collider2D collider;
 
-    private Color oldColor;
+    public Vector2Int coords;
 
-    public GameObject selectorOne;
-    public GameObject selectorTwo;
+    private Color color;
 
-    public Material defaultSprite;
-    public Material frontSelectorOneMat;
-    public Material backSelectorOneMat;
-
-    public EffectAnimationManager frontSelector;
-    public EffectAnimationManager backSelector;
+    public SpriteRenderer frontSelector;
+    public SpriteRenderer backSelector;
 
     public EffectAnimationManager frontSelectorTwo;
     public EffectAnimationManager backSelectorTwo;
 
     public GameObject tileMapGameObject;
 
+    public bool currentCursor = false;
+    public bool previousCollision = false;
+    public bool allowHover = false;
+
+    private SkillIndicatorState stateBeforeHover;
+
     private void Awake()
     {        
-        frontSelector.loops = true;
-        frontSelector.setAnimations(EffectAnimationType.FrontSelector);
-
-        backSelector.loops = true;
-        backSelector.setAnimations(EffectAnimationType.BackSelector);
-
         frontSelectorTwo.loops = true;
         frontSelectorTwo.setAnimations(EffectAnimationType.FrontSelector2);
 
@@ -38,7 +33,22 @@ public class SkillIndicator : MonoBehaviour
         backSelectorTwo.setAnimations(EffectAnimationType.BackSelector2);
     }
 
-	public void disableSelf(bool deactivate)
+    private void OnEnable()
+    {
+        EnemyMovement.ToggleHoverColliders.AddListener(toggleTileMapCollider);
+    }
+
+    private void OnDisable()
+    {
+        EnemyMovement.ToggleHoverColliders.RemoveListener(toggleTileMapCollider);
+    }
+
+    private void toggleTileMapCollider(bool active)
+    {
+        tileMapGameObject.SetActive(active);
+    }
+
+    public void disableSelf(bool deactivate)
 	{
 		if(deactivate)
 		{
@@ -56,39 +66,69 @@ public class SkillIndicator : MonoBehaviour
 
     public void setColor(Color color)
     {
-        frontSelector.spriteRenderer.color = color;
-        backSelector.spriteRenderer.color = color;
-        oldColor = color;
+        this.color = color;
+    }
 
-        frontSelectorTwo.spriteRenderer.color = color;
-        backSelectorTwo.spriteRenderer.color = color;
+    public Color getColor()
+    {
+        return color;
+    }
+
+    private void setColorWithTransparency(SpriteRenderer spriteRenderer)
+    {
+        spriteRenderer.color = new Color(color.r, color.g, color.b, ColorList.hoverSelectorAlpha);
     }
 
     public void setToTargetFoundSelector()
     {
-        backSelector.spriteRenderer.color = Color.clear;
-        backSelector.spriteRenderer.material = defaultSprite;
-        
-        frontSelector.spriteRenderer.color = Color.clear;
-        frontSelector.spriteRenderer.material = defaultSprite;
+        backSelector.color = Color.clear;
+        frontSelector.color = Color.clear;
 
-        backSelectorTwo.spriteRenderer.color = oldColor;
-        frontSelectorTwo.spriteRenderer.color = oldColor;
+        backSelectorTwo.spriteRenderer.color = color;
+        frontSelectorTwo.spriteRenderer.color = color;
     }
 
     public void setToNoTargetFoundSelector()
     {
-        backSelector.spriteRenderer.color = oldColor;
-        backSelector.spriteRenderer.material = backSelectorOneMat;
-        
-        frontSelector.spriteRenderer.color = oldColor;
-        frontSelector.spriteRenderer.material = frontSelectorOneMat;
+        setColorWithTransparency(backSelector);
+        setColorWithTransparency(frontSelector);
 
         backSelectorTwo.spriteRenderer.color = Color.clear;
         frontSelectorTwo.spriteRenderer.color = Color.clear;
     }
 
-	public void detectObservableObject()
+    public void OnMouseEnter()
+    {
+        if(allowHover && !currentCursor)
+        {
+            stateBeforeHover = new SkillIndicatorState(this);
+
+            setColor(Color.green);
+            setToTargetFoundSelector();
+            setColorWithTransparency(backSelectorTwo.spriteRenderer);
+            setColorWithTransparency(frontSelectorTwo.spriteRenderer);
+        }
+    }
+
+    public void OnMouseExit()
+    {
+        if(stateBeforeHover != null)
+        {
+            stateBeforeHover.restore(this);
+            stateBeforeHover = null;
+        }
+    }
+
+    public void OnMouseUp()
+    {
+        if(allowHover)
+        {
+            CunningManager.setCurrentSelector(coords);
+            stateBeforeHover = null;
+        }
+    }
+
+    public void detectObservableObject()
     {
 		if(Helpers.hasCollision(collider, LayerAndTagManager.observableLayerMask))
 		{

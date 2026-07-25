@@ -159,6 +159,8 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     public readonly static UnityEvent RevealAllNonDefeatedEnemies = new UnityEvent();
 
+    public readonly static UnityEvent<bool> ToggleHoverColliders = new UnityEvent<bool>();
+
     private MonsterMovementType _MovementType = MonsterMovementType.Random;
     public virtual MonsterMovementType movementType
     {
@@ -770,6 +772,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         TutorialSequence.TutorialSequenceTargetFinder.AddListener(assignToTutorialSequence);
         OnOOCMonsterDefeat.AddListener(disableIfDefeated);
         TutorialSequence.OnTutorialTargetVisibilityCheck.AddListener(isVisible);
+        ToggleHoverColliders.AddListener(toggleHover);
     }
 
 	public void destroyListeners()
@@ -778,6 +781,20 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		TutorialSequence.TutorialSequenceTargetFinder.RemoveListener(assignToTutorialSequence);
         OnOOCMonsterDefeat.RemoveListener(disableIfDefeated);
         TutorialSequence.OnTutorialTargetVisibilityCheck.RemoveListener(isVisible);
+        ToggleHoverColliders.RemoveListener(toggleHover);
+	}
+
+	public void toggleHover(bool toggleHover)
+	{
+        if(animationManager != null && animationManager.polygonCollider2D != null)
+        {
+            animationManager.polygonCollider2D.enabled = toggleHover;
+        }
+
+        if(attachedCollider2D != null)
+        {
+            attachedCollider2D.enabled = toggleHover;
+        }
 	}
 
 	public void onReveal(bool toggleReveal)

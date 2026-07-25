@@ -45,7 +45,6 @@ RectTransform:
   - {fileID: 8403658214547320794}
   - {fileID: 1981611207536021008}
   - {fileID: 1118531363885429251}
-  - {fileID: 52037096276107646}
   - {fileID: 8349594426262021622}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -173,8 +172,8 @@ MonoBehaviour:
   shadowSprite: {fileID: 0}
   polygonCollider2D: {fileID: 8448093679278581172}
   healthBarManager: {fileID: 0}
-  linkedStats: {fileID: 0}
-  characterToAnimate: 
+  npcName: 
+  animationName: 
   heartBeatRow: 0
   animancer: {fileID: 3094158370434555424}
   key: 0
@@ -593,100 +592,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.325}
   serializedVersion: 2
   m_Radius: 0.05
---- !u!1001 &2156587022222395039
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 3312928677131579616}
-    m_Modifications:
-    - target: {fileID: 2113704515732940769, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113704515732940769, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113704515732940769, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113704515732940769, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113704515732940769, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113704515732940769, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113704515732940769, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113704515732940769, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113704515732940769, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2113704515732940769, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5762837903424585071, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_Name
-      value: Train Collider
-      objectReference: {fileID: 0}
-    - target: {fileID: 5762837903424585071, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174692737536351044, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174692737536351044, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8174692737536351044, guid: 58043b30835d4964282352b8d639ae58,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.35
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 58043b30835d4964282352b8d639ae58, type: 3}
---- !u!4 &52037096276107646 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2113704515732940769, guid: 58043b30835d4964282352b8d639ae58,
-    type: 3}
-  m_PrefabInstance: {fileID: 2156587022222395039}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2693209578451859610
 PrefabInstance:
   m_ObjectHideFlags: 0
