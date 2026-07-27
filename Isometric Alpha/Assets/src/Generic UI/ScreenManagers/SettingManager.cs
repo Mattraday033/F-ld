@@ -15,11 +15,11 @@ public enum SettingsManagerState {
 [System.Serializable]
 public class SettingsManager : ScreenManager, IEscapable
 {
-    private static SettingsManagerState state = SettingsManagerState.Keybinds;
+    private static SettingsManagerState state;
     private static SettingsManager instance;
 
-    // public Button gameplayButton;
-    // public GameObject gameplayPanel;
+    public Button gameplayButton;
+    public GameObject gameplayPanel;
 
     public Button keybindsButton;
     public GameObject keybindsPanel;
@@ -61,6 +61,10 @@ public class SettingsManager : ScreenManager, IEscapable
         switch(SettingsManager.state)
         {
             case SettingsManagerState.Audio:
+
+                instance.gameplayButton.interactable = true;
+                instance.gameplayPanel.SetActive(false);
+
                 instance.keybindsButton.interactable = true;
                 instance.keybindsPanel.SetActive(false);
 
@@ -68,7 +72,21 @@ public class SettingsManager : ScreenManager, IEscapable
                 instance.audioPanel.SetActive(true);
                 return;   
 
+            case SettingsManagerState.Gameplay:
+                instance.gameplayButton.interactable = false;
+                instance.gameplayPanel.SetActive(true);
+
+                instance.keybindsButton.interactable = true;
+                instance.keybindsPanel.SetActive(false);
+
+                instance.audioSettingsButton.interactable = true;
+                instance.audioPanel.SetActive(false);
+                return;   
+
             default:
+                instance.gameplayButton.interactable = true;
+                instance.gameplayPanel.SetActive(false);
+
                 instance.audioSettingsButton.interactable = true;
                 instance.audioPanel.SetActive(false);
 
@@ -108,5 +126,12 @@ public class SettingsManager : ScreenManager, IEscapable
     public override KeyCode getExitKeyCode()
     {
         return KeyBindingList.settingsScreenKey.getCurrentKeyCode();
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        state = SettingsManagerState.Gameplay;
+        instance = null;
     }
 }

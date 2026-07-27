@@ -223,8 +223,40 @@ public class TransitionSpace : MonoBehaviour, ICounter
         effect.setAnimations(EffectAnimationType.TransitionIndicator);
     }
 
+    private void handleTransitionVisibilitySettingChange()
+    {
+        if(!shouldShowIndicator() || RevealManager.currentlyRevealed)
+        {
+            return;
+        }
+
+        if(indicatorAlwaysVisibleSettingOn() && indicator == null)
+        {
+            createIndicator();
+        } else if(indicator != null)
+        {
+            indicatorSpriteRenderer = null;
+            Destroy(indicator);
+        }
+    }
+
+    private bool indicatorAlwaysVisibleSettingOn()
+    {
+        return GameplaySettingsList.transitionIndicatorsAlwaysVisible.settingOptions[Constants.onSettingIndex].set;
+    }
+
     private void updateIndicatorVisibility(bool revealed)
     {
+        if(indicatorAlwaysVisibleSettingOn())
+        {
+            if(indicator == null)
+            {
+                createIndicator();
+            }
+
+            return;
+        }
+
         if(revealed && indicator == null)
         {
             createIndicator();
@@ -267,6 +299,8 @@ public class TransitionSpace : MonoBehaviour, ICounter
 
             updateIndicatorVisibility(RevealManager.currentlyRevealed);
         }
+
+        GameplaySettingsList.OnTransitionIndicatorVisibilitySettingChange.AddListener(handleTransitionVisibilitySettingChange);
     }
     public void removeListeners()
     {
@@ -279,6 +313,8 @@ public class TransitionSpace : MonoBehaviour, ICounter
 
         RevealManager.OnReveal.RemoveListener(updateIndicatorVisibility);
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(updateIndicatorVisibility);
+        
+        GameplaySettingsList.OnTransitionIndicatorVisibilitySettingChange.RemoveListener(handleTransitionVisibilitySettingChange);
     }
 
     public void updateCounter()

@@ -186,6 +186,11 @@ public static class PrefabNames
     public const string keybindSection = keybindFolder + "KeyBinding Section";
     public const string keybindButton = keybindFolder + "Keybind Buttons";
 
+    public const string gameplayFolder = "Gameplay/";
+    public const string gameplaySection = gameplayFolder + "Gameplay Section";
+    public const string gameplaySettingParent = gameplayFolder + "Gameplay Setting Parent";
+    public const string gameplayOption = gameplayFolder + "Gameplay Option";
+
     public const string outlineMaterial = "Sprite-Outline-Material";
 
     #endregion

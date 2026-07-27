@@ -159,6 +159,60 @@ public struct AudioSettingsWrapper
 
 }
 
+public struct GameplaySettingsWrapper
+{
+    public string combatAnimationSpeed;
+    public string autoTarget;
+    public string healthBarsAlwaysVisible;
+
+    public string transitionIndicatorsAlwaysVisible;
+
+    public string boldImportantQuestText;
+    public string showOnlyImportantQuestText;
+
+    public string tutorialsEnabled;
+
+    public static GameplaySettingsWrapper buildFromCurrentSettings()
+    {
+        return new GameplaySettingsWrapper()
+        {
+            combatAnimationSpeed = GameplaySettingsList.combatAnimationSpeed.getCurrentOptionTitle(),
+            autoTarget = GameplaySettingsList.autoTarget.getCurrentOptionTitle(),
+            healthBarsAlwaysVisible = GameplaySettingsList.healthBarsAlwaysVisible.getCurrentOptionTitle(),
+
+            transitionIndicatorsAlwaysVisible = GameplaySettingsList.transitionIndicatorsAlwaysVisible.getCurrentOptionTitle(),
+
+            boldImportantQuestText = GameplaySettingsList.boldImportantQuestText.getCurrentOptionTitle(),
+            showOnlyImportantQuestText = GameplaySettingsList.showOnlyImportantQuestText.getCurrentOptionTitle(),
+
+            tutorialsEnabled = GameplaySettingsList.tutorialsEnabled.getCurrentOptionTitle()
+        };
+    }
+
+    public void useForSettings()
+    {
+        setOptionIfPresent(GameplaySettingsList.combatAnimationSpeed, combatAnimationSpeed);
+        setOptionIfPresent(GameplaySettingsList.autoTarget, autoTarget);
+        setOptionIfPresent(GameplaySettingsList.healthBarsAlwaysVisible, healthBarsAlwaysVisible);
+
+        setOptionIfPresent(GameplaySettingsList.transitionIndicatorsAlwaysVisible, transitionIndicatorsAlwaysVisible);
+
+        setOptionIfPresent(GameplaySettingsList.boldImportantQuestText, boldImportantQuestText);
+        setOptionIfPresent(GameplaySettingsList.showOnlyImportantQuestText, showOnlyImportantQuestText);
+
+        setOptionIfPresent(GameplaySettingsList.tutorialsEnabled, tutorialsEnabled);
+    }
+
+    private static void setOptionIfPresent(GameplaySetting setting, string optionTitle)
+    {
+        if(!String.IsNullOrEmpty(optionTitle))
+        {
+            setting.setOption(optionTitle);
+        }
+    }
+
+}
+
 public struct KeyBindingSettingsWrapper
 {
     public KeyCode? moveNorthKey;
@@ -317,6 +371,8 @@ public class ConfigFile
 
     public KeyBindingSettingsWrapper keybindSettings;
 
+    public GameplaySettingsWrapper gameplaySettings;
+
     public void useForSettings()
     {
         tutorialFlags.useForSettings();
@@ -324,6 +380,8 @@ public class ConfigFile
         audioSettings.useForSettings();
 
         keybindSettings.useForSettings();
+
+        gameplaySettings.useForSettings();
     }
 
     public static ConfigFile build()
@@ -339,6 +397,8 @@ public class ConfigFile
                                                         AudioManager._FootstepVolumePlayerSetting);
 
         config.keybindSettings = KeyBindingSettingsWrapper.buildFromCurrentSettings();
+
+        config.gameplaySettings = GameplaySettingsWrapper.buildFromCurrentSettings();
 
         return config;
     }
@@ -356,6 +416,8 @@ public class ConfigFile
                                                         AudioManager.volumeMaximum);
 
         config.keybindSettings = KeyBindingSettingsWrapper.buildFromCurrentSettings();
+
+        config.gameplaySettings = GameplaySettingsWrapper.buildFromCurrentSettings();
 
 
         string json = JsonConvert.SerializeObject(config);

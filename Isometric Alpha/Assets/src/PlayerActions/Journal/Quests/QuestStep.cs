@@ -35,7 +35,7 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
         this.active = false;
 
         this.stepName = wrapper.stepName;
-        this.journalDescription = wrapper.journalDescription;
+        this.journalDescription = wrapper.journalDescription.Replace(Constants.boldTextStartCaps, Constants.boldTextStart).Replace(Constants.boldTextEndCaps, Constants.boldTextEnd);
         this.mapZone = wrapper.mapZone;
         this.mapLocation = wrapper.mapLocation;
 
@@ -47,18 +47,9 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
 		this.parentQuest = parentQuest;
 		this.active = active;
 		this.stepName = stepName;
-		this.journalDescription = journalDescription;
+		this.journalDescription = journalDescription.Replace(Constants.boldTextStartCaps, Constants.boldTextStart).Replace(Constants.boldTextEndCaps, Constants.boldTextEnd);
 
         activationIndex = -1;
-	}
-
-	public QuestStep(Quest parentQuest, bool active, string stepName, string journalDescription, int activationIndex)
-	{
-		this.parentQuest = parentQuest;
-		this.active = active;
-		this.stepName = stepName;
-		this.journalDescription = journalDescription;
-        this.activationIndex = activationIndex;
 	}
 
 	public bool hasTargetLocation()
@@ -175,8 +166,56 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
 		}
 
 		DescriptionPanel.setText(panel.secondaryNameText, DialogueList.scrubNameOfEndNumbers(getName()));
-		DescriptionPanel.setText(panel.loreDescriptionText, journalDescription);
+		DescriptionPanel.setText(panel.loreDescriptionText, getJournalDescriptionForDisplay());
 	}
+
+    private string getJournalDescriptionForDisplay()
+    {
+        SettingOption[] boldImportantTextSO = GameplaySettingsList.boldImportantQuestText.settingOptions;
+        SettingOption[] importantTextOnlySO = GameplaySettingsList.showOnlyImportantQuestText.settingOptions;
+
+        if(importantTextOnlySO[Constants.onSettingIndex].set)
+        {
+            string output = "";
+            string[] importantSectionStarts = journalDescription.Split(Constants.boldTextStart);
+
+            foreach(string section in importantSectionStarts)
+            {
+                string[] possibleImportantSection = section.Split(Constants.boldTextEnd);
+
+                if(possibleImportantSection.Length > 1)
+                {
+                    string importantSection = possibleImportantSection[Constants.indexZero];
+                    importantSection = char.ToUpper(importantSection[0]) + importantSection.Substring(1);
+
+                    if(!importantSection[importantSection.Length-1].Equals(' '))
+                    {
+                        importantSection += ' ';
+                    }
+
+                    output += importantSection;
+                }
+            }
+
+            if(boldImportantTextSO[Constants.onSettingIndex].set)
+            {
+                return Constants.boldTextStart + output + Constants.boldTextEnd;
+            } else
+            {
+                return output;
+            }
+
+        } else
+        {
+            if(boldImportantTextSO[Constants.onSettingIndex].set)
+            {
+                return journalDescription;
+            } else
+            {
+                return journalDescription.Replace(Constants.boldTextStart, "").Replace(Constants.boldTextEnd, "");
+            }
+        }
+    }
 
 	public void describeSelfRow(DescriptionPanel panel)
 	{
@@ -212,7 +251,7 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(parentQuest.getName()));
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(DialogueList.scrubNameOfEndNumbers(getName())));
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, journalDescription));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, getJournalDescriptionForDisplay()));
 
 		return buildingBlocks;
 	}

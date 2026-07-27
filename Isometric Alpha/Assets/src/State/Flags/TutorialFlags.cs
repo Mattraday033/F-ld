@@ -45,6 +45,11 @@ public static class TutorialFlags
 		}
 	}
 
+	public static void resetFlags()
+	{
+		tutorialFlags = new Dictionary<string, bool>();
+	}
+
     public static void checkForTutorialFlagsInNormalFlags()
     {
         List<string> flagsToOverwrite = new List<string>();

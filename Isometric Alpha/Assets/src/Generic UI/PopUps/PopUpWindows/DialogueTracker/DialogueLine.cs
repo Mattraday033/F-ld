@@ -7,9 +7,6 @@ public class DialogueLine : IDescribable
 {
     public readonly static UnityEvent UnboldAllText = new UnityEvent();
 
-    private const string boldTextStart = "<b>";
-    private const string boldTextEnd = "</b>";
-
     private DialogueDescriptionPanel dialoguePanel;
 
 	public string speakerName;
@@ -45,8 +42,8 @@ public class DialogueLine : IDescribable
 
     public void boldText()
     {
-        speakerName = boldTextStart + speakerName + boldTextEnd;
-        contents = boldTextStart + contents + boldTextEnd;
+        speakerName = Constants.boldTextStart + speakerName + Constants.boldTextEnd;
+        contents = Constants.boldTextStart + contents + Constants.boldTextEnd;
 
         UnboldAllText.AddListener(unboldText);
     }
@@ -55,8 +52,8 @@ public class DialogueLine : IDescribable
     {
         UnboldAllText.RemoveListener(unboldText);
     
-        speakerName = speakerName.Replace(boldTextStart, "").Replace(boldTextEnd, "");
-        contents = contents.Replace(boldTextStart, "").Replace(boldTextEnd, "");
+        speakerName = speakerName.Replace(Constants.boldTextStart, "").Replace(Constants.boldTextEnd, "");
+        contents = contents.Replace(Constants.boldTextStart, "").Replace(Constants.boldTextEnd, "");
 
         if(dialoguePanel != null)
         {

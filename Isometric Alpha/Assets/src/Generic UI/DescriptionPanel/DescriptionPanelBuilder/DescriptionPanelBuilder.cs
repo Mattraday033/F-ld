@@ -897,4 +897,8 @@ public static class IconList
 
     //Victory Conditions:
     public const string waves = "Waves";
+
+    //Setting Boxes
+    public const string settingBoxEmpty = "Setting Box Empty";
+    public const string settingBoxFull = "Setting Box Full";
 }

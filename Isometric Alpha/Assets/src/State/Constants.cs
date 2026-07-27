@@ -161,6 +161,22 @@ public static class Constants
     public const int ninetyArmor = 90;
 
     #endregion
+
+    #region Rich Text Prefix/Suffix
+
+    public const string boldTextStart = "<b>";
+    public const string boldTextEnd = "</b>";
+
+    public const string boldTextStartCaps = "<B>";
+    public const string boldTextEndCaps = "</B>";
+
+    #endregion
+
+    #region Gameplay Settings Index
+
+    public const int onSettingIndex = 0;
+
+    #endregion
 }
 
 public static class StatDifficultyList

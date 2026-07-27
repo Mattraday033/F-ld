@@ -64,7 +64,7 @@ public class KeyBindingSettingsManager : MonoBehaviour
         GameObject movementKeybindSectionGO = Instantiate(Resources.Load<GameObject>(PrefabNames.keybindSection), scrollableArea);
         KeybindingSection movementKeySection = movementKeybindSectionGO.GetComponent<KeybindingSection>();
 
-        movementKeySection.createKeybindButtons("Movement",KeyBindingList.getMovementKeybindSection());
+        movementKeySection.createKeybindButtons("Movement", KeyBindingList.getMovementKeybindSection());
 
         GameObject overworldKeybindSectionGO = Instantiate(Resources.Load<GameObject>(PrefabNames.keybindSection), scrollableArea);
         KeybindingSection overworldKeySection = overworldKeybindSectionGO.GetComponent<KeybindingSection>();

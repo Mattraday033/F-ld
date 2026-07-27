@@ -44,6 +44,7 @@ public interface INeedsUpdateOnStateChange
 public class CombatStateManager : MonoBehaviour
 {
     private const float fastForwardTimeScale = 4f;
+    private const float doubleResolvingTurnTimeScale = 2f;
     private const float resolvingTurnTimeScale = 1.2f;
     private const float normalTimeScale = 1f;
 
@@ -380,7 +381,7 @@ public class CombatStateManager : MonoBehaviour
                 OnTurnChangeToPlayer.Invoke();
                 break;
             case WhoseTurn.Resolving:
-                Time.timeScale = resolvingTurnTimeScale;
+                Time.timeScale = getResolveTurnTimeScale();
                 OnTurnChangeToResolving.Invoke();
                 break;
             case WhoseTurn.Won:
@@ -407,6 +408,26 @@ public class CombatStateManager : MonoBehaviour
         
         SelectorManager.declareSelectors();
 	}
+
+    private static float getResolveTurnTimeScale()
+    {
+        int fastAnimationSpeedIndex = 1;
+        int veryFastAnimationSpeedIndex = 2;
+
+        SettingOption[] settingOptions = GameplaySettingsList.combatAnimationSpeed.settingOptions;
+
+        if(settingOptions[fastAnimationSpeedIndex].set)
+        {
+            return doubleResolvingTurnTimeScale;
+        }
+
+        if(settingOptions[veryFastAnimationSpeedIndex].set)
+        {
+            return fastForwardTimeScale;
+        }
+
+        return resolvingTurnTimeScale;
+    }
 
 	public static void resolveTurn()
 	{

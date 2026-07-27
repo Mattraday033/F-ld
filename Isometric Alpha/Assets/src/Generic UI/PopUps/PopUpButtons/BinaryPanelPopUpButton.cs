@@ -15,7 +15,9 @@ public enum BinaryDescisionType {
                                     RaiseStats = 8, 
                                     ResolveWithoutActionsWarning = 9,
                                     ResetKeybinds = 10,
-                                    OverwriteKeybind = 11
+                                    OverwriteKeybind = 11,
+                                    ResetGameplayOptions = 12,
+                                    ResetTutorials = 13
                                 }
 
 public class BinaryPanelPopUpButton : PopUpButton
@@ -86,6 +88,10 @@ public class BinaryPanelPopUpButton : PopUpButton
                 return new ResetKeybinds();                
             case BinaryDescisionType.OverwriteKeybind:
                 return new OverwriteKeybind();
+            case BinaryDescisionType.ResetGameplayOptions:
+                return new ResetGameplayOptions();                
+            case BinaryDescisionType.ResetTutorials:
+                return new ResetTutorials();
             default:
 				throw new IOException("Unknown BinaryDescisionType: " + decisionType.ToString());
 		}
