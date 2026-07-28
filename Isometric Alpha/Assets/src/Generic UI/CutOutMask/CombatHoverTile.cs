@@ -76,6 +76,41 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         hoverCollider.enabled = true;
     }
 
+    protected override bool handleTutorialClick()
+    {
+        if(!TutorialSequence.currentStepAllowsCombatTileClicks())
+        {
+            return false;
+        }
+
+        GridCoords currentCoords = SelectorManager.getCurrentSelectorCoords();
+        GridCoords destination = getLegalSelectorDestination();
+
+        // The keyboard cannot cross the battlefield divide during a tutorial step, so neither can a click.
+        if(!CombatGrid.positionsAreOnSameSide(currentCoords, destination))
+        {
+            return true;
+        }
+
+        moveSelectorToTarget();
+
+        if(!destination.Equals(currentCoords))
+        {
+            AudioManager.playSelectorMovedSFX();
+        }
+
+        SpawnHoverPanel.runInstanceOfScript();
+
+        SelectorManager.updateAllDamagePreviews();
+
+        if(TutorialSequence.conditionFulfilled())
+        {
+            TutorialSequence.advanceCurrentTutorialSequence();
+        }
+
+        return true;
+    }
+
     private void OnEnable()
     {
         SelectorManager.SelectorMoved.AddListener(determineVisbility);

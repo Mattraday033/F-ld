@@ -12,6 +12,7 @@ public static class TutorialSequenceList
     private const bool highlight = false;
     private const bool unhighlight = false;
     private const bool allowsMovementKeys = true;
+    private const bool allowsCombatTileClicks = true;
 
     private const string itemTutorialSequenceKey = "Item Tutorial";
     public const string equippableItemTutorialSeenFlag = "equippableItemTutorialSequenceEntered";
@@ -975,15 +976,17 @@ public static class TutorialSequenceList
                                                          scriptAtEnd: new SelectCurrentActor(),
                                                          additionalScripts: combatTutorialStepFiveAndSevenAdditionalScripts,
                                                          allowsMovementKeys: allowsMovementKeys,
+                                                         allowsCombatTileClicks: allowsCombatTileClicks,
                                                          condition: () => SelectCurrentActor.hasActorTarget()));
         combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 6,
                                                          combatActionWheelTargetHash,
-                                                         ArrowDirection.BottomRight,
+                                                         ArrowDirection.Right,
                                                          KeyBindingList.combatSelectKey,
                                                          createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                          scriptAtEnd: new AbilityWheelChooseAbility(),
                                                          additionalScripts: combatTutorialStepFourteenAdditionalScripts,
-                                                         condition: () => SelectTarget.canPayCost()));
+                                                         condition: () => SelectTarget.canPayCost(),
+                                                         selectorState: TutorialSelectorState.Orange));
         combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 7,
                                                          topThirdOfCombatUITargetHash,
                                                          ArrowDirection.Center,
@@ -993,7 +996,9 @@ public static class TutorialSequenceList
                                                          scriptAtEnd: new SelectTarget(),
                                                          additionalScripts: combatTutorialStepFiveAndSevenAdditionalScripts,
                                                          allowsMovementKeys: allowsMovementKeys,
-                                                         condition: () => SelectTarget.hasTargets()));
+                                                         allowsCombatTileClicks: allowsCombatTileClicks,
+                                                         condition: () => SelectTarget.hasTargets(),
+                                                         selectorState: TutorialSelectorState.Orange));
 
         combatTutorialSteps = getFinalCombatTutorialSteps(combatTutorialSteps);
 
@@ -1019,7 +1024,9 @@ public static class TutorialSequenceList
                                                          KeyBindingList.combatSelectKey,
                                                          scriptAtEnd: new SelectTertiaryTarget(),
                                                          additionalScripts: combatTutorialRepositionStepOneAdditionalScripts,
-                                                         allowsMovementKeys: allowsMovementKeys));
+                                                         allowsMovementKeys: allowsMovementKeys,
+                                                         allowsCombatTileClicks: allowsCombatTileClicks,
+                                                         selectorState: TutorialSelectorState.Yellow));
 
         combatTutorialSteps = getFinalCombatTutorialSteps(combatTutorialSteps);
 

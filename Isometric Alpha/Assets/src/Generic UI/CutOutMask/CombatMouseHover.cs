@@ -13,13 +13,25 @@ public abstract class CombatMouseHover : MonoBehaviour
         SelectorManager.displayCurrentHoverUI();
     }
 
+    protected GridCoords getLegalSelectorDestination()
+    {
+        return SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.getCurrentSelector(), getTargetCoords());
+    }
+
     protected void moveSelectorToTarget()
     {
-        SelectorManager.currentSelector.setToLocation(SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.getCurrentSelector(), getTargetCoords()));
+        SelectorManager.currentSelector.setToLocation(getLegalSelectorDestination());
 
         SelectorManager.createPressEPrompt();
 
         SelectorManager.updateAllDamagePreviews();
+    }
+
+    // Returns whether the click was consumed by the current tutorial step. Only combat hover
+    // tiles handle this; everything else falls through to the normal click behaviour.
+    protected virtual bool handleTutorialClick()
+    {
+        return false;
     }
 
     public void OnMouseDown()
@@ -64,6 +76,14 @@ public abstract class CombatMouseHover : MonoBehaviour
                         moveSelectorToTarget();
                         SelectorManager.handleChoosingTertiary();
                     }
+                    break;
+                case CurrentActivity.Tutorial:
+
+                    if (handleTutorialClick())
+                    {
+                        return;
+                    }
+
                     break;
                 default:
                     break;

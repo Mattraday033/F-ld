@@ -53,6 +53,8 @@ public struct TutorialSequenceAdditionalScript
     }
 }
 
+public enum TutorialSelectorState { White, Orange, Yellow }
+
 [Serializable]
 public struct TutorialSequenceStep : IDescribable 
 {
@@ -68,6 +70,7 @@ public struct TutorialSequenceStep : IDescribable
     public string tutorialMessageKey;
     public bool createPopUpScreenBlocker;
     public bool allowsMovementKeys;
+    public bool allowsCombatTileClicks;
     public bool addShiftToKeyCodeMessage;
     public bool skipHighlight;
     public bool skipUnhighlight;
@@ -93,6 +96,8 @@ public struct TutorialSequenceStep : IDescribable
 
     public ConditionDelegate condition;
 
+    public TutorialSelectorState selectorState;
+
     public TutorialSequenceStep( string tutorialMessageKey,
                                  string tutorialTargetHash,
                                  ArrowDirection arrowDirection, 
@@ -104,8 +109,10 @@ public struct TutorialSequenceStep : IDescribable
                                  bool skipUnhighlight = false, 
                                  bool createPopUpScreenBlocker = false,
                                  bool allowsMovementKeys = false,
+                                 bool allowsCombatTileClicks = false,
                                  bool useButtonPress = false,
-                                 ConditionDelegate condition = null)
+                                 ConditionDelegate condition = null,
+                                 TutorialSelectorState selectorState = TutorialSelectorState.White)
     {
         this.tutorialMessageKey = tutorialMessageKey;
         this.tutorialTargetHash = tutorialTargetHash;
@@ -130,6 +137,7 @@ public struct TutorialSequenceStep : IDescribable
         this.scriptAtEnd = scriptAtEnd;
 
         this.allowsMovementKeys = allowsMovementKeys;
+        this.allowsCombatTileClicks = allowsCombatTileClicks;
 
         this.addShiftToKeyCodeMessage = false;
         this.blockInternalRaycastsOnCutOutMask = false;
@@ -145,6 +153,18 @@ public struct TutorialSequenceStep : IDescribable
         {
             this.additionalScripts = additionalScripts;
         }
+
+        this.selectorState = selectorState;
+    }
+
+    public static TutorialSelectorState getCurrentTutorialSelectorState()
+    {
+        if(TutorialSequence.currentTutorialSequence != null)
+        {
+            return TutorialSequence.currentTutorialSequence.getCurrentTutorialSequenceStep().selectorState;
+        }
+
+        return TutorialSelectorState.White;
     }
 
 	public bool Equals(TutorialSequenceStep otherStep)
@@ -1079,6 +1099,15 @@ public class TutorialSequence
     {
         return (PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence || CombatStateManager.currentActivity == CurrentActivity.Tutorial)
                  && currentTutorialSequence != null && currentTutorialSequence.preventMouseHovers;
+    }
+
+    //whether the current step lets a click on a combat hover tile move the selector and advance the sequence
+    public static bool currentStepAllowsCombatTileClicks()
+    {
+        return CombatStateManager.currentActivity == CurrentActivity.Tutorial &&
+                currentTutorialSequence != null &&
+                !blockMouseHovers() &&
+                currentTutorialSequence.getCurrentTutorialSequenceStep().allowsCombatTileClicks;
     }
 
     public static bool conditionFulfilled()

@@ -59,6 +59,8 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     {
         if(CombatStateManager.currentActivity == CurrentActivity.Tutorial)
         {
+            abilityMenuManager.setCurrentlySelectedAbilityIndex(index);
+
             AbilityWheelChooseAbility chooseAbilityScript = new AbilityWheelChooseAbility();
 
             chooseAbilityScript.runScript();

@@ -357,23 +357,42 @@ public class Selector : ICloneable
     {
         Color color = Color.white;
 
-        if(alwaysRed)
+        if(CombatStateManager.inCombat && 
+            CombatStateManager.currentActivity == CurrentActivity.Tutorial &&
+            !name.Equals(SelectorList.playerCursorName))
         {
-		    color = ColorList.intimidateIndicatorOrange;
-        } else if(alwaysWhite)
-        {
-		    color = Color.white;
-        } else
-        {
-            switch(CombatStateManager.currentActivity)
+            switch(TutorialSequenceStep.getCurrentTutorialSelectorState())
             {
-                case CurrentActivity.ChoosingAbility:
-                case CurrentActivity.ChoosingLocation:
-                    color = ColorList.intimidateIndicatorOrange;
+                case TutorialSelectorState.Orange:
+		            color = ColorList.intimidateIndicatorOrange;
                     break;
-                case CurrentActivity.ChoosingTertiary:
+                case TutorialSelectorState.Yellow:
                     color = Color.yellow;
                     break;
+                default:
+                    break;
+            }
+
+        } else
+        {
+            if(alwaysRed)
+            {
+                color = ColorList.intimidateIndicatorOrange;
+            } else if(alwaysWhite)
+            {
+                color = Color.white;
+            } else
+            {
+                switch(CombatStateManager.currentActivity)
+                {
+                    case CurrentActivity.ChoosingAbility:
+                    case CurrentActivity.ChoosingLocation:
+                        color = ColorList.intimidateIndicatorOrange;
+                        break;
+                    case CurrentActivity.ChoosingTertiary:
+                        color = Color.yellow;
+                        break;
+                }
             }
         }
 
