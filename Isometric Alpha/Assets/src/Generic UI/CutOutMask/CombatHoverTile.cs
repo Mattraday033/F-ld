@@ -23,6 +23,8 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     private bool queueMouseOver = false;
 
+    private PolygonCollider2D hoverCollider;
+
     private bool _WaitingOnMouseUp = false;
     private bool waitingOnMouseUp
     {
@@ -46,11 +48,32 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     private void Awake()
     {
+        hoverCollider = GetComponent<PolygonCollider2D>();
+
         backEffectManager.loops = true;
         backEffectManager.setAnimations(EffectAnimationType.BackSelector2);
 
         frontEffectManager.loops = true;
         frontEffectManager.setAnimations(EffectAnimationType.FrontSelector2);
+
+        CombatStateManager.OnActivityChangeToInEscapeMenu.AddListener(disableHoverCollider);
+        CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(enableHoverCollider);
+    }
+
+    private void OnDestroy()
+    {
+        CombatStateManager.OnActivityChangeToInEscapeMenu.RemoveListener(disableHoverCollider);
+        CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveListener(enableHoverCollider);
+    }
+
+    private void disableHoverCollider()
+    {
+        hoverCollider.enabled = false;
+    }
+
+    private void enableHoverCollider()
+    {
+        hoverCollider.enabled = true;
     }
 
     private void OnEnable()

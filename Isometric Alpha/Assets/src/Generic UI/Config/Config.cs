@@ -47,39 +47,39 @@ public struct TutorialFlagWrapper
     {
         return new TutorialFlagWrapper()
         {
-            equippableItemTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.equippableItemTutorialSeenFlag),
-            formationTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.formationTutorialSeenFlag),
+            equippableItemTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.equippableItemTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            formationTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.formationTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
 
-            combatTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag),
-            traitTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.traitTutorialSeenFlag),
-            mandatoryTargetTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.mandatoryTargetTutorialSeenFlag),
+            combatTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            traitTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.traitTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            mandatoryTargetTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.mandatoryTargetTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
 
-            skipThatchShackTutorialsFlag = TutorialFlags.getFlag(TutorialSequenceList.skipThatchShackTutorialsFlag),
-            intimidateTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.intimidateTutorialSeenFlag),
-            cunningTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.cunningTutorialSeenFlag),
-            secondCunningTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondCunningTutorialSeenFlag),
-            thirdCunningTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.thirdCunningTutorialSeenFlag),
-            observationTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.observationTutorialSeenFlag),
-            secondObservationTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondObservationTutorialSeenFlag),
-            leadershipTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.leadershipTutorialSeenFlag),
-            secondLeadershipTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondLeadershipTutorialSeenFlag),
-            interactableObjectTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.interactableObjectTutorialSeenFlag),
-            hiddenObjectsTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.hiddenObjectsTutorialSeenFlag),
-            firstHostilityTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.firstHostilityTutorialSeenFlag),
-            secondHostilityTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondHostilityTutorialSeenFlag),
+            skipThatchShackTutorialsFlag = TutorialFlags.getFlag(TutorialSequenceList.skipThatchShackTutorialsFlag, ignoreTutorialDisabledSetting: true),
+            intimidateTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.intimidateTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            cunningTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.cunningTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            secondCunningTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondCunningTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            thirdCunningTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.thirdCunningTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            observationTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.observationTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            secondObservationTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondObservationTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            leadershipTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.leadershipTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            secondLeadershipTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondLeadershipTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            interactableObjectTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.interactableObjectTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            hiddenObjectsTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.hiddenObjectsTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            firstHostilityTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.firstHostilityTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            secondHostilityTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.secondHostilityTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
 
-            movableObjectTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.movableObjectTutorialSeenFlag),
+            movableObjectTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.movableObjectTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
 
-            questCounterTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.questCounterTutorialSeenFlag),
+            questCounterTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.questCounterTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
 
-            playerLevelUpTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.playerLevelUpTutorialSeenFlag),
-            addingAbilitiesTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.addingAbilitiesTutorialSeenFlag),
-            companionSpecificAbilitiesTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.companionSpecificAbilitiesTutorialSeenFlag),
+            playerLevelUpTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.playerLevelUpTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            addingAbilitiesTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.addingAbilitiesTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            companionSpecificAbilitiesTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.companionSpecificAbilitiesTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
 
-            exuberanceCostTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.exuberanceCostTutorialSeenFlag),
-            traitCostTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.traitCostTutorialSeenFlag),
+            exuberanceCostTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.exuberanceCostTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
+            traitCostTutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.traitCostTutorialSeenFlag, ignoreTutorialDisabledSetting: true),
 
-            winConUITutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.winConUITutorialSeenFlag),
+            winConUITutorialSeen = TutorialFlags.getFlag(TutorialSequenceList.winConUITutorialSeenFlag, ignoreTutorialDisabledSetting: true),
         };
     }
 

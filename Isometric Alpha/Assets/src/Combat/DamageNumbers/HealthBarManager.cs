@@ -24,7 +24,8 @@ public class HealthBarManager : MonoBehaviour
     public Stats linkedStats;
 
     // Whether game logic wants this bar shown (set by show()/hide()). The bar is only
-    // actually revealed while eligible AND (its owner is hovered OR the show-formula/Alt key is held).
+    // actually revealed while eligible AND (its owner is hovered OR the show-formula/Alt key is held
+    // OR the health-bars-always-visible setting is on).
     private bool eligible;
     private bool hovered;
 
@@ -36,6 +37,7 @@ public class HealthBarManager : MonoBehaviour
         DescriptionPanelBuilder.OnFormulaSwap.AddListener(updateCreatureTypeSymbols);
         DescriptionPanelBuilder.OnFormulaSwap.AddListener(applyConcealment);
         CombatUIModule.OnHideCombatUI.AddListener(hide);
+        GameplaySettingsList.OnHealthBarVisibilitySettingChange.AddListener(applyConcealment);
 
         if(CombatStateManager.whoseTurn == WhoseTurn.Won ||
                     CombatStateManager.whoseTurn == WhoseTurn.Lost)
@@ -52,6 +54,7 @@ public class HealthBarManager : MonoBehaviour
         DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(updateCreatureTypeSymbols);
         DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(applyConcealment);
         CombatUIModule.OnHideCombatUI.RemoveListener(hide);
+        GameplaySettingsList.OnHealthBarVisibilitySettingChange.RemoveListener(applyConcealment);
     }
 
     // Called by CombatantHover when the mouse enters/leaves this bar's owner.
@@ -61,10 +64,16 @@ public class HealthBarManager : MonoBehaviour
         applyConcealment();
     }
 
-    // Reveal the bar only when it is eligible and either hovered or the Alt/show-formula key is held.
+    private bool healthBarsAlwaysVisibleSettingOn()
+    {
+        return GameplaySettingsList.healthBarsAlwaysVisible.settingOptions[Constants.onSettingIndex].set;
+    }
+
+    // Reveal the bar only when it is eligible and either the always-visible setting is on,
+    // its owner is hovered, or the Alt/show-formula key is held.
     private void applyConcealment()
     {
-        gameObject.SetActive(eligible && (hovered || OverallUIManager.showFormula));
+        gameObject.SetActive(eligible && (healthBarsAlwaysVisibleSettingOn() || hovered || OverallUIManager.showFormula));
     }
 
     private void updateCreatureTypeSymbols()

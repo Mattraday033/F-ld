@@ -120,6 +120,8 @@ public static class GameplaySettingsList
 
     public static readonly UnityEvent OnTransitionIndicatorVisibilitySettingChange = new UnityEvent();
 
+    public static readonly UnityEvent OnHealthBarVisibilitySettingChange = new UnityEvent();
+
     #endregion
 
     // Combat
@@ -129,8 +131,12 @@ public static class GameplaySettingsList
     public readonly static GameplaySetting autoTarget = new GameplaySetting("Auto-Targeting", 
                                                         new SettingOption[] { new SettingOption("On", true), new SettingOption("Off")});
 
-    public readonly static GameplaySetting healthBarsAlwaysVisible = new GameplaySetting("Health Bars Always Visible", 
-                                                                     new SettingOption[] { new SettingOption("On"), new SettingOption("Off", true)});
+    public readonly static GameplaySetting healthBarsAlwaysVisible = new GameplaySetting("Health Bars Always Visible",
+                                                                     new SettingOption[] { new SettingOption("On"), new SettingOption("Off", true)},
+                                                                     () =>
+                                                                     {
+                                                                         OnHealthBarVisibilitySettingChange.Invoke();
+                                                                     });
 
     // Overworld
     public readonly static GameplaySetting transitionIndicatorsAlwaysVisible =  new GameplaySetting("Transition Indicators Always Visible", 

@@ -133,11 +133,11 @@ public static class TutorialMessageList
         tutorialDictionary.Add(combatTutorialMessagePrefix + 2, "All creatures on this side of the battlefield are your allies.");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 3, "All creatures on this side of the battlefield are enemies.");
 
-        tutorialDictionary.Add(combatTutorialMessagePrefix + 4 + " EnemyGetsSurpriseRound", "The Surprise Round Icon is red, meaning you have been surprised. When you are surprised, you forfeit your first turn. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to let the enemy take their turn.");
-        tutorialDictionary.Add(combatTutorialMessagePrefix + 4 + " PlayerGetsSurpriseRound", "This is the Surprise Round Icon. Green means you surprised the enemy and they won't get to attack on their first turn.");
-        tutorialDictionary.Add(combatTutorialMessagePrefix + 4 + " NoSurpriseRound", "This is the Surprise Round Icon. It is grey, meaning no one is surprised, and no one will get any free attacks.");
+        tutorialDictionary.Add(combatTutorialMessagePrefix + 4 + " EnemyGetsSurpriseRound", "This is the Surprise Round Icon. The Party symbol mean you have been surprised. When you are surprised, you forfeit your first turn. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to let the enemy take their turn.");
+        tutorialDictionary.Add(combatTutorialMessagePrefix + 4 + " PlayerGetsSurpriseRound", "This is the Surprise Round Icon. The Skull means you have surprised the enemy and they won't get to attack on their first turn.");
+        tutorialDictionary.Add(combatTutorialMessagePrefix + 4 + " NoSurpriseRound", "This is the Surprise Round Icon. When it shows this symbol, it means no one is surprised, and no one will get any free attacks.");
 
-        tutorialDictionary.Add(combatTutorialMessagePrefix + 5, "It is your turn. Move the white selector square with the Movement keys. When it is under an ally, press <nobr>' " + keyCodePlaceHolder + " '</nobr>");
+        tutorialDictionary.Add(combatTutorialMessagePrefix + 5, "It is your turn. Move the white bobbing selector with the Movement keys. When it is under an ally, press <nobr>' " + keyCodePlaceHolder + " '</nobr>");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 6, "This is this character's Action Wheel. Use the ' " + counterClockwiseKeyCodePlaceHolder + " ' and ' " + clockwiseKeyCodePlaceHolder + " ' keys to cycle through your choices. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to select an Action.");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 7, "Use the Movement keys to target a creature. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to queue your action.");
         tutorialDictionary.Add(combatTutorialMessagePrefix + 8, "Most Actions can only be performed between rounds. When you resolve the turn, all Actions in the Action Order will occur in order, starting at the top.");

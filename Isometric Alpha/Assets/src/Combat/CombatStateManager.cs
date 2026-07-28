@@ -89,6 +89,11 @@ public class CombatStateManager : MonoBehaviour
     public readonly static UnityEvent OnActivityChangeFromTutorial = new UnityEvent();
     public readonly static UnityEvent OnActivityChangeFromResolveTurnWarning = new UnityEvent();
 
+    // These carry the activity being moved to, so listeners can treat the
+    // ChoosingLocation <-> ChoosingTertiary hand off differently from a real exit.
+    public readonly static UnityEvent<CurrentActivity> OnActivityChangeFromChoosingLocation = new UnityEvent<CurrentActivity>();
+    public readonly static UnityEvent<CurrentActivity> OnActivityChangeFromChoosingTertiary = new UnityEvent<CurrentActivity>();
+
 
     public readonly static UnityEvent OnCurrentActivityChange = new UnityEvent();
 
@@ -533,8 +538,10 @@ public class CombatStateManager : MonoBehaviour
             case CurrentActivity.ChoosingAbility:
                 break;
             case CurrentActivity.ChoosingLocation:
+                OnActivityChangeFromChoosingLocation.Invoke(newActivity);
                 break;
             case CurrentActivity.ChoosingTertiary:
+                OnActivityChangeFromChoosingTertiary.Invoke(newActivity);
                 break;
             case CurrentActivity.Tutorial:
                 OnActivityChangeFromTutorial.Invoke();

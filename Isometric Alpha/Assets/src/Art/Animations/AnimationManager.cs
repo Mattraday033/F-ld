@@ -197,24 +197,59 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     private void OnDestroy()
     {
         HeartBeatManager.getHeartBeat(animationName).RemoveListener(updateIdleAnimation);
-        CombatStateManager.OnActivityChangeToInEscapeMenu.RemoveListener(disablePolygonCollider);
-        CombatStateManager.OnActivityChangeToResolveTurnWarning.RemoveListener(disablePolygonCollider);
-        CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveListener(enablePolygonCollider);
-        CombatStateManager.OnActivityChangeFromResolveTurnWarning.RemoveListener(enablePolygonCollider);
-        CombatTraitColliderDisabler.OnCombatTraitHoverEnter.RemoveListener(disablePolygonCollider);
-        CombatTraitColliderDisabler.OnCombatTraitHoverExit.RemoveListener(enablePolygonCollider);
+        // CombatStateManager.OnActivityChangeToInEscapeMenu.RemoveListener(disablePolygonCollider);
+        // CombatStateManager.OnActivityChangeToResolveTurnWarning.RemoveListener(disablePolygonCollider);
+        // CombatStateManager.OnActivityChangeToChoosingLocation.RemoveListener(disablePolygonCollider);
+        // CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveListener(enablePolygonCollider);
+        // CombatStateManager.OnActivityChangeFromResolveTurnWarning.RemoveListener(enablePolygonCollider);
+        CombatStateManager.OnActivityChangeFromChoosingLocation.RemoveListener(handleActivityChangeFromChoosingLocation);
+        CombatStateManager.OnActivityChangeFromChoosingTertiary.RemoveListener(handleActivityChangeFromChoosingTertiary);
+        // CombatTraitColliderDisabler.OnCombatTraitHoverEnter.RemoveListener(disablePolygonCollider);
+        // CombatTraitColliderDisabler.OnCombatTraitHoverExit.RemoveListener(enablePolygonCollider);
         SetIdleByNPCName.RemoveListener(setCurrentIdle);
         PlayAnimationByNPCName.RemoveListener(playAnimationByNPCName);
     }
 
     private void disablePolygonCollider()
     {
+        if(polygonCollider2D == null)
+        {
+            return;
+        }
+
         polygonCollider2D.enabled = false;
     }
 
     private void enablePolygonCollider()
     {
+        if(CombatStateManager.inCombat || polygonCollider2D == null)
+        {
+            return;
+        }
+
         polygonCollider2D.enabled = true;
+    }
+
+    // ChoosingLocation and ChoosingTertiary both keep the colliders off, so handing
+    // off between the two should not flicker them back on in between.
+    private void handleActivityChangeFromChoosingLocation(CurrentActivity newActivity)
+    {
+        if(newActivity == CurrentActivity.ChoosingTertiary)
+        {
+            return;
+        }
+
+        enablePolygonCollider();
+    }
+
+    private void handleActivityChangeFromChoosingTertiary(CurrentActivity newActivity)
+    {
+        if(newActivity == CurrentActivity.ChoosingLocation)
+        {
+            return;
+        }
+
+        enablePolygonCollider();
     }
 
     #endregion
@@ -226,6 +261,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     private void Awake()
     {
         key = CombatAnimationManager.getCurrentKey();
+
+        if(CombatStateManager.inCombat)
+        {
+            disablePolygonCollider();
+        }
     }
 
     public GameObject getGameObject()
@@ -277,12 +317,15 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         setHeartBeatRow();
 
         HeartBeatManager.getHeartBeat(animationName).AddListener(updateIdleAnimation);
-        CombatStateManager.OnActivityChangeToInEscapeMenu.AddListener(disablePolygonCollider);
-        CombatStateManager.OnActivityChangeToResolveTurnWarning.AddListener(disablePolygonCollider);
-        CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(enablePolygonCollider);
-        CombatStateManager.OnActivityChangeFromResolveTurnWarning.AddListener(enablePolygonCollider);
-        CombatTraitColliderDisabler.OnCombatTraitHoverEnter.AddListener(disablePolygonCollider);
-        CombatTraitColliderDisabler.OnCombatTraitHoverExit.AddListener(enablePolygonCollider);
+        // CombatStateManager.OnActivityChangeToInEscapeMenu.AddListener(disablePolygonCollider);
+        // CombatStateManager.OnActivityChangeToResolveTurnWarning.AddListener(disablePolygonCollider);
+        // CombatStateManager.OnActivityChangeToChoosingLocation.AddListener(disablePolygonCollider);
+        // CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(enablePolygonCollider);
+        // CombatStateManager.OnActivityChangeFromResolveTurnWarning.AddListener(enablePolygonCollider);
+        CombatStateManager.OnActivityChangeFromChoosingLocation.AddListener(handleActivityChangeFromChoosingLocation);
+        CombatStateManager.OnActivityChangeFromChoosingTertiary.AddListener(handleActivityChangeFromChoosingTertiary);
+        // CombatTraitColliderDisabler.OnCombatTraitHoverEnter.AddListener(disablePolygonCollider);
+        // CombatTraitColliderDisabler.OnCombatTraitHoverExit.AddListener(enablePolygonCollider);
         SetIdleByNPCName.AddListener(setCurrentIdle);
         PlayAnimationByNPCName.AddListener(playAnimationByNPCName);
 

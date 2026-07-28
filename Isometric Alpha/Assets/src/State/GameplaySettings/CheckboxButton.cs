@@ -31,7 +31,7 @@ public class CheckboxButton : Button, IPointerUpHandler
             case SelectionState.Normal:
                 targetGraphic.color = ColorList.grey25;
                 secondaryGraphic.color = ColorList.grey25;
-                if(EventSystem.current != null)
+                if(EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null)
                 {
                     EventSystem.current.SetSelectedGameObject(null);
                 }

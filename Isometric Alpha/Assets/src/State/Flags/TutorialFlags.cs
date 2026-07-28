@@ -8,8 +8,13 @@ public static class TutorialFlags
 
 	private static Dictionary<string, bool> tutorialFlags = new Dictionary<string, bool>();
 
-	public static bool getFlag(string flagName)
+	public static bool getFlag(string flagName, bool ignoreTutorialDisabledSetting = false)
 	{
+        if(!tutorialsEnabled() && !ignoreTutorialDisabledSetting)
+        {
+            return true;
+        }
+
 		if (!tutorialFlags.ContainsKey(flagName))
 		{
 			tutorialFlags.Add(flagName, false);
@@ -17,6 +22,11 @@ public static class TutorialFlags
             
         return tutorialFlags[flagName];
 	}
+
+    private static bool tutorialsEnabled()
+    {
+        return GameplaySettingsList.tutorialsEnabled.settingOptions[Constants.onSettingIndex].set;
+    }
 
 	public static void setFlag(string flagName, bool flagStatus)
 	{
@@ -49,23 +59,5 @@ public static class TutorialFlags
 	{
 		tutorialFlags = new Dictionary<string, bool>();
 	}
-
-    public static void checkForTutorialFlagsInNormalFlags()
-    {
-        List<string> flagsToOverwrite = new List<string>();
-
-        foreach(string key in tutorialFlags.Keys)
-        {
-            if(Flags.getFlag(key))
-            {
-                flagsToOverwrite.Add(key);
-            }
-        }
-
-        foreach(string flag in flagsToOverwrite)
-        {
-            tutorialFlags[flag] = true;
-        }
-    }
 
 }
