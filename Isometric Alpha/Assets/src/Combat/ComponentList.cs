@@ -13,5 +13,8 @@ public class ComponentList : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public CombatantHover combatantHover;
     public TutorialSequenceStepTargetObject tutorialTarget;
+    
+    public OverHeadIconManager overHeadIconManager;
+
 
 }

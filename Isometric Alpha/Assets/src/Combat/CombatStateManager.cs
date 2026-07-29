@@ -386,7 +386,8 @@ public class CombatStateManager : MonoBehaviour
                 OnTurnChangeToPlayer.Invoke();
                 break;
             case WhoseTurn.Resolving:
-                Time.timeScale = getResolveTurnTimeScale();
+                nonFastForwardTimeScale = getResolveTurnTimeScale();
+                Time.timeScale = nonFastForwardTimeScale;
                 OnTurnChangeToResolving.Invoke();
                 break;
             case WhoseTurn.Won:
@@ -434,12 +435,13 @@ public class CombatStateManager : MonoBehaviour
         return resolvingTurnTimeScale;
     }
 
-	public static void resolveTurn()
+	public static void resolveTurn(bool skipNoActionCheck = false)
 	{
 		if (currentActivity == CurrentActivity.Tutorial)
 		{
 			resolvingTurnDuringTutorial = true;
-		} else if(!PlayerCombatActionManager.playerHasActionsInQueue() && 
+		} else if(!skipNoActionCheck && 
+                !PlayerCombatActionManager.playerHasActionsInQueue() && 
                 currentActivity != CurrentActivity.ResolveActionWarning && 
                 whoseTurn != WhoseTurn.Start)
         {
@@ -890,6 +892,8 @@ public class CombatStateManager : MonoBehaviour
         return instance.creatureGrid;
     }
 
+    private static float nonFastForwardTimeScale = normalTimeScale;
+
     public static void setTimeScale()
     {
         switch(whoseTurn)
@@ -907,7 +911,7 @@ public class CombatStateManager : MonoBehaviour
                     Time.timeScale = fastForwardTimeScale;
                 } else
                 {
-                    Time.timeScale = resolvingTurnTimeScale;
+                    Time.timeScale = nonFastForwardTimeScale;
                 }
                 break;
         }

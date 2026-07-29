@@ -388,6 +388,7 @@ MonoBehaviour:
     tutorialMessageKey: 
     createPopUpScreenBlocker: 0
     allowsMovementKeys: 0
+    allowsCombatTileClicks: 0
     addShiftToKeyCodeMessage: 0
     skipHighlight: 0
     skipUnhighlight: 0
@@ -400,6 +401,7 @@ MonoBehaviour:
     additionalScripts: []
     arrowDirection: 0
     useButtonPress: 0
+    selectorState: 0
   parentRect: {fileID: 0}
   topRectTransform: {fileID: 5539818740903857738}
   topLayoutGroup: {fileID: 0}

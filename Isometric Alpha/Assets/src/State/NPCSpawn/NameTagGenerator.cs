@@ -14,6 +14,8 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
     public INameSource nameSource;
 	public DescriptionPanel nameTag;
 
+    public OverHeadIconManager overHeadIconManager;
+
     private bool ignoreSecretDoors;
 
 	private void Awake()
@@ -162,6 +164,12 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
             return;
         }
 
+        if(overHeadIconManager != null)
+        {
+            createOverHeadNameTag();
+            return;
+        }
+
         if(gameObject.GetComponent<RectTransform>() == null)
         {
             gameObject.AddComponent<RectTransform>();
@@ -187,6 +195,10 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 		}
 	}
 
+    private void createOverHeadNameTag()
+    {
+        overHeadIconManager.createOverHeadIcon(OverHeadIconType.NameTag, nameOfNPC: getName());
+    }
     private string getName()
     {
         string name = nameSource.getName();
@@ -205,6 +217,11 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         {
             Destroy(nameTag.gameObject);
             nameTag = null;
+        }
+
+        if(overHeadIconManager != null)
+        {
+            overHeadIconManager.destroyIcon(OverHeadIconType.NameTag);
         }
     }
 

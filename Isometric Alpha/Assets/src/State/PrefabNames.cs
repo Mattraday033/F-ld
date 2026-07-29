@@ -261,6 +261,11 @@ public static class PrefabNames
     public const string cunningBlocker = interactablesFolder + "Cunning Blocker";
     public const string book = interactablesFolder + "Book";
 
+    public const string commonComponentsFolder = interactablesFolder + "CommonComponents/";
+    public const string overHeadIconManager = commonComponentsFolder + "OverHeadIconManager";
+    public const string overHeadIcon = commonComponentsFolder + "OverHeadIcon";
+    public const string overHeadNameTag = commonComponentsFolder + "NPC Name Tag OverHead";
+
     #endregion
 
     #region Non-Interactable Game Objects

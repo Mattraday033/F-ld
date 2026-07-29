@@ -145,7 +145,7 @@ public class PathToPlayer
 	}
 }
 
-public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutorialSequenceTarget, IDescribableInBlocks
+public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutorialSequenceTarget, IDescribableInBlocks, IOverHeadIconSource
 {
     private const int cunningChargeCost = 2;
 	public const int pathIndexHardCutoff = 1000;
@@ -175,9 +175,45 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     public SpriteRenderer spriteRenderer;
     public SpriteOutline outline;
 
-    public int cunningStunCounter = 0;
-	public int intimidateCounter = 0;
-	public int retreatStunnedCounter = 0;
+    public OverHeadIconManager iconManager;
+
+    private int _CunningStunCounter = 0;
+	private int _IntimidateCounter = 0;
+	private int _RetreatStunCounter = 0;
+
+    public int cunningStunCounter
+    {
+        get
+        {
+            return _CunningStunCounter;
+        }
+        set
+        {
+            _CunningStunCounter = value;
+        }
+    }
+	public int intimidateCounter
+    {
+        get
+        {
+            return _IntimidateCounter;
+        }
+        set
+        {
+            _IntimidateCounter = value;
+        }
+    }
+	public int retreatStunCounter
+    {
+        get
+        {
+            return _RetreatStunCounter;
+        }
+        set
+        {
+            _RetreatStunCounter = value;
+        }
+    }
 
 	public CharacterFacing enemyFacing = new CharacterFacing();
 
@@ -635,9 +671,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     public void cunning()
     {
-        setCunningCounter(CunningManager.cunningRange / 2);
+        cunningStunCounter = CunningManager.cunningRange / 2;
 
         setFacing(CharacterFacing.getOpposingFacing(enemyFacing.getFacing()));
+
+        iconManager.createOverHeadIcon(OverHeadIconType.Cunning, this);
     }
     
 	public virtual bool validTarget(SkillType skillType)
@@ -645,29 +683,21 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         return true;
 	}
 
-	public void setCunningCounter(int newCunningCounter)
-	{
-		cunningStunCounter = newCunningCounter;
-	}
-
 	public void intimidate()
 	{
 		intimidateCounter = IntimidateManager.intimidateRange / 2;
-	}
-
-	public void setIntimidateCounter(int newIntimidateCounter)
-	{
-		intimidateCounter = newIntimidateCounter;
+        iconManager.createOverHeadIcon(OverHeadIconType.Intimidate, this);
 	}
 
 	public void retreatStun()
 	{
-		retreatStunnedCounter = 1;
+		retreatStunCounter = 1;
+        iconManager.createOverHeadIcon(OverHeadIconType.Retreat, this);
 	}
 
 	public void setRetreatStunCounter(int newRetreatStunnedCounter)
 	{
-		retreatStunnedCounter = newRetreatStunnedCounter;
+		retreatStunCounter = newRetreatStunnedCounter;
 	}
 
 	public bool stunnedFromCunning()
@@ -682,7 +712,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	public bool stunnedFromRetreating()
 	{
-		return retreatStunnedCounter > 0;
+		return retreatStunCounter > 0;
 	}
 
 	private void decrementSkillCounters()
@@ -697,9 +727,9 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 			intimidateCounter--;
 		}
 
-		if (retreatStunnedCounter > 0)
+		if (retreatStunCounter > 0)
 		{
-			retreatStunnedCounter--;
+			retreatStunCounter--;
 		}
 	}
 
@@ -732,7 +762,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         if (statsWrapper.retreatCounter > 0)
         {
             retreatStun();
-            retreatStunnedCounter = statsWrapper.retreatCounter;
+            retreatStunCounter = statsWrapper.retreatCounter;
         }
 
         setFacing(statsWrapper.facing);

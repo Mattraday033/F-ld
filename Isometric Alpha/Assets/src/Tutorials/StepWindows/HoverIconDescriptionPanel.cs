@@ -18,6 +18,8 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
 
     private const float maxWidth = 430f;
 
+    public static bool boxAlwaysOnTop;
+
     public bool alwaysTop = false;
 
     public CanvasGroup canvasGroup;
@@ -38,8 +40,11 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
         Vector2 centerWorldPosition = topRectTransform.TransformPoint(topRectTransform.rect.center);
 
         ArrowDirection direction;
-
-        if (alwaysTop)
+        
+        if (boxAlwaysOnTop)
+        {
+            direction = ArrowDirection.Bottom;
+        }else if (alwaysTop || boxAlwaysOnTop)
         {
             direction = ArrowDirection.Top;
         } else if(Flags.isInNewGameMode())
@@ -280,5 +285,11 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
     private static bool mouseInHeightThirdSection(int mousePosY)
     {
         return mousePosY >= screenHeightSecondThird;
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        boxAlwaysOnTop = false;
     }
 }

@@ -18,7 +18,7 @@ public class ResolveTurnWithNoActions : IDecision
     {
 		EscapeStack.handleEscapePress();
         
-        CombatStateManager.resolveTurn();
+        CombatStateManager.resolveTurn(skipNoActionCheck: true);
     }
  
 	public void backOut()

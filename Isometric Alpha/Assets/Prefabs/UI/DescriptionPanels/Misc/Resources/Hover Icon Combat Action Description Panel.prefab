@@ -362,8 +362,10 @@ MonoBehaviour:
   contentsText: {fileID: 0}
   worthText: {fileID: 0}
   slotText: {fileID: 0}
+  slotsUsedText: {fileID: 0}
   weaponNameText: {fileID: 0}
   rangeText: {fileID: 0}
+  invulnerabilityText: {fileID: 0}
   armorRatingText: {fileID: 0}
   damageText: {fileID: 0}
   offHandDamageText: {fileID: 0}
@@ -378,13 +380,12 @@ MonoBehaviour:
   wisText: {fileID: 0}
   chaText: {fileID: 0}
   nestedDescriptionPanel: {fileID: 0}
-  gameObjectDisplayCanvas: {fileID: 0}
-  displayAdjustmentCoords: 0000000000000000
   skipText: {fileID: 0}
   tutorialSequenceStep:
     tutorialMessageKey: 
     createPopUpScreenBlocker: 0
     allowsMovementKeys: 0
+    allowsCombatTileClicks: 0
     addShiftToKeyCodeMessage: 0
     skipHighlight: 0
     skipUnhighlight: 0
@@ -396,7 +397,8 @@ MonoBehaviour:
     scriptAtEnd: {fileID: 0}
     additionalScripts: []
     arrowDirection: 0
-    nextStepKeyCode: 
+    useButtonPress: 0
+    selectorState: 0
   parentRect: {fileID: 0}
   topRectTransform: {fileID: 5539818740903857738}
   topLayoutGroup: {fileID: 0}

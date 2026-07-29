@@ -19,12 +19,21 @@ public class CunningManager : SkillManager
     public static int cunningsRemaining;
 
     [RuntimeInitializeOnLoadMethod]
-    private static void initializeCunningManager()
+    private static void init()
     {
         cunningsRemaining = -1;
 
         LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
         PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(enableAllHoverColliders);
+    }
+
+    public override ContactFilter2D getCollisionFilter()
+    {
+        ContactFilter2D filterCollider = new ContactFilter2D();
+        filterCollider.useTriggers = true;
+        filterCollider.SetLayerMask(LayerAndTagManager.blocksCunningLayerMask);
+
+        return filterCollider;
     }
 
     private static void enableAllHoverColliders()
@@ -227,7 +236,7 @@ public class CunningManager : SkillManager
         return colliderIndicators;
     }
 
-    private bool cullFromCollision(Collider2D[] collisions)
+    public virtual bool cullFromCollision(Collider2D[] collisions)
     {
         foreach (Collider2D collision in collisions)
         {

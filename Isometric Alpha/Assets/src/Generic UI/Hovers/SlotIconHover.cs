@@ -523,6 +523,14 @@ public static class HoverMessageList
     public const string observationMessage = "This Skill allows you to find hidden doors and lost secrets. Face your Character towards a suspicious object or wall and use Observation to check if the target can be interacted with. If the target contains a secret, it will change color. Determined by the highest Wisdom of all Party Members.";
     public const string leadershipMessage = "This Skill allows you to command your followers out of Combat, telling them to stand on buttons or in doorways to block enemy movement. The number of Party Members you can command with Leadership is determined by the highest Charisma of all Party Members.";
 
+    public const string intimidatedKey = "Intimidated";
+    public const string intimidatedMessage = "This creature is weary of your presence. It cannot surprise anyone or be surprised.";
+    public const string distractedKey = "Distracted";
+    public const string distractedMessage = "This creature is distracted. It cannot move for a number of steps.";
+    public const string evadedKey = "Evaded";
+    public const string evadedMessage = "Your Party has recently retreated from a fight with this creature. It cannot move while your Party makes its escape.";
+
+
     public const string startingRedKnifeMessage = "This shows the amount of the Red Knife Exuberance your Party will gain at the start of Combat. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.redKnifeAcquisitionMethodExplanation;
     public const string redKnifeMessage = "This shows the amount of the Red Knife Exuberance your Party currently has. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.redKnifeAcquisitionMethodExplanation;
     public const string startingBlueShieldMessage = "This shows the amount of the Blue Shield Exuberance your Party will gain at the start of Combat. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.blueShieldAcquisitionMethodExplanation;
@@ -604,6 +612,9 @@ public static class HoverMessageList
 
     public const string restPointMessage = "This location has a Rest Point. Rest Points will restore the Health of all Party Members, as well as any expended Skill charges.";
     public const string shopIconMessage = "This location has a Shop. Shops sell useful items or equipment and buy unwanted loot.";
+
+    public const string shopkeeperIconKey = "Shopkeeper";
+    public const string shopkeeperIconMessage = "This person is a Shopkeeper. Shopkeepers sell useful items or equipment and buy unwanted loot.";
 
     public static string getMessage(string iconName)
     {
@@ -752,6 +763,13 @@ public static class HoverMessageList
 
             case characterAbilityKey:
                 return characterAbilityMessage;
+
+            case intimidatedKey:
+                return intimidatedMessage;
+            case distractedKey:
+                return distractedMessage;
+            case evadedKey:
+                return evadedMessage;
 
             case IconList.mandatoryTargetIcon:
                 return mandatoryTargetMessage;
@@ -960,6 +978,8 @@ public static class HoverMessageList
                 return restPointMessage;
             case IconList.shopIcon:
                 return shopIconMessage;
+            case shopkeeperIconKey:
+                return shopkeeperIconMessage;
 
             default:
 

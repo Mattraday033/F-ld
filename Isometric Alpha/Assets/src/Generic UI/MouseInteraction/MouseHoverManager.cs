@@ -146,12 +146,14 @@ public static class MouseHoverManager
         }
     }
 
-    public static void spawnHoverIcon(IHoverIconSource source, Transform parent, float scale = 1f)
+    public static void spawnHoverIcon(IHoverIconSource source, Transform parent, float scale = 1f, bool alwaysTop = false)
     {
         if (source.getObjectBeingDescribed() == null || parent == null)
         {
             return;
         }
+
+        HoverIconDescriptionPanel.boxAlwaysOnTop = alwaysTop;
 
         OnHoverPanelCreation.Invoke();
 
@@ -164,6 +166,8 @@ public static class MouseHoverManager
         hoverDescriptionPanelObject.SetActive(true);
 
         hoverDescriptionPanelObject.transform.localScale = new Vector3(scale, scale);
+
+        HoverIconDescriptionPanel.boxAlwaysOnTop = false;
     }
 
     public static void spawnCustomHover(IHoverIconSource source, Transform parent, string prefabName)

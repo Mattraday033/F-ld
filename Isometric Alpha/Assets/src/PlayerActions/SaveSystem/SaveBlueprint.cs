@@ -62,6 +62,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
 	public InventoryWrapper[] currentShopkeeperInventories;
 	public InventoryWrapper[] currentBuyBackInventories;
+	public string currentShopkeeperIntimidatedFlags;
 
     public EnemyStatWrapper[] monsterLocations;
 	public FlagWrapper[] currentMonsterDefeatKeys;
@@ -117,6 +118,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
 		saveBlueprint.currentShopkeeperInventories = ShopkeeperInventoryList.convertShopkeeperInventoriesToJson();
 		saveBlueprint.currentBuyBackInventories = ShopkeeperInventoryList.convertBuyBackInventoriesToJson();
+		saveBlueprint.currentShopkeeperIntimidatedFlags = ShopkeeperInventoryList.getShopkeeperIntimidatedFlagsForSave();
 
         saveBlueprint.monsterLocations = MovementManager.getAllMonsterStats();
 
@@ -185,6 +187,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
 		this.currentShopkeeperInventories = GetFromJson.getElementFromJson(this.saveName, nameof(currentShopkeeperInventories), jsonDynamic, SaveDefaultValues.defaultEmptyInventoryWrapperArray);
 		this.currentBuyBackInventories = GetFromJson.getElementFromJson(this.saveName, nameof(currentBuyBackInventories), jsonDynamic, SaveDefaultValues.defaultEmptyInventoryWrapperArray);
+		this.currentShopkeeperIntimidatedFlags = GetFromJson.getElementFromJson(this.saveName, nameof(currentShopkeeperIntimidatedFlags), jsonDynamic, SaveDefaultValues.defaultCurrentShopkeeperIntimidatedFlags);
 
         this.currentPuzzleIndex = GetFromJson.getElementFromJson(this.saveName, nameof(currentPuzzleIndex), jsonDynamic, SaveDefaultValues.defaultStatZero);
 

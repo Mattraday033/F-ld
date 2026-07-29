@@ -16,6 +16,7 @@ public interface ISkillTarget
     public void intimidate();
     public Vector3 getTargetPosition();
 }
+
 public abstract class SkillManager
 {
     public readonly static UnityEvent OnSkillUse = new UnityEvent();
@@ -28,14 +29,7 @@ public abstract class SkillManager
     public const int skillImprovedLevel = 5;
     public const int skillExtraordinaryLevel = 8;
 
-    public virtual ContactFilter2D getCollisionFilter()
-    {
-        ContactFilter2D filterCollider = new ContactFilter2D();
-        filterCollider.useTriggers = true;
-        filterCollider.SetLayerMask(LayerAndTagManager.blocksSkillsLayerMask);
-
-        return filterCollider;
-    }
+    public abstract ContactFilter2D getCollisionFilter();
 
     public virtual void createSkillArea()
     {

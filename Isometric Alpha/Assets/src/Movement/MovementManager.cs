@@ -373,7 +373,7 @@ public class MovementManager : MonoBehaviour
                                                         enemyMovement.enemyFacing.getFacing(),
                                                         enemyMovement.intimidateCounter,
                                                         enemyMovement.cunningStunCounter,
-                                                        enemyMovement.retreatStunnedCounter);
+                                                        enemyMovement.retreatStunCounter);
         }
 
         return statWrappers;

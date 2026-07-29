@@ -15,7 +15,7 @@ public class IntimidateManager : CunningManager
     public static int intimidatesRemaining;
 
     [RuntimeInitializeOnLoadMethod]
-    private static void initializeInimidateManager()
+    private static void init()
     {
         intimidatesRemaining = -1;
         targetsFound = 0;
@@ -26,6 +26,16 @@ public class IntimidateManager : CunningManager
 
         LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
     }
+
+    public override ContactFilter2D getCollisionFilter()
+    {
+        ContactFilter2D filterCollider = new ContactFilter2D();
+        filterCollider.useTriggers = true;
+        filterCollider.SetLayerMask(LayerAndTagManager.blocksIntimidateLayerMask);
+
+        return filterCollider;
+    }
+
 
     private static void readSaveBlueprint(SaveBlueprint blueprint)
     {
@@ -173,6 +183,21 @@ public class IntimidateManager : CunningManager
     public override int getRange()
     {
         return intimidateRange;
+    }
+
+    public override bool cullFromCollision(Collider2D[] collisions)
+    {
+        foreach (Collider2D collision in collisions)
+        {
+            if (collision != null && 
+                (collision.gameObject.layer == LayerAndTagManager.colliderLayer || 
+                 collision.gameObject.layer == LayerAndTagManager.observableLayer))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public override bool executeSkill()

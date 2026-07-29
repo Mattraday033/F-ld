@@ -31,6 +31,7 @@ public static class SaveDefaultValues
     public const Facing defaultFacing = Facing.SouthWest;
 
     public const string defaultCurrentFlags = "{\"newGame\": true}";
+    public const string defaultCurrentShopkeeperIntimidatedFlags = "{}";
 
     public readonly static SkillType defaultSkillType = SkillType.Intimidate;
     public readonly static Vector3Int defaultPlayerCell = new Vector3Int(7,1,0);

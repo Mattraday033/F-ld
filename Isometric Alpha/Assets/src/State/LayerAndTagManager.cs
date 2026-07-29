@@ -73,7 +73,8 @@ public static class LayerAndTagManager
 
     public readonly static LayerMask observableLayerMask = initializeObservableLayerMask();
     public readonly static LayerMask blocksObservationLayerMask = initializeBlocksObservationLayerMask();
-	public readonly static LayerMask blocksSkillsLayerMask = initializeBlocksSkillsLayerMask();
+	public readonly static LayerMask blocksCunningLayerMask = initializeBlocksCunningLayerMask();
+	public readonly static LayerMask blocksIntimidateLayerMask = initializeBlocksIntimidateLayerMask();
 
 	public readonly static LayerMask pressesButtonsLayerMask = initializePressesButtonsLayerMask();
 
@@ -193,19 +194,35 @@ public static class LayerAndTagManager
         return blocksMoveableObjectLayerMask;
 	}
 
-	private static LayerMask initializeBlocksSkillsLayerMask()
+	private static LayerMask initializeBlocksCunningLayerMask()
 	{
-		LayerMask blocksSkillLayerMask = new LayerMask();
+		LayerMask blocksCunningLayerMask = new LayerMask();
         
-		blocksSkillLayerMask |= (1 << colliderLayer);
-		blocksSkillLayerMask |= (1 << objectLayer);
-		blocksSkillLayerMask |= (1 << cunningableObjectLayer);
-        blocksSkillLayerMask |= (1 << openableDoorLayer);
-		blocksSkillLayerMask |= (1 << enemyLayer);
-        blocksSkillLayerMask |= (1 << observableLayer);
+		blocksCunningLayerMask |= (1 << colliderLayer);
+		blocksCunningLayerMask |= (1 << objectLayer);
+		blocksCunningLayerMask |= (1 << cunningableObjectLayer);
+        blocksCunningLayerMask |= (1 << openableDoorLayer);
+		blocksCunningLayerMask |= (1 << enemyLayer);
+        blocksCunningLayerMask |= (1 << observableLayer);
 
-        return blocksSkillLayerMask;
+        return blocksCunningLayerMask;
 	}
+
+	private static LayerMask initializeBlocksIntimidateLayerMask()
+	{
+		LayerMask blocksIntimidateLayerMask = new LayerMask();
+        
+		blocksIntimidateLayerMask |= (1 << colliderLayer);
+		blocksIntimidateLayerMask |= (1 << objectLayer);
+		blocksIntimidateLayerMask |= (1 << npcLayer);
+		blocksIntimidateLayerMask |= (1 << cunningableObjectLayer);
+        blocksIntimidateLayerMask |= (1 << openableDoorLayer);
+		blocksIntimidateLayerMask |= (1 << enemyLayer);
+        blocksIntimidateLayerMask |= (1 << observableLayer);
+
+        return blocksIntimidateLayerMask;
+	}
+
 
     private static LayerMask initializeObservableLayerMask()
     {
