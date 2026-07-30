@@ -68,7 +68,7 @@ public class DialogueManager : MonoBehaviour
 		oocUIManager = OOCUIManager.getInstance();
 		fadeToBlackManager = FadeToBlackManager.getInstance();
 
-		if (State.dialogueUponSceneLoadKey != null && State.dialogueUponSceneLoadKey.Length > 0)
+		if (!LoadSaveFile.midLoad && State.dialogueUponSceneLoadKey != null && State.dialogueUponSceneLoadKey.Length > 0)
 		{
 			dialogueTrackerButton = new DialogueTrackerButton(true);
 

@@ -150,19 +150,19 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.kastor+2),
                                new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.finishedKastorIntimidateTutorial}),
                                                             stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
-                                                                                            FlagNameList.finishedKastorCunningTutorial,
+                                                                                            FlagNameList.startedKastorCunningTutorial,
                                                                                             FlagNameList.directorDefeated,
                                                                                             FlagNameList.revoltStarted }), spawnWhileHostile: spawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.kastor+3),
-                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.finishedKastorCunningTutorial}),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.startedKastorCunningTutorial}),
                                                             stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
-                                                                                            FlagNameList.finishedKastorLeadershipTutorial,
+                                                                                            FlagNameList.startedKastorLeadershipTutorial,
                                                                                             FlagNameList.directorDefeated,
                                                                                             FlagNameList.revoltStarted }), spawnWhileHostile: spawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.slaveShackFour, NPCNameList.kastor+4),
-                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.finishedKastorLeadershipTutorial}),
+                               new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[]{ FlagNameList.startedKastorLeadershipTutorial}),
                                                             stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
                                                                                             FlagNameList.savedDibber,
                                                                                             FlagNameList.directorDefeated,

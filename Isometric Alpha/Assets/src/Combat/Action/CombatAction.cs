@@ -236,7 +236,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return DamageCalculator.calculateFormula(getFinalCritFormula(), getActorStats());
     }
 
-    public string getCritTotalForDisplay()
+    public override string getCritTotalForDisplay()
     {
         if (getCritFormulaTotal() <= 0)
         {

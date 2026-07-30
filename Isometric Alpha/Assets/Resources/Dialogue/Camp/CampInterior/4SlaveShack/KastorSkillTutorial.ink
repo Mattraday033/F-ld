@@ -69,7 +69,7 @@ activateQuestStep({saveDibberQuestName},Use the crank.)
 
 Good work with those bats. I'm glad to see you two can work together in a fight. 
 
-The next patch of rubble looks like we could get over it ourselves, but I don't know what state Dibber is in. We'll want this rubble moved in case we have to carry him out.
+The next section of rubble looks like we could get over it ourselves, but I don't know what state Dibber is in. We'll want it removed in case we have to carry him out.
 
 When the guards were trying to patch up this hut before the lockdown, they set up a crank towards the back wall. You should be able to use it to clear us a path while I clamber over the rubble and help from the other side.
 

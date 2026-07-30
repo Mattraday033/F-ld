@@ -6,6 +6,8 @@ public class SkillIndicator : MonoBehaviour
 {
 	public Collider2D collider;
 
+    public PolygonCollider2D mouseHoverCollider;
+
     public Vector2Int coords;
 
     private Color color;
@@ -31,6 +33,8 @@ public class SkillIndicator : MonoBehaviour
 
         backSelectorTwo.loops = true;
         backSelectorTwo.setAnimations(EffectAnimationType.BackSelector2);
+
+        mouseHoverCollider.enabled = PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence;
     }
 
     private void OnEnable()

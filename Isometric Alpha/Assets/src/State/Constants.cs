@@ -10,6 +10,8 @@ public static class Constants
 	public const string jsonFileExtension = ".json";
     public const string jsonFileExtensionWithoutPeriod = "json";
 
+    public const float shopMarkUpMultiplier = 3f;
+
     public const int tierZero = 0;
     public const int tierOne = 1;
     public const int tierTwo = 2;

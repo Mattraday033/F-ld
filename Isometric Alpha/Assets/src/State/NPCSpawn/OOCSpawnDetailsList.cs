@@ -150,45 +150,45 @@ public static class OOCSpawnDetailsList
 
         #region Str Tutorial
 
-        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.STRDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.STRDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.STRDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.STRDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
 
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.intimidateTutorialSequenceKey,
-                                                                          TutorialSequenceList.intimidateTutorialSeenFlag,
-                         new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseStrengthAtStart }, useTutorialFlags: true)));
+        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.intimidateTutorialSequenceKey,
+        //                                                                   TutorialSequenceList.intimidateTutorialSeenFlag,
+        //                  new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseStrengthAtStart }, useTutorialFlags: true)));
 
 
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -2), TutorialSequenceList.interactableRubbleTutorialSequenceKey,
-                                                                          TutorialSequenceList.interactableObjectTutorialSeenFlag,
-                        new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseStrengthAtStart,
-                                                                          TutorialSequenceList.intimidateTutorialSeenFlag}, useTutorialFlags: true),
-                                                                          Constants.indexOne));
+        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -2), TutorialSequenceList.interactableRubbleTutorialSequenceKey,
+        //                                                                   TutorialSequenceList.interactableObjectTutorialSeenFlag,
+        //                 new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseStrengthAtStart,
+        //                                                                   TutorialSequenceList.intimidateTutorialSeenFlag}, useTutorialFlags: true),
+        //                                                                   Constants.indexOne));
         #endregion
         #region Dex Tutorial
 
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.vaultableObjectTutorialSequenceKey,
-                                                                          TutorialSequenceList.interactableObjectTutorialSeenFlag,
-                                new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseDexterityAtStart,
-                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
-                                                                          Constants.indexZero));
+        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.vaultableObjectTutorialSequenceKey,
+        //                                                                   TutorialSequenceList.interactableObjectTutorialSeenFlag,
+        //                         new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseDexterityAtStart,
+        //                                                                   TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
+        //                                                                   Constants.indexZero));
 
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.firstCunningTutorialSequenceKey,
-                                                                          TutorialSequenceList.cunningTutorialSeenFlag,
-                                new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseDexterityAtStart }, useTutorialFlags: true)));
+        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.firstCunningTutorialSequenceKey,
+        //                                                                   TutorialSequenceList.cunningTutorialSeenFlag,
+        //                         new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseDexterityAtStart }, useTutorialFlags: true)));
 
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -2), TutorialSequenceList.secondCunningTutorialSequenceKey,
-                                                                          TutorialSequenceList.secondCunningTutorialSeenFlag,
-                                new StartSpawningAllTrueFlagList(new string[] { TutorialSequenceList.cunningTutorialSeenFlag }, useTutorialFlags: true),
-                                                                          Constants.indexOne));
+        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -2), TutorialSequenceList.secondCunningTutorialSequenceKey,
+        //                                                                   TutorialSequenceList.secondCunningTutorialSeenFlag,
+        //                         new StartSpawningAllTrueFlagList(new string[] { TutorialSequenceList.cunningTutorialSeenFlag }, useTutorialFlags: true),
+        //                                                                   Constants.indexOne));
 
-        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthEast, CunningObjectSpriteCategory.Crank, endFacing: Facing.NorthWest, blockerSpawnDetails:
-                 new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf),
-                 tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
+        // list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthEast, CunningObjectSpriteCategory.Crank, endFacing: Facing.NorthWest, blockerSpawnDetails:
+        //          new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf),
+        //          tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
 
-        list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, -4), VaultableObject.diffTwoVaultableBarrelsOneTile, tutorialTargetHash: TutorialSequenceList.vaultableBarrelsTargetHash));
+        // list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, -4), VaultableObject.diffTwoVaultableBarrelsOneTile, tutorialTargetHash: TutorialSequenceList.vaultableBarrelsTargetHash));
 
-        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
-        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
 
         list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(0, -6), PrefabNames.southDescendingRubble));
         list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(1, -6), PrefabNames.blockRubble));
@@ -197,21 +197,21 @@ public static class OOCSpawnDetailsList
         #endregion
         #region Wis Tutorial
 
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.observationTutorialSequenceKey,
-                                                                          TutorialSequenceList.observationTutorialSeenFlag,
-                        new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseWisdomAtStart,
-                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
-                                                                          Constants.indexZero));
+        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.observationTutorialSequenceKey,
+        //                                                                   TutorialSequenceList.observationTutorialSeenFlag,
+        //                 new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseWisdomAtStart,
+        //                                                                   TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
+        //                                                                   Constants.indexZero));
         #endregion
         #region Cha Tutorial
-        list.Add(new ButtonSpawnDetails(new Vector3Int(3, -3), tutorialTargetHash: TutorialSequenceList.tutorialButtonOneTargetHash));
-        list.Add(new ButtonSpawnDetails(new Vector3Int(5, -3), tutorialTargetHash: TutorialSequenceList.tutorialButtonTwoTargetHash));
+        // list.Add(new ButtonSpawnDetails(new Vector3Int(3, -3), tutorialTargetHash: TutorialSequenceList.tutorialButtonOneTargetHash));
+        // list.Add(new ButtonSpawnDetails(new Vector3Int(5, -3), tutorialTargetHash: TutorialSequenceList.tutorialButtonTwoTargetHash));
 
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(3, -4), TutorialSequenceList.leadershipTutorialSequenceKey,
-                                                                          TutorialSequenceList.leadershipTutorialSeenFlag,
-                        new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseCharismaAtStart,
-                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
-                                                                          Constants.indexZero));
+        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(3, -4), TutorialSequenceList.leadershipTutorialSequenceKey,
+        //                                                                   TutorialSequenceList.leadershipTutorialSeenFlag,
+        //                 new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseCharismaAtStart,
+        //                                                                   TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
+        //                                                                   Constants.indexZero));
 
         list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(0, -6), PrefabNames.southDescendingRubble));
         list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(1, -6), PrefabNames.blockRubble));

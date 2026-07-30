@@ -16,6 +16,8 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     public SpriteRenderer frontSpriteRenderer;
     public SpriteRenderer backSpriteRenderer;
 
+    public SpriteRenderer arrowSpriteRenderer;
+
     public EffectAnimationManager frontEffectManager;
     public EffectAnimationManager backEffectManager;
 
@@ -130,23 +132,11 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         currentColor = color;
     }
 
-    private void setToPressedColor()
-    {
-        frontSpriteRenderer.color = currentColor;
-        frontSpriteRenderer.color = new Color(frontSpriteRenderer.color.r - .25f, 
-                                              frontSpriteRenderer.color.g - .25f, 
-                                              frontSpriteRenderer.color.b - .25f);
-
-        backSpriteRenderer.color = currentColor;
-        backSpriteRenderer.color = new Color(backSpriteRenderer.color.r - .25f, 
-                                             backSpriteRenderer.color.g - .25f, 
-                                             backSpriteRenderer.color.b - .25f);
-    }
-
     public void hideTile()
     {
         backSpriteRenderer.color = Color.clear;
         frontSpriteRenderer.color = Color.clear;
+        arrowSpriteRenderer.color = Color.clear;
         inVisibleSelector = false;
     }
 
@@ -161,6 +151,17 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
                 selector.setToColor();
                 backSpriteRenderer.color = currentColor;
                 frontSpriteRenderer.color = currentColor;
+
+                if(CombatStateManager.inCombat && 
+                    CombatStateManager.currentActivity == CurrentActivity.ChoosingTertiary && 
+                    (currentColor.Equals(Color.yellow) || currentColor.a < 1f))
+                {
+                    arrowSpriteRenderer.color = currentColor;
+                } else
+                {
+                    arrowSpriteRenderer.color = Color.clear;
+                }
+
                 inVisibleSelector = true;
                 updated = true;
             }

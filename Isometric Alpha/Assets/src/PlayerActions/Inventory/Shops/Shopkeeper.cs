@@ -38,9 +38,9 @@ public class Shopkeeper : MonoBehaviour, IOverHeadIconSource, ISkillTarget
 
     private void Awake()
     {
-        
         iconManager = GetComponent<ComponentList>().overHeadIconManager;
         createShopkeeperIcon();
+        createIntimidatedIcon();
 
         revealable = GetComponent<IRevealable>();
     }
@@ -97,6 +97,14 @@ public class Shopkeeper : MonoBehaviour, IOverHeadIconSource, ISkillTarget
         }
     }
 
+    public void createIntimidatedIcon()
+    {
+        if(ShopkeeperInventoryList.getShopkeeperIntimidatedFlag(shopkeeperInventoryKey))
+        {
+            iconManager.createOverHeadIcon(OverHeadIconType.Intimidate, this);
+        }
+    }
+
     public int getIntimidateCounter()
     {
         return -1;
@@ -123,6 +131,11 @@ public class Shopkeeper : MonoBehaviour, IOverHeadIconSource, ISkillTarget
         }
 	}
 
+    public string getIntimidatedDescriptionKey()
+    {
+        return HoverMessageList.intimidatedShopkeeperKey;
+    }
+
     #region ISkillTarget Methods
 
     public int getChargeCost(SkillType skillType)
@@ -136,7 +149,7 @@ public class Shopkeeper : MonoBehaviour, IOverHeadIconSource, ISkillTarget
     
     public bool validTarget(SkillType skillType)
     {
-        return skillType == SkillType.Intimidate;
+        return skillType == SkillType.Intimidate && !ShopkeeperInventoryList.getShopkeeperIntimidatedFlag(shopkeeperInventoryKey);
     }
 
     public void cunning()
@@ -146,7 +159,9 @@ public class Shopkeeper : MonoBehaviour, IOverHeadIconSource, ISkillTarget
 
     public void intimidate()
     {
-        Debug.LogError("Shopkeeper " + shopkeeperInventoryKey + " has been intimidated.");
+        ShopkeeperInventoryList.setShopkeeperIntimidatedFlag(shopkeeperInventoryKey);
+        createIntimidatedIcon();
+        AreaList.addHostility();
     }
 
 	public Vector3 getTargetPosition()

@@ -26,6 +26,7 @@ public interface IOverHeadIconSource
 
     public Color getRevealColor();
     public void onReveal(bool toggleReveal);
+    public string getIntimidatedDescriptionKey();
 }
 
 public class OverHeadIcon : SlotIconHover
@@ -97,8 +98,16 @@ public class OverHeadIcon : SlotIconHover
                 case OverHeadIconType.Intimidate:
                 case OverHeadIconType.Cunning:
                 case OverHeadIconType.Retreat:
-                    DestroyImmediate(gameObject);
-                    iconManager.removeAllDestroyedIcons();
+
+                    if(!iconManager.hasIcon(OverHeadIconType.Shopkeeper))
+                    {
+                        DestroyImmediate(gameObject);
+                        iconManager.removeAllDestroyedIcons();
+                    } else
+                    {
+                        roundCounter.enabled = false;
+                    }
+
                     return;
                 case OverHeadIconType.Shopkeeper:
                     roundCounter.enabled = false;
@@ -146,7 +155,7 @@ public class OverHeadIcon : SlotIconHover
         {
             case OverHeadIconType.Intimidate:
                 iconImage.sprite = Helpers.loadSpriteFromResources(IconList.intimidateIconName);
-                hoverMessageKey = HoverMessageList.intimidatedKey;
+                hoverMessageKey = source.getIntimidatedDescriptionKey();
                 break;
             case OverHeadIconType.Cunning:
                 iconImage.sprite = Helpers.loadSpriteFromResources(IconList.cunningIconName);

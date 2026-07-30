@@ -850,6 +850,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 		}
 	}
 
+    public string getIntimidatedDescriptionKey()
+    {
+        return HoverMessageList.intimidatedKey;
+    }
+
 	public void createHoverTag()
 	{
 		MouseHoverManager.getMouseHoverBase();

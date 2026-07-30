@@ -21,6 +21,7 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
     public Facing endFacing;
     public CunningObjectSpriteCategory category;
 
+
     private void Awake()
     {
         outline = new SpriteOutline();

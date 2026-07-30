@@ -133,9 +133,7 @@ public static class PartyStats
 
     public static float calculateDiscount()
     {
-        float totalCha = getTotalCharisma();
-
-        return totalCha * Charisma.discountPerCharismaPoint;
+        return getTotalCharisma() * Charisma.discountPerCharismaPoint;
     }
 
     public static float getDiscountMultiplier()
@@ -143,9 +141,9 @@ public static class PartyStats
         return baseCostMultiplier - calculateDiscount();
     }
 
-    public static string getDiscountForDisplay()
+    public static string getDiscountForDisplay(string shopkeeperKey = null)
     {
-        return (int)(calculateDiscount() * 100f) + "%";
+        return (int)((calculateDiscount() + DiscountList.getDiscount(shopkeeperKey)) * 100f) + "%";
     }
 
     public static double getGoldMultiplier()

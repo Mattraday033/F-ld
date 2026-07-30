@@ -213,7 +213,7 @@ public class ShopPopUpWindow : PopUpWindow, ITabParent
     public void updateCounter()
     {
         totalPlayerGold.text = Purse.getCoinsInPurseForDisplay();
-        totalPlayerDiscount.text = PartyStats.getDiscountForDisplay();
+        totalPlayerDiscount.text = PartyStats.getDiscountForDisplay(currentShopkeeper.shopkeeperInventoryKey);
         updateSellAllJunkButtonInteractability();
     }
 

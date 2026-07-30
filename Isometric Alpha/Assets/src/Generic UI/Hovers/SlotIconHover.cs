@@ -247,6 +247,8 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         switch(hoverMessageKey)
         {
+            case HoverMessageList.intimidatedShopkeeperKey:
+                return HoverMessageList.intimidatedKey;
             case IconList.intimidateIconName:
             case IconList.cunningIconName:
             case IconList.observationIconName:
@@ -406,7 +408,7 @@ public static class HoverMessageList
     public const string durationIconMessage = "This Action has an effect that lasts multiple rounds, such as applying a Trait to it's target.";
 
     public const string amountIconMessage = "Quantity";
-    public const string worthIconMessage = "An Item's worth in Gold Pieces. A Shopkeeper's Discount affect's the cost of the Items they sell and how much they will pay for Items you sell to them.";
+    public const string worthIconMessage = "An Item's worth in Gold Pieces. A Shopkeeper's Discount affects the cost of the Items they sell and how much they will pay for Items you sell to them.";
     public const string goldIconMessage = "Your Party's total Gold Pieces";
 
     public const string goldRewardKey = "Reward";
@@ -524,6 +526,8 @@ public static class HoverMessageList
     public const string leadershipMessage = "This Skill allows you to command your followers out of Combat, telling them to stand on buttons or in doorways to block enemy movement. The number of Party Members you can command with Leadership is determined by the highest Charisma of all Party Members.";
 
     public const string intimidatedKey = "Intimidated";
+    public const string intimidatedShopkeeperKey = "Intimidated Shopkeeper";
+    public const string intimidatedShopkeeperMessage = "This Shopkeeper is afraid of your Party, and will give your Party a discount on goods.";
     public const string intimidatedMessage = "This creature is weary of your presence. It cannot surprise anyone or be surprised.";
     public const string distractedKey = "Distracted";
     public const string distractedMessage = "This creature is distracted. It cannot move for a number of steps.";
@@ -764,6 +768,8 @@ public static class HoverMessageList
             case characterAbilityKey:
                 return characterAbilityMessage;
 
+            case intimidatedShopkeeperKey:
+                return intimidatedShopkeeperMessage;
             case intimidatedKey:
                 return intimidatedMessage;
             case distractedKey:

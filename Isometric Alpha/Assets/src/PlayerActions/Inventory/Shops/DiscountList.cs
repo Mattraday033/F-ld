@@ -4,18 +4,31 @@ using UnityEngine;
 
 public static class DiscountList
 {
-    public const float defaultDiscount = 1f;
+    public const float defaultDiscount = 0f;
 
     public static Dictionary<string, IDiscount> discountDictionary;
 
     public static float getDiscount(string key)
     {
-        if (!discountDictionary.ContainsKey(key))
+        if (key == null)
         {
             return defaultDiscount;
+        } else if( !discountDictionary.ContainsKey(key))
+        {
+            return defaultDiscount + calculateIntimidationDiscount(key);
         }
 
-        return discountDictionary[key].getDiscount();
+        return discountDictionary[key].getDiscount() + calculateIntimidationDiscount(key);
+    }
+
+    private static float calculateIntimidationDiscount(string key)
+    {
+        if(!ShopkeeperInventoryList.getShopkeeperIntimidatedFlag(key))
+        {
+            return 0f;
+        }
+
+        return PartyStats.getHighestStrength() * Charisma.discountPerCharismaPoint * 4;
     }
 
     [RuntimeInitializeOnLoadMethod]
@@ -45,11 +58,11 @@ public class UrosDiscount : IDiscount
         }
         else if (Flags.getFlag(FlagNameList.urosBadPrices))
         {
-            return 1.5f;
+            return -.5f;
         }
         else if (Flags.getFlag(FlagNameList.urosWorstPrices))
         {
-            return 2f;
+            return -1f;
         }
         else
         {

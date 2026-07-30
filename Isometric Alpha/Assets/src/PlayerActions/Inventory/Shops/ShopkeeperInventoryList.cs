@@ -177,7 +177,7 @@ public static class ShopkeeperInventoryList
         return shopkeeperIntimidatedFlags[shopkeeperInventoryKey];
     }
 
-    public static void setShopkeeperIntimidatedFlag(string shopkeeperInventoryKey, bool flagStatus)
+    public static void setShopkeeperIntimidatedFlag(string shopkeeperInventoryKey, bool flagStatus = true)
     {
         if (!shopkeeperIntimidatedFlags.ContainsKey(shopkeeperInventoryKey))
         {

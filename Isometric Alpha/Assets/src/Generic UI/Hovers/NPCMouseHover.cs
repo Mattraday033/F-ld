@@ -11,6 +11,38 @@ public class NPCMouseHover : MonoBehaviour
     public PolygonCollider2D polygonCollider2D;
     public SpriteRenderer spriteRenderer;
 
+    public void OnEnable()
+    {
+        createListeners();
+    }
+
+    public void OnDisable()
+    {
+        destroyListeners();
+    }
+
+    public void createListeners()
+    {
+        PlayerOOCStateManager.OnStateChangeToSkill.AddListener(disableHover);
+        PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(enableHover);
+    }
+
+    public void destroyListeners()
+    {
+        PlayerOOCStateManager.OnStateChangeToSkill.RemoveListener(disableHover);
+        PlayerOOCStateManager.OnStateChangeFromSkill.RemoveListener(enableHover);
+    }
+
+    private void disableHover()
+    {
+        polygonCollider2D.enabled = false;
+    }
+
+    private void enableHover()
+    {
+        polygonCollider2D.enabled = true;
+    }
+
     void Start()
     {
         revealables = transform.parent.GetComponents<IRevealable>();

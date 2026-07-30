@@ -11,7 +11,7 @@ public class CursorController : MonoBehaviour
 
     private bool clicked = false;
 
-    private Vector2 clickPosition = Vector2.zero;
+    private Vector2 clickPosition = new Vector2(0f, 18f);
 
     private void Awake()
     {
@@ -43,5 +43,17 @@ public class CursorController : MonoBehaviour
             Cursor.SetCursor(cursorDefaultSprite, clickPosition, CursorMode.Auto);
             return;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (Camera.main == null) return;
+
+        Vector3 mousePos = Input.mousePosition;
+        Vector3 worldPos = Camera.main.ScreenToWorldPoint(
+            new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane + 1f));
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(worldPos, Constants.detectionSize);
     }
 }

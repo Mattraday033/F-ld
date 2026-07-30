@@ -493,12 +493,12 @@ fadeBackIn(60)
 
 changeCamTarget({thatchIndex})
 
-Why stop me? Of all the guards, I can think of none more vile than that one.
+Why stop me? He is more beast than man; you've robbed us both of the satisfaction of knowing he won't hurt anyone ever again.
 
 {
 -givenAdviceFromBalint:
     +Bálint told me "you may only ever be able to pick one battle, make sure it is one you can win." I'm saving our energies for that battle.
-        Bálint is wise. I trust his judgement. I will have to take my revenge on Slate's killer later.
+        I begrudge you that Bálint is wise. I trust his judgement. *Thatch grinds his teeth in frustration.* I will have to take my revenge on Slate's killer later.
             ->6b
 -else:
     +The less fights we start, the more energy we'll have for when it matters.

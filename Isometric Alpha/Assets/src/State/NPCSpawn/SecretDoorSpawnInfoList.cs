@@ -36,8 +36,7 @@ public static class SecretDoorSpawnInfoList
         list = new List<SecretDoorSpawnInfo>();
 
         list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackFour, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(5, 18),
-                                            new TutorialSecretDoorInfo(SecretDoorKeyList.wisTutorialSecretDoor,
-                                            new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseWisdomAtStart })),
+                                            new SecretDoorInfo(SecretDoorKeyList.wisTutorialSecretDoor),
                                             Constants.sizeTwo, Axis.DescendingY,
                                             TutorialSequenceList.secretDoorTargetHash));
 

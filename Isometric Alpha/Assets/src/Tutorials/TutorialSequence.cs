@@ -802,10 +802,21 @@ public class TutorialSequence
         // Debug.LogError("invoking TutorialSequenceTargetFinder");
         TutorialSequenceTargetFinder.Invoke(currentStep);
 
+        if(!tutorialSequenceSucessfullySpawnedWindow())
+        {
+            endSequence();
+            return;
+        }
+
         if (inFinalStep())
         {
             TutorialSequenceStepTargetRow.ChangeButtonInteractivity.Invoke(true);
         }
+    }
+
+    private static bool tutorialSequenceSucessfullySpawnedWindow()
+    {
+        return TutorialSequenceStep.currentTutorialMessageWindow != null;
     }
 
     public static void spawnCurrentTutorialPopUp()

@@ -39,7 +39,6 @@ public static class PlayerOOCStateManager
     public readonly static UnityEvent OnStateChangeToWalking = new UnityEvent();
     public readonly static UnityEvent OnStateChangeFromWalking = new UnityEvent();
 
-    
     public readonly static UnityEvent OnStateChangeToInDialogue = new UnityEvent();
     public readonly static UnityEvent OnStateChangeFromInDialogue = new UnityEvent();
 
@@ -73,6 +72,7 @@ public static class PlayerOOCStateManager
 
         // TransitionManager.AfterTransition.AddListener(setToDefaultStateOnTransition);
         FadeToBlackManager.OnFadeBackInFinished.AddListener(checkIfWaitingOnSecondHostilityTutorial);
+        OnStateChangeToWalking.AddListener(checkIfWaitingOnSecondHostilityTutorial);
     }
 
     // private static void setToDefaultStateOnTransition()

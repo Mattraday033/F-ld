@@ -41,7 +41,7 @@ public abstract class StatBoostSource : INameSource
         return 0;
     }
 
-    public string getCritTotalForDisplay()
+    public virtual string getCritTotalForDisplay()
     {
         return getCritFormulaTotal() + "%";
     }

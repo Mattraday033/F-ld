@@ -185,7 +185,7 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		{
             case ShopMode.Buy:
 
-                int price = (int)(((float) worth) * PartyStats.getDiscountMultiplier() * ShopPopUpWindow.getCurrentShopkeeper().getDiscount());
+                int price = (int)(worth * Constants.shopMarkUpMultiplier * (1f - PartyStats.getDiscountMultiplier() * ShopPopUpWindow.getCurrentShopkeeper().getDiscount()));
                 
                 if(price < 1)
                 {
@@ -340,12 +340,12 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		return damageFormula;
 	}
 
-	public int getDamageFormulaTotal()
+	public override int getDamageFormulaTotal()
 	{
 		return DamageCalculator.calculateFormula(getDamageFormula(), getStatSource());
 	}
 
-	public string getDamageTotalForDisplay()
+	public override string getDamageTotalForDisplay()
 	{
 		if (CombatStateManager.inCombat)
 		{
@@ -353,11 +353,6 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		}
 
 		return "" + getDamageFormulaTotal();
-	}
-
-	public string getDamageFormulaForDisplay()
-	{
-		return getDamageFormula();
 	}
 
 	public override string getCritFormula()
@@ -370,17 +365,12 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		return critFormula;
 	}
 
-	public int getCritFormulaTotal()
+	public override int getCritFormulaTotal()
 	{
 		return DamageCalculator.calculateFormula(getCritFormula(), getStatSource());
 	}
 
-	public string getCritFormulaForDisplay()
-	{
-		return "(" + getCritFormula() + ")%";
-	}
-
-	public string getCritTotalForDisplay()
+	public override string getCritTotalForDisplay()
 	{
 		return getCritFormulaTotal() + "%";
 	}

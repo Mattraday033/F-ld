@@ -61,6 +61,11 @@ public class OverHeadIconManager : MonoBehaviour
         }
     }
 
+    public bool hasIcon(OverHeadIconType type)
+    {
+        return icons.ContainsKey(type);
+    }
+
     public bool hoveringOverIcon()
     {
         foreach(GameObject gameObject in icons.Values)

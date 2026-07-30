@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 2261191870349253907}
+  mouseHoverCollider: {fileID: 2081998958805458528}
   coords: {x: 0, y: 0}
   frontSelector: {fileID: 2953482586582477905}
   backSelector: {fileID: 3595694796434384468}
@@ -143,7 +144,7 @@ PolygonCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.06}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.495, y: 0.38}
