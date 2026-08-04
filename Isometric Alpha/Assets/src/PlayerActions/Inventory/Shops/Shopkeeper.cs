@@ -2,57 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shopkeeper : MonoBehaviour, IOverHeadIconSource, ISkillTarget
+public class Shopkeeper : OverHeadIconComponent, ISkillTarget
 {
     public const bool requestNormalShopInventory = false;
     public const bool requestBuyBackInventory = true;
 
-    public int cunningStunCounter
-    {
-        get
-        {
-            return -1;
-        }
-    }
-	public int intimidateCounter
-    {
-        get
-        {
-            return -1;
-        }
-    }
-	public int retreatStunCounter
-    {
-        get
-        {
-            return -1;
-        }
-    }
-
     public bool equipmentDefault;
     public string shopkeeperInventoryKey;
-    private OverHeadIconManager iconManager;
 
-    private IRevealable revealable;
+    // private void Awake()
+    // {
+    //     iconManager = GetComponent<ComponentList>().overHeadIconManager;
+    //     createShopkeeperIcon();
+    //     createIntimidatedIcon();
 
+    //     revealable = GetComponent<IRevealable>();
+    // }
 
-    private void Awake()
+    protected override void createAllOverheadIcons()
     {
-        iconManager = GetComponent<ComponentList>().overHeadIconManager;
         createShopkeeperIcon();
         createIntimidatedIcon();
-
-        revealable = GetComponent<IRevealable>();
-    }
-
-    private void OnEnable()
-    {
-        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(createShopkeeperIcon);
-    }
-
-    private void OnDisable()
-    {
-        PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(createShopkeeperIcon);
     }
 
     public virtual float getDiscount()
@@ -84,7 +54,7 @@ public class Shopkeeper : MonoBehaviour, IOverHeadIconSource, ISkillTarget
         }
     }
 
-    public virtual bool shouldRevealShopkeeperIcon()
+    public bool shouldRevealShopkeeperIcon()
     {
         return ShopkeeperInventoryList.getShopkeeperRevealStatus(getShopkeeperInventoryKey());
     }
@@ -103,37 +73,6 @@ public class Shopkeeper : MonoBehaviour, IOverHeadIconSource, ISkillTarget
         {
             iconManager.createOverHeadIcon(OverHeadIconType.Intimidate, this);
         }
-    }
-
-    public int getIntimidateCounter()
-    {
-        return -1;
-    }
-    public int getCunningCounter()
-    {
-        return -1;
-    }
-    public int getRetreatCounter()
-    {
-        return -1;
-    }
-
-    public Color getRevealColor()
-    {
-        return ColorList.canBeInteractedWith;
-    }
-
-	public void onReveal(bool toggleReveal)
-	{
-        if(revealable != null && !RevealManager.currentlyRevealed)
-        {
-            revealable.onReveal(toggleReveal);
-        }
-	}
-
-    public string getIntimidatedDescriptionKey()
-    {
-        return HoverMessageList.intimidatedShopkeeperKey;
     }
 
     #region ISkillTarget Methods

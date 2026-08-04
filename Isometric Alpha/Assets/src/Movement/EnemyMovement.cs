@@ -148,6 +148,7 @@ public class PathToPlayer
 public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutorialSequenceTarget, IDescribableInBlocks, IOverHeadIconSource
 {
     private const int cunningChargeCost = 2;
+    private const int intimidateChargeCost = 2;
 	public const int pathIndexHardCutoff = 1000;
     private const bool skipFileCreation = true;
 
@@ -660,13 +661,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     public int getChargeCost(SkillType skillType)
     {
-        switch(skillType)
-        {
-            case SkillType.Cunning:
-                return cunningChargeCost;
-            default:
-                return Constants.sizeOne;
-        }
+        return Constants.creatureSkillChargeCost;
     }
 
     public void cunning()

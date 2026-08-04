@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
-public enum OverHeadIconType { Intimidate, Cunning, Retreat, Shopkeeper, NameTag }
+public enum OverHeadIconType { Intimidate, Cunning, Retreat, Shopkeeper, NameTag, RestStop }
 
 public interface IOverHeadIconSource
 {    
@@ -109,7 +109,7 @@ public class OverHeadIcon : SlotIconHover
                     }
 
                     return;
-                case OverHeadIconType.Shopkeeper:
+                default:
                     roundCounter.enabled = false;
                     return;
             }
@@ -140,6 +140,7 @@ public class OverHeadIcon : SlotIconHover
         switch(this.type)
         {
             case OverHeadIconType.Shopkeeper:
+            case OverHeadIconType.RestStop:
                 removeListeners();
                 break;
             default:
@@ -168,6 +169,10 @@ public class OverHeadIcon : SlotIconHover
             case OverHeadIconType.Shopkeeper:
                 iconImage.sprite = Helpers.loadSpriteFromResources(IconList.shopIcon);
                 hoverMessageKey = HoverMessageList.shopkeeperIconKey;
+                break;
+            case OverHeadIconType.RestStop:
+                iconImage.sprite = Helpers.loadSpriteFromResources(IconList.restPointIcon);
+                hoverMessageKey = HoverMessageList.restPointCharacterKey;
                 break;
             default:
                 return;

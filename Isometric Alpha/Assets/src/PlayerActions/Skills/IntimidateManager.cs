@@ -167,7 +167,7 @@ public class IntimidateManager : CunningManager
 
     public override bool canUseSkill()
     {
-        return targetsFound > 0 && getIntimidatesRemaining() > 0;
+        return targetsFound > 0 && base.canUseSkill();
     }
 
     public override Color getTileBaseColor()

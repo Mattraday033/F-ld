@@ -6,8 +6,9 @@ public class DropInFromAboveTransitionScript : PlayerInteractionScript
 {
     private const float verticalMoveSpeed = 18f;
     private const float pauseAtTopSeconds = .25f;
-    private const float pauseAfterLandingSeconds = .75f;
-    private const float offscreenBuffer = 2f;          
+    private const float waitBeforeStandUp = .175f;
+    private const float offscreenBuffer = 2f;
+    private const float standUpTimeoutBuffer = .5f;
 
     public override void runScript(GameObject target = null)
     {
@@ -54,6 +55,10 @@ public class DropInFromAboveTransitionScript : PlayerInteractionScript
 
         playerTransform.position = offscreenPosition;
 
+        AnimationManager animationManager = PlayerObject.getAnimationManager();
+
+        startFallingAnimation(animationManager);
+
         while (FadeToBlackManager.isBlack() || FadeToBlackManager.isMidScreenFade())
         {
             yield return null;
@@ -72,12 +77,71 @@ public class DropInFromAboveTransitionScript : PlayerInteractionScript
 
         PlayerMovement.updateStartEndPosition();
 
-        yield return new WaitForSeconds(pauseAfterLandingSeconds);
+        // yield return new WaitForSeconds(waitBeforeStandUp);
+
+        //The player has stopped falling, so get back up before anything else can happen.
+        yield return playStandUpAnimation(animationManager);
+
+        setIdleForCurrentArea(animationManager);
 
         //Re-couple the camera to the player and hand control back.
         mainCM.m_Follow = playerTransform;
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
         PlayerObject.setSpriteSortingLayer(SortingLayerManager.firstSortingLayerInfo);
+    }
+
+    //The falling idle is a heart beat driven idle, so it holds until the idle is changed again.
+    private void startFallingAnimation(AnimationManager animationManager)
+    {
+        if (animationManager == null ||
+            !IdleDictionary.idleDictContainsSprites(animationManager.animationName, CharacterAnimationType.Vertical_Falling))
+        {
+            return;
+        }
+
+        animationManager.haltAllAnimations();
+        animationManager.setCurrentIdle(CharacterAnimationType.Vertical_Falling);
+    }
+
+    //Standing up sets the idle back to the normal out of combat idle when the clip ends.
+    private IEnumerator playStandUpAnimation(AnimationManager animationManager)
+    {
+        if (animationManager == null)
+        {
+            yield break;
+        }
+
+        animationManager.playStandUpAnimation();
+
+        //Animancer needs a frame before the new state reports itself as playing.
+        yield return null;
+
+        float maxWait = animationManager.getAnimationLength(CharacterAnimationType.StandUp) + standUpTimeoutBuffer;
+        float timeWaited = 0f;
+
+        while (animationManager.animancer.IsPlaying() && timeWaited < maxWait)
+        {
+            yield return null;
+
+            timeWaited += Time.deltaTime;
+        }
+    }
+
+    //Standing up always ends in the out of combat idle, so correct it for the area the player landed in.
+    private void setIdleForCurrentArea(AnimationManager animationManager)
+    {
+        if (animationManager == null)
+        {
+            return;
+        }
+
+        if (AreaList.currentAreaIsHostile())
+        {
+            animationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
+        } else
+        {
+            animationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
+        }
     }
 
     private float player_spriteHeight()

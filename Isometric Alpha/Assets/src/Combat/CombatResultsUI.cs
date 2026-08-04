@@ -90,6 +90,9 @@ public class CombatResultsUI : PopUpWindow
         List<Item> itemDrops = CombatResultsManager.determineItemDrops(dropTable, guaranteedDrops);
         int goldDropped = CombatResultsManager.determineGoldDrops(dropTable);
 
+        int intimidateChargesReplenished = CombatResultsManager.determineIntimidateChargesReplenished();
+        int cunningChargesReplenished = CombatResultsManager.determineCunningChargesReplenished();
+
         if (xpDropped < 0)
         {
             xpDropped = 0;
@@ -99,7 +102,7 @@ public class CombatResultsUI : PopUpWindow
 
         goldText.text = goldDropped + Purse.moneySymbol;
 
-        CombatResults combatResults = new CombatResults(itemDrops);
+        CombatResults combatResults = new CombatResults(itemDrops, intimidateChargesReplenished, cunningChargesReplenished);
 
         descriptionPanelSlot.setPrimaryDescribable(combatResults);
     }
@@ -132,11 +135,17 @@ public class CombatResultsUI : PopUpWindow
 
 public class CombatResults : IDescribable, IDescribableInBlocks
 {
+    private int intimidateChargesReplenished;
+    private int cunningChargesReplenished;
+
     public List<Item> loot;
 
-    public CombatResults(List<Item> loot)
+    public CombatResults(List<Item> loot, int intimidateChargesReplenished, int cunningChargesReplenished)
     {
         this.loot = loot;
+        
+        this.intimidateChargesReplenished = intimidateChargesReplenished;
+        this.cunningChargesReplenished = cunningChargesReplenished;
     }
 
     public List<DescriptionPanelBuildingBlock> getRegenerationDescription()
@@ -237,6 +246,16 @@ public class CombatResults : IDescribable, IDescribableInBlocks
         foreach(Item item in loot)
         {
             blocks.Add(new DescriptionPanelBuildingBlock(item));
+        }
+
+        if(intimidateChargesReplenished > 0)
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock("Intimidate Charges: " + intimidateChargesReplenished));
+        }
+
+        if(cunningChargesReplenished > 0)
+        {
+            blocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock("Cunning Charges: " + cunningChargesReplenished));
         }
 
         if(blocks.Count <= 1)

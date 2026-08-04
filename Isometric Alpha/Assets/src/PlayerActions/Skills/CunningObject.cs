@@ -65,7 +65,7 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
     public int getChargeCost(SkillType skillType)
     {
-        return Constants.sizeOne;
+        return Constants.objectSkillChargeCost;
     }
 
 

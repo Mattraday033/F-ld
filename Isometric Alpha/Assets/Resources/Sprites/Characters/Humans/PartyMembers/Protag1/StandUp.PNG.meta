@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Gets_Back_Up_0
+      name: StandUp_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,20 +105,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a9ef95cf417aba40a89477eaeafb805
-      internalID: 30508128
+      spriteID: 06a2ccda923c92642b2ed08486ab3dc2
+      internalID: 655259315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_1
+      name: StandUp_1
       rect:
         serializedVersion: 2
         x: 128
@@ -126,20 +126,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64be73225e3732b459b56cc0ae4f2c35
-      internalID: 603475928
+      spriteID: 80b6e38f70db3ff40b0131e308c4f5fc
+      internalID: 1056917879
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_2
+      name: StandUp_2
       rect:
         serializedVersion: 2
         x: 256
@@ -147,20 +147,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2f3a41bd025cf5419ee894073fcb6eb
-      internalID: 430822401
+      spriteID: f8bb9be5c0ce2d84489b0887bcabb489
+      internalID: 993166224
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_3
+      name: StandUp_3
       rect:
         serializedVersion: 2
         x: 384
@@ -168,20 +168,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92d4ed4093f9aaa408514ccfc3204daf
-      internalID: 1563467568
+      spriteID: b2b0b1a35d7f0b24bbf642a07c1c966d
+      internalID: -202274382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_4
+      name: StandUp_4
       rect:
         serializedVersion: 2
         x: 512
@@ -189,20 +189,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 799362e4f50ac65489ff606e4fdf7219
-      internalID: 1073555640
+      spriteID: 7c33be1515f3d02499570f6576f920b7
+      internalID: -685308680
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_5
+      name: StandUp_5
       rect:
         serializedVersion: 2
         x: 640
@@ -210,20 +210,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50699b26c9af71e4989093d38d0c6f11
-      internalID: -492752344
+      spriteID: 32ffb39e7a3bd274896f392f04937b90
+      internalID: 560899800
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_6
+      name: StandUp_6
       rect:
         serializedVersion: 2
         x: 768
@@ -231,20 +231,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33413b32fd35c6c48be5511823e4e8a8
-      internalID: 1518233954
+      spriteID: e4c1849fa9fd402449015787bb3e0cab
+      internalID: 1906296435
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_7
+      name: StandUp_7
       rect:
         serializedVersion: 2
         x: 896
@@ -252,20 +252,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4983f9a2417dfe94491c1b8b58b9897e
-      internalID: -1599458191
+      spriteID: 88e3de31e10e45e4abf23c4e1bceb02c
+      internalID: 2125983045
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_8
+      name: StandUp_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -273,20 +273,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e4eef071b916174fb8f23974fb85a91
-      internalID: -1872453560
+      spriteID: 027fff8f8351ef842983a91f1b47d83f
+      internalID: -1826165357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_9
+      name: StandUp_9
       rect:
         serializedVersion: 2
         x: 1152
@@ -294,20 +294,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e388f3d84106a624fbdbedc0a3030ee2
-      internalID: -350475765
+      spriteID: ae932fc29a2129643988c9073d35fa66
+      internalID: 1267099135
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_10
+      name: StandUp_10
       rect:
         serializedVersion: 2
         x: 1280
@@ -315,20 +315,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 249182cd1eec16f4c90b82d2982de8b0
-      internalID: 1003434254
+      spriteID: a20c59a5b1527af428f6dc1626e58d91
+      internalID: -630844583
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_11
+      name: StandUp_11
       rect:
         serializedVersion: 2
         x: 1408
@@ -336,20 +336,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d4664297fd13cb4e9dc416f22922c42
-      internalID: -220669865
+      spriteID: 66a3232dab72e5243af6d28d38b71dc6
+      internalID: -319785736
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_12
+      name: StandUp_12
       rect:
         serializedVersion: 2
         x: 1536
@@ -357,20 +357,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c628b6112a45dd74e838587f483d5415
-      internalID: -120566868
+      spriteID: 68474cd6b54ec5741bc247be52220f61
+      internalID: 300809221
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_13
+      name: StandUp_13
       rect:
         serializedVersion: 2
         x: 1664
@@ -378,20 +378,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56daf6fea5b56db4f96d27bb4bc1e0b0
-      internalID: -483242604
+      spriteID: 657c5c5615a433c46b32bfed4e5022ac
+      internalID: -1473181675
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_14
+      name: StandUp_14
       rect:
         serializedVersion: 2
         x: 1792
@@ -399,20 +399,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1b4fe8f75e1fdf49b536a6986657e28
-      internalID: 906058096
+      spriteID: 5e1a7f8af4a143045928e97fd841be84
+      internalID: 1772801578
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_15
+      name: StandUp_15
       rect:
         serializedVersion: 2
         x: 1920
@@ -420,20 +420,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 747e470f00e08fa4bbcae0fb127a45e0
-      internalID: -1372707787
+      spriteID: 61d14e5256bc2e647960680ada519361
+      internalID: 1949496229
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_16
+      name: StandUp_16
       rect:
         serializedVersion: 2
         x: 2048
@@ -441,20 +441,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd25daa886bf1a841b44e1595cfbb40d
-      internalID: -741959047
+      spriteID: c66006552ea2ebf4f8a0c45b886cfbb9
+      internalID: -1180866307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_17
+      name: StandUp_17
       rect:
         serializedVersion: 2
         x: 2176
@@ -462,20 +462,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ca78c1de60cf034e8321965a2e47f91
-      internalID: -727179873
+      spriteID: 96c7895bb062ce143b46a3d6dc8995c2
+      internalID: -1876322500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_18
+      name: StandUp_18
       rect:
         serializedVersion: 2
         x: 2304
@@ -483,20 +483,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: edce8d0bfa7c3cb4ebf1115633b561cc
-      internalID: -505936804
+      spriteID: 8f5e8e992422fd14886e6be471ff7d9a
+      internalID: -497058107
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_19
+      name: StandUp_19
       rect:
         serializedVersion: 2
         x: 2432
@@ -504,20 +504,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b705797bbb5cee14f97712ada56ca9ba
-      internalID: 1221510517
+      spriteID: 5949b98a188c67148ba9ad74ac073eda
+      internalID: -818478334
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_20
+      name: StandUp_20
       rect:
         serializedVersion: 2
         x: 2560
@@ -525,20 +525,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c469a520eb040da48a0b4f39e38d6986
-      internalID: 1617476884
+      spriteID: c91fa3b51ee8b5f40a3019fc6baf3f32
+      internalID: -145594941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_21
+      name: StandUp_21
       rect:
         serializedVersion: 2
         x: 2688
@@ -546,20 +546,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4fa5546dceed444db0e78cdd8f7d4dd
-      internalID: 1668959469
+      spriteID: 08464a084184efa42b76aa0fe7b829a2
+      internalID: -994914112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_22
+      name: StandUp_22
       rect:
         serializedVersion: 2
         x: 2816
@@ -567,20 +567,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4883914dffee5b47b36a458a001e036
-      internalID: 1546822872
+      spriteID: 0ad5d4bd75e390e49a34c133b2fcb53a
+      internalID: 2084324241
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_23
+      name: StandUp_23
       rect:
         serializedVersion: 2
         x: 2944
@@ -588,20 +588,20 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.25}
+      pivot: {x: 0.55, y: 0.3}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d67e450b22dcd10469ccd1e3cf59d23b
-      internalID: -482663
+      spriteID: ce0de2f673f006943ae1a0c265834786
+      internalID: 544096554
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Gets_Back_Up_24
+      name: StandUp_24
       rect:
         serializedVersion: 2
         x: 3072
@@ -615,8 +615,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53617d3b693ab0a46bf7fe4320ab1ce6
-      internalID: 391364459
+      spriteID: 607fc0b0004200347ada67c5fe13233f
+      internalID: 42749810
       vertices: []
       indices: 
       edges: []
@@ -632,31 +632,31 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Gets_Back_Up_0: 30508128
-      Gets_Back_Up_1: 603475928
-      Gets_Back_Up_10: 1003434254
-      Gets_Back_Up_11: -220669865
-      Gets_Back_Up_12: -120566868
-      Gets_Back_Up_13: -483242604
-      Gets_Back_Up_14: 906058096
-      Gets_Back_Up_15: -1372707787
-      Gets_Back_Up_16: -741959047
-      Gets_Back_Up_17: -727179873
-      Gets_Back_Up_18: -505936804
-      Gets_Back_Up_19: 1221510517
-      Gets_Back_Up_2: 430822401
-      Gets_Back_Up_20: 1617476884
-      Gets_Back_Up_21: 1668959469
-      Gets_Back_Up_22: 1546822872
-      Gets_Back_Up_23: -482663
-      Gets_Back_Up_24: 391364459
-      Gets_Back_Up_3: 1563467568
-      Gets_Back_Up_4: 1073555640
-      Gets_Back_Up_5: -492752344
-      Gets_Back_Up_6: 1518233954
-      Gets_Back_Up_7: -1599458191
-      Gets_Back_Up_8: -1872453560
-      Gets_Back_Up_9: -350475765
+      StandUp_0: 655259315
+      StandUp_1: 1056917879
+      StandUp_10: -630844583
+      StandUp_11: -319785736
+      StandUp_12: 300809221
+      StandUp_13: -1473181675
+      StandUp_14: 1772801578
+      StandUp_15: 1949496229
+      StandUp_16: -1180866307
+      StandUp_17: -1876322500
+      StandUp_18: -497058107
+      StandUp_19: -818478334
+      StandUp_2: 993166224
+      StandUp_20: -145594941
+      StandUp_21: -994914112
+      StandUp_22: 2084324241
+      StandUp_23: 544096554
+      StandUp_24: 42749810
+      StandUp_3: -202274382
+      StandUp_4: -685308680
+      StandUp_5: 560899800
+      StandUp_6: 1906296435
+      StandUp_7: 2125983045
+      StandUp_8: -1826165357
+      StandUp_9: 1267099135
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

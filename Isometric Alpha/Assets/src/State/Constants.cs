@@ -174,6 +174,13 @@ public static class Constants
 
     #endregion
 
+    #region Skill Costs
+
+    public const int objectSkillChargeCost = 1;
+    public const int creatureSkillChargeCost = 2;
+
+    #endregion
+
     #region Gameplay Settings Index
 
     public const int onSettingIndex = 0;

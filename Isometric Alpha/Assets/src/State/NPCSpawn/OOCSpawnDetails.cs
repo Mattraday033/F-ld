@@ -1485,13 +1485,26 @@ public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
     }
 }
 
-public class ShopkeeperSpawnDetails : NPCWithAnimationsSpawnDetails
+public class RestStopAndShopkeeperSpawnDetails : NPCWithAnimationsSpawnDetails
 {
 
-    public ShopkeeperSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string animationName = null, Vector3Int[] extraSpaces = null, bool ignoresSecretDoors = true, Facing facing = Facing.Random, bool withScale = false) :
+    private bool isShopkeeper = false;
+    private bool isRestStop = false;
+
+    public RestStopAndShopkeeperSpawnDetails(string npcName, 
+                                             Vector3Int cellCoords, 
+                                             string areaName, 
+                                             string animationName = null, 
+                                             Vector3Int[] extraSpaces = null, 
+                                             bool ignoresSecretDoors = true, 
+                                             Facing facing = Facing.Random, 
+                                             bool withScale = false,
+                                             bool isShopkeeper = false,
+                                             bool isRestStop = false) :
     base(npcName, cellCoords, areaName, animationName: animationName, extraSpaces: extraSpaces, ignoresSecretDoors: ignoresSecretDoors, facing: facing, withScale: withScale)
     {
-
+        this.isShopkeeper = isShopkeeper;
+        this.isRestStop = isRestStop;
     }
 
     public override bool interactable()
@@ -1503,9 +1516,18 @@ public class ShopkeeperSpawnDetails : NPCWithAnimationsSpawnDetails
     {
         base.spawnActions(npc);
 
-        Shopkeeper shopkeeper = npc.AddComponent<Shopkeeper>();
+        if(isShopkeeper)
+        {
+            Shopkeeper shopkeeper = npc.AddComponent<Shopkeeper>();
 
-        shopkeeper.shopkeeperInventoryKey = npcName;
+            shopkeeper.shopkeeperInventoryKey = npcName;
+        }
+
+        if(isRestStop)
+        {
+            npc.AddComponent<RestStop>();
+        }
+
     }
 }
 

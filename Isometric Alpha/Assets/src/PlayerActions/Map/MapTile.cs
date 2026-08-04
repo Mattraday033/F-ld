@@ -262,9 +262,13 @@ public class MapTile : MonoBehaviour, IQuestListSource
     }
 }
 
+public delegate bool RestStopAvailable();
+
 public static class RestAndShopMapLocationList
 {
     
+    private readonly static Dictionary<string, List<RestStopAvailable>> restStopAvailabilityDict = new Dictionary<string, List<RestStopAvailable>>();
+
     public static bool locationHasShop(string locationName) // locationName will always be a MapLocation, and never a MapInterior
     {
         switch(locationName)
@@ -281,29 +285,74 @@ public static class RestAndShopMapLocationList
 
     public static bool locationHasRestPoint(string locationName) // locationName will always be a MapLocation, and never a MapInterior
     {
-        switch(locationName)
+        if(!restStopAvailabilityDict.ContainsKey(locationName))
         {
-            case LocationNameList.campNorthEast:
-                return !Flags.getFlag(FlagNameList.directorDefeated);
-            case LocationNameList.campSouthEast:
-                return Flags.getFlag(FlagNameList.kastorStartedRevolt) && 
-                        !Flags.getFlag(FlagNameList.convincedSlavesToHelpYou) &&
-                        !Flags.getFlag(FlagNameList.directorDefeated);
-            case ZoneKeyList.mineLvl3 + LocationNameList.section5:
-                return Flags.getFlag(FlagNameList.mineLvl3CarterAndNandorInParty) && 
-                        !Flags.getFlag(FlagNameList.mineLvl3BreachSealed) && 
-                        !Flags.getFlag(FlagNameList.broughtNandorToKastor);
-            case ZoneKeyList.mineLvl3 + LocationNameList.section3b:
-                return Flags.getFlag(FlagNameList.mineLvl3GuardsInParty) && 
-                        !Flags.getFlag(FlagNameList.mineLvl3BreachSealed) && 
-                        !Flags.getFlag(FlagNameList.mineLvl2GuardsFinishedMove);
-            case ZoneKeyList.mineLvl2 + LocationNameList.section2a:
-                return  Flags.getFlag(FlagNameList.mineLvl2GuardsFinishedMove) && 
-                        !Flags.getFlag(FlagNameList.mineLvl3BreachSealed);
-            default:
-                return false;
+            return false;
         }
+
+        foreach(RestStopAvailable check in restStopAvailabilityDict[locationName])
+        {
+            if(check())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        restStopAvailabilityDict[LocationNameList.campNorthEast] = new List<RestStopAvailable>()
+        {
+            () => { 
+                    return !Flags.getFlag(FlagNameList.directorDefeated); 
+                    }
+        };
+
+        restStopAvailabilityDict[LocationNameList.slaveShackTwo] = new List<RestStopAvailable>()
+        {
+            () => { 
+                    return !Flags.getFlag(FlagNameList.revoltStarted); 
+                    }
+        };
+
+        restStopAvailabilityDict[LocationNameList.campSouthEast] = new List<RestStopAvailable>()
+        {
+            () => { 
+                    return Flags.getFlag(FlagNameList.kastorStartedRevolt) && 
+                        !Flags.getFlag(FlagNameList.convincedSlavesToHelpYou) &&
+                        !Flags.getFlag(FlagNameList.directorDefeated); 
+                    }
+        };
+
+        restStopAvailabilityDict[ZoneKeyList.mineLvl3 + LocationNameList.section5] = new List<RestStopAvailable>()
+        {
+            () => { 
+                    return Flags.getFlag(FlagNameList.mineLvl3CarterAndNandorInParty) && 
+                        !Flags.getFlag(FlagNameList.mineLvl3BreachSealed) && 
+                        !Flags.getFlag(FlagNameList.broughtNandorToKastor);
+                    }
+        };
+
+        restStopAvailabilityDict[ZoneKeyList.mineLvl3 + LocationNameList.section3b] = new List<RestStopAvailable>()
+        {
+            () => { 
+                    return Flags.getFlag(FlagNameList.mineLvl3GuardsInParty) && 
+                        !Flags.getFlag(FlagNameList.mineLvl3BreachSealed) && 
+                        !Flags.getFlag(FlagNameList.mineLvl2GuardsFinishedMove);
+                    }
+        };
+
+        restStopAvailabilityDict[ZoneKeyList.mineLvl2 + LocationNameList.section2a] = new List<RestStopAvailable>()
+        {
+            () => { 
+                    return  Flags.getFlag(FlagNameList.mineLvl2GuardsFinishedMove) && 
+                        !Flags.getFlag(FlagNameList.mineLvl3BreachSealed);
+                  }
+        };
+
+    }
 
 }

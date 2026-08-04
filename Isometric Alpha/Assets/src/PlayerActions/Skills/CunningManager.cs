@@ -471,7 +471,7 @@ public class CunningManager : SkillManager
         return target != null && target.validTarget(SkillType.Cunning) && !hasEnoughChargesForTarget(target);
     }
 
-    private bool canUseSkill(ISkillTarget target)
+    protected bool canUseSkill(ISkillTarget target)
     {
         return target != null && target.validTarget(SkillType.Cunning) && hasEnoughChargesForTarget(target);
     }

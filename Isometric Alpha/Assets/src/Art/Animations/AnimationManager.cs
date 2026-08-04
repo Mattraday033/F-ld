@@ -18,7 +18,8 @@ public enum CharacterAnimationType {
                                     Attack_Normal, Attack_Normal_Front, Attack_Normal_Back, 
                                     Attack_Special, 
                                     StandUp, 
-                                    Spawn 
+                                    Spawn,
+                                    Vertical_Falling
                                     }
 
 public class AnimationManager : MonoBehaviour, IAnimationTracker
@@ -28,7 +29,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         CharacterAnimationType.Idle_Front, CharacterAnimationType.Idle_Back,
         CharacterAnimationType.OOC_Idle_Front, CharacterAnimationType.OOC_Idle_Back,
         CharacterAnimationType.Secondary_Idle, CharacterAnimationType.Secondary_Idle_Front, CharacterAnimationType.Secondary_Idle_Back,
-        CharacterAnimationType.Death_Front_Weaponless, CharacterAnimationType.Death_Back_Weaponless
+        CharacterAnimationType.Death_Front_Weaponless, CharacterAnimationType.Death_Back_Weaponless,
+        CharacterAnimationType.Vertical_Falling
     };
 
 

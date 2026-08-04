@@ -36,7 +36,7 @@ public static class OOCSpawnDetailsList
         #region 2SlaveShack
         list = new List<OOCSpawnDetails>();
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.brush, new Vector3Int(4, 2), LocationNameList.slaveShackTwo, facing: Facing.SouthEast, speakAtStartScript: new BeginningConversationScript()));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.géza, new Vector3Int(4, 0), LocationNameList.slaveShackTwo, facing: Facing.NorthWest));
+        list.Add(new RestStopAndShopkeeperSpawnDetails(NPCNameList.géza, new Vector3Int(4, 0), LocationNameList.slaveShackTwo, facing: Facing.NorthWest, isRestStop: true));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardLaszlo, new Vector3Int(2, 1), facing: Facing.NorthEast));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardLaszlo + 1, new Vector3Int(-2, -1), facing: Facing.NorthEast));
@@ -318,7 +318,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.noBrand+1, new Vector3Int(3, 13), LocationNameList.messHall, facing: Facing.SouthEast));
 
-        list.Add(new ShopkeeperSpawnDetails(NPCNameList.kende, new Vector3Int(3, 10), LocationNameList.messHall, extraSpaces: new Vector3Int[] { new Vector3Int(3, 9) }, facing: Facing.SouthEast));
+        list.Add(new RestStopAndShopkeeperSpawnDetails(NPCNameList.kende, new Vector3Int(3, 10), LocationNameList.messHall, extraSpaces: new Vector3Int[] { new Vector3Int(3, 9) }, facing: Facing.SouthEast, isShopkeeper: true));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(4,8), facing: Facing.NorthWest));
 
         list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(4, 13), Facing.SouthWest));
@@ -534,7 +534,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+7, new Vector3Int(-3, -8), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+8, new Vector3Int(2, -3), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.clay+1, new Vector3Int(-6, -1), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthWest));
-        list.Add(new ShopkeeperSpawnDetails(NPCNameList.uros, new Vector3Int(-6, 2), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthEast));
+        list.Add(new RestStopAndShopkeeperSpawnDetails(NPCNameList.uros, new Vector3Int(-6, 2), LocationNameList.campNorthEast, ignoresSecretDoors: false, facing: Facing.SouthEast, isShopkeeper: true));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(11, 1), LocationNameList.campNorthEast, facing: Facing.SouthWest, ignoresSecretDoors: false, animationType: CharacterAnimationType.Death_Back, offset: Constants.onTableHeightOffset*-2f, sleepingDialogueIntro: true));
         list.Add(new ObstacleSpawnDetails(NPCNameList.bed, new Vector3Int(11, 1), PrefabNames.slaveBed, offset: Constants.onTableHeightOffset*-3f, flipX: true, ignoresSecretDoors: false));  

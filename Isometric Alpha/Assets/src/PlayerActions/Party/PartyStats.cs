@@ -293,12 +293,6 @@ public static class PartyStats
 
     #region Skills
 
-    [RuntimeInitializeOnLoadMethod]
-    public static void init()
-    {
-        TransitionManager.BeforeTransition.AddListener(resetAllSkills);
-    }
-
     public static void resetAllSkills()
     {
         IntimidateManager.resetIntimidatesRemaining();
@@ -322,14 +316,14 @@ public static class PartyStats
     {
         if(allowSkillsForTutorial())
         {
-            return 1;
+            return 2;
         }
 
         int playerStrength = getHighestStrength();
 
         if (playerStrength >= SkillManager.skillUnlockLevel)
         {
-            return 1;
+            return 2;
         }
         else
         {          

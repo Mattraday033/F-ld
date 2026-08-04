@@ -50,4 +50,28 @@ public static class CombatResultsManager
 		return finalGoldDropped;
 	}
 
+	public static int determineCunningChargesReplenished()
+	{
+        if(CunningManager.getCunningsRemaining() < PartyStats.getMaxCunningCount())
+        {
+            CunningManager.addCunningsRemaining(1);
+            return 1;
+        } else
+        {
+            return 0;
+        }
+	}
+
+	public static int determineIntimidateChargesReplenished()
+	{
+        if(IntimidateManager.getIntimidatesRemaining() < PartyStats.getMaxIntimidateCount())
+        {
+            IntimidateManager.incrementIntimidatesRemaining();
+            return 1;
+        } else
+        {
+            return 0;
+        }
+	}
+
 }

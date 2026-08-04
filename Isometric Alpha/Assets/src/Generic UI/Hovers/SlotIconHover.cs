@@ -247,6 +247,8 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
         switch(hoverMessageKey)
         {
+            case HoverMessageList.restPointCharacterKey:
+                return IconList.restPointIcon;
             case HoverMessageList.intimidatedShopkeeperKey:
                 return HoverMessageList.intimidatedKey;
             case IconList.intimidateIconName:
@@ -614,11 +616,14 @@ public static class HoverMessageList
     public const string worldMapKey = "World Map";
     public const string worldMapMessage = "Here you can see where you are in the world of " + NPCNameList.fold;
 
-    public const string restPointMessage = "This location has a Rest Point. Rest Points will restore the Health of all Party Members, as well as any expended Skill charges.";
+    public const string restPointMessage = "This location has a Rest Point. Using a Rest Point will restore the Health of all Party Members, as well as any expended Skill charges.";
     public const string shopIconMessage = "This location has a Shop. Shops sell useful items or equipment and buy unwanted loot.";
 
     public const string shopkeeperIconKey = "Shopkeeper";
-    public const string shopkeeperIconMessage = "This person is a Shopkeeper. Shopkeepers sell useful items or equipment and buy unwanted loot.";
+    public const string shopkeeperIconMessage = "This Character is a Shopkeeper. Shopkeepers sell useful items or equipment and buy unwanted loot.";
+    
+    public const string restPointCharacterKey = "Rest Point Character";
+    public const string restPointCharacterMessage = "This Character serves as a Rest Point. Using a Rest Point will restore the Health of all Party Members, as well as any expended Skill charges.";
 
     public static string getMessage(string iconName)
     {
@@ -982,6 +987,8 @@ public static class HoverMessageList
 
             case IconList.restPointIcon:
                 return restPointMessage;
+            case restPointCharacterKey:
+                return restPointCharacterMessage;
             case IconList.shopIcon:
                 return shopIconMessage;
             case shopkeeperIconKey:
