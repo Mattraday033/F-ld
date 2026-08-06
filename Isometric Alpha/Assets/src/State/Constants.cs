@@ -176,6 +176,8 @@ public static class Constants
 
     #region Skill Costs
 
+    public const string needMoreChargesMessage = "Need More Charges";
+
     public const int objectSkillChargeCost = 1;
     public const int creatureSkillChargeCost = 2;
 

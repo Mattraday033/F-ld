@@ -1283,6 +1283,13 @@ public static class SpawnParamsList
 
         #region Manse-2F
 
+        #region Manse-2F-1a
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, NPCNameList.honorguard),
+                                        new InteractableSpawnParams(spawnWhileHostile: doesNotSpawnWhileHostile));
+
+        #endregion
+
         #region Manse-2F-1b
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.section1b, NPCNameList.diary),
@@ -1315,6 +1322,10 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.director+1),
                                         new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.receivedDirectorsPardon}),spawnWhileHostile: doesNotSpawnWhileHostile));
         
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.page+1),
+                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated }),spawnWhileHostile: doesNotSpawnWhileHostile));
+        
+
         #endregion
 
         #endregion

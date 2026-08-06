@@ -292,7 +292,7 @@ public class PlayerObject : MonoBehaviour
                     return KeyBindingList.interactKey.ToString() + ": Cunning";
                 } else if(CunningManager.getInstance().hasTooExpensiveTarget())
                 {
-                    return "Need More Charges";
+                    return Constants.needMoreChargesMessage;
                 } else
                 {
                     return KeyBindingList.moveNorthKey.ToString() + "/" + 
@@ -306,9 +306,9 @@ public class PlayerObject : MonoBehaviour
                     return KeyBindingList.interactKey.ToString() + ": Intimidate";
                 }
 
-                if(IntimidateManager.getIntimidatesRemaining() <= 0)
+                if(!IntimidateManager.hasEnoughCharges())
                 {
-                    return "Need More Charges";
+                    return Constants.needMoreChargesMessage;
                 }
 
                 break;

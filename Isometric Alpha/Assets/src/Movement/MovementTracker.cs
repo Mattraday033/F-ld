@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//0.3486086
-
 public abstract class MovementTracker : MonoBehaviour
 {
     protected virtual void OnEnable()
@@ -25,8 +23,8 @@ public abstract class MovementTracker : MonoBehaviour
 
     public abstract string getName();
 
-    protected Vector3 _StartingPosition;
-    public Vector3 startingPosition
+    protected Vector2 _StartingPosition;
+    public Vector2 startingPosition
     {
         get => _StartingPosition;
         set
@@ -35,8 +33,8 @@ public abstract class MovementTracker : MonoBehaviour
         }
     }
 
-    protected Vector3 _EndingPosition;
-    public Vector3 endingPosition
+    protected Vector2 _EndingPosition;
+    public Vector2 endingPosition
     {
         get => _EndingPosition;
         set

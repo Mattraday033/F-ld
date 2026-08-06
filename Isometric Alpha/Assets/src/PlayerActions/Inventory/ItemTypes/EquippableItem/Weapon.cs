@@ -226,7 +226,7 @@ public class Weapon : EquippableItem, IJSONConvertable
 
         if (appliesStanceStacks())
         {
-            buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, IconList.stanceWeaponIconName));
+            buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: IconList.stanceWeaponIconName));
         }
 
         return buildingBlocks;

@@ -115,8 +115,8 @@ public class IntimidateManager : CunningManager
     public static void enterIntimidateMode()
     {
         SkillManager.destroyAllSkillGrids();
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.intimidating);
         IntimidateManager.getInstance().createSkillArea();
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.intimidating);
         PlayerObject.setButtonPromptVisibility();
     }
 
@@ -126,34 +126,6 @@ public class IntimidateManager : CunningManager
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
         PlayerObject.setButtonPromptVisibility();
     }
-
-    // public override void createSkillArea()
-    // {
-    //     Vector3Int playerCoords = getPlayerCoords();
-
-    //     int range = getRange();
-    //     skillGrid = new SkillIndicator[range, range];
-
-    //     for (int row = 0; row < range; row++)
-    //     {
-    //         for (int col = 0; col < range; col++)
-    //         {
-    //             if (coordsWithinRange(row, col))
-    //             {
-    //                 skillGrid[row, col] = instantiateTile(playerCoords, row, col).GetComponent<SkillIndicator>();
-    //                 skillGrid[row, col].updateColliderPosition();
-    //             }
-    //             else
-    //             {
-    //                 continue;
-    //             }
-
-    //             setTileColor(skillGrid[row, col]);
-    //         }
-    //     }
-
-    //     cullSkillArea();
-    // }
 
     protected override bool allowHovers()
     {
@@ -168,6 +140,43 @@ public class IntimidateManager : CunningManager
     public override bool canUseSkill()
     {
         return targetsFound > 0 && base.canUseSkill();
+    }
+
+    public static bool hasEnoughCharges()
+    {
+        return intimidatesRemaining >= getInstance().getHighestChargeCost();
+    }
+
+    private int getHighestChargeCost()
+    {
+        int highestChargeCost = 0;
+
+        // if(skillGrid == null)
+        // {
+        //     return highestChargeCost;
+        // }
+
+        foreach(SkillIndicator tile in skillGrid)
+        {
+            if(tile == null)
+            {
+                continue;
+            }
+
+            ISkillTarget target = getTargetFromTile(tile);
+
+            if(target != null)
+            {
+                int targetChargeCost = target.getChargeCost(SkillType.Intimidate);
+       
+                if(highestChargeCost < targetChargeCost)
+                {
+                    highestChargeCost = targetChargeCost;
+                }
+            }
+        }
+
+        return highestChargeCost;
     }
 
     public override Color getTileBaseColor()

@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 8090671379455875025}
   - component: {fileID: 3746387259490983449}
   - component: {fileID: 4277064042287401875}
+  - component: {fileID: 4205624108540838942}
   m_Layer: 19
   m_Name: Combat Hover Tile
   m_TagString: Untagged
@@ -242,6 +243,18 @@ PolygonCollider2D:
       - {x: 0.0057812333, y: 0.028750002}
       - {x: 0.51359373, y: -0.22125}
   m_UseDelaunayMesh: 0
+--- !u!114 &4205624108540838942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6792478035285357114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddebba213809599459b79271410bd776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5886138786185178823
 PrefabInstance:
   m_ObjectHideFlags: 0

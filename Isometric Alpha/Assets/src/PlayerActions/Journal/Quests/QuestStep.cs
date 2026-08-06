@@ -174,6 +174,11 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
         SettingOption[] boldImportantTextSO = GameplaySettingsList.boldImportantQuestText.settingOptions;
         SettingOption[] importantTextOnlySO = GameplaySettingsList.showOnlyImportantQuestText.settingOptions;
 
+        if(!journalDescription.Contains(Constants.boldTextStart))
+        {
+            return Constants.boldTextStart + journalDescription + Constants.boldTextEnd;
+        }
+
         if(importantTextOnlySO[Constants.onSettingIndex].set)
         {
             string output = "";

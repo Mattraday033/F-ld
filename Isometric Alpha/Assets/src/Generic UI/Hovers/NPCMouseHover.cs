@@ -23,12 +23,18 @@ public class NPCMouseHover : MonoBehaviour
 
     public void createListeners()
     {
+        MovementManager.OnMoveFinished.AddListener(setColliderPosition);
+        TransitionManager.AfterTransition.AddListener(setColliderPosition);
+
         PlayerOOCStateManager.OnStateChangeToSkill.AddListener(disableHover);
         PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(enableHover);
     }
 
     public void destroyListeners()
     {
+        MovementManager.OnMoveFinished.RemoveListener(setColliderPosition);
+        TransitionManager.AfterTransition.RemoveListener(setColliderPosition);
+
         PlayerOOCStateManager.OnStateChangeToSkill.RemoveListener(disableHover);
         PlayerOOCStateManager.OnStateChangeFromSkill.RemoveListener(enableHover);
     }
@@ -46,6 +52,18 @@ public class NPCMouseHover : MonoBehaviour
     void Start()
     {
         revealables = transform.parent.GetComponents<IRevealable>();
+        
+        setColliderPosition();
+    }
+
+    private void setColliderPosition()
+    {
+        setColliderPosition(0);
+    }
+
+    private void setColliderPosition(int index = 0)
+    {
+        transform.parent.position = new Vector2(transform.parent.position.x, transform.parent.position.y);
         
         Vector3Int currentCell = AreaManager.getMasterGrid().WorldToCell(transform.parent.position);
 

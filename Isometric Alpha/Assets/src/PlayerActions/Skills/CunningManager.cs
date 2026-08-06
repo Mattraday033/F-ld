@@ -498,6 +498,11 @@ public class CunningManager : SkillManager
 
     public ISkillTarget getTargetFromTile(SkillIndicator tile)
     {
+        if(tile == null)
+        {
+            return null;
+        }
+
         EnemyMovement.ToggleHoverColliders.Invoke(true);
         Collider2D selectorCollider = tile.collider;
         ISkillTarget target = null;
