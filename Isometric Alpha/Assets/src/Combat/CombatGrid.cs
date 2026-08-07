@@ -96,7 +96,7 @@ public static class CombatGrid
 	{
         if(newCombatant == null && combatantsDict.ContainsKey(coords))
         {
-            if(combatantsDict[coords].getName().Contains(PartyManager.playerMarker))
+            if(combatantsDict[coords] != null && combatantsDict[coords].getName().Contains(PartyManager.playerMarker))
             {
                 return;
             }

@@ -349,7 +349,12 @@ public static class DialogueList
                                                         NPCNameList.thatch,
                                                         NPCNameList.gaspar,
                                                         NPCNameList.gaspar + NPCNameList.shadowSuffix,
-                                                        NPCNameList.gaspar+1
+                                                        NPCNameList.gaspar+1,
+                                                        NPCNameList.protagUnderstudy,
+                                                        NPCNameList.weft+2,
+                                                        NPCNameList.thatch+1,
+                                                        NPCNameList.rubble
+
                                                      },
                             Resources.Load<TextAsset>(DialogueNameList.afterTakacsFightPath)));
 

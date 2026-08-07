@@ -1144,6 +1144,37 @@ public class DialogueManager : MonoBehaviour
 
                     break;
 
+                case "startfall":
+
+                    camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
+                    Vector2Int startCoords = new Vector2Int(getArgumentInt(buffer, Constants.indexOne), getArgumentInt(buffer, Constants.indexTwo));
+                    Vector2Int endCoords = new Vector2Int(getArgumentInt(buffer, Constants.indexThree), getArgumentInt(buffer, Constants.indexFour));
+                    float durationSeconds = getArgumentFloat(buffer, Constants.indexFive);
+                    bool disableAtEnd = getArgumentBool(buffer, Constants.indexSix);
+                    string effectName = getArgument(buffer, Constants.indexSeven);
+
+                    currentDialogue.cameraFoci[camTargetIndex].SetActive(true);
+
+                    FallingNPCMovement targetFallingNPC = currentDialogue.cameraFoci[camTargetIndex].GetComponent<FallingNPCMovement>();
+                    
+                    if(targetFallingNPC == null)
+                    {
+                        targetFallingNPC = currentDialogue.cameraFoci[camTargetIndex].AddComponent<FallingNPCMovement>();
+                    }
+
+                    targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+
+                    if(targetAnimationManager != null)
+                    {
+                        targetAnimationManager.disableExtras();
+                    }
+
+                    targetFallingNPC.moveBetweenCells(startCoords, endCoords, durationSeconds, disableAtEnd, effectAtEndName: effectName);
+
+                    continueStory();
+
+                    break;
+
                 case "disableextras":
                 case "hideextras":
                 case "removespriteextras":
@@ -1596,9 +1627,10 @@ public class DialogueManager : MonoBehaviour
 
                 case "createeffect":
 
-                    string effectName = getArgument(buffer, Constants.indexZero);
+                    effectName = getArgument(buffer, Constants.indexZero);
                     xPos = getArgumentInt(buffer, Constants.indexOne);
                     yPos = getArgumentInt(buffer, Constants.indexTwo);
+                    bool loopEffect = getArgumentBool(buffer, Constants.indexThree);
 
                     targetCellCoords = new Vector3Int(xPos, yPos);
 
@@ -1607,11 +1639,27 @@ public class DialogueManager : MonoBehaviour
                     effectGO.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(targetCellCoords);
 
                     effect = effectGO.GetComponent<EffectAnimationManager>();
-
+                    effect.loops = loopEffect;
+                    
                     effect.setAnimations(effectName);
                     
                     continueStory();
                     
+                    break;
+
+                case "destroyeffect":
+                case "destroyeffects":
+                case "destroyalleffects":
+
+                    effectName = getArgument(buffer, Constants.indexZero);
+                    
+                    if(Enum.TryParse(effectName, ignoreCase: true, out EffectAnimationType effectType))
+                    {
+                        EffectAnimationManager.DestroyAllEffectsOfType.Invoke(effectType);
+                    }
+
+                    continueStory();
+
                     break;
 
                 case "defeatmonster":
@@ -2016,14 +2064,16 @@ public class DialogueManager : MonoBehaviour
         return buffer.Split("(")[1].Split(")")[0].Split(",");
     }
 
-    private string getArgument(string buffer)
+    private string getArgument(string buffer, int argIndex = Constants.indexZero)
     {
-        return getArgument(buffer, Constants.indexZero);
-    }
+        string[] allArgs = getAllArgs(buffer);
 
-    private string getArgument(string buffer, int argIndex)
-    {
-        return getAllArgs(buffer)[argIndex];
+        if(allArgs.Length <= argIndex)
+        {
+            return null;
+        }
+
+        return allArgs[argIndex];
     }
 
     private int getArgumentInt(string buffer, int argIndex = 0)

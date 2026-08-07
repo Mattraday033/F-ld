@@ -49,13 +49,12 @@ public abstract class OOCSpawnDetails
 
     public virtual string getSpriteName()
     {
-        if (spriteName == null)
+        switch(spriteName)
         {
-            return PrefabNames.defaultNPCSprite;
-        }
-        else
-        {
-            return spriteName;
+            case null:
+                return PrefabNames.defaultNPCSprite;
+            default:
+                return spriteName;
         }
     }
 

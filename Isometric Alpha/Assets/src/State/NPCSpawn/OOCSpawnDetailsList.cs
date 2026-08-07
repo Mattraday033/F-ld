@@ -401,6 +401,12 @@ public static class OOCSpawnDetailsList
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.unseenBarrier, new Vector3Int(-6, -2), secretDoorFlag: SecretDoorKeyList.bodyPilePool));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.unseenBarrier, new Vector3Int(-7, -3), secretDoorFlag: SecretDoorKeyList.bodyPilePool));
 
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.protagUnderstudy, new Vector3Int(16, 24), facing: Facing.SouthEast, animationName: PartyManager.playerMarker, animationType: CharacterAnimationType.Vertical_Falling, sortingLayerInfo: SortingLayerManager.sixthSortingLayerInfo));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch+1, new Vector3Int(16, 24), facing: Facing.SouthEast, animationType: CharacterAnimationType.Vertical_Falling, sortingLayerInfo: SortingLayerManager.sixthSortingLayerInfo));
+        list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft+2, new Vector3Int(16, 24), facing: Facing.SouthWest, animationType: CharacterAnimationType.Vertical_Falling, sortingLayerInfo: SortingLayerManager.sixthSortingLayerInfo));
+
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble, new Vector3Int(-9, -10), PrefabNames.lowRubble)); 
+
         oocSpawnDetailsDict.Add(LocationNameList.bodyPile, list);
         #endregion
 

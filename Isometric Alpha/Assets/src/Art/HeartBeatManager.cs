@@ -143,6 +143,15 @@ public class HeartBeatManager : MonoBehaviour
     {
         switch(enemyType)
         {
+            case NPCNameList.gaspar:
+
+                if(AreaManager.locationName.Equals(LocationNameList.bodyPile) && !Flags.getFlag(FlagNameList.gasparSavedFromNoose))
+                {
+                    return HeartBeatSpeed.Fast;
+                } else
+                {
+                    return HeartBeatSpeed.Slow;
+                }
             case MonsterNameList.hiveHeraldNest:
             case MonsterNameList.martyrWormNest:
             case MonsterNameList.toxicWormNest:

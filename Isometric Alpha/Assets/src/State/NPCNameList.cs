@@ -11,6 +11,8 @@ public static class NPCNameList
 
     public const string branded = "Branded";
 
+    public const string protagUnderstudy = "ProtagUnderstudy";
+
     public const string balint = "Bálint";
     public const string brush = "Brush";
     public const string clay = "Clay";

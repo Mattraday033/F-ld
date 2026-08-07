@@ -176,6 +176,7 @@ public static class Constants
 
     #region Skill Costs
 
+    public const string skillChargeDescription = "Skill Charges can be regained by resting at a Rest Point, using certain Items, or defeating a pack of Enemies in Combat.";
     public const string needMoreChargesMessage = "Need More Charges";
 
     public const int objectSkillChargeCost = 1;

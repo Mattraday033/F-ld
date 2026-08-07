@@ -380,6 +380,9 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.bodyPile, NPCNameList.ladder),
                                             new InteractableSpawnParams(onlySpawnWhileHostile: onlySpawnWhileHostile));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.bodyPile, NPCNameList.rubble),
+                                            new InteractableSpawnParams(spawnWhileHostile: doesNotSpawnWhileHostile));
+
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.bodyPile, NPCNameList.slave),
                                             new InteractableSpawnParams(spawnWhileHostile: spawnWhileHostile));
 

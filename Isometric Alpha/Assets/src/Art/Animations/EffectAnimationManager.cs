@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Animancer;
 using Animancer.FSM;
 
@@ -26,12 +27,19 @@ public enum EffectAnimationType
     FrontSelector,
     BackSelector,    
     FrontSelector2,
-    BackSelector2
+    BackSelector2,
+    Bubbles,
+    Splash
 }
 
 
 public class EffectAnimationManager : AnimationManager
 {
+
+    public readonly static UnityEvent<EffectAnimationType> DestroyAllEffectsOfType = new UnityEvent<EffectAnimationType>();
+    
+    private EffectAnimationType type;
+
     public bool waitBeforeSFX = true;
     public bool playSFX = true;
     private const float timeToWaitBeforeSFX = .3f;
@@ -55,8 +63,13 @@ public class EffectAnimationManager : AnimationManager
     {
         string folderPath = PrefabNames.abilityEffectFolderPath + effectType;
 
+        if(Enum.TryParse(effectType, ignoreCase: true, out EffectAnimationType animationType))
+        {
+            type = animationType;
+        }
+
         setSpriteRenderer(effectType);
-        determineOutline(effectType);
+        determineOutline();
 
         AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath);
 
@@ -100,22 +113,21 @@ public class EffectAnimationManager : AnimationManager
         }
     }
 
-    private void determineOutline(string effectType)
+    private void determineOutline()
     {
-        if(Enum.TryParse(effectType, ignoreCase: true, out EffectAnimationType animationType))
+        switch(type)
         {
-            switch(animationType)
-            {
-                case EffectAnimationType.BatSwarm:
-                case EffectAnimationType.FrontSelector:
-                case EffectAnimationType.BackSelector:                
-                case EffectAnimationType.FrontSelector2:
-                case EffectAnimationType.BackSelector2:
-                    return;
-                default:
-                    spriteRenderer.material = Resources.Load<Material>(PrefabNames.outlineMaterial);
-                    return;
-            }
+            case EffectAnimationType.BatSwarm:
+            case EffectAnimationType.FrontSelector:
+            case EffectAnimationType.BackSelector:                
+            case EffectAnimationType.FrontSelector2:
+            case EffectAnimationType.BackSelector2:
+            case EffectAnimationType.Bubbles:
+            case EffectAnimationType.Splash:
+                return;
+            default:
+                spriteRenderer.material = Resources.Load<Material>(PrefabNames.outlineMaterial);
+                return;
         }
     }
 
@@ -194,6 +206,24 @@ public class EffectAnimationManager : AnimationManager
         DestroyImmediate(gameObject);
 
         base.removeAnimation();
+    }
+
+    private void destroyEffectOfType(EffectAnimationType type)
+    {
+        if(this.type == type)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnEnable()
+    {
+        DestroyAllEffectsOfType.AddListener(destroyEffectOfType);
+    }
+
+    private void OnDisable()
+    {
+        DestroyAllEffectsOfType.RemoveListener(destroyEffectOfType);
     }
 
 }

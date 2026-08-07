@@ -12,7 +12,12 @@ VAR thatchIndex = 5
 VAR gasparHangingIndex = 6
 VAR gasparShadowIndex = 7
 VAR gasparCutDownIndex = 8
+VAR protagUnderstudyIndex = 9
+VAR weftFallingIndex = 10
+VAR thatchFallingIndex = 11
+VAR ladderRubbleIndex = 12
 
+VAR deathFlagWeft = false
 VAR partyFlagThatch = false
 VAR hadAfterTakacsFightConvo = false
 VAR gasparBroughtToExecution = false
@@ -28,6 +33,18 @@ VAR playerName = ""
 
 === 1a ===
 
+{
+-gasparBroughtToExecution:
+activate({gasparHangingIndex})
+activate({gasparShadowIndex})
+playAnimation({gasparHangingIndex},Secondary_Idle)
+hideExtras({gasparHangingIndex})
+}
+
+activate({ladderIndex})
+deactivate({ladderRubbleIndex})
+
+changeCamTarget({guardOneIndex})
 addSecretDoorFlag(CampBody PileUnseen Barrier)
 duckMusic()
 setToTrue(hadAfterTakacsFightConvo)
@@ -35,26 +52,53 @@ setToTrue(hadAfterTakacsFightConvo)
 stopAllFades()
 setFacing(NE)
 deactivate({playerIndex})
+
+disableDialogueUI()
+slowFadeBackIn(4)
+wait(1.5)
+
+startFall({protagUnderstudyIndex}, 10, 16, -7, 0, .65, true, Splash)
+wait(.35)
+{
+-not deathFlagWeft:
+startFall({weftFallingIndex}, 12, 16, -4, 1, .65, true, Splash)
+wait(.35)
+}
+{
+-partyFlagThatch:
+startFall({thatchFallingIndex}, 9, 14, -8, -2, .65, true, Splash)
+}
+
+wait(4)
+
+createEffect(Bubbles, -7, 0, true)
+{
+-not deathFlagWeft:
+createEffect(Bubbles, -4, 1, true)
+}
+{
+-partyFlagThatch:
+createEffect(Bubbles, -8, -2, true)
+}
+
+wait(5)
+
+fadeToBlack(false, false)
+
 activate({guardOneIndex})
 activate({guardTwoIndex})
-activate({ladderIndex})
 
 {
 -gasparBroughtToExecution:
 changeCamTarget({gasparHangingIndex})
-activate({gasparHangingIndex})
-activate({gasparShadowIndex})
-playAnimation({gasparHangingIndex},Secondary_Idle)
-hideExtras({gasparHangingIndex})
 setNPCFacing({guardOneIndex},SE)
 setNPCFacing({guardTwoIndex},SE)
 -else:
 changeCamTarget({guardOneIndex})
 }
+fadeBackIn(60)
 
-disableDialogueUI()
-slowFadeBackIn(5)
-wait(3.25)
+wait(3.5)
 
 enableDialogueUI()
 {
@@ -124,7 +168,7 @@ Think we should head back? The smell is making my eyes water.
 changeCamTarget({guardTwoIndex})
 setNPCFacing({guardTwoIndex},NW)
 
-You want to come back with nothing when that Vada's kicking around? I'd like to see the Confederation again, not get executed for incompetance all the way out here.
+You want to come back with nothing with that Vada about? I'd like to see the Confederation again, not get executed for incompetance all the way out here.
 
 disableDialogueUI()
 wait(1)
@@ -143,13 +187,14 @@ How could I not?
 
 changeCamTarget({guardTwoIndex})
 
-Pick one of the more mashed bodies and let's get out of here. With luck, the Director won't be able to tell the difference neither.
+Pick one of the more mashed bodies and let's get back up the ladder. With luck, the Director won't be able to tell the difference either.
 
 fadeToBlack(true, false)
 
 deactivate({guardOneIndex})
 deactivate({guardTwoIndex})
 deactivate({ladderIndex})
+activate({ladderRubbleIndex})
 
 activate({playerIndex})
 activate({weftIndex})
@@ -165,6 +210,8 @@ playAnimation({playerIndex},OOC_Idle_Back)
 changeCamTarget({weftIndex})
 
 wait(.5)
+
+destroyEffects(Bubbles)
 
 fadeBackIn(60)
 
@@ -216,7 +263,7 @@ changeCamTarget({weftIndex})
 
 \*Weft looks up at him with pity.* Forget what I said before, this is ghastly to watch.
 
-    +We should cut him down. Even if he still ends up dead, it would be a mercy. <Cut down Gáspár>
+    +We should cut him down. Even if he still ends up dead, it would be a mercy. <Cut Gáspár down>
         Ok, come on. I'll boost you up to him.
         ->cutDownGaspar_1b
     +Now you know how it feels, overseer! My branding felt just like that! <Leave Gáspár>
@@ -252,7 +299,7 @@ VAR gaveGasparNeckAdvice = false
 VAR askedIfItWasHorrible = false
 VAR andWorseForIt = false
 
-\*Gáspár coughs heavily. His entire body shivers, and he sways from side to side. More than once does he reach for his own neck, just to jerk his hand away upon touching the wound there inflicted by the grinding rope.*
+\*Gáspár coughs heavily. His entire body shivers, and he sways from side to side. More than once does he reach for his own neck, just to jerk his hand away upon touching the wounds inflicted there by the grinding rope.*
 
     +Some of the other branded showed me how to hold your neck so that it hurts less. See? Like this.
         ~gaveGasparNeckAdvice = true

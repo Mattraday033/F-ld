@@ -77,7 +77,7 @@ public static class TutorialMessageList
 
         tutorialDictionary.Add(intimidateTutorialMessagePrefix + 1, "This creature is hiding around a blind corner. If someone in your Party has put points in Strength, then the Intimidate skill can keep it from surprising you. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to activate it.");
         tutorialDictionary.Add(intimidateTutorialMessagePrefix + 2, "The orange tiles show Intimidate's range. A red tile shows a target. All targets in range will be affected by Intimidate. Intimidated creatures cannot surprise you or be surprised.");
-        tutorialDictionary.Add(intimidateTutorialMessagePrefix + 3, "You have limited uses of Intimidate. These are replenished when you enter a new area. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to use Intimidate.");
+        tutorialDictionary.Add(intimidateTutorialMessagePrefix + 3, "Intimidation has a limited amount of charges. Intimidating an Enemy costs two charges. " + Constants.skillChargeDescription + " Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to use Intimidate.");
         tutorialDictionary.Add(intimidateTutorialMessagePrefix + 4, "The symbol above the creature indicates it has been intimidated. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to start combat.");
 
         tutorialDictionary.Add(interactableObjectTutorialMessagePrefix + 1, "Rubble blocks your path. If you highlight interactables, the rubble will be shown in green. This means you can interact with it like you would an NPC. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to interact with it.");
@@ -89,7 +89,7 @@ public static class TutorialMessageList
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 4, "The symbol above the creature indicates it has been distracted. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to start combat.");
 
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 5, "If someone in your Party has put points in Dexterity, then you can use the Cunning skill to get past certain obstacles. Cunning targets have a yellow border when you highlight interactables. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to begin to activate the Cunning Skill.");
-        tutorialDictionary.Add(cunningTutorialMessagePrefix + 6, "You have limited uses of Cunning, shown here. Your charges are replenished when you enter a new area, or by using certain items. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to target the object.");
+        tutorialDictionary.Add(cunningTutorialMessagePrefix + 6, "You have limited uses of Cunning, shown here. "+ Constants.skillChargeDescription + " Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to target the object.");
         tutorialDictionary.Add(cunningTutorialMessagePrefix + 7, "Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to activate the object.");
 
         tutorialDictionary.Add(observationTutorialMessagePrefix + 1, "Your path is blocked by a hidden door. Hidden doors are not highlighted by pressing <nobr>' " + revealKeyCodePlaceHolder + " '.</nobr> Instead, if someone in your Party has put points in Wisdom, then you can use the Observation skill to reveal them. Press <nobr>' " + keyCodePlaceHolder + " '</nobr> to face the door.");

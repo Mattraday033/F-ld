@@ -148,12 +148,14 @@ fadeBackIn(60)
 Speak yer business, branded.
 
     +The Director gave me orders to report here. I'm to be pardoned.
-{
--gasparBroughtToExecution:
-    ->3a
--else:
-    ->2a
-}
+    
+        ->jumpInPit
+// {
+// -gasparBroughtToExecution:
+//     ->3a
+// -else:
+//     ->2a
+// }
 
 === 2a ===
 
@@ -346,7 +348,7 @@ changeCamTarget({directorIndex})
 
 === gasparExecution ===
 
-Before we set out from Pharos four months ago, each of you was told what you were to expect. That we were to venture into hostile lands; that you would be surrounded by enemies, far from home; that you may never again return.
+Before we set out from Pharos four months ago, each of you was told what to expect. That you would venture into hostile lands; that you would be surrounded by enemies, far from home; that you may never again return.
 
 Each of you volunteered for this mission, and took oaths against your lives that you would see it completed. Oaths to me, oaths to each other, and oaths to the Confederation. Those that would prove their words empty are no longer your comrades, but cowards and traitors!
 
@@ -379,7 +381,7 @@ wait(.25)
 
 enableDialogueUI()
 
-So dies such a craven! Gáspár of Gécz was charged with the protection of the mine's depths and instead of carrying out that duty, consigned branded and guard alike to deaths by monsters and starvation rather than rise to their defense! 
+So dies such a craven! Gáspár of Gécz was charged with the protection of the mine's depths! But rather than carry out that duty, he willingly consigned those in his care to death by fang or famine! 
 
 May his hanging remind each of us of what fate awaits should we no longer cherish our words and bonds to eachother: a coward's death, at the hands of our betters.
 
@@ -421,7 +423,7 @@ changeCamTarget({directorIndex})
 
 \*The Director waits for the cheer to fade before continuing.* I near the end of my eigth decade. In that time, I have ridden with names many of you only know from stories as we waged our war against the Craft Folk. 
 
-I watched as the fires rose over Carnassus, and your fathers toppled the great statues of Saint Lysop. I beheld the death of our King Csaba at the hands of the King of Kilns, and the scouring of Pharos which followed. I lead our western lance against the Masons and layed seige to their jewel, Wudra; the furthest our hordes have ridden against our hated foes.
+I watched as the fires rose over Carnassus, and your fathers toppled the great statues of Saint Lysop. I beheld the death of our King Csaba at the hands of the King of Kilns, and the scouring of Pharos which followed. I lead our western lance against the Masons and laid seige to their jewel, Wudra; the furthest our hordes have ridden against our hated foes.
 
 Over this long life, I have witnessed our traditions of honor, loyalty, and strength earn us lands and trophies at great cost. Over the many cycles of war and peace, I have had cause to wonder if the cost we paid was not simply in blood and kin, but whether those very values we held in such regard were hidden within the final tally when the bill came due.
 
@@ -429,7 +431,7 @@ createEffect(SmokeBomb,-7,14)
 
 \*The Director pauses for a moment in thought.*
 
-These lost virtues are not unrecoverable, however. Our hated enemies are not so fearsome that they cannot be overcome by our combined might. At the end of the last war the Confederation left their armies broken, and their lands torched and scarred. When the next war begins, our people will find them a pathetic, crippled foe unable to withstand the combined might of our glorious hordes!
+These lost virtues are not unrecoverable, however. Our hated enemies are not so fearsome that they cannot be overcome by our combined might. At the end of the last war the Confederation left their armies broken, and their lands torched and scarred. When the next war begins, our people will find them a pathetic, crippled foe unable to withstand the overwhelming strength of our glorious hordes!
 
 disableDialogueUI()
 createEffect(SmokeBomb,-6,14)
@@ -448,7 +450,7 @@ Vada... *Adéla shivers with discomfort.*
 
 changeCamTarget({takacsIndex})
 
-There is but one, insignificant detail that has been overlooked. A fly buzzes in this camp. A fat, happy, lazy fly, which you will help me catch for my supper.
+There is but one, insignificant detail that has been overlooked. A fly buzzes in this camp. A lazy fly, fat and happy, which you will help me catch for my supper.
 
 disableDialogueUI()
 createEffect(SmokeBomb,-9,10)
