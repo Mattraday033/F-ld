@@ -15,19 +15,22 @@ public static class AnimationSFXDictionaryList
     public readonly static Dictionary<CharacterAnimationType, string> maleHumanAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
         [CharacterAnimationType.Attack_Normal] = AudioClipList.weaponSwingAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.maleHumanDeathSound 
+        [CharacterAnimationType.Death] = AudioClipList.maleHumanDeathSound,
+        [CharacterAnimationType.Secondary_Death] = AudioClipList.maleHumanDeathSound 
     };
 
     public readonly static Dictionary<CharacterAnimationType, string> femaleHumanAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
         [CharacterAnimationType.Attack_Normal] = AudioClipList.weaponSwingAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.femaleHumanDeathSound 
+        [CharacterAnimationType.Death] = AudioClipList.femaleHumanDeathSound,
+        [CharacterAnimationType.Secondary_Death] = AudioClipList.femaleHumanDeathSound
     };
 
     public readonly static Dictionary<CharacterAnimationType, string> whipAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
         [CharacterAnimationType.Attack_Normal] = AudioClipList.whipAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.maleHumanDeathSound 
+        [CharacterAnimationType.Death] = AudioClipList.maleHumanDeathSound,
+        [CharacterAnimationType.Secondary_Death] = AudioClipList.maleHumanDeathSound 
     };
 
     #endregion
@@ -37,20 +40,23 @@ public static class AnimationSFXDictionaryList
     public readonly static Dictionary<CharacterAnimationType, string> batSwarmAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
         [CharacterAnimationType.Attack_Normal] = AudioClipList.batSwarmAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.batDeathSFXOne
+        [CharacterAnimationType.Death] = AudioClipList.batDeathSFXOne,
+        [CharacterAnimationType.Secondary_Death] = AudioClipList.batDeathSFXOne 
     };
 
     public readonly static Dictionary<CharacterAnimationType, string> largeBatAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
         [CharacterAnimationType.Attack_Normal] = AudioClipList.batAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.batDeathSFXOne
+        [CharacterAnimationType.Death] = AudioClipList.batDeathSFXOne,
+        [CharacterAnimationType.Secondary_Death] = AudioClipList.batDeathSFXOne 
     };
 
     public readonly static Dictionary<CharacterAnimationType, string> bipedalBatAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
         [CharacterAnimationType.Attack_Normal] = AudioClipList.batHowlAttackSound,
         [CharacterAnimationType.Attack_Special] = AudioClipList.batHowlAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.batDeathSFXTwo
+        [CharacterAnimationType.Death] = AudioClipList.batDeathSFXTwo,
+        [CharacterAnimationType.Secondary_Death] = AudioClipList.batDeathSFXTwo 
     };
 
     #endregion
@@ -88,7 +94,8 @@ public static class AnimationSFXDictionaryList
     public readonly static Dictionary<CharacterAnimationType, string> horseAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
         [CharacterAnimationType.Attack_Normal] = AudioClipList.horseAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.horseDeathSFX
+        [CharacterAnimationType.Death] = AudioClipList.horseDeathSFX,
+        [CharacterAnimationType.Secondary_Death] = AudioClipList.horseDeathSFX 
     };
 
     #endregion
@@ -98,7 +105,8 @@ public static class AnimationSFXDictionaryList
     public readonly static Dictionary<CharacterAnimationType, string> stoneSaintAudioDictionary = new Dictionary<CharacterAnimationType, string>
     {
         [CharacterAnimationType.Attack_Normal] = AudioClipList.rockIntroSFX,
-        [CharacterAnimationType.Death] = AudioClipList.rockIntroSFX
+        [CharacterAnimationType.Death] = AudioClipList.rockIntroSFX,
+        [CharacterAnimationType.Secondary_Death] = AudioClipList.rockIntroSFX
     };
 
     #endregion

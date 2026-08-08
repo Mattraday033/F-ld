@@ -96,9 +96,12 @@ setNPCFacing({guardTwoIndex},SE)
 -else:
 changeCamTarget({guardOneIndex})
 }
+
+wait(4.25)
+
 fadeBackIn(60)
 
-wait(3.5)
+wait(4)
 
 enableDialogueUI()
 {
@@ -256,7 +259,7 @@ setFacing(SE)
 changeCamTarget({gasparHangingIndex})
 disableDialogueUI()
 
-wait(3)
+wait(4.25)
 
 enableDialogueUI()
 changeCamTarget({weftIndex})
@@ -367,7 +370,11 @@ changeCamTarget({gasparHangingIndex})
 
 disableDialogueUI()
 
-wait(3)
+wait(.65)
+
+playAnimation({gasparHangingIndex},Secondary_Death)
+
+wait(4.5)
 
 enableDialogueUI()
 
@@ -375,6 +382,19 @@ setFacing(NE)
 setNPCFacing({weftIndex},SW)
 
 changeCamTarget({weftIndex})
+
+I'd be a liar if I said I was broken-hearted but... that's a rough way to go out for anyone.
+
+{
+-partyFlagThatch:
+
+changeCamTarget({thatchIndex})
+
+Far kinder than he deserved. *Thatch spits on the ground.*
+
+changeCamTarget({weftIndex})
+
+}
 
 Gáspár's fate aside, I'm overjoyed to still be among the living... er, among the dead, but alive, I mean. 
 

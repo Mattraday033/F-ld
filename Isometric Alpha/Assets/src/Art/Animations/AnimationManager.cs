@@ -14,7 +14,7 @@ public enum CharacterAnimationType {
                                     Run_Front, Run_Front_Left, Run_Front_Right, 
                                     Run_Back, Run_Back_Left, Run_Back_Right, 
                                     Wounded, Wounded_Front, Wounded_Back, OOC_Wounded_Front, OOC_Wounded_Back,
-                                    Death, Death_Front, Death_Back, Death_Front_Weaponless, Death_Back_Weaponless,
+                                    Death, Secondary_Death, Death_Front, Death_Back, Death_Front_Weaponless, Death_Back_Weaponless,
                                     Attack_Normal, Attack_Normal_Front, Attack_Normal_Back, 
                                     Attack_Special, 
                                     StandUp, 
@@ -40,7 +40,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
       CharacterAnimationType.Run_Back,      CharacterAnimationType.Run_Back_Left,       CharacterAnimationType.Run_Back_Right,  
       CharacterAnimationType.Wounded,       CharacterAnimationType.Wounded_Front,       CharacterAnimationType.Wounded_Back,
       CharacterAnimationType.OOC_Wounded_Front, CharacterAnimationType.OOC_Wounded_Back,
-      CharacterAnimationType.Death,         CharacterAnimationType.Death_Front,         CharacterAnimationType.Death_Back,   
+      CharacterAnimationType.Death,         CharacterAnimationType.Secondary_Death, CharacterAnimationType.Death_Front,         CharacterAnimationType.Death_Back,   
       CharacterAnimationType.Attack_Normal, CharacterAnimationType.Attack_Normal_Front, CharacterAnimationType.Attack_Normal_Back, 
       CharacterAnimationType.Attack_Special,
       CharacterAnimationType.Spawn,
@@ -135,7 +135,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public virtual bool spriteSetByHeartBeat()
     {
-        return !CombatAnimationManager.trackerBeingTracked(this) && 
+        return !currentIdle.ToString().Contains("Death") && !CombatAnimationManager.trackerBeingTracked(this) && 
                 ((!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation() && PlayerOOCStateManager.currentActivity != OOCActivity.Defeat) || 
                 (CombatStateManager.inCombat && !linkedStats.isDead()));
     }
@@ -448,6 +448,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
 
         addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death, replaceOldSprites);
+        addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Secondary_Death, replaceOldSprites);
         addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death_Back, replaceOldSprites);
         addIdleSpritesOfType(animationName, folderPath, CharacterAnimationType.Death_Front, replaceOldSprites);
     }
@@ -469,10 +470,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         switch(type)
         {
             case CharacterAnimationType.Death:
+            case CharacterAnimationType.Secondary_Death:
             case CharacterAnimationType.Death_Back:
             case CharacterAnimationType.Death_Front:
 
-                sprites = new Sprite[1]{sprites[sprites.Length-1]};    
+                sprites = new Sprite[1]{sprites[sprites.Length-1]};
 
                 break;
         }
@@ -612,6 +614,17 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
 
         playAnimation(createClipTransitionToDeathThenHide());
+        // removeAnimation();
+    }
+
+    public void playSecondaryDeathAnimation()
+    {
+        if(currentIdle != getDeathAnimationType() && linkedStats != null)
+        {
+            linkedStats.playAnimationSFX(CharacterAnimationType.Secondary_Death);
+        }
+
+        playAnimation(createClipTransitionToSecondaryDeath());
         // removeAnimation();
     }
 
@@ -867,6 +880,19 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         return clipTransition;
     }
 
+    private ClipTransition createClipTransitionToSecondaryDeath()
+    {
+        CharacterAnimationType deathAnimationType = getDeathAnimationType(CharacterAnimationType.Secondary_Death);
+
+        ClipTransition clipTransition = new ClipTransition();
+        clipTransition.Clip = animationDict[deathAnimationType];
+        clipTransition.Events.OnEnd = () => haltAllAnimations();
+
+        currentIdle = deathAnimationType;
+
+        return clipTransition;
+    }
+
     private ClipTransition createClipTransitionSpecialAnimationThenHide()
     {
         ClipTransition clipTransition = new ClipTransition();
@@ -876,10 +902,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         return clipTransition;
     }
 
-    private CharacterAnimationType getDeathAnimationType()
+    private CharacterAnimationType getDeathAnimationType(CharacterAnimationType deathAnimationType = CharacterAnimationType.Death)
     {
-        CharacterAnimationType deathAnimationType = CharacterAnimationType.Death;
-
         if(CombatStateManager.inCombat)
         {
             if(linkedStats.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
@@ -1190,6 +1214,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
         switch(animationType)
         {
+            case CharacterAnimationType.Secondary_Death:
             case CharacterAnimationType.Death_Front:
             case CharacterAnimationType.Death_Front_Weaponless:
             case CharacterAnimationType.Death_Back:
