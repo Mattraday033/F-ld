@@ -15,25 +15,29 @@ public class CreditScreenManager : MonoBehaviour
         if(!Flags.isInNewGameMode() && thankYouMessage != null)
         {
             thankYouMessage.SetActive(true);
-            StartCoroutine(PlayCreditsMusic());
+            StartCoroutine(playCreditsMusic());
         }
 
         StartCoroutine(ScrollCredits());
     }
 
-    private IEnumerator PlayCreditsMusic()
+    private IEnumerator playCreditsMusic()
     {
-        AudioManager.playNoMusic();
-        AudioManager.playMusicWithoutFade(AudioClipList.winMusic);
+        yield return null;
+        yield return null;
+        yield return null;
 
-        AudioClip winClip = Resources.Load<AudioClip>(AudioClipList.winMusic);
+        AudioManager.playNoMusic();
+        AudioManager.playAudioClipAsSingleton(AudioClipList.winMusic);
+
+        AudioClip winClip = AudioClipList.getAudioClip(AudioClipList.winMusic);
 
         if(winClip != null)
         {
             yield return new WaitForSeconds(winClip.length);
         }
 
-        AudioManager.previousMusicPath = AudioManager.currentMusicPath;
+        AudioManager.previousMusicPath = AudioClipList.winMusic;
         AudioManager.currentMusicPath = AudioClipList.campOverworld;
         AudioManager.addMusicFade();
         MusicFade.OnMusicMidFade.AddListener(LoadCampOverworld);
@@ -44,10 +48,10 @@ public class CreditScreenManager : MonoBehaviour
         AudioManager.playMusicWithoutFade(AudioClipList.campOverworld);
         MusicFade.OnMusicMidFade.RemoveListener(LoadCampOverworld);
     }
-
+ 
     private IEnumerator ScrollCredits()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(9f);
 
         float duration = 15f;
         float elapsed = 0f;

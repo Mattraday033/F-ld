@@ -138,7 +138,7 @@ public static class ColorList
     }
 
     [RuntimeInitializeOnLoadMethod]
-    private static void initializeDictionaries()
+    private static void init()
     {
         rubbleColorDict = new Dictionary<string, Color>();
 
@@ -153,6 +153,7 @@ public static class ColorList
         rubbleColorDict.Add(LocationNameList.slaveShackNine, shackRubbleColor);
 
         rubbleColorDict.Add(LocationNameList.campNorthWest, shackRubbleColor);
+        rubbleColorDict.Add(LocationNameList.bodyPile, shackRubbleColor);
 
         rubbleColorDict.Add(ZoneKeyList.mineLvl1, shackRubbleColor);
 

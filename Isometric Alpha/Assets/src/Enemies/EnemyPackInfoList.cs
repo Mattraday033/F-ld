@@ -219,7 +219,7 @@ public static class EnemyPackInfoList
                                                                                         EnemyAmountList.javelineerPuppets
                                                                                     },
                                                                                     DropTableList.lovashiGuardsDTKey,
-                                                                                    winCon: WinLoseConditionList.surival,
+                                                                                    winCon: WinLoseConditionList.survival,
                                                                                     beforeCombatActions: new List<BeforeCombatAction>() {
                                                                                                                                             () => { CombatGrid.LastEnemyKilled.AddListener(EnvironmentalCombatActionList.addTakacsPuppetWaveSummon); }
                                                                                                                                         },

@@ -29,7 +29,8 @@ public enum EffectAnimationType
     FrontSelector2,
     BackSelector2,
     Bubbles,
-    Splash
+    Splash,
+    Confused
 }
 
 
@@ -38,7 +39,7 @@ public class EffectAnimationManager : AnimationManager
 
     public readonly static UnityEvent<EffectAnimationType> DestroyAllEffectsOfType = new UnityEvent<EffectAnimationType>();
     
-    private EffectAnimationType type;
+    public EffectAnimationType type;
 
     public bool waitBeforeSFX = true;
     public bool playSFX = true;
@@ -124,6 +125,7 @@ public class EffectAnimationManager : AnimationManager
             case EffectAnimationType.BackSelector2:
             case EffectAnimationType.Bubbles:
             case EffectAnimationType.Splash:
+            case EffectAnimationType.Confused:
                 return;
             default:
                 spriteRenderer.material = Resources.Load<Material>(PrefabNames.outlineMaterial);

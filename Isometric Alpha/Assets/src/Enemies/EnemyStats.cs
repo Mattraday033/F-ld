@@ -215,7 +215,7 @@ public class EnemyStats : Stats
                     break;
             }
 
-            AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(animationAudioClipDictionary[animationType]));
+            AudioManager.playAudioClipAsSingleton(AudioClipList.getAudioClip(animationAudioClipDictionary[animationType]));
         } else
         {
             base.playAnimationSFX(animationType);

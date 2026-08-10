@@ -1142,7 +1142,7 @@ public class DialogueManager : MonoBehaviour
                                 targetAnimationManager.playAnimation(CharacterAnimationType.OOC_Wounded_Front);
                                 break;
                         }
-                    }
+                    } 
 
                     continueStory();
 
@@ -1206,9 +1206,46 @@ public class DialogueManager : MonoBehaviour
                     continueStory();
                     break;
 
-                case "setidleofnpcsbyname":
+                case "createstapledeffectbyname":
+                case "createeffectonnpcsbyname":
 
                     string npcName = getArgument(buffer, Constants.indexZero);
+                    effectName = getArgument(buffer, Constants.indexOne);
+
+                    if(Enum.TryParse(effectName, ignoreCase: true, out EffectAnimationType effectType))
+                    {
+                        AnimationManager.CreateEffectByNPCName.Invoke(npcName, effectType);
+                    }
+
+                    continueStory();
+
+                    break;
+
+                case "hideallstapledeffects":
+
+                    AnimationManager.HideAllStapledEffects.Invoke();
+
+                    continueStory();
+
+                    break;
+
+                case "showstapledeffectbyname":
+
+                    npcName = getArgument(buffer, Constants.indexZero);
+                    effectName = getArgument(buffer, Constants.indexOne);
+
+                    if(Enum.TryParse(effectName, ignoreCase: true, out effectType))
+                    {
+                        AnimationManager.ShowStapledEffectByNPCName.Invoke(npcName, effectType);
+                    }
+
+                    continueStory();
+
+                    break;
+
+                case "setidleofnpcsbyname":
+
+                    npcName = getArgument(buffer, Constants.indexZero);
                     string idleName = getArgument(buffer, Constants.indexOne);
 
                     if(Enum.TryParse(idleName, ignoreCase: true, out CharacterAnimationType idleType))
@@ -1657,7 +1694,7 @@ public class DialogueManager : MonoBehaviour
 
                     effectName = getArgument(buffer, Constants.indexZero);
                     
-                    if(Enum.TryParse(effectName, ignoreCase: true, out EffectAnimationType effectType))
+                    if(Enum.TryParse(effectName, ignoreCase: true, out effectType))
                     {
                         EffectAnimationManager.DestroyAllEffectsOfType.Invoke(effectType);
                     }
@@ -2307,7 +2344,7 @@ public class DialogueManager : MonoBehaviour
 			yield return null;
 		}
 
-		AudioClip executionClip = Resources.Load<AudioClip>(AudioClipList.executionSFX);
+		AudioClip executionClip = AudioClipList.getAudioClip(AudioClipList.executionSFX);
 		AudioManager.playExecutionSFX();
 
         foreach(GameObject target in targets)
@@ -2373,7 +2410,7 @@ public class DialogueManager : MonoBehaviour
 
         target.SetActive(false);
 
-		AudioClip whipClip = Resources.Load<AudioClip>(AudioClipList.whipAttackSound);
+		AudioClip whipClip = AudioClipList.getAudioClip(AudioClipList.whipAttackSound);
 
 		for (int i = 0; i < 4; i++)
 		{

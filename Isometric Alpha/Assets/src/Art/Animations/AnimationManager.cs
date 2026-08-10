@@ -92,10 +92,15 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public readonly static UnityEvent<string, CharacterAnimationType> SetIdleByNPCName = new UnityEvent<string, CharacterAnimationType>();
     public readonly static UnityEvent<string, CharacterAnimationType> PlayAnimationByNPCName = new UnityEvent<string, CharacterAnimationType>();
+    public readonly static UnityEvent<string, EffectAnimationType> CreateEffectByNPCName = new UnityEvent<string, EffectAnimationType>();
+    public readonly static UnityEngine.Events.UnityEvent HideAllStapledEffects = new UnityEngine.Events.UnityEvent();
+    public readonly static UnityEvent<string, EffectAnimationType> ShowStapledEffectByNPCName = new UnityEvent<string, EffectAnimationType>();
 
     public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
 
     public NamedAnimancerComponent animancer;
+
+    private List<EffectAnimationManager> stapledEffects = new List<EffectAnimationManager>();
 
     #region HeartBeatListener
 
@@ -150,6 +155,45 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                     playAttackFrontAnimation();
                     break;
             }     
+        }
+    }
+
+    public void showStapledEffect(string npcName, EffectAnimationType effectType)
+    {
+        if(!this.npcName.Equals(npcName))
+        {
+            return;
+        }
+
+        foreach(EffectAnimationManager effect in stapledEffects)
+        {
+            if(effect != null && effect.type == effectType)
+            {
+                effect.spriteRenderer.color = Color.white;
+            }
+        }
+    }
+
+    public void hideAllStapledEffects()
+    {
+        foreach(EffectAnimationManager effect in stapledEffects)
+        {
+            effect.spriteRenderer.color = Color.clear;
+        }
+    }
+
+    public void createEffectByNPCName(string npcName, EffectAnimationType effectType)
+    {
+        if(this.npcName.Equals(npcName))
+        {
+            EffectAnimationManager effect = Instantiate(Resources.Load<GameObject>(PrefabNames.effect), transform).GetComponent<EffectAnimationManager>();
+
+            effect.transform.localPosition = Vector3.zero;
+
+            effect.loops = true;
+            effect.setAnimations(effectType);
+
+            stapledEffects.Add(effect);
         }
     }
 
@@ -210,6 +254,10 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         // CombatTraitColliderDisabler.OnCombatTraitHoverExit.RemoveListener(enablePolygonCollider);
         SetIdleByNPCName.RemoveListener(setCurrentIdle);
         PlayAnimationByNPCName.RemoveListener(playAnimationByNPCName);
+
+        HideAllStapledEffects.RemoveListener(hideAllStapledEffects);
+        CreateEffectByNPCName.RemoveListener(createEffectByNPCName);
+        ShowStapledEffectByNPCName.RemoveListener(showStapledEffect);
     }
 
     private void disablePolygonCollider()
@@ -330,6 +378,10 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         // CombatTraitColliderDisabler.OnCombatTraitHoverExit.AddListener(enablePolygonCollider);
         SetIdleByNPCName.AddListener(setCurrentIdle);
         PlayAnimationByNPCName.AddListener(playAnimationByNPCName);
+
+        HideAllStapledEffects.AddListener(hideAllStapledEffects);
+        CreateEffectByNPCName.AddListener(createEffectByNPCName);
+        ShowStapledEffectByNPCName.AddListener(showStapledEffect);
 
         setToDefaultIdle();
     }

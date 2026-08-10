@@ -36,8 +36,8 @@ public static class WinLoseConditionList
         "Defeat all Master Creatures to Win. Minion/Summoned Creatures will flee after the last Master Creature is defeated."
     );
 
-    public readonly static WavesWinCondition surival = new WavesWinCondition(
-        Constants.sizeOne,
+    public readonly static WavesWinCondition survival = new WavesWinCondition(
+        Constants.sizeThree,
         IconList.waves,
         winBehaviour: takacsCutScene,
         lossBehaviour: takacsCutScene

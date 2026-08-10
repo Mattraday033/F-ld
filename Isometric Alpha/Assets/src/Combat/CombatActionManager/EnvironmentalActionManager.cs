@@ -161,8 +161,8 @@ public static class EnvironmentalCombatActionList
     private static SummonAbility prepareSummonWaveAbility(string key, int row)
     {
         SummonAbility summonAbility = AbilityList.getAbility(EnemyStatsList.getEnemyStats(NPCNameList.takacs), key) as SummonAbility;
-        Selector summonSelector = SelectorList.getByName(SelectorList.horizontalThreeName);
-        summonSelector.setToLocation(new GridCoords(row,1));
+        Selector summonSelector = SelectorList.getByName(SelectorList.horizontalThreeName).clone();
+        summonSelector.setToLocation(new GridCoords(row,0));
         summonAbility.setSelector(summonSelector);
 
         return summonAbility;

@@ -332,7 +332,7 @@ public class AudioManager : MonoBehaviour
 
     private static void loadAndPlayClip(AudioSource source, string clipPath, VolumeType type)
     {
-        source.clip = Resources.Load<AudioClip>(clipPath);
+        source.clip = AudioClipList.getAudioClip(clipPath);
         source.volume = getVolumeByType(type);
         source.Play();
     }
@@ -409,7 +409,7 @@ public class AudioManager : MonoBehaviour
 
         int soundEffectNumber = Random.Range(Constants.indexOne, highestFootStepSFX + 1);
 
-        AudioClip footstepClip = Resources.Load<AudioClip>(footstepSFXFolderPath + soundEffectNumber);
+        AudioClip footstepClip = AudioClipList.getAudioClip(footstepSFXFolderPath + soundEffectNumber);
 
         if(footstepClip != null)
         {
@@ -442,7 +442,7 @@ public class AudioManager : MonoBehaviour
 
             if(timeWaited >= HeartBeatManager.fastBeatLengthSeconds*1.5f)
             {
-                AudioClip currentClip = Resources.Load<AudioClip>(audioClipPathQueue[0].Key);
+                AudioClip currentClip = AudioClipList.getAudioClip(audioClipPathQueue[0].Key);
 
                 instance.StartCoroutine(playQueuedAudioClip(currentClip, audioClipPathQueue[0].Value));
                 audioClipPathQueue.RemoveAt(0);
@@ -502,7 +502,7 @@ public class AudioManager : MonoBehaviour
 
     public static void playAudioClipAsSingleton(string clipPath, VolumeType type = VolumeType.SFX)
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(clipPath), type);
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(clipPath), type);
     }
 
     public static void playAudioClipAsSingleton(AudioClip clip, VolumeType type = VolumeType.SFX)
@@ -536,7 +536,7 @@ public class AudioManager : MonoBehaviour
 
         currentAmbiencePath = clipPath;
         instance.ambienceSource.volume = sfxVolumePlayerSetting * .6f;
-        instance.ambienceSource.clip = Resources.Load<AudioClip>(clipPath);
+        instance.ambienceSource.clip = AudioClipList.getAudioClip(clipPath);
         instance.ambienceSource.Play();
     }
 
@@ -590,60 +590,60 @@ public class AudioManager : MonoBehaviour
 
     public static void playExecutionSFX()
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.executionSFX));
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(AudioClipList.executionSFX));
     }
 
     public static void playCoinSFX()
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.coinSFXPrefix + 
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(AudioClipList.coinSFXPrefix + 
                 Random.Range(Constants.indexOne, AudioClipList.coinSFXCount + 1)));
     }
 
     public static void playWeaponChangeSFX()
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.weaponPrefix + 
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(AudioClipList.weaponPrefix + 
                 Random.Range(Constants.indexOne, AudioClipList.weaponSFXCount + 1)));
     }
 
     public static void playSelectorMovedSFX()
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.moveSelectorSFX));
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(AudioClipList.moveSelectorSFX));
     }
 
     public static void playChangeSelectedActionFX()
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.changeSelectedActionSFX));
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(AudioClipList.changeSelectedActionSFX));
     }
 
     public static void playChooseActorAbilityLocationSFX()
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.chooseActorAbilityLocationSFX));
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(AudioClipList.chooseActorAbilityLocationSFX));
     }
 
     public static void playCannotChooseActorAbilityLocationSFX()
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.cannotChooseActorAbilityLocationSFX));
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(AudioClipList.cannotChooseActorAbilityLocationSFX));
     }
 
     public static void playChangeScreenSFX()
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.changeScreenSFXPrefix + 
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(AudioClipList.changeScreenSFXPrefix + 
                                  Random.Range(Constants.indexOne, AudioClipList.changeScreenSFXCount + 1)));
     }
 
     public static void playOnTransitionSFX()
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.onTransitionSFX));
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(AudioClipList.onTransitionSFX));
     }
 
     public static void playWhipSFX()
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.whipAttackSound));
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(AudioClipList.whipAttackSound));
     }
 
     public static void playPlacePartyMemberSFX()
     {
-        playAudioClipAsSingleton(Resources.Load<AudioClip>(AudioClipList.placePartyMemberSFX));
+        playAudioClipAsSingleton(AudioClipList.getAudioClip(AudioClipList.placePartyMemberSFX));
     }
 
     public static void playSmokebombSFX()
@@ -701,7 +701,7 @@ public class AudioManager : MonoBehaviour
     #endregion
 
     [RuntimeInitializeOnLoadMethod]
-    private static void instantiateAudioManager()
+    private static void init()
     {
         instance = null;
         previousMusicPath = "";
@@ -729,7 +729,13 @@ public enum FootStepType { Dirt, Cave, WoodFloor }
 
 public static class AudioClipList
 {
-    public const string audioFolderPath = "Audio/";
+
+    private readonly static Dictionary<string, AudioClip> audioClipDict = new Dictionary<string, AudioClip>();
+
+    public const string audioFolderName = "Audio";
+    public const string audioFolderPath = audioFolderName + Constants.seperatorChar;
+
+    private const string resourcesFolderName = "Resources" + Constants.seperatorChar;
 
     public const string musicFolderPath = audioFolderPath + "Music/";
 
@@ -870,12 +876,12 @@ public static class AudioClipList
     public const string eatingSFXFolder = itemsSFXFolder + "Eating/";
     public const string eatingSFXPrefix = eatingSFXFolder + "Eating";
     public const int eatingSFXCount = 6;
-    public readonly static PlaySFXLogic playEatingSFX = () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(eatingSFXPrefix + Random.Range(Constants.indexOne, eatingSFXCount + 1)));
+    public readonly static PlaySFXLogic playEatingSFX = () => AudioManager.playAudioClipAsSingleton(getAudioClip(eatingSFXPrefix + Random.Range(Constants.indexOne, eatingSFXCount + 1)));
 
 
     public const string drinkingSFXFolder = itemsSFXFolder + "Drinking/";
     public const string sipSFX = drinkingSFXFolder + "Sip";
-    public readonly static PlaySFXLogic playSipSFX = () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(sipSFX));
+    public readonly static PlaySFXLogic playSipSFX = () => AudioManager.playAudioClipAsSingleton(getAudioClip(sipSFX));
 
     #endregion
 
@@ -900,17 +906,28 @@ public static class AudioClipList
     public const string rockIntroSFX = objectsDialogueSFXFolder + "Rock" + dialogueIntroPrefix;
     public const string gateIntroSFX = objectsDialogueSFXFolder + "Gate" + dialogueIntroPrefix;
 
-    public readonly static PlaySFXLogic playEatingRockCakeSFX = () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(rockIntroSFX));
+    public readonly static PlaySFXLogic playEatingRockCakeSFX = () => AudioManager.playAudioClipAsSingleton(getAudioClip(rockIntroSFX));
 
     public const string sleepingDialogueSFXFolder = dialogueSFXFolder + "Sleeping/";
 
     public const string snoringDialogueSFX = sleepingDialogueSFXFolder + "Snoring";
 
+
+    public static AudioClip getAudioClip(string audioClipPath)
+    {
+        if(!audioClipDict.ContainsKey(audioClipPath))
+        {
+            audioClipDict[audioClipPath] = Resources.Load<AudioClip>(audioClipPath);
+        }
+
+        return audioClipDict[audioClipPath];
+    }
+
     public static PlaySFXLogic getDialogueIntroSFXLogic(string npcName, bool sleeping = false)
     {
         if(sleeping)
         {
-            return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(snoringDialogueSFX), VolumeType.Voice);
+            return () => AudioManager.playAudioClipAsSingleton(getAudioClip(snoringDialogueSFX), VolumeType.Voice);
         }
 
         switch(DialogueList.scrubNameOfEndNumbers(npcName))
@@ -924,7 +941,7 @@ public static class AudioClipList
             case NPCNameList.vaultableBarrels:
             case NPCNameList.hastilyBuiltBarricade:
             case NPCNameList.suspiciousShelf:
-                return () =>  AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(crateIntroSFX), VolumeType.Voice);
+                return () =>  AudioManager.playAudioClipAsSingleton(getAudioClip(crateIntroSFX), VolumeType.Voice);
             case NPCNameList.barracksGate:
             case NPCNameList.manseFrontDoor:
             case NPCNameList.manseServiceEntrance:
@@ -933,7 +950,7 @@ public static class AudioClipList
             case NPCNameList.ancientPortcullis:
             case NPCNameList.campGate:
             case NPCNameList.mineArmoryGate:
-                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(gateIntroSFX), VolumeType.Voice);
+                return () => AudioManager.playAudioClipAsSingleton(getAudioClip(gateIntroSFX), VolumeType.Voice);
             case NPCNameList.rubble:
             case NPCNameList.awkwardRubble:
             case NPCNameList.liftableRubble:
@@ -944,15 +961,15 @@ public static class AudioClipList
             case NPCNameList.toppledStatue:
             case NPCNameList.vaultableGap:
             case ItemSpriteList.rockCakeSprite:
-                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(rockIntroSFX), VolumeType.Voice);
+                return () => AudioManager.playAudioClipAsSingleton(getAudioClip(rockIntroSFX), VolumeType.Voice);
             case NPCNameList.slate:
                 return () => { };
             case NPCNameList.csalan:
             case NPCNameList.horse:
-                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(horseIntroSFX), VolumeType.Voice);
+                return () => AudioManager.playAudioClipAsSingleton(getAudioClip(horseIntroSFX), VolumeType.Voice);
             case NPCNameList.controlPanel:  
             case NPCNameList.leafPile:
-                return () => AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(onTransitionSFX), VolumeType.Voice);     
+                return () => AudioManager.playAudioClipAsSingleton(getAudioClip(onTransitionSFX), VolumeType.Voice);     
             case NPCNameList.captainAdela:
             case NPCNameList.guardVirag:
             case NPCNameList.guardReka:
@@ -961,7 +978,7 @@ public static class AudioClipList
             case NPCNameList.page:
                 return () =>
                 {
-                    AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanFemaleDialogueSFXFolder + dialogueIntroPrefix +
+                    AudioManager.playAudioClipAsSingleton(getAudioClip(humanFemaleDialogueSFXFolder + dialogueIntroPrefix +
                                  Random.Range(Constants.indexOne, humanFemaleIntroCount + 1)), VolumeType.Voice);
                 };
             case NPCNameList.brush:
@@ -970,11 +987,11 @@ public static class AudioClipList
                     if(AreaManager.locationName.Equals(LocationNameList.slaveShackTwo))
                     {
                         return;
-                        // AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(snoringDialogueSFX), VolumeType.Voice);
+                        // AudioManager.playAudioClipAsSingleton(getAudioClip(snoringDialogueSFX), VolumeType.Voice);
                     } else
                     {
                         
-                        AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
+                        AudioManager.playAudioClipAsSingleton(getAudioClip(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
                                  Random.Range(Constants.indexOne, humanMaleIntroCount + 1)), VolumeType.Voice);
                     }
                 };
@@ -986,13 +1003,13 @@ public static class AudioClipList
                         return;
                     } 
                         
-                    AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
+                    AudioManager.playAudioClipAsSingleton(getAudioClip(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
                                  Random.Range(Constants.indexOne, humanMaleIntroCount + 1)), VolumeType.Voice);
                 };
             default:
                 return () =>
                 {
-                    AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
+                    AudioManager.playAudioClipAsSingleton(getAudioClip(humanMaleDialogueSFXFolder + dialogueIntroPrefix +
                                  Random.Range(Constants.indexOne, humanMaleIntroCount + 1)), VolumeType.Voice);
                 };
         }

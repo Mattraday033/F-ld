@@ -383,7 +383,7 @@ setNPCFacing({weftIndex},SW)
 
 changeCamTarget({weftIndex})
 
-I'd be a liar if I said I was broken-hearted but... that's a rough way to go out for anyone.
+I'd be a liar if I said I was broken-hearted but... that's a hard way to go out for anyone.
 
 {
 -partyFlagThatch:

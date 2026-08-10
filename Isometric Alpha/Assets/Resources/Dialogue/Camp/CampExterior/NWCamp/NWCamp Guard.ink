@@ -143,19 +143,22 @@ movePlayerPos(-15,0)
 setFacing(NE)
 setNPCFacing({guardIndex},SW)
 
+createEffectOnNPCsByName(Guard3,Confused)
+createEffectOnNPCsByName(Guard4,Confused)
+createEffectOnNPCsByName(Director,Confused)
+hideAllStapledEffects()
+
 fadeBackIn(60)
 
 Speak yer business, branded.
 
     +The Director gave me orders to report here. I'm to be pardoned.
-    
-        ->jumpInPit
-// {
-// -gasparBroughtToExecution:
-//     ->3a
-// -else:
-//     ->2a
-// }
+        {
+        -gasparBroughtToExecution:
+            ->3a
+        -else:
+            ->2a
+        }
 
 === 2a ===
 
@@ -427,7 +430,14 @@ I watched as the fires rose over Carnassus, and your fathers toppled the great s
 
 Over this long life, I have witnessed our traditions of honor, loyalty, and strength earn us lands and trophies at great cost. Over the many cycles of war and peace, I have had cause to wonder if the cost we paid was not simply in blood and kin, but whether those very values we held in such regard were hidden within the final tally when the bill came due.
 
+
+disableDialogueUI()
+
 createEffect(SmokeBomb,-7,14)
+wait(.25)
+showStapledEffectByName(Director,Confused)
+wait(1.8)
+enableDialogueUI()
 
 \*The Director pauses for a moment in thought.*
 
@@ -462,6 +472,8 @@ wait(0.4)
 createEffect(SmokeBomb,-5,10)
 wait(0.4)
 createEffect(SmokeBomb,-10,6)
+showStapledEffectByName(Guard3,Confused)
+showStapledEffectByName(Guard4,Confused)
 wait(0.4)
 createEffect(SmokeBomb,-8,9)
 wait(0.4)

@@ -287,7 +287,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
             return;
         }
         
-        AudioManager.playAudioClipAsSingleton(Resources.Load<AudioClip>(animationAudioClipDictionary[animationType]));
+        AudioManager.playAudioClipAsSingleton(AudioClipList.getAudioClip(animationAudioClipDictionary[animationType]));
     }
 
     #endregion
