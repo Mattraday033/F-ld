@@ -11,6 +11,11 @@ public class OpeningMonologueManager : MonoBehaviour
     // public GameObject skipPrompt;
     // public TextMeshProUGUI skipPromptText;
 
+    public List<Image> openingMonologueImages;
+    private int monologueImageGroupIndex = 0;
+    private int monologueImageIndex = 0;
+
+
     public TextMeshProUGUI continuePromptText;
 
     public Image artPanel;
@@ -31,26 +36,6 @@ public class OpeningMonologueManager : MonoBehaviour
 
         StartCoroutine(FadeQuote());
     }
-
-    // void Update()
-    // {
-    //     if(!canExit)
-    //     {
-    //         return;
-    //     }
-
-    //     if(KeyBindingList.continueUIKeyIsPressed() || KeyBindingList.settingsScreenOrBackKeyPressed())
-    //     {
-    //         SceneChange.changeSceneToOverworldWithLoadingScreen();
-    //         return;
-    //     } 
-
-    //     // if(Input.anyKeyDown && !skipPrompt.activeSelf)
-    //     // {
-    //     //     skipPrompt.SetActive(true);
-    //     //     return;
-    //     // } 
-    // }
 
     private IEnumerator FadeQuote()
     {
@@ -101,13 +86,15 @@ public class OpeningMonologueManager : MonoBehaviour
     }
 
     private const float letterInterval = .03f;
-    private const float newlineInterval = .68f;
+    private const float newlineInterval = 1f;
 
     // Feeds each page of the opening monologue to the scroll text box in turn.
     // Each page reveals one letter at a time; a spacebar press advances to the
     // next page once the current page has been fully shown.
     private IEnumerator FeedPages()
     {
+        setUpNextMonologueImageGroup();
+
         yield return StartCoroutine(FeedCenteredThenScroll(openingTextFirstPageCentered, openingTextFirstPageLeftAligned));
         yield return StartCoroutine(WaitForSpacePress());
 
@@ -145,9 +132,16 @@ public class OpeningMonologueManager : MonoBehaviour
         int totalVisible = scrollText.textInfo.characterCount;
         int visible = 0;
 
+        bool revealImage = true;
+
         while (visible < totalVisible)
         {
             KeyPressManager.updateKeyBools();
+
+            if(revealImage)
+            {
+                revealNextImage();
+            }
 
             visible++;
             scrollText.maxVisibleCharacters = visible;
@@ -157,12 +151,15 @@ public class OpeningMonologueManager : MonoBehaviour
                 ? newlineInterval
                 : letterInterval;
 
+            revealImage = shouldRevealNextImageAfterLineBreak(scrollText.textInfo.characterInfo, visible);
+
             float elapsed = 0f;
             while (elapsed < interval)
             {
                 if (Input.GetKeyDown(KeyCode.Space) && !KeyPressManager.handlingPrimaryKeyPress)
                 {
                     scrollText.maxVisibleCharacters = totalVisible;
+                    setAllImagesToVisible();
                     KeyPressManager.handlingPrimaryKeyPress = true;
                     yield break;
                 }
@@ -190,9 +187,17 @@ public class OpeningMonologueManager : MonoBehaviour
         int scrollTotal = scrollText.textInfo.characterCount;
 
         int visible = 0;
+
+        bool revealImage = true;
+
         while (visible < centeredTotal)
         {
             KeyPressManager.updateKeyBools();
+
+            if(revealImage)
+            {
+                revealNextImage();
+            }
 
             visible++;
             centeredText.maxVisibleCharacters = visible;
@@ -202,6 +207,8 @@ public class OpeningMonologueManager : MonoBehaviour
                 ? newlineInterval
                 : letterInterval;
 
+            revealImage = shouldRevealNextImageAfterLineBreak(centeredText.textInfo.characterInfo, visible);
+
             float elapsed = 0f;
             while (elapsed < interval)
             {
@@ -209,6 +216,7 @@ public class OpeningMonologueManager : MonoBehaviour
                 {
                     centeredText.maxVisibleCharacters = centeredTotal;
                     scrollText.maxVisibleCharacters = scrollTotal;
+                    setAllImagesToVisible();
                     KeyPressManager.handlingPrimaryKeyPress = true;
                     yield break;
                 }
@@ -223,6 +231,11 @@ public class OpeningMonologueManager : MonoBehaviour
         {
             KeyPressManager.updateKeyBools();
 
+            if(revealImage)
+            {
+                revealNextImage();
+            }
+
             visible++;
             scrollText.maxVisibleCharacters = visible;
 
@@ -231,6 +244,8 @@ public class OpeningMonologueManager : MonoBehaviour
                 ? newlineInterval
                 : letterInterval;
 
+            revealImage = shouldRevealNextImageAfterLineBreak(scrollText.textInfo.characterInfo, visible);
+
             float elapsed = 0f;
             while (elapsed < interval)
             {
@@ -238,12 +253,27 @@ public class OpeningMonologueManager : MonoBehaviour
                 {
                     centeredText.maxVisibleCharacters = centeredTotal;
                     scrollText.maxVisibleCharacters = scrollTotal;
+                    setAllImagesToVisible();
                     KeyPressManager.handlingPrimaryKeyPress = true;
                     yield break;
                 }
 
                 elapsed += Time.deltaTime;
                 yield return null;
+            }
+        }
+    }
+
+    private void setAllImagesToVisible()
+    {
+        foreach(Image image in openingMonologueImages)
+        {
+            if(image.sprite != null)
+            {
+                image.color = Color.black;
+            } else
+            {
+                image.color = Color.clear;
             }
         }
     }
@@ -265,8 +295,71 @@ public class OpeningMonologueManager : MonoBehaviour
 
         KeyPressManager.handlingPrimaryKeyPress = true;
 
+        setUpNextMonologueImageGroup();
+
         StopCoroutine(pulse);
         continuePromptText.color = promptColor;
+    }
+
+    private bool shouldRevealNextImageAfterLineBreak(TMP_CharacterInfo[] charInfo, int visible)
+    {
+        return visible > 0 && visible < charInfo.Length &&
+                charInfo[visible - 1].character == '\n' &&
+                charInfo[visible].character != '\n';
+    }
+
+    private void setUpNextMonologueImageGroup()
+    {
+        if(monologueImageGroupIndex >= PrefabNames.openingMonologueSlideGroups.Length)
+        {
+            return;
+        }
+
+        for(int i = 0; i < openingMonologueImages.Count; i++)
+        {
+            if(i < PrefabNames.openingMonologueSlideGroups[monologueImageGroupIndex].Length)
+            {
+                openingMonologueImages[i].sprite = Helpers.loadSpriteFromResources(PrefabNames.openingMonologueSlideGroups[monologueImageGroupIndex][i]);
+            } else
+            {
+                openingMonologueImages[i].sprite = null;
+            }
+
+            openingMonologueImages[i].color = Color.clear;
+        }
+
+        monologueImageIndex = 0;
+        monologueImageGroupIndex++;
+    }
+
+    private void revealNextImage()
+    {
+        if(monologueImageIndex < openingMonologueImages.Count && 
+            openingMonologueImages[monologueImageIndex].sprite != null)
+        {
+            StartCoroutine(revealImage(openingMonologueImages[monologueImageIndex]));
+        }
+
+        monologueImageIndex++;
+    }
+
+    private IEnumerator revealImage(Image image)
+    {
+        float elapsed = 0f;
+        float timeToWait = 1.25f;
+
+        while (elapsed < timeToWait)
+        {
+            if(image.color.Equals(Color.black))
+            {
+                yield break;
+            }
+
+            image.color = Color.Lerp(Color.clear, Color.black, elapsed/timeToWait);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
     }
 
     // Pulses continuePromptText from its current color up to the scroll text's
@@ -300,7 +393,7 @@ public class OpeningMonologueManager : MonoBehaviour
                                         "Far away, and a generation ago, these last Craft Kingdoms rallied and won a great victory, putting the Rider Lords to route.\n\n" + 
                                         "Ever since, the Confederation has maintained an uneasy truce with the remnants of the free Craft Folk, and have turned their attentions inwards.";
     private const string openingTextFourthPage = "The current era is one choked with purges and crushed revolts, as the Lovashi make ready to resume their march.\n\n" + 
-                                            "Great fields have been sewn. Grain reaped and stockpiled. Weapons battered into form. Monuments raised to their Beast god.\n\n" + 
+                                            "Great fields have been sewn. Grain reaped and stockpiled.\n\nWeapons battered into form.\n\nMonuments raised to their Beast god.\n\n" + 
                                             "All by the industry of your people's unwilling hands.";
 
     private const string openingTextFifthPage = "Any of your fellows that resisted their domitors have been given <nobr>\"the brand\":</nobr> a mark inflicted by applying a burning metal collar to the victim’s neck.\n\n" + 

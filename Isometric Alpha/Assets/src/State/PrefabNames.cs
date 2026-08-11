@@ -231,12 +231,46 @@ public static class PrefabNames
     public const string UIComponentsFolder = UIFolder + "Components/";
     public const string costIcon = UIComponentsFolder + "Cost Icon";
 
-    public const string openingMonologueFolder = "";
-    public const string openingMonologueArt1 = "Art 1";
-    public const string openingMonologueArt2 = "Art 2";
-    public const string openingMonologueArt3 = "Art 3";
-    public const string openingMonologueArt4 = "Art 4";
-    public const string openingMonologueArt5 = "Art 5";
+    #region Opening Monologue
+
+    //Assets/Resources/UI/Opening Monologue/Slide 1.1.png
+    public const string openingMonologueFolder = UIFolder + "Opening Monologue/";
+    private const string slidePrefix = "Slide ";
+
+    private const string skipSlide = "";
+
+    public const string openingMonologueSlide1_1 = openingMonologueFolder + slidePrefix + "1.1";
+    public const string openingMonologueSlide1_2 = openingMonologueFolder + slidePrefix + "1.2";
+    public const string openingMonologueSlide1_3 = openingMonologueFolder + slidePrefix + "1.3";
+
+    public const string openingMonologueSlide2_1 = openingMonologueFolder + slidePrefix + "2.1";
+    public const string openingMonologueSlide2_2 = openingMonologueFolder + slidePrefix + "2.2";
+    public const string openingMonologueSlide2_3 = openingMonologueFolder + slidePrefix + "2.3";
+    
+    public const string openingMonologueSlide3_1 = openingMonologueFolder + slidePrefix + "3.1";
+    public const string openingMonologueSlide3_2 = openingMonologueFolder + slidePrefix + "3.2";
+    
+    public const string openingMonologueSlide4_1 = openingMonologueFolder + slidePrefix + "4.1";
+    public const string openingMonologueSlide4_2 = openingMonologueFolder + slidePrefix + "4.2";
+    public const string openingMonologueSlide4_3 = openingMonologueFolder + slidePrefix + "4.3";
+    public const string openingMonologueSlide4_4 = openingMonologueFolder + slidePrefix + "4.4";
+
+    public const string openingMonologueSlide5 = openingMonologueFolder + slidePrefix + "5";
+    public const string openingMonologueSlide6 = openingMonologueFolder + slidePrefix + "6";
+    public const string openingMonologueSlide7 = openingMonologueFolder + slidePrefix + "7";
+    
+    public readonly static string[][] openingMonologueSlideGroups =
+                                        new string[][]  {   
+                                                            new string[]{ openingMonologueSlide1_1, openingMonologueSlide1_2, openingMonologueSlide1_3 },
+                                                            new string[]{ openingMonologueSlide2_1, openingMonologueSlide2_2, openingMonologueSlide2_3 },
+                                                            new string[]{ openingMonologueSlide3_1,  skipSlide, openingMonologueSlide3_2},
+                                                            new string[]{ openingMonologueSlide4_1, openingMonologueSlide4_2, openingMonologueSlide4_3, openingMonologueSlide4_4 },
+                                                            new string[]{ openingMonologueSlide5 },
+                                                            new string[]{ openingMonologueSlide6 },
+                                                            new string[]{ openingMonologueSlide7 }
+                                                        };
+
+    #endregion
 
     #endregion
 
