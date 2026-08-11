@@ -78,7 +78,10 @@ VAR broughtMarcosToGaspar = false
 VAR skippedTutorialInNWCamp = false
 VAR finishedTaborObservationTutorial = false
 
+//coming from different ink file
 VAR justSavedDibber = false
+//saved dibber at all 
+VAR savedDibber = false
 
 VAR hadWeftTrustConvo = false
 VAR knowsWeftStartedFire = false
@@ -1183,54 +1186,57 @@ The two of you appear capable enough as a team, and I am thankful to you both fo
 
 === kastorBackstory_Entrance ===
 I can answer your questions, if you ask them quickly.
-    ->kastorBackstory_Hub
+    ->kastorBackstory_Hub(->2f)
 
-=== kastorBackstory_Hub ===
+=== kastorBackstory_Hub(->returnDivert) ===
 
 {
 -savedDibber:
     +Who taught you medicine?
-        ->kastorBackstory_MedicineTeacher_1a
+        ->kastorBackstory_MedicineTeacher_1a(returnDivert)
 }
 
+    +I have no more questions
+        ->returnDivert
 
-=== kastorBackstory_MedicineTeacher_1a ===
+
+=== kastorBackstory_MedicineTeacher_1a(->returnDivert) ===
 
 I was a medic in Count Kálnoky's levies. His is the youngest County, so there was always some fire that needed smothering.
 
 The pay was good, but that was about the only part of the job worth praising. The rest was bloody, tireless, thankless work.
 
-->kastorBackstory_MedicineTeacher_1aa
+->kastorBackstory_MedicineTeacher_1aa(returnDivert)
 
-=== kastorBackstory_MedicineTeacher_1aa ===
+=== kastorBackstory_MedicineTeacher_1aa(->returnDivert) ===
 
     +You fought for the Lovashi? 
-        ->kastorBackstory_MedicineTeacher_1b
+        ->kastorBackstory_MedicineTeacher_1b(returnDivert)
     +I'm surprised to hear a Count described as generous with his wages.
-        ->kastorBackstory_MedicineTeacher_1c
+        ->kastorBackstory_MedicineTeacher_1c(returnDivert)
     +If you were once a medic, how did you earn your brand?
-        ->kastorBackstory_MedicineTeacher_1d
+        ->kastorBackstory_MedicineTeacher_1d(returnDivert)
     +Let's discuss something else.
         What did you have in mind?
-        ->kastorBackstory_Hub
+        ->kastorBackstory_Hub(returnDivert)
 
-=== kastorBackstory_MedicineTeacher_1b ===
+=== kastorBackstory_MedicineTeacher_1b(->returnDivert) ===
 
 Aye, that I did. Don't look so disgusted: I was a medic, remember? I patched up conscript and mutineer alike. Though of course, the rebels I saved from death's chilly vice would all end up branded in the end.
 
 Now that I personally know the fate that awaited them, I wonder if it would have been the greater mercy to have let them succumb instead.
 
-    ->kastorBackstory_MedicineTeacher_1aa
+    ->kastorBackstory_MedicineTeacher_1aa(returnDivert)
 
-=== kastorBackstory_MedicineTeacher_1c ===
+=== kastorBackstory_MedicineTeacher_1c(->returnDivert) ===
 
 I expect they all are. They have to be, really, for as little esteem they hold for their levies their levies hold even less for them. 
 
 Each raised host is always one missed pay away from revolt themselves, so without the promise of a mountain of lucre the entire enterprise would collapse.
 
-    ->kastorBackstory_MedicineTeacher_1aa
+    ->kastorBackstory_MedicineTeacher_1aa(returnDivert)
 
-=== kastorBackstory_MedicineTeacher_1d ===
+=== kastorBackstory_MedicineTeacher_1d(->returnDivert) ===
 
 \*Kastor hesitates for a moment.* If we're going to be fighting the Lovashi together, then I might as well tell you. Just mind that it's not something I'm proud of.
 
@@ -1246,18 +1252,18 @@ The rest you experienced yourself: the captain needed little support to have me 
 
     +I'm glad your healer's training doesn't prevent you from killing Lovashi.
         When the time comes I will do my part, though I may be of more use to our movement by staying behind with the wounded.
-        ->kastorBackstory_Hub
+        ->kastorBackstory_Hub(returnDivert)
     +Duty means little to you, it seems.
         \*Kastor looks uncomfortable.* Does a levy have a duty to his lord, when his oaths are taken at the point of a spear? Or perhaps you mean my duty as a healer to my patient, which I should have performed over my duty to his victims?
 
         You come quickly to an answer I have not found, despite the magnitudes of difference in our time spent seeking it. Just don't let that answer get in the way of our duties to our fellow conspirators.
-        ->kastorBackstory_Hub
+        ->kastorBackstory_Hub(returnDivert)
     +It would be unfair for me to judge. I wasn't there, after all.
         I appreciate such a response. I was there, and still I find it difficult to keep an even head about it.
-        ->kastorBackstory_Hub
+        ->kastorBackstory_Hub(returnDivert)
     +You disgust me. One lordling doesn't make up for the Craft Folk you've killed.
         \*Kastor's eyes harden.* No, it does not.
-        ->kastorBackstory_Hub
+        ->kastorBackstory_Hub(returnDivert)
 
 === 2f ===
 ~explainingPlan = true
