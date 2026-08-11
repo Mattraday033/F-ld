@@ -1169,7 +1169,95 @@ fadeBackIn(60)
 
 The two of you appear capable enough as a team, and I am thankful to you both for helping me save Dibber. His faculties haven't returned to him yet, but I know he would express his gratitude to you if he could.
 
-    ->2f
+    +You appear to be an experienced healer. I'm curious how that came to be.
+        ->kastorBackstory_Entrance
+    +He is most welcome.
+        ->2f
+    +I don't require the gratitude of a liability like him.
+        For now he may be disabled, but should he recover he will be a willing ally. We're going to need all the help we can get when the fighting starts.
+        ->2f
+    +\*Say nothing.*
+        ->2f
+
+
+
+=== kastorBackstory_Entrance ===
+I can answer your questions, if you ask them quickly.
+    ->kastorBackstory_Hub
+
+=== kastorBackstory_Hub ===
+
+{
+-savedDibber:
+    +Who taught you medicine?
+        ->kastorBackstory_MedicineTeacher_1a
+}
+
+
+=== kastorBackstory_MedicineTeacher_1a ===
+
+I was a medic in Count Kálnoky's levies. His is the youngest County, so there was always some fire that needed smothering.
+
+The pay was good, but that was about the only part of the job worth praising. The rest was bloody, tireless, thankless work.
+
+->kastorBackstory_MedicineTeacher_1aa
+
+=== kastorBackstory_MedicineTeacher_1aa ===
+
+    +You fought for the Lovashi? 
+        ->kastorBackstory_MedicineTeacher_1b
+    +I'm surprised to hear a Count described as generous with his wages.
+        ->kastorBackstory_MedicineTeacher_1c
+    +If you were once a medic, how did you earn your brand?
+        ->kastorBackstory_MedicineTeacher_1d
+    +Let's discuss something else.
+        What did you have in mind?
+        ->kastorBackstory_Hub
+
+=== kastorBackstory_MedicineTeacher_1b ===
+
+Aye, that I did. Don't look so disgusted: I was a medic, remember? I patched up conscript and mutineer alike. Though of course, the rebels I saved from death's chilly vice would all end up branded in the end.
+
+Now that I personally know the fate that awaited them, I wonder if it would have been the greater mercy to have let them succumb instead.
+
+    ->kastorBackstory_MedicineTeacher_1aa
+
+=== kastorBackstory_MedicineTeacher_1c ===
+
+I expect they all are. They have to be, really, for as little esteem they hold for their levies their levies hold even less for them. 
+
+Each raised host is always one missed pay away from revolt themselves, so without the promise of a mountain of lucre the entire enterprise would collapse.
+
+    ->kastorBackstory_MedicineTeacher_1aa
+
+=== kastorBackstory_MedicineTeacher_1d ===
+
+\*Kastor hesitates for a moment.* If we're going to be fighting the Lovashi together, then I might as well tell you. Just mind that it's not something I'm proud of.
+
+My host had been given orders to deploy against a ring of horse smugglers, out in the badlands near the Masonic Gap. Lovashi can't stand a horse being sold for field work, but the serfs love the smugglers because a horse can improve the crop yield of an entire village.
+
+We cornered some of the horse traders in this one-well hamlet on the ass end of nowhere. It wasn't much of a fight, even after the villagers took the smugglers' side, but the captain's son wanted to earn a bit of glory at the head of the column. So lumber in we did, suffering their missiles the entire way until we got close enough to dispatch 'em.
+
+Once the blooding was over, I got to work on my duties: patching anyone still squealling when the blades are sheathed. And many squeallers there were, for we'd suffered much more than we should have rushing down the center like that. And that's when the captain pulled me from my charges to work on his son.
+
+The bastard had a minor wound from a slingstone he'd taken in the fighting. An easy enough task, but it didn't seem right to give him special treatment when the whole affair was his fault. The Gods seemed to agree, because not long after he died of an infection... an infection that the captain declared his medic should have been able to prevent.
+
+The rest you experienced yourself: the captain needed little support to have me branded. A few months later and here we are.
+
+    +I'm glad your healer's training doesn't prevent you from killing Lovashi.
+        When the time comes I will do my part, though I may be of more use to our movement by staying behind with the wounded.
+        ->kastorBackstory_Hub
+    +Duty means little to you, it seems.
+        \*Kastor looks uncomfortable.* Does a levy have a duty to his lord, when his oaths are taken at the point of a spear? Or perhaps you mean my duty as a healer to my patient, which I should have performed over my duty to his victims?
+
+        You come quickly to an answer I have not found, despite the magnitudes of difference in our time spent seeking it. Just don't let that answer get in the way of our duties to our fellow conspirators.
+        ->kastorBackstory_Hub
+    +It would be unfair for me to judge. I wasn't there, after all.
+        I appreciate such a response. I was there, and still I find it difficult to keep an even head about it.
+        ->kastorBackstory_Hub
+    +You disgust me. One lordling doesn't make up for the Craft Folk you've killed.
+        \*Kastor's eyes harden.* No, it does not.
+        ->kastorBackstory_Hub
 
 === 2f ===
 ~explainingPlan = true

@@ -166,6 +166,7 @@ public struct GameplaySettingsWrapper
     public string healthBarsAlwaysVisible;
 
     public string transitionIndicatorsAlwaysVisible;
+    public string highlightSpeakerInDialogue;
 
     public string boldImportantQuestText;
     public string showOnlyImportantQuestText;
@@ -181,6 +182,7 @@ public struct GameplaySettingsWrapper
             healthBarsAlwaysVisible = GameplaySettingsList.healthBarsAlwaysVisible.getCurrentOptionTitle(),
 
             transitionIndicatorsAlwaysVisible = GameplaySettingsList.transitionIndicatorsAlwaysVisible.getCurrentOptionTitle(),
+            highlightSpeakerInDialogue = GameplaySettingsList.highlightSpeakerInDialogue.getCurrentOptionTitle(),
 
             boldImportantQuestText = GameplaySettingsList.boldImportantQuestText.getCurrentOptionTitle(),
             showOnlyImportantQuestText = GameplaySettingsList.showOnlyImportantQuestText.getCurrentOptionTitle(),
@@ -196,6 +198,7 @@ public struct GameplaySettingsWrapper
         setOptionIfPresent(GameplaySettingsList.healthBarsAlwaysVisible, healthBarsAlwaysVisible);
 
         setOptionIfPresent(GameplaySettingsList.transitionIndicatorsAlwaysVisible, transitionIndicatorsAlwaysVisible);
+        setOptionIfPresent(GameplaySettingsList.highlightSpeakerInDialogue, highlightSpeakerInDialogue);
 
         setOptionIfPresent(GameplaySettingsList.boldImportantQuestText, boldImportantQuestText);
         setOptionIfPresent(GameplaySettingsList.showOnlyImportantQuestText, showOnlyImportantQuestText);

@@ -145,6 +145,8 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
                 return;
         }
 
+        PlayerObject.toggleButtonPrompt(false);
+
 		if (!RevealManager.currentlyRevealed)
 		{
             outline.createOutline(getRevealColor());
@@ -154,6 +156,8 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
+        PlayerObject.restoreButtonPrompt();
+
         switch(PlayerOOCStateManager.currentActivity)
         {
             case OOCActivity.walking:

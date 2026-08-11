@@ -249,12 +249,15 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
                 outline.createOutline(getRevealColor());
             }
 
+            PlayerObject.toggleButtonPrompt(false);
             spawnNameTag();
         }
     }
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
+        PlayerObject.restoreButtonPrompt();
+
 		if (!ignoreHover)
 		{
             if(!RevealManager.currentlyRevealed && outline != null)

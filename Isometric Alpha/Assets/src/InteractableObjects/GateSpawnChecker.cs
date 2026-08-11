@@ -78,12 +78,15 @@ public class GateSpawnChecker : MonoBehaviour, IRevealable
 		if (!RevealManager.currentlyRevealed)
 		{
 			// RevealManager.setOutlineColor(gameObject, getRevealColor());
+			PlayerObject.toggleButtonPrompt(false);
 			createHoverTag();
 		}
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
+		PlayerObject.restoreButtonPrompt();
+
 		if (!RevealManager.currentlyRevealed)
 		{
 			// RevealManager.setOutlineColorToDefault(gameObject);

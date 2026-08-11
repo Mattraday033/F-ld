@@ -95,10 +95,12 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public readonly static UnityEvent<string, EffectAnimationType> CreateEffectByNPCName = new UnityEvent<string, EffectAnimationType>();
     public readonly static UnityEngine.Events.UnityEvent HideAllStapledEffects = new UnityEngine.Events.UnityEvent();
     public readonly static UnityEvent<string, EffectAnimationType> ShowStapledEffectByNPCName = new UnityEvent<string, EffectAnimationType>();
+    public readonly static UnityEngine.Events.UnityEvent RemoveAllShadowOutlines = new UnityEngine.Events.UnityEvent();
 
     public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
 
     public NamedAnimancerComponent animancer;
+    private SpriteOutline shadowOutline;
 
     private List<EffectAnimationManager> stapledEffects = new List<EffectAnimationManager>();
 
@@ -258,6 +260,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         HideAllStapledEffects.RemoveListener(hideAllStapledEffects);
         CreateEffectByNPCName.RemoveListener(createEffectByNPCName);
         ShowStapledEffectByNPCName.RemoveListener(showStapledEffect);
+
+        RemoveAllShadowOutlines.RemoveListener(removeShadowOutline);
+        PlayerOOCStateManager.OnStateChangeFromInDialogue.RemoveListener(removeShadowOutline);
     }
 
     private void disablePolygonCollider()
@@ -383,6 +388,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         CreateEffectByNPCName.AddListener(createEffectByNPCName);
         ShowStapledEffectByNPCName.AddListener(showStapledEffect);
 
+        RemoveAllShadowOutlines.AddListener(removeShadowOutline);
+        PlayerOOCStateManager.OnStateChangeFromInDialogue.AddListener(removeShadowOutline);
+
         setToDefaultIdle();
     }
 
@@ -391,6 +399,9 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         GameObject shadow = Instantiate(Resources.Load<GameObject>(EnemyTypeFolderPathList.getShadowPrefabName(animationName)), transform);
         shadow.transform.SetAsFirstSibling();
         shadowSprite = shadow.GetComponent<SpriteRenderer>();
+
+        shadowOutline = new SpriteOutline();
+        shadowOutline.setSpriteRenderer(shadowSprite);
 
         if(CombatStateManager.inCombat)
         {
@@ -1216,6 +1227,35 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             shadowSprite.gameObject.SetActive(true);
         }
 
+    }
+
+    public void showShadowOutline()
+    {
+        if(shadowSprite != null)
+        {
+            shadowOutline.createOutline(ColorList.canBeInteractedWith, getOutlineSize());
+        }
+    }
+
+    public void removeShadowOutline()
+    {
+        if(shadowSprite != null)
+        {
+            shadowOutline.removeOutline();
+        }
+    }
+
+    private float getOutlineSize()
+    {
+        switch(npcName)
+        {
+            case NPCNameList.horse:
+            case NPCNameList.csalan:
+                return Constants.shadow512x512OutlineSize;
+
+            default:
+                return Constants.shadow256x256OutlineSize;
+        }
     }
 
     public CharacterAnimationType getFallBackAnimationType(CharacterAnimationType animationType)

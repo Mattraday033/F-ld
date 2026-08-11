@@ -869,11 +869,14 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
             outline.createOutline(getRevealColor());
 		}
 
+        PlayerObject.toggleButtonPrompt(false);
         createHoverTag();
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
+        PlayerObject.restoreButtonPrompt();
+
         if((eventData != null && eventData.used) || !PlayerOOCStateManager.enemyHoversLegal())
         {
             return;

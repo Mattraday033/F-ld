@@ -46,7 +46,7 @@ public class DropInFromAboveTransitionScript : PlayerInteractionScript
 
         Vector3 restPosition = playerTransform.position;
 
-        mainCM.m_Follow = null;
+        mainCM.Follow = null;
         mainCM.transform.position = new Vector3(restPosition.x, restPosition.y, mainCM.transform.position.z);
 
         float spriteHeight = player_spriteHeight();
@@ -85,7 +85,7 @@ public class DropInFromAboveTransitionScript : PlayerInteractionScript
         setIdleForCurrentArea(animationManager);
 
         //Re-couple the camera to the player and hand control back.
-        mainCM.m_Follow = playerTransform;
+        mainCM.Follow = playerTransform;
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
         PlayerObject.setSpriteSortingLayer(SortingLayerManager.firstSortingLayerInfo);
     }

@@ -98,7 +98,7 @@ public class PlayerObject : MonoBehaviour
     private void setAsCameraTarget()
     {
         CinemachineVirtualCamera mainCM = GameObject.FindWithTag(LayerAndTagManager.mainVirtualCameraTag).GetComponent<CinemachineVirtualCamera>();
-        mainCM.m_Follow = gameObject.transform;
+        mainCM.Follow = gameObject.transform;
     }
 
     public static Transform getInstanceTransform()
@@ -255,6 +255,27 @@ public class PlayerObject : MonoBehaviour
         {
             player.pressButtonPrompt.SetActive(false);
         }
+    }
+
+    public static void toggleButtonPrompt(bool activate)
+    {
+        PlayerObject player = getInstance();
+
+        if(player != null)
+        {
+            player.pressButtonPrompt.SetActive(activate);
+        }
+    }
+
+    public static void restoreButtonPrompt()
+    {
+        if(hasCustomPromptMessage)
+        {
+            toggleButtonPrompt(true);
+            return;
+        }
+
+        setButtonPromptVisibility();
     }
 
     private string getPromptMessage()

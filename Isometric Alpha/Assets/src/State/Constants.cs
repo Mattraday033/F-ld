@@ -184,6 +184,13 @@ public static class Constants
 
     #endregion
 
+    #region SpriteOutlineSizes
+
+    public const float shadow256x256OutlineSize = 8f;
+    public const float shadow512x512OutlineSize = 4f;
+
+    #endregion
+
     #region Gameplay Settings Index
 
     public const int onSettingIndex = 0;

@@ -314,7 +314,7 @@ public static class RestAndShopMapLocationList
         restStopAvailabilityDict[LocationNameList.slaveShackTwo] = new List<RestStopAvailable>()
         {
             () => { 
-                    return !Flags.getFlag(FlagNameList.revoltStarted); 
+                    return !Flags.getFlag(FlagNameList.revoltStarted) && Flags.getFlag(FlagNameList.finishedFirstDialogue); 
                     }
         };
 

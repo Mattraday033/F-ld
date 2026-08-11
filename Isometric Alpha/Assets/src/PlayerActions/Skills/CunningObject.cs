@@ -154,6 +154,8 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        PlayerObject.toggleButtonPrompt(false);
+
         if (!RevealManager.currentlyRevealed)
         {
             outline.createOutline(getRevealColor());
@@ -162,6 +164,8 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        PlayerObject.restoreButtonPrompt();
+
         if (!RevealManager.currentlyRevealed)
         {
             outline.removeOutline();

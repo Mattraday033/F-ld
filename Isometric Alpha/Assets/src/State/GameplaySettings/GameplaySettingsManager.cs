@@ -38,7 +38,7 @@ public class GameplaySettingsManager : MonoBehaviour
 
         GameplaySection overworldSection = Instantiate(Resources.Load<GameObject>(PrefabNames.gameplaySection), scrollableArea).GetComponent<GameplaySection>();
 
-        overworldSection.createGamepaySettingsPrompts("Overworld", new List<GameplaySetting>() { GameplaySettingsList.transitionIndicatorsAlwaysVisible });
+        overworldSection.createGamepaySettingsPrompts("Overworld", new List<GameplaySetting>() { GameplaySettingsList.highlightSpeakerInDialogue, GameplaySettingsList.transitionIndicatorsAlwaysVisible });
 
         GameplaySection journalSection = Instantiate(Resources.Load<GameObject>(PrefabNames.gameplaySection), scrollableArea).GetComponent<GameplaySection>();
 

@@ -146,6 +146,9 @@ public static class GameplaySettingsList
                                                                                     OnTransitionIndicatorVisibilitySettingChange.Invoke();
                                                                                 });
 
+    public readonly static GameplaySetting highlightSpeakerInDialogue =  new GameplaySetting("Highlight Speaker In Dialogue", 
+                                                                                new SettingOption[] { new SettingOption("On", true), new SettingOption("Off")});
+
     // Journal
     public readonly static GameplaySetting boldImportantQuestText = new GameplaySetting("Bold Important Quest Text", 
                                                                     new SettingOption[] { new SettingOption("On", true), new SettingOption("Off")});

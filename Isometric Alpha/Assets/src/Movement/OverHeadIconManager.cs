@@ -11,6 +11,33 @@ public class OverHeadIconManager : MonoBehaviour
     public Transform iconParent;
     private Dictionary<OverHeadIconType, GameObject> icons = new Dictionary<OverHeadIconType, GameObject>();
 
+    private void OnEnable()
+    {
+        PlayerOOCStateManager.OnStateChangeToInDialogue.AddListener(disableCanvas);
+        PlayerOOCStateManager.OnStateChangeFromInDialogue.AddListener(enableCanvas);
+    }
+
+    private void OnDisable()
+    {
+        PlayerOOCStateManager.OnStateChangeToInDialogue.RemoveListener(disableCanvas);
+        PlayerOOCStateManager.OnStateChangeFromInDialogue.RemoveListener(enableCanvas);
+    }
+
+    private void disableCanvas()
+    {
+        if(canvas != null)
+        {
+            canvas.enabled = false;
+        }
+    }
+
+    private void enableCanvas()
+    {
+        if(canvas != null)
+        {
+            canvas.enabled = true;
+        }
+    }
 
     public void createOverHeadIcon(OverHeadIconType iconType, IOverHeadIconSource source = null, string nameOfNPC = null)
     {

@@ -31,7 +31,47 @@ public class DialogueManager : MonoBehaviour
 
 	private static bool returnToRevealAfterDialogue;
 
-	private string nameText;
+
+    #region _NameText/Speaker Highlighting
+	private string _NameText;
+
+    private string getNameTextWithoutColon()
+    {
+        return _NameText.Replace(":", "");
+    }
+
+    private void resetNameText()
+    {
+        _NameText = "";
+    }
+
+    private void setNameText(int targetIndex)
+    {
+        AnimationManager.RemoveAllShadowOutlines.Invoke();
+
+        _NameText = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[targetIndex]) + ":";
+
+        if(targetIndex > 0)
+        {
+            highlightSpeaker(currentDialogue.cameraFoci[targetIndex]);
+        }
+    }
+
+    private void highlightSpeaker(GameObject cameraFoci)
+    {
+        if(GameplaySettingsList.highlightSpeakerInDialogue.settingOptions[Constants.onSettingIndex].set)
+        {
+            AnimationManager animationManager = cameraFoci.GetComponent<AnimationManager>();
+        
+            if(animationManager != null)
+            {
+                animationManager.showShadowOutline();
+            }
+        }
+    }
+
+    #endregion
+
 	private string buffer;
 	private bool keepOldDialogue = false;
 	private bool combineOldDialogue = false;
@@ -119,7 +159,7 @@ public class DialogueManager : MonoBehaviour
 		mainCamera = Camera.main;
 		mainCM = GameObject.FindWithTag("MainVirtualCamera").GetComponent<CinemachineVirtualCamera>();
 		framingTransposer = mainCM.GetCinemachineComponent<CinemachineFramingTransposer>();
-        //mainCM.m_Follow = PlayerMovement.getInstance().gameObject.transform;
+        //mainCM.Follow = PlayerMovement.getInstance().gameObject.transform;
 		//dialogueCanvas.worldCamera = mainCamera;
 	}
 
@@ -192,7 +232,7 @@ public class DialogueManager : MonoBehaviour
 
         NPCCombatInfo combatInfo = currentDialogue.npcCombatInfo;
 
-		nameText = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[Dialogue.mainNPCIndex]) + ":";
+		setNameText(Dialogue.mainNPCIndex);
 		currentStory = addAllVariables(new Story(dialogue.inkJSON.text), dialogue.variableSources);
 
 		storyName = dialogue.inkJSON.name;
@@ -241,7 +281,7 @@ public class DialogueManager : MonoBehaviour
 
 	public void endDialogue()
 	{
-		mainCM.m_Follow = PlayerMovement.getInstance().gameObject.transform;
+		mainCM.Follow = PlayerMovement.getInstance().gameObject.transform;
 
 		setCameraToDefaultSpeed();
 
@@ -250,10 +290,9 @@ public class DialogueManager : MonoBehaviour
 		currentDialogue = null;
 		currentChoiceInkObjects = null;
 
-        nameText = "";
-
 		currentConversation.addEndOfDialogueLine();
 
+        resetNameText();
 		storyName = "";
 		previousChoice = null;
 		QuestList.checkForDeadNames();
@@ -1938,7 +1977,7 @@ public class DialogueManager : MonoBehaviour
                     break;
 
                 default:
-                    currentConversation.addDialogueLine(nameText.Replace(":", ""), buffer);
+                    currentConversation.addDialogueLine(getNameTextWithoutColon(), buffer);
                     break;
             }
 
@@ -1967,7 +2006,7 @@ public class DialogueManager : MonoBehaviour
 
     private GameObject changeCameraTarget(int targetIndex)
     {
-        nameText = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[targetIndex]) + ":";
+        setNameText(targetIndex);
         
         if (targetIndex == 0)
         {
@@ -1976,6 +2015,7 @@ public class DialogueManager : MonoBehaviour
         else
         {
             mainCM.Follow = currentDialogue.cameraFoci[targetIndex].transform;
+
         }
 
         return mainCM.Follow.gameObject;
@@ -2039,14 +2079,6 @@ public class DialogueManager : MonoBehaviour
 
         Flags.setFlag(flagName, flagStatus);
         currentStory.variablesState[flagName] = flagStatus;
-    }
-
-    private void searchInventoryFor(string[] args, int itemNameIndex, int equipmentNameIndex)
-    {
-        bool flagStatus = Inventory.inventoryContainsItem(args[Constants.indexOne]) ||
-                                                    Inventory.equipmentContainsItem(args[Constants.indexOne]);
-        Flags.setFlag(args[Constants.indexZero], flagStatus);
-        currentStory.variablesState[args[Constants.indexZero]] = flagStatus;
     }
 
     private void execute(string buffer, bool leaveDeadBodies = false)
