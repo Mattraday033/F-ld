@@ -59,11 +59,6 @@ public class SaveHandler : ScreenManager, IEscapable
 
 		instance = this;
 
-		if (saveGameList == null || saveGameList.Count == 0)
-		{
-			createSavedGameList();
-		}
-
 		if(Flags.isInNewGameMode())
         {
             OverallUIManager.setCurrentScreenType(this);
@@ -633,6 +628,7 @@ public class SaveHandler : ScreenManager, IEscapable
         }
 
         saveGameList = new Dictionary<string, SaveBlueprint>();
+        createSavedGameList();
         instance = null;
 
         LoadSaveFile.OnLoadResetData.AddListener(createSavedGameListSkipInvoke);

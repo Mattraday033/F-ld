@@ -32,6 +32,11 @@ public static class InkVariableNameList
     public const string gateKey = "gateKey";
 
     public const string description = "description";
+    public const string searchChoice = "searchChoice";
+    public const string successDescription = "successDescription";
+    public const string successChoice = "successChoice";
+    public const string failureDescription = "failureDescription";
+    public const string openDescription = "openDescription";
     public const string destinationName = "destinationName";
 
     public const string keyName = "keyName";

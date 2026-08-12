@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Forest_Grass_Wall
+  m_Name: Forest_Grass_Scarce_Wall
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 5cdfa7db2f94023408a8b7dd4a8f6f35, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8a389daf1776d4b44a11a6c9dffaaea8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

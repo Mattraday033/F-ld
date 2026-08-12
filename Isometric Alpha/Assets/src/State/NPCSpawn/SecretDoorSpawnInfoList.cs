@@ -35,7 +35,7 @@ public static class SecretDoorSpawnInfoList
         #region 4SlaveShack
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackFour, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(5, 18),
+        list.Add(new WallPatchSpawnInfo(LocationNameList.slaveShackFour, new Vector3Int(5, 18),
                                             new SecretDoorInfo(SecretDoorKeyList.wisTutorialSecretDoor),
                                             Constants.sizeTwo, Axis.DescendingY,
                                             TutorialSequenceList.secretDoorTargetHash));
@@ -46,7 +46,7 @@ public static class SecretDoorSpawnInfoList
         #region 5SlaveShack
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackFive, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(2, -6),
+        list.Add(new WallPatchSpawnInfo(LocationNameList.slaveShackFive, new Vector3Int(2, -6),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree), Constants.sizeTwo, Axis.DescendingX));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.slaveShackFive, list);
@@ -54,10 +54,10 @@ public static class SecretDoorSpawnInfoList
         #region 6SlaveShack
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(5, 2),
+        list.Add(new WallPatchSpawnInfo(LocationNameList.slaveShackSix, new Vector3Int(5, 2),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingX));
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.slaveShackSix, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(8, -6),
+        list.Add(new WallPatchSpawnInfo(LocationNameList.slaveShackSix, new Vector3Int(8, -6),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
@@ -66,7 +66,7 @@ public static class SecretDoorSpawnInfoList
         #region Stables
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.stables, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(9, -4),
+        list.Add(new WallPatchSpawnInfo(LocationNameList.stables, new Vector3Int(9, -4),
                                             new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne), Constants.sizeTwo, Axis.DescendingX));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.stables, list);
@@ -74,7 +74,7 @@ public static class SecretDoorSpawnInfoList
         #region Temple
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.temple, NPCNameList.wallPatch, PrefabNames.wallPatch, new Vector3Int(11, 4),
+        list.Add(new WallPatchSpawnInfo(LocationNameList.temple, new Vector3Int(11, 4),
                                             new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo), Constants.sizeTwo, Axis.DescendingY));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.temple, list);
@@ -83,36 +83,41 @@ public static class SecretDoorSpawnInfoList
         #region CenterCamp
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.campCenter, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(8, 12),
-                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+        list.Add(new WallPatchSpawnInfo(LocationNameList.campCenter, new Vector3Int(8, 12),
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX, 
+                                            terrainSpriteName: PrefabNames.wallPatch, tall: true));
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.campCenter, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(-7, 14),
-                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingY, terrainSpriteName: PrefabNames.wallPatch));
+        list.Add(new WallPatchSpawnInfo(LocationNameList.campCenter, new Vector3Int(-7, 14),
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingY, 
+                                            terrainSpriteName: PrefabNames.wallPatch, tall: true));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.campCenter, list);
         #endregion
         #region SECamp
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(18, 15),
-                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+        list.Add(new WallPatchSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(18, 15),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX,
+                                             terrainSpriteName: PrefabNames.wallPatch, tall: true));
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(19, 8),
-                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+        list.Add(new WallPatchSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(19, 8),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX,
+                                             terrainSpriteName: PrefabNames.wallPatch, tall: true));
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.campSouthEast, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(20, 4),
-                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX, terrainSpriteName: PrefabNames.wallPatch));
+        list.Add(new WallPatchSpawnInfo(LocationNameList.campSouthEast, new Vector3Int(20, 4),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne, addHostilityIfOutside: true), Constants.sizeTwo, Axis.DescendingX,
+                                             terrainSpriteName: PrefabNames.wallPatch, tall: true));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
         #endregion
         #region NWCamp
         list = new List<SecretDoorSpawnInfo>();
 
-        list.Add(new SecretDoorSpawnInfo(LocationNameList.campNorthWest, NPCNameList.wallPatch, PrefabNames.wallPatchTall, new Vector3Int(4, 1),
+        list.Add(new WallPatchSpawnInfo(LocationNameList.campNorthWest, new Vector3Int(4, 1),
                                             new SecretDoorInfo(SecretDoorKeyList.northWestCampWallPatchOne, addHostilityIfOutside: false), Constants.sizeThree, Axis.DescendingY, 
                                             terrainSpriteName: PrefabNames.wallPatch, observable: () => Flags.getFlag(FlagNameList.startedTaborObservationTutorial),
                                             script: new TaborObservationTutorialScript(),
-                                            tutorialTargetHash: TutorialSequenceList.secretDoorTargetHash));
+                                            tutorialTargetHash: TutorialSequenceList.secretDoorTargetHash, tall: true));
 
         secretDoorSpawnDetailsDict.Add(LocationNameList.campNorthWest, list);
         #endregion
@@ -233,8 +238,8 @@ public delegate bool ObservableDelegate();
 public class SecretDoorSpawnInfo : AxisSpawnInfo
 {
     private string secretDoorName;
-    private SecretDoorInfo secretDoorInfo;
-    private string spritePathName;
+    protected SecretDoorInfo secretDoorInfo;
+    protected string spritePathName;
     private string terrainSpriteName;
     private ObservableDelegate observable;
     private QuestStepActivationScript script;
@@ -302,4 +307,42 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
         return list;
     }
 
+}
+
+public class WallPatchSpawnInfo : SecretDoorSpawnInfo
+{
+    public WallPatchSpawnInfo( string currentArea,
+                                Vector3Int startCell, 
+                                SecretDoorInfo secretDoorInfo, 
+                                int size = 1, 
+                                Axis axis = Axis.DescendingX, 
+                                string tutorialTargetHash = "", 
+                                string terrainSpriteName = "",
+                                ObservableDelegate observable = null,
+                                QuestStepActivationScript script = null,
+                                bool tall = false):
+    base(   currentArea,
+            NPCNameList.wallPatch,
+            PrefabNames.wallPatch, 
+            startCell, 
+            secretDoorInfo, 
+            size, 
+            axis, 
+            tutorialTargetHash, 
+            terrainSpriteName,
+            observable,
+            script)
+    {
+        secretDoorInfo.description = "*This section of boards holds up the structure's ceiling. Redundancies allow a determined individual to remove some of the boards without collapsing the roof.";
+        secretDoorInfo.searchChoice = "Attempt to make a hole in the wall.*";
+        secretDoorInfo.successDescription = "*After a moment of planning, you understand the safest order to remove the boards.*";
+        secretDoorInfo.successChoice = "Start removing boards.*";
+        secretDoorInfo.failureDescription = "*You are unable to safely remove the boards.*";
+        secretDoorInfo.openDescription = "*The way is open.*";
+
+        if(tall)
+        {
+            this.spritePathName = PrefabNames.wallPatchTall;
+        }
+    }
 }

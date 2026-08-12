@@ -12,6 +12,7 @@ VAR toldThatchAboutSlate = false
 VAR toldKastorOfThatchsFate = false
 
 VAR metKastor = false
+VAR askedKastorWhoTaughtHimMedicine = false
 VAR kastorReactedToHostility = false
 VAR kastorCalledPlayerMadReckless = false
 VAR failedToConvinceSlavesToHelpYou = false
@@ -960,11 +961,6 @@ addXP(250,1)
 
 === 2aa ===
 
-    /*
-    *I can move past the guards freely. What do you need of me?
-        ->2f
-    */
-
     {
     -not givenTutorialQuest and not toldKastorOfThatchsFate:
     *I can move past the guards freely. What do you need of me?
@@ -1172,8 +1168,8 @@ fadeBackIn(60)
 
 The two of you appear capable enough as a team, and I am thankful to you both for helping me save Dibber. His faculties haven't returned to him yet, but I know he would express his gratitude to you if he could.
 
-    +You appear to be an experienced healer. I'm curious how that came to be.
-        ->kastorBackstory_Entrance
+    +The way you spoke before betrays experience as a healer. I'm curious how that came to be.
+        ->kastorBackstory_Entrance(->2f)
     +He is most welcome.
         ->2f
     +I don't require the gratitude of a liability like him.
@@ -1182,23 +1178,31 @@ The two of you appear capable enough as a team, and I am thankful to you both fo
     +\*Say nothing.*
         ->2f
 
+=== kastorBackstory_Entrance(->returnDivert) ===
 
-
-=== kastorBackstory_Entrance ===
 I can answer your questions, if you ask them quickly.
-    ->kastorBackstory_Hub(->2f)
+    ->kastorBackstory_Hub(returnDivert)
 
 === kastorBackstory_Hub(->returnDivert) ===
 
 {
--savedDibber:
-    +Who taught you medicine?
+-true:
+    +Who taught you medicine?   
+        setToTrue(askedKastorWhoTaughtHimMedicine)
         ->kastorBackstory_MedicineTeacher_1a(returnDivert)
 }
 
+{
+-askedKastorWhoTaughtHimMedicine:
+    +You fought for the Lovashi? 
+        ->kastorBackstory_MedicineTeacher_1b(returnDivert)
+    +I'm surprised to hear a Count described as generous with his wages.
+        ->kastorBackstory_MedicineTeacher_1c(returnDivert)
+    +If you were once a medic, how did you earn your brand?
+        ->kastorBackstory_MedicineTeacher_1d(returnDivert)    
     +I have no more questions
         ->returnDivert
-
+}
 
 === kastorBackstory_MedicineTeacher_1a(->returnDivert) ===
 
@@ -1206,27 +1210,16 @@ I was a medic in Count Kálnoky's levies. His is the youngest County, so there w
 
 The pay was good, but that was about the only part of the job worth praising. The rest was bloody, tireless, thankless work.
 
-->kastorBackstory_MedicineTeacher_1aa(returnDivert)
+->kastorBackstory_Hub(returnDivert)
 
-=== kastorBackstory_MedicineTeacher_1aa(->returnDivert) ===
-
-    +You fought for the Lovashi? 
-        ->kastorBackstory_MedicineTeacher_1b(returnDivert)
-    +I'm surprised to hear a Count described as generous with his wages.
-        ->kastorBackstory_MedicineTeacher_1c(returnDivert)
-    +If you were once a medic, how did you earn your brand?
-        ->kastorBackstory_MedicineTeacher_1d(returnDivert)
-    +Let's discuss something else.
-        What did you have in mind?
-        ->kastorBackstory_Hub(returnDivert)
 
 === kastorBackstory_MedicineTeacher_1b(->returnDivert) ===
 
-Aye, that I did. Don't look so disgusted: I was a medic, remember? I patched up conscript and mutineer alike. Though of course, the rebels I saved from death's chilly vice would all end up branded in the end.
+Aye, that I did. Don't look so disgusted: I was a medic, and a conscript besides. I wasn't without sympathy for the mutineers we caught. I would patch them up as well when I could. Though of course, the rebels I saved from death's chilly vice would all end up branded in the end.
 
 Now that I personally know the fate that awaited them, I wonder if it would have been the greater mercy to have let them succumb instead.
 
-    ->kastorBackstory_MedicineTeacher_1aa(returnDivert)
+    ->kastorBackstory_Hub(returnDivert)
 
 === kastorBackstory_MedicineTeacher_1c(->returnDivert) ===
 
@@ -1234,7 +1227,7 @@ I expect they all are. They have to be, really, for as little esteem they hold f
 
 Each raised host is always one missed pay away from revolt themselves, so without the promise of a mountain of lucre the entire enterprise would collapse.
 
-    ->kastorBackstory_MedicineTeacher_1aa(returnDivert)
+    ->kastorBackstory_Hub(returnDivert)
 
 === kastorBackstory_MedicineTeacher_1d(->returnDivert) ===
 
@@ -1616,6 +1609,16 @@ fadeBackIn(60)
 
 You're back. Were you successful?
 
+->3aa
+
+=== 3ab ===
+
+Was there anything else you needed?
+
+->3aa
+
+=== 3aa ===
+
 {
 - (refusedToWorkWithJanos or (playerFinishedErvinsTask() and not toldKastorFinishedErvinsTask) or (deathFlagImre and not toldKastorFinishedErvinsTask) or (deathFlagErvin and not givenTaskByErvin) or (deathFlagJanos and not obtainedMineArmoryKey) or (finishedBalintsTask and not toldKastorFinishedBalintsTask) or (deathFlagBálint and not toldKastorFinishedBalintsTask) or (mentionedBadReasonForGoingInsideMine and not learnedAboutMuzsasSweetToothFromKastor) or (obtainedMineArmoryKey and not toldKastorObtainedMineArmoryKey) and not (toldKastorErvinIsDead and toldKastorBalintIsDead and toldKastorJanosIsDead)):
 
@@ -1624,6 +1627,8 @@ You're back. Were you successful?
 }
     +Not yet.
         ->3b
+    +The way you spoke before betrays experience as a healer. I'm curious how that came to be.
+        ->kastorBackstory_Entrance(->3ab)
     +Why is your hut so much bigger than Brush and Géza's?
         ->keepDialogueB4HutSizeExplanation(->3a)
     +Tell me about what happened to the mine.

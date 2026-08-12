@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Bench_Back
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 231117b29aa222e409aaa6f36e987f71, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a47f3fecc56e84c4a8ddbb990434ddb0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

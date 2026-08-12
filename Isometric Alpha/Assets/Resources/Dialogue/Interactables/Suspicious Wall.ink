@@ -3,6 +3,11 @@ VAR observationLevel = 0
 VAR observationDifficulty = 2
 
 VAR description = "*The wall looks formidable, but you can feel a slight draft.*"
+VAR searchChoice = "*Search around for anything suspicious.*"
+VAR successDescription = "*You search around for anything that catches your eye, and notice a loose section.*"
+VAR successChoice = "*Push it inwards.*"
+VAR failureDescription = "*You find nothing interesting.*"
+VAR openDescription = "*Applying pressure, you hear a soft click. Suddenly, the wall moves aside.*"
 
 VAR addHostilityIfOutside = false
 
@@ -20,7 +25,7 @@ VAR playerName = ""
 
 {description}
 
-    +Search around for anything suspicious. <Observation {observationLevel}/{observationDifficulty}>
+    +\*{searchChoice} <Observation {observationLevel}/{observationDifficulty}>
     
     {
     -observationLevel >= observationDifficulty:
@@ -34,16 +39,16 @@ VAR playerName = ""
 
 === 1b ===
 
-\*You search around for anything that catches your eye, and notice a loose section.*
+{successDescription}
 
-    +\*Push it inwards.*
+    +\*{successChoice}
         ->1d
     +\*Don't touch anything.*
         ->Close
 
 === 1c ===
 
-\*You find nothing interesting.*
+{failureDescription}
 
     +\*Leave.*
         ->Close
@@ -71,7 +76,7 @@ addSecretDoorFlag({secretDoorKey})
 
 fadeBackIn(60)
 
-\*Applying pressure, you hear a soft click. Suddenly, the wall moves aside.*
+{openDescription}
 
     ->Close
     

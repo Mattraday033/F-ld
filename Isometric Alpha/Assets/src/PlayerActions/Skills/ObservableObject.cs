@@ -10,13 +10,31 @@ public class SecretDoorInfo : IStoryVariableSource
     public List<string> secretDoorKeys = new List<string>();
     public int difficulty;
     public string description;
+    public string searchChoice;
+    public string successDescription;
+    public string successChoice;
+    public string failureDescription;
+    public string openDescription;
     public string customDialoguePath;
     public bool addHostilityIfOutside;
     public string questName;
     public string questStepName;
     public bool completeQuest;
 
-    public SecretDoorInfo(string secretDoorKey = null, List<string> secretDoorKeys = null, int difficulty = Constants.difficultyTwo, string description = null, string customDialoguePath = null, bool addHostilityIfOutside = false, string questName = null, string questStepName = null, bool completeQuest = false)
+    public SecretDoorInfo(  string secretDoorKey = null,
+                            List<string> secretDoorKeys = null,
+                            int difficulty = Constants.difficultyTwo,
+                            string description = null,
+                            string searchChoice = null,
+                            string successDescription = null,
+                            string successChoice = null,
+                            string failureDescription = null,
+                            string openDescription = null,
+                            string customDialoguePath = null,
+                            bool addHostilityIfOutside = false,
+                            string questName = null,
+                            string questStepName = null,
+                            bool completeQuest = false)
     {
         if(secretDoorKey != null)
         {
@@ -30,6 +48,11 @@ public class SecretDoorInfo : IStoryVariableSource
 
         this.difficulty = difficulty;
         this.description = description;
+        this.searchChoice = searchChoice;
+        this.successDescription = successDescription;
+        this.successChoice = successChoice;
+        this.failureDescription = failureDescription;
+        this.openDescription = openDescription;
         this.customDialoguePath = customDialoguePath;
         this.addHostilityIfOutside = addHostilityIfOutside;
         this.questName = questName;
@@ -72,6 +95,36 @@ public class SecretDoorInfo : IStoryVariableSource
             story.variablesState[InkVariableNameList.description] != null)
         {
             story.variablesState[InkVariableNameList.description] = description;
+        }
+
+        if (searchChoice != null &&
+            story.variablesState[InkVariableNameList.searchChoice] != null)
+        {
+            story.variablesState[InkVariableNameList.searchChoice] = searchChoice;
+        }
+
+        if (successDescription != null &&
+            story.variablesState[InkVariableNameList.successDescription] != null)
+        {
+            story.variablesState[InkVariableNameList.successDescription] = successDescription;
+        }
+
+        if (successChoice != null && 
+            story.variablesState[InkVariableNameList.successChoice] != null)
+        {
+            story.variablesState[InkVariableNameList.successChoice] = successChoice;
+        }
+
+        if (failureDescription != null &&
+            story.variablesState[InkVariableNameList.failureDescription] != null)
+        {
+            story.variablesState[InkVariableNameList.failureDescription] = failureDescription;
+        }
+
+        if (openDescription != null &&
+            story.variablesState[InkVariableNameList.openDescription] != null)
+        {
+            story.variablesState[InkVariableNameList.openDescription] = openDescription;
         }
 
         if(story.variablesState[InkVariableNameList.addHostilityIfOutside] != null)
