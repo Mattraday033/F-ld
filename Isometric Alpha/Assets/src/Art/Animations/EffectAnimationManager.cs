@@ -69,7 +69,7 @@ public class EffectAnimationManager : AnimationManager
             type = animationType;
         }
 
-        setSpriteRenderer(effectType);
+        setSpriteRenderer();
         determineOutline();
 
         AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath);
@@ -88,24 +88,24 @@ public class EffectAnimationManager : AnimationManager
         {
             if(waitBeforeSFX)
             {
-                StartCoroutine(waitThenPlaySFX(effectType));
+                StartCoroutine(waitThenPlaySFX());
             } else
             {
-                AudioManager.playEffectAnimationSFX(effectType);
+                AudioManager.playEffectAnimationSFX(type);
             }
         }
     }
 
-    private void setSpriteRenderer(string effectType)
+    private void setSpriteRenderer()
     {
-        switch(effectType)
+        switch(type)
         {
-            case "FrontLvlUp":
+            case EffectAnimationType.FrontLvlUp:
                 spriteRenderer.sortingLayerName = LayerAndTagManager.firstSortingLayerName;
                 spriteRenderer.sortingOrder = Constants.indexOne;
                 spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
                 return;
-            case "BackLvlUp":
+            case EffectAnimationType.BackLvlUp:
                 spriteRenderer.sortingLayerName = LayerAndTagManager.firstSortingLayerName;
                 spriteRenderer.sortingOrder = Constants.indexOne;
                 spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
@@ -133,7 +133,7 @@ public class EffectAnimationManager : AnimationManager
         }
     }
 
-    private IEnumerator waitThenPlaySFX(string effectType)
+    private IEnumerator waitThenPlaySFX()
     {
         float timeWaited = 0f;
 
@@ -144,7 +144,7 @@ public class EffectAnimationManager : AnimationManager
             timeWaited += Time.deltaTime;
         }
 
-        AudioManager.playEffectAnimationSFX(effectType);
+        AudioManager.playEffectAnimationSFX(type);
     }
     
     private IEnumerator spawnDamageNumbers()

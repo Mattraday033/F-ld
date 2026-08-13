@@ -153,6 +153,7 @@ fadeBackIn(60)
 Speak yer business, branded.
 
     +The Director gave me orders to report here. I'm to be pardoned.
+        ->jumpInPit
         {
         -gasparBroughtToExecution:
             ->3a

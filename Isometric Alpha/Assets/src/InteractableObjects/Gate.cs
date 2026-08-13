@@ -54,19 +54,19 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
             return;
         }
 
-        AudioManager.playAudioClipAsSingleton(getAudioClipPath(getName()));
+        AudioManager.playAudioClipAsSingleton(getSFXType(getName()));
     }
 
-    private static string getAudioClipPath(string gateKey)
+    private static SFXType getSFXType(string gateKey)
     {
         switch(DialogueList.scrubNameOfEndNumbers(gateKey))
         {
             case NPCNameList.unstablePillar:
             case NPCNameList.awkwardRubble:
             case NPCNameList.liftableRubble:
-                return AudioClipList.rockIntroSFX;
+                return SFXType.RockIntro;
             default:
-                return AudioClipList.gateOpen;
+                return SFXType.GateOpen;
         }
     }
 

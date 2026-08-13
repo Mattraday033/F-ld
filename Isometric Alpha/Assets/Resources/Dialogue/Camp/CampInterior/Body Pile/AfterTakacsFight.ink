@@ -175,7 +175,7 @@ You want to come back with nothing with that Vada about? I'd like to see the Con
 
 disableDialogueUI()
 wait(1)
-playDelayedSFX(Bat_Howl,150)
+playDelayedSFX(BatHowl,150)
 wait(.3)
 setNPCFacing({guardOneIndex},NW)
 setNPCFacing({guardTwoIndex},NE)

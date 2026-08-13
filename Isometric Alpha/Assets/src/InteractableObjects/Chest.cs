@@ -188,25 +188,25 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         }
     }
 
-    public virtual string getChestOpenSFX(ChestType type)
+    public virtual SFXType getChestOpenSFX(ChestType type)
     {
         switch(type)
         {
             case ChestType.Shelf:
-                return AudioClipList.onTransitionSFX;
+                return SFXType.OnTransition;
             case ChestType.Chest:
-                return AudioClipList.chestOpen;
+                return SFXType.ChestOpen;
             default:
-                return "";
+                return SFXType.NoSFX;
         }
     }
 
-    private static string getChestTakeSFX(ChestType type)
+    private static SFXType getChestTakeSFX(ChestType type)
     {
         switch(type)
         {
             default:
-                return AudioClipList.placeInInventory;
+                return SFXType.PlaceInInventory;
         }
     }
 

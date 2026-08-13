@@ -37,7 +37,7 @@ public class CombatResultsUI : PopUpWindow
         OnCombatResultsUICreation.Invoke();
 
         AudioManager.playNoMusic();
-        AudioManager.playAudioClipAsSingleton(AudioClipList.winMusic);
+        AudioManager.playAudioClipAsSingleton(SFXType.Win);
 
         setTitleText();
     }

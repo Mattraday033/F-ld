@@ -1361,34 +1361,12 @@ public class DialogueManager : MonoBehaviour
 
                     string npcSFXArgs = getArgument(buffer, Constants.indexZero);
                     intParameter = getArgumentInt(buffer, Constants.indexOne);
-
-                    string audioClip = "";
-
-                    switch (npcSFXArgs.ToLower().Replace(" ",""))
-                    {
-                        case "whip":
-                            audioClip = AudioClipList.whipAttackSound;
-                            break;
-                        case "maledeath":
-                            audioClip = AudioClipList.maleHumanDeathSound;
-                            break;
-                        case "snoring":
-                            audioClip = AudioClipList.snoringDialogueSFX;
-                            break;
-                        case "tunnel_explosion":
-                            audioClip = AudioClipList.tunnelExplosionSFX;
-                            break;
-                        case "bat_howl":
-                            audioClip = AudioClipList.batHowlAttackSound;
-                            break;
-                        default:
-                            audioClip = npcSFXArgs;
-                            break;
-                    }
-
                     secondsToWait = ((float) intParameter)/1000f;
 
-                    StartCoroutine(waitThenPlaySFX(secondsToWait, audioClip));
+                    if(Enum.TryParse(npcSFXArgs, ignoreCase: true, out SFXType sfxType))
+                    {
+                        StartCoroutine(waitThenPlaySFX(secondsToWait, sfxType));
+                    }
 
                     continueStory();
 
@@ -2376,7 +2354,7 @@ public class DialogueManager : MonoBehaviour
 			yield return null;
 		}
 
-		AudioClip executionClip = AudioClipList.getAudioClip(AudioClipList.executionSFX);
+		AudioClip executionClip = AudioClipList.getAudioClip(SFXType.Execution);
 		AudioManager.playExecutionSFX();
 
         foreach(GameObject target in targets)
@@ -2442,7 +2420,7 @@ public class DialogueManager : MonoBehaviour
 
         target.SetActive(false);
 
-		AudioClip whipClip = AudioClipList.getAudioClip(AudioClipList.whipAttackSound);
+		AudioClip whipClip = AudioClipList.getAudioClip(SFXType.Whip);
 
 		for (int i = 0; i < 4; i++)
 		{
@@ -2555,7 +2533,7 @@ public class DialogueManager : MonoBehaviour
         playAnimation(animationManager);
     }
 
-    private static IEnumerator waitThenPlaySFX(float secondsToWait, string audioClip)
+    private static IEnumerator waitThenPlaySFX(float secondsToWait, SFXType sfxType)
     {
         float timeWaited = 0f;
 
@@ -2566,7 +2544,7 @@ public class DialogueManager : MonoBehaviour
             timeWaited += Time.deltaTime;
         }
 
-        AudioManager.playAudioClipAsSingleton(audioClip);
+        AudioManager.playAudioClipAsSingleton(sfxType);
     }
 }
 

@@ -6,107 +6,107 @@ public static class AnimationSFXDictionaryList
 {
     #region Humans
 
-    public readonly static Dictionary<CharacterAnimationType, string> playerHumanAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> playerHumanAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.weaponSwingAttackSound
+        [CharacterAnimationType.Attack_Normal] = SFXType.WeaponSwing
     };
 
 
-    public readonly static Dictionary<CharacterAnimationType, string> maleHumanAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> maleHumanAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.weaponSwingAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.maleHumanDeathSound,
-        [CharacterAnimationType.Secondary_Death] = AudioClipList.maleHumanDeathSound 
+        [CharacterAnimationType.Attack_Normal] = SFXType.WeaponSwing,
+        [CharacterAnimationType.Death] = SFXType.MaleHuman_Death,
+        [CharacterAnimationType.Secondary_Death] = SFXType.MaleHuman_Death 
     };
 
-    public readonly static Dictionary<CharacterAnimationType, string> femaleHumanAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> femaleHumanAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.weaponSwingAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.femaleHumanDeathSound,
-        [CharacterAnimationType.Secondary_Death] = AudioClipList.femaleHumanDeathSound
+        [CharacterAnimationType.Attack_Normal] = SFXType.WeaponSwing,
+        [CharacterAnimationType.Death] = SFXType.FemaleHuman_Death,
+        [CharacterAnimationType.Secondary_Death] = SFXType.FemaleHuman_Death
     };
 
-    public readonly static Dictionary<CharacterAnimationType, string> whipAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> whipAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.whipAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.maleHumanDeathSound,
-        [CharacterAnimationType.Secondary_Death] = AudioClipList.maleHumanDeathSound 
+        [CharacterAnimationType.Attack_Normal] = SFXType.Whip,
+        [CharacterAnimationType.Death] = SFXType.MaleHuman_Death,
+        [CharacterAnimationType.Secondary_Death] = SFXType.MaleHuman_Death 
     };
 
     #endregion
 
     #region Bats
 
-    public readonly static Dictionary<CharacterAnimationType, string> batSwarmAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> batSwarmAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.batSwarmAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.batDeathSFXOne,
-        [CharacterAnimationType.Secondary_Death] = AudioClipList.batDeathSFXOne 
+        [CharacterAnimationType.Attack_Normal] = SFXType.BatSwarm_BatSwarm,
+        [CharacterAnimationType.Death] = SFXType.BatDeath1,
+        [CharacterAnimationType.Secondary_Death] = SFXType.BatDeath1 
     };
 
-    public readonly static Dictionary<CharacterAnimationType, string> largeBatAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> largeBatAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.batAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.batDeathSFXOne,
-        [CharacterAnimationType.Secondary_Death] = AudioClipList.batDeathSFXOne 
+        [CharacterAnimationType.Attack_Normal] = SFXType.BatAttack,
+        [CharacterAnimationType.Death] = SFXType.BatDeath1,
+        [CharacterAnimationType.Secondary_Death] = SFXType.BatDeath1 
     };
 
-    public readonly static Dictionary<CharacterAnimationType, string> bipedalBatAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> bipedalBatAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.batHowlAttackSound,
-        [CharacterAnimationType.Attack_Special] = AudioClipList.batHowlAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.batDeathSFXTwo,
-        [CharacterAnimationType.Secondary_Death] = AudioClipList.batDeathSFXTwo 
+        [CharacterAnimationType.Attack_Normal] = SFXType.BatHowl,
+        [CharacterAnimationType.Attack_Special] = SFXType.BatHowl,
+        [CharacterAnimationType.Death] = SFXType.BatDeath2,
+        [CharacterAnimationType.Secondary_Death] = SFXType.BatDeath2 
     };
 
     #endregion
 
     #region Worms
 
-    public readonly static Dictionary<CharacterAnimationType, string> biteWormAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> biteWormAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.biteAttackSound,
-        [CharacterAnimationType.Attack_Special] = AudioClipList.wormExplodeOnDeathSound
+        [CharacterAnimationType.Attack_Normal] = SFXType.Bite,
+        [CharacterAnimationType.Attack_Special] = SFXType.WormExplodeOnDeath
     };
 
-    public readonly static Dictionary<CharacterAnimationType, string> massiveWormAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> massiveWormAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
         // [CharacterAnimationType.Attack_Normal] = AudioClipList.batSwarmAttackSound,
-        [CharacterAnimationType.Attack_Special] = AudioClipList.wormExplodeOnDeathSound
+        [CharacterAnimationType.Attack_Special] = SFXType.WormExplodeOnDeath
     };
 
-    public readonly static Dictionary<CharacterAnimationType, string> summonWormAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> summonWormAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.wormSummonSound,
-        [CharacterAnimationType.Attack_Special] = AudioClipList.wormExplodeOnDeathSound
+        [CharacterAnimationType.Attack_Normal] = SFXType.WormSummon,
+        [CharacterAnimationType.Attack_Special] = SFXType.WormExplodeOnDeath
     };
 
-    public readonly static Dictionary<CharacterAnimationType, string> vomitWormAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> vomitWormAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.wormVomitAttackSound,
-        [CharacterAnimationType.Attack_Special] = AudioClipList.wormExplodeOnDeathSound
+        [CharacterAnimationType.Attack_Normal] = SFXType.WormAcidVomit,
+        [CharacterAnimationType.Attack_Special] = SFXType.WormExplodeOnDeath
     };
 
     #endregion
 
     #region Horses
 
-    public readonly static Dictionary<CharacterAnimationType, string> horseAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> horseAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.horseAttackSound,
-        [CharacterAnimationType.Death] = AudioClipList.horseDeathSFX,
-        [CharacterAnimationType.Secondary_Death] = AudioClipList.horseDeathSFX 
+        [CharacterAnimationType.Attack_Normal] = SFXType.HorseWhinny,
+        [CharacterAnimationType.Death] = SFXType.Horse_Death,
+        [CharacterAnimationType.Secondary_Death] = SFXType.Horse_Death
     };
 
     #endregion
 
     #region Saints
 
-    public readonly static Dictionary<CharacterAnimationType, string> stoneSaintAudioDictionary = new Dictionary<CharacterAnimationType, string>
+    public readonly static Dictionary<CharacterAnimationType, SFXType> stoneSaintAudioDictionary = new Dictionary<CharacterAnimationType, SFXType>
     {
-        [CharacterAnimationType.Attack_Normal] = AudioClipList.rockIntroSFX,
-        [CharacterAnimationType.Death] = AudioClipList.rockIntroSFX,
-        [CharacterAnimationType.Secondary_Death] = AudioClipList.rockIntroSFX
+        [CharacterAnimationType.Attack_Normal] = SFXType.RockIntro,
+        [CharacterAnimationType.Death] = SFXType.RockIntro,
+        [CharacterAnimationType.Secondary_Death] = SFXType.RockIntro,
     };
 
     #endregion

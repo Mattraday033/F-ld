@@ -192,10 +192,10 @@ public class FadeToBlackManager : MonoBehaviour
         {
             BetweenAreaFade oldFade = fadeDictionary[newFade.getFadeType()] as BetweenAreaFade;
 
-            if(oldFade.newClipPath.Equals(newFade.newClipPath))
+            if(oldFade.newClip == newFade.newClip)
             {
                 return;
-            } else if(oldFade.originalClipPath.Equals(newFade.newClipPath) && oldFade.fadeOut)
+            } else if(oldFade.originalClip == newFade.newClip && oldFade.fadeOut)
             {
                 newFade.fadeOut = false;
             } 

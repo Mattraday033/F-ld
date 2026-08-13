@@ -20,9 +20,9 @@ public class SingleSpriteChest : Chest
         setMouseHoverPosition();
     }
 
-    public override string getChestOpenSFX(ChestType type)
+    public override SFXType getChestOpenSFX(ChestType type)
     {
-        return AudioClipList.onTransitionSFX;
+        return SFXType.OnTransition;
     }
 
 }

@@ -169,7 +169,7 @@ fadeToBlack(true, false)
 
 addSecretDoorFlag({sealedPocketRubbleFlagName})
 
-playDelayedSFX(Tunnel_Explosion, 200)
+playDelayedSFX(TunnelExplosion, 200)
 
 moveToPos(-7,4)
 

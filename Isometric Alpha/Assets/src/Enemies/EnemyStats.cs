@@ -34,7 +34,14 @@ public class EnemyStats : Stats
 
     #region Constructors
 
-    public EnemyStats(string key, int armor, int tHP, CombatAction combatAction = null, Trait[] traits = null, bool gendered = false, string[] animationSuffixes = null, Dictionary<CharacterAnimationType, string> animationAudioClipDictionary = null) :
+    public EnemyStats(  string key,
+                        int armor, 
+                        int tHP, 
+                        CombatAction combatAction = null, 
+                        Trait[] traits = null, 
+                        bool gendered = false, 
+                        string[] animationSuffixes = null, 
+                        Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary = null) :
     base(key)
     {
         this.armor = armor;

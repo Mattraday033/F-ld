@@ -137,6 +137,7 @@ public static class AbilityList
 	public const string guardJavelinKey = "Javelin Throw";
 	public const string guardAxeKey = "Axe Swing";
 	public const string guardLashKey = "Lash";
+	public const string taborsWhipKey = "Tabor's Whip";
 	public const string guardArrowBarrageKey = "Arrow Barrage";
 	public const string guardCoordinateKey = "Coordinate";
 	public const string guardSlingAttackKey = "Bullet";
@@ -276,13 +277,14 @@ public static class AbilityList
         enemyAbilityDictionary.Add(splitBossSpawnWormsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(splitBossSpawnWormsKey, useDescription: "The worm splits to spawn two smaller worms."), targetParams: TargetParams.build(SelectorList.horizontalOneName), animationParams: AnimationParams.build(AnimationParams.useSpecialAttack)), twoArmoredWorms, activatesAfterDeath: true));
 
         //guard abilities
-        enemyAbilityDictionary.Add(slashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slashKey, loreDescription: "The bite of a sword swung quick."), DamageParams.build("8", "5"))));
+        enemyAbilityDictionary.Add(slashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(slashKey, loreDescription: "The bite of a sword swung quick."), DamageParams.build("20", "15"))));
         enemyAbilityDictionary.Add(bladeBlitzKey, new Ability(CombatActionSettings.build(DescriptionParams.build(bladeBlitzKey, iconName: executeKey, loreDescription: "Two axe strikes, lightning fast."), DamageParams.build("25", "15"), TargetParams.build(SelectorList.horizontalTwoName))));
         enemyAbilityDictionary.Add(guardSpearKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSpearKey, loreDescription: "A piercing blow capable of skewering multiple targets."), DamageParams.build("25", "15"), TargetParams.build(SelectorList.verticalOneName), animationParams: AnimationParams.build(EffectAnimationType.Pierce))));
         enemyAbilityDictionary.Add(guardAxeKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardAxeKey, loreDescription: "A wide sweep from a sharp axe."), DamageParams.build("23", "10"), TargetParams.build(SelectorList.horizontalTwoName))));
         enemyAbilityDictionary.Add(guardArrowBarrageKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardArrowBarrageKey, loreDescription: "A hail of deadly missles called from nearby arrow towers."), DamageParams.build("32", "15"))));
         enemyAbilityDictionary.Add(guardJavelinKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardJavelinKey, loreDescription: "A missile aimed right at your heart."), DamageParams.build("17", "5"), TargetParams.build(SelectorList.verticalOneName))));
         enemyAbilityDictionary.Add(guardLashKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardLashKey, iconName: "Lashings", loreDescription: "The bane of slaves everywhere."), DamageParams.build("21", "40"), TargetParams.build(SelectorList.verticalThreeName))));
+        enemyAbilityDictionary.Add(taborsWhipKey, new Ability(CombatActionSettings.build(DescriptionParams.build(taborsWhipKey, iconName: "Lashings"), DamageParams.build("11", "15"), TargetParams.build(SelectorList.verticalThreeName))));
         enemyAbilityDictionary.Add(guardCoordinateKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardCoordinateKey, iconName: "Cohesion", loreDescription: "A leader takes charge and directs their troops in battle, increasing their damage."), targetParams: TargetParams.build(SelectorList.boxThreeName), appliedTrait: TraitList.cohesion)));
         enemyAbilityDictionary.Add(guardSlingAttackKey, new Ability(CombatActionSettings.build(DescriptionParams.build(guardSlingAttackKey, loreDescription:"The slinger whips a bullet towards it's target."), DamageParams.build("6", "4"))));
         enemyAbilityDictionary.Add(guardSlaveSummonKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(guardSlaveSummonKey, useDescription: "The slave driver calls forth Branded Conscripts, which force their enemies to attack them instead of their masters.")), MonsterNameList.brandedConscript));

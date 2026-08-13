@@ -89,7 +89,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 
                 if(actorStats.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
                 {
-                    envCombatAction = AbilityList.getAbility(actorStats, AbilityList.guardLashKey);
+                    envCombatAction = AbilityList.getAbility(actorStats, AbilityList.taborsWhipKey);
                     targetingTrait = TraitList.chaotic;
 
                     environmentalCombatActions.Add(envCombatAction.clone(actorStats), targetingTrait.clone(actorStats));

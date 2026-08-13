@@ -66,7 +66,7 @@ public class LargeEnemyStats : EnemyStats
 
     #region Constructors
 
-    public LargeEnemyStats(string key, int armor, int tHP, Trait[] traits, CombatAction combatAction = null, Dictionary<CharacterAnimationType, string> animationAudioClipDictionary = null) :
+    public LargeEnemyStats(string key, int armor, int tHP, Trait[] traits, CombatAction combatAction = null, Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary = null) :
     base(key, armor, tHP, traits: traits, combatAction: combatAction, animationAudioClipDictionary: animationAudioClipDictionary)
     {
         if(!traits.Contains(TraitList.large) && !traits.Contains(TraitList.immobile))

@@ -1,0 +1,113 @@
+Audio/Music/Battle/Camp Battle1
+Audio/Music/Battle/Camp Battle2
+Audio/Music/Battle/Camp Battle3
+Audio/Music/Camp Battle
+Audio/Music/Camp Interior
+Audio/Music/Camp Overworld
+Audio/Music/Cave 1
+Audio/Music/Cave 2
+Audio/Music/Dead
+Audio/Music/Old Music/Camp Interior (Old)
+Audio/Music/Win
+Audio/Sound Effects/Ambience/Birds
+Audio/Sound Effects/Ambience/Crowd
+Audio/Sound Effects/Attack Sounds/Bats/Bat Attack
+Audio/Sound Effects/Attack Sounds/Bats/Bat Howl
+Audio/Sound Effects/Attack Sounds/Bats/Bat Swarm
+Audio/Sound Effects/Attack Sounds/Horse/Horse Whinny
+Audio/Sound Effects/Attack Sounds/Misc/Bite
+Audio/Sound Effects/Attack Sounds/Misc/PlacePartyMember
+Audio/Sound Effects/Attack Sounds/Misc/Smokebomb
+Audio/Sound Effects/Attack Sounds/Weapons/WeaponSwing
+Audio/Sound Effects/Attack Sounds/Weapons/Whip
+Audio/Sound Effects/Attack Sounds/Worms/WormAcidVomit
+Audio/Sound Effects/Attack Sounds/Worms/WormExplodeOnDeath
+Audio/Sound Effects/Attack Sounds/Worms/WormSummon
+Audio/Sound Effects/BetweenAreas/OnTransition
+Audio/Sound Effects/Coin/Coin1
+Audio/Sound Effects/Coin/Coin2
+Audio/Sound Effects/Coin/Coin3
+Audio/Sound Effects/Coin/Coin4
+Audio/Sound Effects/Coin/Coin5
+Audio/Sound Effects/Death Sounds/Bats/Bat Death 1
+Audio/Sound Effects/Death Sounds/Bats/Bat Death 2
+Audio/Sound Effects/Death Sounds/Female Human/Death
+Audio/Sound Effects/Death Sounds/Horse/Death
+Audio/Sound Effects/Death Sounds/Male Human/Death
+Audio/Sound Effects/Dialogue/Female Human/Intro1
+Audio/Sound Effects/Dialogue/Female Human/Intro2
+Audio/Sound Effects/Dialogue/Female Human/Intro3
+Audio/Sound Effects/Dialogue/Horse/HorseIntro
+Audio/Sound Effects/Dialogue/Male Human/Intro1
+Audio/Sound Effects/Dialogue/Male Human/Intro2
+Audio/Sound Effects/Dialogue/Male Human/Intro3
+Audio/Sound Effects/Dialogue/Objects/CrateIntro
+Audio/Sound Effects/Dialogue/Objects/GateIntro
+Audio/Sound Effects/Dialogue/Objects/RockIntro
+Audio/Sound Effects/Dialogue/Sleeping/Snoring
+Audio/Sound Effects/EquipUnequip/Actions/ActionEquip
+Audio/Sound Effects/EquipUnequip/Actions/ActionUnequip
+Audio/Sound Effects/EquipUnequip/Armor/Body
+Audio/Sound Effects/EquipUnequip/Armor/Feet
+Audio/Sound Effects/EquipUnequip/Armor/Hands
+Audio/Sound Effects/EquipUnequip/Armor/Head
+Audio/Sound Effects/EquipUnequip/Armor/Shield
+Audio/Sound Effects/EquipUnequip/Armor/Trinket
+Audio/Sound Effects/EquipUnequip/Weapon/Weapon1
+Audio/Sound Effects/EquipUnequip/Weapon/Weapon2
+Audio/Sound Effects/EquipUnequip/Weapon/Weapon3
+Audio/Sound Effects/Footsteps/Cave/FS1
+Audio/Sound Effects/Footsteps/Cave/FS2
+Audio/Sound Effects/Footsteps/Cave/FS3
+Audio/Sound Effects/Footsteps/Cave/FS4
+Audio/Sound Effects/Footsteps/Cave/FS5
+Audio/Sound Effects/Footsteps/Cave/FS6
+Audio/Sound Effects/Footsteps/Cave/FS7
+Audio/Sound Effects/Footsteps/Cave/FS8
+Audio/Sound Effects/Footsteps/Cave/FS9
+Audio/Sound Effects/Footsteps/Dirt/FS1
+Audio/Sound Effects/Footsteps/Dirt/FS2
+Audio/Sound Effects/Footsteps/Dirt/FS3
+Audio/Sound Effects/Footsteps/Dirt/FS4
+Audio/Sound Effects/Footsteps/Dirt/FS5
+Audio/Sound Effects/Footsteps/Dirt/FS6
+Audio/Sound Effects/Footsteps/Dirt/FS7
+Audio/Sound Effects/Footsteps/WoodFloor/FS1
+Audio/Sound Effects/Footsteps/WoodFloor/FS2
+Audio/Sound Effects/Footsteps/WoodFloor/FS3
+Audio/Sound Effects/Footsteps/WoodFloor/FS4
+Audio/Sound Effects/Footsteps/WoodFloor/FS5
+Audio/Sound Effects/Hit/Acid/Acid
+Audio/Sound Effects/Hit/BatSwarm/BatSwarm
+Audio/Sound Effects/Hit/Healing/Healing
+Audio/Sound Effects/Hit/Negative/Negative
+Audio/Sound Effects/Hit/Pierce/Pierce
+Audio/Sound Effects/Hit/Positive/Positive
+Audio/Sound Effects/Hit/Slash/Slash
+Audio/Sound Effects/Items/Drinking/Sip
+Audio/Sound Effects/Items/Eating/Eating1
+Audio/Sound Effects/Items/Eating/Eating2
+Audio/Sound Effects/Items/Eating/Eating3
+Audio/Sound Effects/Items/Eating/Eating4
+Audio/Sound Effects/Items/Eating/Eating5
+Audio/Sound Effects/Items/Eating/Eating6
+Audio/Sound Effects/Misc/ButtonOff
+Audio/Sound Effects/Misc/ButtonOn
+Audio/Sound Effects/Misc/ChestOpen
+Audio/Sound Effects/Misc/Execution
+Audio/Sound Effects/Misc/GateOpen
+Audio/Sound Effects/Misc/GateOpenShort
+Audio/Sound Effects/Misc/Gong
+Audio/Sound Effects/Misc/JellyMisfire
+Audio/Sound Effects/Misc/LvlUp
+Audio/Sound Effects/Misc/PlaceInInventory
+Audio/Sound Effects/Misc/Rest
+Audio/Sound Effects/Misc/Splash
+Audio/Sound Effects/Misc/TunnelExplosion
+Audio/Sound Effects/UI/CannotChooseActorAbilityLocation
+Audio/Sound Effects/UI/ChangeScreen/ChangeScreen1
+Audio/Sound Effects/UI/ChangeScreen/ChangeScreen2
+Audio/Sound Effects/UI/ChangeScreen/ChangeScreen3
+Audio/Sound Effects/UI/ChangeSelectedAction
+Audio/Sound Effects/UI/ChooseActorAbilityLocation
+Audio/Sound Effects/UI/MoveSelector

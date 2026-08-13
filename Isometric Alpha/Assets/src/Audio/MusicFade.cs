@@ -62,14 +62,14 @@ public abstract class MusicFade : IFade
 public class BetweenAreaFade : MusicFade
 {
 
-    public string originalClipPath;
-    public string newClipPath;
+    public SFXType originalClip;
+    public SFXType newClip;
 
     public bool fadeOut;
 
-    public BetweenAreaFade(bool fadeOut, string originalClipPath, string newClipPath)
+    public BetweenAreaFade(bool fadeOut, SFXType originalClip, SFXType newClip)
     {
-        if(originalClipPath.Equals(Constants.emptyString))
+        if(originalClip == SFXType.NoSFX)
         {
             this.fadeOut = false;
         } else
@@ -77,8 +77,8 @@ public class BetweenAreaFade : MusicFade
             this.fadeOut = fadeOut;
         }
         
-        this.originalClipPath = originalClipPath;
-        this.newClipPath = newClipPath;
+        this.originalClip = originalClip;
+        this.newClip = newClip;
     }
 
     public override void setTimeWaited(float newTimeWaited, bool incomingDirection = false)

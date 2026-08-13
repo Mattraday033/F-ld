@@ -28,24 +28,24 @@ public class CreditScreenManager : MonoBehaviour
         yield return null;
 
         AudioManager.playNoMusic();
-        AudioManager.playAudioClipAsSingleton(AudioClipList.winMusic);
+        AudioManager.playAudioClipAsSingleton(SFXType.Win);
 
-        AudioClip winClip = AudioClipList.getAudioClip(AudioClipList.winMusic);
+        AudioClip winClip = AudioClipList.getAudioClip(SFXType.Win);
 
         if(winClip != null)
         {
             yield return new WaitForSeconds(winClip.length);
         }
 
-        AudioManager.previousMusicPath = AudioClipList.winMusic;
-        AudioManager.currentMusicPath = AudioClipList.campOverworld;
+        AudioManager.previousMusic = SFXType.Win;
+        AudioManager.currentMusic = SFXType.CampOverworld;
         AudioManager.addMusicFade();
         MusicFade.OnMusicMidFade.AddListener(LoadCampOverworld);
     }
 
     private static void LoadCampOverworld()
     {
-        AudioManager.playMusicWithoutFade(AudioClipList.campOverworld);
+        AudioManager.playMusicWithoutFade(SFXType.CampOverworld);
         MusicFade.OnMusicMidFade.RemoveListener(LoadCampOverworld);
     }
  

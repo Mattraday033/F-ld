@@ -115,6 +115,19 @@ public static class EnumDescriptionList
         }
     }
 
+    public static SFXType convertEffectTypeToSFXType(this EffectAnimationType effect)
+    {
+        string effectName = effect.ToString();
+
+        if(Enum.TryParse(effectName, ignoreCase: true, out SFXType sfxType))
+        {
+            return sfxType;
+        } else
+        {
+            return SFXType.NoSFX;
+        }
+    }
+
 }
 
 public class StackableTrait: Trait

@@ -285,22 +285,22 @@ public class ObservableObject : MonoBehaviour, INonRevealableNameSource
 
     private static void playAudioClip()
     {
-        string sfxPath = "";
+        SFXType sfxType = SFXType.NoSFX;
 
         switch(MapObjectList.getCurrentZoneKey())
         {
             case ZoneKeyList.mineLvl1:
             case ZoneKeyList.mineLvl2:
             case ZoneKeyList.mineLvl3:
-                sfxPath = AudioClipList.rockIntroSFX;
+                sfxType = SFXType.RockIntro;
                 break;
             default:
                 
-                sfxPath = AudioClipList.gateOpen;
+                sfxType = SFXType.GateOpen;
                 break;
         }
 
-        AudioManager.playAudioClipAsSingleton(sfxPath);
+        AudioManager.playAudioClipAsSingleton(sfxType);
     }   
 
     public void hideSecretDoor(string doorToBeHidden)

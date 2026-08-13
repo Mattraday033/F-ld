@@ -65,7 +65,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     // public Trait[] hiddenTraits = new Trait[0];
     public TraitContainer traitContainer;
 
-    protected Dictionary<CharacterAnimationType, string> animationAudioClipDictionary;
+    protected Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary;
 
     #endregion
 

@@ -126,7 +126,7 @@ public static class PartyMemberList
         return defaultPartyMember;
     }
 
-    public static Dictionary<CharacterAnimationType, string> getAudioDictionary(string allyName)
+    public static Dictionary<CharacterAnimationType, SFXType> getAudioDictionary(string allyName)
     {
         if(allyName == null || allyName.Contains(PartyManager.playerMarker))
         {
