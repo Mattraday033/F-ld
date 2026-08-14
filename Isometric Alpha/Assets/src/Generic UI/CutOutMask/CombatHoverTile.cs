@@ -211,7 +211,11 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
         {
             revealPriorityHeld = true;
-            createHoverTag();
+
+            if(CombatStateManager.currentActivity != CurrentActivity.Tutorial)
+            {
+                createHoverTag();
+            }
             CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), true);
         }
 
@@ -233,7 +237,12 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
         {
             revealPriorityHeld = false;
-            SelectorManager.displayCurrentHoverUI();
+
+            if(CombatStateManager.currentActivity != CurrentActivity.Tutorial)
+            {
+                SelectorManager.displayCurrentHoverUI();
+            }
+            
             CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), false);
         }
 
@@ -259,6 +268,11 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if(CutOutMaskInternalBlockerManager.isBlocking())
+        {
+            return;
+        }
+
         switch(CombatStateManager.currentActivity)
         {
             case CurrentActivity.ChoosingActor:
@@ -272,6 +286,11 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if(CutOutMaskInternalBlockerManager.isBlocking())
+        {
+            return;
+        }
+
         switch(CombatStateManager.currentActivity)
         {
             case CurrentActivity.ChoosingActor:

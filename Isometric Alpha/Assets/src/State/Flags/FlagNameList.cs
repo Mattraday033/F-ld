@@ -208,6 +208,7 @@ public static class FlagNameList
         public const string heardTaborsLesson = "heardTaborsLesson";
         public const string letTaborLive = "letTaborLive"; //walked into Tabor's room and didn't kill him
         public const string killedTaborInManse = "killedTaborInManse"; //killed Tabor during conversation in Manse
+        public const string killedAdelaInManse = "killedAdelaInManse"; //killed Adela during conversation in Manse
         public const string attackedTabor = "attackedTabor"; //faught Tabor in combat in Manse
         public const string acceptedTaborsSurrenderAfterDirectorFight = "acceptedTaborsSurrenderAfterDirectorFight"; //went back to get Tabor after defeating the Director and accepted his surrender
         public const string hadGuardWhoBlockedPathFlogged = "hadGuardWhoBlockedPathFlogged"; //flag for if player had guard at beginning of gaspar execution/director announcement scene flogged

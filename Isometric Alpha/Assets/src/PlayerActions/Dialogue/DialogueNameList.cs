@@ -326,6 +326,12 @@ public static class DialogueNameList
 
     #endregion
 
+    #region 
+
+    public const string captainAdelaManse2FPathName = manseSecondFloorPathName + NPCNameList.captainAdela;
+
+    #endregion
+
     #region Manse-2F-Office
 
     public const string officeDoorPathName = manseSecondFloorPathName + NPCNameList.officeDoor;

@@ -1900,6 +1900,8 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.captainAdela, new Vector3Int(-8, 5), ZoneKeyList.manseSecondFloor + LocationNameList.section3b, facing: Facing.NorthEast));
+
         list.Add(new WeaponRackSpawnDetails(Constants.indexZero, new Vector3Int(1, 1), Facing.SouthEast, ChestType.SpearRack));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);

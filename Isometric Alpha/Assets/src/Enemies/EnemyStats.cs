@@ -79,6 +79,13 @@ public class EnemyStats : Stats
 
     public override GameObject instantiateCombatSprite(List<GridCoords> coords)
     {
+        SpawnDetails spawnDetails = State.enemyPackInfo.getNextSpawnDetails();
+
+        if(spawnDetails != null)
+        {
+            coords = new List<GridCoords>(spawnDetails.allSpawnPositions);
+        }
+
         combatSprite = base.instantiateCombatSprite(coords);
 
         combatSprite.transform.localScale = new Vector3(1f, 1f, 1f);

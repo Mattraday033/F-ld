@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class PassiveAbility : EquippedPassive //passives are (currently) mostly used to explain to the player some mechanic that happens naturally,
 {                                              //like regeneration
-    private MultiStackTrait multiStackTrait;
-
     public PassiveAbility(CombatActionSettings settings) :
     base(settings)
     {
 
-    }
-    public PassiveAbility(CombatActionSettings settings, MultiStackTrait multiStackTrait) :
-    base(settings)
-    {
-        this.multiStackTrait = multiStackTrait;
     }
 
     //        statAbilityDictionary.Add(currentKey, new PassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(TraitList.exitStrategy2Round.getName(), TraitList.exitStrategy2Round.getDescription(), TraitList.exitStrategy2Round.getIconName()), FrequencyParams.build(zeroSlotMax, noCooldown))));
@@ -53,11 +46,6 @@ public class PassiveAbility : EquippedPassive //passives are (currently) mostly 
 
     public override GameObject getDescriptionPanelFull(PanelType panelType)
     {
-        if (multiStackTrait != null)
-        {
-            return getMultiStackDescriptionPanelFull(panelType);
-        }
-
         string panelTypeName = "";
 
         switch (panelType)
@@ -92,69 +80,6 @@ public class PassiveAbility : EquippedPassive //passives are (currently) mostly 
         }
 
         return DescriptionPanel.getDescriptionPanel(panelTypeName);
-    }
-
-    public override GameObject getRowType(RowType rowType)
-    {
-        if (multiStackTrait == null)
-        {
-            return base.getRowType(rowType);
-        }
-
-        string rowTypeName = "";
-
-        switch (rowType)
-        {
-            case RowType.JournalCategory:
-                rowTypeName = PrefabNames.multiStackPerkEntryRow;
-                break;
-            case RowType.StatRequirements:
-                rowTypeName = PrefabNames.multiStackableAbilityRow;
-                break;
-            case RowType.LevelUp:
-                rowTypeName = PrefabNames.multiStackableNoDamageActionLevelUpRow;
-                break;
-            default:
-                return base.getRowType(rowType);
-        }
-
-        return DescriptionPanel.getDescriptionPanel(rowTypeName);
-    }
-
-    public override void describeSelfFull(DescriptionPanel panel)
-    {
-        base.describeSelfFull(panel);
-
-        if (multiStackTrait == null)
-        {
-            return;
-        }
-
-        MultiStackableTraitDescriptionPanel multiPanel = (MultiStackableTraitDescriptionPanel)panel;
-
-        for (int index = 0; index < multiPanel.iconPanels.Length; index++)
-        {
-            DescriptionPanel.setImage(multiPanel.iconPanels[index], Helpers.loadSpriteFromResources(multiStackTrait.stackableTraits[index].getIconName()));
-        }
-    }
-
-    public override void describeSelfRow(DescriptionPanel panel)
-    {
-        base.describeSelfRow(panel);
-        
-        addSlotsTextToRow(panel);
-
-        if(multiStackTrait == null)
-        {
-            return;
-        }
-
-        MultiStackableTraitDescriptionPanel multiPanel = (MultiStackableTraitDescriptionPanel) panel; 
-
-        for (int index = 0; index < multiPanel.iconPanels.Length && index < multiPanel.stackCounters.Length; index++)
-        {
-            DescriptionPanel.setImage(multiPanel.iconPanels[index], Helpers.loadSpriteFromResources(multiStackTrait.stackableTraits[index].getIconName()));
-        }
     }
 
     public override void addSlotsTextToRow(DescriptionPanel panel)

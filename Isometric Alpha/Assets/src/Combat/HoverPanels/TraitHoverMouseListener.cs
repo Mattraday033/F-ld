@@ -12,8 +12,24 @@ public class TraitHoverMouseListener : GridRow, IPointerEnterHandler, IPointerEx
 	public DescriptionPanelBuilder traitHoverDescriptionPanel;
     public List<DescriptionPanelBuilder> relatedDescriptionPanelBuilders;
 
+    private void OnMouseEnter()
+    {
+        OnPointerEnter(null);
+    }
+
+    private void OnMouseExit()
+    {
+        OnPointerExit(null);
+    }
+
+
     public override void OnPointerEnter(PointerEventData eventData)
     {
+        if(eventData != null && eventData.used)
+        {
+            return;
+        }
+
         Transform descriptionPanelParent = HoverPanel.getTraitDescriptionPanelParent();
 
         descriptionPanelParent.gameObject.SetActive(true);
@@ -35,7 +51,7 @@ public class TraitHoverMouseListener : GridRow, IPointerEnterHandler, IPointerEx
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        if(InspectNode.inspecting)
+        if(InspectNode.inspecting || (eventData != null && eventData.used))
         {
             return;
         }

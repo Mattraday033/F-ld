@@ -137,6 +137,17 @@ new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, Abil
                                                                             },
                                                                             animationAudioClipDictionary: AnimationSFXDictionaryList.whipAudioDictionary));
 
+        enemyStatsDict.Add(NPCNameList.captainAdela, new LargeEnemyStats(NPCNameList.captainAdela,
+                                                                    Constants.sixtyArmor,
+                                                                                            275,
+                                                                new Trait[] { 
+                                                                                TraitList.master,
+                                                                                TraitList.clockwiseFourCornersEnemySide,
+                                                                                TraitList.indomitable
+                                                                            },
+                                                                            AbilityList.getAbility(null, AbilityList.shoreUpKey),
+                                                                            animationAudioClipDictionary: AnimationSFXDictionaryList.femaleHumanAudioDictionary));
+
         enemyStatsDict.Add(NPCNameList.barricade, new MultiAnimationEnemyStats(NPCNameList.barricade,
                                                                                 Constants.twentyFiveArmor,
                                                                                         125,

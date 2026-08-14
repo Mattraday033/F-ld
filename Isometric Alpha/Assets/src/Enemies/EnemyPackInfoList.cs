@@ -134,6 +134,25 @@ public static class EnemyPackInfoList
                                                                                                         DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.killedTaborInManse);
 
+    public readonly static BossPackInfo captainAdelaFight = new BossPackInfo(new CreatureAmount[] { 
+                                                                                                        EnemyAmountList.captainAdela,
+                                                                                                        EnemyAmountList.oneLinebreaker,
+                                                                                                        EnemyAmountList.oneLancer,
+                                                                                                        EnemyAmountList.oneLieutenant,
+                                                                                                        EnemyAmountList.oneExecutioner
+                                                                                                       },
+                                                                                                        DropTableList.lovashiGuardsDTKey,
+                                                                                                        FlagNameList.killedAdelaInManse, 
+                                                                                                        xpDrop: 150,
+                                                                                                        spawnDetailsList: new List<SpawnDetails>()
+                                                                                                        {
+                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(1,1), new GridCoords(1,2) }),
+                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(0,0) }),
+                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(0,3) }),
+                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(3,0) }),
+                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(3,3) })
+                                                                                                        });
+
     public readonly static BossPackInfo honorguardCaptainBossFight = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.oneExecutioner
                                                                                                        },

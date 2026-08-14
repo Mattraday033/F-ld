@@ -224,7 +224,14 @@ public class BossPackInfo : EnemyPackInfo
 
     public QuestStepActivationScript script;
 
-    public BossPackInfo(CreatureAmount[] FoeTypes, string dropTableName, string killFlagKey = "", string dialogueUponSceneLoadKey = null, ItemListID[] guaranteedDrops = null, QuestStepActivationScript script = null, int xpDrop = 0, List<SpawnDetails> spawnDetailsList = null):
+    public BossPackInfo(CreatureAmount[] FoeTypes, 
+                        string dropTableName,
+                        string killFlagKey = "",
+                        string dialogueUponSceneLoadKey = null,
+                        ItemListID[] guaranteedDrops = null, 
+                        QuestStepActivationScript script = null, 
+                        int xpDrop = 0, 
+                        List<SpawnDetails> spawnDetailsList = null):
     base(FoeTypes, dropTableName, guaranteedDrops, spawnDetailsList: spawnDetailsList)
     {
         this.FoeTypes = FoeTypes;

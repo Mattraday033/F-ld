@@ -120,8 +120,6 @@ public static class PrefabNames
 
 
     public const string traitSquareRowPanel = "Trait Square Row Panel";
-    public const string stackableTraitSquareRowPanel = "Stackable Trait Square Row Panel";
-    public const string multiStackableTraitSquareRowPanel = "MultiStackable Trait Square Row Panel";
     public const string multiStackableTraitHoverDescriptionPanel = "MultiStackable Trait Hover Description Panel";
 
     public const string characterGenerationStatDescriptionPanel = "Chargen Mouse Hover";

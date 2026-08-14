@@ -540,11 +540,11 @@ public static class MonsterSpawnDetailsList
 
         #region Manse-2F-3b
 
-        list = new List<MonsterSpawnDetails>();
+        // list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-8, 5), Facing.NorthEast, movementType: MonsterMovementType.Stationary));
+        // list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-8, 5), Facing.NorthEast, movementType: MonsterMovementType.Stationary));
 
-        monsterSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
+        // monsterSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
 
         #endregion
         #region Manse-2F-3c

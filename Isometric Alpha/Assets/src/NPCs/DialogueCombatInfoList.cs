@@ -82,6 +82,14 @@ public static class DialogueCombatInfoList
                                                                                             new DeadNameList(new string[]{NPCNameList.tabor, NPCNameList.chiefTabor})
                                                                                         });
 
+    public readonly static NPCCombatInfo adelaCombatInfo = new NPCCombatInfo( 
+                                                                     new EnemyPackInfo[]   {   
+                                                                                                EnemyPackInfoList.captainAdelaFight
+                                                                                            },
+                                                                    new DeadNameList[]  {
+                                                                                            new DeadNameList(new string[]{NPCNameList.captainAdela})
+                                                                                        });
+
     public readonly static NPCCombatInfo directorCombatInfo = new NPCCombatInfo( 
                                                                      new EnemyPackInfo[]   {   
                                                                                                 EnemyPackInfoList.directorWithBarricades,

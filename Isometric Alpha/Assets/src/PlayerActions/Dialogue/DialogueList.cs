@@ -1326,6 +1326,11 @@ public static class DialogueList
                                 new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
                                  Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
 
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, NPCNameList.captainAdela, 
+                                                            new SingleCharacterDialogue(NPCNameList.captainAdela,
+                                                            Resources.Load<TextAsset>(DialogueNameList.captainAdelaManse2FPathName), 
+                                                            npcCombatInfo: DialogueCombatInfoList.adelaCombatInfo));
+
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, NPCNameList.liftableGate, liftableGateDialogue);
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, NPCNameList.heavyBarrels,

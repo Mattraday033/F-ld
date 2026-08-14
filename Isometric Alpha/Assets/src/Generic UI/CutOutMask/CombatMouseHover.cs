@@ -37,7 +37,8 @@ public abstract class CombatMouseHover : MonoBehaviour
     public void OnMouseDown()
     {
         if(AbilityMenuButton.hoveringOverAbilityMenuButton || 
-            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu || 
+            CutOutMaskInternalBlockerManager.isBlocking())
         {
             return;
         }

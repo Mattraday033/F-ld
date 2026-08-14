@@ -456,7 +456,7 @@ public class StackableTrait: Trait
     //IDescribable Methods
     public override GameObject getRowType(RowType rowType)
     {
-        return Resources.Load<GameObject>(PrefabNames.stackableTraitSquareRowPanel);
+        return Resources.Load<GameObject>(PrefabNames.traitSquareRowPanel);
     }
 
     public override void describeSelfRow(DescriptionPanel panel)

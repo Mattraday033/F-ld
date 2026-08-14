@@ -4,6 +4,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum MultiStackProcType { RedKnife = 0, BlueShield = 1, YellowThorn = 2, GreenLeaf = 3 }
 public class ExuberanceEquippedPassive : EquippedPassive
 {
     private const int redStackIndex = 0;

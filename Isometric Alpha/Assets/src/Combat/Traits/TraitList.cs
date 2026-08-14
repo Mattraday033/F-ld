@@ -145,7 +145,7 @@ public static class TraitList
 	//temporary buffs
 	public readonly static Trait daringSacrifice = new MandatoryTargetTrait(StatSourceNameList.daringSacrificeKey, TraitType.Protection, "Become invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice", Constants.endOfRoundDuration, daringSacrificeDamageReduction);
 	public readonly static Trait cohesion = new DamageBoostTrait(StatSourceNameList.cohesionKey, iconName:  "Cohesion", roundsLeft: Constants.twoRoundDuration);
-	// public readonly static Trait shoredUp = new ShieldTrait(StatSourceNameList.shoredUpKey, TraitType.Boost, "This creature only takes half of any damage dealt to it.", "Shielded", roundsLeft: Constants.twoRoundDuration, shieldedDamageReduction);
+	public readonly static Trait shoredUp = new Trait(StatSourceNameList.shoredUpKey, TraitType.Protection, "This creature has their defenses increased", "Shielded", roundsLeft: Constants.twoRoundDuration);
 	public readonly static Trait exitStrategy = new Trait(StatSourceNameList.exitStrategyKey, TraitType.Protection, "This creature and all of it's allies take reduced damage until one round after the surprise round.", iconName: "ExitStrategy", roundsLeft: Constants.oneRoundDuration, permanent: false); //exception to round duration rule because it's applied at the top of the first round and thus doesn't need to compensate for the first tick down.
 	public readonly static LinkTrait chokeholdLinkTrait = new LinkTrait(StatSourceNameList.chokeholdKey, "This creature deals half of all damage received to whoever it is linked to.", "Chokehold", Constants.twoRoundDuration, chokeholdDamagePercentage, stuns: true);
 	public readonly static Trait rallied = new DamageBoostTrait(StatSourceNameList.ralliedKey, iconName: "Rally", roundsLeft: Constants.fourRoundDuration, permanent: false);
@@ -191,23 +191,7 @@ public static class TraitList
     public readonly static Trait halfHandStance = new StackableTrait(StatSourceNameList.halfHandStanceKey, TraitType.Stance, "A balanced stance, increasing damage dealt by " + halfHandStanceExtraDamage + " and decreasing damage taken by " + halfHandStanceExtraDamage + " per stack. Starts with " + halfHandStanceStartingStacks + " stacks. Gain stacks by attacking with fists or staffs. Only one stance can be active at a time.", iconName: StatSourceNameList.halfHandStanceKey, startingStacks: Constants.fourStacksAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication, costType: ActionCostType.Stance, personalReapplicationEvents: new List<UnityEvent>() { Stance.OnStanceApplyingWeaponAttack });
     public readonly static Trait predation = new StackableTrait(StatSourceNameList.predationKey, TraitType.EquippedPassive, "Your brutal strikes reinvigorate you. Whenever you deal 100% or more of a Master enemy's total health in one hit, you heal for D/2 health and gain 10% Armor Penetration and 4 extra damage per attack. The enemy does not need to be at full health to activate Predation.", iconName: StatSourceNameList.predationKey, startingStacks: Constants.zeroStacksAtStart, stacksAppliedPerApplication: Constants.oneStackPerApplication, costType: ActionCostType.Predation, personalReapplicationEvents: new List<UnityEvent>(){ Stats.PredationProc });
 
-	//Charisma passive stackable traits
-	// private readonly static Trait redKnifeBaseTrait = new Trait(StatSourceNameList.redKnifeKey, TraitType.Charge, "The will to harm. " + AbilityList.redKnifeAcquisitionMethodExplanation, "Red Knife");
-	// private readonly static StackableTrait redKnife = new StackableTrait(Constants.zeroStacksAtStart, Constants.oneStackPerApplication, ActionCostType.RedKnife, redKnifeBaseTrait);
-
-    // private readonly static Trait blueShieldBaseTrait = new Trait(StatSourceNameList.blueShieldKey, TraitType.Charge, "The will to help. " + AbilityList.blueShieldAcquisitionMethodExplanation, "Blue Shield");
-    // private readonly static StackableTrait blueShield = new StackableTrait(Constants.zeroStacksAtStart, Constants.oneStackPerApplication, ActionCostType.BlueShield, blueShieldBaseTrait);
-
-    // private readonly static Trait yellowThornBaseTrait = new Trait(StatSourceNameList.yellowThornKey, TraitType.Charge, "The will to hinder. " + AbilityList.yellowThornAcquisitionMethodExplanation, "Yellow Thorn");
-    // private readonly static StackableTrait yellowThorn = new StackableTrait(Constants.zeroStacksAtStart, Constants.oneStackPerApplication, ActionCostType.YellowThorn, yellowThornBaseTrait);
-
-    // private readonly static Trait greenLeafBaseTrait = new Trait(StatSourceNameList.greenLeafKey, TraitType.Charge, "The will to heal. " + AbilityList.greenLeafAcquisitionMethodExplanation, "Green Leaf");
-    // private readonly static StackableTrait greenLeaf = new StackableTrait(Constants.zeroStacksAtStart, Constants.oneStackPerApplication, ActionCostType.GreenLeaf, greenLeafBaseTrait);
-
-    // private readonly static StackableTrait[] charismaPassiveStackableTraits = new StackableTrait[] { redKnife, blueShield, yellowThorn, greenLeaf };
-
     private readonly static Trait charismaPassivesBaseTrait = new Trait(StatSourceNameList.exuberanceKey, TraitType.Charge, "The energies that draw others to you, and inspire them to follow your example.", iconName: "");
-    // public readonly static MultiStackTrait charismaPassives = new MultiStackTrait(charismaPassivesBaseTrait, charismaPassiveStackableTraits);
 
 	public readonly static Trait stonewall = new ShieldTrait(StatSourceNameList.stonewallKey, TraitType.Protection, "This creature will take 75% less damage until the following turn.", "Stonewall", Constants.twoRoundDuration, false);
 

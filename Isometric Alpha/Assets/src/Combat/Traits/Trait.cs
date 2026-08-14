@@ -222,6 +222,12 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         return false;
     }
 
+    public virtual List<GridCoords> getSpawnRequirements()
+    {
+        return null;
+    }
+
+
     public virtual void removeStacks(ActionCostType costType, int stacksToRemove)
     {
         //empty on purpose
@@ -671,6 +677,11 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         }
 
         return other.getName().Equals(getName());
+    }
+
+    public override int GetHashCode()
+    {
+        return getName().GetHashCode();
     }
 
     public string getApplicationDescription()
