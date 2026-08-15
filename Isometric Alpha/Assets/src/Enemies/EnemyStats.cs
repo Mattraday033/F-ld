@@ -79,7 +79,7 @@ public class EnemyStats : Stats
 
     public override GameObject instantiateCombatSprite(List<GridCoords> coords)
     {
-        SpawnDetails spawnDetails = State.enemyPackInfo.getNextSpawnDetails();
+        SpawnDetails spawnDetails = obtainSpawnDetails();
 
         if(spawnDetails != null)
         {
@@ -94,6 +94,7 @@ public class EnemyStats : Stats
 
         return combatSprite;
     }
+    
     public override string getCombatSpriteName()
     {
         return PrefabNames.enemySprite;

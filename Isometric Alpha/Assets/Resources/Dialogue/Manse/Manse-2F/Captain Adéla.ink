@@ -30,7 +30,7 @@ We grew lax and unclamped our boots from your necks for but an instant, and you 
         Of course not. I was hand picked by the Director himself to lead his honorguard. To give in to you is unthinkable.
         ->1b
 
-    +How evil you make our freedom sound.
+    +How evil you make our freedom seem.
 
         I wish freedom on you like I wish it upon a wildfire, or a plague. I'd rather die than allow your kind the freedom to spread as you please.
 
@@ -38,6 +38,9 @@ We grew lax and unclamped our boots from your necks for but an instant, and you 
 
     +If a system demands constant vigilance, then it is doomed to fail. No one can be on their guard forever.
         ->1c
+
+    +Let our servitude end! Die slaver! <Combat>
+        ->Combat
 
     +Your rhetoric means nothing to me. Let the inevitable commence. <Combat>
         ->Combat

@@ -88,11 +88,14 @@ public class LargeEnemyStats : EnemyStats
     {
         if(spawnDetails == null)
         {
-            spawnDetails = State.enemyPackInfo.getNextSpawnDetails();
+            spawnDetails = obtainSpawnDetails();
             if(spawnDetails == null)
             {
                 return null;
             }
+        } else
+        {
+            obtainedSpawnDetails = true;
         }
 
         positions = spawnDetails.allSpawnPositions.Select(p => p.clone()).ToList();

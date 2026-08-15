@@ -177,8 +177,22 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         return combatSprite;
     }
 
+    protected SpawnDetails obtainSpawnDetails()
+    {
+        SpawnDetails spawnDetails = null;
 
+        if(!obtainedSpawnDetails)
+        {
+            spawnDetails = State.enemyPackInfo.getNextSpawnDetails();
+        }
 
+        obtainedSpawnDetails = true;
+
+        return spawnDetails;
+    }
+
+    protected bool obtainedSpawnDetails = false;
+    
     public virtual void setUpComponents(ComponentList list)
     {
         healthBarManager = list.healthBarManager;
