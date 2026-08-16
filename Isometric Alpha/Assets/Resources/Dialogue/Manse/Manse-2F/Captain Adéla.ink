@@ -18,7 +18,7 @@ changeCamTarget({adelaIndex})
 
 See what events have escalated to: dirty, ragged slaves marching about the Manse, looting and killing as they go. Your lot are always but one step from a riot. 
 
-playAnimation({adelaIndex},Idle_Back)
+playAnimation({adelaIndex},Secondary_Idle_Back)
 
 We grew lax and unclamped our boots from your necks for but an instant, and you took the oppurtunity to cause havoc. And as Captain of the Guard, it falls to me to put things right.
 
@@ -32,14 +32,14 @@ We grew lax and unclamped our boots from your necks for but an instant, and you 
 
     +How evil you make our freedom seem.
 
-        I wish freedom on you like I wish it upon a wildfire, or a plague. I'd rather die than allow your kind the freedom to spread as you please.
+        I wish freedom on you like I wish it upon a wildfire, or a plague. I'd rather die than allow your kind the space to spread as you please.
 
         ->haveItYourWay
 
     +If a system demands constant vigilance, then it is doomed to fail. No one can be on their guard forever.
         ->1c
 
-    +Let our servitude end! Die slaver! <Combat>
+    +Our servitude ends! Die slaver! <Combat>
         ->Combat
 
     +Your rhetoric means nothing to me. Let the inevitable commence. <Combat>
@@ -50,7 +50,7 @@ We grew lax and unclamped our boots from your necks for but an instant, and you 
 Violence is inevitable in all parts of life. A warrior knows this and prepares accordingly.
 
     +What a lame excuse. What other slice of your life comes close to this? 
-        This is a waste of time! While you blather on, your compatriots continue their rampage! I'm done talking, raise your weapons!
+        \*The captain shakes her head.* This is a waste of time! While you blather on, your compatriots continue their rampage! I'm done talking, raise your weapons!
 
         ->haveItYourWay
 

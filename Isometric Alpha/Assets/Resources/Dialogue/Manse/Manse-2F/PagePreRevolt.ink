@@ -821,7 +821,7 @@ Yes, you have. Had even a fraction of their number survived, we may have been ab
 playAnimation({leftGuardIndex},Idle_Back)
 playAnimation({rightGuardIndex},Idle_Back)
 playAnimation({taborBehindDeskIndex},Idle_Front)
-playAnimation({adelaIndex},Idle_Front)
+playAnimation({adelaIndex},Secondary_Idle_Front)
 
 Overseer Gáspár, for severe dereliction of duty and cowardice in the face of the enemy, I am placing you under arrest. Considering the importance of our mission here, your punishment shall be execution, to be carried out within the hour.
 

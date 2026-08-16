@@ -69,6 +69,9 @@ public class SelectorManager : MonoBehaviour
         CombatUIModule.OnHideCombatUI.AddListener(hideCurrentHoverUI);
 
         CombatStateManager.AfterCombatantsSpawn.AddListener(movePlayerCursorToPlayerCharacter);
+
+        CombatActionOrderRow.OnPointerEnterCombatActionOrderRow.AddListener(hidePressEPrompt);
+        CombatActionOrderRow.OnPointerExitCombatActionOrderRow.AddListener(showPressEPrompt);
     }
 
     private void OnDestroy()
@@ -91,6 +94,9 @@ public class SelectorManager : MonoBehaviour
         CombatUIModule.OnHideCombatUI.RemoveListener(hideCurrentHoverUI);
 
         CombatStateManager.AfterCombatantsSpawn.RemoveListener(movePlayerCursorToPlayerCharacter);
+
+        CombatActionOrderRow.OnPointerEnterCombatActionOrderRow.RemoveListener(hidePressEPrompt);
+        CombatActionOrderRow.OnPointerExitCombatActionOrderRow.RemoveListener(showPressEPrompt);
     }
 
     private void setFirstSelectorVisibility()
@@ -217,6 +223,22 @@ public class SelectorManager : MonoBehaviour
 			instance.pressEPrompt = null;
 		}
 	}
+
+    private static void hidePressEPrompt()
+    {
+		if (instance != null && instance.pressEPrompt != null)
+		{
+			instance.pressEPrompt.SetActive(false);
+		}
+    }
+
+    private static void showPressEPrompt()
+    {
+		if (instance != null && instance.pressEPrompt != null)
+		{
+			instance.pressEPrompt.SetActive(true);
+		}
+    }
 
 	public static void deactivateCombatantInfoUIHoverPanel()
 	{

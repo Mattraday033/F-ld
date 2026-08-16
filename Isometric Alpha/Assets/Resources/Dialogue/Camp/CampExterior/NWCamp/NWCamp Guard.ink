@@ -490,7 +490,7 @@ changeCameraTarget({crowdIndex})
 
 setIdleOfNPCsByName(Guard3,Idle_Back)
 setIdleOfNPCsByName(Guard4,Idle_Front)
-playAnimation({adelaIndex},Idle_Front)
+playAnimation({adelaIndex},Secondary_Idle_Front)
 
 \*The Lovashi draw their weapons and begin to move towards you with ill intent.*
 

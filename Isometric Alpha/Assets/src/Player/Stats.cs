@@ -4,8 +4,8 @@ using System.IO;
 using System.Linq;
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Events;
+using UnityEngine.UI; 
+using UnityEngine.Events; 
 
 
 public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInBlocks
@@ -192,7 +192,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     }
 
     protected bool obtainedSpawnDetails = false;
-    
+
     public virtual void setUpComponents(ComponentList list)
     {
         healthBarManager = list.healthBarManager;
@@ -640,9 +640,26 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
         if (moveSprite && positions.Count > 0)
         {
-            CombatGrid.updateStatsSpritePosition(positions[0]);
+            updateSpritePosition();
         }
     }
+
+	public virtual void updateSpritePosition()
+	{
+        int coordsSum = 0;
+        GridCoords lowestYPosCoords = positions[0];
+
+        foreach(GridCoords position in positions)
+        {
+            if(position.sum() > coordsSum)
+            {
+                coordsSum = position.sum();
+                lowestYPosCoords = position;
+            }
+        }
+
+		combatSprite.transform.position = CombatGrid.getPositionAt(lowestYPosCoords);
+	}
 
     public abstract int getTotalArmorRating();
     public virtual int getTotalArmorShred()

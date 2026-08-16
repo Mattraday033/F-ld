@@ -16,7 +16,6 @@ public class CutOutMaskInternalBlockerManager : MonoBehaviour
     {
         if(instance != null)
         {
-            Debug.LogError("duplicate instance of CutOutMaskInternalBlockerManager");
             Destroy(instance);
         }
 

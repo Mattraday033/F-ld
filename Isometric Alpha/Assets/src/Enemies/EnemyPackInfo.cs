@@ -89,6 +89,12 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
 
         this.spawnDetailsList = spawnDetailsList;
 
+        if(this.spawnDetailsList != null)
+        {
+            CombatStateManager.OnCombatStart.AddListener(() => currentSpawnDetailsIndex = 0);
+            LoadSaveFile.OnLoadResetData.AddListener(() => currentSpawnDetailsIndex = 0);
+        }
+
         this.alwaysSurprised = alwaysSurprised;
 
         this.winCon = winCon ?? WinLoseConditionList.defeatAllEnemies;
@@ -194,12 +200,12 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
 
     public SpawnDetails getNextSpawnDetails()
     {
-        if(spawnDetailsList.Count == 0)
+        if(spawnDetailsList == null || spawnDetailsList.Count == 0 || currentSpawnDetailsIndex >= spawnDetailsList.Count)
         {
             return null;
         }
 
-        if(currentSpawnDetailsIndex < 0 || currentSpawnDetailsIndex >= spawnDetailsList.Count)
+        if(currentSpawnDetailsIndex < 0)
         {
             currentSpawnDetailsIndex = 0;
         }

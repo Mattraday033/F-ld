@@ -54,8 +54,9 @@ public class SpawnDetails
 public class LargeEnemyStats : EnemyStats
 {
 
-    #region Global Variables
+    #region Variables
     public SpawnDetails spawnDetails;
+    private bool useAverageSpritePosition;
 
     #endregion
 
@@ -66,13 +67,21 @@ public class LargeEnemyStats : EnemyStats
 
     #region Constructors
 
-    public LargeEnemyStats(string key, int armor, int tHP, Trait[] traits, CombatAction combatAction = null, Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary = null) :
+    public LargeEnemyStats( string key, 
+                            int armor, 
+                            int tHP, 
+                            Trait[] traits, 
+                            CombatAction combatAction = null, 
+                            Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary = null,
+                            bool useAverageSpritePosition = false) :
     base(key, armor, tHP, traits: traits, combatAction: combatAction, animationAudioClipDictionary: animationAudioClipDictionary)
     {
         if(!traits.Contains(TraitList.large) && !traits.Contains(TraitList.immobile))
         {
             traitContainer.addTrait(TraitList.large);
         }
+
+        this.useAverageSpritePosition = useAverageSpritePosition;
     }
 
     #endregion
@@ -115,12 +124,17 @@ public class LargeEnemyStats : EnemyStats
 
     public void setHealthBarToAverageWorldPosition()
     {
-        healthBarManager.setPosition(Helpers.getAveragePosition(spawnDetails.getAllSpawnWorldPositions()));
+        healthBarManager.setPosition(getAveragePosition());
     }
 
     public override bool multiSpaceEnemy()
     {
         return true;
+    }
+
+    private Vector3 getAveragePosition()
+    {
+        return Helpers.getAveragePosition(spawnDetails.getAllSpawnWorldPositions());
     }
 
     #endregion

@@ -146,7 +146,8 @@ new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, Abil
                                                                                 TraitList.indomitable
                                                                             },
                                                                             AbilityList.getAbility(null, AbilityList.shoreUpKey),
-                                                                            animationAudioClipDictionary: AnimationSFXDictionaryList.femaleHumanAudioDictionary));
+                                                                            animationAudioClipDictionary: AnimationSFXDictionaryList.femaleHumanAudioDictionary,
+                                                                            useAverageSpritePosition: true));
 
         enemyStatsDict.Add(NPCNameList.barricade, new MultiAnimationEnemyStats(NPCNameList.barricade,
                                                                                 Constants.twentyFiveArmor,

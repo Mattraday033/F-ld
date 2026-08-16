@@ -419,7 +419,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         }
 
         shadow.flipX = facing.getFacing() == Facing.NorthWest || 
-                        facing.getFacing() == Facing.SouthEast;
+                        facing.getFacing() == Facing.SouthEast || 
+                        flipShadowByName();
 
         switch(facing.getFacing())
         {
@@ -439,6 +440,22 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         {
             setAllShadowDirections(transform.GetComponent<SpriteRenderer>());
         }
+    }
+
+    private bool flipShadowByName()
+    {
+        if(CombatStateManager.inCombat && linkedStats != null)
+        {
+            switch(linkedStats.getName())
+            {
+                case NPCNameList.captainAdela:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        return false;
     }
 
     private bool canChangeShadowFacing()

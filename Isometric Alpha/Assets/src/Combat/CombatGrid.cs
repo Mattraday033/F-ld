@@ -74,19 +74,6 @@ public static class CombatGrid
 		return (positionIsOnAlliedSide(firstCoords) && positionIsOnAlliedSide(secondCoords)) || (positionIsOnEnemySide(firstCoords) && positionIsOnEnemySide(secondCoords));
     }
 
-	public static void updateStatsSpritePosition(GridCoords newCoords)
-	{
-		Stats combatant = getCombatantAtCoords(newCoords);
-		
-		if(combatant == null || combatant.combatSprite == null)
-		{
-			return;
-		}
-		
-		combatant.combatSprite.transform.position = getPositionAt(newCoords.row, newCoords.col);
-		// Helpers.updateGameObjectPosition(combatant.combatSprite);
-	}
-	
 	public static void setCombatantAtCoords(int rowIndex, int colIndex, Stats newCombatant)
 	{
 		setCombatantAtCoords(new GridCoords(rowIndex, colIndex), newCombatant);

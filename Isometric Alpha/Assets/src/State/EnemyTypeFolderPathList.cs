@@ -273,6 +273,15 @@ public static class EnemyTypeFolderPathList
     {
         switch(DialogueList.scrubNameOfEndNumbers(enemyType))
         {
+
+            case NPCNameList.captainAdela:
+                if(CombatStateManager.inCombat)
+                {
+                    return PrefabNames.shadow256x128;
+                } else
+                {
+                    return PrefabNames.shadow256x256;
+                }
             case MonsterNameList.horseCharger:
             case MonsterNameList.horseStomper:
             case NPCNameList.csalan:

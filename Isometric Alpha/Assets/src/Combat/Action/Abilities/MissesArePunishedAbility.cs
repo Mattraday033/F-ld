@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class MissesArePunishedAbility : Ability
 {
-	public static bool currentlyHealsTarget = true;
-	
 	public MissesArePunishedAbility(CombatActionSettings settings):
 	base(settings)
 	{
@@ -15,36 +13,45 @@ public class MissesArePunishedAbility : Ability
 
     public override void performCombatAction(List<Stats> targets)
     {
-        bool hasTargets = false;
-
-        foreach (Stats targetCombatant in targets)
+        if (!hasTargets())
         {
-            if (targetCombatant != null && !targetCombatant.isDead())
-            {
-                hasTargets = true;
-                break;
-            }
-        }
-
-        if (!hasTargets)
-        {
-            currentlyHealsTarget = false;
-
             Stats targetCombatant = getActorStats();
 
             sendProjectileAt(getActorCoords(), targetCombatant, 1);
         }
         else
         {
-            currentlyHealsTarget = true;
-
             base.performCombatAction(targets);
         }
     }
 
+    private bool hasTargets()
+    {
+        Selector selector = getSelector();
+
+        if(selector == null)
+        {
+            return false;
+        }
+
+        List<Stats> targets = selector.getAllTargets();
+
+        foreach (Stats targetCombatant in targets)
+        {
+            if (targetCombatant != null && !targetCombatant.isDead())
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+
     public override bool healsTarget()
 	{
-		return currentlyHealsTarget;
+		return hasTargets();
 	}
 
 	public override string getRangeTitle()

@@ -19,6 +19,8 @@ public class ClockwiseTargetPriorityTrait : TargetPriorityTrait
 	
 	public override Selector findTargetLocation(Selector selector, List<Stats> listOfTargets)
 	{		
+        selector = selector.clone();
+
 		for(int positionsIndex = 0; positionsIndex < positions.Length; positionsIndex++)
 		{
 			if(CombatStateManager.turnNumber % positions.Length == positionsIndex)
@@ -29,7 +31,10 @@ public class ClockwiseTargetPriorityTrait : TargetPriorityTrait
 			}
 		}
 		
-		throw new IOException("Unexpected number : " + CombatStateManager.turnNumber);	//should never happen
+        Debug.LogError("Unexpected number : " + CombatStateManager.turnNumber);
+
+        return selector;
+
 	}
 	
 }

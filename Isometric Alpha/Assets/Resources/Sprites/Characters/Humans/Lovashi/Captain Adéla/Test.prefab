@@ -32,7 +32,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 902665109, guid: 945b459fb431af047a69fce95a1f5ff7,
+        type: 3}
     - target: {fileID: 3088928631249601841, guid: ee590a245bc8e5548bac3f88e182284c,
         type: 3}
       propertyPath: m_SortingLayer
@@ -40,8 +41,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3088928631249601841, guid: ee590a245bc8e5548bac3f88e182284c,
         type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088928631249601841, guid: ee590a245bc8e5548bac3f88e182284c,
+        type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5210974832025453308, guid: ee590a245bc8e5548bac3f88e182284c,
         type: 3}

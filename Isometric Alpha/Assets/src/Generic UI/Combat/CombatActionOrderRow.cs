@@ -11,6 +11,9 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 {
     public readonly static UnityEvent<Stats, bool> HighlightRow = new UnityEvent<Stats, bool>();
 
+    public readonly static UnityEvent OnPointerEnterCombatActionOrderRow = new UnityEvent();
+    public readonly static UnityEvent OnPointerExitCombatActionOrderRow = new UnityEvent();
+
 	public NestedDescriptionPanelMouseListener nestedDescriptionPanelMouseListener;
 
 	private GameObject targetDisplaySelector;
@@ -87,6 +90,8 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 			return;
 		}
 
+        OnPointerEnterCombatActionOrderRow.Invoke();
+
 		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
 
         if(actionBeingDescribed != null &&
@@ -114,6 +119,8 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
         {
             return;
         }
+
+        OnPointerExitCombatActionOrderRow.Invoke();
 
 		removeHoverDataFromScreen();
 	}

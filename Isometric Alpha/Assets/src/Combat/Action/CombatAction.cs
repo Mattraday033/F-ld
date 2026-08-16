@@ -36,6 +36,11 @@ public struct GridCoords
 		col = c;
 	}
 
+    public int sum()
+    {
+        return row + col;
+    }
+
 	public override string ToString()
 	{
 		return "(Row: " + row + ", Col: " + col + ")";
