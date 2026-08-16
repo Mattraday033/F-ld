@@ -60,12 +60,18 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
         CombatStateManager.OnActivityChangeToInEscapeMenu.AddListener(disableHoverCollider);
         CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(enableHoverCollider);
+        
+        CombatStateManager.OnActivityChangeToResolveTurnWarning.AddListener(disableHoverCollider);
+        CombatStateManager.OnActivityChangeFromResolveTurnWarning.AddListener(enableHoverCollider);
     }
 
     private void OnDestroy()
     {
         CombatStateManager.OnActivityChangeToInEscapeMenu.RemoveListener(disableHoverCollider);
         CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveListener(enableHoverCollider);
+
+        CombatStateManager.OnActivityChangeToResolveTurnWarning.RemoveListener(disableHoverCollider);
+        CombatStateManager.OnActivityChangeFromResolveTurnWarning.RemoveListener(enableHoverCollider);
     }
 
     private void disableHoverCollider()

@@ -44,7 +44,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 				listOfTargets = CombatGrid.getAllAliveAllyCombatants();
 			}
 			
-			Selector envCombatActionSelector = targetingTrait.findTargetLocation(SelectorList.getByName(envCombatAction.getRangeName()), listOfTargets);
+			Selector envCombatActionSelector = targetingTrait.findTargetLocation(SelectorFactory.buildByTemplate(envCombatAction.getRangeTemplate()), listOfTargets);
 			
 			if(envCombatActionSelector == null)
 			{
@@ -161,7 +161,7 @@ public static class EnvironmentalCombatActionList
     private static SummonAbility prepareSummonWaveAbility(string key, int row)
     {
         SummonAbility summonAbility = AbilityList.getAbility(EnemyStatsList.getEnemyStats(NPCNameList.takacs), key) as SummonAbility;
-        Selector summonSelector = SelectorList.getByName(SelectorList.horizontalThreeName).clone();
+        Selector summonSelector = SelectorFactory.buildByTemplate(SelectorTemplate.HorizontalThree).clone();
         summonSelector.setToLocation(new GridCoords(row,0));
         summonAbility.setSelector(summonSelector);
 

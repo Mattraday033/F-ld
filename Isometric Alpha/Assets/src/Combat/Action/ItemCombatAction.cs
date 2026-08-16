@@ -8,7 +8,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 	private UsableItem sourceItem;
 
 	public ItemCombatAction(Stats actor, UsableItem sourceItem):
-    base(actor, SelectorList.getByName(sourceItem.getRangeName()))
+    base(actor, SelectorFactory.buildByTemplate(sourceItem.getRangeTemplate()))
 	{
 		this.sourceItem = sourceItem.clone() as UsableItem;
         this.sourceItem.equipTarget = actor;
@@ -29,14 +29,9 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		return sourceItem.getKey();
 	}
 
-	public override string getRangeName()
+	public override SelectorTemplate getRangeTemplate()
 	{
-		return sourceItem.getRangeName();
-	}
-
-	public override string getRangeTitle()
-	{
-		return getRangeName();
+		return sourceItem.getRangeTemplate();
 	}
 
 	public override Item getSourceItem()

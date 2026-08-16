@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class MissesArePunishedAbility : Ability
 {
-	public MissesArePunishedAbility(CombatActionSettings settings):
+    private int missDamageMult = 3;
+
+	public MissesArePunishedAbility(CombatActionSettings settings, int missDamageMult = 3):
 	base(settings)
 	{
-
+        this.missDamageMult = missDamageMult;
 	}
 
     public override void performCombatAction(List<Stats> targets)
@@ -25,10 +27,20 @@ public class MissesArePunishedAbility : Ability
         }
     }
 
+    public override int findFinalDamage(Stats targetCombatant, bool isCrit)
+    {
+        int finalDamage = base.findFinalDamage(targetCombatant, isCrit);
+
+        if(!hasTargets())
+        {
+            finalDamage *= missDamageMult;
+        } 
+     
+        return finalDamage;
+    }
+
     private bool hasTargets()
     {
-        Selector selector = getSelector();
-
         if(selector == null)
         {
             return false;
@@ -47,8 +59,6 @@ public class MissesArePunishedAbility : Ability
         return false;
     }
 
-
-
     public override bool healsTarget()
 	{
 		return hasTargets();
@@ -56,31 +66,28 @@ public class MissesArePunishedAbility : Ability
 
 	public override string getRangeTitle()
 	{
-		return determineRangeIndex();
+		return determineRangeIndex().ToFriendlyString();
 	}
 
-	public override string getRangeName()
+	public override SelectorTemplate getRangeTemplate()
 	{
 		return determineRangeIndex();
 	}
 
-	private string determineRangeIndex()
+	private SelectorTemplate determineRangeIndex()
 	{
 		if(CombatStateManager.turnNumber % 4 == 1)
 		{
-			return SelectorList.reverseHookOneName; 	//northwest
+			return SelectorTemplate.ReverseHookOne; 	//northwest
 		} else if(CombatStateManager.turnNumber % 4 == 2)
 		{
-			return SelectorList.hookOneName; 			//northeast
+			return SelectorTemplate.HookOne; 			//northeast
 		} else if(CombatStateManager.turnNumber % 4 == 3)
 		{
-			return SelectorList.reverseL_OneName; 	//southeast
-		} else if(CombatStateManager.turnNumber % 4 == 0)
+			return SelectorTemplate.ReverseL_One; 	//southeast
+		} else //CombatStateManager.turnNumber % 4 == 0
 		{
-			return SelectorList.L_OneName; 				//southwest
-		} else
-		{
-			throw new IOException("Unexpected number : " + CombatStateManager.turnNumber);	//should never happen
-		}
+			return SelectorTemplate.L_One; 				//southwest
+		} 
 	}
 }

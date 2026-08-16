@@ -11,19 +11,19 @@ public class Weapon : EquippableItem, IJSONConvertable
 	public const string subtype = "Weapon";
 	public const int mainHandSlotIndex = 6;
 
-    private string rangeName;
+    private SelectorTemplate rangeTemplate;
     private string iconName;
     private bool isTwoHanded;
     private EffectAnimationType effectAnimationType;
 
     public Trait traitToApply;
 
-	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, string rangeName, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash, Trait traitToApply = null) :
+	public Weapon(ItemListID listId, string key, string loreDescription, string damageFormula, string critFormula, string iconName, SelectorTemplate rangeTemplate, int worth, bool isTwoHanded, EffectAnimationType effectAnimationType = EffectAnimationType.Slash, Trait traitToApply = null) :
     base(listId, key, loreDescription, damageFormula, critFormula, subtype, worth)
 	{
 		this.isTwoHanded = isTwoHanded;
 		this.iconName = iconName;
-		this.rangeName = rangeName;
+		this.rangeTemplate = rangeTemplate;
         this.effectAnimationType = effectAnimationType;
         this.traitToApply = traitToApply;
 	}
@@ -61,12 +61,12 @@ public class Weapon : EquippableItem, IJSONConvertable
 
 	public string getRange()
 	{
-		return getRangeName();
+		return getRangeTemplate().ToFriendlyString();
 	}
 
-	public string getRangeName()
+	public SelectorTemplate getRangeTemplate()
 	{
-		return rangeName;
+		return rangeTemplate;
 	}
 
 	public override bool removeFromInventoryWhenCreatingCombatAction()
@@ -212,7 +212,7 @@ public class Weapon : EquippableItem, IJSONConvertable
 
         buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeName()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRange()));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getWorthBlock(getWorthForDisplay()));
 

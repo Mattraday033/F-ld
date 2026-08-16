@@ -49,10 +49,10 @@ public static class TraitList
 
 	public readonly static GridCoords[] fourCornersEnemySide = new GridCoords[]
                                                                                 { 
-                                                                                    new GridCoords(3,0),
+                                                                                    new GridCoords(2,0),
                                                                                     new GridCoords(0,0),
-                                                                                    new GridCoords(0,3),
-                                                                                    new GridCoords(3,3)
+                                                                                    new GridCoords(0,2),
+                                                                                    new GridCoords(2,2)
                                                                                 };
 
     public static Dictionary<string, Trait> dictionaryOfTraits;

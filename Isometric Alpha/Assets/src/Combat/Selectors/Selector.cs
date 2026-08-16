@@ -7,8 +7,8 @@ using System;
 [System.Serializable]
 public class Selector : ICloneable
 {
-	public string name;
-	
+	public SelectorTemplate? template;
+
 	private bool alwaysWhite = false;
 	public bool alwaysRed = false;
     public bool hoverSelector = false;
@@ -60,14 +60,15 @@ public class Selector : ICloneable
     public int currentCol { private set{} get { return (int) rect.x; }}
 
 	public Selector(
-		string name,
         int width,
         int height,
 		GridCoords startingCoords,
 		bool[,] spaces,
-        bool alwaysWhite = false)
+        bool alwaysWhite = false,
+        SelectorTemplate? template = null)
 	{
-		this.name = name;
+
+		this.template = template;
 
 		this.startingCoords = startingCoords;
 
@@ -127,7 +128,15 @@ public class Selector : ICloneable
 	
 	public override int GetHashCode()
 	{
-		return name.GetHashCode();
+        string allCoords = "";
+        GridCoords[] gridCoords = getAllSelectorCoords();
+
+        foreach(GridCoords coords in gridCoords)
+        {
+            allCoords += coords.ToString();
+        }
+
+		return allCoords.GetHashCode();
 	}
 
 	public virtual bool wasGenerated()
@@ -359,7 +368,7 @@ public class Selector : ICloneable
 
         if(CombatStateManager.inCombat && 
             CombatStateManager.currentActivity == CurrentActivity.Tutorial &&
-            !name.Equals(SelectorList.playerCursorName))
+            template != SelectorTemplate.PlayerCursor)
         {
             switch(TutorialSequenceStep.getCurrentTutorialSelectorState())
             {

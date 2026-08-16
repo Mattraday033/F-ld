@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -468,7 +468,7 @@ public static class DamageCalculator
 
 				CombatAction fear = AbilityList.getAbility(currentStatSource, AbilityList.fearName);
 
-				Selector targetSelector = TraitList.chaotic.findTargetLocation(SelectorList.getByName(fear.getRangeName()), CombatGrid.getAllAliveEnemyCombatants());
+				Selector targetSelector = TraitList.chaotic.findTargetLocation(SelectorFactory.buildByTemplate(fear.getRangeTemplate()), CombatGrid.getAllAliveEnemyCombatants());
 
 				if (currentStatSource.positions.Count > 0)
 				{

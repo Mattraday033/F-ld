@@ -39,11 +39,11 @@ public static class SelectorGenerator
             selectorCoords = new GridCoords(CombatGrid.enemyRowUpperBounds, CombatGrid.colLeftBounds);
         }
 
-		return new Selector(name: generatedSelectorName,
-                            width:generatedSelectorWidthAndHeight,
+		return new Selector(width:generatedSelectorWidthAndHeight,
                             height:generatedSelectorWidthAndHeight,
                             startingCoords: selectorCoords,
-                            spaces:  generateSpaces(allTileGridCoords));
+                            spaces:  generateSpaces(allTileGridCoords),
+                            template: SelectorTemplate.Generated);
 	}
 	
 	private static GridCoords[] compileSelectorChildTileCoords(Selector[] selectors)

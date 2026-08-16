@@ -17,15 +17,15 @@ public class BuffChargeUpAbility : ChargeUpAbility
         return false;
 	}
 
-	public override string getRangeName()
+	public override SelectorTemplate getRangeTemplate()
 	{
 		if (isCharged())
 		{
-			return actionWhenCharged.getRangeName();
+			return actionWhenCharged.getRangeTemplate();
 		}
 		else
 		{
-			return SelectorList.boxThreeName;
+			return SelectorTemplate.BoxThree;
 		}
 	}
 
@@ -33,11 +33,11 @@ public class BuffChargeUpAbility : ChargeUpAbility
 	{
 		if (isCharged())
 		{
-			return actionWhenCharged.getRangeName();
+			return actionWhenCharged.getRangeTemplate().ToFriendlyString();
 		}
 		else
 		{
-			return SelectorList.boxThreeName;
+			return SelectorTemplate.BoxThree.ToFriendlyString();
 		}
 	}
 
@@ -61,7 +61,7 @@ public class BuffChargeUpAbility : ChargeUpAbility
 
             newTraitContainer.addTrait(TraitList.specificHexadecupleBoxEnemySide);
 
-            return newTraitContainer.findTargetLocation(SelectorList.getByName(getRangeName()), new List<Stats>());
+            return newTraitContainer.findTargetLocation(SelectorFactory.buildByTemplate(getRangeTemplate()), new List<Stats>());
         }
     }
 }

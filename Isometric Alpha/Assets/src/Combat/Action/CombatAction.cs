@@ -153,13 +153,18 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public Stats actorStats;
 
-    private Selector selector; //the selector the player used to identify the spaces affected on the grid
-                               //selector should be a snapshot of where the selector was when choosing the target
-                               //for this action. The selector may change locations between choosing the target of
-                               //this action and when the action is resolved, so be sure to use selector.clone() when
-                               //instantiating an action.
-
-    private string selectorName;
+    private Selector _Selector;
+    protected Selector selector
+    {
+        get
+        {
+            return _Selector;
+        }
+        set
+        {
+            _Selector = value;
+        }
+    }
 
     public int cooldownRemaining { get; private set; } = 0;
 
@@ -671,12 +676,12 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         if (isSelfTargeting())
         {
-            Selector selector = SelectorList.getByName(getRangeName());
+            Selector selector = SelectorFactory.buildByTemplate(getRangeTemplate());
             selector.setToLocation(getActorCoords());
             return selector;
         }
 
-        return actor.traitContainer.findTargetLocation(SelectorList.getByName(getRangeName()), listOfTargets);
+        return actor.traitContainer.findTargetLocation(SelectorFactory.buildByTemplate(getRangeTemplate()), listOfTargets);
     }
 
     public void addPreviousTarget(GridCoords coords)
@@ -759,15 +764,18 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual Selector getNewRange()
     {
-        return SelectorList.getByName(getRangeName());
+        return SelectorFactory.buildByTemplate(getRangeTemplate());
     }
 
-    public virtual string getRangeName()
+    public virtual SelectorTemplate getRangeTemplate()
     {
-        return SelectorList.singleName;
+        return SelectorTemplate.Single;
     }
 
-    public abstract string getRangeTitle();
+	public virtual string getRangeTitle()
+	{
+		return getRangeTemplate().ToFriendlyString();
+	}
 
     public virtual void setSelector(Selector selector)
     {
@@ -821,7 +829,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual Selector getTertiarySelector()
     {
-        Selector tertiarySelector = SelectorList.getByName(SelectorList.singleName);
+        Selector tertiarySelector = SelectorFactory.buildByTemplate(SelectorTemplate.Single);
 
         //if (!tertiaryCoords.Equals(GridCoords.getDefaultCoords()))
         //{

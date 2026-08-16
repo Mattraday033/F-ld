@@ -100,8 +100,27 @@ public static class CombatGrid
         }
 
         combatantsDict[coords] = newCombatant;
+
+        removeNullCombatants();
 	}
 
+    private static void removeNullCombatants()
+    {
+        List<GridCoords> nullCoords = new List<GridCoords>();
+
+        foreach(GridCoords coords in combatantsDict.Keys)
+        {
+            if(combatantsDict[coords] == null)
+            {
+                nullCoords.Add(coords);
+            }
+        }
+
+        foreach(GridCoords nullCoord in nullCoords)
+        {
+            combatantsDict.Remove(nullCoord);
+        }
+    }
     public static GridCoords getNextAllyToJumpSelectorTo(GridCoords currentCoords)
     {
         return getNextCombatantToJumpSelectorTo(currentCoords, forward: true, ally: true);

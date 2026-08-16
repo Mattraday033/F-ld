@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class DoubleStrikeAbility : Ability
 {
-    private string secondAttackRangeIndex;
+    private SelectorTemplate secondAttackRangeIndex;
     private GridCoords secondaryCoords;
     private GridCoords tertiaryCoords = GridCoords.getDefaultCoords();
 
-    public DoubleStrikeAbility(CombatActionSettings settings, string secondAttackRangeIndex) :
+    public DoubleStrikeAbility(CombatActionSettings settings, SelectorTemplate secondAttackRangeIndex) :
     base(settings)
     {
         this.secondAttackRangeIndex = secondAttackRangeIndex;
@@ -61,7 +61,7 @@ public class DoubleStrikeAbility : Ability
 
     public override Selector getTertiarySelector()
     {
-        Selector tertiarySelector = SelectorList.getByName(secondAttackRangeIndex);
+        Selector tertiarySelector = SelectorFactory.buildByTemplate(secondAttackRangeIndex);
 
         if (!tertiaryCoords.Equals(GridCoords.getDefaultCoords()))
         {

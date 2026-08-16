@@ -13,22 +13,22 @@ public class CombatItem : UsableItem, IJSONConvertable
     private bool targetsEnemySection = false;
     protected bool healsTarget = false;
 
-	private string rangeName;
+	private SelectorTemplate rangeTemplate;
 	private bool itemUseRequiresAnAction;
 
-	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, string rangeName, bool useRequiresAnAction, bool targetsEnemySection = false, bool healsTarget = false, PlaySFXLogic OOCOnUseSFX = null) :
+	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, SelectorTemplate rangeTemplate, bool useRequiresAnAction, bool targetsEnemySection = false, bool healsTarget = false, PlaySFXLogic OOCOnUseSFX = null) :
     base(listID, key, loreDescription, useDescription, subtype, iconName, worth, OOCOnUseSFX)
 	{
-		this.rangeName = rangeName;
+		this.rangeTemplate = rangeTemplate;
 		this.itemUseRequiresAnAction = useRequiresAnAction;
 		this.targetsEnemySection = targetsEnemySection;		
 		this.healsTarget = healsTarget;		
 	}
 
-	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, string rangeName, bool useRequiresAnAction, int quantity, bool targetsEnemySection = false, bool healsTarget = false, PlaySFXLogic OOCOnUseSFX = null) :
+	public CombatItem(ItemListID listID, string key, string loreDescription, string useDescription, string subtype, string iconName, int worth, SelectorTemplate rangeTemplate, bool useRequiresAnAction, int quantity, bool targetsEnemySection = false, bool healsTarget = false, PlaySFXLogic OOCOnUseSFX = null) :
     base(listID, key, loreDescription, useDescription, subtype, iconName, worth, quantity, OOCOnUseSFX)
 	{
-		this.rangeName = rangeName;
+		this.rangeTemplate = rangeTemplate;
 		this.itemUseRequiresAnAction = useRequiresAnAction;
 		this.targetsEnemySection = targetsEnemySection;		
 		this.healsTarget = healsTarget;		
@@ -39,9 +39,9 @@ public class CombatItem : UsableItem, IJSONConvertable
         //Empty on purpose
     }
 
-	public override string getRangeName()
+	public override SelectorTemplate getRangeTemplate()
 	{
-		return rangeName;
+		return rangeTemplate;
 	}
 
     public override bool targetsAllySection()

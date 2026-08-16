@@ -24,7 +24,7 @@ public class Ability: CombatAction, IJSONConvertable
 	
 	private string critFormula;
 	
-	private string rangeName;
+	private SelectorTemplate rangeTemplate;
 	
 	private int maximumSlots;
 	
@@ -54,7 +54,7 @@ public class Ability: CombatAction, IJSONConvertable
     private EffectAnimationType effectAnimationType;
 
     public Ability(CombatActionSettings settings) :
-    base(null, SelectorList.getByName(settings.targetParams.rangeName))
+    base(null, SelectorFactory.buildByTemplate(settings.targetParams.rangeTemplate))
     {
         applySettings(settings);
     }
@@ -72,7 +72,7 @@ public class Ability: CombatAction, IJSONConvertable
 		critFormula = settings.damageParams.critFormula;
 		cannotDealDamage = settings.damageParams.cannotDealDamage;
 
-        rangeName = settings.targetParams.rangeName;
+        rangeTemplate = settings.targetParams.rangeTemplate;
 
         selfTargeting = settings.targetParams.selfTargeting;
         targetsOnlyAllies = settings.targetParams.targetsOnlyAllies;
@@ -146,7 +146,7 @@ public class Ability: CombatAction, IJSONConvertable
 	
 	public override string getRangeTitle()
 	{
-		return rangeName;
+		return rangeTemplate.ToFriendlyString();
 	}
 
     public override int[] getActionCosts()
@@ -241,9 +241,9 @@ public class Ability: CombatAction, IJSONConvertable
         return critFormula;
 	}
 	
-	public override string getRangeName()
+	public override SelectorTemplate getRangeTemplate()
 	{
-		return rangeName;
+		return rangeTemplate;
 	}
 	
 	public override int getMaximumSlots()

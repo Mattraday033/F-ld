@@ -13,14 +13,14 @@ public class EvolveAbility : Ability
 		this.actionWhenInAttackMode = actionWhenInAttackMode.clone();
 	}
 
-	public override string getRangeName()
+	public override SelectorTemplate getRangeTemplate()
 	{
 		if(inAttackMode())
 		{
-			return actionWhenInAttackMode.getRangeName();
+			return actionWhenInAttackMode.getRangeTemplate();
 		} else
 		{
-			return base.getRangeName();
+			return base.getRangeTemplate();
 		}
 	}
 
@@ -28,10 +28,10 @@ public class EvolveAbility : Ability
 	{
 		if(inAttackMode())
 		{
-			return actionWhenInAttackMode.getRangeName();
+			return actionWhenInAttackMode.getRangeTemplate().ToFriendlyString();
 		} else
 		{
-			return base.getRangeName();
+			return base.getRangeTemplate().ToFriendlyString();
 		}
 	}
 	

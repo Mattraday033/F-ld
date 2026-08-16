@@ -5,26 +5,26 @@ using UnityEngine;
 
 public static class Range
 {
-	public static GridCoords getRangeAllyStartingPosition(string rangeName)
+	public static GridCoords getRangeAllyStartingPosition(SelectorTemplate rangeTemplate)
 	{
-		GridCoords allyStartingPosition = SelectorList.getByName(rangeName).startingCoords;
+		GridCoords allyStartingPosition = SelectorFactory.buildByTemplate(rangeTemplate).startingCoords;
 
 		return new GridCoords(allyStartingPosition.row + 4, allyStartingPosition.col);
 	}
 
-	// public static GridCoords getRangeEnemyStartingPosition(string rangeName)
+	// public static GridCoords getRangeEnemyStartingPosition(SelectorTemplate rangeTemplate)
 	// {
-	// 	switch(rangeName)
+	// 	switch(rangeTemplate)
 	// 	{
-	// 		case SelectorList.singleName:
-	// 		case SelectorList.hookOneName:
+	// 		case SelectorTemplate.Single:
+	// 		case SelectorTemplate.HookOne:
 	// 			return new GridCoords(1,2);
-	// 		case SelectorList.boxTwoName:
-	// 		case SelectorList.reverseHookOneName:
+	// 		case SelectorTemplate.BoxTwo:
+	// 		case SelectorTemplate.ReverseHookOne:
 	// 			return new GridCoords(1,1);
-	// 		case SelectorList.reverseL_OneName:
-	// 		case SelectorList.horizontalThreeName:
-	// 		case SelectorList.horizontalFourName:
+	// 		case SelectorTemplate.ReverseL_One:
+	// 		case SelectorTemplate.HorizontalThree:
+	// 		case SelectorTemplate.HorizontalFour:
 	// 			return new GridCoords(2,1);
 	// 		default:
 	// 			return new GridCoords(2,2);
@@ -35,14 +35,14 @@ public static class Range
 	{
 		List<GlossaryEntry> allRangesGlossaryEntries = new List<GlossaryEntry>();
 
-		foreach(Selector selector in SelectorList.selectorDict.Values)
+		foreach(SelectorTemplate selectorTemplate in SelectorFactory.selectorDict.Keys)
 		{
-            if(selector.name.Equals(SelectorList.playerCursor.name))
+            if(selectorTemplate == SelectorTemplate.PlayerCursor)
             {
                 continue;
             }
 
-			GridGlossaryEntry gridGlossaryEntry = new GridGlossaryEntry(selector.name,"Range",getDefaultRangeCoords(selector.name));
+			GridGlossaryEntry gridGlossaryEntry = new GridGlossaryEntry(selectorTemplate.ToFriendlyString(),"Range",getDefaultRangeCoords(selectorTemplate));
 
 			allRangesGlossaryEntries.Add(gridGlossaryEntry);
 		}
@@ -50,9 +50,9 @@ public static class Range
 		return allRangesGlossaryEntries;
 	}
 
-	private static GridCoords[] getDefaultRangeCoords(string rangeName)
+	private static GridCoords[] getDefaultRangeCoords(SelectorTemplate rangeTemplate)
 	{
-		Selector selector = SelectorList.getByName(rangeName);
+		Selector selector = SelectorFactory.buildByTemplate(rangeTemplate);
 
 		return selector.getAllSelectorCoords();
 	}

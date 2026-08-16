@@ -37,7 +37,7 @@ public class GeneratedTargetPriorityTrait : TargetPriorityTrait
 		
 		for(int currentSelector = 0; currentSelector < spacesLeft; currentSelector++)
 		{	
-			Selector selector = targetParameters.findTargetLocation(SelectorList.getByName(SelectorList.singleName), listOfTargets);
+			Selector selector = targetParameters.findTargetLocation(SelectorFactory.buildByTemplate(SelectorTemplate.Single), listOfTargets);
 			
 			if(selector == null)
 			{

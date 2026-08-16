@@ -226,7 +226,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
                 Destroy(previewSelectorObject);
             }
 
-            Selector selectorClone = SelectorList.getByName(loadedCombatAction.getRangeName());
+            Selector selectorClone = SelectorFactory.buildByTemplate(loadedCombatAction.getRangeTemplate());
 
             // selectorClone.SetActive(true);
 
@@ -234,11 +234,11 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
             if (loadedCombatAction.isSelfTargeting())
             {
-                selectorClone.setToLocation(SelectorList.playerCursor.getCoords());
+                selectorClone.setToLocation(SelectorFactory.playerCursor.getCoords());
             }
             else if (loadedCombatAction.targetsAllySection())
             {
-                selectorClone.setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeName()));
+                selectorClone.setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeTemplate()));
             }
             else
             {
@@ -255,12 +255,12 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     {
         SelectorManager selectorManager = SelectorManager.getInstance();
 
-        loadedCombatAction.setSelector(SelectorList.getByName(loadedCombatAction.getRangeName()));
+        loadedCombatAction.setSelector(SelectorFactory.buildByTemplate(loadedCombatAction.getRangeTemplate()));
 
         SelectorManager.currentSelector = loadedCombatAction.getSelector();
 
         loadedCombatAction = setCombatActionSelectorStartingPosition(loadedCombatAction);
-        loadedCombatAction.setActor(CombatGrid.getCombatantAtCoords(SelectorList.playerCursor.getCoords()));
+        loadedCombatAction.setActor(CombatGrid.getCombatantAtCoords(SelectorFactory.playerCursor.getCoords()));
 
         getDescriptionPanelSlot().revertToPrimaryDescribable();
         getDescriptionPanelSlot().setPrimaryDescribable(loadedCombatAction);
@@ -279,7 +279,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (loadedCombatAction.isSelfTargeting())
         {
-            loadedCombatAction.getSelector().setToLocation(SelectorList.playerCursor.getCoords());
+            loadedCombatAction.getSelector().setToLocation(SelectorFactory.playerCursor.getCoords());
             loadedCombatAction.getSelector().selfTargeting = true;
             return action;
         }
@@ -288,18 +288,18 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (loadedCombatAction.targetsAllySection())
         {
-            if (loadedCombatAction.getRangeName() == SelectorList.boxThreeName)
+            if (loadedCombatAction.getRangeTemplate() == SelectorTemplate.BoxThree)
             {
-                loadedCombatAction.getSelector().setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeName()));
+                loadedCombatAction.getSelector().setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeTemplate()));
             }
             else
             {
-                loadedCombatAction.getSelector().setToLocation(SelectorList.playerCursor.getCoords());
+                loadedCombatAction.getSelector().setToLocation(SelectorFactory.playerCursor.getCoords());
             }
 
             return action;
         }
-        else if (!loadedCombatAction.targetsAllySection() && loadedCombatAction.getRangeName() == SelectorList.boxThreeName)
+        else if (!loadedCombatAction.targetsAllySection() && loadedCombatAction.getRangeTemplate() == SelectorTemplate.BoxThree)
         {
             loadedCombatAction.getSelector().setToStartLocation();
 

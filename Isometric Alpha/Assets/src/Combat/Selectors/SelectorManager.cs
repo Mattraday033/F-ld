@@ -101,7 +101,7 @@ public class SelectorManager : MonoBehaviour
 
     private void setFirstSelectorVisibility()
     {
-        // SelectorList.playerCursor.getSelectorObject().SetActive(CombatStateManager.whoseTurn == WhoseTurn.Player);
+        // SelectorFactory.playerCursor.getSelectorObject().SetActive(CombatStateManager.whoseTurn == WhoseTurn.Player);
     }
 
 	public static SelectorManager getInstance()
@@ -131,7 +131,7 @@ public class SelectorManager : MonoBehaviour
 
     public static void backOutOfAbilityMenu()
     {
-        setCurrentSelector(SelectorList.playerCursor);
+        setCurrentSelector(SelectorFactory.playerCursor);
 
         currentSelector.setToColor();
 
@@ -340,7 +340,7 @@ public class SelectorManager : MonoBehaviour
 		{
 			if (loadedCombatAction.requiresAnAction())
 			{
-				playerCombatActionManager.queueCombatAction(SelectorList.playerCursor, currentSelector, loadedCombatAction);
+				playerCombatActionManager.queueCombatAction(SelectorFactory.playerCursor, currentSelector, loadedCombatAction);
                 AudioManager.playChooseActorAbilityLocationSFX();
 			}
 			else
@@ -348,11 +348,10 @@ public class SelectorManager : MonoBehaviour
 				loadedCombatAction.performCombatAction();
 			}
 
-			SelectorList.resetAllSelectors();
 			Stats loadedActorStats = loadedCombatAction.getActorStats();
 			if (loadedActorStats != null && loadedActorStats.positions.Count > 0)
 			{
-				SelectorList.playerCursor.setToLocation(loadedActorStats.positions[0]);
+				SelectorFactory.playerCursor.setToLocation(loadedActorStats.positions[0]);
 			}
 
 			CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
@@ -426,9 +425,7 @@ public class SelectorManager : MonoBehaviour
 
 	public void finishChoosingTertiary(CombatAction loadedCombatAction)
 	{
-		playerCombatActionManager.queueCombatActionWithTertiary(SelectorList.playerCursor, currentSelector, loadedCombatAction);
-
-        SelectorList.resetAllSelectors();
+		playerCombatActionManager.queueCombatActionWithTertiary(SelectorFactory.playerCursor, currentSelector, loadedCombatAction);
 
 		currentSelector.setToLocation(loadedCombatAction.getActorCoords());
 
@@ -582,7 +579,7 @@ public class SelectorManager : MonoBehaviour
             return;
         }
 
-        visibleSelectors.Add(SelectorList.playerCursor);
+        visibleSelectors.Add(SelectorFactory.playerCursor);
 
         switch(CombatStateManager.currentActivity)
         {
@@ -614,7 +611,7 @@ public class SelectorManager : MonoBehaviour
                 break;
         }
 
-        if(currentSelector != SelectorList.playerCursor)
+        if(currentSelector != SelectorFactory.playerCursor)
         {
             visibleSelectors.Add(currentSelector);
         }
@@ -701,7 +698,7 @@ public class SelectorManager : MonoBehaviour
 
     public static void movePlayerCursorToPlayerCharacter()
     {
-        SelectorList.playerCursor.setToLocation(PartyManager.getPlayerStats().positions[0]);
+        SelectorFactory.playerCursor.setToLocation(PartyManager.getPlayerStats().positions[0]);
     }
 
     public static void updateAllDamagePreviews()
@@ -873,7 +870,7 @@ public class SelectorManager : MonoBehaviour
 
 	public static void resetCurrentSelector()
 	{
-		setCurrentSelector(SelectorList.playerCursor);
+		setCurrentSelector(SelectorFactory.playerCursor);
 	}
 
     [RuntimeInitializeOnLoadMethod]

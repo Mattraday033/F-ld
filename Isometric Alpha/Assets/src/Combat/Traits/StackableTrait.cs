@@ -19,15 +19,16 @@ public enum ActionCostType {
 
 public static class EnumDescriptionList
 {
-    public static string ToFriendlyString(this ActionCostType costType)
+    public static string ToFriendlyString(this Enum template)
     {
-        string name = costType.ToString();
+        string name = template.ToString();
         string newName = "";
 
         int index = 0;
         foreach(char c in name)
         {
-            if(Char.IsUpper(c) && index != 0)
+            if((Char.IsUpper(c) || Char.IsDigit(c)) && 
+                index != 0)
             {
                 newName += " " + c;
             } else
@@ -40,6 +41,7 @@ public static class EnumDescriptionList
 
         return newName;
     }
+
 
     public static Trait getCostTrait(this ActionCostType costType)
     {

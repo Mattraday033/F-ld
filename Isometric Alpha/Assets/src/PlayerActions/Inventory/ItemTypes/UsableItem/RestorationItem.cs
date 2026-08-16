@@ -10,14 +10,14 @@ public class RestorationItem : CombatItem, IJSONConvertable
 
     private TraitType traitTypeToRemove;
 
-    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, string rangeName, TraitType traitTypeToRemove, PlaySFXLogic OOCOnUseSFX = null) :
-    base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeName, useDoesNotRequireAnAction, OOCOnUseSFX: OOCOnUseSFX)
+    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, SelectorTemplate rangeTemplate, TraitType traitTypeToRemove, PlaySFXLogic OOCOnUseSFX = null) :
+    base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeTemplate, useDoesNotRequireAnAction, OOCOnUseSFX: OOCOnUseSFX)
     {
         this.traitTypeToRemove = traitTypeToRemove;
     }
 
-    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, string rangeName, TraitType traitTypeToRemove, int quantity, PlaySFXLogic OOCOnUseSFX = null) :
-     base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeName, useDoesNotRequireAnAction, quantity, OOCOnUseSFX: OOCOnUseSFX)
+    public RestorationItem(ItemListID listId, string key, string loreDescription, string useDescription, string iconName, int worth, SelectorTemplate rangeTemplate, TraitType traitTypeToRemove, int quantity, PlaySFXLogic OOCOnUseSFX = null) :
+     base(listId, key, loreDescription, useDescription, subtype, iconName, worth, rangeTemplate, useDoesNotRequireAnAction, quantity, OOCOnUseSFX: OOCOnUseSFX)
     {
         this.traitTypeToRemove = traitTypeToRemove;
     }

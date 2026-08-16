@@ -24,7 +24,7 @@ public static class TestScript
         // PartyManager.getPlayerStats().setLevel(1);
         // PartyManager.getPlayerStats().currentHealth = 1;
         // PartyManager.getPlayerStats().strength = 1;
-        PartyManager.getPlayerStats().dexterity = 2;
+        // PartyManager.getPlayerStats().dexterity = 2;
         // PartyManager.getPlayerStats().wisdom = 2;
         // PartyManager.getPlayerStats().charisma = 3;
 
@@ -39,11 +39,12 @@ public static class TestScript
 
         // PartyManager.getPlayerStats().combatActionArray = new CombatActionArray(PartyManager.getPlayerStats(), Wisdom.getStartingActions(PartyManager.getPlayerStats()));
 
-        PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
+        // PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
 
-        // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.bandagesIndex, 5));
+        // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.rationsIndex, 50));
+        // // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.bandagesIndex, 5));
 
-        // Inventory.addItem(ItemList.getItem(ItemList.treasureItemListIndex, ItemList.smallCoinPurseIndex));
+        // // Inventory.addItem(ItemList.getItem(ItemList.treasureItemListIndex, ItemList.smallCoinPurseIndex));
 
         // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.shivIndex, 2));
         // Inventory.addItem(ItemList.getItem(ItemList.weaponsListIndex, ItemList.cudgelIndex));

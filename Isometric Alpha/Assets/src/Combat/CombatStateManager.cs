@@ -193,7 +193,7 @@ public class CombatStateManager : MonoBehaviour
 			RevealManager.toggleReveal();
 		}
 
-		SelectorManager.currentSelector = SelectorList.playerCursor;
+		SelectorManager.currentSelector = SelectorFactory.playerCursor;
         CombatHoverTileManager.createCombatTileHoverGrid();
 		instantiateBackground();
 
@@ -326,7 +326,7 @@ public class CombatStateManager : MonoBehaviour
 
 		// SelectorManager.currentSelector.SetActive(false);
 
-		// SelectorManager.currentSelector = SelectorList.playerCursor;
+		// SelectorManager.currentSelector = SelectorFactory.playerCursor;
 
 		// SelectorManager.currentSelector.SetActive(true);
 
