@@ -961,12 +961,12 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public virtual void queueingAction()
     {
-        //empty on purpose
+	    chargeActorActionCost();
     }
 
     public virtual void unqueueingAction()
     {
-        //empty on purpose
+        refundActorActionCost();
     }
 
     public virtual void activatingAction()
@@ -1558,6 +1558,14 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         if (!getActionCostTypes().Contains(ActionCostType.None))
         {
             getActorStats().payActionCost(getActionCostTypes(), getActionCosts());
+        }
+    }
+
+    public void refundActorActionCost()
+    {
+        if (!getActionCostTypes().Contains(ActionCostType.None))
+        {
+            getActorStats().refundActionCost(getActionCostTypes(), getActionCosts());
         }
     }
 

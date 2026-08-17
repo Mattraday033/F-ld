@@ -146,7 +146,7 @@ public class ExuberanceTracker : MonoBehaviour, ICounter
         List<UnityEvent> listOfEvents = new List<UnityEvent>();
 
         listOfEvents.Add(CombatStateManager.OnNewTurn);
-        listOfEvents.Add(Exuberances.OnExuberanceChance);
+        listOfEvents.Add(Exuberances.OnExuberanceChange);
         listOfEvents.Add(ScreenManager.OnScreenInteriorUpdate);
 
         return listOfEvents;

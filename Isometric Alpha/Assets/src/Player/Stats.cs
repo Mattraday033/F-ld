@@ -783,26 +783,50 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     {
         for (int index = 0; index < costTypes.Length && index < actionCosts.Length; index++)
         {
-            if (costTypes[index] == ActionCostType.None)
+            switch(costTypes[index])
             {
-                continue;
+                case ActionCostType.None:
+                    continue;
+                case ActionCostType.RedKnife:
+                case ActionCostType.BlueShield:
+                case ActionCostType.YellowThorn:
+                case ActionCostType.GreenLeaf:
+                    Exuberances.payCost(costTypes[index], actionCosts[index]);
+                    continue;
+                default:
+                    Trait costTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.hasActionCostType(costTypes[index]));
+
+                    if (costTrait != null)
+                    {
+                        costTrait.removeStacks(costTypes[index], actionCosts[index]);
+                    }
+                    break;
             }
+        }
+    }
 
-            if (costTypes[index] == ActionCostType.RedKnife ||
-                costTypes[index] == ActionCostType.BlueShield ||
-                costTypes[index] == ActionCostType.YellowThorn ||
-                costTypes[index] == ActionCostType.GreenLeaf
-               )
+    public void refundActionCost(ActionCostType[] costTypes, int[] actionCosts)
+    {
+        for (int index = 0; index < costTypes.Length && index < actionCosts.Length; index++)
+        {
+            switch(costTypes[index])
             {
-                Exuberances.payCost(costTypes[index], actionCosts[index]);
-                continue;
-            }
+                case ActionCostType.None:
+                    continue;
+                case ActionCostType.RedKnife:
+                case ActionCostType.BlueShield:
+                case ActionCostType.YellowThorn:
+                case ActionCostType.GreenLeaf:
+                    Exuberances.addExuberance(costTypes[index], actionCosts[index]);
+                    continue;
+                default:
+                    Trait costTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.hasActionCostType(costTypes[index]));
 
-            Trait costTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.hasActionCostType(costTypes[index]));
-
-            if (costTrait != null)
-            {
-                costTrait.removeStacks(costTypes[index], actionCosts[index]);
+                    if (costTrait != null)
+                    {
+                        costTrait.removeStacks(costTypes[index], actionCosts[index]);
+                    }
+                    break;
             }
         }
     }
@@ -1016,6 +1040,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
             
             Trait.OnTraitRemoval.Invoke(traitToRemove);
         }
+    }
+
+    public void removeFirstTraitOfType(TraitType traitType)
+    {
+        traitContainer.removeFirstTraitOfType(traitType);
     }
 
     public void removeAllTraits()

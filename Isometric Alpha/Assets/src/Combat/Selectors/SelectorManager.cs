@@ -34,8 +34,8 @@ public class SelectorManager : MonoBehaviour
 
 	public static bool isMoving = false;
 
-	public static Selector currentSelector; //selector that is currently being used. Left null in the unity inspector
-	public static AbilityMenuManager currentAbilityManager; //circle of circles that shows abilities
+	public static Selector currentSelector;
+	public static AbilityMenuManager currentAbilityManager;
 
 	public HoverPanelPopUpButton hoverPanelPopUpButton;
 
@@ -72,6 +72,9 @@ public class SelectorManager : MonoBehaviour
 
         CombatActionOrderRow.OnPointerEnterCombatActionOrderRow.AddListener(hidePressEPrompt);
         CombatActionOrderRow.OnPointerExitCombatActionOrderRow.AddListener(showPressEPrompt);
+
+        CombatStateManager.OnActivityChangeToChoosingAbility.AddListener(resetCurrentSelector);
+        CombatStateManager.OnActivityChangeToChoosingActor.AddListener(resetCurrentSelector);
     }
 
     private void OnDestroy()
@@ -97,6 +100,9 @@ public class SelectorManager : MonoBehaviour
 
         CombatActionOrderRow.OnPointerEnterCombatActionOrderRow.RemoveListener(hidePressEPrompt);
         CombatActionOrderRow.OnPointerExitCombatActionOrderRow.RemoveListener(showPressEPrompt);
+
+        CombatStateManager.OnActivityChangeToChoosingAbility.RemoveListener(resetCurrentSelector);
+        CombatStateManager.OnActivityChangeToChoosingActor.RemoveListener(resetCurrentSelector);
     }
 
     private void setFirstSelectorVisibility()

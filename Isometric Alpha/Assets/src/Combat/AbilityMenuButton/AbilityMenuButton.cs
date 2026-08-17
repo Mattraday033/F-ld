@@ -493,7 +493,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         {
             getDescriptionPanelSlot().setTempDescribable(loadedCombatAction);
 
-            if (!loadedCombatAction.getActionCostTypes().Contains(ActionCostType.None))
+            if (!loadedCombatAction.getActionCostTypes().Contains(ActionCostType.None) && !loadedCombatAction.unactivatable())
             {
                 setAllActionCosts(loadedCombatAction.getActionCostTypes(), loadedCombatAction.getActionCosts());
             }

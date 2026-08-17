@@ -227,6 +227,10 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         return null;
     }
 
+    public virtual void addStacks(ActionCostType costType, int stacksToAdd)
+    {
+        //empty on purpose
+    }
 
     public virtual void removeStacks(ActionCostType costType, int stacksToRemove)
     {

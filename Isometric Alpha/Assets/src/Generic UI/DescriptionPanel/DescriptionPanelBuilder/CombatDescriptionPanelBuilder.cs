@@ -33,14 +33,18 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
         {
             setTransparency();
             InspectNode.OnInspect.AddListener(setTransparency);
-        }
 
-        // filter = new BuilderFilterBlackList(new List<DescriptionPanelBuildingBlockType>() { DescriptionPanelBuildingBlockType.PrimaryStat, DescriptionPanelBuildingBlockType.SecondaryStat });
+            CombatStateManager.OnActivityChangeToTutorial.AddListener(setTransparency);
+            CombatStateManager.OnActivityChangeFromTutorial.AddListener(setTransparency);
+        }
     }
 
     private void OnDestroy()
     {
         InspectNode.OnInspect.RemoveListener(setTransparency);
+
+        CombatStateManager.OnActivityChangeToTutorial.RemoveListener(setTransparency);
+        CombatStateManager.OnActivityChangeFromTutorial.RemoveListener(setTransparency);
     }
     
     private void setTransparency()
@@ -50,7 +54,7 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
             return;
         }
 
-        if(InspectNode.inspecting)
+        if(InspectNode.inspecting || CombatStateManager.currentActivity == CurrentActivity.Tutorial)
         {
             backgroundImage.color = ColorList.grey25;
             interiorImage.enabled = true;

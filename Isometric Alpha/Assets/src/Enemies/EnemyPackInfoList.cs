@@ -142,7 +142,9 @@ public static class EnemyPackInfoList
                                                                                                         EnemyAmountList.oneExecutioner
                                                                                                        },
                                                                                                         DropTableList.lovashiGuardsDTKey,
-                                                                                                        FlagNameList.killedAdelaInManse, 
+                                                                                                        FlagNameList.killedAdelaInManse,
+                                                                                                        guaranteedDrops: new ItemListID[]  {new ItemListID(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyBackIndex)},
+                                                                                                        script: new KeyHalfScript(), 
                                                                                                         xpDrop: 150,
                                                                                                         spawnDetailsList: new List<SpawnDetails>()
                                                                                                         {
@@ -152,15 +154,6 @@ public static class EnemyPackInfoList
                                                                                                             new SpawnDetails(new GridCoords[]{ new GridCoords(3,0) }),
                                                                                                             new SpawnDetails(new GridCoords[]{ new GridCoords(3,3) })
                                                                                                         });
-
-    public readonly static BossPackInfo honorguardCaptainBossFight = new BossPackInfo(new CreatureAmount[] { 
-                                                                                                        EnemyAmountList.oneExecutioner
-                                                                                                       },
-                                                                                                        DropTableList.lovashiGuardsDTKey,
-                                                                                                        FlagNameList.honorguardCaptainKilled,
-                                                                                                        guaranteedDrops: new ItemListID[]  {new ItemListID(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyBackIndex)},
-                                                                                                        script: new KeyHalfScript(),
-                                                                                                        xpDrop: 100);
 
     public readonly static BossPackInfo directorWithBarricades = new BossPackInfo(new CreatureAmount[] { 
                                                                                                         EnemyAmountList.barricade,
@@ -1139,16 +1132,6 @@ public static class EnemyPackInfoList
         list.Add(oneLinebreakerOneAxemanOneSpearmanThreeJavelineers);
 
         enemyPackInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, list);
-
-        #endregion
-
-        #region Manse-2F-3b
-
-        list = new List<EnemyPackInfo>();
-
-        list.Add(honorguardCaptainBossFight);
-
-        enemyPackInfoDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
 
         #endregion
 

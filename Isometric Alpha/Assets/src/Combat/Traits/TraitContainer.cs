@@ -68,6 +68,26 @@ public class TraitContainer : StatBoostSourceCombiner, ICloneable
         return traits.Remove(traitToRemove);
     }
 
+    public void removeFirstTraitOfType(TraitType traitType)
+    {
+        Trait traitOfType = null;
+
+        foreach(Trait trait in traits)
+        {
+            if(trait.traitType == traitType)
+            {
+                traitOfType = trait;
+                break;
+            }
+        }
+
+        if(traitOfType != null)
+        {
+            removeTrait(traitOfType);
+            Trait.OnTraitRemoval.Invoke(traitOfType);
+        }
+    }
+
     public void removeAllTraitsOfType(TraitType traitType)
     {
         List<Trait> traitsToRemove = Helpers.getAllObjectsWithQuality<Trait>(traits, t => t.traitType == traitType);

@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class Stance: EquippedPassive
 {
     public const string stanceNameFragment = "Stance";
-	public static UnityEvent OnStanceApplyingWeaponAttack = new UnityEvent();
+	public readonly static UnityEvent OnStanceApplyingWeaponAttack = new UnityEvent();
 
     public Stance(CombatActionSettings settings) :
     base(settings)

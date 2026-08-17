@@ -69,7 +69,6 @@ public static class TraitList
 	public const int chewHealing = 8;
 	public const int caveMadnessExtraDamage = 3;
 	public const int demoralizeExtraDamage = 5;
-	private const int predationExtraDamage = 4;
 	private const int halfHandStanceExtraDamage = 1;
 	private const double daringSacrificeDamageReduction = 1.0;
 	private const double chokeholdDamagePercentage = .5;
@@ -145,7 +144,7 @@ public static class TraitList
 	//temporary buffs
 	public readonly static Trait daringSacrifice = new MandatoryTargetTrait(StatSourceNameList.daringSacrificeKey, TraitType.Protection, "Become invulnerable for one turn. All enemy attack patterns must include this creature when possible, even if they normally would not.", "DaringSacrifice", Constants.endOfRoundDuration, daringSacrificeDamageReduction);
 	public readonly static Trait cohesion = new DamageBoostTrait(StatSourceNameList.cohesionKey, iconName:  "Cohesion", roundsLeft: Constants.twoRoundDuration);
-	public readonly static Trait shoredUp = new Trait(StatSourceNameList.shoredUpKey, TraitType.Protection, "This creature has their defenses increased", iconName: AbilityList.shoreUpKey, roundsLeft: Constants.twoRoundDuration);
+	public readonly static Trait shoredUp = new Trait(StatSourceNameList.shoredUpKey, TraitType.Protection, "This creature has their defenses increased", iconName: AbilityList.shoreUpKey, roundsLeft: Constants.twoRoundDuration, permanent: false);
 	public readonly static Trait exitStrategy = new Trait(StatSourceNameList.exitStrategyKey, TraitType.Protection, "This creature and all of it's allies take reduced damage until one round after the surprise round.", iconName: "ExitStrategy", roundsLeft: Constants.oneRoundDuration, permanent: false); //exception to round duration rule because it's applied at the top of the first round and thus doesn't need to compensate for the first tick down.
 	public readonly static LinkTrait chokeholdLinkTrait = new LinkTrait(StatSourceNameList.chokeholdKey, "This creature deals half of all damage received to whoever it is linked to.", "Chokehold", Constants.twoRoundDuration, chokeholdDamagePercentage, stuns: true);
 	public readonly static Trait rallied = new DamageBoostTrait(StatSourceNameList.ralliedKey, iconName: "Rally", roundsLeft: Constants.fourRoundDuration, permanent: false);

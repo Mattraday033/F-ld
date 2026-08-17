@@ -86,7 +86,6 @@ public class CombatActionManager : MonoBehaviour
 		{
 			actionBeingResolved.performCombatAction();
 			actionBeingResolved.setCooldownToMax();
-			actionBeingResolved.chargeActorActionCost();
 
             if (actionBeingResolved.getActorStats() != null && 
 				Helpers.hasQuality<Trait>(actionBeingResolved.getActorStats().traitContainer, t => t.deleteIfDead()))

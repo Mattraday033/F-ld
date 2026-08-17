@@ -87,6 +87,7 @@ public enum SFXType
     WoodFloor_FS5, // Audio/Sound Effects/Footsteps/WoodFloor/FS5
     Acid, // Audio/Sound Effects/Hit/Acid/Acid
     BatSwarm_BatSwarm, // Audio/Sound Effects/Hit/BatSwarm/BatSwarm
+    Blunt, // Audio/Sound Effects/Hit/Blunt/Blunt
     Healing, // Audio/Sound Effects/Hit/Healing/Healing
     Negative, // Audio/Sound Effects/Hit/Negative/Negative
     Pierce, // Audio/Sound Effects/Hit/Pierce/Pierce

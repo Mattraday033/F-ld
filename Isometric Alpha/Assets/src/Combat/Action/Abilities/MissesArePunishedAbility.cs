@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class MissesArePunishedAbility : Ability
 {
+    private EffectAnimationType missEffectType;
     private int missDamageMult = 3;
 
-	public MissesArePunishedAbility(CombatActionSettings settings, int missDamageMult = 3):
+	public MissesArePunishedAbility(CombatActionSettings settings, int missDamageMult = 3, EffectAnimationType missEffectType = EffectAnimationType.Slash):
 	base(settings)
 	{
         this.missDamageMult = missDamageMult;
+        this.missEffectType = missEffectType;
 	}
 
     public override void performCombatAction(List<Stats> targets)
@@ -57,6 +59,17 @@ public class MissesArePunishedAbility : Ability
         }
 
         return false;
+    }
+
+    public override string getEffectAnimationType()
+    {
+        if(!hasTargets())
+        {
+            return missEffectType.ToString();
+        } else
+        {
+            return base.getEffectAnimationType();
+        }
     }
 
     public override bool healsTarget()

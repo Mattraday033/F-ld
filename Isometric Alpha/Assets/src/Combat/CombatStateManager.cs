@@ -322,14 +322,6 @@ public class CombatStateManager : MonoBehaviour
 
 	public static void skipCombatTutorial()
 	{
-		// SelectorManager.currentSelector.setToOriginalColor();
-
-		// SelectorManager.currentSelector.SetActive(false);
-
-		// SelectorManager.currentSelector = SelectorFactory.playerCursor;
-
-		// SelectorManager.currentSelector.SetActive(true);
-
 		if (AbilityMenuManager.getInstance() != null)
 		{
 			AbilityMenuManager.getInstance().disableAbilityButtonCanvas();

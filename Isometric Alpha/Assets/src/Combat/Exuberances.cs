@@ -8,7 +8,7 @@ using UnityEngine.Events;
 
 public static class Exuberances
 {
-    public static UnityEvent OnExuberanceChance = new UnityEvent();
+    public static UnityEvent OnExuberanceChange = new UnityEvent();
     private static Dictionary<MultiStackProcType, int> exuberanceDictionary;
 
     static Exuberances()
@@ -54,7 +54,7 @@ public static class Exuberances
     public static void payCost(MultiStackProcType type, int cost)
     {
         exuberanceDictionary[type] -= cost;
-        OnExuberanceChance.Invoke();
+        OnExuberanceChange.Invoke();
     }
 
     public static void addExuberance(ActionCostType type, int amount)
@@ -65,7 +65,7 @@ public static class Exuberances
     public static void addExuberance(MultiStackProcType type, int amount)
     {
         exuberanceDictionary[type] += amount;
-        OnExuberanceChance.Invoke();
+        OnExuberanceChange.Invoke();
     }
 
     private static MultiStackProcType convertActionCostToProcType(ActionCostType type)

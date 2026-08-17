@@ -240,6 +240,20 @@ public class StackableTrait: Trait
 	{
 		return numberOfStacks;
 	}
+
+    public override void addStacks(ActionCostType costType, int stacksToAdd)
+	{
+		base.addStacks(costType, stacksToAdd);
+
+        if(numberOfStacks + stacksToAdd < maximumStacks)
+        {
+            numberOfStacks += stacksToAdd;
+        } else
+        {
+            numberOfStacks = maximumStacks;
+        }
+    }
+
     public override void removeStacks(ActionCostType costType, int stacksToRemove)
     {
         if (numberOfStacks - stacksToRemove >= 0)
