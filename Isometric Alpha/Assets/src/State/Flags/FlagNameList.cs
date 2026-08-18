@@ -387,6 +387,7 @@ public static class FlagNameList
         public const string mineLvl3ConvincedRekaAndPazman = "mineLvl3ConvincedRekaAndPazman"; //Convinced Guards Reka and Pazman to lay down their weapons
         public const string mineLvl3PromisedToProtectRekaAndPazman = "mineLvl3PromisedToProtectRekaAndPazman"; //Threatened Guard Reka and Pazman when taking them prisoner
         public const string mineLvl3ThreatenedRekaAndPazmanAsPrisoners = "mineLvl3ThreatenedRekaAndPazmanAsPrisoners"; //Threatened Guard Reka and Pazman when taking them prisoner 
+        public const string fightingNandorCarter = "fightingNandorCarter";
 
         //Manse Flags
         public const string manseDiningRoomPermButtonScriptActivated = "manseDiningRoomPermButtonScriptActivated";

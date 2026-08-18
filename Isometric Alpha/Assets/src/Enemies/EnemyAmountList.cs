@@ -25,8 +25,11 @@ public static class EnemyAmountList
 
     public readonly static CreatureAmount clay = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.clay));
 
-
     public readonly static CreatureAmount dezso = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.dezso));
+    
+    public readonly static CreatureAmount nandor = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.nandor));
+    public readonly static CreatureAmount carter = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.carter));
+    public readonly static CreatureAmount thatch = new CreatureAmount(Constants.oneCreature, EnemyStatsList.getEnemyStats(NPCNameList.thatch));
 
     #endregion
 

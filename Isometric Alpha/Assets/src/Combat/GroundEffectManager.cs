@@ -47,7 +47,7 @@ public class GroundEffect
                                     GroundEffectManager.getInstance().damageNumberCanvas, isNotACrit, doesNotHealTarget);
             
             target.modifyCurrentHealth(DamageCalculator.calculateFormula(damageFormula, DamageCalculator.noStatsSource));
-            target.playAnimationOnDamage();
+            // target.playAnimationOnDamage();
         }
     }
 

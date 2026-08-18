@@ -99,12 +99,12 @@ public static class AllyPackInfoList
 
             case ZoneKeyList.mineLvl3:
 
-                if(!Flags.getFlag(FlagNameList.mineLvl3BreachSealed) && 
+                if((!Flags.getFlag(FlagNameList.mineLvl3BreachSealed) || Flags.getFlag(FlagNameList.fightingNandorCarter)) && 
                     Flags.getFlag(FlagNameList.mineLvl3GuardsInParty) && 
                     Flags.getFlag(FlagNameList.gasparAddedToParty))
                 {
                     return mineLevel3GuardsWithoutGaspar;
-                } else if( !Flags.getFlag(FlagNameList.mineLvl3BreachSealed) && 
+                } else if((!Flags.getFlag(FlagNameList.mineLvl3BreachSealed) || Flags.getFlag(FlagNameList.fightingNandorCarter)) && 
                             Flags.getFlag(FlagNameList.mineLvl3GuardsInParty) && 
                             !Flags.getFlag(FlagNameList.gasparAddedToParty))
                 {

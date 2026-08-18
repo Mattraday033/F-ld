@@ -81,6 +81,7 @@ public static class AbilityList
 	public const string flenseName = "Flense";
 	public const string fearName = "Fear";
 
+    public const string makeItBleedName = "Make It Bleed";
     public const string throatJabName = "Throat Jab";
 	public const string doubleStrikeName = "Double Strike";
 	public const int doubleStrikeRepetitions = 2;
@@ -329,6 +330,14 @@ public static class AbilityList
         enemyAbilityDictionary.Add(summonJavelineerPuppetsKey, new SummonAbility(CombatActionSettings.build(DescriptionParams.build(summonSpearmanPuppetsKey, useDescription: vadaSummonDescription)), 
                                                                                     new string[]{MonsterNameList.puppetedPrefix + MonsterNameList.javelineer, MonsterNameList.puppetedPrefix + MonsterNameList.javelineer, 
                                                                                                  MonsterNameList.puppetedPrefix + MonsterNameList.javelineer, MonsterNameList.puppetedPrefix + MonsterNameList.javelineer}));
+
+        #region Companion Mimic Abilities
+
+        statAbilityDictionary.Add(doubleStrikeName, new RepetitionAbility(CombatActionSettings.build(doubleStrikeName, DescriptionParams.build(doubleStrikeName, useDescription: "The Caster Damages their opponent twice.", loreDescription: "Two quick taps to the gut, one right after the other."), DamageParams.build("16"), animationParams: AnimationParams.build(EffectAnimationType.Blunt)), doubleStrikeRepetitions));
+        statAbilityDictionary.Add(makeItBleedName, new Ability(CombatActionSettings.build(makeItBleedName, DescriptionParams.build(makeItBleedName, iconName: "MakeItBleed", useDescription: "The enemy takes initial damage and every hit the enemy takes for the rest of Combat deals additional damage.", loreDescription: "Impale, bludgeon, or slash the enemy to the point of massive hemorrhaging."), DamageParams.build("20", "5"), TargetParams.build(SelectorTemplate.BoxOne), animationParams: AnimationParams.build(EffectAnimationType.Blunt), appliedTrait: TraitList.wounded)));
+        statAbilityDictionary.Add(flenseName, new Ability(CombatActionSettings.build(flenseName, DescriptionParams.build(flenseName), DamageParams.build("17", "10"), appliedTrait: TraitList.npcFlensed)));
+		
+        #endregion
 	}
 	
 	private static void instantiateStatAbilities()

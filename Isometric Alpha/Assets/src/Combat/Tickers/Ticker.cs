@@ -60,17 +60,13 @@ public class Ticker : MonoBehaviour
 	public void tickDownAllNonPermanentTraits(List<Stats> allCombatants)
 	{
         List<KeyValuePair<Stats, Trait>> traitsToRemove = new  List<KeyValuePair<Stats, Trait>>();
-        List<Stats> hurtCombatants = new List<Stats>();
 
 		foreach(Stats combatant in allCombatants)
 		{
 			foreach(Trait trait in combatant.traitContainer)
 			{
-				if(trait.tickDown())
-                {
-                    hurtCombatants.Add(trait.getTraitHolder());
-                }
-				
+                trait.tickDown();
+
 				if(!trait.isPermanent() && trait.getRoundsLeft() <= 0)
 				{
 					traitsToRemove.Add(new KeyValuePair<Stats, Trait>(combatant, trait));
@@ -83,11 +79,6 @@ public class Ticker : MonoBehaviour
             kvp.Key.removeTrait(kvp.Value);
         }
         
-        foreach(Stats combatant in hurtCombatants)
-        {
-            combatant.playAnimationOnDamage();
-        }
-
         DeadCombatantManager.getInstance().cleanUpAllDeadCombatants();
         CombatStateManager.getInstance().checkForWinOrLossStates();
 	}

@@ -429,12 +429,12 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         modifyCurrentHealth(getTotalHealth(), true);
     }
 
-    public void modifyCurrentHealth(int changeInHealth)
-    {
-        modifyCurrentHealth(changeInHealth, false);
-    }
+    // public void modifyCurrentHealth(int changeInHealth)
+    // {
+    //     modifyCurrentHealth(changeInHealth, false);
+    // }
 
-    public void modifyCurrentHealth(int changeInHealth, bool healing)
+    public void modifyCurrentHealth(int changeInHealth, bool healing = false, bool playAnimation = true)
     {
         int totalHealth = getTotalHealth();
 
@@ -473,6 +473,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
                 {
                     currentHealth += changeInHealth; //healed enemy, increment by changeInHealth
                 }
+            }
+
+            if(playAnimation)
+            {
+                playAnimationOnDamage();
             }
         }
 

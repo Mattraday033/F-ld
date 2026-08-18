@@ -25,6 +25,7 @@ VAR weftWillLeave = false
 VAR fullGuardFightIndex = 0
 VAR halfGuardFightIndex = 1
 VAR nandorCarterFightIndex = 2
+VAR nandorCarterThatchFightIndex = 3
 
 VAR dialogueKeyForAfterKillingGuards = "AfterKillingGuardsMineLvl3"
 
@@ -277,6 +278,8 @@ removeFromParty({carterIndex})
 -nandorWillLeave:
 removeFromParty({nandorIndex})
 }
+
+setToTrue(fightingNandorCarter)
 
 removeFromParty({gasparIndex})
 
@@ -696,7 +699,7 @@ Gáspár, we refuse! I don't care if I die here, I will no longer be a slave!
 playAnimation({thatchIndex},Idle_Front)
 changeCamTarget({thatchIndex})
 
-You will not fight? What kind of branded are you, choosing to cower rather than fight to break their chains?
+You will not fight? What kind of branded are you, choosing to cower rather than struggle to break your chains?
 
     +Thatch, lack of sleep clouds your judgement. I won't fight when death is certain.
         ->convinceThatchToStay_2a
@@ -705,7 +708,7 @@ You will not fight? What kind of branded are you, choosing to cower rather than 
 
 === convinceThatchToStay_2a ===
 
-I would. I have a tool in my hand and one of the masters to swing it at. If I die here, then I die with all of my wishes fulfilled.
+I would. I have a tool in my hand and one of the masters to swing it at. If I die, I die with all of my wishes fulfilled.
 
     +Perhaps Slate thought the same while spitting in the guards' eyes. Would you force me to mourn your broken body as we did his? {not angeredThatchInHisHut:<Cha {charisma}/{getThatchStayCharismaDiff()}>}
     {
@@ -885,7 +888,13 @@ deactivate({rubbleMarcosIndex})
 
 {
 -mineLvl3RefusedToFightGaspar:
-enterCombat({nandorCarterFightIndex},{dialogueKeyForAfterKillingGuards})
+    {
+        -carterWillLeave and nandorWillLeave and thatchWillLeave:
+            enterCombat({nandorCarterThatchFightIndex},{dialogueKeyForAfterKillingGuards})
+        -else:
+            enterCombat({nandorCarterFightIndex},{dialogueKeyForAfterKillingGuards})
+    }
+
     ->Close
 
 -mineLvl3ConvincedRekaAndPazman:

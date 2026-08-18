@@ -161,12 +161,12 @@ public class EffectAnimationManager : AnimationManager
         DamageNumberPopup.create(targetCoords, damage, transform.position, DamageNumberPopup.getDirectionByTargetCoords(targetCoords),
                                  CombatAnimationManager.getInstance().damageNumberCanvas, crit, healsTarget);
 
-        Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
+        // Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
 
-        if (target != null)
-        {
-            target.playAnimationOnDamage();
-        }
+        // if (target != null)
+        // {
+        //     target.playAnimationOnDamage();
+        // }
     }
 
     private ClipTransition createClipTransitionThenDelete(AnimationClip clip)

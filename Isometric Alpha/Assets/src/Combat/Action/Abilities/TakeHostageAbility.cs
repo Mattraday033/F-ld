@@ -54,7 +54,7 @@ public class TakeHostageAbility : Ability
 
             projectileNumber += sendProjectileAt(target.getPositionToHit(getSelector(), skips), target, projectileNumber);
 
-            target.playAnimationOnDamage();
+            // target.playAnimationOnDamage();
 
             if (target.isDead() && !target.isLarge())
             {

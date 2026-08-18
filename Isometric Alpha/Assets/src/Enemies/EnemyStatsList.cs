@@ -193,6 +193,37 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                       TraitList.backLine
                                                                     },
                                                                     animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
+
+        enemyStatsDict.Add(NPCNameList.nandor, new EnemyStats(NPCNameList.nandor,
+                                                                            Constants.twentyArmor,
+                                                                                    120,
+                    AbilityList.getAbility(null, AbilityList.doubleStrikeName) as Ability,
+                                                        new Trait[] { 
+                                                                      TraitList.master,
+                                                                      TraitList.chaotic
+                                                                    },
+                                                                    animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
+
+        enemyStatsDict.Add(NPCNameList.carter, new EnemyStats(NPCNameList.carter,
+                                                                            Constants.tenArmor,
+                                                                                    100,
+                    AbilityList.getAbility(null, AbilityList.flenseName) as Ability,
+                                                        new Trait[] { 
+                                                                      TraitList.master,
+                                                                      TraitList.chaotic
+                                                                    },
+                                                                    animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
+
+        enemyStatsDict.Add(NPCNameList.thatch, new EnemyStats(NPCNameList.thatch,
+                                                                            Constants.fortyArmor,
+                                                                                    165,
+                    AbilityList.getAbility(null, AbilityList.makeItBleedName) as Ability,
+                                                        new Trait[] { 
+                                                                      TraitList.master,
+                                                                      TraitList.chaotic
+                                                                    },
+                                                                    animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
+
         #endregion
         #endregion
 

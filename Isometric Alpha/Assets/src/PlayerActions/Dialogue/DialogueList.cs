@@ -1291,7 +1291,7 @@ public static class DialogueList
                                  Resources.Load<TextAsset>(DialogueNameList.directorPathName),
                                  DialogueCombatInfoList.directorCombatInfo));
 
-          addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.director+1,
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.director+1,
                                 new Dialogue(new string[]   { 
                                                                 NPCNameList.playerNamePlaceHolder,
                                                                 NPCNameList.director+1,
@@ -1300,7 +1300,7 @@ public static class DialogueList
                                                             }, 
                                  Resources.Load<TextAsset>(DialogueNameList.prerevoltDirectorPathName)));
 
-          addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.page+1,
+            addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.page+1,
                                 new Dialogue(new string[]   { 
                                                                 NPCNameList.playerNamePlaceHolder,
                                                                 NPCNameList.page+1,

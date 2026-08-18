@@ -53,6 +53,9 @@ VAR largeCupPlacedOnBarrel = false
 
 VAR playerName = ""
 
+
+setToFalse(fightingNandorCarter)
+
 {
 -mineLvl3RefusedToFightGaspar:
     ->5a
@@ -513,7 +516,7 @@ Overseer? Your orders?
 
 changeCamTarget({gasparIndex})
 
-My orders are to return to the surface. We'll need to inform the Director of what happened here. After that, hot food and bed rest for each of us.
+We must return to the surface. We'll need to inform the Director of what happened here. After that, hot food and bed rest for each of us.
 
     +You look concerned, overseer. Your face wears empathy like the two are strangers.
         setNPCFacing({pazmanIndex},SE)

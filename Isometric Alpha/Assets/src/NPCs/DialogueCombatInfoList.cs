@@ -47,15 +47,26 @@ public static class DialogueCombatInfoList
                                                                                             NPCNameList.guardMarcos
                                                                                           });
 
+    public readonly static DeadNameList nandorCarterMarcosThatchDead = new DeadNameList(new string[] { 
+                                                                                            NPCNameList.nandor,
+                                                                                            NPCNameList.carter,
+                                                                                            NPCNameList.marcos,
+                                                                                            NPCNameList.guardMarcos,
+                                                                                            NPCNameList.thatch
+                                                                                          });
+
+
     public readonly static NPCCombatInfo breachRubbleCombatInfo = new NPCCombatInfo(new EnemyPackInfo[] { 
                                                                                                             EnemyPackInfoList.ml3GuardsNoSurrenders, 
                                                                                                             EnemyPackInfoList.ml3GuardsRekaPazmanSurrender,
-                                                                                                            EnemyPackInfoList.ml3FightingNandorAndCarter
+                                                                                                            EnemyPackInfoList.ml3FightingNandorCarter,
+                                                                                                            EnemyPackInfoList.ml3FightingNandorCarterThatch
                                                                                                         },
                                                                             new DeadNameList[] { 
                                                                                                     allMineGuardsDead,
                                                                                                     gasparViragDead,
-                                                                                                    nandorCarterMarcosDead
+                                                                                                    nandorCarterMarcosDead,
+                                                                                                    nandorCarterMarcosThatchDead 
                                                                                                });
 
     public readonly static DeadNameList kendeKitchenDeadNames = new DeadNameList(new string[]{NPCNameList.kende});

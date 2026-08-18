@@ -73,7 +73,6 @@ public class SelectorManager : MonoBehaviour
         CombatActionOrderRow.OnPointerEnterCombatActionOrderRow.AddListener(hidePressEPrompt);
         CombatActionOrderRow.OnPointerExitCombatActionOrderRow.AddListener(showPressEPrompt);
 
-        CombatStateManager.OnActivityChangeToChoosingAbility.AddListener(resetCurrentSelector);
         CombatStateManager.OnActivityChangeToChoosingActor.AddListener(resetCurrentSelector);
     }
 
@@ -101,7 +100,6 @@ public class SelectorManager : MonoBehaviour
         CombatActionOrderRow.OnPointerEnterCombatActionOrderRow.RemoveListener(hidePressEPrompt);
         CombatActionOrderRow.OnPointerExitCombatActionOrderRow.RemoveListener(showPressEPrompt);
 
-        CombatStateManager.OnActivityChangeToChoosingAbility.RemoveListener(resetCurrentSelector);
         CombatStateManager.OnActivityChangeToChoosingActor.RemoveListener(resetCurrentSelector);
     }
 

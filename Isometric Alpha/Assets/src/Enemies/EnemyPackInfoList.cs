@@ -279,12 +279,19 @@ public static class EnemyPackInfoList
                                                                                                         DropTableList.lovashiGuardsDTKey,
                                                                                                         script: new KilledMineLvlThreeGuardsAfterBreachScript());
 
-    public readonly static EnemyPackInfo ml3FightingNandorAndCarter = new BossPackInfo(new CreatureAmount[] { 
-                                                                                                        EnemyAmountList.overseerGaspar, 
-                                                                                                        EnemyAmountList.guardVirag, 
-                                                                                                        EnemyAmountList.guardPazman
+    public readonly static EnemyPackInfo ml3FightingNandorCarter = new BossPackInfo(new CreatureAmount[] { 
+                                                                                                            EnemyAmountList.nandor, 
+                                                                                                            EnemyAmountList.carter 
                                                                                                        },
-                                                                                                        DropTableList.lovashiGuardsDTKey,
+                                                                                                        DropTableList.slaveMineDTKey,
+                                                                                                        script: new KilledNandorCarterAfterBreachScript());
+
+    public readonly static EnemyPackInfo ml3FightingNandorCarterThatch = new BossPackInfo(new CreatureAmount[] { 
+                                                                                                            EnemyAmountList.nandor, 
+                                                                                                            EnemyAmountList.carter, 
+                                                                                                            EnemyAmountList.thatch
+                                                                                                       },
+                                                                                                        DropTableList.slaveMineDTKey,
                                                                                                         script: new KilledNandorCarterAfterBreachScript());
 
     #endregion

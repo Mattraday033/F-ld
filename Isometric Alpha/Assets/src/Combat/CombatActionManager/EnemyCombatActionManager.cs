@@ -110,7 +110,6 @@ public class EnemyCombatActionManager : MonoBehaviour
                                             CombatAnimationManager.getInstance().damageNumberCanvas, false, false);
                 }
 				enemy.modifyCurrentHealth(linkDamage);
-                enemy.playAnimationOnDamage();
 			}
 		}
 	}

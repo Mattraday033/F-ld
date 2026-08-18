@@ -178,6 +178,7 @@ public static class TraitList
 
 	//permanent debuffs
 	public readonly static Trait flensed = new DamageOverTimeTrait(StatSourceNameList.flensedKey, TraitType.Wound, "This creature takes damage at the end of every round for the rest of combat.", "Flense", "3D + 5");
+	public readonly static Trait npcFlensed = new DamageOverTimeTrait(StatSourceNameList.flensedKey, TraitType.Wound, "This creature takes damage at the end of every round for the rest of combat.", "Flense", "8");
 	public readonly static Trait isolated = new BreakableCrowdControlTrait(StatSourceNameList.isolatedKey, TraitType.Mental, "This creature has been removed from battle and cannot act until it is dealt damage.", "Isolate");
 
 	//EquippedPassiveBuffs
