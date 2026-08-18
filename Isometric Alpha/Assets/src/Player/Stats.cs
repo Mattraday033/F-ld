@@ -475,7 +475,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
                 }
             }
 
-            if(playAnimation)
+            if(CombatStateManager.inCombat && playAnimation && !inPreviewMode)
             {
                 playAnimationOnDamage();
             }

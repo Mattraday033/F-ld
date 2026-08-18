@@ -97,7 +97,18 @@ public class PartyMember : IDescribable, IDescribableInBlocks
                     name = NPCNameList.tabor;
                     break;
                 case NPCNameList.overseerGaspar:
-                    name = NPCNameList.gaspar;
+                case NPCNameList.gaspar:
+                case NPCNameList.gaspar + NPCNameList.freedSuffix:
+                case NPCNameList.gaspar + NPCNameList.hangedSuffix:
+
+                    if(Flags.getFlag(FlagNameList.gasparSavedFromNoose))
+                    {
+                        name = NPCNameList.gaspar + NPCNameList.freedSuffix;
+                    } else
+                    {
+                        name = NPCNameList.gaspar;
+                    }
+
                     break;
             }
         }

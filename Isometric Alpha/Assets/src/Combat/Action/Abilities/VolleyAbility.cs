@@ -111,7 +111,7 @@ public class VolleyAbility : Ability
 				crit = DamageCalculator.isACrit(getCritFormula(), getName());
 				finalDamage = findFinalDamage(targetCombatant, crit);
 			
-				targetCombatant.modifyCurrentHealth(finalDamage, healsTarget());
+				targetCombatant.modifyCurrentHealth(finalDamage, healing: healsTarget());
 			} else
 			{
 				finalDamage = -1;
