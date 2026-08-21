@@ -4,13 +4,17 @@ using UnityEngine.Tilemaps;
 
 #pragma warning disable UDR0001 // Editor-only: no runtime init method is required.
 [InitializeOnLoad]
-public static class TilemapBenchSpriteWatcher
+public static class TilemapSpriteWatcher
 {
     private const int MaxAdjustmentsPerCallback = 64;
 
+    private const string grassOverlaySpriteName = "Grass Overlay";
+
+    private static readonly Vector3 grassOverlayOffset = new Vector3(0f, .2f, 0f);
+
     private static bool _isAdjusting;
 
-    static TilemapBenchSpriteWatcher()
+    static TilemapSpriteWatcher()
     {
         Tilemap.tilemapTileChanged -= OnTilemapTileChanged;
         Tilemap.tilemapTileChanged += OnTilemapTileChanged;
@@ -27,7 +31,7 @@ public static class TilemapBenchSpriteWatcher
             int limit = Mathf.Min(tiles.Length, MaxAdjustmentsPerCallback);
             if (tiles.Length > MaxAdjustmentsPerCallback)
             {
-                Debug.LogWarning($"TilemapBenchSpriteWatcher: batch of {tiles.Length} tiles exceeded safety limit {MaxAdjustmentsPerCallback}; processing first {limit} only.", tilemap);
+                Debug.LogWarning($"TilemapSpriteWatcher: batch of {tiles.Length} tiles exceeded safety limit {MaxAdjustmentsPerCallback}; processing first {limit} only.", tilemap);
             }
 
             for (int i = 0; i < limit; i++)
@@ -60,24 +64,20 @@ public static class TilemapBenchSpriteWatcher
             return;
         }
 
-        switch (sprite.name)
-        {
-            case "Bench_Front":
-            case "Bench_Back":
-                ApplyIfDifferent(tilemap, position, Matrix4x4.TRS(new Vector3(0f, 0.08f, 0f), Quaternion.identity, new Vector3(0.96f, 1f, 1f)));
-                return;
-            case "LeafPile TestTile":
-                ApplyIfDifferent(tilemap, position, Matrix4x4.TRS(new Vector3(0f, 0f, 0f), Quaternion.identity, new Vector3(0.5f, .5f, 1f)));
-                return;
-            default:
-                return;
-        }
+        Vector3 offset = sprite.name == grassOverlaySpriteName ? grassOverlayOffset : Vector3.zero;
+
+        ApplyOffsetIfDifferent(tilemap, position, offset);
     }
 
-    private static void ApplyIfDifferent(Tilemap tilemap, Vector3Int position, Matrix4x4 target)
+    //Only the translation of the cell's transform matrix is the tile's offset, so whatever rotation
+    //and scale the cell already carries is kept.
+    private static void ApplyOffsetIfDifferent(Tilemap tilemap, Vector3Int position, Vector3 offset)
     {
         Matrix4x4 current = tilemap.GetTransformMatrix(position);
+        Matrix4x4 target = Matrix4x4.TRS(offset, current.rotation, current.lossyScale);
+
         if (current == target) return;
+
         tilemap.SetTransformMatrix(position, target);
     }
 }
