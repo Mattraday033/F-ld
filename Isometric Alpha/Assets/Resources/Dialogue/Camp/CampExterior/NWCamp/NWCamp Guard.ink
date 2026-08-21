@@ -143,6 +143,8 @@ movePlayerPos(-15,0)
 setFacing(NE)
 setNPCFacing({guardIndex},SW)
 
+createEffectOnNPCsByName(Hangman,Confused)
+createEffectOnNPCsByName(Captain Adéla,Confused)
 createEffectOnNPCsByName(Guard3,Confused)
 createEffectOnNPCsByName(Guard4,Confused)
 createEffectOnNPCsByName(Director,Confused)
@@ -153,7 +155,7 @@ fadeBackIn(60)
 Speak yer business, branded.
 
     +The Director gave me orders to report here. I'm to be pardoned.
-        ->jumpInPit
+        // ->jumpInPit
         {
         -gasparBroughtToExecution:
             ->3a
@@ -473,6 +475,8 @@ wait(0.4)
 createEffect(SmokeBomb,-5,10)
 wait(0.4)
 createEffect(SmokeBomb,-10,6)
+showStapledEffectByName(Hangman,Confused)
+showStapledEffectByName(Captain Adéla,Confused)
 showStapledEffectByName(Guard3,Confused)
 showStapledEffectByName(Guard4,Confused)
 wait(0.4)
@@ -490,6 +494,7 @@ changeCameraTarget({crowdIndex})
 
 setIdleOfNPCsByName(Guard3,Idle_Back)
 setIdleOfNPCsByName(Guard4,Idle_Front)
+setIdleOfNPCsByName(Hangman,Idle_Front)
 playAnimation({adelaIndex},Secondary_Idle_Front)
 
 \*The Lovashi draw their weapons and begin to move towards you with ill intent.*

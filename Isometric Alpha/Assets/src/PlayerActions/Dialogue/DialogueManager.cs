@@ -16,7 +16,7 @@ public class DialogueManager : MonoBehaviour
 
     private List<Choice> currentChoiceInkObjects;
 
-    [Header("Cameras")]
+    [Header("Cameras")] 
 
     [SerializeField] 
     public Camera mainCamera;
