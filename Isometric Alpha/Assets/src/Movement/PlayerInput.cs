@@ -839,6 +839,8 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
+        drawSpriteSortPoint();
+
         if (AreaManager.getMovementManager() == null)
         {
             return;
@@ -875,7 +877,38 @@ public class PlayerInput : MonoBehaviour
                 throw new IOException("Unknown facing: " + State.playerFacing.getFacing().ToString());
         }
     }
-    
+
+    //Draws a cyan horizontal line at the height of the sort point Unity uses to order the player's
+    //current sprite against everything else in the scene.
+    private static void drawSpriteSortPoint()
+    {
+        AnimationManager animationManager = PlayerObject.getAnimationManager();
+
+        if (animationManager == null || animationManager.spriteRenderer == null)
+        {
+            return;
+        }
+
+        SpriteRenderer spriteRenderer = animationManager.spriteRenderer;
+
+        if (spriteRenderer.sprite == null)
+        {
+            return;
+        }
+
+        //Pivot sorting uses the renderer's transform position, center sorting uses the middle of its bounds.
+        Bounds bounds = spriteRenderer.bounds;
+        Vector3 sortPoint = spriteRenderer.spriteSortPoint == SpriteSortPoint.Pivot
+            ? spriteRenderer.transform.position
+            : bounds.center;
+
+        float halfWidth = Mathf.Max(bounds.size.x, 1f) / 2f;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawLine(new Vector3(sortPoint.x - halfWidth, sortPoint.y, sortPoint.z),
+                        new Vector3(sortPoint.x + halfWidth, sortPoint.y, sortPoint.z));
+    }
+
     public static void toggleTerrainKeyCheck()
     {
         if (Input.GetKey(KeyBindingList.hideTerrainKey.getCurrentKeyCode()) && !KeyPressManager.handlingSecondaryKeyPress)

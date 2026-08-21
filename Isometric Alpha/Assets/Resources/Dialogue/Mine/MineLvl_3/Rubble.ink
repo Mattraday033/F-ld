@@ -730,18 +730,18 @@ I would. I have a tool in my hand and one of the masters to swing it at. If I di
 
 === convinceThatchToStay_2aa ===
 
-\*Thatch locks eyes with you, and then shakes his head violently, slapping his head in an effort to keep fatigue at bay.* 
+\*Thatch locks eyes with you, and then shakes his head violently, slapping his head in an effort to keep his fatigue at bay.* 
 
-I feel as if I am on the verge of madness. I discern our waking world from nightmare soley by this pick's heft, for no dreams of mine are so surreal to grant hope of freedom by force.
+I am on the verge of madness! The heft of this pick alone tells me this is no dream, for no dream of mine could be so surreal to grant hope of freedom by force.
 
-And now you ask me to abandon my last tether to a life free from this blurring? Perhaps I <i>am</i> still sane for you sound madder still.
+And now you ask me to abandon my last tether to a life rid of this blurring? Perhaps I <i>am</i> still sane for you sound madder still.
 
     +What could I offer you not to seek this death you are bent on?
         ->convinceThatchToStay_2ab
 
 === convinceThatchToStay_2ab ===
 
-Promise me you will see it end! Promise me I get to leave this blasted camp! See me gone from here or let me leave on my terms!
+Promise me you will see it end! Promise me I get to leave this blasted camp! See me gone from here or let me leave on my own terms!
 
     +One day, you will be free. I swear it.
         setToTrue(sworeThatchWouldBeFree)
