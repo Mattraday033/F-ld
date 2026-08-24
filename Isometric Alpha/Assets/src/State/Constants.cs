@@ -10,6 +10,10 @@ public static class Constants
 	public const string jsonFileExtension = ".json";
     public const string jsonFileExtensionWithoutPeriod = "json";
 
+    public const string textFileExtension = ".txt";
+
+    public const string buildDateAndTimeFormat = "yyyy-MM-dd HH:mm:ss";
+
     public const float shopMarkUpMultiplier = 3f;
 
     public const int tierZero = 0;

@@ -376,6 +376,8 @@ public class ConfigFile
 
     public GameplaySettingsWrapper gameplaySettings;
 
+    public string buildDateAndTime;
+
     public void useForSettings()
     {
         tutorialFlags.useForSettings();
@@ -479,7 +481,9 @@ public static class Config
         if(config == null)
         {
             config = ConfigFile.buildDefault();
-        } 
+        }
+
+        addBuildDateAndTimeToConfig();
 
         config.useForSettings();
 	}
@@ -493,7 +497,28 @@ public static class Config
 
         config = ConfigFile.build();
 
+        addBuildDateAndTimeToConfig();
+
         Json.writeObjectToJSON(PrefabNames.configFile, config);
+    }
+
+    /// <summary>
+    /// Copies the date and time held in the Build-Timestamp file written at build time into the
+    /// config. Only builds carry that file, so this does nothing when running in the editor.
+    /// </summary>
+    public static void addBuildDateAndTimeToConfig()
+    {
+        if(Application.isEditor || config == null)
+        {
+            return;
+        }
+
+        if(!File.Exists(PrefabNames.buildTimestampFile))
+        {
+            return;
+        }
+
+        config.buildDateAndTime = File.ReadAllText(PrefabNames.buildTimestampFile).Trim();
     }
 
 }

@@ -135,7 +135,7 @@ public class SelectorManager : MonoBehaviour
 
     public static void backOutOfAbilityMenu()
     {
-        setCurrentSelector(SelectorFactory.playerCursor);
+        setCurrentSelector(SelectorFactory.playerCursor, declareSelector: false);
 
         currentSelector.setToColor();
 
@@ -559,10 +559,6 @@ public class SelectorManager : MonoBehaviour
 		{
             AudioManager.playSelectorMovedSFX();
 
-            updateAllDamagePreviews();
-
-			displayCurrentHoverUI();
-
             declareSelectors();
 
             if(CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
@@ -629,6 +625,7 @@ public class SelectorManager : MonoBehaviour
 
         SelectorMoved.Invoke(visibleSelectors);
         updateAllDamagePreviews();
+        displayCurrentHoverUI();
     }
 
 	public static void moveCurrentSelectorToNextSingleTileTarget()
@@ -678,7 +675,6 @@ public class SelectorManager : MonoBehaviour
 
                 AudioManager.playSelectorMovedSFX();
 
-                updateAllDamagePreviews();
                 declareSelectors();
 			}
 		}
@@ -866,10 +862,14 @@ public class SelectorManager : MonoBehaviour
 		}
 	}
 
-	public static void setCurrentSelector(Selector newSelector)
+	public static void setCurrentSelector(Selector newSelector, bool declareSelector = true)
 	{
 		currentSelector = newSelector;
-        declareSelectors();
+
+        if(declareSelector)
+        {
+            declareSelectors();
+        }
 	}
 
 	public static void resetCurrentSelector()

@@ -113,11 +113,6 @@ public abstract class OOCSpawnDetails
 
     public virtual void spawnActions(GameObject interactable)
     {
-        if(flipSprite())
-        {
-            interactable.transform.localScale = Constants.flippedXScale;
-        }
-
         SpriteRenderer spriteRenderer = interactable.GetComponent<SpriteRenderer>();
 
         spawnActions(spriteRenderer);
@@ -145,6 +140,7 @@ public abstract class OOCSpawnDetails
             sortingLayerInfo.setRendererSortingLayer(spriteRenderer);
         }
 
+        spriteRenderer.flipX = flipSprite();
     }
     public static void addTutorialTargetComponent(GameObject gameObject, string tutorialTargetHash)
     {
@@ -533,11 +529,6 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
         obstacle.setObstacleName(npcName);
 
         spawnActions(interactable.GetComponent<SpriteRenderer>());
-
-        if(flipSprite())
-        {
-            interactable.transform.localScale = Constants.flippedXScale;
-        }
     }
 
     public override void spawnActions(SpriteRenderer spriteRenderer)
@@ -555,6 +546,8 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
         {
             sortingLayerInfo.setRendererSortingLayer(spriteRenderer);
         }
+
+        spriteRenderer.flipX = flipSprite();
     }
 
     protected override void setIgnoresSecretDoors(GameObject interactable)
@@ -1397,7 +1390,7 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
 
         } else if(flipSprite())
         {
-            gateGameObject.transform.localScale = Constants.flippedXScale;
+            gate.spriteRenderer.flipX = true;
         }
     }
 

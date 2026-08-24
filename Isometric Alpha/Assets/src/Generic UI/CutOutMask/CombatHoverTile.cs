@@ -212,16 +212,10 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
         CombatHoverTileManager.GetHoverSelector.AddListener(getHoverSelector);
 
-        SelectorManager.updateAllDamagePreviews();
-
         if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
         {
             revealPriorityHeld = true;
 
-            if(CombatStateManager.currentActivity != CurrentActivity.Tutorial)
-            {
-                createHoverTag();
-            }
             CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), true);
         }
 
@@ -238,17 +232,10 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
         CombatHoverTileManager.GetHoverSelector.RemoveListener(getHoverSelector);
 
-        SelectorManager.updateAllDamagePreviews();
-        
         if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
         {
             revealPriorityHeld = false;
 
-            if(CombatStateManager.currentActivity != CurrentActivity.Tutorial)
-            {
-                SelectorManager.displayCurrentHoverUI();
-            }
-            
             CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), false);
         }
 
@@ -324,88 +311,3 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         return targetCoords;
     }
 }
-/*
-    private void handleEnemyClick(Stats targetStats)
-    {
-        if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
-        {
-            return;
-        }
-
-        if (CombatStateManager.currentActivity == CurrentActivity.ChoosingActor || CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation)
-        {
-            SelectorManager.currentSelector.setToLocation(SelectorManager.findLegalCoordsContainingMandatoryTarget(SelectorManager.getCurrentSelector(), targetCoords));
-        }
-    }
-
-    private void handleAllyClick(Stats targetStats)
-    {
-        if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
-        {
-            return;
-        }
-
-        if (CombatStateManager.currentActivity == CurrentActivity.ChoosingAbility)
-        {
-            SelectorManager.deselectAlly();
-        }
-
-        if (targetStats.positions.Count > 0)
-        {
-            SelectorManager.currentSelector.setToLocation(targetStats.positions[0]);
-        }
-
-        if (targetStats.positions.Contains(SelectorManager.currentSelector.getCoords()))
-        {
-            SelectorManager.handleAllySelection();
-        }
-    }
-
-    public void OnMouseEnter()
-    {
-        // if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
-        // {
-        //     return;
-        // }
-
-        // preserveHoverCoords();
-
-        // if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
-        // {
-        //     onReveal(Constants.reveal);
-
-        //     createHoverTag();
-
-        //     if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && tileHasTarget() && !DamagePreviewManager.hasPreviewAtCoords(targetCoords))
-        //     {
-        //         createHoverDamagePreview();
-        //     }
-        // }
-    }
-
-    public void OnMouseExit() 
-    {
-        // if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
-        // {
-        //     return;
-        // }
-
-        // purgeHoverCoords();
-
-        // if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null)
-        // {
-        //     if (getTargetGameObject() != null)
-        //     {
-        //         getSpriteOutline().removeOutline();
-        //     }
-
-        //     SelectorManager.displayCurrentHoverUI();
-
-        //     if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && tileHasTarget())
-        //     {
-        //         DamagePreviewManager.removeAllHoverPreviews();
-        //         DamagePreviewManager.setUpDamagePreviews();
-        //     }
-        // }
-    }
-    */

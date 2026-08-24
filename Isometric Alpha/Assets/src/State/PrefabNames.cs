@@ -206,6 +206,13 @@ public static class PrefabNames
 
     #endregion
 
+    #region Build
+
+    public const string buildTimestampFileName = "Build-Timestamp" + Constants.textFileExtension;
+    public readonly static string buildTimestampFile = Application.streamingAssetsPath + "/" + buildTimestampFileName;
+
+    #endregion
+
     #region UI
 
     public const string UIFolder = "UI/";
