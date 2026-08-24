@@ -568,7 +568,42 @@ public class SelectorManager : MonoBehaviour
 		}
 	}
 
+    private static bool declareSelectorsQueued = false;
+
+    // Selector declaration is batched to the end of the frame. A single state change can trigger
+    // this many times over, so only the first call queues the coroutine; the rest fall out here.
     public static void declareSelectors()
+    {
+        if(declareSelectorsQueued)
+        {
+            return;
+        }
+
+        if(instance == null || !instance.isActiveAndEnabled)
+        {
+            declareSelectorsNow();
+            return;
+        }
+
+        declareSelectorsQueued = true;
+        instance.StartCoroutine(declareSelectorsAtEndOfFrame());
+    }
+
+    private static IEnumerator declareSelectorsAtEndOfFrame()
+    {
+        yield return new WaitForEndOfFrame();
+
+        try
+        {
+            declareSelectorsNow();
+        }
+        finally
+        {
+            declareSelectorsQueued = false;
+        }
+    }
+
+    private static void declareSelectorsNow()
     {
         CombatHoverTileManager.hideAllTiles();
         List<Selector> visibleSelectors = new List<Selector>();
@@ -885,6 +920,7 @@ public class SelectorManager : MonoBehaviour
         instance = null;
         isMoving = false;
         heartBeatCount = 0;
+        declareSelectorsQueued = false;
     }
 }
 
