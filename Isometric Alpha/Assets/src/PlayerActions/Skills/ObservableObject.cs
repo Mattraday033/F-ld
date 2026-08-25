@@ -15,7 +15,10 @@ public class SecretDoorInfo : IStoryVariableSource
     public string successChoice;
     public string failureDescription;
     public string openDescription;
-    public string customDialoguePath;
+
+    // NoDialogue means "use the generic secret door story"; see OOCSpawnDetails.getDialogue.
+    public DialogueKey customDialogueKey;
+
     public bool addHostilityIfOutside;
     public string questName;
     public string questStepName;
@@ -30,7 +33,7 @@ public class SecretDoorInfo : IStoryVariableSource
                             string successChoice = null,
                             string failureDescription = null,
                             string openDescription = null,
-                            string customDialoguePath = null,
+                            DialogueKey customDialogueKey = DialogueKey.NoDialogue,
                             bool addHostilityIfOutside = false,
                             string questName = null,
                             string questStepName = null,
@@ -53,7 +56,7 @@ public class SecretDoorInfo : IStoryVariableSource
         this.successChoice = successChoice;
         this.failureDescription = failureDescription;
         this.openDescription = openDescription;
-        this.customDialoguePath = customDialoguePath;
+        this.customDialogueKey = customDialogueKey;
         this.addHostilityIfOutside = addHostilityIfOutside;
         this.questName = questName;
         this.questStepName = questStepName;

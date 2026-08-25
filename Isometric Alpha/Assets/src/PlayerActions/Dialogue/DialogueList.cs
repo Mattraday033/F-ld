@@ -10,36 +10,38 @@ public static class DialogueList
 
 
     private readonly static Dialogue wallPatchDialogue = new Dialogue(new string[] { NPCNameList.wallPatch },
-                                                            Resources.Load<TextAsset>(DialogueNameList.wallPatchPath));
+                                                            InkAssetList.getInkJSON(DialogueKey.WallPatch));
 
     private readonly static Dialogue awkwardRubbleDialogue = new Dialogue(new string[] { NPCNameList.awkwardRubble },
-                                                             Resources.Load<TextAsset>(DialogueNameList.awkwardRubblePath));
+                                                             InkAssetList.getInkJSON(DialogueKey.AwkwardRubble));
     private readonly static Dialogue ancientPortcullisDialogue = new Dialogue(new string[] { NPCNameList.ancientPortcullis},
-                                                             Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath));
+                                                             InkAssetList.getInkJSON(DialogueKey.AncientPortcullis));
 
     private readonly static Dialogue liftableGateDialogue = new Dialogue(new string[] { "", NPCNameList.liftableGate + 1},
-                                                             Resources.Load<TextAsset>(DialogueNameList.liftableGatePath));
+                                                             InkAssetList.getInkJSON(DialogueKey.LiftableGate));
 
     private readonly static StoryStatRequirementVariableSource unstablePillarStrengthRequirement = new StoryStatRequirementVariableSource(StoryVariableNameList.strReqVariableName, Constants.sizeThree);
     private readonly static Dialogue unstablePillarDialogue = new Dialogue(new string[] { "", NPCNameList.unstablePillar},
-                                                             Resources.Load<TextAsset>(DialogueNameList.unstablePillarPath),
+                                                             InkAssetList.getInkJSON(DialogueKey.UnstablePillar),
                                                              unstablePillarStrengthRequirement);
 
     private readonly static Dialogue liftableRubbleDialogue = new Dialogue(new string[] { NPCNameList.liftableRubble },
-                            Resources.Load<TextAsset>(DialogueNameList.liftableRubblePath));
+                            InkAssetList.getInkJSON(DialogueKey.LiftableRubble));
 
     public static Dictionary<string, Dialogue> dialogueList;
 
     [RuntimeInitializeOnLoadMethod]
     private static void initializeDialogueList()
     {
+        InkAssetList.init();
+
         dialogueList = new Dictionary<string, Dialogue>();
 
         #region Interactables
 
         addDialogueToList(NPCNameList.vaultableBarrels,
                             new Dialogue(new string[] { NPCNameList.vaultableBarrels },
-                            Resources.Load<TextAsset>(DialogueNameList.dialogueResourcesPathName + PrefabNames.vaultableObject)));
+                            InkAssetList.getInkJSON(DialogueKey.VaultableObject)));
 
         #endregion
 
@@ -47,38 +49,38 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.slaveShackOne, NPCNameList.seb,
                             new Dialogue(new string[] { NPCNameList.seb },
-                            Resources.Load<TextAsset>(DialogueNameList.sebPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Seb)));
 
         addDialogueToList(LocationNameList.slaveShackOne, NPCNameList.balint,
                             new Dialogue(new string[] { NPCNameList.balint },
-                            Resources.Load<TextAsset>(DialogueNameList.balintPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Balint)));
 
         #endregion
         #region Slave Shack 2
 
         addDialogueToList(LocationNameList.slaveShackTwo, NPCNameList.brush,
                             new Dialogue(new string[] { NPCNameList.brush, NPCNameList.géza, NPCNameList.guardLaszlo, NPCNameList.guardLaszlo + 1, NPCNameList.géza + 1, NPCNameList.géza + 2},
-                            Resources.Load<TextAsset>(DialogueNameList.introDialoguePath)));
+                            InkAssetList.getInkJSON(DialogueKey.IntroDialogue)));
 
         addDialogueToList(LocationNameList.slaveShackTwo, NPCNameList.géza,
                             new Dialogue(new string[] { NPCNameList.géza },
-                            Resources.Load<TextAsset>(DialogueNameList.gézaPath)));
+                            InkAssetList.getInkJSON(DialogueKey._2SlaveShack_Géza)));
 
         #endregion
         #region Slave Shack 3
 
         addDialogueToList(LocationNameList.slaveShackThree, NPCNameList.janos,
                             new Dialogue(new string[] { NPCNameList.janos, NPCNameList.guardAndras, NPCNameList.guardAndras + 1 },
-                            Resources.Load<TextAsset>(DialogueNameList.janosPath),
+                            InkAssetList.getInkJSON(DialogueKey._3SlaveShack_Janos),
                             DialogueCombatInfoList.andrasCombatInfo));
 
         addDialogueToList(LocationNameList.slaveShackThree, NPCNameList.guardAndras + 1,
                             new Dialogue(new string[] { NPCNameList.guardAndras + 1 },
-                            Resources.Load<TextAsset>(DialogueNameList.andrasPath)));
+                            InkAssetList.getInkJSON(DialogueKey._3SlaveShack_Andras)));
 
         addDialogueToList(LocationNameList.slaveShackThree, DialogueNameList.janosAfterKillingAndrasKey,
                             new Dialogue(new string[] { NPCNameList.janos },
-                            Resources.Load<TextAsset>(DialogueNameList.janosAfterKillingAndrasPath)));
+                            InkAssetList.getInkJSON(DialogueKey.JanosAfterKillingAndras)));
 
         #endregion
         #region Slave Shack 4
@@ -97,7 +99,7 @@ public static class DialogueList
                                                         NPCNameList.dibber+1,
                                                         NPCNameList.weft
                                                     },
-                            Resources.Load<TextAsset>(DialogueNameList.kastorPlanPath)));
+                            InkAssetList.getInkJSON(DialogueKey.KastorPlan)));
 
         Dialogue kastorSkillTutorialDialogue = new Dialogue(new string[] { 
                                                         NPCNameList.kastor,
@@ -106,7 +108,7 @@ public static class DialogueList
                                                         NPCNameList.kastor+3,
                                                         NPCNameList.kastor+4
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.kastorSkillTutorialPath));
+                            InkAssetList.getInkJSON(DialogueKey.KastorSkillTutorial));
 
         addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.kastor+1, kastorSkillTutorialDialogue);
         addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.kastor+2, kastorSkillTutorialDialogue);
@@ -121,18 +123,18 @@ public static class DialogueList
                                                         NPCNameList.kastor+5,
                                                         NPCNameList.thatch
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.dibberPath));
+                            InkAssetList.getInkJSON(DialogueKey.Dibber));
 
         addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.dibber, dibberDialogue);
         addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.dibber+1, dibberDialogue);
 
         addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.guardMarcos,
                             new Dialogue(new string[] { NPCNameList.guardMarcos },
-                            Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath)));
+                            InkAssetList.getInkJSON(DialogueKey.GuardMarcos)));
 
         addDialogueToList(LocationNameList.slaveShackFour, NPCNameList.guardMarcos+1,
                             new Dialogue(new string[] { NPCNameList.guardMarcos+1 },
-                            Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath)));
+                            InkAssetList.getInkJSON(DialogueKey.GuardMarcos)));
 
         addPartyMemberDialogue(LocationNameList.slaveShackFour, NPCNameList.nandor);
         addPartyMemberDialogue(LocationNameList.slaveShackFour, NPCNameList.carter);
@@ -145,7 +147,7 @@ public static class DialogueList
                                                         NPCNameList.ervin
                                                         // ,NPCNameList.thatch
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.ervinPath)));
+                            InkAssetList.getInkJSON(DialogueKey._5SlaveShack_Ervin)));
 
         addDialogueToList(LocationNameList.slaveShackFive, NPCNameList.wallPatch, wallPatchDialogue);
 
@@ -154,20 +156,20 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.thatch,
                             new Dialogue(new string[] { NPCNameList.thatch, NPCNameList.rubble },
-                            Resources.Load<TextAsset>(DialogueNameList.thatchPath)));
+                            InkAssetList.getInkJSON(DialogueKey._6SlaveShack_Thatch)));
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.slate,
                             new Dialogue(new string[] { NPCNameList.slate },
-                            Resources.Load<TextAsset>(DialogueNameList.slatePath)));
+                            InkAssetList.getInkJSON(DialogueKey.Slate)));
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.guardVazul,
                             new Dialogue(new string[] { "", NPCNameList.guardVazul, NPCNameList.slate, NPCNameList.thatch + 1 },
-                            Resources.Load<TextAsset>(DialogueNameList.vazulPath),
+                            InkAssetList.getInkJSON(DialogueKey.Vazul),
                             DialogueCombatInfoList.vazulCombatInfo));
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.rubble,
                             new Dialogue(new string[] { NPCNameList.rubble },
-                            Resources.Load<TextAsset>(DialogueNameList.immovableRubblePath)));
+                            InkAssetList.getInkJSON(DialogueKey.ImmovableRubble)));
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.wallPatch, wallPatchDialogue);
 
@@ -175,14 +177,14 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.awkwardRubble,
                             new Dialogue(new string[] { NPCNameList.awkwardRubble },
-                            Resources.Load<TextAsset>(DialogueNameList.fallenBeamPath)));
+                            InkAssetList.getInkJSON(DialogueKey.FallenBeam)));
 
         #endregion
         #region Slave Shack 7
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.slave,
                             new SingleCharacterDialogue(NPCNameList.slave,
-                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.dezso,
                             new Dialogue(new string[]{
@@ -195,26 +197,26 @@ public static class DialogueList
                                                         NPCNameList.weft,
                                                         NPCNameList.guard
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.dezsoPath),
+                            InkAssetList.getInkJSON(DialogueKey.Dezso),
                             DialogueCombatInfoList.dezsoHostageFight));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.loam,
                             new Dialogue(new string[]{ NPCNameList.loam},
-                            Resources.Load<TextAsset>(DialogueNameList.loamPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Loam)));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+1,
                             new SingleCharacterDialogue(NPCNameList.guard+1,
-                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+2,
                             new SingleCharacterDialogue(NPCNameList.guard+2,
-                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+3,
                             new SingleCharacterDialogue(NPCNameList.guard+3,
-                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+4,
                             new SingleCharacterDialogue(NPCNameList.guard+4,
-                            Resources.Load<TextAsset>(DialogueNameList.guardsAfterHostagesPath)));
+                            InkAssetList.getInkJSON(DialogueKey.GuardsAfterHostages)));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.weft,
                             new Dialogue(new string[]{
@@ -222,7 +224,7 @@ public static class DialogueList
                                                         NPCNameList.weft, 
                                                         NPCNameList.weft+1
                                                     },
-                            Resources.Load<TextAsset>(DialogueNameList.weftAfterHostagesPath)));
+                            InkAssetList.getInkJSON(DialogueKey.WeftAfterHostages)));
         #endregion
         #region Slave Shack 8
 
@@ -231,7 +233,7 @@ public static class DialogueList
                                                         NPCNameList.weft,
                                                         NPCNameList.overseer
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.weftPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Weft)));
 
         #endregion
 
@@ -241,14 +243,14 @@ public static class DialogueList
                                                         NPCNameList.guardLaszlo,
                                                         NPCNameList.weft
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.laszloPath)));
+                            InkAssetList.getInkJSON(DialogueKey.GuardLászló)));
         #endregion
 
         #region Guard House NE
 
         addDialogueToList(LocationNameList.guardHouseNorthEast, NPCNameList.barracksGate,
                             new SingleCharacterDialogue(NPCNameList.barracksGate,
-                            Resources.Load<TextAsset>(DialogueNameList.barracksGatePath)));
+                            InkAssetList.getInkJSON(DialogueKey.BarracksGate)));
 
         #endregion
 
@@ -256,12 +258,12 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.guardHouseSouthWest, NPCNameList.barracksGate,
                             new SingleCharacterDialogue(NPCNameList.barracksGate,
-                            Resources.Load<TextAsset>(DialogueNameList.barracksGatePath)));
+                            InkAssetList.getInkJSON(DialogueKey.BarracksGate)));
 
 
         addDialogueToList(LocationNameList.guardHouseSouthWest, NPCNameList.guard,
                             new SingleCharacterDialogue(NPCNameList.guard,
-                            Resources.Load<TextAsset>(DialogueNameList.barracksGuardPath)));
+                            InkAssetList.getInkJSON(DialogueKey.BarracksGuard)));
 
         #endregion
 
@@ -269,25 +271,25 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.uros,
                             new Dialogue(new string[] { NPCNameList.uros, NPCNameList.quartermasterEmese },
-                            Resources.Load<TextAsset>(DialogueNameList.urosPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Uros)));
 
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.quartermasterEmese,
                             new Dialogue(new string[] { NPCNameList.quartermasterEmese, NPCNameList.uros },
-                            Resources.Load<TextAsset>(DialogueNameList.emesePath)));
+                            InkAssetList.getInkJSON(DialogueKey.Emese)));
 
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate,
                             new Dialogue(new string[] { NPCNameList.crate },
-                            Resources.Load<TextAsset>(DialogueNameList.dudCratePath)));
+                            InkAssetList.getInkJSON(DialogueKey.DudCrates)));
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate + 1,
                             new Dialogue(new string[] { NPCNameList.crate + 1 },
-                            Resources.Load<TextAsset>(DialogueNameList.dudCratePath)));
+                            InkAssetList.getInkJSON(DialogueKey.DudCrates)));
 
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.barrels,
                             new Dialogue(new string[] { NPCNameList.barrels },
-                            Resources.Load<TextAsset>(DialogueNameList.barrelsWithNuggetPath)));
+                            InkAssetList.getInkJSON(DialogueKey.BarrelsWithNugget)));
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.barrels + 1,
                             new Dialogue(new string[] { NPCNameList.barrels + 1},
-                            Resources.Load<TextAsset>(DialogueNameList.dudBarrelPath)));
+                            InkAssetList.getInkJSON(DialogueKey.DudBarrels)));
 
         #endregion
         #region Stables
@@ -296,17 +298,17 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.stables, NPCNameList.beam,
                             new Dialogue(new string[] { NPCNameList.beam },
-                            Resources.Load<TextAsset>(DialogueNameList.beamPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Beam)));
 
         addDialogueToList(LocationNameList.stables, NPCNameList.horse,
                             new Dialogue(new string[] { NPCNameList.horse },
-                            Resources.Load<TextAsset>(DialogueNameList.horsePath)));
+                            InkAssetList.getInkJSON(DialogueKey.Horse)));
         addDialogueToList(LocationNameList.stables, NPCNameList.horse + 1,
                             new Dialogue(new string[] { NPCNameList.horse + 1 },
-                            Resources.Load<TextAsset>(DialogueNameList.horsePath)));
+                            InkAssetList.getInkJSON(DialogueKey.Horse)));
         addDialogueToList(LocationNameList.stables, NPCNameList.horse + 2,
                             new Dialogue(new string[] { NPCNameList.horse + 2 },
-                            Resources.Load<TextAsset>(DialogueNameList.horsePath)));
+                            InkAssetList.getInkJSON(DialogueKey.Horse)));
 
         #endregion
         #region Temple
@@ -318,7 +320,7 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.messHall, NPCNameList.noBrand+1,
                             new Dialogue(new string[] { NPCNameList.noBrand+1 },
-                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
 
         addDialogueToList(LocationNameList.messHall, NPCNameList.kende,
                             new Dialogue(new string[] { 
@@ -326,7 +328,7 @@ public static class DialogueList
                                                         NPCNameList.kende,
                                                         NPCNameList.weft
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.kendePath)));
+                            InkAssetList.getInkJSON(DialogueKey.Kende)));
         #endregion
 
         #region Body Pile
@@ -337,7 +339,7 @@ public static class DialogueList
                                                         NPCNameList.chiefTabor,
                                                         NPCNameList.weft
                                                      },
-                            Resources.Load<TextAsset>(DialogueNameList.thiefsBodyPath)));
+                            InkAssetList.getInkJSON(DialogueKey.ThiefBody)));
 
         addDialogueToList(LocationNameList.bodyPile, DialogueNameList.afterTakacsFightKey,
                             new Dialogue(new string[] { 
@@ -356,7 +358,7 @@ public static class DialogueList
                                                         NPCNameList.rubble
 
                                                      },
-                            Resources.Load<TextAsset>(DialogueNameList.afterTakacsFightPath)));
+                            InkAssetList.getInkJSON(DialogueKey.AfterTakacsFight)));
 
         #endregion
 
@@ -364,11 +366,11 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.leafPile,
                             new Dialogue(new string[] { NPCNameList.leafPile },
-                            Resources.Load<TextAsset>(DialogueNameList.leafPilePath)));
+                            InkAssetList.getInkJSON(DialogueKey.LeafPile)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.overseer,
                             new Dialogue(new string[] { NPCNameList.overseer },
-                            Resources.Load<TextAsset>(DialogueNameList.overseerPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Overseer)));
 
         addDialogueToList(LocationNameList.campNorthEast, DialogueNameList.slavesAfterKillingOverseerCampNEKey,
                          new Dialogue(new string[] { 
@@ -384,83 +386,83 @@ public static class DialogueList
                                                         NPCNameList.slaveFour, 
                                                         NPCNameList.crowd
                                                         }, 
-                            Resources.Load<TextAsset>(DialogueNameList.slavesAfterKillingOverseerCampNEPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.slavesAfterKillingOverseerCampNE)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.temple+1,
                          new Dialogue(new string[] { NPCNameList.temple+1 }, 
-                            Resources.Load<TextAsset>(DialogueNameList.slaveFiveNECampPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.Slave5)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+6,
                          new Dialogue(new string[] { NPCNameList.slave+6 }, 
-                            Resources.Load<TextAsset>(DialogueNameList.slaveSixNECampPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.Slave6)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+7,
                          new Dialogue(new string[] { NPCNameList.slave+7 }, 
-                            Resources.Load<TextAsset>(DialogueNameList.slaveSevenNECampPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.Slave7)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+8,
                          new Dialogue(new string[] { NPCNameList.slave+8 }, 
-                            Resources.Load<TextAsset>(DialogueNameList.slaveEightNECampPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.Slave8)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.clay+1,
                          new Dialogue(new string[] { NPCNameList.clay+1 }, 
-                            Resources.Load<TextAsset>(DialogueNameList.slaveNineNECampPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.Slave9)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.woundedSlave,
                          new Dialogue(new string[] { NPCNameList.woundedSlave }, 
-                            Resources.Load<TextAsset>(DialogueNameList.woundedSlaveNECampPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.WoundedSlave)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.woundedSlave+1,
                          new Dialogue(new string[] { NPCNameList.woundedSlave+1 }, 
-                            Resources.Load<TextAsset>(DialogueNameList.woundedSlaveOneNECampPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.WoundedSlave1)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.woundedSlave+2,
                          new Dialogue(new string[] { NPCNameList.woundedSlave+2 }, 
-                            Resources.Load<TextAsset>(DialogueNameList.woundedSlaveTwoNECampPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.WoundedSlave2)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guardMarcos,
                          new Dialogue(new string[] { NPCNameList.guardMarcos }, 
-                            Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath)));
+                            InkAssetList.getInkJSON(DialogueKey.GuardMarcos)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.uros,
                          new Dialogue(new string[] { NPCNameList.uros }, 
-                            Resources.Load<TextAsset>(DialogueNameList.urosNECampPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.UrosDuringRevolution)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.kastor,
                          new Dialogue(new string[] { NPCNameList.kastor }, 
-                            Resources.Load<TextAsset>(DialogueNameList.kastorNECampPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.KastorDuringRevolution)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.géza+1,
                          new Dialogue(new string[] { NPCNameList.géza+1 }, 
-                            Resources.Load<TextAsset>(DialogueNameList.gézaNECampPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.GézaDuringRevolution)));
 
         addDialogueToList(LocationNameList.campNorthEast, MonsterNameList.brandedConscript,
                         new SingleCharacterDialogue(MonsterNameList.brandedConscript,
-                        Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+                        InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
 
         addDialogueToList(LocationNameList.campNorthEast, MonsterNameList.spearman,
                         new SingleCharacterDialogue(MonsterNameList.spearman,
-                        Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+                        InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+2,
                             new SingleCharacterDialogue(NPCNameList.guard+2,
-                            Resources.Load<TextAsset>(DialogueNameList.situationGuardPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SituationGuard)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+3,
                             new SingleCharacterDialogue(NPCNameList.guard+3,
-                            Resources.Load<TextAsset>(DialogueNameList.situationGuardPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SituationGuard)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+4,
                             new SingleCharacterDialogue(NPCNameList.guard+4,
-                            Resources.Load<TextAsset>(DialogueNameList.situationGuardBlockerPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SituationGuardBlocker)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+1,
                             new SingleCharacterDialogue(NPCNameList.guard+1,
-                            Resources.Load<TextAsset>(DialogueNameList.situationGuardPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SituationGuard)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.honorguard+1,
                             new SingleCharacterDialogue(NPCNameList.honorguard+1,
-                            Resources.Load<TextAsset>(DialogueNameList.situationGuardPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SituationGuard)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.chiefTabor,
                             new Dialogue(new string[]{ 
@@ -470,25 +472,25 @@ public static class DialogueList
                                                         NPCNameList.weft,
                                                         NPCNameList.guard+2
                                                     },
-                            Resources.Load<TextAsset>(DialogueNameList.taborNEPath)));
+                            InkAssetList.getInkJSON(DialogueKey.NECamp_Tabor)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.captainAdela,
                             new Dialogue(new string[]{ NPCNameList.captainAdela},
-                            Resources.Load<TextAsset>(DialogueNameList.captainAdelaPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.Adela)));
         #endregion
         #region CenterCamp
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.csalan,
                             new Dialogue(new string[] { NPCNameList.csalan },
-                            Resources.Load<TextAsset>(DialogueNameList.csalanPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Csalan)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.guard + 1,
                             new Dialogue(new string[] { NPCNameList.guard + 1 },
-                            Resources.Load<TextAsset>(DialogueNameList.guardWatchingTaborPath)));
+                            InkAssetList.getInkJSON(DialogueKey.GuardWatchingTabor)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.temple,
                             new Dialogue(new string[] { NPCNameList.temple },
-                            Resources.Load<TextAsset>(DialogueNameList.templePath)));
+                            InkAssetList.getInkJSON(DialogueKey.Temple)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.chiefTabor,
                             new Dialogue(new string[] { NPCNameList.chiefTabor,
@@ -497,37 +499,37 @@ public static class DialogueList
                                                         NPCNameList.branded+1,
                                                         NPCNameList.branded+2,
                                                         NPCNameList.weft},
-                            Resources.Load<TextAsset>(DialogueNameList.taborPath)));
+                            InkAssetList.getInkJSON(DialogueKey.CenterCamp_Tabor)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.feher,
                             new Dialogue(new string[] { NPCNameList.feher },
-                            Resources.Load<TextAsset>(DialogueNameList.feherPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Feher)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.branded,
                             new Dialogue(new string[] { NPCNameList.branded },
-                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
         addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+1,
                             new Dialogue(new string[] { NPCNameList.branded+1 },
-                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
         addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+2,
                             new Dialogue(new string[] { NPCNameList.branded+2 },
-                            Resources.Load<TextAsset>(DialogueNameList.slavesWatchingTaborPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.campGate, 
                             new Dialogue(new string[] { NPCNameList.campGate },
-                            Resources.Load<TextAsset>(DialogueNameList.campGatePath)));
+                            InkAssetList.getInkJSON(DialogueKey.CampGate)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.wallPatch, wallPatchDialogue);
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.barricadeGuards+1,
                                 new SingleCharacterDialogue(NPCNameList.barricadeGuards+1,
-                                Resources.Load<TextAsset>(DialogueNameList.firstBarricadeGuardsPath),
+                                InkAssetList.getInkJSON(DialogueKey.FirstBarricadeGuards),
                                 DialogueCombatInfoList.barricadeGuardsCombatInfo,
                                 new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey1)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.barricade+1,
                                 new SingleCharacterDialogue(NPCNameList.barricade+1,
-                                Resources.Load<TextAsset>(DialogueNameList.firstBarricadeGuardsPath),
+                                InkAssetList.getInkJSON(DialogueKey.FirstBarricadeGuards),
                                 DialogueCombatInfoList.barricadeGuardsCombatInfo,
                                 new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey1)));
 
@@ -538,7 +540,7 @@ public static class DialogueList
                                                             NPCNameList.carter,
                                                             NPCNameList.carter
                                                           },
-                            Resources.Load<TextAsset>(DialogueNameList.pageBeforeLeavingPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Page)));
 
         #endregion
         #region SECamp
@@ -546,45 +548,62 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.wallPatch, wallPatchDialogue);
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.statue,
                             new SingleCharacterDialogue(NPCNameList.statue,
-                            Resources.Load<TextAsset>(DialogueNameList.directorStatuePath)));
+                            InkAssetList.getInkJSON(DialogueKey.DirectorStatue)));
                             
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.toppledStatue,
                             new SingleCharacterDialogue(NPCNameList.toppledStatue,
-                            Resources.Load<TextAsset>(DialogueNameList.brokenDirectorStatuePath)));
+                            InkAssetList.getInkJSON(DialogueKey.BrokenDirectorStatue)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+7,
+                            new SingleCharacterDialogue(NPCNameList.slave,
+                            InkAssetList.getInkJSON(DialogueKey.MessHallSlave1)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+8,
+                            new SingleCharacterDialogue(NPCNameList.slave,
+                            InkAssetList.getInkJSON(DialogueKey.MessHallSlave2)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guard,
+                            new SingleCharacterDialogue(NPCNameList.guard,
+                            InkAssetList.getInkJSON(DialogueKey.MessHallGuard)));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guard+1,
+                            new SingleCharacterDialogue(NPCNameList.guard,
+                            InkAssetList.getInkJSON(DialogueKey.StatueGuard)));
+
 
         #region Guard Punishment Scene
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave,
                             new SingleCharacterDialogue(NPCNameList.slave,
-                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave1Path)));
+                            InkAssetList.getInkJSON(DialogueKey.CrowdSlave1)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+1,
                             new SingleCharacterDialogue(NPCNameList.slave,
-                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave1Path)));
+                            InkAssetList.getInkJSON(DialogueKey.CrowdSlave1)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+2,
                             new SingleCharacterDialogue(NPCNameList.slave,
-                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave2Path)));
+                            InkAssetList.getInkJSON(DialogueKey.CrowdSlave2)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+3,
                             new SingleCharacterDialogue(NPCNameList.slave ,
-                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave3Path)));
+                            InkAssetList.getInkJSON(DialogueKey.CrowdSlave3)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+4,
                             new SingleCharacterDialogue(NPCNameList.slave ,
-                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave3Path)));
+                            InkAssetList.getInkJSON(DialogueKey.CrowdSlave3)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+5,
                             new SingleCharacterDialogue(NPCNameList.slave ,
-                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave3Path)));
+                            InkAssetList.getInkJSON(DialogueKey.CrowdSlave3)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+6,
                             new SingleCharacterDialogue(NPCNameList.slave ,
-                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave3Path)));
+                            InkAssetList.getInkJSON(DialogueKey.CrowdSlave3)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.crowd,
                             new SingleCharacterDialogue(NPCNameList.slave ,
-                            Resources.Load<TextAsset>(DialogueNameList.crowdSlave3Path)));
+                            InkAssetList.getInkJSON(DialogueKey.CrowdSlave3)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.kastor,
                             new Dialogue(new string[]   {  
@@ -600,32 +619,32 @@ public static class DialogueList
                                                             NPCNameList.géza,
                                                             NPCNameList.thatch
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.kastorGuardPunishmentPath),
-                            new TextAsset[]{Resources.Load<TextAsset>(DialogueNameList.nandorGuardPunishmentPath)}));
+                            InkAssetList.getInkJSON(DialogueKey.Kastor),
+                            new TextAsset[]{InkAssetList.getInkJSON(DialogueKey.SECamp_Nandor)}));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.brush,
                             new SingleCharacterDialogue(NPCNameList.brush,
-                            Resources.Load<TextAsset>(DialogueNameList.brushGuardPunishmentPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SECamp_Brush)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.géza,
                             new SingleCharacterDialogue(NPCNameList.géza,
-                            Resources.Load<TextAsset>(DialogueNameList.gézaGuardPunishmentPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SECamp_Géza)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.ervin,
                             new SingleCharacterDialogue(NPCNameList.ervin,
-                            Resources.Load<TextAsset>(DialogueNameList.ervinGuardPunishmentPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SECamp_Ervin)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.janos,
                             new SingleCharacterDialogue(NPCNameList.janos,
-                            Resources.Load<TextAsset>(DialogueNameList.janosGuardPunishmentPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SECamp_Janos)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.thatch,
                             new SingleCharacterDialogue(NPCNameList.thatch,
-                            Resources.Load<TextAsset>(DialogueNameList.thatchGuardPunishmentPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SECamp_Thatch)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.carter,
                             new SingleCharacterDialogue(NPCNameList.carter,
-                            Resources.Load<TextAsset>(DialogueNameList.carterGuardPunishmentPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SECamp_Carter)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.nandor,
                             new Dialogue(new string[]   {  
@@ -646,8 +665,8 @@ public static class DialogueList
                                                             NPCNameList.clay,
                                                             NPCNameList.nandor+1
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.guardPunishmentStartConvoPath),
-                            new TextAsset[]{Resources.Load<TextAsset>(DialogueNameList.nandorGuardPunishmentPath)}));
+                            InkAssetList.getInkJSON(DialogueKey.GuardPunishmentStartConvo),
+                            new TextAsset[]{InkAssetList.getInkJSON(DialogueKey.SECamp_Nandor)}));
 
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.nandor+1,
@@ -664,7 +683,7 @@ public static class DialogueList
                                                             NPCNameList.géza,
                                                             NPCNameList.thatch
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.nandorGuardPunishmentPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SECamp_Nandor)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.marcos,
                             new Dialogue(new string[]   {  
@@ -672,7 +691,7 @@ public static class DialogueList
                                                             NPCNameList.marcos,
                                                             NPCNameList.crowd
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.marcosGuardPunishmentPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Marcos)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.andras,
                             new Dialogue(new string[]   {  
@@ -681,7 +700,7 @@ public static class DialogueList
                                                             NPCNameList.crowd,
                                                             NPCNameList.janos
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.andrasGuardPunishmentPath)));
+                            InkAssetList.getInkJSON(DialogueKey.SECamp_Andras)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.reka,
                             new Dialogue(new string[]   {  
@@ -689,7 +708,7 @@ public static class DialogueList
                                                             NPCNameList.reka,
                                                             NPCNameList.crowd
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.rekaGuardPunishmentPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Reka)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.pazman,
                             new Dialogue(new string[]   {  
@@ -699,7 +718,7 @@ public static class DialogueList
                                                             NPCNameList.ervin,
                                                             NPCNameList.ervin+1
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.pazmanGuardPunishmentPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Pazman)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.chiefTabor,
                             new Dialogue(new string[]   {  
@@ -708,7 +727,7 @@ public static class DialogueList
                                                             NPCNameList.crowd,
                                                             NPCNameList.clay
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.taborGuardPunishmentPath),
+                            InkAssetList.getInkJSON(DialogueKey.SECamp_ChiefTabor),
                             DialogueCombatInfoList.clayFightForTaborCombatInfo));
 
         addDialogueToList(LocationNameList.campSouthEast, DialogueNameList.taborAfterClayFightKey,
@@ -716,8 +735,8 @@ public static class DialogueList
                                                             NPCNameList.playerNamePlaceHolder,
                                                             NPCNameList.chiefTabor
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.taborAfterClayFightPath),
-                            new TextAsset[]{Resources.Load<TextAsset>(DialogueNameList.taborGuardPunishmentPath)}));             
+                            InkAssetList.getInkJSON(DialogueKey.TaborAfterClayFight),
+                            new TextAsset[]{InkAssetList.getInkJSON(DialogueKey.SECamp_ChiefTabor)}));             
 
         #endregion
 
@@ -726,46 +745,46 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guard,
                             new SingleCharacterDialogue(NPCNameList.guard,
-                            Resources.Load<TextAsset>(DialogueNameList.genericGuardDialoguePath)));
+                            InkAssetList.getInkJSON(DialogueKey.GenericGuard)));
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guard+1,
                             new SingleCharacterDialogue(NPCNameList.guard+1,
-                            Resources.Load<TextAsset>(DialogueNameList.genericGuardDialoguePath)));
+                            InkAssetList.getInkJSON(DialogueKey.GenericGuard)));
 
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa,
                             new Dialogue(new string[] { NPCNameList.guardMuzsa, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
-                            Resources.Load<TextAsset>(DialogueNameList.muszaPath),
+                            InkAssetList.getInkJSON(DialogueKey.GuardMuzsa),
                             DialogueCombatInfoList.muzsaCombatInfo));
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa + 1,
                             new Dialogue(new string[] { NPCNameList.guardMuzsa + 1, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
-                            Resources.Load<TextAsset>(DialogueNameList.muszaPath)));
+                            InkAssetList.getInkJSON(DialogueKey.GuardMuzsa)));
 
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.barracksGate,
                             new SingleCharacterDialogue(NPCNameList.barracksGate,
-                            Resources.Load<TextAsset>(DialogueNameList.barracksGatePath)));
+                            InkAssetList.getInkJSON(DialogueKey.BarracksGate)));
 
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.uros,
                             new Dialogue(new string[] { NPCNameList.uros },
-                            Resources.Load<TextAsset>(DialogueNameList.urosPath)));
+                            InkAssetList.getInkJSON(DialogueKey.Uros)));
 
         #endregion
         #region ManseCamp
 
         addDialogueToList(LocationNameList.campManse, NPCNameList.imre,
                             new Dialogue(new string[] { NPCNameList.imre },
-                            Resources.Load<TextAsset>(DialogueNameList.imrePath),
+                            InkAssetList.getInkJSON(DialogueKey.Imre),
                             DialogueCombatInfoList.imreCombatInfo));
 
         addDialogueToList(LocationNameList.campManse, NPCNameList.imre+1,
                             new Dialogue(new string[] { NPCNameList.imre+1 },
-                            Resources.Load<TextAsset>(DialogueNameList.imrePath)));
+                            InkAssetList.getInkJSON(DialogueKey.Imre)));
 
         addDialogueToList(LocationNameList.campManse, NPCNameList.manseFrontDoor,
                             new Dialogue(new string[] { NPCNameList.manseFrontDoor },
-                            Resources.Load<TextAsset>(DialogueNameList.manseFrontDoorPath)));
+                            InkAssetList.getInkJSON(DialogueKey.ManseFrontDoor)));
 
         addDialogueToList(LocationNameList.campManse, NPCNameList.manseServiceEntrance + 1,
                             new Dialogue(new string[] { NPCNameList.manseServiceEntrance },
-                            Resources.Load<TextAsset>(DialogueNameList.manseServiceEntrancePath)));
+                            InkAssetList.getInkJSON(DialogueKey.ManseServiceEntrance)));
 
         addDialogueToList(LocationNameList.campManse, NPCNameList.barricadeGuards+2,
                             new Dialogue(new string[] { 
@@ -773,7 +792,7 @@ public static class DialogueList
                                                         NPCNameList.barricadeGuards+2,
                                                         NPCNameList.guardAndras+2
                                                       },
-                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                InkAssetList.getInkJSON(DialogueKey.SecondBarricadeGuards),
                                 DialogueCombatInfoList.barricadeGuardsCombatInfo,
                                 new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey2)));
 
@@ -783,7 +802,7 @@ public static class DialogueList
                                                         NPCNameList.barricadeGuards+2,
                                                         NPCNameList.guardAndras+2
                                                       },
-                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                InkAssetList.getInkJSON(DialogueKey.SecondBarricadeGuards),
                                 DialogueCombatInfoList.barricadeGuardsCombatInfo,
                                 new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey2)));
 
@@ -793,7 +812,7 @@ public static class DialogueList
                                                         NPCNameList.barricadeGuards+3,
                                                         NPCNameList.guardAndras+3
                                                       },
-                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                InkAssetList.getInkJSON(DialogueKey.SecondBarricadeGuards),
                                 DialogueCombatInfoList.barricadeGuardsCombatInfo,
                                 new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey3)));
 
@@ -803,13 +822,13 @@ public static class DialogueList
                                                         NPCNameList.barricadeGuards+3,
                                                         NPCNameList.guardAndras+3
                                                       },
-                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                InkAssetList.getInkJSON(DialogueKey.SecondBarricadeGuards),
                                 DialogueCombatInfoList.barricadeGuardsCombatInfo,
                                 new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey3)));
 
         addDialogueToList(LocationNameList.campManse, NPCNameList.barracksGate+2,
                             new SingleCharacterDialogue(NPCNameList.barracksGate+2,
-                            Resources.Load<TextAsset>(DialogueNameList.barracksGatePath)));
+                            InkAssetList.getInkJSON(DialogueKey.BarracksGate)));
 
         addDialogueToList(LocationNameList.campManse, NPCNameList.chiefTabor,
                             new Dialogue( new string[]{ 
@@ -817,7 +836,7 @@ public static class DialogueList
                                                         NPCNameList.chiefTabor,
                                                         NPCNameList.weft
                                                         },
-                            Resources.Load<TextAsset>(DialogueNameList.taborWeftHutPath)));
+                            InkAssetList.getInkJSON(DialogueKey.TaborWeftHut)));
 
         #endregion
         #region NWCamp
@@ -828,10 +847,10 @@ public static class DialogueList
                                                         NPCNameList.guard,
                                                         NPCNameList.chiefTabor+1
                                                       },
-                            Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
+                            InkAssetList.getInkJSON(DialogueKey.NWCampGuard),
                             new TextAsset[]
                             {
-                                Resources.Load<TextAsset>(DialogueNameList.taborEndOfTutorialPath)
+                                InkAssetList.getInkJSON(DialogueKey.TaborEndOfTutorial)
                             }));
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.guard+2,
@@ -849,7 +868,7 @@ public static class DialogueList
                                                         NPCNameList.hangman,
                                                         NPCNameList.gaspar
                                                       },
-                            Resources.Load<TextAsset>(DialogueNameList.guardNWPath),
+                            InkAssetList.getInkJSON(DialogueKey.NWCampGuard),
                             DialogueCombatInfoList.takacsPuppetCombatInfo));
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor,
@@ -860,7 +879,7 @@ public static class DialogueList
                                                         NPCNameList.guard,
                                                         NPCNameList.chiefTabor+1
                                                       },
-                                Resources.Load<TextAsset>(DialogueNameList.taborEndOfTutorialPath)));
+                                InkAssetList.getInkJSON(DialogueKey.TaborEndOfTutorial)));
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor+1,
                             new Dialogue(new string[] { 
@@ -870,7 +889,7 @@ public static class DialogueList
                                                         NPCNameList.guard,
                                                         NPCNameList.chiefTabor+2
                                                       },
-                                Resources.Load<TextAsset>(DialogueNameList.taborIntimidateTutorialPath)));
+                                InkAssetList.getInkJSON(DialogueKey.TaborIntimidateTutorial)));
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor+2,
                             new Dialogue(new string[] { 
@@ -880,7 +899,7 @@ public static class DialogueList
                                                         NPCNameList.guard,
                                                         NPCNameList.chiefTabor+3
                                                       },
-                                Resources.Load<TextAsset>(DialogueNameList.taborCunningTutorialPath)));
+                                InkAssetList.getInkJSON(DialogueKey.TaborCunningTutorial)));
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor+3,
                             new Dialogue(new string[] { 
@@ -890,7 +909,7 @@ public static class DialogueList
                                                         NPCNameList.guard,
                                                         NPCNameList.chiefTabor+4
                                                       },
-                                Resources.Load<TextAsset>(DialogueNameList.taborLeadershipTutorialPath)));
+                                InkAssetList.getInkJSON(DialogueKey.TaborLeadershipTutorial)));
 
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.chiefTabor+4,
                             new Dialogue(new string[] { 
@@ -900,7 +919,7 @@ public static class DialogueList
                                                         NPCNameList.guard,
                                                         NPCNameList.chiefTabor
                                                       },
-                                Resources.Load<TextAsset>(DialogueNameList.taborObservationTutorialPath)));
+                                InkAssetList.getInkJSON(DialogueKey.TaborObservationTutorial)));
 
 
         // addDialogueToList(LocationNameList.campNorthWest, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
@@ -913,7 +932,7 @@ public static class DialogueList
                                                         NPCNameList.weft+1,
                                                         NPCNameList.guard+1
                                                       },
-                            Resources.Load<TextAsset>(DialogueNameList.taborBodyPilePath)));
+                            InkAssetList.getInkJSON(DialogueKey.TaborAfterBodyPile)));
 
         #endregion
 
@@ -927,28 +946,33 @@ public static class DialogueList
 
         #region MineLvl_2
 
+        // TODO: no ink story was ever written for the mine's secret walls - these three entries
+        // pointed at Mine/MineLvl_2/Suspicious Wall1, ...Wall2 and Mine/MineLvl_3/Suspicious Wall,
+        // none of which exist, so they have always resolved to nothing. Author the stories and
+        // swap in their keys, or delete these entries and let OOCSpawnDetails fall back to
+        // DialogueKey.SuspiciousWall like every other secret door.
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section1a, NPCNameList.suspiciousWall,
                                                                                   new Dialogue(new string[] { NPCNameList.suspiciousWall },
-                                                                                  Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPathML2 + 1)));
+                                                                                  InkAssetList.getInkJSON(DialogueKey.NoDialogue)));
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section7b, NPCNameList.suspiciousWall,
                                                                                   new Dialogue(new string[] { NPCNameList.suspiciousWall },
-                                                                                  Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPathML2 + 2)));
+                                                                                  InkAssetList.getInkJSON(DialogueKey.NoDialogue)));
 
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.controlPanel, new Dialogue(new string[] { NPCNameList.controlPanel},
-                                                                                  Resources.Load<TextAsset>(DialogueNameList.controlPanelPath)));
+                                                                                  InkAssetList.getInkJSON(DialogueKey.ControlPanel)));
 
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardPazman,
                                                             new Dialogue(new string[] { "", NPCNameList.guardPazman},
-                                                             Resources.Load<TextAsset>(DialogueNameList.pazmanML3CampPath)));                                        
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardPazman)));                                        
 
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardVirag, 
                                                             new Dialogue(new string[] { "", NPCNameList.guardVirag},
-                                                             Resources.Load<TextAsset>(DialogueNameList.viragML3CampPath)));
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardVirag)));
 
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.guardReka, 
                                                             new Dialogue(new string[] { "", NPCNameList.guardReka},
-                                                             Resources.Load<TextAsset>(DialogueNameList.rekaML3CampPath)));
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardReka)));
 
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2a, NPCNameList.overseerGaspar, 
                                                             new Dialogue(new string[] 
@@ -960,13 +984,13 @@ public static class DialogueList
                                                                 NPCNameList.guardReka,
                                                                 NPCNameList.guardVirag
                                                             },
-                                                             Resources.Load<TextAsset>(DialogueNameList.ml3GuardBarricadePath),
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardsCrate),
                                                              DialogueCombatInfoList.mineLvl3GuardsCombatInfo));
 
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
         addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section2b, NPCNameList.mineArmoryGate + 1,
                                                                                   new Dialogue(new string[] { NPCNameList.mineArmoryGate },
-                                                                                  Resources.Load<TextAsset>(DialogueNameList.mineArmoryGatePath)));
+                                                                                  InkAssetList.getInkJSON(DialogueKey.MineArmoryGate)));
 
         // addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
         // addDialogueToList(ZoneKeyList.mineLvl2 + LocationNameList.section3a, NPCNameList.awkwardRubble + 1, awkwardRubbleDialogue);
@@ -991,7 +1015,7 @@ public static class DialogueList
 
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section1b, NPCNameList.suspiciousWall,
                                                                                   new Dialogue(new string[] { NPCNameList.suspiciousWall },
-                                                                                  Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPathML3)));
+                                                                                  InkAssetList.getInkJSON(DialogueKey.NoDialogue)));
 
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section2b, NPCNameList.liftableGate, liftableGateDialogue);
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section2b, NPCNameList.ancientPortcullis+1, ancientPortcullisDialogue);
@@ -1009,27 +1033,27 @@ public static class DialogueList
                                                                 NPCNameList.guardVirag,
                                                                 NPCNameList.barricade
                                                             },
-                                                             Resources.Load<TextAsset>(DialogueNameList.ml3GuardCampLiftableGatePath),
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardLiftableGate),
                                                              DialogueCombatInfoList.mineLvl3GuardsCombatInfo, 
                                                              new TextAsset[]
                                                              {
-                                                                 Resources.Load<TextAsset>(DialogueNameList.ml3GuardBarricadePath)
+                                                                 InkAssetList.getInkJSON(DialogueKey.GuardsCrate)
                                                              }));
 
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardPazman, //unreachable, for pazman behind barricade
                                                             new Dialogue(new string[] { "", NPCNameList.guardPazman},
-                                                             Resources.Load<TextAsset>(DialogueNameList.pazmanML3CampPath)));                                        
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardPazman)));                                        
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardPazman+1, 
                                                             new Dialogue(new string[] { "", NPCNameList.guardPazman+1},
-                                                             Resources.Load<TextAsset>(DialogueNameList.pazmanML3CampPath)));
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardPazman)));
                                                             
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardVirag, 
                                                             new Dialogue(new string[] { "", NPCNameList.guardVirag},
-                                                             Resources.Load<TextAsset>(DialogueNameList.viragML3CampPath)));
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardVirag)));
 
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.guardReka, 
                                                             new Dialogue(new string[] { "", NPCNameList.guardReka},
-                                                             Resources.Load<TextAsset>(DialogueNameList.rekaML3CampPath)));
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardReka)));
 
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.overseerGaspar, 
                                                             new Dialogue(new string[] 
@@ -1042,7 +1066,7 @@ public static class DialogueList
                                                                 NPCNameList.guardVirag,
                                                                 NPCNameList.barricade
                                                             },
-                                                             Resources.Load<TextAsset>(DialogueNameList.ml3GuardBarricadePath),
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardsCrate),
                                                              DialogueCombatInfoList.mineLvl3GuardsCombatInfo));
 
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section3b, NPCNameList.barricade, 
@@ -1056,7 +1080,7 @@ public static class DialogueList
                                                                 NPCNameList.guardVirag,
                                                                 NPCNameList.barricade
                                                             },
-                                                             Resources.Load<TextAsset>(DialogueNameList.ml3GuardBarricadePath),
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardsCrate),
                                                              DialogueCombatInfoList.mineLvl3GuardsCombatInfo));
 
         #endregion
@@ -1077,10 +1101,10 @@ public static class DialogueList
                                                                 NPCNameList.nandor,
                                                                 NPCNameList.guardMarcos
                                                             },
-                                                             Resources.Load<TextAsset>(DialogueNameList.ml3MinerBarricadePath),
+                                                             InkAssetList.getInkJSON(DialogueKey.MinersCrate),
                                                              new TextAsset[]{ 
-                                                                                Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath),
-                                                                                Resources.Load<TextAsset>(DialogueNameList.ml3MinerBarricadePath)
+                                                                                InkAssetList.getInkJSON(DialogueKey.GuardMarcos),
+                                                                                InkAssetList.getInkJSON(DialogueKey.MinersCrate)
                                                                             }));
 
         // addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter, 
@@ -1090,7 +1114,7 @@ public static class DialogueList
         //                                                         NPCNameList.carter, 
         //                                                         NPCNameList.nandor
         //                                                     },
-        //                                                      Resources.Load<TextAsset>(DialogueNameList.ml3CarterPath)));
+        //                                                      InkAssetList.getInkJSON(DialogueKey.MineLvl_3_Carter)));
 
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter+1, 
                                                             new Dialogue(new string[] 
@@ -1098,7 +1122,7 @@ public static class DialogueList
                                                                 "", 
                                                                 NPCNameList.carter+1
                                                             },
-                                                             Resources.Load<TextAsset>(DialogueNameList.ml3CarterPath)));
+                                                             InkAssetList.getInkJSON(DialogueKey.MineLvl_3_Carter)));
 
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.guardMarcos, 
                                                             new Dialogue(new string[] 
@@ -1106,7 +1130,7 @@ public static class DialogueList
                                                                 "", 
                                                                 NPCNameList.guardMarcos
                                                             },
-                                                             Resources.Load<TextAsset>(DialogueNameList.ml3MarcosPath)));
+                                                             InkAssetList.getInkJSON(DialogueKey.GuardMarcos)));
 
         addPartyMemberDialogue(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.nandor);
         addPartyMemberDialogue(ZoneKeyList.mineLvl3 + LocationNameList.minerCamp, NPCNameList.carter);
@@ -1118,7 +1142,7 @@ public static class DialogueList
         //                                                         NPCNameList.nandor,
         //                                                         NPCNameList.carter
         //                                                     },
-        //                                                      Resources.Load<TextAsset>(DialogueNameList.ml3NandorPath)));
+        //                                                      InkAssetList.getInkJSON(DialogueKey.MineLvl_3_Nandor)));
 
         #endregion
 
@@ -1145,7 +1169,7 @@ public static class DialogueList
                                                                                                             NPCNameList.weft,
                                                                                                             NPCNameList.thatch
                                                                                                         },
-                                                                                Resources.Load<TextAsset>(DialogueNameList.pocketRubblePathML3),
+                                                                                InkAssetList.getInkJSON(DialogueKey.Rubble),
                                                                                 DialogueCombatInfoList.breachRubbleCombatInfo));
 
         addDialogueToList(ZoneKeyList.mineLvl3 + LocationNameList.section7, DialogueNameList.afterKillingGuardsMineLvl3Key, 
@@ -1161,7 +1185,7 @@ public static class DialogueList
                                                                                                             NPCNameList.thatch+1,
                                                                                                             NPCNameList.thatch+2
                                                                                                         },
-                                                                                Resources.Load<TextAsset>(DialogueNameList.afterKillingGuardsMineLvl3Path)));
+                                                                                InkAssetList.getInkJSON(DialogueKey.AfterKillingGuardsMineLvl3)));
 
         #endregion
 
@@ -1175,7 +1199,7 @@ public static class DialogueList
                                                         NPCNameList.barricadeGuards+4,
                                                         NPCNameList.guardAndras+4
                                                       },
-                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                InkAssetList.getInkJSON(DialogueKey.SecondBarricadeGuards),
                                 DialogueCombatInfoList.barricadeGuardsCombatInfo,
                                 new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey4)));
 
@@ -1185,7 +1209,7 @@ public static class DialogueList
                                                         NPCNameList.barricadeGuards+4,
                                                         NPCNameList.guardAndras+4
                                                       },
-                                Resources.Load<TextAsset>(DialogueNameList.secondBarricadeGuardsPath),
+                                InkAssetList.getInkJSON(DialogueKey.SecondBarricadeGuards),
                                 DialogueCombatInfoList.barricadeGuardsCombatInfo,
                                 new StoryFlagList(InkVariableNameList.defeatFlag, FlagNameList.barricadeGuardDefeatKey4)));
                                 
@@ -1202,24 +1226,24 @@ public static class DialogueList
                                                                 NPCNameList.guard, 
                                                                 NPCNameList.noBrand+2
                                                             }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.kendeUponEnteringKitchensPathName), 
+                                 InkAssetList.getInkJSON(DialogueKey.kendeUponEnteringKitchens), 
                                  DialogueCombatInfoList.kendeInKitchensCombatInfo));
 
         addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.imre+1,
                             new Dialogue(new string[]   { NPCNameList.imre+1 }, 
-                                Resources.Load<TextAsset>(DialogueNameList.loyalImrePathName)));
+                                InkAssetList.getInkJSON(DialogueKey.LoyalImre)));
 
         addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, NPCNameList.pan,
                             new SingleCharacterDialogue(NPCNameList.pan, 
-                            Resources.Load<TextAsset>(DialogueNameList.panPathName)));
+                            InkAssetList.getInkJSON(DialogueKey.Pan)));
 
         addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom, NPCNameList.ancientPortcullis,
                             new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
-                                Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
+                                InkAssetList.getInkJSON(DialogueKey.AncientPortcullis)));
 
         addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, NPCNameList.ancientPortcullis,
                             new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
-                                Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
+                                InkAssetList.getInkJSON(DialogueKey.AncientPortcullis)));
 
         addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, NPCNameList.ancientPortcullis, ancientPortcullisDialogue);
 
@@ -1232,29 +1256,29 @@ public static class DialogueList
                                                             NPCNameList.horse+1,
                                                             NPCNameList.horse+2
                                                         }, 
-                                Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName), 
+                                InkAssetList.getInkJSON(DialogueKey.BeamAndCsalan), 
                                 DialogueCombatInfoList.beamAndCsalanCombatInfo));
 
         addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse, new Dialogue(new string[]   { 
                                                             NPCNameList.playerNamePlaceHolder, 
                                                             NPCNameList.horse
                                                         }, 
-                                Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+                                InkAssetList.getInkJSON(DialogueKey.BeamAndCsalan)));
         addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+1, new Dialogue(new string[]   { 
                                                             NPCNameList.playerNamePlaceHolder, 
                                                             NPCNameList.horse+1
                                                         }, 
-                                Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+                                InkAssetList.getInkJSON(DialogueKey.BeamAndCsalan)));
         addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.horse+2, new Dialogue(new string[]   { 
                                                             NPCNameList.playerNamePlaceHolder, 
                                                             NPCNameList.horse+2
                                                         }, 
-                                Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+                                InkAssetList.getInkJSON(DialogueKey.BeamAndCsalan)));
         addDialogueToList(ZoneKeyList.manseFirstFloor + LocationNameList.section3b, NPCNameList.csalan, new Dialogue(new string[]   { 
                                                             NPCNameList.playerNamePlaceHolder, 
                                                             NPCNameList.csalan
                                                         }, 
-                                Resources.Load<TextAsset>(DialogueNameList.beamAndCsalanPathName)));
+                                InkAssetList.getInkJSON(DialogueKey.BeamAndCsalan)));
 
         #endregion
 
@@ -1266,7 +1290,7 @@ public static class DialogueList
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, NPCNameList.honorguard,
                                 new SingleCharacterDialogue(NPCNameList.honorguard, 
-                                 Resources.Load<TextAsset>(DialogueNameList.directorsBedroomGuardsPath)));
+                                 InkAssetList.getInkJSON(DialogueKey.Honorguard)));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor,
                                 new Dialogue(new string[]   {   
@@ -1277,7 +1301,7 @@ public static class DialogueList
                                                                 NPCNameList.slave,
                                                                 NPCNameList.noBrand
                                                                  }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.chiefTaborManseSecondFloorPathName),
+                                 InkAssetList.getInkJSON(DialogueKey.Manse2F_ChiefTabor),
                                  DialogueCombatInfoList.taborCombatInfo));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.director,
@@ -1288,7 +1312,7 @@ public static class DialogueList
                                                                 NPCNameList.carter,
                                                                 NPCNameList.nandor
                                                             }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.directorPathName),
+                                 InkAssetList.getInkJSON(DialogueKey.Director),
                                  DialogueCombatInfoList.directorCombatInfo));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.director+1,
@@ -1298,7 +1322,7 @@ public static class DialogueList
                                                                 NPCNameList.takacs+1,
                                                                 NPCNameList.takacs+2
                                                             }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.prerevoltDirectorPathName)));
+                                 InkAssetList.getInkJSON(DialogueKey.DirectorPreRevolt)));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.page+1,
                                 new Dialogue(new string[]   { 
@@ -1316,30 +1340,30 @@ public static class DialogueList
                                                                 NPCNameList.carter+1,
                                                                 NPCNameList.weft+1
                                                             }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.prerevoltPagePathName)));
+                                 InkAssetList.getInkJSON(DialogueKey.PagePreRevolt)));
 
 
         // addDialogueToList(DialogueNameList.directorDefeatedConvoKey,
-        //                  new Dialogue(new string[] { "", "Director", "Page", "Carter", "Nándor" }, new GameObject[5], Resources.Load<TextAsset>(DialogueNameList.directorDefeatedConvoKey)));
+        //                  new Dialogue(new string[] { "", "Director", "Page", "Carter", "Nándor" }, new GameObject[5], InkAssetList.getInkJSON(DialogueKey.DirectorDefeatedConvo)));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, NPCNameList.ancientPortcullis,
                                 new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
+                                 InkAssetList.getInkJSON(DialogueKey.AncientPortcullis)));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, NPCNameList.captainAdela, 
                                                             new SingleCharacterDialogue(NPCNameList.captainAdela,
-                                                            Resources.Load<TextAsset>(DialogueNameList.captainAdelaManse2FPathName), 
+                                                            InkAssetList.getInkJSON(DialogueKey.CaptainAdéla), 
                                                             npcCombatInfo: DialogueCombatInfoList.adelaCombatInfo));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, NPCNameList.liftableGate, liftableGateDialogue);
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, NPCNameList.heavyBarrels,
                                 new Dialogue(new string[]   { NPCNameList.heavyBarrels }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.heavyBarrelsPath)));
+                                 InkAssetList.getInkJSON(DialogueKey.HeavyBarrels)));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, NPCNameList.heavyBarrels+1,
                                 new Dialogue(new string[]   { NPCNameList.heavyBarrels+1 }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.heavyBarrelsPath)));
+                                 InkAssetList.getInkJSON(DialogueKey.HeavyBarrels)));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, DialogueNameList.directorDefeatedConvoKey,
                                 new Dialogue(new string[]   {   
@@ -1350,11 +1374,11 @@ public static class DialogueList
                                                                 NPCNameList.nandor,
                                                                 NPCNameList.thatch
                                                             }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.directorDefeatedPathName)));
+                                 InkAssetList.getInkJSON(DialogueKey.DirectorDefeatedConvo)));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.officeDoor,
                                 new Dialogue(new string[]   { NPCNameList.officeDoor }, 
-                                Resources.Load<TextAsset>(DialogueNameList.officeDoorPathName)));
+                                InkAssetList.getInkJSON(DialogueKey.OfficeDoor)));
 
         #endregion
 
@@ -1362,15 +1386,15 @@ public static class DialogueList
 
             addDialogueToList(ZoneKeyList.pit + LocationNameList.section2b, NPCNameList.cellDoor,
                                 new Dialogue(new string[]   { NPCNameList.cellDoor }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.pitGatePathName)));
+                                 InkAssetList.getInkJSON(DialogueKey.PitGate)));
 
             addDialogueToList(ZoneKeyList.pit + LocationNameList.section2b, NPCNameList.brush,
                                 new Dialogue(new string[]   { Constants.emptyString, NPCNameList.brush, NPCNameList.cellDoor }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.pitBrushPathName)));
+                                 InkAssetList.getInkJSON(DialogueKey.Pit_Brush)));
 
             addDialogueToList(ZoneKeyList.pit + LocationNameList.section2c, NPCNameList.ancientPortcullis,
                                 new Dialogue(new string[]   { NPCNameList.ancientPortcullis }, 
-                                 Resources.Load<TextAsset>(DialogueNameList.ancientPortcullisPath)));
+                                 InkAssetList.getInkJSON(DialogueKey.AncientPortcullis)));
 
         #endregion//Assets/Resources/Dialogue/Manse/Pit/Pit Gate.ink
 
@@ -1395,7 +1419,7 @@ public static class DialogueList
     {
         addDialogueToList(areaName, partyMemberName,
                     new Dialogue(new string[] { partyMemberName},
-                    Resources.Load<TextAsset>(DialogueNameList.defaultPartyMemberDialoguePathName)));
+                    InkAssetList.getInkJSON(DialogueKey.DefaultPartyMemberDialogue)));
     }
 
     public static Dialogue getDialogue(string areaName, string npcName)

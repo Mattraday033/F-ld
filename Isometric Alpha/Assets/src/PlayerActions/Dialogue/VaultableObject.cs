@@ -42,7 +42,7 @@ public class VaultableObject : IStoryVariableSource
 
     public virtual Dialogue getDialogue(string name)
     {
-        return new Dialogue(new string[] { Constants.emptyString, name }, Resources.Load<TextAsset>(DialogueNameList.vaultableObjectPath));
+        return new Dialogue(new string[] { Constants.emptyString, name }, InkAssetList.getInkJSON(DialogueKey.VaultableObject));
     }
 
     public virtual Story addVariables(Story story)
@@ -78,7 +78,7 @@ public class VaultableOrDestroyableObject : VaultableObject
 
     public override Dialogue getDialogue(string name)
     {
-        return new Dialogue(new string[] { Constants.emptyString, name }, Resources.Load<TextAsset>(DialogueNameList.vaultableOrDestroyableObjectPath));
+        return new Dialogue(new string[] { Constants.emptyString, name }, InkAssetList.getInkJSON(DialogueKey.VaultableOrDestroyableObject));
     }
 
     public override Story addVariables(Story story)
@@ -120,7 +120,7 @@ public class Ladder : IStoryVariableSource
 
     public static Dialogue getDialogue()
     {
-        return new SingleCharacterDialogue(NPCNameList.ladder, Resources.Load<TextAsset>(DialogueNameList.ladderPath));
+        return new SingleCharacterDialogue(NPCNameList.ladder, InkAssetList.getInkJSON(DialogueKey.Ladder));
     }
 
     public virtual Story addVariables(Story story)

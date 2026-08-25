@@ -958,8 +958,6 @@ public static class TransitionSpawnInfoList
 
         list.Add(new TransitionSpawnInfo(ZoneKeyList.mineLvl2 + LocationNameList.section6, ZoneKeyList.mineLvl2 + LocationNameList.section1a, new Vector3Int(-5, 5), Facing.NorthEast, scriptOnTransition: new AddSecretDoorFlagOnTransitionScript(SecretDoorKeyList.mineLvl2FirstSecretDoor)));
 
-        list.Add(new FastTravelTransitionSpawnInfo(new Vector3Int(-6, 5), Facing.NorthEast));
-
         list.Add(new TransitionSpawnInfo(ZoneKeyList.mineLvl2 + LocationNameList.section6, ZoneKeyList.mineLvl2 + LocationNameList.section7a, new Vector3Int(17, 5), Facing.SouthWest));
 
         transitionSpawnInfoDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section6, list);

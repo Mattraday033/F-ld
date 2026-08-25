@@ -727,62 +727,32 @@ public enum FootStepType { Dirt, Cave, WoodFloor }
 public static class AudioClipList
 {
 
-    // Resources-relative path for every clip, keyed by SFXType. Filled by init() from the generated
-    // manifest; see SFXTypeGenerator.
-    private readonly static Dictionary<SFXType, AudioClip> sfxTypePathDict = new Dictionary<SFXType, AudioClip>();
-
     private const int reservedSFXTypeCount = 1;
     public const string audioClipFilePathsFileName = "AudioClipFilePaths";
+
+    // Every clip under Resources/Audio, keyed by SFXType. Filled from the generated manifest;
+    // see SFXTypeGenerator.
+    private readonly static ResourceList<SFXType, AudioClip> audioClips =
+        new ResourceList<SFXType, AudioClip>(audioClipFilePathsFileName,
+                                             reservedSFXTypeCount,
+                                             "[AudioClipList]",
+                                             "Tools > Audio > Regenerate SFXType");
 
     public readonly static PlaySFXLogic playEatingSFX = () => AudioManager.playAudioClipAsSingleton(getRandomSFXInRange(SFXType.Eating1, SFXType.Eating6));
     public readonly static PlaySFXLogic playSipSFX = () => AudioManager.playAudioClipAsSingleton(SFXType.Sip);
     public readonly static PlaySFXLogic playEatingRockCakeSFX = () => AudioManager.playAudioClipAsSingleton(SFXType.RockIntro);
     public static void init()
     {
-        // Statics survive between play sessions when domain reload is disabled, so clear rather
-        // than trust these to be empty. Stale AudioClip references would point at objects the
-        // previous session already unloaded.
-        sfxTypePathDict.Clear();
-
-        TextAsset audioClipFilePaths = Resources.Load<TextAsset>(audioClipFilePathsFileName);
-
-        if(audioClipFilePaths == null)
-        {
-            Debug.LogError($"[AudioClipList] Could not load {audioClipFilePathsFileName} from Resources. Run Tools > Audio > Regenerate SFXType.");
-            return;
-        }
-
-        string[] audioClipPaths = audioClipFilePaths.text.Split(new char[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
-
-        int expectedPathCount = System.Enum.GetValues(typeof(SFXType)).Length - reservedSFXTypeCount;
-
-        if(audioClipPaths.Length != expectedPathCount)
-        {
-            Debug.LogError($"[AudioClipList] {audioClipFilePathsFileName} has {audioClipPaths.Length} paths but SFXType expects {expectedPathCount}. Run Tools > Audio > Regenerate SFXType.");
-            return;
-        }
-
-        for(int i = Constants.indexZero; i < audioClipPaths.Length; i++)
-        {
-            sfxTypePathDict[(SFXType)(i + reservedSFXTypeCount)] = Resources.Load<AudioClip>(audioClipPaths[i].Trim());
-        }
+        audioClips.init();
     }
 
+    /// <summary>
+    /// The clip for an SFXType, or null for SFXType.NoSFX - a legitimate "play nothing" value
+    /// rather than a lookup failure, so it does not log.
+    /// </summary>
     public static AudioClip getAudioClip(SFXType sfxType)
     {
-        // NoSFX is a legitimate "play nothing" value, not a lookup failure, so it must not log.
-        if(sfxType == SFXType.NoSFX)
-        {
-            return null;
-        }
-
-        if(!sfxTypePathDict.ContainsKey(sfxType))
-        {
-            Debug.LogError($"[AudioClipList] No audio clip path for SFXType.{sfxType}. Run Tools > Audio > Regenerate SFXType.");
-            return null;
-        }
-
-        return sfxTypePathDict[sfxType];
+        return audioClips.getAsset(sfxType);
     }
 
     public static PlaySFXLogic getDialogueIntroSFXLogic(string npcName, bool sleeping = false)

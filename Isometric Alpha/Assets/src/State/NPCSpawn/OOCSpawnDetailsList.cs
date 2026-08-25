@@ -633,8 +633,13 @@ public static class OOCSpawnDetailsList
         #region SECamp
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campSouthEast, Constants.indexZero));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+7, new Vector3Int(6, -5), LocationNameList.campSouthEast, facing: Facing.NorthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+8, new Vector3Int(7, -5), LocationNameList.campSouthEast, facing: Facing.SouthWest));
 
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(10, -9), LocationNameList.campSouthEast, animationName: MonsterNameList.spearman, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(8, 2), LocationNameList.campSouthEast, animationName: MonsterNameList.axeman, facing: Facing.NorthWest));
+
+        list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campSouthEast, Constants.indexZero));
 
         float statueOffset = -.1f;
         list.Add(new NPCOffGridSpawnDetails(NPCNameList.statue, new Vector3Int(7, 3), LocationNameList.campSouthEast, PrefabNames.directorStatuePath, 

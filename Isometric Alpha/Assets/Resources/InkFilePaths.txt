@@ -1,0 +1,141 @@
+Dialogue/Camp/CampExterior/CenterCamp/Camp Gate
+Dialogue/Camp/CampExterior/CenterCamp/Csalan
+Dialogue/Camp/CampExterior/CenterCamp/Feher
+Dialogue/Camp/CampExterior/CenterCamp/FirstBarricadeGuards
+Dialogue/Camp/CampExterior/CenterCamp/GuardWatchingTabor
+Dialogue/Camp/CampExterior/CenterCamp/Page
+Dialogue/Camp/CampExterior/CenterCamp/SlavesWatchingTabor
+Dialogue/Camp/CampExterior/CenterCamp/Tabor
+Dialogue/Camp/CampExterior/CenterCamp/Temple
+Dialogue/Camp/CampExterior/ManseCamp/Imre
+Dialogue/Camp/CampExterior/ManseCamp/ManseFrontDoor
+Dialogue/Camp/CampExterior/ManseCamp/ManseServiceEntrance
+Dialogue/Camp/CampExterior/ManseCamp/SecondBarricadeGuards
+Dialogue/Camp/CampExterior/ManseCamp/TaborWeftHut
+Dialogue/Camp/CampExterior/MineEntranceCamp/Barracks Gate
+Dialogue/Camp/CampExterior/MineEntranceCamp/GuardMuzsa
+Dialogue/Camp/CampExterior/NECamp/Adela
+Dialogue/Camp/CampExterior/NECamp/GézaDuringRevolution
+Dialogue/Camp/CampExterior/NECamp/KastorDuringRevolution
+Dialogue/Camp/CampExterior/NECamp/LeafPile
+Dialogue/Camp/CampExterior/NECamp/Overseer
+Dialogue/Camp/CampExterior/NECamp/SituationGuard
+Dialogue/Camp/CampExterior/NECamp/SituationGuardBlocker
+Dialogue/Camp/CampExterior/NECamp/Slave5
+Dialogue/Camp/CampExterior/NECamp/Slave6
+Dialogue/Camp/CampExterior/NECamp/Slave7
+Dialogue/Camp/CampExterior/NECamp/Slave8
+Dialogue/Camp/CampExterior/NECamp/Slave9
+Dialogue/Camp/CampExterior/NECamp/Tabor
+Dialogue/Camp/CampExterior/NECamp/UrosDuringRevolution
+Dialogue/Camp/CampExterior/NECamp/Wounded Slave
+Dialogue/Camp/CampExterior/NECamp/Wounded Slave1
+Dialogue/Camp/CampExterior/NECamp/Wounded Slave2
+Dialogue/Camp/CampExterior/NECamp/slavesAfterKillingOverseerCampNE
+Dialogue/Camp/CampExterior/NWCamp/NWCamp Guard
+Dialogue/Camp/CampExterior/NWCamp/TaborAfterBodyPile
+Dialogue/Camp/CampExterior/NWCamp/TaborCunningTutorial
+Dialogue/Camp/CampExterior/NWCamp/TaborEndOfTutorial
+Dialogue/Camp/CampExterior/NWCamp/TaborIntimidateTutorial
+Dialogue/Camp/CampExterior/NWCamp/TaborLeadershipTutorial
+Dialogue/Camp/CampExterior/NWCamp/TaborObservationTutorial
+Dialogue/Camp/CampExterior/SECamp/Andras
+Dialogue/Camp/CampExterior/SECamp/BrokenDirectorStatue
+Dialogue/Camp/CampExterior/SECamp/Brush
+Dialogue/Camp/CampExterior/SECamp/Carter
+Dialogue/Camp/CampExterior/SECamp/Chief Tabor
+Dialogue/Camp/CampExterior/SECamp/CrowdSlave1
+Dialogue/Camp/CampExterior/SECamp/CrowdSlave2
+Dialogue/Camp/CampExterior/SECamp/CrowdSlave3
+Dialogue/Camp/CampExterior/SECamp/DirectorStatue
+Dialogue/Camp/CampExterior/SECamp/Ervin
+Dialogue/Camp/CampExterior/SECamp/GuardPunishmentStartConvo
+Dialogue/Camp/CampExterior/SECamp/Géza
+Dialogue/Camp/CampExterior/SECamp/Janos
+Dialogue/Camp/CampExterior/SECamp/Kastor
+Dialogue/Camp/CampExterior/SECamp/Marcos
+Dialogue/Camp/CampExterior/SECamp/MessHallGuard
+Dialogue/Camp/CampExterior/SECamp/MessHallSlave1
+Dialogue/Camp/CampExterior/SECamp/MessHallSlave2
+Dialogue/Camp/CampExterior/SECamp/Nandor
+Dialogue/Camp/CampExterior/SECamp/Pazman
+Dialogue/Camp/CampExterior/SECamp/Reka
+Dialogue/Camp/CampExterior/SECamp/StatueGuard
+Dialogue/Camp/CampExterior/SECamp/TaborAfterClayFight
+Dialogue/Camp/CampExterior/SECamp/Thatch
+Dialogue/Camp/CampInterior/1SlaveShack/Balint
+Dialogue/Camp/CampInterior/1SlaveShack/Seb
+Dialogue/Camp/CampInterior/2SlaveShack/Géza
+Dialogue/Camp/CampInterior/2SlaveShack/IntroDialogue
+Dialogue/Camp/CampInterior/2SlaveShack/Old_IntroDialogue
+Dialogue/Camp/CampInterior/3SlaveShack/Andras
+Dialogue/Camp/CampInterior/3SlaveShack/Janos
+Dialogue/Camp/CampInterior/3SlaveShack/JanosAfterKillingAndras
+Dialogue/Camp/CampInterior/4SlaveShack/Dibber
+Dialogue/Camp/CampInterior/4SlaveShack/KastorPlan
+Dialogue/Camp/CampInterior/4SlaveShack/KastorSkillTutorial
+Dialogue/Camp/CampInterior/5SlaveShack/Ervin
+Dialogue/Camp/CampInterior/6SlaveShack/ImmovableRubble
+Dialogue/Camp/CampInterior/6SlaveShack/Slate
+Dialogue/Camp/CampInterior/6SlaveShack/Thatch
+Dialogue/Camp/CampInterior/6SlaveShack/Vazul
+Dialogue/Camp/CampInterior/7SlaveShack/Dezso
+Dialogue/Camp/CampInterior/7SlaveShack/GuardsAfterHostages
+Dialogue/Camp/CampInterior/7SlaveShack/Loam
+Dialogue/Camp/CampInterior/7SlaveShack/WeftAfterHostages
+Dialogue/Camp/CampInterior/8SlaveShack/Weft
+Dialogue/Camp/CampInterior/Body Pile/AfterTakacsFight
+Dialogue/Camp/CampInterior/Body Pile/ThiefBody
+Dialogue/Camp/CampInterior/GuardHouseSW/Barracks Guard
+Dialogue/Camp/CampInterior/GuardShack/Guard László
+Dialogue/Camp/CampInterior/Mess Hall/Kende
+Dialogue/Camp/CampInterior/Stables/Beam
+Dialogue/Camp/CampInterior/Stables/Horse
+Dialogue/Camp/CampInterior/Stockhouse/BarrelsWithNugget
+Dialogue/Camp/CampInterior/Stockhouse/DudBarrels
+Dialogue/Camp/CampInterior/Stockhouse/DudCrates
+Dialogue/Camp/CampInterior/Stockhouse/Emese
+Dialogue/Camp/CampInterior/Stockhouse/Uros
+Dialogue/Camp/WallPatch
+Dialogue/Interactables/Gates/Ancient Portcullis
+Dialogue/Interactables/Gates/Awkward Rubble
+Dialogue/Interactables/Gates/FallenBeam
+Dialogue/Interactables/Gates/Gate With Key
+Dialogue/Interactables/Gates/Heavy Barrels
+Dialogue/Interactables/Gates/Liftable Gate
+Dialogue/Interactables/Gates/LiftableRubble
+Dialogue/Interactables/Gates/Unstable Pillar
+Dialogue/Interactables/Ladder
+Dialogue/Interactables/Suspicious Wall
+Dialogue/Interactables/VaultableObject
+Dialogue/Interactables/VaultableOrDestroyableObject
+Dialogue/Manse/Manse-1F/BeamAndCsalan
+Dialogue/Manse/Manse-1F/LoyalImre
+Dialogue/Manse/Manse-1F/Pan
+Dialogue/Manse/Manse-1F/kendeUponEnteringKitchens
+Dialogue/Manse/Manse-2F/Captain Adéla
+Dialogue/Manse/Manse-2F/Chief Tabor
+Dialogue/Manse/Manse-2F/Director
+Dialogue/Manse/Manse-2F/DirectorDefeatedConvo
+Dialogue/Manse/Manse-2F/DirectorPreRevolt
+Dialogue/Manse/Manse-2F/Honorguard
+Dialogue/Manse/Manse-2F/Office Door
+Dialogue/Manse/Manse-2F/OfficeSecretDoor
+Dialogue/Manse/Manse-2F/PagePreRevolt
+Dialogue/Manse/Pit/Brush
+Dialogue/Manse/Pit/Pit Gate
+Dialogue/Mine/MineLvl_2/Control Panel
+Dialogue/Mine/MineLvl_2/Mine Armory Gate
+Dialogue/Mine/MineLvl_3/AfterKillingGuardsMineLvl3
+Dialogue/Mine/MineLvl_3/Carter
+Dialogue/Mine/MineLvl_3/Guard Liftable Gate
+Dialogue/Mine/MineLvl_3/GuardMarcos
+Dialogue/Mine/MineLvl_3/GuardPazman
+Dialogue/Mine/MineLvl_3/GuardReka
+Dialogue/Mine/MineLvl_3/GuardVirag
+Dialogue/Mine/MineLvl_3/GuardsCrate
+Dialogue/Mine/MineLvl_3/MinersCrate
+Dialogue/Mine/MineLvl_3/Nandor
+Dialogue/Mine/MineLvl_3/Rubble
+Dialogue/Misc/GenericGuard
+Dialogue/PartyMembers/DefaultPartyMemberDialogue

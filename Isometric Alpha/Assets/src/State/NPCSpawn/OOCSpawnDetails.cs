@@ -1418,7 +1418,7 @@ public class GateWithKeySpawnDetails : GateSpawnDetails
 
     public override Dialogue getDialogue(string areaName)
     {
-        return new SingleCharacterDialogue(npcName, Resources.Load<TextAsset>(DialogueNameList.gateWithKeyPath));
+        return new SingleCharacterDialogue(npcName, InkAssetList.getInkJSON(DialogueKey.GateWithKey));
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)
@@ -1546,12 +1546,12 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
 
     public override Dialogue getDialogue(string areaName)
     {
-        if(secretDoorInfo != null && secretDoorInfo.customDialoguePath != null)
+        if(secretDoorInfo != null && secretDoorInfo.customDialogueKey != DialogueKey.NoDialogue)
         {
-            return new Dialogue(new string[] { Constants.emptyString, NPCNameList.suspiciousWall }, Resources.Load<TextAsset>(secretDoorInfo.customDialoguePath));
+            return new Dialogue(new string[] { Constants.emptyString, NPCNameList.suspiciousWall }, InkAssetList.getInkJSON(secretDoorInfo.customDialogueKey));
         }
 
-        return new Dialogue(new string[] { Constants.emptyString, NPCNameList.suspiciousWall }, Resources.Load<TextAsset>(DialogueNameList.suspiciousWallPath));
+        return new Dialogue(new string[] { Constants.emptyString, NPCNameList.suspiciousWall }, InkAssetList.getInkJSON(DialogueKey.SuspiciousWall));
     }
 
     public override bool interactable()

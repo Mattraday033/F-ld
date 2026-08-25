@@ -159,7 +159,7 @@ public static class SecretDoorSpawnInfoList
         list = new List<SecretDoorSpawnInfo>();
 
         list.Add(new SecretDoorSpawnInfo(ZoneKeyList.manseSecondFloor + LocationNameList.office, NPCNameList.suspiciousWall, PrefabNames.manseWallSecretDoor, new Vector3Int(4, 2),
-                                            new SecretDoorInfo(SecretDoorKeyList.officeSecretEntranceFlag, difficulty: Constants.difficultyThree, customDialoguePath: DialogueNameList.officeSecretDoorPathName),
+                                            new SecretDoorInfo(SecretDoorKeyList.officeSecretEntranceFlag, difficulty: Constants.difficultyThree, customDialogueKey: DialogueKey.OfficeSecretDoor),
                                             Constants.sizeFour, Axis.DescendingY));
 
         secretDoorSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.office, list);
