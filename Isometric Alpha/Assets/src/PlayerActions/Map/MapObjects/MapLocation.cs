@@ -1,3 +1,4 @@
+using Ink.Runtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -135,6 +136,31 @@ public class MapLocation : IMapObject
         return false;
 	}
 	
+    public static Story addAllVariables(Story story)
+    {
+        foreach (KeyValuePair<string, List<string>> kvp in State.allKnownMapData)
+        {
+            string prefixAndZoneName = InkVariableNameList.discoverFlagPrefix + kvp.Key.Replace("_"," ");
+
+            foreach(string locationName in kvp.Value)
+            {
+                if(locationName == null)
+                {
+                    continue;
+                }
+
+                string flagName = prefixAndZoneName + locationName.Replace("_"," ");
+
+                if (story.variablesState[flagName] != null)
+                {
+                    story.variablesState[flagName] = true;
+                }
+            }
+        }
+
+        return story;
+    }
+
 	public string[] getAdjacentMapObjects()
 	{
 		return adjacentLocations;

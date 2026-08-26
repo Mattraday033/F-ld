@@ -2493,6 +2493,7 @@ public class DialogueManager : MonoBehaviour
         story = MetaFlags.addAllVariables(story);
 		story = DeathFlagManager.addAllVariables(story);
 		story = PartyManager.addAllVariables(story);
+        story = MapLocation.addAllVariables(story);
 		story = GateAndChestManager.addAllVariables(story);
 		story = Purse.addCoinsToStory(story);
 		story = PartyManager.getPlayerStats().addAllStats(story);

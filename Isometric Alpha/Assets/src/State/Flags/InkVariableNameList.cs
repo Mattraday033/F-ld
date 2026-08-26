@@ -5,6 +5,13 @@ using Ink.Runtime;
 
 public static class InkVariableNameList
 {
+    #region Flag type prefixes
+    public const string partyFlagPrefix = "partyFlag";
+    public const string deathFlagPrefix = "deathFlag";
+    public const string formationFlagPrefix = "formationFlag";
+    public const string discoverFlagPrefix = "discoverFlag";
+    #endregion
+
     public const string playerName = "playerName";
 
     public const string strengthVarName = "strength";

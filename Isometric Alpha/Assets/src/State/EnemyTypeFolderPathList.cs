@@ -111,6 +111,7 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.captainAdela, lovashiFolderPath + NPCNameList.captainAdela + "/");
         folderPathDict.Add(NPCNameList.director, lovashiFolderPath + NPCNameList.director + "/");
         folderPathDict.Add(NPCNameList.quartermasterEmese, lovashiFolderPath + NPCNameList.quartermasterEmese + "/");
+        folderPathDict.Add(NPCNameList.guardHenrik, lovashiFolderPath + MonsterNameList.axeman + "/");
         folderPathDict.Add(NPCNameList.guardLaszlo, lovashiFolderPath + NPCNameList.guardLaszlo + "/");
         folderPathDict.Add(NPCNameList.guardMuzsa, lovashiFolderPath + NPCNameList.guardMuzsa + "/");
         folderPathDict.Add(NPCNameList.kende, lovashiFolderPath + NPCNameList.kende + "/");
@@ -119,6 +120,7 @@ public static class EnemyTypeFolderPathList
         folderPathDict.Add(NPCNameList.pazman, lovashiFolderPath + NPCNameList.guardPazman + "/");
         folderPathDict.Add(NPCNameList.guardPazman, lovashiFolderPath + NPCNameList.guardPazman + "/");
         folderPathDict.Add(NPCNameList.reka, lovashiFolderPath + NPCNameList.guardReka + "/");
+        folderPathDict.Add(NPCNameList.priestRikard, lovashiFolderPath + NPCNameList.priest+ "/");
         folderPathDict.Add(NPCNameList.guardReka, lovashiFolderPath + NPCNameList.guardReka+ "/");
         folderPathDict.Add(NPCNameList.guardVazul, lovashiFolderPath + MonsterNameList.spearman + "/");
         folderPathDict.Add(NPCNameList.guardVirag, lovashiFolderPath + NPCNameList.guardVirag+ "/");

@@ -58,10 +58,7 @@ public static class NPCNameList
 
     #region Lovashi Guards
 
-    public const string guard = "Guard";
-    public const string overseer = "Overseer";
-    public const string chief = "Chief";
-    public const string honorguard = "Honorguard";
+    public const string guardHenrik = "Guard Henrik";
 
     public const string captainAdela = "Captain Adéla";
 
@@ -72,6 +69,7 @@ public static class NPCNameList
     public const string gaspar = "Gáspár";
     public const string guardReka = "Guard Réka";
     public const string reka = "Réka";
+    public const string priestRikard = "Priest Rikard";
     public const string guardPazman = "Guard Pázmán";
     public const string pazman = "Pázmán";
     public const string guardVirag = "Guard Virág";
@@ -202,11 +200,20 @@ public static class NPCNameList
 
     public const string blank = "Blank";
 
-    public const string hangman = "Hangman";
-
     public const string takacs = "Takács";
     public const string crowd = "The Crowd";
 
+    #endregion
+
+    #region Occupation
+
+    public const string chief = "Chief";
+    public const string guard = "Guard";
+    public const string hangman = "Hangman";
+    public const string honorguard = "Honorguard";
+    public const string overseer = "Overseer";
+    public const string priest = "Priest";
+    
     #endregion
 
 }

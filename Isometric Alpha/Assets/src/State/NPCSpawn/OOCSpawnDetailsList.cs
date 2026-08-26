@@ -357,6 +357,8 @@ public static class OOCSpawnDetailsList
 
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.centerCampWallPatchTwo, locationName: LocationNameList.temple, index: Constants.indexOne));
 
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.priestRikard, new Vector3Int(6, 7), LocationNameList.temple, facing: Facing.NorthWest));
+
         oocSpawnDetailsDict.Add(LocationNameList.temple, list);
         #endregion
         #region Body Pile
@@ -637,7 +639,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+8, new Vector3Int(7, -5), LocationNameList.campSouthEast, facing: Facing.SouthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(10, -9), LocationNameList.campSouthEast, animationName: MonsterNameList.spearman, facing: Facing.SouthWest));
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(8, 2), LocationNameList.campSouthEast, animationName: MonsterNameList.axeman, facing: Facing.NorthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardHenrik, new Vector3Int(8, 2), LocationNameList.campSouthEast, facing: Facing.NorthWest));
 
         list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campSouthEast, Constants.indexZero));
 

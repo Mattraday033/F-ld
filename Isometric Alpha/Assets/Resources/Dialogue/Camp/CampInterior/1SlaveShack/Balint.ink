@@ -718,7 +718,7 @@ Patience, I'm getting to that. *Bálint pauses for a moment.* Blast, I lost my p
 
 === 6e ===
 
-{interruptedBalint:Yes, exactly. }As part of their purpose to domesticate animals, the Lovashi were gifted horses by the God of nature, Beast, and taught their language by Him. They call it the 'old horse tongue', and fluency in it allows them to communicate with their horses. Horses taught the language can speak back and comprehend complex thoughts much the same way humans do. In Lovashi society, there is very little difference in how a human and horse are treated.
+{interruptedBalint:Yes, exactly. }As part of their purpose to domesticate animals, the Lovashi were gifted horses by the God of nature, Beast, and taught their language by Him. They call it the 'old horsetongue', and fluency in it allows them to communicate with their horses. Horses taught the language can speak back and comprehend complex thoughts much the same way humans do. In Lovashi society, there is very little difference in how a human and horse are treated.
 
     +There is no way that's true. They treat us much worse than their horses.
         ->6f

@@ -194,14 +194,14 @@ public static class PartyManager
         {
             PartyMember partyMember = kvp.Value;
 
-            if (partyMember.canJoinParty && story.variablesState["partyFlag" + partyMember.stats.getName()] != null)
+            if (partyMember.canJoinParty && story.variablesState[InkVariableNameList.partyFlagPrefix + partyMember.stats.getName()] != null)
             {
-                story.variablesState["partyFlag" + partyMember.stats.getName()] = true;
+                story.variablesState[InkVariableNameList.partyFlagPrefix + partyMember.stats.getName()] = true;
             }
 
-            if (partyMember.isInParty() && story.variablesState["formationFlag" + partyMember.stats.getName()] != null)
+            if (partyMember.isInParty() && story.variablesState[InkVariableNameList.formationFlagPrefix + partyMember.stats.getName()] != null)
             {
-                story.variablesState["formationFlag" + partyMember.stats.getName()] = true;
+                story.variablesState[InkVariableNameList.formationFlagPrefix + partyMember.stats.getName()] = true;
             }
         }
 

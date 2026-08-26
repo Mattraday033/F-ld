@@ -58,9 +58,9 @@ public static class DeathFlagManager
 	{
 		foreach(KeyValuePair<string, bool> kvp in deadNames)
 		{
-			if(story.variablesState["deathFlag" + kvp.Key] != null)
+			if(story.variablesState[InkVariableNameList.deathFlagPrefix + kvp.Key] != null)
 			{
-				story.variablesState["deathFlag" + kvp.Key] = true;
+				story.variablesState[InkVariableNameList.deathFlagPrefix + kvp.Key] = true;
 			}
 		}
 

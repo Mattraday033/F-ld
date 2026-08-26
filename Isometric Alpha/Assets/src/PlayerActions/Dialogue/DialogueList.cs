@@ -315,6 +315,10 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.temple, NPCNameList.wallPatch, wallPatchDialogue);
 
+        addDialogueToList(LocationNameList.temple, NPCNameList.priestRikard,
+                            new SingleCharacterDialogue(NPCNameList.priestRikard,
+                            InkAssetList.getInkJSON(DialogueKey.PriestRikard)));
+
         #endregion
         #region Mess Hall
 
@@ -566,8 +570,8 @@ public static class DialogueList
                             new SingleCharacterDialogue(NPCNameList.guard,
                             InkAssetList.getInkJSON(DialogueKey.MessHallGuard)));
 
-        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guard+1,
-                            new SingleCharacterDialogue(NPCNameList.guard,
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guardHenrik,
+                            new SingleCharacterDialogue(NPCNameList.guardHenrik,
                             InkAssetList.getInkJSON(DialogueKey.StatueGuard)));
 
 

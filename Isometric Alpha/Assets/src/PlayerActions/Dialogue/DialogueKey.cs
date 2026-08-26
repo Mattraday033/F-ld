@@ -104,6 +104,7 @@ public enum DialogueKey
     DudCrates, // Dialogue/Camp/CampInterior/Stockhouse/DudCrates
     Emese, // Dialogue/Camp/CampInterior/Stockhouse/Emese
     Uros, // Dialogue/Camp/CampInterior/Stockhouse/Uros
+    PriestRikard, // Dialogue/Camp/CampInterior/Temple/PriestRikard
     WallPatch, // Dialogue/Camp/WallPatch
     AncientPortcullis, // Dialogue/Interactables/Gates/Ancient Portcullis
     AwkwardRubble, // Dialogue/Interactables/Gates/Awkward Rubble

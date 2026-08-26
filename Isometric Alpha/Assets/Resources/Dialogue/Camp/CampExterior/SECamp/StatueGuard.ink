@@ -1,4 +1,4 @@
-﻿VAR wisdom = 1
+VAR wisdom = 1
 VAR strength = 1
 VAR dexterity = 1
 VAR charisma = 1
@@ -9,6 +9,7 @@ VAR playerIndex = 0
 VAR henrikIndex = 1
 VAR spokeWithHenrik = false
 VAR saidHenrikReveresDirector = false
+VAR henrikMentionedPriest = false
 
 {
 -spokeWithHenrik:
@@ -53,16 +54,16 @@ Bah! You startled me, branded. Sneak up on enough guards and you're bound to get
 
 === 1b ===
 
-This is a statue of the Director. His full name is Lord Gábor Kálnoky, but you will refer to him by his title. You'd better familiarize yourself with his likeness, so you can be on your best behavior when he's around.
+This is a statue of the Director, Lord Gábor Kálnoky. You'd better familiarize yourself with his likeness, so you can be on your best behavior when he's around.
 
 {
 -wisdom >= 2:
-    +That can't be right. You're telling me the Commander of the Western Lance, one of the greatest heros of the last war and uncle to the current Count Kálnoky, is the Director of this camp? <Wis {wisdom}/2>
+    +That can't be right. A renowned hero of the confederation is the Director of this camp? <Wis {wisdom}/2>
         ->1d
 -else:
     +Is he someone special? I've never heard of him. <Wis {wisdom}/2>
         Never heard of him? I'm surprised even a slave could be so ignorant. 
-        ->1c(->1e)
+        ->1c(->2a)
 }
 
 
@@ -76,32 +77,7 @@ The Director was the Commander of the Western Lance, and where he rode the fight
 
 === 1d ===
 
-Don't forget 'Taker of Slaves', 'Freer of Horses', and, if the rumors are true, decent poet and singer. I truly could speak of him all day.
-
-->1e
-
-=== 1e ===
-
-{
--true:
-    +I have questions about the Director if you'd be willing to answer them.
-        ->2aa
-}
-{
--wisdom < 2:
-    +If he's so brave and smart, why is there still a Kingdom of Masons? Seems like they were too much for him.
-        Because the Craft Folk cheated, thats why! Enough with your back-talk. Get back to work!
-        ->Close
-}
-{
--true:
-    +I've got too much work to do to listen to a history lesson. I must be going.
-        ->Close
-}
-
-=== 2aa ===
-
-I'd be happy educate you. Ask away.
+I speak the truth. We are both blessed enough to be under his command.
 
 ->2a
 
@@ -110,7 +86,7 @@ I'd be happy educate you. Ask away.
 {
     -wisdom < 2:
     +If the Director is a Kálnoky, does that make him a count?
-        He's not the count, his nephew is. Count Béla Kálnoky rules over County Kálnoky. Only the current ruler of a county is the count. You would address the other members of his family as lord or lady.
+        The Director's nephew, Count Béla, rules over County Kálnoky. Only the current ruler of a county is the count. You would address the other members of his family as lord or lady.
         ->2a
     -wisdom > 2:
     +Tell me what you know of the Director's deeds.
@@ -120,26 +96,37 @@ I'd be happy educate you. Ask away.
 {
 -saidHenrikReveresDirector:
     +The Lovashi have a lot of history it seems. Can you tell me more stories from your past?
+        setToTrue(henrikMentionedPriest)
         I don't have the time for that. If you're allowed a break you can ask Priest Rikard, in the temple at the center of camp. He would gladly answer your questions.
         ->2a
 }
-
+{
+    -true:
     +You seem to really look up to the Director.
         setToTrue(saidHenrikReveresDirector)
         I believe we all do. He is old enough to remember a time before the Confederation. Before counts and the Emancipation Conflict. Before our people were settled and still.
 
         When he was young, the Riding Folk were too. The priests tell us back then we rode the High Steppes and hunted deer and kept sheep. Back then we were one people, under one sky and one king.
 
-        But he doesn't need to listen to priests to know this. He isn't some actor playing a role like Chief Tabor does. He lived it. He can remember it, derive wisdom from it. And every action he takes reflects that wisdom.
+        But he doesn't need to listen to priests to know this. He isn't some actor playing a role like Chief Tabor does. He's a true, living link to a past I may never know. Not like he does. 
 
         ->2a
 
     +If the Director's such a hero, what's he doing overseering a mining camp? Isn't that beneath him?
         It's not for me to question his motives. A soldier must trust his commander, and I trust the Director with my life.
         ->2a
-
+}
+{
+-wisdom < 2:
+    +If he's so brave and smart, why is there still a Kingdom of Masons? Seems like they were too much for him.
+        \*Henrik groans.* I don't have time to answer such a ridiculous question. Get back to work.
+        ->Close
+}
+{
+-true:
     +I must be going.
         ->Close
+}
 
 === 3a ===
 

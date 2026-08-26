@@ -96,6 +96,7 @@ Dialogue/Camp/CampInterior/Stockhouse/DudBarrels
 Dialogue/Camp/CampInterior/Stockhouse/DudCrates
 Dialogue/Camp/CampInterior/Stockhouse/Emese
 Dialogue/Camp/CampInterior/Stockhouse/Uros
+Dialogue/Camp/CampInterior/Temple/PriestRikard
 Dialogue/Camp/WallPatch
 Dialogue/Interactables/Gates/Ancient Portcullis
 Dialogue/Interactables/Gates/Awkward Rubble
