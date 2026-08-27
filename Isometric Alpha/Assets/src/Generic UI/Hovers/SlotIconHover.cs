@@ -418,7 +418,7 @@ public static class HoverMessageList
 
     public const string invulnerableIconMessage = "Invulnerability provides a flat reduction to incoming Damage per hit. Invulnerability can only reduce incoming Damage down to 1. This reduction is applied before the Damage reduction from Armor Score.";
     public const string vulnerableIconMessage = "Extra Damage that is applied when Damage is taken. Applied before the Damage reduction from Armor Score.";
-    public const string healingBoostIconMessage = "Extra Health recovery that is applied when a creature receives Healing.";
+    public const string healingBoostIconMessage = "Extra Health recovery that is applied when a creature receives Healing.\n\nThis stat only affects incoming Healing, and not Healing done by this Creature that targets other Creatures.";
 
     public const string bonusDamageKey = "Bonus Damage";
     public const string bonusDamageMessage = "A Character's Bonus Damage is added to the damage of all of their Abilities. Each Character's Bonus Damage is equal to the highest Base Damage of all of their equipped Weapons. For example, a Weapon with a Damage Formula of '3S + 5' provides 5 Bonus Damage. Hold 'Alt' when viewing a Weapon's Stats to reveal formulas.";

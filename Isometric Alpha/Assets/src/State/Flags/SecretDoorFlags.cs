@@ -1,3 +1,4 @@
+using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,14 +9,6 @@ public static class SecretDoorFlags
     public readonly static UnityEvent<string> OnSecretDoorDiscovery = new UnityEvent<string>();
 
     private static Dictionary<string, bool> secretDoorFlags;
-
-    [RuntimeInitializeOnLoadMethod]
-    private static void initializeSecretDoorFlags()
-    {
-        secretDoorFlags = new Dictionary<string, bool>();
-
-        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
-    }
 
     private static void readSaveBlueprint(SaveBlueprint blueprint)
     {
@@ -57,5 +50,22 @@ public static class SecretDoorFlags
         {
             secretDoorFlags.Add(key, true);
         }
+    }
+
+	public static Story addAllVariables(Story story)
+	{
+		return Flags.addAllFlagVariables(secretDoorFlags, 
+                                            story, 
+                                            flagPrefix: InkVariableNameList.secretDoorFlagPrefix, 
+                                            spacesAllowed: true);
+	}
+
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void inti()
+    {
+        secretDoorFlags = new Dictionary<string, bool>();
+
+        LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
     }
 }

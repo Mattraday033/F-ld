@@ -50,12 +50,23 @@ public static class Flags
 
 	public static Story addAllVariables(Story story)
 	{
-		foreach (KeyValuePair<string, bool> kvp in flags)
+		return addAllFlagVariables(flags, story);
+	}
+
+	public static Story addAllFlagVariables(Dictionary<string, bool> flagDict, Story story, string flagPrefix = "", bool spacesAllowed = false)
+	{
+		foreach (KeyValuePair<string, bool> kvp in flagDict)
 		{
-			if (story.variablesState[kvp.Key] != null)
-			{
-				story.variablesState[kvp.Key] = kvp.Value;
-			}
+            string key = kvp.Key;
+
+            if(spacesAllowed)
+            {
+                key = key.Replace(" ", "_");
+            } 
+
+            key = flagPrefix + key;
+
+            InkVariableNameList.setStoryVariable(story, key, kvp.Value);
 		}
 
 		return story;

@@ -2490,6 +2490,7 @@ public class DialogueManager : MonoBehaviour
 	private static Story addAllVariables(Story story, List<IStoryVariableSource> variableSources)
 	{
 		story = Flags.addAllVariables(story);
+        story = SecretDoorFlags.addAllVariables(story);
         story = MetaFlags.addAllVariables(story);
 		story = DeathFlagManager.addAllVariables(story);
 		story = PartyManager.addAllVariables(story);

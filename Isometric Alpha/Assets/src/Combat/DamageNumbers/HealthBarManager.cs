@@ -31,6 +31,11 @@ public class HealthBarManager : MonoBehaviour
 
     private void Awake()
     {
+        if(!CombatStateManager.inCombat)
+        {
+            return;
+        }
+
         Trait.OnTraitApplication.AddListener(updateHealthBarColor);
         Trait.OnTraitRemoval.AddListener(updateHealthBarColor);
         LargeEnemyStats.OnLargeEnemySpawn.AddListener(cleanUpHiddenHealthBars);
@@ -48,6 +53,11 @@ public class HealthBarManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        if(!CombatStateManager.inCombat)
+        {
+            return;
+        }
+
         Trait.OnTraitApplication.RemoveListener(updateHealthBarColor);
         Trait.OnTraitRemoval.RemoveListener(updateHealthBarColor);
         LargeEnemyStats.OnLargeEnemySpawn.RemoveListener(cleanUpHiddenHealthBars);

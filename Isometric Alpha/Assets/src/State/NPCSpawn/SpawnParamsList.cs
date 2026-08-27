@@ -374,6 +374,12 @@ public static class SpawnParamsList
                                 new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: false));
 
         #endregion
+        #region Temple
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.temple, NPCNameList.priestRikard),
+                                        new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: false));
+
+        #endregion
 
         #region Body Pile
 

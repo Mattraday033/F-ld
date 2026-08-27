@@ -32,6 +32,7 @@ Dialogue/Camp/CampExterior/NECamp/Wounded Slave
 Dialogue/Camp/CampExterior/NECamp/Wounded Slave1
 Dialogue/Camp/CampExterior/NECamp/Wounded Slave2
 Dialogue/Camp/CampExterior/NECamp/slavesAfterKillingOverseerCampNE
+Dialogue/Camp/CampExterior/NWCamp/BodyPileGuard
 Dialogue/Camp/CampExterior/NWCamp/NWCamp Guard
 Dialogue/Camp/CampExterior/NWCamp/TaborAfterBodyPile
 Dialogue/Camp/CampExterior/NWCamp/TaborCunningTutorial

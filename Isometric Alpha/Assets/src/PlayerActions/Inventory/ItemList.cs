@@ -134,6 +134,7 @@ public static class ItemList
     public const int servantsClothesIndex = 29;
     public const int unsentLettersIndex = 30;
 	public const int pagesLetterOpenerIndex = 31; 
+	public const int priestsShawlIndex = 32; 
 
 	public const int leafSamplesIndex = 0;
 	public const int guardDiaryIndex = 1;
@@ -243,6 +244,7 @@ public static class ItemList
 	public const string cookingPotKey = "Cooking Pot";
 	public const string signalTorchKey = "Signal Torch";
     public const string unsentLettersKey = "Unsent Letters";
+    public const string priestsShawlKey = "Priest's Shawl";
 
     public const string toolBundleKey = "Tool Bundle";
 
@@ -338,7 +340,8 @@ public static class ItemList
 		armor.Add(new TierZeroBody(new ItemListID(armorListIndex, servantsClothesIndex), servantsClothesKey, "A plain robe, bleached white and paired with a colored sash."));
         armor.Add(new Trinket(new ItemListID(armorListIndex, unsentLettersIndex), unsentLettersKey, "A small trove of paper scraps, scribbled with charcoal. Each contains a journal entry, addressed from Dezso to a woman named 'Teréz'. Scattered across these smudged and grimy pages are one man's affection, fear, and loneliness."));
         armor.Add(new OffHandWeapon(new ItemListID(armorListIndex, pagesLetterOpenerIndex), "Page's Letter Opener", "A sturdy little knife. Perfect for cutting the twine on a missive, or cleaning one's nails.", "D+C+2", "D+C", ItemSpriteList.letterOpenerSprite));
-
+        armor.Add(new TierOneHelmet(new ItemListID(armorListIndex, priestsShawlIndex), priestsShawlKey, "The cover of a Lovashi priest. Made of simple cloth, and dyed a faded blue and yellow."));
+		
 		//QuestItem(string key, string loreDescription, int ID)
 
 		questItems.Add(new QuestItem(new ItemListID(questItemListIndex, leafSamplesIndex), "Leaf Samples", "An array of green leaves of all shapes and sizes.", leafSamplesIndex));

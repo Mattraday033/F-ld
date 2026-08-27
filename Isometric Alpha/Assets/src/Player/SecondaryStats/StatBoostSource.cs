@@ -92,6 +92,8 @@ public abstract class StatBoostSource : INameSource
                 return "2S+4";
             case ItemList.martialArtistsBeltKey:
                 return "W";
+            case ItemList.priestsShawlKey:
+                return "W+C+1";
             case StatSourceNameList.shoredUpKey:
                 return "25";
             case StatSourceNameList.exitStrategyKey:
@@ -224,6 +226,8 @@ public abstract class StatBoostSource : INameSource
         {
             case NPCNameList.weft + ZoneOfInfluenceTrait.zoiTraitName:
                 return "2C";
+            case ItemList.priestsShawlKey:
+                return "3";
             default:
                 return Constants.zeroRating;
         }
@@ -388,6 +392,8 @@ public abstract class StatBoostSource : INameSource
                 return Wisdom.mentalResistPerWisdom+"C";
             case ItemList.delversDreamKey:
                 return "10";
+            case ItemList.priestsShawlKey:
+                return "5";
         }
 
         return Constants.zeroRating;

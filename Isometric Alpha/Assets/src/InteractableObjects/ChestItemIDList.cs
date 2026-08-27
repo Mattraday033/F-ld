@@ -87,6 +87,15 @@ public static class ChestItemIDList
         chestItemIDList.Add(LocationNameList.bodyPile, list);
 
         #endregion
+        #region Temple
+
+        list = new List<ItemListID>();
+
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.priestsShawlIndex));
+
+        chestItemIDList.Add(LocationNameList.temple, list);
+
+        #endregion
 
         #region MineLvl_1-1c
 

@@ -925,7 +925,6 @@ public static class DialogueList
                                                       },
                                 InkAssetList.getInkJSON(DialogueKey.TaborObservationTutorial)));
 
-
         // addDialogueToList(LocationNameList.campNorthWest, NPCNameList.awkwardRubble, awkwardRubbleDialogue);
         addDialogueToList(LocationNameList.campNorthWest, NPCNameList.wallPatch, wallPatchDialogue);
 
@@ -937,6 +936,10 @@ public static class DialogueList
                                                         NPCNameList.guard+1
                                                       },
                             InkAssetList.getInkJSON(DialogueKey.TaborAfterBodyPile)));
+
+        addDialogueToList(LocationNameList.campNorthWest, NPCNameList.guard+5,
+                            new SingleCharacterDialogue(NPCNameList.guard,
+                            InkAssetList.getInkJSON(DialogueKey.BodyPileGuard)));
 
         #endregion
 

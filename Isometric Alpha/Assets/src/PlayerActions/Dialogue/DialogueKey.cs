@@ -40,6 +40,7 @@ public enum DialogueKey
     WoundedSlave1, // Dialogue/Camp/CampExterior/NECamp/Wounded Slave1
     WoundedSlave2, // Dialogue/Camp/CampExterior/NECamp/Wounded Slave2
     slavesAfterKillingOverseerCampNE, // Dialogue/Camp/CampExterior/NECamp/slavesAfterKillingOverseerCampNE
+    BodyPileGuard, // Dialogue/Camp/CampExterior/NWCamp/BodyPileGuard
     NWCampGuard, // Dialogue/Camp/CampExterior/NWCamp/NWCamp Guard
     TaborAfterBodyPile, // Dialogue/Camp/CampExterior/NWCamp/TaborAfterBodyPile
     TaborCunningTutorial, // Dialogue/Camp/CampExterior/NWCamp/TaborCunningTutorial

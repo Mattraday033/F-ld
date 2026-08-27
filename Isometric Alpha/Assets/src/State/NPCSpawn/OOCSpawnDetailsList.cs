@@ -357,7 +357,9 @@ public static class OOCSpawnDetailsList
 
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.centerCampWallPatchTwo, locationName: LocationNameList.temple, index: Constants.indexOne));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.priestRikard, new Vector3Int(6, 7), LocationNameList.temple, facing: Facing.NorthWest));
+        list.Add(new ChestSpawnDetails(Constants.indexZero, new Vector3Int(9, 8), Facing.SouthEast));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.priestRikard, new Vector3Int(6, 6), LocationNameList.temple, facing: Facing.NorthWest));
 
         oocSpawnDetailsDict.Add(LocationNameList.temple, list);
         #endregion
@@ -873,6 +875,8 @@ public static class OOCSpawnDetailsList
         list.Add(new ChestSpawnDetails(Constants.indexOne, new Vector3Int(-13,-10), Facing.SouthEast));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(-14, 0), LocationNameList.campNorthWest,  animationName: MonsterNameList.axeman, facing: Facing.SouthWest));
+
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+5, new Vector3Int(-3, 16), LocationNameList.campNorthWest, facing: Facing.NorthWest));
 
         list.Add(new LadderSpawnDetails(new Vector3Int(-8, 16), PrefabNames.ladderShortNE,
                                         new Ladder(Constants.noDifficulty, LocationNameList.campNorthWest, LocationNameList.bodyPile, 

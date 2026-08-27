@@ -10,6 +10,7 @@ public static class InkVariableNameList
     public const string deathFlagPrefix = "deathFlag";
     public const string formationFlagPrefix = "formationFlag";
     public const string discoverFlagPrefix = "discoverFlag";
+    public const string secretDoorFlagPrefix = "secretDoorFlag";
     #endregion
 
     public const string playerName = "playerName";
@@ -64,27 +65,7 @@ public static class InkVariableNameList
     public const string questStepName = "questStepName";
     public const string completeQuest = "completeQuest";
 
-    public static Story setStoryVariable(Story story, string variableName, int value)
-    {
-        if (story.variablesState[variableName] != null)
-        {
-            story.variablesState[variableName] = value;
-        }
-        
-        return story;
-    }
-
-    public static Story setStoryVariable(Story story, string variableName, bool value)
-    {
-        if (story.variablesState[variableName] != null)
-        {
-            story.variablesState[variableName] = value;
-        }
-        
-        return story;
-    }
-
-    public static Story setStoryVariable(Story story, string variableName, string value)
+    public static Story setStoryVariable(Story story, string variableName, dynamic value)
     {
         if (story.variablesState[variableName] != null)
         {

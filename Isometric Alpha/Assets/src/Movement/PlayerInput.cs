@@ -14,15 +14,15 @@ public class PlayerInput : MonoBehaviour
 
     void Update()
     {
-        if(KeyBindingSettingsManager.listeningForKeyBinding() || InspectNode.inspecting)
+        if(KeyBindingSettingsManager.listeningForKeyBinding() || 
+            PlayerOOCStateManager.currentActivity == OOCActivity.inAnimation)
         {
             return;
         }
 
-        //While a scripted animation is playing (e.g. a transition cutscene) no keyboard/mouse
-        //input should cause any behaviour, including walking onto other transitions.
-        if (PlayerOOCStateManager.currentActivity == OOCActivity.inAnimation)
+        if(InspectNode.inspecting)
         {
+            showFormulaToggleCheck();
             return;
         }
 
