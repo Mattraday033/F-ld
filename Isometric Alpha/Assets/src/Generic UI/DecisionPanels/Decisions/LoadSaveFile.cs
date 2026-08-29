@@ -82,7 +82,10 @@ public class LoadSaveFile: IDecision
 
         FadeToBlackManager.setToMaxOpacity();
 
-        PlayerOOCStateManager.setCurrentActivity(exitActivity);
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence)
+        {
+            PlayerOOCStateManager.setCurrentActivity(exitActivity);
+        }
 
         SceneChange.removeLoadingScreen();
 

@@ -21,10 +21,12 @@ public class SkillIndicator : MonoBehaviour
     public GameObject tileMapGameObject;
 
     public bool currentCursor = false;
-    public bool previousCollision = false;
+    public bool collidedWithSkillTarget = false;
     public bool allowHover = false;
 
     private SkillIndicatorState stateBeforeHover;
+
+    #region Awake/OnEnable/OnDisable
 
     private void Awake()
     {        
@@ -40,11 +42,21 @@ public class SkillIndicator : MonoBehaviour
     private void OnEnable()
     {
         EnemyMovement.ToggleHoverColliders.AddListener(toggleTileMapCollider);
+
+        IntimidateManager.GetAllIntimidateTargets.AddListener(declareSkillTarget);
     }
 
     private void OnDisable()
     {
         EnemyMovement.ToggleHoverColliders.RemoveListener(toggleTileMapCollider);
+
+        IntimidateManager.GetAllIntimidateTargets.RemoveListener(declareSkillTarget);
+    }
+    #endregion
+
+    public bool hadPreviousCollision()
+    {
+        return collidedWithSkillTarget;
     }
 
     private void toggleTileMapCollider(bool active)
@@ -148,6 +160,14 @@ public class SkillIndicator : MonoBehaviour
 		{
 			disableSelf(false);
 		}
+    }
+
+    private void declareSkillTarget(IntBus bus)
+    {   
+        if(collidedWithSkillTarget)
+        {
+            bus.amount++;
+        }
     }
 
 }

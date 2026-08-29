@@ -140,6 +140,11 @@ public class CunningManager : SkillManager
         setSelectorOriginTile();
     }
 
+    public override bool targetIsValid(ISkillTarget skillTarget)
+    {
+        return skillTarget != null && skillTarget.validTarget(SkillType.Cunning);
+    }
+
     protected virtual bool allowHovers()
     {
         return true;
@@ -165,12 +170,35 @@ public class CunningManager : SkillManager
 
         foreach (Vector2Int coords in colliderIndicators)
         {
-            if (skillGrid[coords.x, coords.y] != null)
+            destroyTileAt(coords);
+        }
+
+        if(!allowSolitaryTiles())
+        {
+            for (int i = 0; i < getRange(); i++)
             {
-                GameObject.Destroy(skillGrid[coords.x, coords.y].gameObject);
-                skillGrid[coords.x, coords.y] = null;
+                for (int j = 0; j < getRange(); j++)
+                {
+                    bool nothingAbove = i == 0 || skillGrid[i-1,j] == null;
+                    bool nothingBelow = i == getRange()-1 || skillGrid[i+1,j] == null;
+                    bool nothingLeft = j == 0 || skillGrid[i,j-1] == null;
+                    bool nothingRight = j == getRange()-1 || skillGrid[i,j+1] == null;
+                    
+                    if( nothingAbove && 
+                        nothingBelow && 
+                        nothingLeft && 
+                        nothingRight)
+                    {
+                        destroyTileAt(i,j);
+                    }
+                }
             }
         }
+    }
+
+    public virtual bool allowSolitaryTiles()
+    {
+        return false;
     }
 
     private List<Vector2Int> snakeTowardCenter(Vector2Int start)

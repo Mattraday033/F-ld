@@ -79,7 +79,7 @@ public static class ChestItemIDList
 
         list = new List<ItemListID>();
 
-        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeDirkIndex));
+        list.Add(new ItemListID(ItemList.armorListIndex, ItemList.bronzeCuirassIndex));
         list.Add(new ItemListID(ItemList.treasureItemListIndex, ItemList.smallCoinPurseIndex));
         list.Add(new ItemListID(ItemList.armorListIndex, ItemList.minersHelmetIndex));
         list.Add(new ItemListID(ItemList.questItemListIndex, ItemList.lovashiRingIndex));

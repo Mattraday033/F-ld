@@ -1,10 +1,7 @@
-Dialogue/Camp/CampExterior/CenterCamp/Camp Gate
 Dialogue/Camp/CampExterior/CenterCamp/Csalan
-Dialogue/Camp/CampExterior/CenterCamp/Feher
 Dialogue/Camp/CampExterior/CenterCamp/FirstBarricadeGuards
 Dialogue/Camp/CampExterior/CenterCamp/GuardWatchingTabor
 Dialogue/Camp/CampExterior/CenterCamp/Page
-Dialogue/Camp/CampExterior/CenterCamp/SlavesWatchingTabor
 Dialogue/Camp/CampExterior/CenterCamp/Tabor
 Dialogue/Camp/CampExterior/CenterCamp/Temple
 Dialogue/Camp/CampExterior/ManseCamp/Imre
@@ -15,12 +12,10 @@ Dialogue/Camp/CampExterior/ManseCamp/TaborWeftHut
 Dialogue/Camp/CampExterior/MineEntranceCamp/Barracks Gate
 Dialogue/Camp/CampExterior/MineEntranceCamp/GuardMuzsa
 Dialogue/Camp/CampExterior/NECamp/Adela
+Dialogue/Camp/CampExterior/NECamp/GuardTaborPunished
 Dialogue/Camp/CampExterior/NECamp/GézaDuringRevolution
 Dialogue/Camp/CampExterior/NECamp/KastorDuringRevolution
 Dialogue/Camp/CampExterior/NECamp/LeafPile
-Dialogue/Camp/CampExterior/NECamp/Overseer
-Dialogue/Camp/CampExterior/NECamp/SituationGuard
-Dialogue/Camp/CampExterior/NECamp/SituationGuardBlocker
 Dialogue/Camp/CampExterior/NECamp/Slave5
 Dialogue/Camp/CampExterior/NECamp/Slave6
 Dialogue/Camp/CampExterior/NECamp/Slave7
@@ -41,7 +36,6 @@ Dialogue/Camp/CampExterior/NWCamp/TaborIntimidateTutorial
 Dialogue/Camp/CampExterior/NWCamp/TaborLeadershipTutorial
 Dialogue/Camp/CampExterior/NWCamp/TaborObservationTutorial
 Dialogue/Camp/CampExterior/SECamp/Andras
-Dialogue/Camp/CampExterior/SECamp/BrokenDirectorStatue
 Dialogue/Camp/CampExterior/SECamp/Brush
 Dialogue/Camp/CampExterior/SECamp/Carter
 Dialogue/Camp/CampExterior/SECamp/Chief Tabor
@@ -55,15 +49,11 @@ Dialogue/Camp/CampExterior/SECamp/Géza
 Dialogue/Camp/CampExterior/SECamp/Janos
 Dialogue/Camp/CampExterior/SECamp/Kastor
 Dialogue/Camp/CampExterior/SECamp/Marcos
-Dialogue/Camp/CampExterior/SECamp/MessHallGuard
-Dialogue/Camp/CampExterior/SECamp/MessHallSlave1
-Dialogue/Camp/CampExterior/SECamp/MessHallSlave2
 Dialogue/Camp/CampExterior/SECamp/Nandor
 Dialogue/Camp/CampExterior/SECamp/Pazman
 Dialogue/Camp/CampExterior/SECamp/Reka
 Dialogue/Camp/CampExterior/SECamp/StatueGuard
 Dialogue/Camp/CampExterior/SECamp/TaborAfterClayFight
-Dialogue/Camp/CampExterior/SECamp/Thatch
 Dialogue/Camp/CampInterior/1SlaveShack/Balint
 Dialogue/Camp/CampInterior/1SlaveShack/Seb
 Dialogue/Camp/CampInterior/2SlaveShack/Géza
@@ -76,12 +66,10 @@ Dialogue/Camp/CampInterior/4SlaveShack/Dibber
 Dialogue/Camp/CampInterior/4SlaveShack/KastorPlan
 Dialogue/Camp/CampInterior/4SlaveShack/KastorSkillTutorial
 Dialogue/Camp/CampInterior/5SlaveShack/Ervin
-Dialogue/Camp/CampInterior/6SlaveShack/ImmovableRubble
 Dialogue/Camp/CampInterior/6SlaveShack/Slate
 Dialogue/Camp/CampInterior/6SlaveShack/Thatch
 Dialogue/Camp/CampInterior/6SlaveShack/Vazul
 Dialogue/Camp/CampInterior/7SlaveShack/Dezso
-Dialogue/Camp/CampInterior/7SlaveShack/GuardsAfterHostages
 Dialogue/Camp/CampInterior/7SlaveShack/Loam
 Dialogue/Camp/CampInterior/7SlaveShack/WeftAfterHostages
 Dialogue/Camp/CampInterior/8SlaveShack/Weft
@@ -93,8 +81,6 @@ Dialogue/Camp/CampInterior/Mess Hall/Kende
 Dialogue/Camp/CampInterior/Stables/Beam
 Dialogue/Camp/CampInterior/Stables/Horse
 Dialogue/Camp/CampInterior/Stockhouse/BarrelsWithNugget
-Dialogue/Camp/CampInterior/Stockhouse/DudBarrels
-Dialogue/Camp/CampInterior/Stockhouse/DudCrates
 Dialogue/Camp/CampInterior/Stockhouse/Emese
 Dialogue/Camp/CampInterior/Stockhouse/Uros
 Dialogue/Camp/CampInterior/Temple/PriestRikard
@@ -120,7 +106,6 @@ Dialogue/Manse/Manse-2F/Chief Tabor
 Dialogue/Manse/Manse-2F/Director
 Dialogue/Manse/Manse-2F/DirectorDefeatedConvo
 Dialogue/Manse/Manse-2F/DirectorPreRevolt
-Dialogue/Manse/Manse-2F/Honorguard
 Dialogue/Manse/Manse-2F/Office Door
 Dialogue/Manse/Manse-2F/OfficeSecretDoor
 Dialogue/Manse/Manse-2F/PagePreRevolt
@@ -139,5 +124,5 @@ Dialogue/Mine/MineLvl_3/GuardsCrate
 Dialogue/Mine/MineLvl_3/MinersCrate
 Dialogue/Mine/MineLvl_3/Nandor
 Dialogue/Mine/MineLvl_3/Rubble
-Dialogue/Misc/GenericGuard
+Dialogue/Misc/GenericDialogue
 Dialogue/PartyMembers/DefaultPartyMemberDialogue

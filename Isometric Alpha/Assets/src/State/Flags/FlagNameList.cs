@@ -95,6 +95,10 @@ public static class FlagNameList
         public const string foundThiefsRing = "foundThiefsRing";
         public const string enteredCampNorthWestAfterBodyPile = "enteredCampNorthWestAfterBodyPile";
 
+        //ravine guard flags
+        public const string madeRavineGuardTripAttempt = "madeRavineGuardTripAttempt";
+        public const string succeededRavineGuardTripAttempt = "succeededRavineGuardTripAttempt";
+
         //hostage negotiations flags
         public const string toldToGetMealByTabor = "toldToGetMealByTabor";
         public const string situationStartedInNECamp = "situationStartedInNECamp";

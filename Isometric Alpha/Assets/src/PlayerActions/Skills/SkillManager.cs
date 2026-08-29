@@ -20,7 +20,6 @@ public interface ISkillTarget
 public abstract class SkillManager
 {
     public readonly static UnityEvent OnSkillUse = new UnityEvent();
-    public readonly static UnityEvent OnSkillTargetFound = new UnityEvent();
 
     public static Vector2Int selectorPosition;
     protected static SkillIndicator[,] skillGrid;
@@ -86,24 +85,9 @@ public abstract class SkillManager
 
     public void setTileColor(SkillIndicator tile)
     {
-        if (collidedWithTarget(tile))
+        if(tile.hadPreviousCollision())
         {
-            OnSkillTargetFound.Invoke();
-            tile.setColor(getTileTargetColor());
-            tile.setToTargetFoundSelector();
-        }
-        else
-        {
-            tile.setColor(getTileBaseColor());
-            tile.setToNoTargetFoundSelector();
-        }
-    }
-
-    public virtual bool collidedWithTarget(SkillIndicator tile)
-    {
-        if(tile.previousCollision)
-        {
-            return true;
+            return;
         }
 
         Collider2D[] collisions = Helpers.getCollisions(tile.collider, getCollisionFilter());
@@ -115,15 +99,22 @@ public abstract class SkillManager
                 continue;
             }
 
-            if (collision.GetComponent<ISkillTarget>() != null)
+            ISkillTarget skillTarget = collision.GetComponent<ISkillTarget>();
+
+            if (skillTarget != null && targetIsValid(skillTarget))
             {
-                tile.previousCollision = true;
-                return true;
+                tile.setColor(getTileTargetColor());
+                tile.setToTargetFoundSelector();
+                tile.collidedWithSkillTarget = true;
+                return;
             }
         }
 
-        return false;
+        tile.setColor(getTileBaseColor());
+        tile.setToNoTargetFoundSelector();
     }
+
+    public abstract bool targetIsValid(ISkillTarget skillTarget);
 
     public GameObject instantiateTile(Vector3Int playerCoords, int skillGridRow, int skillGridCol)
     {
@@ -136,13 +127,20 @@ public abstract class SkillManager
 
     public void destroyTileAt(int row, int col)
     {
-        if (skillGrid[row, col] == null)
+        destroyTileAt(new Vector2Int(row,col));
+    }
+
+    public void destroyTileAt(Vector2Int coords)
+    {
+        if (coords.x < 0 || coords.x >= getRange() || 
+            coords.y < 0 || coords.y >= getRange() || 
+            skillGrid[coords.x, coords.y] == null)
         {
             return;
         }
 
-        GameObject.Destroy(skillGrid[row, col].gameObject);
-        skillGrid[row, col] = null;
+        GameObject.Destroy(skillGrid[coords.x, coords.y].gameObject);
+        skillGrid[coords.x, coords.y] = null;
     }
 
     public virtual int getRange()
@@ -197,12 +195,4 @@ public abstract class SkillManager
         return EffectAnimationType.SmokeBomb.ToString();
     }
 
-    /*
-    private string getGridCellCoords(Vector2Int currentCoords)
-    {
-        Vector3Int gridCellCoords = PlayerMovement.getMovementGridCoords();
-
-        return "(" + ((currentCoords.x + gridCellCoords.x) - playerCunningCoords) + "," + ((currentCoords.y + gridCellCoords.y) - playerCunningCoords) + ")";
-    }
-    */
 }

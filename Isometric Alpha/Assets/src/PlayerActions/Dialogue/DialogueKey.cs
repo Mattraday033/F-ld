@@ -6,13 +6,10 @@
 public enum DialogueKey
 {
     NoDialogue, // reserved: no asset
-    CampGate, // Dialogue/Camp/CampExterior/CenterCamp/Camp Gate
     Csalan, // Dialogue/Camp/CampExterior/CenterCamp/Csalan
-    Feher, // Dialogue/Camp/CampExterior/CenterCamp/Feher
     FirstBarricadeGuards, // Dialogue/Camp/CampExterior/CenterCamp/FirstBarricadeGuards
     GuardWatchingTabor, // Dialogue/Camp/CampExterior/CenterCamp/GuardWatchingTabor
     Page, // Dialogue/Camp/CampExterior/CenterCamp/Page
-    SlavesWatchingTabor, // Dialogue/Camp/CampExterior/CenterCamp/SlavesWatchingTabor
     CenterCamp_Tabor, // Dialogue/Camp/CampExterior/CenterCamp/Tabor
     Temple, // Dialogue/Camp/CampExterior/CenterCamp/Temple
     Imre, // Dialogue/Camp/CampExterior/ManseCamp/Imre
@@ -23,12 +20,10 @@ public enum DialogueKey
     BarracksGate, // Dialogue/Camp/CampExterior/MineEntranceCamp/Barracks Gate
     GuardMuzsa, // Dialogue/Camp/CampExterior/MineEntranceCamp/GuardMuzsa
     Adela, // Dialogue/Camp/CampExterior/NECamp/Adela
+    GuardTaborPunished, // Dialogue/Camp/CampExterior/NECamp/GuardTaborPunished
     GézaDuringRevolution, // Dialogue/Camp/CampExterior/NECamp/GézaDuringRevolution
     KastorDuringRevolution, // Dialogue/Camp/CampExterior/NECamp/KastorDuringRevolution
     LeafPile, // Dialogue/Camp/CampExterior/NECamp/LeafPile
-    Overseer, // Dialogue/Camp/CampExterior/NECamp/Overseer
-    SituationGuard, // Dialogue/Camp/CampExterior/NECamp/SituationGuard
-    SituationGuardBlocker, // Dialogue/Camp/CampExterior/NECamp/SituationGuardBlocker
     Slave5, // Dialogue/Camp/CampExterior/NECamp/Slave5
     Slave6, // Dialogue/Camp/CampExterior/NECamp/Slave6
     Slave7, // Dialogue/Camp/CampExterior/NECamp/Slave7
@@ -49,7 +44,6 @@ public enum DialogueKey
     TaborLeadershipTutorial, // Dialogue/Camp/CampExterior/NWCamp/TaborLeadershipTutorial
     TaborObservationTutorial, // Dialogue/Camp/CampExterior/NWCamp/TaborObservationTutorial
     SECamp_Andras, // Dialogue/Camp/CampExterior/SECamp/Andras
-    BrokenDirectorStatue, // Dialogue/Camp/CampExterior/SECamp/BrokenDirectorStatue
     SECamp_Brush, // Dialogue/Camp/CampExterior/SECamp/Brush
     SECamp_Carter, // Dialogue/Camp/CampExterior/SECamp/Carter
     SECamp_ChiefTabor, // Dialogue/Camp/CampExterior/SECamp/Chief Tabor
@@ -63,15 +57,11 @@ public enum DialogueKey
     SECamp_Janos, // Dialogue/Camp/CampExterior/SECamp/Janos
     Kastor, // Dialogue/Camp/CampExterior/SECamp/Kastor
     Marcos, // Dialogue/Camp/CampExterior/SECamp/Marcos
-    MessHallGuard, // Dialogue/Camp/CampExterior/SECamp/MessHallGuard
-    MessHallSlave1, // Dialogue/Camp/CampExterior/SECamp/MessHallSlave1
-    MessHallSlave2, // Dialogue/Camp/CampExterior/SECamp/MessHallSlave2
     SECamp_Nandor, // Dialogue/Camp/CampExterior/SECamp/Nandor
     Pazman, // Dialogue/Camp/CampExterior/SECamp/Pazman
     Reka, // Dialogue/Camp/CampExterior/SECamp/Reka
     StatueGuard, // Dialogue/Camp/CampExterior/SECamp/StatueGuard
     TaborAfterClayFight, // Dialogue/Camp/CampExterior/SECamp/TaborAfterClayFight
-    SECamp_Thatch, // Dialogue/Camp/CampExterior/SECamp/Thatch
     Balint, // Dialogue/Camp/CampInterior/1SlaveShack/Balint
     Seb, // Dialogue/Camp/CampInterior/1SlaveShack/Seb
     _2SlaveShack_Géza, // Dialogue/Camp/CampInterior/2SlaveShack/Géza
@@ -84,12 +74,10 @@ public enum DialogueKey
     KastorPlan, // Dialogue/Camp/CampInterior/4SlaveShack/KastorPlan
     KastorSkillTutorial, // Dialogue/Camp/CampInterior/4SlaveShack/KastorSkillTutorial
     _5SlaveShack_Ervin, // Dialogue/Camp/CampInterior/5SlaveShack/Ervin
-    ImmovableRubble, // Dialogue/Camp/CampInterior/6SlaveShack/ImmovableRubble
     Slate, // Dialogue/Camp/CampInterior/6SlaveShack/Slate
-    _6SlaveShack_Thatch, // Dialogue/Camp/CampInterior/6SlaveShack/Thatch
+    Thatch, // Dialogue/Camp/CampInterior/6SlaveShack/Thatch
     Vazul, // Dialogue/Camp/CampInterior/6SlaveShack/Vazul
     Dezso, // Dialogue/Camp/CampInterior/7SlaveShack/Dezso
-    GuardsAfterHostages, // Dialogue/Camp/CampInterior/7SlaveShack/GuardsAfterHostages
     Loam, // Dialogue/Camp/CampInterior/7SlaveShack/Loam
     WeftAfterHostages, // Dialogue/Camp/CampInterior/7SlaveShack/WeftAfterHostages
     Weft, // Dialogue/Camp/CampInterior/8SlaveShack/Weft
@@ -101,8 +89,6 @@ public enum DialogueKey
     Beam, // Dialogue/Camp/CampInterior/Stables/Beam
     Horse, // Dialogue/Camp/CampInterior/Stables/Horse
     BarrelsWithNugget, // Dialogue/Camp/CampInterior/Stockhouse/BarrelsWithNugget
-    DudBarrels, // Dialogue/Camp/CampInterior/Stockhouse/DudBarrels
-    DudCrates, // Dialogue/Camp/CampInterior/Stockhouse/DudCrates
     Emese, // Dialogue/Camp/CampInterior/Stockhouse/Emese
     Uros, // Dialogue/Camp/CampInterior/Stockhouse/Uros
     PriestRikard, // Dialogue/Camp/CampInterior/Temple/PriestRikard
@@ -128,7 +114,6 @@ public enum DialogueKey
     Director, // Dialogue/Manse/Manse-2F/Director
     DirectorDefeatedConvo, // Dialogue/Manse/Manse-2F/DirectorDefeatedConvo
     DirectorPreRevolt, // Dialogue/Manse/Manse-2F/DirectorPreRevolt
-    Honorguard, // Dialogue/Manse/Manse-2F/Honorguard
     OfficeDoor, // Dialogue/Manse/Manse-2F/Office Door
     OfficeSecretDoor, // Dialogue/Manse/Manse-2F/OfficeSecretDoor
     PagePreRevolt, // Dialogue/Manse/Manse-2F/PagePreRevolt
@@ -147,6 +132,6 @@ public enum DialogueKey
     MinersCrate, // Dialogue/Mine/MineLvl_3/MinersCrate
     MineLvl_3_Nandor, // Dialogue/Mine/MineLvl_3/Nandor
     Rubble, // Dialogue/Mine/MineLvl_3/Rubble
-    GenericGuard, // Dialogue/Misc/GenericGuard
+    GenericDialogue, // Dialogue/Misc/GenericDialogue
     DefaultPartyMemberDialogue, // Dialogue/PartyMembers/DefaultPartyMemberDialogue
 }

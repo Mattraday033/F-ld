@@ -401,15 +401,16 @@ public static class SpawnParamsList
                                                                                                                 FlagNameList.kastorExecutedWeft
                                                                                                              }),
                                                                         spawnWhileHostile: spawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.bodyPile, NPCNameList.body+2),
+                                            new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.succeededRavineGuardTripAttempt}),
+                                                                        spawnWhileHostile: spawnWhileHostile));
         #endregion
 
         #region Camp North East
         
         InteractableSpawnParams situationCampNESpawnParams = new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.situationStartedInNECamp }),
                                                                                          new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated, FlagNameList.hostageSituationGuardsLeft }));
-
-//spokeToTaborAtBeginningOfSituation
-
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+2), 
                                                                         new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.situationStartedInNECamp }),
@@ -423,14 +424,24 @@ public static class SpawnParamsList
                                                                         new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]{ FlagNameList.situationStartedInNECamp, FlagNameList.kastorExecutedWeft }),
                                                                                                     new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, FlagNameList.directorDefeated})));
 
-
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+1), situationCampNESpawnParams);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.honorguard+1), situationCampNESpawnParams);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.chiefTabor), situationCampNESpawnParams);
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.captainAdela), situationCampNESpawnParams);
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.overseer),
-                               defaultBeforeRevoltSpawnParams);
+                                            new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { FlagNameList.weftAddedToParty }),
+                                                                        stopSpawningFlagList: revoltStartedStopSpawning));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.slave+13),
+                                            new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { FlagNameList.weftAddedToParty }),
+                                                                        stopSpawningFlagList: revoltStartedStopSpawning));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+5), 
+                                                                        new InteractableSpawnParams(stopSpawningFlagList: directorDefeatedStopSpawning));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+6), 
+                                                                        new InteractableSpawnParams(stopSpawningFlagList: directorDefeatedStopSpawning));
+
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, MonsterNameList.brandedConscript),
                                new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.revoltStarted }),
@@ -518,6 +529,8 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.csalan),
                                new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: doesNotSpawnWhileHostile));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.gateGuard),
+                               new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: doesNotSpawnWhileHostile));
 
         InteractableSpawnParams taborLessonSpawnParams = new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted,
                                                                                           FlagNameList.directorDefeated,
@@ -899,6 +912,16 @@ public static class SpawnParamsList
         #endregion
         #region Camp North West
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.guard+5),
+                               new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, 
+                                                                                                                         FlagNameList.directorDefeated, 
+                                                                                                                         FlagNameList.directorMentionedAnnouncement,
+                                                                                                                         FlagNameList.gasparBroughtToExecution,
+                                                                                                                         FlagNameList.madeRavineGuardTripAttempt
+                                                                                                                         }),
+                                                            spawnWhileHostile: spawnWhileHostile));
+
+
         InteractableSpawnParams directorAnnouncementSceneSpawnParams = new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { 
                                                                                                                          FlagNameList.directorMentionedAnnouncement
                                                                                                                          }),
@@ -906,7 +929,7 @@ public static class SpawnParamsList
                                                                                                                          FlagNameList.revoltStarted,
                                                                                                                          FlagNameList.directorDefeated
                                                                                                                          }),
-                                                            spawnWhileHostile: spawnWhileHostile);
+                                                            spawnWhileHostile: doesNotSpawnWhileHostile);
 
         #region Director Announcement Scene
 
@@ -954,7 +977,6 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.hangman),
                                             gasparExecutionSpawnParams);
         #endregion
-
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.guard),
                                new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { FlagNameList.revoltStarted, 
@@ -1006,7 +1028,7 @@ public static class SpawnParamsList
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthWest, NPCNameList.chiefTabor+3),
                                new InteractableSpawnParams(startSpawningFlagList: new StartSpawningFlagList(new string[] { 
-                                                                                                                         FlagNameList.finishedTaborCunningTutorial
+                                                                                                                         FlagNameList.startedTaborCunningTutorial
                                                                                                                          }),
                                                             stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
                                                                                                                          FlagNameList.revoltStarted, 

@@ -1,9 +1,10 @@
+VAR description = "Hello."
 
 ->1a
 
 === 1a ===
 
-Go away, you're bothering me.
+{description}
 
 ->Close
 

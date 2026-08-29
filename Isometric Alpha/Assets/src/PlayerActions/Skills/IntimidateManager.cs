@@ -4,64 +4,72 @@ using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
+
+public class IntBus
+{
+    public int amount = 0;
+}
 
 public class IntimidateManager : CunningManager
 {
+    public static readonly UnityEvent<IntBus> GetAllIntimidateTargets = new UnityEvent<IntBus>();
+
     public const int intimidateRange = 11;
     public const int playerIntimidateCoords = (intimidateRange - 1) / 2;
 
-    public static int targetsFound;
-
     public static int intimidatesRemaining;
+
+    private static IntimidateManager instance;
+    private static ContactFilter2D filterCollider;
 
     [RuntimeInitializeOnLoadMethod]
     private static void init()
     {
         intimidatesRemaining = -1;
-        targetsFound = 0;
+        instance = new();
 
-        PlayerOOCStateManager.OnStateChangeToSkill.AddListener(noLongerHasTarget);
-        PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(noLongerHasTarget);
-        OnSkillTargetFound.AddListener(incrementIntimidateTargets);
+        filterCollider = new ContactFilter2D();
+        filterCollider.useTriggers = true;
+        filterCollider.SetLayerMask(LayerAndTagManager.blocksIntimidateLayerMask);
 
         LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
     }
 
     public override ContactFilter2D getCollisionFilter()
     {
-        ContactFilter2D filterCollider = new ContactFilter2D();
-        filterCollider.useTriggers = true;
-        filterCollider.SetLayerMask(LayerAndTagManager.blocksIntimidateLayerMask);
-
         return filterCollider;
     }
 
+    public override bool targetIsValid(ISkillTarget skillTarget)
+    {
+        return skillTarget != null && skillTarget.validTarget(SkillType.Intimidate);
+    }
+
+    public override bool allowSolitaryTiles()
+    {
+        return true;
+    }
 
     private static void readSaveBlueprint(SaveBlueprint blueprint)
     {
         setIntimidatesRemaining(blueprint.intimidatesRemaining);
     }
 
-    private static void incrementIntimidateTargets()
+    public static int getIntimidateTargets()
     {
-        targetsFound++;
-    }
+        IntBus bus = new();
 
-    public static void decrementIntimidateTargets()
-    {
-        targetsFound--;
-    }
-
-    private static void noLongerHasTarget()
-    {
-        targetsFound = 0;
+        GetAllIntimidateTargets.Invoke(bus);
+        
+        return bus.amount;
     }
 
     public static int getIntimidatesRemaining()
     {
         if(PartyStats.inTutorialArea() && Flags.getFlag(FlagNameList.startedTaborIntimidateTutorial))
         {
-            return 1;
+            return 2;
         }
 
         if (intimidatesRemaining < 0)
@@ -109,7 +117,7 @@ public class IntimidateManager : CunningManager
 
     public static IntimidateManager getInstance()
     {
-        return new IntimidateManager();
+        return instance;
     }
 
     public static void enterIntimidateMode()
@@ -139,7 +147,7 @@ public class IntimidateManager : CunningManager
 
     public override bool canUseSkill()
     {
-        return targetsFound > 0 && base.canUseSkill();
+        return getIntimidateTargets() > 0;
     }
 
     public static bool hasEnoughCharges()
@@ -198,11 +206,21 @@ public class IntimidateManager : CunningManager
     {
         foreach (Collider2D collision in collisions)
         {
-            if (collision != null && 
-                (collision.gameObject.layer == LayerAndTagManager.colliderLayer || 
-                 collision.gameObject.layer == LayerAndTagManager.observableLayer))
+            // if (collision != null && 
+            //     (collision.gameObject.layer == LayerAndTagManager.colliderLayer || 
+            //      collision.gameObject.layer == LayerAndTagManager.observableLayer))
+            // {
+            //     return true;
+            // }
+
+            if (collision != null)
             {
-                return true;
+                ISkillTarget target = collision.GetComponent<ISkillTarget>();
+
+                if(!targetIsValid(target))
+                {
+                    return true;                    
+                }
             }
         }
 

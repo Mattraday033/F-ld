@@ -38,6 +38,11 @@ public class ObservationManager : SkillManager
         return filterCollider;
     }
 
+    public override bool targetIsValid(ISkillTarget skillTarget)
+    {
+        return skillTarget != null && skillTarget.validTarget(SkillType.Observation);
+    }
+
     public override void createSkillArea()
     {
         skillGrid = new SkillIndicator[getRange(), getRange()];

@@ -156,11 +156,10 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.thatch,
                             new Dialogue(new string[] { NPCNameList.thatch, NPCNameList.rubble },
-                            InkAssetList.getInkJSON(DialogueKey._6SlaveShack_Thatch)));
+                            InkAssetList.getInkJSON(DialogueKey.Thatch)));
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.slate,
-                            new Dialogue(new string[] { NPCNameList.slate },
-                            InkAssetList.getInkJSON(DialogueKey.Slate)));
+                            new GenericDialogue(NPCNameList.slate, "*Slate lies facedown. He does not move.*"));
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.guardVazul,
                             new Dialogue(new string[] { "", NPCNameList.guardVazul, NPCNameList.slate, NPCNameList.thatch + 1 },
@@ -168,8 +167,7 @@ public static class DialogueList
                             DialogueCombatInfoList.vazulCombatInfo));
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.rubble,
-                            new Dialogue(new string[] { NPCNameList.rubble },
-                            InkAssetList.getInkJSON(DialogueKey.ImmovableRubble)));
+                            new GenericDialogue(NPCNameList.rubble, "*This rubble looks very heavy. It would take an enormous amount of strength to move it.*"));
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.wallPatch, wallPatchDialogue);
 
@@ -182,9 +180,10 @@ public static class DialogueList
         #endregion
         #region Slave Shack 7
 
+
+        string leaveMeAloneLine = "Leave me alone, you're gonna get me in trouble.";
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.slave,
-                            new SingleCharacterDialogue(NPCNameList.slave,
-                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
+                            new GenericDialogue(NPCNameList.slave, leaveMeAloneLine));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.dezso,
                             new Dialogue(new string[]{
@@ -201,22 +200,17 @@ public static class DialogueList
                             DialogueCombatInfoList.dezsoHostageFight));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.loam,
-                            new Dialogue(new string[]{ NPCNameList.loam},
-                            InkAssetList.getInkJSON(DialogueKey.Loam)));
+                            new GenericDialogue(NPCNameList.loam, "Hi, I'm Loam"));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+1,
-                            new SingleCharacterDialogue(NPCNameList.guard+1,
-                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
+                            new GenericDialogue(NPCNameList.guard+1, leaveMeAloneLine));
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+2,
-                            new SingleCharacterDialogue(NPCNameList.guard+2,
-                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
+                            new GenericDialogue(NPCNameList.guard+2, leaveMeAloneLine));
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+3,
-                            new SingleCharacterDialogue(NPCNameList.guard+3,
-                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
+                            new GenericDialogue(NPCNameList.guard+3, leaveMeAloneLine));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+4,
-                            new SingleCharacterDialogue(NPCNameList.guard+4,
-                            InkAssetList.getInkJSON(DialogueKey.GuardsAfterHostages)));
+                            new GenericDialogue(NPCNameList.guard+4, "What was they thinking, letting you dunces negotiate? You'd best report back to Chief Tabor before I do his job for him."));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.weft,
                             new Dialogue(new string[]{
@@ -248,22 +242,20 @@ public static class DialogueList
 
         #region Guard House NE
 
+        string barracksGateLine = "This gate is locked. It looks formidable. You'll have to find another way.";
         addDialogueToList(LocationNameList.guardHouseNorthEast, NPCNameList.barracksGate,
-                            new SingleCharacterDialogue(NPCNameList.barracksGate,
-                            InkAssetList.getInkJSON(DialogueKey.BarracksGate)));
+                            new GenericDialogue(NPCNameList.barracksGate, barracksGateLine));
 
         #endregion
 
         #region Guard House SW
 
         addDialogueToList(LocationNameList.guardHouseSouthWest, NPCNameList.barracksGate,
-                            new SingleCharacterDialogue(NPCNameList.barracksGate,
-                            InkAssetList.getInkJSON(DialogueKey.BarracksGate)));
+                            new GenericDialogue(NPCNameList.barracksGate, barracksGateLine));
 
 
         addDialogueToList(LocationNameList.guardHouseSouthWest, NPCNameList.guard,
-                            new SingleCharacterDialogue(NPCNameList.guard,
-                            InkAssetList.getInkJSON(DialogueKey.BarracksGuard)));
+                            new GenericDialogue(NPCNameList.guard, "Whatever your business is here, you'd best finish it quickly. And keep clear of the armory gate!"));
 
         #endregion
 
@@ -277,19 +269,18 @@ public static class DialogueList
                             new Dialogue(new string[] { NPCNameList.quartermasterEmese, NPCNameList.uros },
                             InkAssetList.getInkJSON(DialogueKey.Emese)));
 
+        string dudCratesLine = "*Searching behind some crates, you find nothing of interest.*";
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate,
-                            new Dialogue(new string[] { NPCNameList.crate },
-                            InkAssetList.getInkJSON(DialogueKey.DudCrates)));
+                            new GenericDialogue(NPCNameList.crate, dudCratesLine));
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.crate + 1,
-                            new Dialogue(new string[] { NPCNameList.crate + 1 },
-                            InkAssetList.getInkJSON(DialogueKey.DudCrates)));
+                            new GenericDialogue(NPCNameList.crate, dudCratesLine));
 
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.barrels,
                             new Dialogue(new string[] { NPCNameList.barrels },
                             InkAssetList.getInkJSON(DialogueKey.BarrelsWithNugget)));
         addDialogueToList(LocationNameList.stockhouse, NPCNameList.barrels + 1,
-                            new Dialogue(new string[] { NPCNameList.barrels + 1},
-                            InkAssetList.getInkJSON(DialogueKey.DudBarrels)));
+                            new GenericDialogue(NPCNameList.barrels, 
+                            "*Searching behind some barrels, you find nothing of interest.*"));
 
         #endregion
         #region Stables
@@ -323,8 +314,7 @@ public static class DialogueList
         #region Mess Hall
 
         addDialogueToList(LocationNameList.messHall, NPCNameList.noBrand+1,
-                            new Dialogue(new string[] { NPCNameList.noBrand+1 },
-                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
+                            new GenericDialogue(NPCNameList.noBrand, leaveMeAloneLine));
 
         addDialogueToList(LocationNameList.messHall, NPCNameList.kende,
                             new Dialogue(new string[] { 
@@ -373,8 +363,20 @@ public static class DialogueList
                             InkAssetList.getInkJSON(DialogueKey.LeafPile)));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.overseer,
-                            new Dialogue(new string[] { NPCNameList.overseer },
-                            InkAssetList.getInkJSON(DialogueKey.Overseer)));
+                            new GenericDialogue(NPCNameList.overseer ,
+                            "*The overseer glowers at you.* Be on your way."));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+13,
+                            new GenericDialogue(NPCNameList.slave,
+                            "Don't distract me. The overseer is watching."));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+5,
+                            new SingleCharacterDialogue(NPCNameList.guard,
+                            InkAssetList.getInkJSON(DialogueKey.GuardTaborPunished)));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+6,
+                            new GenericDialogue(NPCNameList.guard,
+                            "*The guard yawns.* Why do I always get the boring shifts?"));
 
         addDialogueToList(LocationNameList.campNorthEast, DialogueNameList.slavesAfterKillingOverseerCampNEKey,
                          new Dialogue(new string[] { 
@@ -440,33 +442,29 @@ public static class DialogueList
                          new Dialogue(new string[] { NPCNameList.géza+1 }, 
                             InkAssetList.getInkJSON(DialogueKey.GézaDuringRevolution)));
 
-        addDialogueToList(LocationNameList.campNorthEast, MonsterNameList.brandedConscript,
-                        new SingleCharacterDialogue(MonsterNameList.brandedConscript,
-                        InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
+        GenericDialogue slavesWatchingTaborDialogue = new GenericDialogue(NPCNameList.branded ,
+                            leaveMeAloneLine);
+        addDialogueToList(LocationNameList.campNorthEast, MonsterNameList.brandedConscript, slavesWatchingTaborDialogue);
 
         addDialogueToList(LocationNameList.campNorthEast, MonsterNameList.spearman,
-                        new SingleCharacterDialogue(MonsterNameList.spearman,
-                        InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
+                        new GenericDialogue(MonsterNameList.spearman, leaveMeAloneLine));
 
+        string situationGuardDialogue = "If you're supposed to be here, report to Chief Tabor or Captain Adela. If you aren't, get back to your hut.";
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+2,
-                            new SingleCharacterDialogue(NPCNameList.guard+2,
-                            InkAssetList.getInkJSON(DialogueKey.SituationGuard)));
+                            new GenericDialogue(NPCNameList.guard+2,situationGuardDialogue));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+3,
-                            new SingleCharacterDialogue(NPCNameList.guard+3,
-                            InkAssetList.getInkJSON(DialogueKey.SituationGuard)));
+                            new GenericDialogue(NPCNameList.guard+3,situationGuardDialogue));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+4,
-                            new SingleCharacterDialogue(NPCNameList.guard+4,
-                            InkAssetList.getInkJSON(DialogueKey.SituationGuardBlocker)));
+                            new GenericDialogue(NPCNameList.guard+4,
+                            "I was told to let you and Weft inside. You'll need to go find Weft and bring him here before I let you pass."));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+1,
-                            new SingleCharacterDialogue(NPCNameList.guard+1,
-                            InkAssetList.getInkJSON(DialogueKey.SituationGuard)));
+                            new GenericDialogue(NPCNameList.guard+1,situationGuardDialogue));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.honorguard+1,
-                            new SingleCharacterDialogue(NPCNameList.honorguard+1,
-                            InkAssetList.getInkJSON(DialogueKey.SituationGuard)));
+                            new GenericDialogue(NPCNameList.honorguard+1,situationGuardDialogue));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.chiefTabor,
                             new Dialogue(new string[]{ 
@@ -489,8 +487,14 @@ public static class DialogueList
                             InkAssetList.getInkJSON(DialogueKey.Csalan)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.guard + 1,
-                            new Dialogue(new string[] { NPCNameList.guard + 1 },
+                            new SingleCharacterDialogue(NPCNameList.guard,
                             InkAssetList.getInkJSON(DialogueKey.GuardWatchingTabor)));
+
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.guard + 2,
+                            new GenericDialogue(NPCNameList.guard, "Guarding the invalid hut must be the dullest job in the whole camp. Scram before I turn you into a resident out of boredom."));
+
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.gateGuard,
+                            new GenericDialogue(NPCNameList.gateGuard, "Branded aren't allowed near the gate. Return to your work immediately."));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.temple,
                             new Dialogue(new string[] { NPCNameList.temple },
@@ -506,22 +510,15 @@ public static class DialogueList
                             InkAssetList.getInkJSON(DialogueKey.CenterCamp_Tabor)));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.feher,
-                            new Dialogue(new string[] { NPCNameList.feher },
-                            InkAssetList.getInkJSON(DialogueKey.Feher)));
+                            new GenericDialogue(NPCNameList.feher, "*Feher sobs weakly.*"));
 
-        addDialogueToList(LocationNameList.campCenter, NPCNameList.branded,
-                            new Dialogue(new string[] { NPCNameList.branded },
-                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
-        addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+1,
-                            new Dialogue(new string[] { NPCNameList.branded+1 },
-                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
-        addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+2,
-                            new Dialogue(new string[] { NPCNameList.branded+2 },
-                            InkAssetList.getInkJSON(DialogueKey.SlavesWatchingTabor)));
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.branded, slavesWatchingTaborDialogue);
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+1, slavesWatchingTaborDialogue);
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.branded+2, slavesWatchingTaborDialogue);
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.campGate, 
-                            new Dialogue(new string[] { NPCNameList.campGate },
-                            InkAssetList.getInkJSON(DialogueKey.CampGate)));
+                            new GenericDialogue(NPCNameList.campGate,
+                            "This gate lead out of the camp. It is locked and sturdy."));
 
         addDialogueToList(LocationNameList.campCenter, NPCNameList.wallPatch, wallPatchDialogue);
 
@@ -551,24 +548,23 @@ public static class DialogueList
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.wallPatch, wallPatchDialogue);
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.statue,
-                            new SingleCharacterDialogue(NPCNameList.statue,
-                            InkAssetList.getInkJSON(DialogueKey.DirectorStatue)));
+                            new GenericDialogue(NPCNameList.statue,
+                            "*A statue depicting the camp's Director. The size of the statue makes him seem as a giant, gazing dourly over the heads of lesser men.*"));
                             
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.toppledStatue,
-                            new SingleCharacterDialogue(NPCNameList.toppledStatue,
-                            InkAssetList.getInkJSON(DialogueKey.BrokenDirectorStatue)));
+                            new GenericDialogue(NPCNameList.toppledStatue,
+                            "*This statue of the camp's Director no longer stands proudly. A noose and many arms have pried it off the stone it was hewn from. The Director's head and torso now lie prostrate in the mud.*"));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+7,
-                            new SingleCharacterDialogue(NPCNameList.slave,
-                            InkAssetList.getInkJSON(DialogueKey.MessHallSlave1)));
+                            new GenericDialogue(NPCNameList.slave,
+                            "Only good thing about getting picked for work is I get to stretch my legs a little."));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+8,
-                            new SingleCharacterDialogue(NPCNameList.slave,
-                            InkAssetList.getInkJSON(DialogueKey.MessHallSlave2)));
+                            new GenericDialogue(NPCNameList.slave,
+                            "The camp sure is quiet during lockdown."));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guard,
-                            new SingleCharacterDialogue(NPCNameList.guard,
-                            InkAssetList.getInkJSON(DialogueKey.MessHallGuard)));
+                            new GenericDialogue(NPCNameList.guard, "No fightin' over scraps. Last slave that did went to the pit."));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guardHenrik,
                             new SingleCharacterDialogue(NPCNameList.guardHenrik,
@@ -643,8 +639,7 @@ public static class DialogueList
                             InkAssetList.getInkJSON(DialogueKey.SECamp_Janos)));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.thatch,
-                            new SingleCharacterDialogue(NPCNameList.thatch,
-                            InkAssetList.getInkJSON(DialogueKey.SECamp_Thatch)));
+                            new GenericDialogue(NPCNameList.thatch, "*Thatch lays with his head slumped against the mess hall's wall. His eyes are closed, and soft snoring can be heard.*"));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.carter,
                             new SingleCharacterDialogue(NPCNameList.carter,
@@ -747,12 +742,14 @@ public static class DialogueList
         #endregion
         #region MineEntranceCamp
 
+        string goAwayDialogue = "Go away, slave. You're bothering me.";
+
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guard,
-                            new SingleCharacterDialogue(NPCNameList.guard,
-                            InkAssetList.getInkJSON(DialogueKey.GenericGuard)));
+                            new GenericDialogue(NPCNameList.guard,
+                                                goAwayDialogue));
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guard+1,
-                            new SingleCharacterDialogue(NPCNameList.guard+1,
-                            InkAssetList.getInkJSON(DialogueKey.GenericGuard)));
+                            new GenericDialogue(NPCNameList.guard+1,
+                                                goAwayDialogue));
 
         addDialogueToList(LocationNameList.campMineEntrance, NPCNameList.guardMuzsa,
                             new Dialogue(new string[] { NPCNameList.guardMuzsa, NPCNameList.barricade, NPCNameList.guardMuzsa + 1 },
@@ -1296,8 +1293,7 @@ public static class DialogueList
 
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, NPCNameList.honorguard,
-                                new SingleCharacterDialogue(NPCNameList.honorguard, 
-                                 InkAssetList.getInkJSON(DialogueKey.Honorguard)));
+                                new GenericDialogue(NPCNameList.honorguard, "No one is permitted inside the Director's bed chambers without his permission. Leave immediatly."));
 
             addDialogueToList(ZoneKeyList.manseSecondFloor + LocationNameList.section2c, NPCNameList.chiefTabor,
                                 new Dialogue(new string[]   {   

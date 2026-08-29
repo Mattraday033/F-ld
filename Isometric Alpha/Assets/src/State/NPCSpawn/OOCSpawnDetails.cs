@@ -1831,6 +1831,7 @@ public class SingleSpriteChestSpawnDetails: ChestSpawnDetails
     base(index, cellCoords, facing, script: script, secretDoorFlag: secretDoorFlag, withScale: withScale)
     {
         this.chestName = chestName;
+        this.npcName = chestName;
 
         this.spriteName = spriteName;
         

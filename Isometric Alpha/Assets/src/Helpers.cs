@@ -72,6 +72,22 @@ public static class Helpers
         return hasCollision(currentCollider, filter);
     }
 
+
+    public static bool hasCollision(Collider2D currentCollider, ContactFilter2D filter, out GameObject collision)
+    {
+        Collider2D collider2D = getCollision(currentCollider, filter);
+
+        if(collider2D != null)
+        {
+            collision = collider2D.gameObject;
+        } else
+        {
+            collision = null;
+        }
+
+        return collider2D != null;
+    }
+
     public static bool hasCollision(Collider2D currentCollider, ContactFilter2D filter)
     {
         List<Collider2D> intersectingColliders = new List<Collider2D>();

@@ -209,6 +209,7 @@ public static class NPCNameList
 
     public const string chief = "Chief";
     public const string guard = "Guard";
+    public const string gateGuard = "Gate Guard";
     public const string hangman = "Hangman";
     public const string honorguard = "Honorguard";
     public const string overseer = "Overseer";

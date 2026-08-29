@@ -77,7 +77,8 @@ public class LoadingBarProgressTracker : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.inDialogue)
+        if(PlayerOOCStateManager.currentActivity != OOCActivity.inDialogue && 
+           PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence)
         {
             PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
         }

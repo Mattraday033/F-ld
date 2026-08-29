@@ -149,24 +149,18 @@ public class Dialogue : ICloneable
 		this.secondaryInkJSONs = secondaryInkJSONs;
 	}
 
-
-	public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo)
+    public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo, IStoryVariableSource variableSource = null)
 	{
         this.names = createNameArray(names);
 
         this.cameraFoci = new GameObject[this.names.Length];
 		this.inkJSON = inkJSON;
 		this.npcCombatInfo = npcCombatInfo;
-	}
 
-    public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo, IStoryVariableSource variableSource)
-	{
-        this.names = createNameArray(names);
-
-        this.cameraFoci = new GameObject[this.names.Length];
-		this.inkJSON = inkJSON;
-		this.npcCombatInfo = npcCombatInfo;
-        this.variableSources.Add(variableSource);
+        if(variableSource != null)
+        {
+            this.variableSources.Add(variableSource);
+        }
 	}
 
 	public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo, TextAsset[] secondaryInkJSONs)
@@ -262,19 +256,10 @@ public class Dialogue : ICloneable
 
 public class SingleCharacterDialogue : Dialogue
 {
-    public SingleCharacterDialogue(string name, TextAsset inkJSON) : 
-    base(new string[]{name}, inkJSON)
-    {
-        
-    }
-
-    public SingleCharacterDialogue(string name, TextAsset inkJSON, NPCCombatInfo npcCombatInfo) : 
-    base(new string[]{name}, inkJSON, npcCombatInfo)
-    {
-        
-    }
-
-    public SingleCharacterDialogue(string name, TextAsset inkJSON, NPCCombatInfo npcCombatInfo, IStoryVariableSource variableSource) : 
+    public SingleCharacterDialogue( string name, 
+                                    TextAsset inkJSON, 
+                                    NPCCombatInfo npcCombatInfo = null, 
+                                    IStoryVariableSource variableSource = null) : 
     base(new string[]{name}, inkJSON, npcCombatInfo, variableSource)
     {
         
@@ -291,4 +276,32 @@ public class SingleCharacterDialogue : Dialogue
 
         return addInfoToClone(this, clone);
     }
+}
+
+public class GenericDialogue : SingleCharacterDialogue, IStoryVariableSource
+{
+    private string dialogueContents;
+
+    public GenericDialogue(string name, string dialogueContents) : 
+    base(name, InkAssetList.getInkJSON(DialogueKey.GenericDialogue))
+    {
+        this.dialogueContents = dialogueContents;
+        
+        variableSources.Add(this);
+    }
+
+    public override Dialogue clone()
+    {
+        return new GenericDialogue(names[Constants.indexOne], dialogueContents);
+    }
+
+    #region IStoryVariableSource methods
+
+
+    public Story addVariables(Story story)
+    {
+        return InkVariableNameList.setStoryVariable(story, InkVariableNameList.description, dialogueContents);
+    }
+
+    #endregion
 }

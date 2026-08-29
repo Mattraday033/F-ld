@@ -13,7 +13,19 @@ VAR succeededRavineGuardTripAttempt = false
 
 === 1a ===
 
-All you branded make me sick. Wish the Director'd just order us to toss rest of you down the ravine and go home. It's what the lot of you deserve.
+All you branded make me sick. I wish the Director would order us to toss the rest of you down the ravine and go home. It's what the lot of you deserve.
+
+{
+    -strength >= 2:
+    +Fortunately for you, I have a cure for that. *Push the guard over the side of the ravine.* <Str {strength}/2>
+        setToTrue(madeRavineGuardTripAttempt)
+        {
+            -strength >= 2:
+                ->1b
+            -else:
+                ->1c
+        }
+}
 
     +After you. *Trip the guard into the ravine* <Dex {dexterity}/2>
         setToTrue(madeRavineGuardTripAttempt)
@@ -30,11 +42,28 @@ All you branded make me sick. Wish the Director'd just order us to toss rest of 
 
 setToTrue(succeededRavineGuardTripAttempt)
 
-->Close
+What are y- AAAAAAAAAAHHH!!!
+
+->deactivateGuard
 
 === 1c ===
 
+addHostilitytoCurrentArea()
 
+\*You can't find a way to catch the guard by surprise.*
+
+You've got some lip on you, branded. I'm off to tell Kende not to give you any rations for a few days. We'll see if you're still mouthy after that.
+
+->deactivateGuard
+
+=== deactivateGuard ===
+
+fadeToBlack()
+
+deactivate({guardIndex})
+wait(1)
+
+fadeBackIn(60)
 
 ->Close
 
