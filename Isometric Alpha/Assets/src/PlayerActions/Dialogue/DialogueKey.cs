@@ -10,6 +10,7 @@ public enum DialogueKey
     FirstBarricadeGuards, // Dialogue/Camp/CampExterior/CenterCamp/FirstBarricadeGuards
     GuardWatchingTabor, // Dialogue/Camp/CampExterior/CenterCamp/GuardWatchingTabor
     Page, // Dialogue/Camp/CampExterior/CenterCamp/Page
+    StableGuard, // Dialogue/Camp/CampExterior/CenterCamp/Stable Guard
     CenterCamp_Tabor, // Dialogue/Camp/CampExterior/CenterCamp/Tabor
     Temple, // Dialogue/Camp/CampExterior/CenterCamp/Temple
     Imre, // Dialogue/Camp/CampExterior/ManseCamp/Imre

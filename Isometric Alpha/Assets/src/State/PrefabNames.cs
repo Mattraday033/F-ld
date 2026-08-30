@@ -445,14 +445,10 @@ public static class PrefabNames
     public const string wallPatch = secretDoorsFolder + "WallPatch";
     public const string wallPatchTall = secretDoorsFolder + "WallPatchTall";
 
-/*
-WallPatch
-WallPatchTall
-*/
-
     public const string miscFolder = spriteFolder + "Misc/";
     public const string controlPanel = miscFolder + NPCNameList.controlPanel;
     public const string unstablePillar = miscFolder + NPCNameList.unstablePillar;
+    public const string showtouch = miscFolder + NPCNameList.showtouch;
 
     public const string tilesFolder = spriteFolder + "Tiles/";
     

@@ -361,6 +361,9 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.priestRikard, new Vector3Int(6, 6), LocationNameList.temple, facing: Facing.NorthWest));
 
+        list.Add(new NPCSpawnDetails(NPCNameList.showtouch, new Vector3Int(10, -1), LocationNameList.temple, spriteName: PrefabNames.showtouch));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(10, 0), LocationNameList.temple, animationName: MonsterNameList.disciplinarian, facing: Facing.SouthWest));
+
         oocSpawnDetailsDict.Add(LocationNameList.temple, list);
         #endregion
         #region Body Pile
@@ -450,6 +453,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+5, new Vector3Int(13, -1), LocationNameList.campNorthEast, animationName: MonsterNameList.axeman, facing: Facing.NorthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+6, new Vector3Int(6, 10), LocationNameList.campNorthEast, animationName: MonsterNameList.spearman, facing: Facing.SouthEast));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+7, new Vector3Int(-3, -13), LocationNameList.campNorthEast, animationName: MonsterNameList.spearman, facing: Facing.SouthWest));
 
         list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -4), LocationNameList.campNorthEast, spriteName: PrefabNames.leafPile));
         list.Add(new NPCSpawnDetails(NPCNameList.leafPile, new Vector3Int(18, -5), LocationNameList.campNorthEast, spriteName: PrefabNames.leafPile));
@@ -576,14 +580,15 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.temple, new Vector3Int(9, 11), LocationNameList.campCenter, facing: Facing.SouthEast));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard + 1, new Vector3Int(6, 3), LocationNameList.campCenter, MonsterNameList.spearman, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(6, 3), LocationNameList.campCenter, MonsterNameList.spearman, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+2, new Vector3Int(8, -4), LocationNameList.campCenter, MonsterNameList.disciplinarian, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+3, new Vector3Int(2, 15), LocationNameList.campCenter, MonsterNameList.spearman, facing: Facing.SouthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.gateGuard, new Vector3Int(3, -13), LocationNameList.campCenter, MonsterNameList.lancer, facing: Facing.NorthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.gateGuard, new Vector3Int(0, -13), LocationNameList.campCenter, MonsterNameList.linebreaker, facing: Facing.NorthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.gateGuard, new Vector3Int(3, -18), LocationNameList.campCenter, MonsterNameList.executioner, facing: Facing.SouthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.gateGuard, new Vector3Int(0, -18), LocationNameList.campCenter, MonsterNameList.lancer, facing: Facing.SouthEast));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+2, new Vector3Int(8, -4), LocationNameList.campCenter, MonsterNameList.disciplinarian, facing: Facing.SouthWest));
 
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(4, 5), LocationNameList.campCenter, facing: Facing.SouthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.branded, new Vector3Int(0, 6), LocationNameList.campCenter, animationName: NPCNameList.slaveTwo, facing: Facing.NorthEast));
@@ -653,9 +658,13 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+7, new Vector3Int(6, -5), LocationNameList.campSouthEast, facing: Facing.NorthEast));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+8, new Vector3Int(7, -5), LocationNameList.campSouthEast, facing: Facing.SouthWest));
 
-        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(10, -9), LocationNameList.campSouthEast, animationName: MonsterNameList.spearman, facing: Facing.SouthWest));
         list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guardHenrik, new Vector3Int(8, 2), LocationNameList.campSouthEast, facing: Facing.NorthWest));
-
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard, new Vector3Int(10, -9), LocationNameList.campSouthEast, animationName: MonsterNameList.spearman, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.guard+1, new Vector3Int(-1, 21), LocationNameList.campSouthEast, animationName: MonsterNameList.disciplinarian, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+9, new Vector3Int(-2, 23), LocationNameList.campSouthEast, animationName: NPCNameList.slave, facing: Facing.NorthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+9, new Vector3Int(-3, 20), LocationNameList.campSouthEast, animationName: NPCNameList.slave+1, facing: Facing.SouthWest));
+        list.Add(new NPCWithAnimationsSpawnDetails(NPCNameList.slave+9, new Vector3Int(-1, 17), LocationNameList.campSouthEast, animationName: NPCNameList.slave+2, facing: Facing.SouthEast));
+        
         list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campSouthEast, Constants.indexZero));
 
         float statueOffset = -.1f;

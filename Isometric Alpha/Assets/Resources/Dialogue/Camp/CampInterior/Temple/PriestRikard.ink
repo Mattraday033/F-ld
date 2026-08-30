@@ -94,9 +94,19 @@ The Director is a devout man, and understands the importance of the work we do h
         ->1f
 }
 
-
 {
 -true:
+    +What's with the boot in the corner?
+        
+        That is not just some boot, it is this camp's 'showtouch'. Please, speak of it respectfully.
+
+        It is common in victory for a Lovashi horde to take trophies or looted items from their enemies. But the Craft Folk have a disgusting practice of making their equipment out of tanned horseflesh.
+
+        It is law that when a object made from horse leather is found, it must be burned. To teach a horde what these items look like, a commander who has seen victory is entitled to take a grotesque of horseflesh and have it consecrated as his horde's showtouch.
+
+        That specific totem was liberated by the Director a generation hence during his contributions to our confederation's war with the Kingdom of Masons. It has traveled with him ever since, to serve to remind to his soldiers of the depths the Craft Folk will sink to in their depravity.
+        ->1c
+
     +I must be going.
         ->Close
 }
@@ -150,9 +160,7 @@ The Director is a devout man, and understands the importance of the work we do h
         ->askReply(->1c)
 }
 
-
 === 1e ===
-
 {
 -true:
     +Can you explain to me why the Lovashi have made sculptures so taboo?
@@ -175,10 +183,6 @@ The Director is a devout man, and understands the importance of the work we do h
     +I have other questions.
         ->askReply(->1c)
 }
-
-=== 1ea ===
-
-->1e
 
 === 1f ===
 
@@ -273,6 +277,10 @@ We brand your people to both show you the horror you have inflicted on horsekind
     +I guess that makes <i>some</i> kind of twisted sense.
         Despite your tone, that is a much more enlightened way of thinking than your compatriots have shown. I will take what I can get.
         ->1f
+
+=== 1g ===
+
+->Close
 
 === askReply(->divert) ===
 

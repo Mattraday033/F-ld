@@ -200,7 +200,7 @@ public static class DialogueList
                             DialogueCombatInfoList.dezsoHostageFight));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.loam,
-                            new GenericDialogue(NPCNameList.loam, "Hi, I'm Loam"));
+                            new GenericDialogue(NPCNameList.loam, "It would be best for all of us if you left."));
 
         addDialogueToList(LocationNameList.slaveShackSeven, NPCNameList.guard+1,
                             new GenericDialogue(NPCNameList.guard+1, leaveMeAloneLine));
@@ -310,6 +310,16 @@ public static class DialogueList
                             new SingleCharacterDialogue(NPCNameList.priestRikard,
                             InkAssetList.getInkJSON(DialogueKey.PriestRikard)));
 
+        addDialogueToList(LocationNameList.temple, NPCNameList.showtouch,
+                            new GenericDialogue(NPCNameList.showtouch,   "*A large boot has been placed on a pedestal, and is surrounded by mounds of small offerings: coins, " +
+                                                                            "flowers, the odd trinket. A plaque attached to the pedestal contains the following " +
+                                                                            "inscription: 'This boot of horseflesh was taken from an Artisan soldier slain by the Western Lance. Let " +
+                                                                            "all children of the saddle know its texture, so they may put all other grotesques to torch.'*"));
+
+        addDialogueToList(LocationNameList.temple, NPCNameList.guard,
+                            new GenericDialogue(NPCNameList.guard, "Branded are not permitted near the showtouch. Find somewhere else to linger."));
+
+
         #endregion
         #region Mess Hall
 
@@ -366,9 +376,9 @@ public static class DialogueList
                             new GenericDialogue(NPCNameList.overseer ,
                             "*The overseer glowers at you.* Be on your way."));
 
+        string doNotDistractMeLine = "Don't distract me. The overseer is watching.";
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.slave+13,
-                            new GenericDialogue(NPCNameList.slave,
-                            "Don't distract me. The overseer is watching."));
+                            new GenericDialogue(NPCNameList.slave, doNotDistractMeLine));
 
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+5,
                             new SingleCharacterDialogue(NPCNameList.guard,
@@ -377,6 +387,10 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+6,
                             new GenericDialogue(NPCNameList.guard,
                             "*The guard yawns.* Why do I always get the boring shifts?"));
+
+        addDialogueToList(LocationNameList.campNorthEast, NPCNameList.guard+7,
+                            new GenericDialogue(NPCNameList.guard,
+                            "What is taking them so long in there? This is the longest inspection I've ever seen."));
 
         addDialogueToList(LocationNameList.campNorthEast, DialogueNameList.slavesAfterKillingOverseerCampNEKey,
                          new Dialogue(new string[] { 
@@ -493,6 +507,10 @@ public static class DialogueList
         addDialogueToList(LocationNameList.campCenter, NPCNameList.guard + 2,
                             new GenericDialogue(NPCNameList.guard, "Guarding the invalid hut must be the dullest job in the whole camp. Scram before I turn you into a resident out of boredom."));
 
+        addDialogueToList(LocationNameList.campCenter, NPCNameList.guard + 3,
+                            new SingleCharacterDialogue(NPCNameList.guard,
+                                InkAssetList.getInkJSON(DialogueKey.StableGuard)));
+
         addDialogueToList(LocationNameList.campCenter, NPCNameList.gateGuard,
                             new GenericDialogue(NPCNameList.gateGuard, "Branded aren't allowed near the gate. Return to your work immediately."));
 
@@ -564,7 +582,13 @@ public static class DialogueList
                             "The camp sure is quiet during lockdown."));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guard,
-                            new GenericDialogue(NPCNameList.guard, "No fightin' over scraps. Last slave that did went to the pit."));
+                            new GenericDialogue(NPCNameList.guard, "No fightin' over scraps. Last slave that did went to the Pit."));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guard+1,
+                            new GenericDialogue(NPCNameList.guard, "You're not a part of my work detail. Get gone."));
+
+        addDialogueToList(LocationNameList.campSouthEast, NPCNameList.slave+9,
+                            new GenericDialogue(NPCNameList.slave, doNotDistractMeLine));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.guardHenrik,
                             new SingleCharacterDialogue(NPCNameList.guardHenrik,

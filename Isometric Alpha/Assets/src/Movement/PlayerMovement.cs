@@ -57,6 +57,7 @@ public class PlayerMovement : MovementTracker
 
 	public override void setFacing(Facing newFacing)
 	{
+        State.playerFacing.setFacing(newFacing);
 		getCharacterFacing().setFacing(newFacing);
 
         updateAnimationDirection();

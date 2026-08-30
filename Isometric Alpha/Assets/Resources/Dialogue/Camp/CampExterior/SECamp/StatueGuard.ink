@@ -26,7 +26,9 @@ fadeToBlack()
 setToTrue(spokeWithHenrik)
 
 movePlayerPos(7,2)
-setFacing({playerIndex},NW)
+setFacing(NW)
+
+wait(1)
 
 fadeBackIn(60)
 
@@ -35,7 +37,7 @@ fadeBackIn(60)
     +Whose statue is this?
         ->1aa(->1b)
     +Yeah, my father was right bastard too.
-        ->1aa(->1b)
+        ->1aa(->1ba)
 
 
 === 1aa(->divert)
@@ -54,7 +56,7 @@ Bah! You startled me, branded. Sneak up on enough guards and you're bound to get
 
 === 1b ===
 
-This is a statue of the Director, Lord Gábor Kálnoky. You'd better familiarize yourself with his likeness, so you can be on your best behavior when he's around.
+This is a statue of the Director, Lord Gábor Kálnoky. You'd better familiarize yourself with his likeness. The branded have to be on their best behavior when he's around.
 
 {
 -wisdom >= 2:
@@ -104,15 +106,15 @@ I speak the truth. We are both blessed enough to be under his command.
     -true:
     +You seem to really look up to the Director.
         setToTrue(saidHenrikReveresDirector)
-        I believe we all do. He is old enough to remember a time before the Confederation. Before counts and the Emancipation Conflict. Before our people were settled and still.
+        Everyone does. He's old enough to remember a time before the confederation. Before counts and the Emancipation Conflict. Before our people were settled and still.
 
         When he was young, the Riding Folk were too. The priests tell us back then we rode the High Steppes and hunted deer and kept sheep. Back then we were one people, under one sky and one king.
 
-        But he doesn't need to listen to priests to know this. He isn't some actor playing a role like Chief Tabor does. He's a true, living link to a past I may never know. Not like he does. 
+        But he doesn't need to listen to priests to know this. He isn't some actor playing a role like Chief Tabor does. He's a true, living link to a past I may never know. Not like he does, anyways. 
 
         ->2a
 
-    +If the Director's such a hero, what's he doing overseering a mining camp? Isn't that beneath him?
+    +If the Director's such a hero, what's he doing overseeing a mining camp? Isn't that beneath him?
         It's not for me to question his motives. A soldier must trust his commander, and I trust the Director with my life.
         ->2a
 }
@@ -133,6 +135,7 @@ I speak the truth. We are both blessed enough to be under his command.
     You've returned. Is there no where you're supposed to be?
 
     +I have questions about the Director if you would be willing to answer them.
+        I'll try to enlighten you. As much as a branded can be, at least.
         ->2a
 
     +I have to get back to work. *Leave.*

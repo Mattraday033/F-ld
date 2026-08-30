@@ -379,6 +379,11 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.temple, NPCNameList.priestRikard),
                                         new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: false));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.temple, NPCNameList.showtouch),
+                                        new InteractableSpawnParams(spawnWhileHostile: spawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.temple, NPCNameList.guard),
+                                        new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning));
+
         #endregion
 
         #region Body Pile
@@ -438,10 +443,16 @@ public static class SpawnParamsList
                                                                         stopSpawningFlagList: revoltStartedStopSpawning));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+5), 
-                                                                        new InteractableSpawnParams(stopSpawningFlagList: directorDefeatedStopSpawning));
+                                                                        new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+6), 
-                                                                        new InteractableSpawnParams(stopSpawningFlagList: directorDefeatedStopSpawning));
+                                                                        new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, NPCNameList.guard+7), 
+                                                                        new InteractableSpawnParams(stopSpawningFlagList: new StopSpawningFlagList(new string[] { 
+                                                                                                                                                                    FlagNameList.revoltStarted, 
+                                                                                                                                                                    FlagNameList.directorDefeated,
+                                                                                                                                                                    FlagNameList.situationStartedInNECamp
+                                                                                                                                                                })));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campNorthEast, MonsterNameList.brandedConscript),
                                new InteractableSpawnParams(new StartSpawningFlagList(new string[]{ FlagNameList.revoltStarted }),
@@ -559,6 +570,12 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.guard+1),
                                new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: doesNotSpawnWhileHostile));
 
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.guard+2),
+                               new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: doesNotSpawnWhileHostile));
+
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.guard+3),
+                               new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: doesNotSpawnWhileHostile));
+
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campCenter, NPCNameList.page),
                                         new InteractableSpawnParams(new StartSpawningAllTrueFlagList(new string[]  { 
                                                                                             FlagNameList.directorDefeated
@@ -622,6 +639,8 @@ public static class SpawnParamsList
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+7),
                                         new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: doesNotSpawnWhileHostile));
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+8),
+                                        new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: doesNotSpawnWhileHostile));
+        interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.slave+9),
                                         new InteractableSpawnParams(stopSpawningFlagList: revoltStartedStopSpawning, spawnWhileHostile: doesNotSpawnWhileHostile));
 
         interactableSpawnParamsDict.Add(new KeyValuePair<string, string>(LocationNameList.campSouthEast, NPCNameList.guard),

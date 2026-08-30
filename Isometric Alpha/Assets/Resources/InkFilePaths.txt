@@ -2,6 +2,7 @@ Dialogue/Camp/CampExterior/CenterCamp/Csalan
 Dialogue/Camp/CampExterior/CenterCamp/FirstBarricadeGuards
 Dialogue/Camp/CampExterior/CenterCamp/GuardWatchingTabor
 Dialogue/Camp/CampExterior/CenterCamp/Page
+Dialogue/Camp/CampExterior/CenterCamp/Stable Guard
 Dialogue/Camp/CampExterior/CenterCamp/Tabor
 Dialogue/Camp/CampExterior/CenterCamp/Temple
 Dialogue/Camp/CampExterior/ManseCamp/Imre

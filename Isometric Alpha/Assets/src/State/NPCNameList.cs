@@ -144,6 +144,7 @@ public static class NPCNameList
     public const string table = "Table";
     public const string rack = "Rack";
     public const string body = "Body";
+    public const string showtouch = "Showtouch";
 
     #endregion
 
