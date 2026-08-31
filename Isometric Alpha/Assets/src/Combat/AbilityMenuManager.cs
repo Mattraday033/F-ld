@@ -781,7 +781,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     private void showMenuAfterEscape()
     {
         abilityButtonCanvas.SetActive(true);
-        CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveAllListeners();
+        CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveListener(showMenuAfterEscape);
     }
 
     //ICounter

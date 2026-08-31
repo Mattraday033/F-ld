@@ -7,6 +7,36 @@ public interface INameSource
     public string getName();
 }
 
+public static class NameSourceExtensions
+{
+    public static bool hasGenericName(this INameSource source)
+    {
+        switch(DialogueList.scrubNameOfEndNumbers(source.getName()))
+        {
+            //inanimate object
+            case NPCNameList.chest:
+            case NPCNameList.shelf:
+            case NPCNameList.crate:
+            case NPCNameList.crates:
+            case NPCNameList.barrels:
+            case NPCNameList.barricade:
+            case NPCNameList.statue:
+            case NPCNameList.rubble:
+            case NPCNameList.awkwardRubble:
+
+            //occupation
+            case NPCNameList.guard:
+            case NPCNameList.branded:
+            case NPCNameList.noBrand:
+            case NPCNameList.slave:
+            case NPCNameList.horse:
+                return true;
+        }
+
+        return false;
+    }
+}
+
 public interface IDialogueParticipant: INameSource
 {
     public Dialogue getDialogue();

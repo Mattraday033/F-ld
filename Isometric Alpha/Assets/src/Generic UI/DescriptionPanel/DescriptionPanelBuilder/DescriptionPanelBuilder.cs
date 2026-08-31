@@ -821,6 +821,7 @@ public static class IconList
     public const string durationIconName = "Duration";
     public const string stanceWeaponIconName = "Stance Weapon";
     public const string stanceIconName = "Stance";
+    public const string noActionRequiredIconName = "No Action Required";
 
     //Item Icons
     public const string armorScoreIconName = "Armor Score";

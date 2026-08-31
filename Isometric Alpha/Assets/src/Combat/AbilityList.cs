@@ -452,7 +452,7 @@ public static class AbilityList
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
         currentKey = generateAbilityKey(charismaKeyChar);
-        statAbilityDictionary.Add(currentKey, new RepositionAllyAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Get Back!", useDescription: "Order a Companion to reposition, healing them in the process."), DamageParams.build("5C"), TargetParams.build(SelectorTemplate.Single), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(new ActionCostType[] { ActionCostType.RedKnife, ActionCostType.YellowThorn }, new int[] { oneStackCastCost, oneStackCastCost }))));
+        statAbilityDictionary.Add(currentKey, new RepositionAllyAbility(CombatActionSettings.build(currentKey, DescriptionParams.build("Get Back!", useDescription: "Order a Companion to reposition, healing them in the process."), DamageParams.build("5C"), TargetParams.build(SelectorTemplate.Single), FrequencyParams.build(oneSlotMax, fourRoundCooldown), CostParams.build(new ActionCostType[] { ActionCostType.RedKnife, ActionCostType.YellowThorn }, new int[] { oneStackCastCost, oneStackCastCost })), requiresAction: false));
         statAbilityDictionary[currentKey].setStatRequirements(currentKey);
 
 		// currentKey = generateAbilityKey(charismaKeyChar);

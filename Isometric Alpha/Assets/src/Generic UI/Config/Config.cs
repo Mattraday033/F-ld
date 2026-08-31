@@ -443,6 +443,17 @@ public static class Config
 {
     private static ConfigFile config = null;
 
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void addWriteConfigOnQuitListener()
+    {
+        if(!Application.isEditor)
+        {
+            Application.quitting -= writeConfig;
+            Application.quitting += writeConfig;
+        }
+    }
+
     public static void initializeSettingsFromConfigFile()
     {
         if(config == null)
@@ -500,6 +511,8 @@ public static class Config
         addBuildDateAndTimeToConfig();
 
         Json.writeObjectToJSON(PrefabNames.configFile, config);
+
+        Debug.Log("Config.json has been overwritten.");
     }
 
     /// <summary>

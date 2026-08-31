@@ -312,6 +312,17 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     #region IRevealable
 
+    public string getName()
+    {
+        if(linkedStats != null)
+        {
+            return linkedStats.getName();
+        } else
+        {
+            return "";
+        }
+    }
+
     public SpriteOutline getSpriteOutline()
     {
         return getTargetStats().getOutlines()[0];

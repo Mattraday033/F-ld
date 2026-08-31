@@ -5532,7 +5532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useUltraWideTutorialWindow: 0
   rectTransform: {fileID: 1076192518}
-  tutorialHash: Character Screen Button
+  tutorialHash: World Map Button
   disableArrow: 0
   image: {fileID: 1076192525}
   previousColor: {r: 0, g: 0, b: 0, a: 0}

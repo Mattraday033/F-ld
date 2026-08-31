@@ -287,10 +287,6 @@ public struct TutorialSequenceStep : IDescribable
 
         tutorialTarget.highlight(skipHighlight);
 
-        // Debug.LogError("Tutorial window parent = " + tutorialTarget.getTransform().name);
-
-
-
         currentTutorialMessageWindow = GameObject.Instantiate(getDescriptionPanelFull(getPanelType(useUltraWideTutorialWindow)), tutorialTarget.getTransform()).GetComponent<TutorialSequenceStepWindow>();
 
         if (!tutorialTarget.isUI())
@@ -629,6 +625,40 @@ public class TutorialSequence
         previousStep = -1;
     }
 
+	public override bool Equals(object o)
+	{
+        TutorialSequence otherSequence = o as TutorialSequence;
+
+        if(otherSequence == null)
+        {
+            return false;
+        }
+
+        if(!otherSequence.tutorialSeenFlagName.Equals(tutorialSeenFlagName))
+        {
+            return false;
+        }
+
+        for(int i = 0;  
+            i < tutorialSequenceSteps.Length && 
+            i < otherSequence.tutorialSequenceSteps.Length;
+            i++)
+        {
+            if(!tutorialSequenceSteps[i].Equals(otherSequence.tutorialSequenceSteps[i]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+	}
+
+	public override int GetHashCode()
+	{
+        return tutorialSeenFlagName.GetHashCode();
+	}
+
+
     public void setSkipScript(SkipTutorialScript skipScript)
     {
         this.skipScript = skipScript;
@@ -649,7 +679,6 @@ public class TutorialSequence
 
     public void startSequence()
     {
-
         setStateToInTutorialSequence();
 
         started = true;
@@ -802,7 +831,7 @@ public class TutorialSequence
         // Debug.LogError("invoking TutorialSequenceTargetFinder");
         TutorialSequenceTargetFinder.Invoke(currentStep);
 
-        if(!tutorialSequenceSucessfullySpawnedWindow())
+        if(!tutorialSequenceSuccessfullySpawnedWindow())
         {
             endSequence();
             return;
@@ -814,7 +843,7 @@ public class TutorialSequence
         }
     }
 
-    private static bool tutorialSequenceSucessfullySpawnedWindow()
+    private static bool tutorialSequenceSuccessfullySpawnedWindow()
     {
         return TutorialSequenceStep.currentTutorialMessageWindow != null;
     }
@@ -909,8 +938,6 @@ public class TutorialSequence
 
         currentTutorialSequence = TutorialSequenceList.getTutorialSequence(tutorialSequenceKey);
 
-
-
         if (currentTutorialSequence == null)
         {
             return false;
@@ -940,6 +967,11 @@ public class TutorialSequence
 
     public static bool overrideTutorialSequence(TutorialSequence tutorialSequence)
     {
+        if(tutorialSequence.Equals(currentTutorialSequence))
+        {
+            return true;
+        }
+
         currentTutorialSequence = tutorialSequence;
 
         if (currentTutorialSequence.hasBeenSeen())

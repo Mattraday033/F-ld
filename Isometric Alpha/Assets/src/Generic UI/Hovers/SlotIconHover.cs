@@ -536,6 +536,7 @@ public static class HoverMessageList
     public const string evadedKey = "Evaded";
     public const string evadedMessage = "Your Party has recently retreated from a fight with this creature. It cannot move while your Party makes its escape.";
 
+    public const string noActionRequiredMessage = "This Action does not count against the Party's total Party Actions limit. When activated, it will occur instantly.";
 
     public const string startingRedKnifeMessage = "This shows the amount of the Red Knife Exuberance your Party will gain at the start of Combat. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.redKnifeAcquisitionMethodExplanation;
     public const string redKnifeMessage = "This shows the amount of the Red Knife Exuberance your Party currently has. Exuberances are used to power certain Abilities, usually tied to the Charisma Stat.\n\n" + AbilityList.redKnifeAcquisitionMethodExplanation;
@@ -559,7 +560,6 @@ public static class HoverMessageList
     public const string itemActionTypeMessage = "Item Actions are Actions provided by equipping Usable Items to the Action Wheel. Most Item Actions consume the equipped Item on use. Some Item Actions do not require a Party Action to use, allowing them to be used instantly.";
     public const string passiveActionTypeMessage = "Passive Abilities are Abilities that are always on, and do not require being equipped to the Action Wheel to provide their benefits.";
     public const string equippedPassiveActionTypeMessage = "Equipped Passives are Abilities that provide a Trait to a Character at the beginning of Combat. All Equipped Passives require that a Character equips them to the Action Wheel before that Character will begin to gain their benefits.";
-
     #endregion
 
     #region Trait Type Messages
@@ -868,6 +868,8 @@ public static class HoverMessageList
                 return volleyAccuracyMessage;
             case IconList.goldMultiplierIconName:
                 return goldMultiplierMessage;
+            case IconList.noActionRequiredIconName:
+                return noActionRequiredMessage;
 
             case IconList.redKnifeIconName:
                 if(CombatStateManager.inCombat)

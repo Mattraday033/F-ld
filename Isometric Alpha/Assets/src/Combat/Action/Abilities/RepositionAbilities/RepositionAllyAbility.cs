@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class RepositionAllyAbility : RepositionAbility, IJSONConvertable
 {
-	public RepositionAllyAbility(CombatActionSettings settings) :
+    private bool requiresAction;
+
+	public RepositionAllyAbility(CombatActionSettings settings, bool requiresAction = true) :
 		base(settings)
 	{
-
+        this.requiresAction = requiresAction;
 	}
 
 	public override void performCombatAction()
@@ -16,6 +18,12 @@ public class RepositionAllyAbility : RepositionAbility, IJSONConvertable
 		base.performCombatAction();
 
 		getActorStats().addTrait(getAppliedTrait());
+
+        if(!requiresAnAction())
+        {
+	        chargeActorActionCost();
+            setCooldownToMax();
+        }
 	}
 
 	public override bool repositionsCaster()
@@ -32,6 +40,12 @@ public class RepositionAllyAbility : RepositionAbility, IJSONConvertable
 	{
 		return true;
 	}
+
+
+    public override bool requiresAnAction()
+    {
+        return requiresAction;
+    }
 
 	public override bool healsTarget()
 	{

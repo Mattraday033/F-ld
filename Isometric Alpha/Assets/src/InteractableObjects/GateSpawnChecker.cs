@@ -95,4 +95,9 @@ public class GateSpawnChecker : MonoBehaviour, IRevealable
 		MouseHoverManager.destroyMouseHoverBase();
 	}
 	
+    public string getName()
+    {
+        return hoverName;
+    }
+
 }

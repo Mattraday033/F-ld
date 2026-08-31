@@ -26,7 +26,11 @@ public class CombatInputManager : MonoBehaviour
         }
 
 		KeyPressManager.updateKeyBools();
-        PlayerInput.showFormulaToggleCheck();
+
+        if(CombatStateManager.currentActivity != CurrentActivity.InEscapeMenu)
+        {
+            PlayerInput.showFormulaToggleCheck();
+        }
 
 		if (KeyPressManager.handlingPrimaryKeyPress || (CombatStateManager.whoseTurn != WhoseTurn.Player && CombatStateManager.currentActivity != CurrentActivity.Tutorial))
 		{

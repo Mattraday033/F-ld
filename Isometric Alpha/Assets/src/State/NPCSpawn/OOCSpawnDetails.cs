@@ -1202,7 +1202,12 @@ public class DependantSpawnDetails : NPCWithAnimationsSpawnDetails
 
         if(parentObject != null)
         {
-            parent = parentObject.AddComponent<RectTransform>();
+            parent = parentObject.GetComponent<RectTransform>();
+
+            if(parent == null)
+            {
+                parent = parentObject.AddComponent<RectTransform>();
+            }
         }
 
         // Vector3 worldPos = npc.transform.position;

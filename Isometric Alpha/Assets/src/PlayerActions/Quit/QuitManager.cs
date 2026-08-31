@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class QuitManager : MonoBehaviour
 {
-
 	public void quitButtonPress()  
 	{
-        Config.writeConfig();
-
         Application.Quit();
 	}
 }

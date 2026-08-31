@@ -20,7 +20,15 @@ public class CharacterLevelCounter : MonoBehaviour
         if (PartyStats.partyMemberCanLevelUp())
         {
             gameObject.SetActive(true);
-            playerLevelUpTutorialSequenceCheck();
+            
+            switch(PlayerOOCStateManager.currentActivity)
+            {
+                case OOCActivity.walking:
+                case OOCActivity.inFade:
+                case OOCActivity.Loading:
+                    playerLevelUpTutorialSequenceCheck();
+                    return;
+            }
         }
         else
         {

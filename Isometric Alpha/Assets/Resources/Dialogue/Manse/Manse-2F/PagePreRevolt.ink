@@ -756,7 +756,7 @@ Page has told me that you were successful, but I would hear it from you. Were yo
 === sealedBreach_2aa ===
 
 {
--gasparAddedToParty or mineLvl3GuardsInParty:
+-gasparAddedToParty or mineLvl3GuardsInParty and not deathFlagOverseerGáspár:
     ->dealingWithGaspar_1a
 }
 
@@ -767,7 +767,7 @@ Page has told me that you were successful, but I would hear it from you. Were yo
 +I was, but these extra guards of yours bode ill for your willingness to keep your side of our bargain.
     Excellent! And I understand why you would feel that way. Worry not. If you will allow me to demonstrate their purpose, they will not feed your apprehension for longer than they must.
     ->dealingWithGaspar_1b
-+The fighting was fierce, but I managed to deal with the worms after a fashion. Any that remain are trapped, and you won't see new ones until you start digging again.
++The fighting was fierce, but I managed to deal with the worms after a fashion. Any that remain are trapped. You won't see new ones until you start digging again.
     Masterfully done. If only my guards had shown similar tenacity. Then we may have never lost the mine to begin with. Now, before I bestow upon you your reward, I must quickly deal with another matter.
     ->dealingWithGaspar_1b
 
@@ -866,7 +866,7 @@ I apologize for making you wait through that. This meeting should not be about p
 
 === sealedBreach_2b === 
 
-+The fighting was fierce, but I managed to deal with the worms after a fashion. Any that remain are trapped, and you won't see new ones until you start digging again.
++The fighting was fierce, but I managed to deal with the worms after a fashion. Any that remain are trapped. You won't see new ones until you start digging again.
     ->sealedBreach_2ba
 
 +You sent me down there to die, but instead I persevered. Now, hold to your end of the bargain and release me. 

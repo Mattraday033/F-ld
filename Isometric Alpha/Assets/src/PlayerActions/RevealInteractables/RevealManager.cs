@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public interface IRevealable : IPointerEnterHandler,
+public interface IRevealable : INameSource, IPointerEnterHandler,
 	IPointerExitHandler
 {
     public SpriteOutline getSpriteOutline();
@@ -18,6 +18,22 @@ public interface IRevealable : IPointerEnterHandler,
 	public Color getRevealColor();
 
 	public void createHoverTag();
+}
+
+public static class IRevealableExtensions
+{
+    public static void revealBasedOnStateChange(this IRevealable revealable)
+    {
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking && 
+            RevealManager.currentlyRevealed && 
+            INonRevealableNameSource.nameSourceIsRevealable(revealable))
+        {
+            revealable.getSpriteOutline().createOutline(revealable.getRevealColor());
+        } else if(PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+        {
+            revealable.onReveal(false);
+        }
+    }
 }
 
 public static class RevealManager

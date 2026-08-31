@@ -798,6 +798,8 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         OnOOCMonsterDefeat.AddListener(disableIfDefeated);
         TutorialSequence.OnTutorialTargetVisibilityCheck.AddListener(isVisible);
         ToggleHoverColliders.AddListener(toggleHover);
+        PlayerOOCStateManager.OnStateChangeFromWalking.AddListener(this.revealBasedOnStateChange);
+        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(this.revealBasedOnStateChange);
     }
 
 	public void destroyListeners()
@@ -807,6 +809,8 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         OnOOCMonsterDefeat.RemoveListener(disableIfDefeated);
         TutorialSequence.OnTutorialTargetVisibilityCheck.RemoveListener(isVisible);
         ToggleHoverColliders.RemoveListener(toggleHover);
+        PlayerOOCStateManager.OnStateChangeFromWalking.RemoveListener(this.revealBasedOnStateChange);
+        PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(this.revealBasedOnStateChange);
 	}
 
 	public void toggleHover(bool toggleHover)

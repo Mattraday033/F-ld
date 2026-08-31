@@ -179,6 +179,11 @@ public class SelectorManager : MonoBehaviour
 
 	public static void displayCurrentHoverUI()
 	{
+        if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        {
+            return;
+        }
+
 		if (!currentSelector.singleTile() ||
 			(!TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag) &&
 			CombatStateManager.currentActivity != CurrentActivity.Tutorial))
@@ -429,9 +434,16 @@ public class SelectorManager : MonoBehaviour
 
 	public void finishChoosingTertiary(CombatAction loadedCombatAction)
 	{
-		playerCombatActionManager.queueCombatActionWithTertiary(SelectorFactory.playerCursor, currentSelector, loadedCombatAction);
+        if (loadedCombatAction.requiresAnAction())
+        {
+            playerCombatActionManager.queueCombatActionWithTertiary(SelectorFactory.playerCursor, currentSelector, loadedCombatAction);
 
-		currentSelector.setToLocation(loadedCombatAction.getActorCoords());
+            currentSelector.setToLocation(loadedCombatAction.getActorCoords());
+        }
+        else
+        {
+            loadedCombatAction.performCombatAction();
+        }
 
         AudioManager.playChooseActorAbilityLocationSFX();
 

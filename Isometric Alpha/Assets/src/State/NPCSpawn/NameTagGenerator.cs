@@ -52,6 +52,9 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         PlayerOOCStateManager.OnStateChangeFromWalking.AddListener(displayNameTagBasedOnStateChange);
         PlayerOOCStateManager.OnStateChangeToWalking.AddListener(displayNameTagBasedOnStateChange);
 
+        PlayerOOCStateManager.OnStateChangeFromWalking.AddListener(this.revealBasedOnStateChange);
+        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(this.revealBasedOnStateChange);
+
         if(!ignoreSecretDoors)
         {
             SecretDoorFlags.OnSecretDoorDiscovery.AddListener(checkSpawnParams);
@@ -64,6 +67,9 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 		SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(checkSpawnParams);
         PlayerOOCStateManager.OnStateChangeFromWalking.RemoveListener(displayNameTagBasedOnStateChange);
         PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(displayNameTagBasedOnStateChange);
+        
+        PlayerOOCStateManager.OnStateChangeFromWalking.RemoveListener(this.revealBasedOnStateChange);
+        PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(this.revealBasedOnStateChange);
 	}
 
     public virtual void checkSpawnParams(string secretDoorFlag)
@@ -82,21 +88,9 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         return outline;
     }
 
-    public void displayNameTagBasedOnStateChange()
-    {
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking && RevealManager.currentlyRevealed && !hasGenericName() && nameSourceRevealable())
-        {
-            spawnNameTag();
-            outline.createOutline(getRevealColor());
-        } else if(PlayerOOCStateManager.currentActivity != OOCActivity.walking)
-        {
-            onReveal(false);
-        }
-    }
-
 	public void onReveal(bool toggleReveal)
 	{
-        if(!nameSourceRevealable() || outline == null)
+        if(!INonRevealableNameSource.nameSourceIsRevealable(this) || outline == null)
         {
             return;
         }
@@ -105,7 +99,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         {
             outline.createOutline(getRevealColor());
 
-            if(!hasGenericName())
+            if(!this.hasGenericName())
             {
                 spawnNameTag();
             }
@@ -122,33 +116,6 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
     {
         ignoreSecretDoors = true;
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(checkSpawnParams);   
-    }
-
-    private bool hasGenericName()
-    {
-        switch(DialogueList.scrubNameOfEndNumbers(nameSource.getName()))
-        {
-            //inanimate object
-            case NPCNameList.chest:
-            case NPCNameList.shelf:
-            case NPCNameList.crate:
-            case NPCNameList.crates:
-            case NPCNameList.barrels:
-            case NPCNameList.barricade:
-            case NPCNameList.statue:
-            case NPCNameList.rubble:
-            case NPCNameList.awkwardRubble:
-
-            //occupation
-            case NPCNameList.guard:
-            case NPCNameList.branded:
-            case NPCNameList.noBrand:
-            case NPCNameList.slave:
-            case NPCNameList.horse:
-                return true;
-        }
-
-        return false;
     }
 
 	public virtual Color getRevealColor()
@@ -199,7 +166,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
     {
         overHeadIconManager.createOverHeadIcon(OverHeadIconType.NameTag, nameOfNPC: getName());
     }
-    private string getName()
+    public string getName()
     {
         string name = nameSource.getName();
 
@@ -230,14 +197,11 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 		//Empty on purpose (may add for things like portcullis controls in mine lvl 2)
 	}
 
-    public bool nameSourceRevealable()
-    {
-        return INonRevealableNameSource.nameSourceIsRevealable(nameSource);
-    }
-
     public void OnPointerEnter(PointerEventData eventData) 
     {
-        if (nameSourceRevealable() && (!ignoreHover && (eventData == null || !eventData.used)) && !spriteRenderer.color.Equals(Color.clear))
+        if (INonRevealableNameSource.nameSourceIsRevealable(this) && 
+            !ignoreHover && (eventData == null || !eventData.used) &&
+            !spriteRenderer.color.Equals(Color.clear))
         {
             if (eventData != null)
             {
@@ -265,7 +229,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
                 outline.removeOutline();
             }
 			
-            if(hasGenericName() || !RevealManager.currentlyRevealed)
+            if(this.hasGenericName() || !RevealManager.currentlyRevealed)
             {
                 destroyNameTag();
             }
@@ -273,5 +237,14 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 		}
 	}
 
-
+    public void displayNameTagBasedOnStateChange()
+    {
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking && 
+            RevealManager.currentlyRevealed && 
+            INonRevealableNameSource.nameSourceIsRevealable(this) && 
+            !this.hasGenericName())
+        {
+            spawnNameTag();
+        } 
+    }
 }

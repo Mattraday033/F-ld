@@ -12,6 +12,24 @@ public class TraitHoverMouseListener : GridRow, IPointerEnterHandler, IPointerEx
 	public DescriptionPanelBuilder traitHoverDescriptionPanel;
     public List<DescriptionPanelBuilder> relatedDescriptionPanelBuilders;
 
+    public BoxCollider2D hoverCollider;
+
+    private void disableHoverCollider()
+    {
+        if (hoverCollider != null)
+        {
+            hoverCollider.enabled = false;
+        }
+    }
+
+    private void enableHoverCollider()
+    {
+        if (hoverCollider != null)
+        {
+            hoverCollider.enabled = true;
+        }
+    }
+
     private void OnMouseEnter()
     {
         OnPointerEnter(null);
@@ -118,12 +136,23 @@ public class TraitHoverMouseListener : GridRow, IPointerEnterHandler, IPointerEx
     private void OnEnable()
     {
         MouseHoverManager.OnHoverPanelCreation.AddListener(destroyAllDescriptionPanels);
+
+        CombatStateManager.OnActivityChangeToInEscapeMenu.AddListener(disableHoverCollider);
+        CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(enableHoverCollider);
         // InspectNode.OnInspect.AddListener(disableDestroyHoverOnPanelCreation);
+
+        if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        {
+            disableHoverCollider();
+        }
     }
 
     private void OnDisable()
     {
         MouseHoverManager.OnHoverPanelCreation.RemoveListener(destroyAllDescriptionPanels);
+
+        CombatStateManager.OnActivityChangeToInEscapeMenu.RemoveListener(disableHoverCollider);
+        CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveListener(enableHoverCollider);
         // InspectNode.OnInspect.AddListener(disableDestroyHoverOnPanelCreation);
     }
 
