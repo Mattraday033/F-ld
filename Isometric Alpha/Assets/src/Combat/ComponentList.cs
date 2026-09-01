@@ -8,7 +8,7 @@ public class ComponentList : MonoBehaviour
 
     public AnimationManager animationManager;
 
-    public HealthBarManager healthBarManager;
+    public RectTransform healthBarParent;
 
     public SpriteRenderer spriteRenderer;
     public CombatantHover combatantHover;

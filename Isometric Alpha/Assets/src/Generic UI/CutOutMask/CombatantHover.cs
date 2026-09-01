@@ -241,9 +241,11 @@ public class CombatantHover : CombatMouseHover, IRevealable
         if(toggleReveal && (!linkedStats.isDead() || revealPriorityHeld))
         {
             getTargetStats().setOutline();
+            linkedStats.healthBarManager.show();
         } else
         {
             getTargetStats().removeOutline();
+            linkedStats.healthBarManager.hide();
         }
     }
 

@@ -578,7 +578,7 @@ public static class AbilityList
 	{
 		miscAbilityDictionary = new Dictionary<string,Ability>();
 
-        miscAbilityDictionary.Add(godSpellAbilityKey, new Ability(CombatActionSettings.build(godSpellAbilityKey, DescriptionParams.build("God Spell", useDescription: "Kills everything on the enemy side of the board.", iconName: "Explosion"), DamageParams.build("99S + 99D + 99W + 99C + 1000", "100"), TargetParams.build(SelectorTemplate.BoxThree), animationParams: AnimationParams.build(CombatAnimationType.Effect))));
+        miscAbilityDictionary.Add(godSpellAbilityKey, new Ability(CombatActionSettings.build(godSpellAbilityKey, DescriptionParams.build("God Spell", useDescription: "Kills everything on the enemy side of the board.", iconName: "Explosion"), DamageParams.build("99S + 99D + 99W + 99C + 1000", "100"), TargetParams.build(SelectorTemplate.Single), animationParams: AnimationParams.build(CombatAnimationType.Effect))));
         miscAbilityDictionary.Add(moveAllyAbilityKey, new RepositionAllyAbility(CombatActionSettings.build(moveAllyAbilityKey, DescriptionParams.build("Move", useDescription: "The character hoofs it to the desired space.", iconName: "HoofIt"), DamageParams.build("99S + 99D + 99W + 99C + 1000", "100"))));
         miscAbilityDictionary.Add(fearName, new Ability(CombatActionSettings.build(DescriptionParams.build(fearName, useDescription: "Puts the fear of the Gods in the target, setting their limbs to trembling and turning their bowels to ice water. This renders them stunned and vulnerable.", iconName: TraitList.afraid.getIconName()), appliedTrait: TraitList.afraid)));
 	}

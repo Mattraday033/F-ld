@@ -39,7 +39,7 @@ public static class TestScript
 
         // PartyManager.getPlayerStats().combatActionArray = new CombatActionArray(PartyManager.getPlayerStats(), Wisdom.getStartingActions(PartyManager.getPlayerStats()));
 
-        // PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
+        PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
 
         // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.rationsIndex, 50));
         // // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.bandagesIndex, 5));

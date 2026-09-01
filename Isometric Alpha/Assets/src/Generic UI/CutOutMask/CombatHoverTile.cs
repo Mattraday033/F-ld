@@ -216,6 +216,8 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         {
             revealPriorityHeld = true;
 
+            getTargetStats().healthBarManager.setHovered(true);
+
             CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), true);
         }
 
@@ -235,6 +237,8 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
         {
             revealPriorityHeld = false;
+
+            getTargetStats().healthBarManager.setHovered(false);
 
             CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), false);
         }

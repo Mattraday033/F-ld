@@ -68,7 +68,7 @@ Material:
     - _Blend: 0
     - _CastShadows: 0
     - _ColorOutlineSize: 0.03
-    - _ColorOutlineSizeX: 0
+    - _ColorOutlineSizeX: 0.02
     - _ColorOutlineSizeY: 0.02
     - _Cull: 0
     - _DstBlend: 10

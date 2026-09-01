@@ -93,9 +93,9 @@ public static class TraitList
 
 
 	//all specific target priorities
-	public readonly static SpecificTargetPriorityTrait specificCheckeredLeftAlliedSide = new SpecificTargetPriorityTrait("(6,2)", "SpecificTargetPriorityTrait", "", new GridCoords(6, 2));
-	public readonly static SpecificTargetPriorityTrait specificHexadecupleBoxEnemySide = new SpecificTargetPriorityTrait("(2,2)", "SpecificTargetPriorityTrait", "", new GridCoords(2, 2));
-	public readonly static SpecificTargetPriorityTrait specificBoxTwoTwoRightCornerEnemySide = new SpecificTargetPriorityTrait("(1,2)", "SpecificTargetPriorityTrait", "", new GridCoords(1, 2));
+	public readonly static SpecificTargetPriorityTrait specificCheckeredLeftAlliedSide = new SpecificTargetPriorityTrait("(6,2)", "SpecificTargetPriorityTrait", "", new GridCoords(4, 0));
+	public readonly static SpecificTargetPriorityTrait specificHexadecupleBoxEnemySide = new SpecificTargetPriorityTrait("(2,2)", "SpecificTargetPriorityTrait", "", new GridCoords(0, 0));
+	public readonly static SpecificTargetPriorityTrait specificBoxTwoTwoRightCornerEnemySide = new SpecificTargetPriorityTrait("(1,2)", "SpecificTargetPriorityTrait", "", new GridCoords(1, 1));
 
 	public readonly static Trait chaotic = new ChaoticTargetPriorityTrait();
 	public readonly static Trait nonMasterChaotic = new NonMasterChaoticTargetPriorityTrait();

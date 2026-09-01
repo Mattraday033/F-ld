@@ -231,9 +231,15 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             return;
         }
 
-        if(isAlly)
+        if(isAlly && linkedStats.isDead())
+        {
+            currentIdle = CharacterAnimationType.Death_Back;
+        } else if(isAlly && !linkedStats.isDead())
         {
             currentIdle = CharacterAnimationType.Idle_Back;
+        } else if(!isAlly && linkedStats.isDead())
+        {
+            currentIdle = CharacterAnimationType.Death_Front;
         } else
         {
             currentIdle = CharacterAnimationType.Idle_Front;

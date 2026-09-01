@@ -206,7 +206,7 @@ public class SelectorManager : MonoBehaviour
 
 		destroyPressEPrompt();
 
-		if (target == null || CombatActionManager.actorAlreadyHasCombatAction(getCurrentSelectorCoords()) ||
+		if (target == null || target.isDead() || CombatActionManager.actorAlreadyHasCombatAction(getCurrentSelectorCoords()) ||
 			(CombatGrid.positionIsOnAlliedSide(getCurrentSelectorCoords()) && CombatActionManager.finishedChoosingPartyMemberCombatActions()))
 		{
 			return;

@@ -41,6 +41,11 @@ public struct GridCoords
         return row + col;
     }
 
+    public static GridCoords sum(GridCoords coords1, GridCoords coords2)
+    {
+        return new GridCoords(coords1.row + coords2.row, coords1.col + coords2.col);
+    }
+
 	public override string ToString()
 	{
 		return "(Row: " + row + ", Col: " + col + ")";

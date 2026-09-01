@@ -38,7 +38,7 @@ public class HealthBarManager : MonoBehaviour
 
         Trait.OnTraitApplication.AddListener(updateHealthBarColor);
         Trait.OnTraitRemoval.AddListener(updateHealthBarColor);
-        LargeEnemyStats.OnLargeEnemySpawn.AddListener(cleanUpHiddenHealthBars);
+        // LargeEnemyStats.OnLargeEnemySpawn.AddListener(cleanUpHiddenHealthBars);
         DescriptionPanelBuilder.OnFormulaSwap.AddListener(updateCreatureTypeSymbols);
         DescriptionPanelBuilder.OnFormulaSwap.AddListener(applyConcealment);
         CombatUIModule.OnHideCombatUI.AddListener(hide);
@@ -60,7 +60,7 @@ public class HealthBarManager : MonoBehaviour
 
         Trait.OnTraitApplication.RemoveListener(updateHealthBarColor);
         Trait.OnTraitRemoval.RemoveListener(updateHealthBarColor);
-        LargeEnemyStats.OnLargeEnemySpawn.RemoveListener(cleanUpHiddenHealthBars);
+        // LargeEnemyStats.OnLargeEnemySpawn.RemoveListener(cleanUpHiddenHealthBars);
         DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(updateCreatureTypeSymbols);
         DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(applyConcealment);
         CombatUIModule.OnHideCombatUI.RemoveListener(hide);
@@ -83,7 +83,14 @@ public class HealthBarManager : MonoBehaviour
     // its owner is hovered, or the Alt/show-formula key is held.
     private void applyConcealment()
     {
-        gameObject.SetActive(eligible && (healthBarsAlwaysVisibleSettingOn() || hovered || OverallUIManager.showFormula));
+        gameObject.SetActive(eligible && 
+                             CombatStateManager.whoseTurn != WhoseTurn.Resolving &&            
+                                         (
+                                            healthBarsAlwaysVisibleSettingOn() || 
+                                            hovered || 
+                                            OverallUIManager.showFormula || 
+                                            (SelectorManager.currentSelector != null && SelectorManager.currentSelector.containsTarget(linkedStats))
+                                         ));
     }
 
     private void updateCreatureTypeSymbols()
@@ -156,8 +163,7 @@ public class HealthBarManager : MonoBehaviour
             CombatStateManager.whoseTurn == WhoseTurn.Won ||
                     CombatStateManager.whoseTurn == WhoseTurn.Lost)
         {
-            eligible = false;
-            gameObject.SetActive(false);
+            hide();
             return;
         }
 
@@ -244,13 +250,13 @@ public class HealthBarManager : MonoBehaviour
 		}
 	}
 	
-    private void cleanUpHiddenHealthBars()
-    {
-        if(!gameObject.activeInHierarchy && (linkedStats == null || linkedStats.isLarge()))
-        {
-            DestroyImmediate(gameObject);
-        }
-    }
+    // private void cleanUpHiddenHealthBars()
+    // {
+    //     if(!gameObject.activeInHierarchy && (linkedStats == null || linkedStats.isLarge()))
+    //     {
+    //         DestroyImmediate(gameObject);
+    //     }
+    // }
 
     public void setPosition(Vector3 worldPosition)
     {
@@ -262,6 +268,23 @@ public class HealthBarManager : MonoBehaviour
         transform.position = worldPosition;
 
         Helpers.updateGameObjectPosition(gameObject);
+    }
+
+    public static void createHealthBar(Stats stats, Transform parent)
+    {
+        GameObject healthBar = Instantiate(Resources.Load<GameObject>(PrefabNames.healthBar), parent);
+        RectTransform rect = healthBar.GetComponent<RectTransform>();
+
+        stats.healthBarManager = healthBar.GetComponent<HealthBarManager>();
+        stats.healthBarManager.linkedStats = stats;
+        // rect.position = Helpers.getAveragePosition(stats.getAllWorldPositions());
+        rect.localScale = new Vector3(.14f, .14f);
+        rect.anchoredPosition = Vector3.zero; // e.g. (0, -0.05, 0)
+
+        if(CombatStateManager.inCombat && !GameplaySettingsList.healthBarsAlwaysVisible.settingOptions[Constants.onSettingIndex].set)
+        {
+            stats.healthBarManager.hide();
+        }
     }
 
 }

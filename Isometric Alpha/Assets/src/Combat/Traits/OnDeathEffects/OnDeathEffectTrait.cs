@@ -43,7 +43,7 @@ public class OnDeathEffectTrait : Trait
 			actionOnDeath.setSelector(actionOnDeath.getTargetSelector());
 			if (actor.positions.Count > 0)
 			{
-				actionOnDeath.getSelector().setToLocation(actor.positions[0]);
+				actionOnDeath.getSelector().setToLocation(GridCoords.sum(actor.positions[0], GridCoords.getDefaultCoords()));
 			}
 			//actionOnDeath.setTargetCoords(actor.position);
 		} else

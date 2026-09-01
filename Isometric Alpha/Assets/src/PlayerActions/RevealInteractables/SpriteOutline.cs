@@ -62,6 +62,7 @@ public class SpriteOutline
 
 
         outlineMaterial.color = color;
+        outlineMaterial.SetColor(blackBorderColorVarName, Color.black);
 
         spriteRenderer.material = outlineMaterial;
 

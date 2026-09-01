@@ -78,9 +78,6 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
             if(coords.Equals(spawnDetails.baseStatsPosition))
             {
                 setUpComponents(componentList);
-            } else
-            {
-                componentList.healthBarManager.hide();
             }
 
             setUpComponents(coords, componentList);
@@ -99,8 +96,6 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
         positions = spawnDetails.allSpawnPositions.Select(p => p.clone()).ToList();
 
-        setHealthBarToAverageWorldPosition();
-
         OnLargeEnemySpawn.Invoke();
 
         return combatSprite;
@@ -108,7 +103,12 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
     public override void setUpComponents(ComponentList list)
     {
-        healthBarManager = list.healthBarManager;
+        if(healthBarManager != null)
+        {
+            return;
+        }
+
+        HealthBarManager.createHealthBar(this, list.healthBarParent);
         updateHealthBar();
     }
 

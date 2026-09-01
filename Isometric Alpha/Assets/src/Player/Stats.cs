@@ -195,7 +195,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual void setUpComponents(ComponentList list)
     {
-        healthBarManager = list.healthBarManager;
+        HealthBarManager.createHealthBar(this, list.healthBarParent);
         updateHealthBar();
 
         list.combatantHover.linkedStats = this;
@@ -213,9 +213,31 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         tutorialTarget = list.tutorialTarget;
         tutorialTarget.tutorialHash = getTutorialTargetHash();
 
-        foreach(Trait trait in traitContainer)
+        if(isDead())
         {
-            trait.setIdleAnimationOnApplication(animationManager);
+            setToDeadIdle();
+        } else
+        {
+            foreach(Trait trait in traitContainer)
+            {
+                trait.setIdleAnimationOnApplication(animationManager);
+            }
+        }
+    }
+
+    private void setToDeadIdle()
+    {
+        if(positions.Count <= 0)
+        {
+            return;
+        }
+
+        if(CombatGrid.positionIsOnAlliedSide(positions[0]))
+        {
+            animationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
+        } else if(CombatGrid.positionIsOnEnemySide(positions[0]))
+        {
+            animationManager.setCurrentIdle(CharacterAnimationType.Death_Front);
         }
     }
 
@@ -245,6 +267,11 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual void removeOutline()
     {
+        if(isDead() && notResurrectable())
+        {
+            return;
+        }
+        
         outline.removeOutline();
     }
 
@@ -261,6 +288,18 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     public void playSpawnAnimation()
     {
         animationManager.playSpawnAnimation();
+    }
+
+    public List<Vector3> getAllWorldPositions()
+    {
+        List<Vector3> worldPositions = new List<Vector3>();
+
+        foreach(GridCoords coords in positions)
+        {
+            worldPositions.Add(CombatGrid.getPositionAt(coords));
+        }
+
+        return worldPositions;
     }
 
     public void instateEnvironmentalCombatAction()
@@ -335,7 +374,19 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     #region HealthBarManager
 
-    public HealthBarManager healthBarManager;
+    private HealthBarManager _HealthBarManager;
+    public HealthBarManager healthBarManager
+    {
+        get
+        {
+            return _HealthBarManager;
+        }
+        set
+        {
+            _HealthBarManager = value;
+            _HealthBarManager.linkedStats = this;
+        }
+    }
 
     public void updateHealthBar()
     {
