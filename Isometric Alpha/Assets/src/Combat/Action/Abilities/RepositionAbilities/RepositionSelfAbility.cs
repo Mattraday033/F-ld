@@ -10,9 +10,9 @@ public class RepositionSelfAbility : RepositionAbility
 
 	}
 
-	public override Stats getCombatantToBeMoved()
+	public override bool combatantToBeMovedExists(out Stats combatant)
 	{
-		return CombatGrid.getCombatantAtCoords(getActorCoords());
+		return CombatGrid.combatantExistsAtCoords(getActorCoords(), out combatant);
 	}
 
 	public override GridCoords getDestinationCoords()

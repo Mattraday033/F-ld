@@ -94,7 +94,7 @@ public abstract class CombatMouseHover : MonoBehaviour
         }
     }
 
-    protected abstract Stats getTargetStats();
+    protected abstract bool hasTargetStats(out Stats target);
     protected abstract GridCoords getTargetCoords();
 
     public abstract void getHoverSelector(SelectorContainer container);
@@ -124,13 +124,10 @@ public abstract class CombatMouseHover : MonoBehaviour
 
     protected GameObject getTargetGameObject()
     {
-        Stats targetStats = getTargetStats();
-
-        if (targetStats != null)
+        if(hasTargetStats(out Stats target))
         {
-            return targetStats.combatSprite;
-        }
-        else
+            return target.combatSprite;
+        } else
         {
             return null;
         }
@@ -138,9 +135,9 @@ public abstract class CombatMouseHover : MonoBehaviour
 
     protected void answerCurrentCombatantPriorityRequest()
     {
-        if(revealPriorityHeld)
+        if(revealPriorityHeld && hasTargetStats(out Stats target))
         {
-            HoverPanelPopUpButton.currentCombatantWithPriority = getTargetStats();
+            HoverPanelPopUpButton.currentCombatantWithPriority = target;
         }
     }
 

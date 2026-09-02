@@ -21,9 +21,8 @@ public class RepositionAbility : Ability, IJSONConvertable
     {
         base.performCombatAction();
 
-        Stats combatantToBeMoved = getCombatantToBeMoved();
-
-        if (combatantToBeMoved == null && getActorStats() != null)
+        if (combatantToBeMovedExists(out Stats combatantToBeMoved) && 
+            getActorStats() != null)
         {
             return;
         }
@@ -52,7 +51,10 @@ public class RepositionAbility : Ability, IJSONConvertable
     public override void queueingAction()
     {
 
-        Stats combatantToBeMoved = getCombatantToBeMoved();
+        if(!combatantToBeMovedExists(out Stats combatantToBeMoved))
+        {
+            return;
+        }
 
         if (combatantToBeMoved.repositionClone != null)
         {
@@ -62,7 +64,7 @@ public class RepositionAbility : Ability, IJSONConvertable
 
         if (!combatantToBeMoved.isInsideCoordinates(getDestinationCoords()))
         {
-            setStatsClone(getCombatantToBeMoved().clone());
+            setStatsClone(combatantToBeMoved.clone());
 
             statsClone.positions = new List<GridCoords> { getDestinationCoords().clone() };
             statsClone.addTrait(TraitList.repositioningInvulnerability);
@@ -94,7 +96,8 @@ public class RepositionAbility : Ability, IJSONConvertable
     {
         base.activatingAction();
 
-        if (getCombatantToBeMoved() != null && !getCombatantToBeMoved().isInsideCoordinates(getDestinationCoords()))
+        if (combatantToBeMovedExists(out Stats combatantToBeMoved) && 
+            !combatantToBeMoved.isInsideCoordinates(getDestinationCoords()))
         {
             CombatGrid.setCombatantAtCoords(getDestinationCoords(), null);
         }
@@ -106,7 +109,8 @@ public class RepositionAbility : Ability, IJSONConvertable
 
     public override void unqueueingAction()
     {
-        if (!statsClone.positions.Any(p => getCombatantToBeMoved().positions.Contains(p)))
+        if (combatantToBeMovedExists(out Stats combatantToBeMoved) && 
+            !statsClone.positions.Any(p => combatantToBeMoved.positions.Contains(p)))
         {
             foreach (GridCoords cloneCoords in statsClone.positions)
             {
@@ -121,9 +125,9 @@ public class RepositionAbility : Ability, IJSONConvertable
         destroyPlaceHolderObject();
     }
 
-    public virtual Stats getCombatantToBeMoved()
+    public virtual bool combatantToBeMovedExists(out Stats combatant)
     {
-        return CombatGrid.getCombatantAtCoords(getSecondaryCoords());
+        return CombatGrid.combatantExistsAtCoords(getSecondaryCoords(), out combatant);
     }
 
     public virtual GridCoords getDestinationCoords()
@@ -178,9 +182,8 @@ public class RepositionAbility : Ability, IJSONConvertable
             GameObject.Destroy(placeHolderObject);
         }
 
-        Stats combatantToBeMoved = getCombatantToBeMoved();
-
-        if (combatantToBeMoved != null && combatantToBeMoved.repositionClone != null &&
+        if (combatantToBeMovedExists(out Stats combatantToBeMoved) &&
+            combatantToBeMoved.repositionClone != null &&
             combatantToBeMoved.repositionClone.positions.Any(p => combatantToBeMoved.positions.Contains(p)))
         {
             combatantToBeMoved.repositionClone = combatantToBeMoved.repositionClone.repositionClone;
@@ -196,9 +199,15 @@ public class RepositionAbility : Ability, IJSONConvertable
         this.statsClone = statsClone;
     }
 
-    public Stats getStatsClone()
+    public bool hasStatsClone()
     {
-        return statsClone;
+        return hasStatsClone(out Stats clone);
+    }
+
+    public bool hasStatsClone(out Stats clone)
+    {
+        clone = statsClone;
+        return clone != null;
     }
 
     public override bool tertiaryCoordsRequiresEmptySpace()

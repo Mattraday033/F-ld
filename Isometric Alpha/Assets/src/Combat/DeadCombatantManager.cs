@@ -55,8 +55,8 @@ public class DeadCombatantManager : MonoBehaviour
 		{
 			CombatAction action = actionQueue[actionIndex];
 			if (!action.multiActorAction() &&
-				(CombatGrid.getCombatantAtCoords(action.getActorCoords()) == null ||
-				!CombatGrid.getCombatantAtCoords(action.getActorCoords()).isAlive()))
+				(!CombatGrid.combatantExistsAtCoords(action.getActorCoords(), out Stats combatant) ||
+				!combatant.isAlive()))
 			{
 				actionQueue.RemoveAt(actionIndex);
 				actionIndex--;

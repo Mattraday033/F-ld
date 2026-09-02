@@ -71,9 +71,7 @@ public static class GemHoverManager
         {
             foreach(GridCoords coord in selector.getAllSelectorCoords())
             {
-                Stats combatant = CombatGrid.getCombatantAtCoords(coord);
-
-                if(combatant == null)
+                if(!CombatGrid.combatantExistsAtCoords(coord, out Stats combatant))
                 {
                     continue;
                 }

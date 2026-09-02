@@ -202,11 +202,10 @@ public class SelectorManager : MonoBehaviour
 
 	public static void createPressEPrompt()
 	{
-		Stats target = CombatGrid.getCombatantAtCoords(getCurrentSelectorCoords());
-
 		destroyPressEPrompt();
 
-		if (target == null || target.isDead() || CombatActionManager.actorAlreadyHasCombatAction(getCurrentSelectorCoords()) ||
+		if (!CombatGrid.combatantExistsAtCoords(getCurrentSelectorCoords(), out Stats target) || target.isDead() || 
+            CombatActionManager.actorAlreadyHasCombatAction(getCurrentSelectorCoords()) ||
 			(CombatGrid.positionIsOnAlliedSide(getCurrentSelectorCoords()) && CombatActionManager.finishedChoosingPartyMemberCombatActions()))
 		{
 			return;
@@ -357,8 +356,8 @@ public class SelectorManager : MonoBehaviour
 				loadedCombatAction.performCombatAction();
 			}
 
-			Stats loadedActorStats = loadedCombatAction.getActorStats();
-			if (loadedActorStats != null && loadedActorStats.positions.Count > 0)
+			if (loadedCombatAction.hasAssignedActor(out Stats loadedActorStats) && 
+                loadedActorStats.positions.Count > 0)
 			{
 				SelectorFactory.playerCursor.setToLocation(loadedActorStats.positions[0]);
 			}
@@ -402,7 +401,8 @@ public class SelectorManager : MonoBehaviour
 
 		CombatAction loadedCombatAction = currentAbilityManager.getCurrentlySelectedAction();
 
-		if (loadedCombatAction.tertiaryCoordsRequiresEmptySpace() && CombatGrid.getCombatantAtCoords(currentSelector.getCoords()) != null)
+		if (loadedCombatAction.tertiaryCoordsRequiresEmptySpace() && 
+            CombatGrid.combatantExistsAtCoords(currentSelector.getCoords()))
 		{
             AudioManager.playCannotChooseActorAbilityLocationSFX();
 			return;
@@ -454,12 +454,11 @@ public class SelectorManager : MonoBehaviour
 
 	public static void handleAllySelection()
 	{
-		if (!SelectionInfo.selectedAllyCanAct(currentSelector.getCoords()))
+		if (!SelectionInfo.selectedAllyCanAct(currentSelector.getCoords()) || 
+            !CombatGrid.combatantExistsAtCoords(currentSelector.getCoords(), out Stats currentTarget))
 		{
 			return;
 		}
-
-		Stats currentTarget = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
 
 		currentAbilityManager = currentTarget.combatSprite.GetComponent<AbilityMenuManager>();
 
@@ -940,23 +939,22 @@ public static class SelectionInfo
 {
 	public static bool selectionIsAlly(GridCoords coords)
 	{
-		Stats target = CombatGrid.getCombatantAtCoords(coords);
-
-		return target != null && Helpers.tagMatchesCriteria(target.combatSprite, SelectorManager.allyTagCriteria);
+		return CombatGrid.combatantExistsAtCoords(coords, out Stats target) && 
+                Helpers.tagMatchesCriteria(target.combatSprite, SelectorManager.allyTagCriteria);
 	}
 
 	public static bool selectionIsPartyMember(GridCoords coords)
 	{
-		Stats target = CombatGrid.getCombatantAtCoords(coords);
-
-		return target != null && target.combatSprite.tag.Equals(LayerAndTagManager.playerTag);
+		return CombatGrid.combatantExistsAtCoords(coords, out Stats target) &&
+                target.combatSprite.tag.Equals(LayerAndTagManager.playerTag);
 	}
 
 	public static bool selectedAllyCanAct(GridCoords coords)
 	{
-        Stats actor = CombatGrid.getCombatantAtCoords(coords);
-
-		return selectionIsPartyMember(coords) && actor.isAlive() && !PlayerCombatActionManager.actorHasActionsInQueue(actor) && PlayerCombatActionCounterManager.playerHasActionsLeft();
+		return CombatGrid.combatantExistsAtCoords(coords, out Stats actor) &&
+                actor.isAlive() && 
+                !PlayerCombatActionManager.actorHasActionsInQueue(actor) 
+                && PlayerCombatActionCounterManager.playerHasActionsLeft();
 	}
 
 }

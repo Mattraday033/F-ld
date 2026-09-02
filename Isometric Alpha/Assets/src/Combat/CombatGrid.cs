@@ -158,7 +158,7 @@ public static class CombatGrid
         if(stats.Count <= 1)
         {
             return currentCoords;
-        } else if(getCombatantAtCoords(currentCoords) == null ||
+        } else if(!combatantExistsAtCoords(currentCoords) ||
                 (ally && positionIsOnEnemySide(SelectorManager.currentSelector.getCoords())) ||
                 (!ally && positionIsOnAlliedSide(SelectorManager.currentSelector.getCoords())))
         {
@@ -170,7 +170,8 @@ public static class CombatGrid
         int i = 0;
         foreach(Stats combatant in stats)
         {
-            if(!getCombatantAtCoords(currentCoords).Equals(combatant))
+            if(!combatantExistsAtCoords(currentCoords, out Stats target) && 
+                target.Equals(combatant))
             {
                 i++;
                 continue;
@@ -250,32 +251,33 @@ public static class CombatGrid
         }
     }
 	
-	//null means no one is at given coords
-	public static Stats getCombatantAtCoords(int rowIndex, int colIndex)
+	public static bool combatantExistsAtCoords(int rowIndex, int colIndex)
 	{
-		if(rowIndex < 0 || colIndex < 0)
-		{
-			return null;
-		}
-		
-		return getCombatantAtCoords(new GridCoords(rowIndex,colIndex));
+		return combatantExistsAtCoords(new GridCoords(rowIndex,colIndex));
 	}
 	
-	//null means no one is at given coords
-	public static Stats getCombatantAtCoords(GridCoords coords)
+	public static bool combatantExistsAtCoords(int rowIndex, int colIndex, out Stats combatant)
 	{
-		if(coords.row < 0 || coords.col < 0)
+		return combatantExistsAtCoords(new GridCoords(rowIndex,colIndex), out combatant);
+	}
+
+	public static bool combatantExistsAtCoords(GridCoords coords, out Stats combatant)
+	{
+		if(coords.row < 0 || coords.col < 0 || 
+            !combatantsDict.ContainsKey(coords))
 		{
-			return null;
-		}
-		
-        if(combatantsDict.ContainsKey(coords))
+            combatant = null;
+		} else
         {
-            return combatantsDict[coords];
-        } else
-        {
-            return null;
-        }
+            combatant = combatantsDict[coords];
+        } 
+    
+        return combatant != null;
+    }
+
+	public static bool combatantExistsAtCoords(GridCoords coords)
+	{
+        return combatantExistsAtCoords(coords, out Stats combatant);
 	}
 	
 	public static int actualEnemyMinionCombatActionCount()
@@ -394,9 +396,7 @@ public static class CombatGrid
 
 	public static bool selectableAllyAtLocation(GridCoords coords)
 	{
-		Stats ally = getCombatantAtCoords(coords);
-		
-        return ally != null && ally.isAlive();
+        return combatantExistsAtCoords(coords, out Stats ally) && ally.isAlive();
 	}
 
 	public static List<Stats> getAllNonsummonedAllyCombatants()
@@ -593,9 +593,7 @@ public static class CombatGrid
 
     public static bool combatantIsRepositionClone(GridCoords targetCoords)
     {
-        Stats stats = getCombatantAtCoords(targetCoords);
-
-        if(stats == null)
+        if(!combatantExistsAtCoords(targetCoords, out Stats stats))
         {
             return false;
         }

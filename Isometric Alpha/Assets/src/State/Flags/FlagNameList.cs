@@ -324,6 +324,7 @@ public static class FlagNameList
         public const string intimidatedUros = "intimidatedUros"; //intimidated Uros into telling you about what he has hidden away.
         public const string threatenedToSnitchOnUros = "threatenedToSnitchOnUros"; //Uros told you about what he has hidden because you told him you'd snitch on him but didn't end up snitching.
         public const string snitchedOnUros = "snitchedOnUros"; //Told Quartermaster Emese about Uros hiding something in the stockhouse
+        public const string boughtNuggetFromUros = "boughtNuggetFromUros";
         public const string gaveUrosTheNugget = "gaveUrosTheNugget"; //finished Uros's quest by giving his nugget back.
         public const string showedUrosTheNuggetWithoutGivingItBack = "showedUrosTheNuggetWithoutGivingItBack"; //finished Uros's quest by showing him the nugget and then not giving it back to him.
         public const string gotIronNuggetFromBarrels = "gotIronNuggetFromBarrels"; //whether you've picked up the iron nugget from behind the barrels yet in the stockhouse

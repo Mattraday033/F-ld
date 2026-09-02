@@ -122,7 +122,7 @@ searchInventoryFor(hasBlastingJelly,Blasting Jelly)
     }
 }
     +\*Leave the entrance alone.*
-        ->Close
+        ->CloseWithoutFade
 
 === 1d ===
 
@@ -927,6 +927,14 @@ deactivate({marcosIndex})
 deactivate({weftIndex})
 
 fadeBackIn(60)
+
+close()
+
+->DONE
+
+=== CloseWithoutFade ===
+
+setToFalse(mineLvl3InRubbleConversation)
 
 close()
 

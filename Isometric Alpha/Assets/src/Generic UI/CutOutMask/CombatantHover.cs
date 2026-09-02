@@ -56,9 +56,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     private Stats getHighlightTarget()
     {
-        Stats target = getTargetStats();
-
-        if(target.queuedToMove())
+        if(hasTargetStats(out Stats target) && target.queuedToMove())
         {
             return target.repositionClone;
         }
@@ -112,20 +110,20 @@ public class CombatantHover : CombatMouseHover, IRevealable
             return;
         }
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive())
         {
             revealPriorityHeld = true;
 
             onReveal(Constants.reveal);
 
-            CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), true);
+            CombatActionOrderRow.HighlightRow.Invoke(target, true);
 
             createHoverTag();
 
             SelectorManager.updateAllDamagePreviews();
             
-            CombatUIModule.OnHideCombatUI.RemoveListener(getTargetStats().removeOutline);
-            CombatUIModule.OnHideCombatUI.AddListener(getTargetStats().removeOutline);
+            CombatUIModule.OnHideCombatUI.RemoveListener(target.removeOutline);
+            CombatUIModule.OnHideCombatUI.AddListener(target.removeOutline);
         }
 
         CombatHoverTileManager.GetHoverSelector.AddListener(getHoverSelector);
@@ -145,7 +143,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
             return;
         }
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive())
         {
             if (getTargetGameObject() != null)
             {
@@ -154,7 +152,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
             SelectorManager.displayCurrentHoverUI();
 
-            CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), false);
+            CombatActionOrderRow.HighlightRow.Invoke(target, false);
         }
 
         SelectorManager.updateAllDamagePreviews();
@@ -190,7 +188,8 @@ public class CombatantHover : CombatMouseHover, IRevealable
     {
         if(TutorialSequence.blockMouseHovers() || 
             CombatStateManager.whoseTurn != WhoseTurn.Player || 
-            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu || 
+            !hasTargetStats(out Stats target))
         {
             return;
         }
@@ -202,7 +201,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
         {
             if(AbilityMenuButton.hoveringOverAbilityMenuButton)
             {
-                getTargetStats().removeOutline();
+                target.removeOutline();
                 SelectorManager.displayCurrentHoverUI();
             } else
             {
@@ -214,16 +213,19 @@ public class CombatantHover : CombatMouseHover, IRevealable
         }
     }
 
-    protected override Stats getTargetStats()
+    protected override bool hasTargetStats(out Stats target)
     {
         Stats originalCombatant = CombatGrid.findOriginalCombatant(linkedStats);
 
         if(originalCombatant == null)
         {
-            return linkedStats;
+            target = linkedStats;
+        } else
+        {
+            target = originalCombatant;
         }
 
-        return originalCombatant;
+        return target != null;
     }
 
     protected override GridCoords getTargetCoords()
@@ -233,25 +235,35 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     public void onReveal(bool toggleReveal)
     {
-        if(highlightAndFadeCoroutine != null)
+        if(!hasTargetStats(out Stats target))
         {
-            StopHighlightFadeMandatoryTarget.Invoke(linkedStats);
+            return;
         }
 
-        if(toggleReveal && (!linkedStats.isDead() || revealPriorityHeld))
+        if(highlightAndFadeCoroutine != null)
         {
-            getTargetStats().setOutline();
-            linkedStats.healthBarManager.show();
+            StopHighlightFadeMandatoryTarget.Invoke(target);
+        }
+
+        if(toggleReveal && (!target.isDead() || revealPriorityHeld))
+        {
+            target.setOutline();
+            target.healthBarManager.show();
         } else
         {
-            getTargetStats().removeOutline();
-            linkedStats.healthBarManager.hide();
+            target.removeOutline();
+            target.healthBarManager.hide();
         }
     }
 
     public Color getRevealColor()
     {
-        if (getTargetStats().positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
+        if(!hasTargetStats(out Stats target))
+        {
+            return Color.clear;
+        }
+
+        if (target.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
         {
             return ColorList.canBeInteractedWith;
         }
@@ -327,11 +339,39 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     public SpriteOutline getSpriteOutline()
     {
-        return getTargetStats().getOutlines()[0];
+        if(!hasTargetStats(out Stats target))
+        {
+            return new SpriteOutline();
+        }
+
+        return target.getOutlines()[0];
     }
+
+    private void holdRevealPriority(Stats stats)
+    {
+        if(stats != null && stats.Equals(linkedStats))
+        {
+            revealPriorityHeld = true;
+        }
+    }
+
+    private void releaseRevealPriority(Stats stats)
+    {
+        if(stats != null && stats.Equals(linkedStats))
+        {
+            revealPriorityHeld = false;
+        }
+    }
+    /*
+        public readonly static UnityEvent<Stats> HoldRevealPriority = new UnityEvent<Stats>();
+    public readonly static UnityEvent<Stats> ReleaseRevealPriority = new UnityEvent<Stats>();
+    */
     
 	public void createListeners()
     {
+        CombatActionOrderRow.HoldRevealPriority.AddListener(holdRevealPriority);
+        CombatActionOrderRow.ReleaseRevealPriority.AddListener(releaseRevealPriority);
+
         SelectorManager.SelectorMoved.AddListener(updateOutlineFromSelectors);
         DamagePreviewManager.UpdateDamagePreviews.AddListener(addDamagePreview);
         HoverPanelPopUpButton.HoverPriorityRequest.AddListener(answerCurrentCombatantPriorityRequest);
@@ -342,13 +382,20 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
 	public void destroyListeners()
     {
+        CombatActionOrderRow.HoldRevealPriority.RemoveListener(holdRevealPriority);
+        CombatActionOrderRow.ReleaseRevealPriority.RemoveListener(releaseRevealPriority);
+
         SelectorManager.SelectorMoved.RemoveListener(updateOutlineFromSelectors);
         DamagePreviewManager.UpdateDamagePreviews.RemoveListener(addDamagePreview);
         HoverPanelPopUpButton.HoverPriorityRequest.RemoveListener(answerCurrentCombatantPriorityRequest);
         CombatResultsUI.OnCombatResultsUICreation.RemoveListener(disableCollider);
         HighlightAllMandatoryTargets.RemoveListener(highlightMandatoryTarget);
         StopHighlightFadeMandatoryTarget.RemoveListener(stopHighlightAndFade);
-        CombatUIModule.OnHideCombatUI.RemoveListener(getTargetStats().removeOutline);
+
+        if(hasTargetStats(out Stats target))
+        {
+            CombatUIModule.OnHideCombatUI.RemoveListener(target.removeOutline);
+        }
     }
 
     public void disableCollider()

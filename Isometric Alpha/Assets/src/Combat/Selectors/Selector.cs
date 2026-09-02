@@ -284,10 +284,9 @@ public class Selector : ICloneable
 
 		foreach (GridCoords targetTileCoord in targetTileCoords)
 		{
-			Stats targetCombatant = CombatGrid.getCombatantAtCoords(targetTileCoord);
-
-			if (targetCombatant != null && Helpers.hasQuality<Trait>(targetCombatant.traitContainer, t => t.isMandatoryTarget())
-                    && !targetCombatant.queuedToMove())
+			if (CombatGrid.combatantExistsAtCoords(targetTileCoord, out Stats targetCombatant) &&
+                    Helpers.hasQuality<Trait>(targetCombatant.traitContainer, t => t.isMandatoryTarget()) &&
+                    !targetCombatant.queuedToMove())
 			{
 				return true;
 			}
@@ -302,7 +301,7 @@ public class Selector : ICloneable
 
 		foreach (GridCoords coord in allSelectorCoords)
 		{
-			if (CombatGrid.getCombatantAtCoords(coord) != null)
+			if (CombatGrid.combatantExistsAtCoords(coord))
 			{
 				return coord;
 			}
@@ -318,9 +317,9 @@ public class Selector : ICloneable
 
         foreach (GridCoords targetTileCoord in targetTileCoords)
         {
-			if(CombatGrid.getCombatantAtCoords(targetTileCoord) != null)
+			if(CombatGrid.combatantExistsAtCoords(targetTileCoord, out Stats target))
 			{
-                allActionTargets.Add(CombatGrid.getCombatantAtCoords(targetTileCoord));
+                allActionTargets.Add(target);
             }
         }
 
@@ -419,9 +418,7 @@ public class Selector : ICloneable
 		
 		foreach(GridCoords coords in allSelectorCoords)
 		{
-			Stats target = CombatGrid.getCombatantAtCoords(coords);
-			
-			if(target == null)
+			if(CombatGrid.combatantExistsAtCoords(coords, out Stats target))
 			{
 				return false;
 			}

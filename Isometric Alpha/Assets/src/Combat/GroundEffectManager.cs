@@ -34,9 +34,7 @@ public class GroundEffect
 	
     public void applyDamage()
     {
-        Stats target = CombatGrid.getCombatantAtCoords(position);
-        
-        if(target == null || target is null)
+        if(!CombatGrid.combatantExistsAtCoords(position, out Stats target))
         {
             return;
         } else
@@ -47,7 +45,6 @@ public class GroundEffect
                                     GroundEffectManager.getInstance().damageNumberCanvas, isNotACrit, doesNotHealTarget);
             
             target.modifyCurrentHealth(DamageCalculator.calculateFormula(damageFormula, DamageCalculator.noStatsSource));
-            // target.playAnimationOnDamage();
         }
     }
 

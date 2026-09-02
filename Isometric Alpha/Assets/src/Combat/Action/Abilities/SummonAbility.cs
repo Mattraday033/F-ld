@@ -76,7 +76,7 @@ public class SummonAbility: Ability
 
 		foreach(GridCoords coords in targetCoords)
 		{
-			if(CombatGrid.getCombatantAtCoords(coords) != null)
+			if(CombatGrid.combatantExistsAtCoords(coords))
             {
                 comboIndex++;
                 continue;

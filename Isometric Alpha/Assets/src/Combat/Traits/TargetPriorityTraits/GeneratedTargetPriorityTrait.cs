@@ -49,8 +49,7 @@ public class GeneratedTargetPriorityTrait : TargetPriorityTrait
 				GridCoords currentCoords = selector.getCoords();
 				placeHolderGridCoords.Add(currentCoords);
 
-                if (CombatGrid.getCombatantAtCoords(currentCoords) != null &&
-                    !(CombatGrid.getCombatantAtCoords(currentCoords) is null))
+                if (CombatGrid.combatantExistsAtCoords(currentCoords))
                 {
                     Debug.LogError("Setting placeholder would overwrite an existing combatant");
                 }

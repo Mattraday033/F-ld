@@ -792,22 +792,35 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return actorStats.positions.Count > 0 ? actorStats.positions[0].clone() : GridCoords.getDefaultCoords();
     }
 
-    public virtual Stats getActorStats()
+    protected Stats getActorStats()
+    {
+        if(hasAssignedActor(out Stats actor))
+        {
+            return actor;
+        }
+
+        return null;
+    }
+
+    public virtual bool hasAssignedActor(out Stats currentActor)
     {
         if (inPreviewMode)
         {
-            return previewActor;
+            currentActor = previewActor;
         }
         else if (actorStats != null)
         {
-            return actorStats;
+            currentActor = actorStats;
         }
         else if (!CombatStateManager.inCombat)
         {
-            return OverallUIManager.getCurrentPartyMember();
+            currentActor = OverallUIManager.getCurrentPartyMember();
+        } else
+        {
+            currentActor = null;
         }
 
-        return actorStats;
+        return currentActor != null;
     }
 
     public virtual GridCoords getTargetCoords()
@@ -848,7 +861,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     // {
     //     if (actorStats == null)
     //     {
-    //         actorStats = CombatGrid.getCombatantAtCoords(newPosition);
+    //         actorStats = CombatGrid.combatantExistsAtCoords(newPosition);
     //     }
     //     else
     //     {

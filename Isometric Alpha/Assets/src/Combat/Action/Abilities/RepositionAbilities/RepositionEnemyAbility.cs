@@ -34,9 +34,10 @@ public class RepositionEnemyAbility : RepositionAbility
 
     public override void unqueueingAction()
     {
-        if (getStatsClone() != null && !getCombatantToBeMoved().positions.Any(p => getStatsClone().positions.Contains(p)))
+        if (hasStatsClone(out Stats statsClone) && combatantToBeMovedExists(out Stats combatantToBeMoved) && 
+            combatantToBeMoved.positions.Any(p => statsClone.positions.Contains(p)))
         {
-            foreach (GridCoords cloneCoords in getStatsClone().positions)
+            foreach (GridCoords cloneCoords in statsClone.positions)
             {
                 CombatGrid.setCombatantAtCoords(cloneCoords, null);
             }

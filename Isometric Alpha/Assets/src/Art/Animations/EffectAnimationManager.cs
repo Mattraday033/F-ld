@@ -40,10 +40,12 @@ public class EffectAnimationManager : AnimationManager
     public readonly static UnityEvent<EffectAnimationType> DestroyAllEffectsOfType = new UnityEvent<EffectAnimationType>();
     
     public EffectAnimationType type;
+    public AnimationClip animationClip;
 
     public bool waitBeforeSFX = true;
     public bool playSFX = true;
     private const float timeToWaitBeforeSFX = .3f;
+    private const float secondsToWaitBeforeWoundedAnimation = 5f/6f;
 
     public GridCoords targetCoords;
 
@@ -72,7 +74,7 @@ public class EffectAnimationManager : AnimationManager
         setSpriteRenderer();
         determineOutline();
 
-        AnimationClip animationClip = Resources.Load<AnimationClip>(folderPath);
+        animationClip = Resources.Load<AnimationClip>(folderPath);
 
         spawnDamageNumbersTime = animationClip.length * (3f/4f);
 
@@ -147,26 +149,35 @@ public class EffectAnimationManager : AnimationManager
         AudioManager.playEffectAnimationSFX(type);
     }
     
-    private IEnumerator spawnDamageNumbers()
+    private IEnumerator handleDamageNumbersAndWoundedAnim()
     {
         float elapsedTime = 0f;
+        bool spawnedDamageNumbers = false;
+        // bool playedWoundedAnimation = false;
 
-        while (elapsedTime < spawnDamageNumbersTime)
+        while (elapsedTime < animationClip.length)
         {
             yield return null;
 
             elapsedTime += Time.deltaTime;
-        }
 
-        DamageNumberPopup.create(targetCoords, damage, transform.position, DamageNumberPopup.getDirectionByTargetCoords(targetCoords),
+            if(elapsedTime >= spawnDamageNumbersTime && !spawnedDamageNumbers)
+            {
+                DamageNumberPopup.create(targetCoords, damage, transform.position, DamageNumberPopup.getDirectionByTargetCoords(targetCoords),
                                  CombatAnimationManager.getInstance().damageNumberCanvas, crit, healsTarget);
+                spawnedDamageNumbers = true;
 
-        // Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
+                if(CombatGrid.combatantExistsAtCoords(targetCoords, out Stats combatant))
+                {
+                    combatant.playAnimationOnDamage();
+                }
+            }
 
-        // if (target != null)
-        // {
-        //     target.playAnimationOnDamage();
-        // }
+            // if(elapsedTime >= secondsToWaitBeforeWoundedAnimation && !playedWoundedAnimation)
+            // {
+
+            // }
+        }
     }
 
     private ClipTransition createClipTransitionThenDelete(AnimationClip clip)
@@ -177,7 +188,7 @@ public class EffectAnimationManager : AnimationManager
 
         if(damage > 0)
         {
-            StartCoroutine(spawnDamageNumbers());
+            StartCoroutine(handleDamageNumbersAndWoundedAnim());
         }
 
         return clipTransition;

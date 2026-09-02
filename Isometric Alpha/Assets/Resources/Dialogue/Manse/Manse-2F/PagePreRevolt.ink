@@ -844,7 +844,7 @@ changeCamTarget({directorIndex})
 
 fadeBackIn(60)
 
-I apologize for making you wait through that. This meeting should not be about punishing the failures of cowards, but about rewarding you for your display of prowess.
+I apologize for making you wait through that. This meeting should not be about punishing the failures of cowards, but about rewarding your accomplishments.
 
 ->dealingWithGaspar_1c
 
@@ -926,11 +926,11 @@ If you consider this deal to have been favorably concluded, then could I interes
 setToTrue(askedDirectorAboutCampLocationAndPardon)
 setNPCFacing({directorIndex},NW)
 
-I was not aware of your knowledge of this. *The Director thinks for a moment before speaking.* I shall do you the favor of not inquiring how you learned this. I suspect it would put you in an awkward position.
+I was not aware you knew so much. *The Director thinks for a moment before speaking.* I shall do you the favor of not inquiring how you learned this. I suspect it would put you in an awkward position.
 
-My position is no less in jeopardy, I'm afraid. You are correct, this camp is far outside the boundaries of the Confederation. Should the Masons learn of its construction, they would surely destroy it. That is something my superiors cannot abide.
+My own position is no less in jeopardy, I'm afraid. You are correct, this camp is far outside the boundaries of the Confederation. Should the Masons learn of its construction, they would surely destroy it. That is something my superiors cannot abide.
 
-But my superiors are not what they were. <i>We</i>, the Lovashi, are not what we were. This conflict has eroded us, and steeped us in a culture not our own. The proud riders of yester-age are now landed lords, ruling over serfs and slaves.
+But to whom I owe my allegiance are not what they were. <i>We</i>, the Lovashi, are not what we were. This conflict has eroded us, and steeped us in a culture not our own. The proud riders of yester-age are now landed lords, ruling over serfs and slaves.
 
 setNPCFacing({directorIndex},SW)
 
@@ -1020,7 +1020,7 @@ If you have questions about me, ask them, but know I guard some pieces of inform
     {
     -beamToldAboutWudra:
     +A servant of yours said you fought the Masons at a place called Wudra.
-        Ah, yes, I was there. I lead a Lovashi horde that lay seige to that city.
+        Ah, yes, I was there. My horde laid seige to that city, a generation ago.
         ->WudraAnswer_1a(divert)
     -askedAboutDirectorStuckInOffice:
     +Wudra must have been some battle, then. I'd hear you speak of it, if you're willing.
@@ -1038,7 +1038,7 @@ If you have questions about me, ask them, but know I guard some pieces of inform
 
 === WudraAnswer_1a(->divert) ===
 
-    +I've heard that many tales are told of your exploits there. Among the Lovashi, at least. Would you tell me what happened?
+    +The Lovashi revere you for what you did there. Would you tell me what happened?
         combineDialogue()
 
         I can give my account, if you'd like. 
@@ -1106,7 +1106,7 @@ I have written a letter to a comrade of mine. He has taken up residence in the t
 
 {
 -not askedDirectorAboutCampLocationAndPardon:
-    +Why all this secrecy? This hardly seems like your average messenger job.
+    +Why all this secrecy? This doesn't seem like your average messenger job.
         My friend is not well liked by the kingdom. He holds no love for the Masons, but neither is he their enemy. Things are simply more convenient for him if discretion is used while attempting contact.
 
         I can't explain more than that, it isn't my place to betray the secrets of a friend. But should you keep them as well, Vidra will be more inclined to give you answers. Think of it as a test; one on which further employment and rewards are contingent. 
@@ -1122,10 +1122,17 @@ I have written a letter to a comrade of mine. He has taken up residence in the t
 }
 
     +What's the letter say?
+    VAR secondLine = "But Vidra shall know your worth, should you successfully deliver him the letter. I suspect he will feel encouraged to let you join the same circle I seek to."
     {
         -askedDirectorAboutCampLocationAndPardon:
+            Much of what I have already told you, but in not so many words. The letter's true meaning will be contextual to the one who you deliver the letter to.
+
+            {secondLine}
             ->sealedBreach_3c   
         -else:
+            Nothing of great import, for the moment. Consider it a matter more personal than pressing. I shall leave it up to my friend whether it is necessary to explain its contents.
+
+            {secondLine}
             ->sealedBreach_3c
     }
 

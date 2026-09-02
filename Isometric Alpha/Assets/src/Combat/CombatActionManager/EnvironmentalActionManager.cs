@@ -27,8 +27,8 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 		{
 			CombatAction envCombatAction = kvp.Key.clone();
 			
-			if(CombatGrid.getCombatantAtCoords(envCombatAction.getActorCoords()) == null || 
-				CombatGrid.getCombatantAtCoords(envCombatAction.getActorCoords()).isDead())
+			if(!envCombatAction.hasAssignedActor(out Stats actor) 
+                || actor.isDead())
 			{
 				continue;
 			}
@@ -36,7 +36,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 			Trait targetingTrait = kvp.Value.clone();
 			List<Stats> listOfTargets;
 			
-			if(envCombatAction.getActorStats().shouldTargetEnemy())
+			if(actor.shouldTargetEnemy())
 			{
 				listOfTargets = CombatGrid.getAllAliveEnemyCombatants();
 			} else

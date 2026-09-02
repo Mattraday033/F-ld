@@ -65,7 +65,7 @@ public static class CreatureSpawner
 		foreach (GridCoords coords in spawnCoords)
 		{
 			if (coords.Equals(GridCoords.getDefaultCoords()) ||
-				CombatGrid.getCombatantAtCoords(coords) != null)
+				CombatGrid.combatantExistsAtCoords(coords))
 			{
 				return;
 			}
@@ -125,7 +125,7 @@ public static class CreatureSpawner
 
             foreach(GridCoords coords in gridCoordsOrder)
             {
-                if(CombatGrid.getCombatantAtCoords(coords) == null)
+                if(!CombatGrid.combatantExistsAtCoords(coords))
                 {
                     return coords;
                 }

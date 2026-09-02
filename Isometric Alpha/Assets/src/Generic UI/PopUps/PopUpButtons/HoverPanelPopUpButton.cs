@@ -28,9 +28,7 @@ public class HoverPanelPopUpButton : PopUpButton
             return currentCombatant;
         }
 
-        currentCombatant = CombatGrid.getCombatantAtCoords(SelectorManager.getCurrentSelector().getCoords());
-
-        if(currentCombatant != null && currentCombatant.isRepositionClone())
+        if(CombatGrid.combatantExistsAtCoords(SelectorManager.getCurrentSelector().getCoords(), out currentCombatant) && currentCombatant.isRepositionClone())
         {
             return CombatGrid.findOriginalCombatant(currentCombatant);
         }

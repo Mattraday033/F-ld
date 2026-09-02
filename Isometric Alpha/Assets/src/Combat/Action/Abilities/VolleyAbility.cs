@@ -33,39 +33,41 @@ public class VolleyAbility : Ability
 		cannotDealDamage = false;
     }
 
-    public override Stats getActorStats()
+    public override bool hasAssignedActor(out Stats currentActor)
 	{
 		List<Stats> deadActors = new List<Stats>();
 		List<Stats> stunnedActors = new List<Stats>();
 
-		foreach (Stats actor in allActors)
+		foreach (Stats volleyActor in allActors)
 		{
-			if (actor == null)
+			if (volleyActor == null)
 			{
 				continue;
 			}
-			else if (actor.isDead())
+			else if (volleyActor.isDead())
 			{
-				deadActors.Add(actor);
+				deadActors.Add(volleyActor);
 			}
-			else if (actor.isStunned())
+			else if (volleyActor.isStunned())
 			{
-				stunnedActors.Add(actor);
+				stunnedActors.Add(volleyActor);
 			}
 			else
 			{
-				return actor;
+                currentActor = volleyActor;
+                return currentActor != null;
 			}
 		}
 
 		//at this point all actors are either stunned, dead, or null
 		if (stunnedActors.Count > 0)
 		{
-			return stunnedActors[0];
+            currentActor = stunnedActors[0];
+			return currentActor != null;
 		}
 		else
 		{
-			return base.getActorStats();
+			return base.hasAssignedActor(out currentActor);
 		}
 	}
 
@@ -102,11 +104,11 @@ public class VolleyAbility : Ability
             actor.playAttackAnimation();
 
 			int targetCoordsIndex = Random.Range(0,targetTileCoords.Length);
-			Stats targetCombatant = CombatGrid.getCombatantAtCoords(targetTileCoords[targetCoordsIndex]);
 			bool crit = false;
 			int finalDamage;
 			
-			if(targetCombatant != null && !(targetCombatant is null) && targetCombatant.isAlive())
+			if(CombatGrid.combatantExistsAtCoords(targetTileCoords[targetCoordsIndex], out Stats targetCombatant) && 
+                targetCombatant.isAlive())
 			{
 				crit = DamageCalculator.isACrit(getCritFormula(), getName());
 				finalDamage = findFinalDamage(targetCombatant, crit);

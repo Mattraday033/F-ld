@@ -73,9 +73,7 @@ public class Projectile : MonoBehaviour, IAnimationTracker
             {
                 if((scriptOnLanding == null || !scriptOnLanding.ran) && targetSnapshot != null)
                 {
-                    Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
-
-                    if(target != null)
+                    if(CombatGrid.combatantExistsAtCoords(targetCoords, out Stats target))
                     {
                         target.playAnimationOnDamage();
                     }
@@ -135,9 +133,8 @@ public class Projectile : MonoBehaviour, IAnimationTracker
     public void setTargetCoords(GridCoords targetCoords)
     {
         this.targetCoords = targetCoords.clone();
-        Stats target = CombatGrid.getCombatantAtCoords(this.targetCoords);
 
-        if(target != null)
+        if(CombatGrid.combatantExistsAtCoords(this.targetCoords, out Stats target))
         {
             targetSnapshot = target.clone();  
         }
@@ -204,18 +201,16 @@ public class KnockBackOnLanding : ScriptOnLanding
     {
         this.targetCoords = targetCoords;
 
-        if (CombatGrid.getCombatantAtCoords(targetCoords) != null)
+        if (CombatGrid.combatantExistsAtCoords(targetCoords, out Stats target))
         {
-            this.targetSnapshot = CombatGrid.getCombatantAtCoords(targetCoords).clone();
+            this.targetSnapshot = target.clone();
         }
-
-
 
         this.moveToCoords = moveToCoords;
 
-        if (CombatGrid.getCombatantAtCoords(collisionCoords) != null)
+        if (CombatGrid.combatantExistsAtCoords(collisionCoords, out Stats collisionTarget))
         {
-            this.collisionTargetSnapshot = CombatGrid.getCombatantAtCoords(collisionCoords).clone();
+            this.collisionTargetSnapshot = collisionTarget.clone();
         }
 
         this.collisionCoords = collisionCoords;
@@ -223,10 +218,7 @@ public class KnockBackOnLanding : ScriptOnLanding
 
     public override void runScript()
     {
-        Stats combatantToBeMoved = CombatGrid.getCombatantAtCoords(targetCoords);
-        Stats combatantCollision = CombatGrid.getCombatantAtCoords(collisionCoords);
-
-        if(combatantToBeMoved != null)
+        if(CombatGrid.combatantExistsAtCoords(targetCoords, out Stats combatantToBeMoved))
         {
             combatantToBeMoved.moveTo(new List<GridCoords> { moveToCoords });
 
@@ -236,7 +228,8 @@ public class KnockBackOnLanding : ScriptOnLanding
                 combatantToBeMoved.updateHealthBar();
             }
 
-            // if(combatantCollision != null && !collisionTargetSnapshot.isDead())
+            // if(CombatGrid.combatantExistsAtCoords(collisionCoords, out Stats combatantCollision) &&
+            //      !collisionTargetSnapshot.isDead())
             // {
             //     combatantCollision.updateHealthBar();
             //     combatantCollision.playAnimationOnDamage();

@@ -311,7 +311,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
     {
         foreach (GridCoords coords in positions)
         {
-            if (CombatGrid.getCombatantAtCoords(coords) == this)
+            if (CombatGrid.combatantExistsAtCoords(coords, out Stats combatant)
+                && combatant.Equals(this))
             {
                 CombatGrid.setCombatantAtCoords(coords, null);
             }
@@ -524,11 +525,6 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
                 {
                     currentHealth += changeInHealth; //healed enemy, increment by changeInHealth
                 }
-            }
-
-            if(CombatStateManager.inCombat && playAnimation && !inPreviewMode)
-            {
-                playAnimationOnDamage();
             }
         }
 

@@ -120,9 +120,9 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         loadedCombatAction = action;
 
-        if (CombatStateManager.inCombat)
+        if (CombatStateManager.inCombat && CombatGrid.combatantExistsAtCoords(SelectorManager.currentSelector.getCoords(), out Stats actor))
         {
-            loadedCombatAction.setActor(CombatGrid.getCombatantAtCoords(SelectorManager.currentSelector.getCoords()));
+            loadedCombatAction.setActor(actor);
         }
     }
 
@@ -253,21 +253,21 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public void enableCombatActionSelector()
     {
-        SelectorManager selectorManager = SelectorManager.getInstance();
-
         loadedCombatAction.setSelector(SelectorFactory.buildByTemplate(loadedCombatAction.getRangeTemplate()));
 
         SelectorManager.currentSelector = loadedCombatAction.getSelector();
 
         loadedCombatAction = setCombatActionSelectorStartingPosition(loadedCombatAction);
-        loadedCombatAction.setActor(CombatGrid.getCombatantAtCoords(SelectorFactory.playerCursor.getCoords()));
+
+        if(CombatGrid.combatantExistsAtCoords(SelectorFactory.playerCursor.getCoords(), out Stats actor))
+        {
+            loadedCombatAction.setActor(actor);
+        }
 
         getDescriptionPanelSlot().revertToPrimaryDescribable();
         getDescriptionPanelSlot().setPrimaryDescribable(loadedCombatAction);
 
         SelectorManager.updateAllDamagePreviews();
-
-        // loadedCombatAction.getSelectorObject().SetActive(true);
 
         SelectorManager.displayCurrentHoverUI();
     }

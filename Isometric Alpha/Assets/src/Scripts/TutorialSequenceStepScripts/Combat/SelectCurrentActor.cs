@@ -7,11 +7,7 @@ public class SelectCurrentActor : TutorialSequenceStepScript
 {
     public override void runScript(GameObject target = null)
     {
-        Selector currentSelector = SelectorManager.currentSelector;
-
-        Stats combatant = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
-
-        if(combatant == null)
+        if(CombatGrid.combatantExistsAtCoords(SelectorManager.currentSelector.getCoords(), out Stats combatant))
         {
             return;
         }
@@ -23,16 +19,6 @@ public class SelectCurrentActor : TutorialSequenceStepScript
 
     public static bool hasActorTarget()
     {
-        Selector currentSelector = SelectorManager.currentSelector;
-
-        Stats combatant = CombatGrid.getCombatantAtCoords(currentSelector.getCoords());
-
-        if(combatant == null)
-        {
-            return false;
-        } else
-        {
-            return true;
-        }
+        return CombatGrid.combatantExistsAtCoords(SelectorManager.currentSelector.getCoords());
     }
 }

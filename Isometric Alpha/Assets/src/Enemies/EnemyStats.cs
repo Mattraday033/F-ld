@@ -46,7 +46,8 @@ public class EnemyStats : Stats
     {
         this.armor = armor;
 
-        this.totalHealth = tHP;
+        // this.totalHealth = tHP;
+        this.totalHealth = 1;
         this.currentHealth = totalHealth;
 
         this.gendered = gendered;
@@ -135,7 +136,7 @@ public class EnemyStats : Stats
 
     public override int getTotalHealth()
     {
-        return totalHealth;
+       return totalHealth;
     }
 
     #endregion
@@ -160,7 +161,11 @@ public class EnemyStats : Stats
         }
 
         CombatAction combatActionClone = combatAction.clone();
-        combatActionClone.setActor(combatAction.getActorStats());
+
+        if(combatAction.hasAssignedActor(out Stats actor))
+        {
+            combatActionClone.setActor(actor);
+        } 
 
         return combatActionClone;
     }

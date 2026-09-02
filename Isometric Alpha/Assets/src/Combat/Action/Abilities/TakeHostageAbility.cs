@@ -54,8 +54,6 @@ public class TakeHostageAbility : Ability
 
             projectileNumber += sendProjectileAt(target.getPositionToHit(getSelector(), skips), target, projectileNumber);
 
-            // target.playAnimationOnDamage();
-
             if (target.isDead() && !target.isLarge())
             {
                 List<GridCoords> emptySpaces = new List<GridCoords>(CombatGrid.getAllEmptySpacesInEnemyZone());

@@ -212,13 +212,13 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
         CombatHoverTileManager.GetHoverSelector.AddListener(getHoverSelector);
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive())
         {
             revealPriorityHeld = true;
 
-            getTargetStats().healthBarManager.setHovered(true);
+            target.healthBarManager.setHovered(true);
 
-            CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), true);
+            CombatActionOrderRow.HighlightRow.Invoke(target, true);
         }
 
         SelectorManager.declareSelectors();
@@ -234,13 +234,13 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
         CombatHoverTileManager.GetHoverSelector.RemoveListener(getHoverSelector);
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && getTargetStats() != null && !getTargetStats().isDead())
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive())
         {
             revealPriorityHeld = false;
 
-            getTargetStats().healthBarManager.setHovered(false);
+            target.healthBarManager.setHovered(false);
 
-            CombatActionOrderRow.HighlightRow.Invoke(getTargetStats(), false);
+            CombatActionOrderRow.HighlightRow.Invoke(target, false);
         }
 
         SelectorManager.declareSelectors();
@@ -305,9 +305,9 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         onEnemySide = CombatGrid.positionIsOnEnemySide(targetCoords);
     }
 
-    protected override Stats getTargetStats()
+    protected override bool hasTargetStats(out Stats target)
     {
-        return CombatGrid.getCombatantAtCoords(targetCoords);
+        return CombatGrid.combatantExistsAtCoords(targetCoords, out target);
     }
 
     protected override GridCoords getTargetCoords()

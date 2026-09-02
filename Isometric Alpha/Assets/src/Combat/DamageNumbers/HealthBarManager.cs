@@ -83,14 +83,14 @@ public class HealthBarManager : MonoBehaviour
     // its owner is hovered, or the Alt/show-formula key is held.
     private void applyConcealment()
     {
-        gameObject.SetActive(eligible && 
+        gameObject.SetActive(OverallUIManager.showFormula || 
+                            (eligible && 
                              CombatStateManager.whoseTurn != WhoseTurn.Resolving &&            
                                          (
                                             healthBarsAlwaysVisibleSettingOn() || 
                                             hovered || 
-                                            OverallUIManager.showFormula || 
                                             (SelectorManager.currentSelector != null && SelectorManager.currentSelector.containsTarget(linkedStats))
-                                         ));
+                                         )));
     }
 
     private void updateCreatureTypeSymbols()

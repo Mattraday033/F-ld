@@ -11,14 +11,14 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 {
     public readonly static UnityEvent<Stats, bool> HighlightRow = new UnityEvent<Stats, bool>();
 
+    public readonly static UnityEvent<Stats> HoldRevealPriority = new UnityEvent<Stats>();
+    public readonly static UnityEvent<Stats> ReleaseRevealPriority = new UnityEvent<Stats>();
+
     public readonly static UnityEvent OnPointerEnterCombatActionOrderRow = new UnityEvent();
     public readonly static UnityEvent OnPointerExitCombatActionOrderRow = new UnityEvent();
 
 	public NestedDescriptionPanelMouseListener nestedDescriptionPanelMouseListener;
 
-	private GameObject targetDisplaySelector;
-	private GameObject tertiaryDisplaySelector;
-	
 	public GameObject arrowIndicator;
 
 	public Image rowBackground;
@@ -27,13 +27,13 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
     private void Awake()
     {
         HighlightRow.AddListener(setRowHighlight);
-        MouseHoverManager.OnHoverPanelCreation.AddListener(removeHoverDataFromScreen);
+        // MouseHoverManager.OnHoverPanelCreation.AddListener(removeHoverDataFromScreen);
     }
 
     private void OnDestroy()
     {
         HighlightRow.RemoveListener(setRowHighlight);
-        MouseHoverManager.OnHoverPanelCreation.RemoveListener(removeHoverDataFromScreen);
+        // MouseHoverManager.OnHoverPanelCreation.RemoveListener(removeHoverDataFromScreen);
     }
 
     public void setRowHighlight(Stats actor, bool highlightRow)
@@ -65,7 +65,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
     private CombatAction getCombatActionBeingDescribed()
 	{
-		return (CombatAction) descriptionPanel.getObjectBeingDescribed();
+		return descriptionPanel.getObjectBeingDescribed() as CombatAction;
 	}
 
     public override void setToIneligible()
@@ -84,25 +84,28 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 	public override void OnPointerEnter(PointerEventData eventData)
 	{
+
+		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
+
 		if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
-			CombatStateManager.currentActivity == CurrentActivity.Retreating)
+			CombatStateManager.currentActivity == CurrentActivity.Retreating ||
+            actionBeingDescribed == null)
 		{
 			return;
 		}
 
         OnPointerEnterCombatActionOrderRow.Invoke();
 
-		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
-
-        if(actionBeingDescribed != null &&
-            actionBeingDescribed.getActorStats() != null &&
-            actionBeingDescribed.getActorStats().positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
+        if(actionBeingDescribed.hasAssignedActor(out Stats actor) &&
+            actor.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p)))
         {
 		    rowBackground.color = Color.green;
         } else
         {
 		    rowBackground.color = Color.red;
         }
+
+        HoldRevealPriority.Invoke(actor);
 
         CombatHoverTileManager.GetHoverSelector.AddListener(getHoverSelector);
         SelectorManager.declareSelectors();
@@ -113,17 +116,36 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
  
     public override void OnPointerExit(PointerEventData eventData)
     {
+		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
+
         if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
 			CombatStateManager.currentActivity == CurrentActivity.Retreating ||
-            InspectNode.inspecting)
+            actionBeingDescribed == null || 
+            !actionBeingDescribed.hasAssignedActor(out Stats actor))
         {
             return;
+        } else if(InspectNode.inspecting)
+        {
+            StartCoroutine(waitForInspectingToEnd());
+            return;
         }
+
+        ReleaseRevealPriority.Invoke(actor);
 
         OnPointerExitCombatActionOrderRow.Invoke();
 
 		removeHoverDataFromScreen();
 	}
+
+    private IEnumerator waitForInspectingToEnd()
+    {
+        while(InspectNode.inspecting)
+        {
+            yield return null;
+        }
+
+        OnPointerExit(null);
+    }
 
     public void getHoverSelector(SelectorContainer container)
     {

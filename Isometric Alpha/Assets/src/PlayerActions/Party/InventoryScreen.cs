@@ -7,7 +7,8 @@ using UnityEngine.UI;
 
 public class InventoryScreen : ScreenManager, ICounter
 {
-    public TextMeshProUGUI playerNameText;
+    public TextMeshProUGUI playerNameText;    
+    public TextMeshProUGUI partyGoldText;
 
     public Image characterSprite;
 
@@ -33,6 +34,7 @@ public class InventoryScreen : ScreenManager, ICounter
         playerNameText.text = currentPartyMember.getName().Replace(PartyManager.playerMarker, "");
         characterSprite.sprite = PartyMember.getPortrait(currentPartyMember.getName());
         characterSprite.gameObject.SetActive(true);
+        partyGoldText.text = Purse.getCoinsInPurseForDisplay();
     }
 
     public override List<UnityEvent> getUpdateEvents()

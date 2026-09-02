@@ -545,7 +545,8 @@ public struct TutorialSequenceStep : IDescribable
                 currentSelector = SelectorManager.currentSelector;
                 loadedCombatAction = AbilityMenuManager.getInstance().getCurrentlySelectedAction();
 
-                if (loadedCombatAction.tertiaryCoordsRequiresEmptySpace() && CombatGrid.getCombatantAtCoords(currentSelector.getCoords()) != null)
+                if (loadedCombatAction.tertiaryCoordsRequiresEmptySpace() && 
+                    CombatGrid.combatantExistsAtCoords(currentSelector.getCoords()))
                 {
                     return false;
                 }

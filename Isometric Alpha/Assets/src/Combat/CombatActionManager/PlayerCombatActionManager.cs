@@ -45,7 +45,12 @@ public class PlayerCombatActionManager : MonoBehaviour
 
 	public void queueCombatAction(Selector actorSelector, Selector targetSelector, CombatAction action)
 	{
-		action.setActor(CombatGrid.getCombatantAtCoords(actorSelector.getCoords()));
+        if(!CombatGrid.combatantExistsAtCoords(actorSelector.getCoords(), out Stats actor))
+        {
+            return;
+        }
+
+		action.setActor(actor);
 		
 		action.setSelector(targetSelector.clone());
 		
@@ -123,8 +128,13 @@ public class PlayerCombatActionManager : MonoBehaviour
 
 	public void queueCombatActionWithTertiary(Selector actorSelector, Selector tertiarySelector, CombatAction action)
 	{
-		action.setActor(CombatGrid.getCombatantAtCoords(actorSelector.getCoords()));
-		
+        if(!CombatGrid.combatantExistsAtCoords(actorSelector.getCoords(), out Stats actor))
+        {
+            return;
+        }
+
+		action.setActor(actor);
+
 		Selector targetSelector = action.getSelector().clone();
 		
 		targetSelector.setToLocation(action.getTargetCoords(), declareSelectors: false);
@@ -173,12 +183,12 @@ public class PlayerCombatActionManager : MonoBehaviour
 
         foreach(CombatAction action in actions)
         {
-            if(action != null && actor.Equals(action.getActorStats()))
+            if(action != null && action.hasAssignedActor(out Stats assignedActor) && 
+                assignedActor.Equals(actor))
             {
                 return true;
             }
         }
-
 
         return false;
     }

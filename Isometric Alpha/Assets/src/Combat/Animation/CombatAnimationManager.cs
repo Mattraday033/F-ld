@@ -136,10 +136,9 @@ public class CombatAnimationManager : MonoBehaviour
             return;
         }
 
-        Stats target = CombatGrid.getCombatantAtCoords(targetCoords);
 
         if(!ignoreMissingTargets && 
-            (target == null || (target.isDead() && !targetCanBeDead)))
+            (!CombatGrid.combatantExistsAtCoords(targetCoords, out Stats target) || (target.isDead() && !targetCanBeDead)))
         {
             return;
         }

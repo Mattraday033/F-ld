@@ -14,11 +14,12 @@ public class SuicideAbility : Ability
 	{
 		base.performCombatAction(targets);
 		
-		Stats caster = CombatGrid.getCombatantAtCoords(getActorCoords());
+        if(CombatGrid.combatantExistsAtCoords(getActorCoords(), out Stats caster))
+        {
+            caster.modifyCurrentHealth(caster.getTotalHealth()*2);
 		
-		caster.modifyCurrentHealth(caster.getTotalHealth()*2);
-		
-		caster.setToDeadSprite();
+		    caster.setToDeadSprite();
+        }
 	}
 	
 	public override bool killsCaster()

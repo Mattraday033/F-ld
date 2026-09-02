@@ -65,11 +65,15 @@ public class CombatActionManager : MonoBehaviour
             return null;
         }
 
-		nextCombatAction.activatingAction();
+        if(nextCombatAction.hasAssignedActor(out currentActor))
+        {
+            nextCombatAction.activatingAction();
 
-		currentActor = nextCombatAction.getActorStats();
-
-		return nextCombatAction;
+		    return nextCombatAction;
+        } else
+        {
+            return null;
+        }
 	}
 
 	public void resolveACombatAction()
@@ -82,13 +86,13 @@ public class CombatActionManager : MonoBehaviour
 			return; //if determineNextCombatAction() returns null then that means both action queues are empty. 
 		}
 		
-		if(!actionBeingResolved.getActorStats().isStunned())
+		if(actionBeingResolved.hasAssignedActor(out Stats actor) && !actor.isStunned())
 		{
 			actionBeingResolved.performCombatAction();
 			actionBeingResolved.setCooldownToMax();
 
-            if (actionBeingResolved.getActorStats() != null && 
-				Helpers.hasQuality<Trait>(actionBeingResolved.getActorStats().traitContainer, t => t.deleteIfDead()))
+            if (actor != null && 
+				Helpers.hasQuality<Trait>(actor.traitContainer, t => t.deleteIfDead()))
 			{
 				CombatGrid.deleteDeadOnDeathEffectActors();
 			}
@@ -170,14 +174,11 @@ public class CombatActionManager : MonoBehaviour
 	{
 		for(int actionIndex = onDeathCombatActionQueue.Count-1; actionIndex >= 0; actionIndex--)
 		{
-			Stats currentActor = onDeathCombatActionQueue[actionIndex].getActorStats();
-			
-			if(currentActor == null || currentActor is null || !currentActor.isDead())
+			if(!onDeathCombatActionQueue[actionIndex].hasAssignedActor(out Stats actor) || actor.isDead())
 			{
 				onDeathCombatActionQueue.RemoveAt(actionIndex);
 			}
 		}
-
 	}
 	
 	public static bool actorAlreadyHasCombatAction(GridCoords coords)
@@ -229,7 +230,7 @@ public class CombatActionManager : MonoBehaviour
 			return;
 		}
 
-		// EnemyStats enemyActor = (EnemyStats)CombatGrid.getCombatantAtCoords(action.getActorCoords());
+		// EnemyStats enemyActor = (EnemyStats)CombatGrid.combatantExistsAtCoords(action.getActorCoords());
 		action.addPreviousTarget(action.getTargetCoords());
 		//action.setTargetCoords(action.getTargetSelector().getCoords());
 		action.getSelector().setToLocation(action.getTargetSelector().getCoords());
@@ -363,8 +364,8 @@ public class CombatActionManager : MonoBehaviour
 
 		foreach (CombatAction action in actions)
 		{
-			if (CombatGrid.getCombatantAtCoords(action.getActorCoords()) != null &&
-				CombatGrid.getCombatantAtCoords(action.getActorCoords()).costsPartyCombatActions())
+			if (action.hasAssignedActor(out Stats actor) &&
+				actor.costsPartyCombatActions())
 			{
 				numberOfPartyCombatActions++;
 			}

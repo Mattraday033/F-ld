@@ -7,6 +7,7 @@ using System;
 
 public enum TraitType
 {
+    NoType = -1,
     Boost = 0,
     Charge = 1,
     FoeType = 2,

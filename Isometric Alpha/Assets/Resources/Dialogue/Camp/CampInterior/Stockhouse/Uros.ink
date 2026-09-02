@@ -2,10 +2,14 @@ VAR strength = 0
 VAR dexterity = 0
 VAR wisdom = 0
 VAR charisma = 0
+
+VAR coins = 0
+
 VAR startledUros = false
 VAR gaveKastorThePassword = false
 VAR convincedUros = false
 VAR intimidatedUros = false
+VAR boughtNuggetFromUros = false
 VAR threatenedToSnitchOnUros = false
 VAR snitchedOnUros = false
 VAR hasIronNugget = false
@@ -125,10 +129,15 @@ I found a shiny lump of something while digging in the mine. I'm not sure but I 
 === 1f ===
 
 {
+    -wisdom >= 2 and coins >= 15:
+    +What if I gave you a few coins for the iron? You wouldn't have to go through the trouble of finding it again and pawning it. <Wis {wisdom}/2>
+        ->1g
+}
+{
 -gaveKastorThePassword:
     +Which way is the wind blowing?
         Huh? How should I know. I've been working in here all day.
-        ->1g
+        ->1f
 }
     +You're very optimistic for a slave.
         Well you gotta be, otherwise what's the point in keepin' on breathin'?
@@ -137,9 +146,22 @@ I found a shiny lump of something while digging in the mine. I'm not sure but I 
         ->Close
     +Yeah? Good luck with that.
         ->Close
+
 === 1g ===
 
-    +Right, of course. Nevermind then.
+\*Uros considers your offer for a moment.* That's a better deal than I'm like to get. Fine, fifteen coins and you're rich. Assuming you can find the damn thing.
+
+    +Done. <Lose 15 Gold>
+
+    setToTrue(boughtNuggetFromUros)
+    prepForItem()
+
+    \*Uros looks greedily at the coins as you count them and hand them over.* Good luck finding the thing. Me, I'm going to buy all the stringy meat and moldy bread I can carry!
+
+    takeCoins(15)
+
+        ->Close
+    +Eh, that's too much for me. Nevermind. *Leave*
         ->Close
 
 === 1h ===
@@ -223,7 +245,12 @@ Don't bother me, I have work to get to.
 {
 -hasIronNugget:
     +I found this, is it what you were looking for? *Show the Iron Nugget to Uros.*
-        ->2b
+        {
+        -boughtNuggetFromUros:
+            ->2ba
+        -else:
+            ->2b
+        }
 }
 
     +I won't disturb you then.
@@ -237,6 +264,11 @@ Don't bother me, I have work to get to.
         ->2c
     +I'm just showing you so you can stop searching. I'm keeping it.
         ->2d
+
+=== 2ba ===
+
+\*Uros examines the nugget glumly.* Yeah, that's it. It's yours now, so quit showing it to me unless you're here to rub it in.
+    ->Close
 
 === 2c ===
 

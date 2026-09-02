@@ -16,9 +16,9 @@ public class KnockBackAbility : RepositionEnemyAbility
         this.damageMultiplierPerSquareMoved = damageMultiplierPerSquareMoved;
     }
 
-    public override Stats getCombatantToBeMoved()
+    public override bool combatantToBeMovedExists(out Stats combatant)
     {
-        return CombatGrid.getCombatantAtCoords(getTargetCoords());
+        return CombatGrid.combatantExistsAtCoords(getTargetCoords(), out combatant);
     }
 
     public override bool requiresTertiaryCoords()
@@ -29,13 +29,10 @@ public class KnockBackAbility : RepositionEnemyAbility
     private GridCoords determineDestinationCoords()
     {
         GridCoords landingCoords = getTargetCoords().clone();
-        Stats combatantHit = null;
 
         for (landingCoords.row = landingCoords.row; landingCoords.row > 0; landingCoords.row--)
         {
-            combatantHit = CombatGrid.getCombatantAtCoords(landingCoords.row - 1, landingCoords.col);
-
-            if (combatantHit != null)
+            if (CombatGrid.combatantExistsAtCoords(landingCoords.row - 1, landingCoords.col, out Stats combatant))
             {
                 break;
             }
@@ -68,18 +65,21 @@ public class KnockBackAbility : RepositionEnemyAbility
 
     public override void performCombatAction()
     {
-        List<Stats> targets = new List<Stats>();
+        if(!CombatGrid.combatantExistsAtCoords(getTargetCoords(), out Stats target))
+        {
+            return;
+        }
 
-        targets.Add(CombatGrid.getCombatantAtCoords(getTargetCoords()));
+        List<Stats> targets = new List<Stats>(new Stats[] { target });
 
         if (getDestinationCoords().row > CombatGrid.rowUpperBounds)
         {
             GridCoords secondTargetCoords = getDestinationCoords();
             secondTargetCoords.row--;
 
-            if (CombatGrid.getCombatantAtCoords(secondTargetCoords) != null)
+            if (CombatGrid.combatantExistsAtCoords(getTargetCoords(), out Stats secondaryTarget))
             {
-                targets.Add(CombatGrid.getCombatantAtCoords(secondTargetCoords));
+                targets.Add(secondaryTarget);
             }
         }
 
@@ -140,67 +140,5 @@ public class KnockBackAbility : RepositionEnemyAbility
     {
         return EffectAnimationType.Blunt.ToString();
     }
-
-    // private static int projectileCount = 0;
-    // public override CombatAnimationType getCombatAnimationType()
-    // {
-    //     projectileCount++;
-    //     if(projectileCount % 2 == 0)
-    //     {
-    //         return CombatAnimationType.None;
-    //     } else
-    //     {
-    //         return CombatAnimationType.Projectile;   
-    //     }
-    // }
-
-    /*
-
-//Don't use the base class's findFinalDamage, it doesn't account for the knockback
-public int[] dealDamage(GridCoords landingCoords, Stats targetCombatant, Stats landingCombatant, bool isCrit)
-{
-    double finalDamageMultiplier = calculateFinalDamageMultiplier(getTargetCoords(), landingCoords);
-    int baseDamage = (int) (DamageCalculator.calculateFormula(getDamageFormula()) * finalDamageMultiplier);
-    Stats actor = CombatGrid.getCombatantAtCoords(getActorCoords());
-
-    baseDamage = actor.modifyOutgoingDamage(baseDamage);
-
-    if(isCrit)
-    {	
-        baseDamage = (int) (baseDamage * actor.getCritDamageMultiplier());
-        baseDamage += (int) ((float) targetCombatant.getTotalHealth() * actor.getDevastatingCriticalPercentage()); //will return 0f if not a devastatingCritical
-    }
-
-    if(CombatStateManager.isPlayerSurpriseRound())
-    {
-        baseDamage = (int) (baseDamage * actor.getSurpriseDamageMultiplier());
-    }
-
-    int[] finalDamage = new int[]{0,0};
-
-    if(targetCombatant != null)
-    {
-        finalDamage[targetCombatantDamageIndex] = targetCombatant.modifyIncomingDamage(baseDamage);
-        targetCombatant.modifyCurrentHealth(finalDamage[targetCombatantDamageIndex]);
-    } else
-    {
-        return new int[]{-1,-1};
-    }
-
-    if(landingCombatant != null)
-    {
-        finalDamage[landingCombatantDamageIndex] = landingCombatant.modifyIncomingDamage(baseDamage);
-        if (!inPreviewMode)
-        {
-            landingCombatant.modifyCurrentHealth(finalDamage[landingCombatantDamageIndex]);
-        }
-    } else
-    {
-        finalDamage[landingCombatantDamageIndex] = -1;
-    }
-
-    return finalDamage;
-}
-*/
 
 }

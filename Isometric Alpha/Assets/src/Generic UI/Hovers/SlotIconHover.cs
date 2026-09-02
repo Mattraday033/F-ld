@@ -411,7 +411,8 @@ public static class HoverMessageList
 
     public const string amountIconMessage = "Quantity";
     public const string worthIconMessage = "An Item's worth in Gold Pieces. A Shopkeeper's Discount affects the cost of the Items they sell and how much they will pay for Items you sell to them.";
-    public const string goldIconMessage = "Your Party's total Gold Pieces";
+    public const string goldKey = "Gold Pieces";
+    public const string goldIconMessage = "Your Party's total Gold Pieces.";
 
     public const string goldRewardKey = "Reward";
     public const string goldRewardMessage = "The amount of Gold your Party earned in Combat.";
@@ -726,6 +727,8 @@ public static class HoverMessageList
 
             case IconList.amountIconName:
                 return amountIconMessage;
+            case goldKey:
+                return goldIconMessage;
             case IconList.worthIconName:
                 if (!CombatStateManager.inCombat && PlayerOOCStateManager.currentActivity == OOCActivity.inUI && OverallUIManager.lastScreenType == ScreenType.Character)
                 {

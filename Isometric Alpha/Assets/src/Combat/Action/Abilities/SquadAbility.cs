@@ -34,7 +34,7 @@ public class SquadAbility : Ability
 
 	private bool checkCoords(GridCoords coords)
 	{
-		return CombatGrid.getCombatantAtCoords(coords) != null && !(CombatGrid.getCombatantAtCoords(coords) is null) && !CombatGrid.getCombatantAtCoords(coords).isDead();
+		return CombatGrid.combatantExistsAtCoords(coords, out Stats target) && target.isAlive();
 	}
 
 	private bool checkTopCoords()

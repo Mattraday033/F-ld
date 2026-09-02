@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InterruptAbility : Ability
 {
-    public TraitType traitTypeToPurge;
+    public TraitType traitTypeToPurge = TraitType.NoType;
     private static bool critChanceSnapShot;
 
     private bool shouldApplyTrait = false;
@@ -36,7 +36,7 @@ public class InterruptAbility : Ability
 
         shouldApplyTrait = targetHasChargeTrait();
 
-        if (!inPreviewMode && traitTypeToPurge != null)
+        if (!inPreviewMode && traitTypeToPurge != TraitType.NoType)
         {
             foreach(Stats target in targets)
             {
@@ -51,9 +51,7 @@ public class InterruptAbility : Ability
 
     private void takeCritSnapShot()
     {
-        Stats target = CombatGrid.getCombatantAtCoords(getTargetCoords());
-
-        if (target != null && target.hasTraitOfType(TraitType.Charge))
+        if (CombatGrid.combatantExistsAtCoords(getTargetCoords(), out Stats target) && target.hasTraitOfType(TraitType.Charge))
         {
             critChanceSnapShot = true;
         }
@@ -113,8 +111,7 @@ public class InterruptAbility : Ability
 
     private bool targetHasChargeTrait()
     {
-        Stats target = CombatGrid.getCombatantAtCoords(getTargetCoords());
-
-        return target != null && target.hasTraitOfType(TraitType.Charge);
+        return CombatGrid.combatantExistsAtCoords(getTargetCoords(), out Stats target) && 
+                target.hasTraitOfType(TraitType.Charge);
     }
 }
