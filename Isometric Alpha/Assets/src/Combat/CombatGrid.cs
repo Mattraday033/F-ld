@@ -56,7 +56,7 @@ public static class CombatGrid
 
         Vector3 position = creatureGrid.GetCellCenterWorld(new Vector3Int(-1 * row, -1 * col));
 
-        return new Vector3(position.x, position.y, -1*(row+col));
+        return new Vector3(position.x, position.y, -1*(row+col) - .01f*row);
     }
 
 	public static bool positionIsOnAlliedSide(GridCoords coords)

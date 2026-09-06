@@ -19,7 +19,7 @@
                                     float4 color, out float4 result, out float alpha)
     {
         result = float4(0.0,0.0,0.0,0.0);
-        alpha = 0.0;
+        alpha = 0.0; 
 
         if(main.w > .1)
         {
@@ -44,6 +44,31 @@
         }
 
         alpha = result.w;
+    }
+
+    void OverwriteSprite_float(float4 base, float4 insert, float threshold,
+                                    out float4 result, out float alpha)
+    {
+        if(insert.w > threshold)
+        {
+            result = insert;
+        } else
+        {
+            result = base;
+        }
+
+        alpha = result.w;
+    }
+
+    void ConsistentAlpha_float(float alpha1, float alpha2, float threshold, out float alpha)
+    {
+        if(alpha1 > threshold || alpha2 > threshold)
+        {
+            alpha = 1;
+        } else
+        {
+            alpha = 0;
+        }
     }
 
 #endif

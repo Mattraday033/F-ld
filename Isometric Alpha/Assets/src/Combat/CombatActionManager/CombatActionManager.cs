@@ -174,7 +174,7 @@ public class CombatActionManager : MonoBehaviour
 	{
 		for(int actionIndex = onDeathCombatActionQueue.Count-1; actionIndex >= 0; actionIndex--)
 		{
-			if(!onDeathCombatActionQueue[actionIndex].hasAssignedActor(out Stats actor) || actor.isDead())
+			if(!onDeathCombatActionQueue[actionIndex].hasAssignedActor(out Stats actor) || actor.isAlive())
 			{
 				onDeathCombatActionQueue.RemoveAt(actionIndex);
 			}

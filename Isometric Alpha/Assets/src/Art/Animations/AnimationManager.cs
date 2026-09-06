@@ -29,6 +29,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         CharacterAnimationType.Idle_Front, CharacterAnimationType.Idle_Back,
         CharacterAnimationType.OOC_Idle_Front, CharacterAnimationType.OOC_Idle_Back,
         CharacterAnimationType.Secondary_Idle, CharacterAnimationType.Secondary_Idle_Front, CharacterAnimationType.Secondary_Idle_Back,
+        CharacterAnimationType.Run_Front, CharacterAnimationType.Run_Back,      
         CharacterAnimationType.Death_Front_Weaponless, CharacterAnimationType.Death_Back_Weaponless,
         CharacterAnimationType.Vertical_Falling
     };
@@ -36,8 +37,6 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
 
     public readonly static CharacterAnimationType[] tempAnimationTypes = new CharacterAnimationType[]
     { 
-      CharacterAnimationType.Run_Front,     CharacterAnimationType.Run_Front_Left,      CharacterAnimationType.Run_Front_Right, 
-      CharacterAnimationType.Run_Back,      CharacterAnimationType.Run_Back_Left,       CharacterAnimationType.Run_Back_Right,  
       CharacterAnimationType.Wounded,       CharacterAnimationType.Wounded_Front,       CharacterAnimationType.Wounded_Back,
       CharacterAnimationType.OOC_Wounded_Front, CharacterAnimationType.OOC_Wounded_Back,
       CharacterAnimationType.Death,         CharacterAnimationType.Secondary_Death, CharacterAnimationType.Death_Front,         CharacterAnimationType.Death_Back,   
@@ -587,36 +586,24 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         return animationDict;
     }
 
-    public void playRunBackAnimation()
+    public void playRunAnimation()
     {
-        playAnimation(getRunAnimationFooting(CharacterAnimationType.Run_Back));
-    }
-
-    public void playRunFrontAnimation()
-    {
-        playAnimation(getRunAnimationFooting(CharacterAnimationType.Run_Front));
-    }
-
-    private static CharacterAnimationType getRunAnimationFooting(CharacterAnimationType animationType)
-    {
-        if(animationType == CharacterAnimationType.Run_Front)
+        if(State.onLeftFoot && facing.facingNorth())
         {
-            if(State.onLeftFoot)
-            {
-                return CharacterAnimationType.Run_Front_Left;
-            } else
-            {
-                return CharacterAnimationType.Run_Front_Right;
-            }
+            currentIdle = CharacterAnimationType.Run_Back_Left;
+            playIdleAnimation(CharacterAnimationType.Run_Back_Left);
+        } else if(!State.onLeftFoot && facing.facingNorth())
+        {
+            currentIdle = CharacterAnimationType.Run_Back_Right;
+            playIdleAnimation(CharacterAnimationType.Run_Back_Right);
+        } else if(State.onLeftFoot && facing.facingSouth())
+        {
+            currentIdle = CharacterAnimationType.Run_Front_Left;
+            playIdleAnimation(CharacterAnimationType.Run_Front_Left);
         } else
         {
-            if(State.onLeftFoot)
-            {
-                return CharacterAnimationType.Run_Back_Left;
-            } else
-            {
-                return CharacterAnimationType.Run_Back_Right;
-            }
+            currentIdle = CharacterAnimationType.Run_Front_Right;
+            playIdleAnimation(CharacterAnimationType.Run_Front_Right);
         }
     }
 
@@ -824,25 +811,25 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
     public void playNorthEastRun()
     {
         setFacing(Facing.NorthEast);
-        playRunBackAnimation();
+        playRunAnimation();
     }
 
     public void playNorthWestRun()
     {
         setFacing(Facing.NorthWest);
-        playRunBackAnimation();
+        playRunAnimation();
     }
 
     public void playSouthEastRun()
     {
         setFacing(Facing.SouthEast);
-        playRunFrontAnimation();
+        playRunAnimation();
     }
 
     public void playSouthWestRun()
     {
         setFacing(Facing.SouthWest);
-        playRunFrontAnimation();
+        playRunAnimation();
     }
 
 
@@ -1069,7 +1056,11 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                 haltAllAnimations();
                 setSpriteToCurrentIdle();
                 return;
-
+                
+            case CharacterAnimationType.Run_Front_Left:
+            case CharacterAnimationType.Run_Front_Right: 
+            case CharacterAnimationType.Run_Back_Left:
+            case CharacterAnimationType.Run_Back_Right: 
             case CharacterAnimationType.Idle_Front:
             case CharacterAnimationType.Idle_Back:
             case CharacterAnimationType.OOC_Idle_Front:
@@ -1107,24 +1098,14 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                 case CharacterAnimationType.Death_Back: 
                     playAnimation(CharacterAnimationType.Death);
                     break;
-                case CharacterAnimationType.Run_Front_Left:
-                case CharacterAnimationType.Run_Front_Right: 
-                    playAnimation(CharacterAnimationType.Run_Front);
-                    break;
-                case CharacterAnimationType.Run_Back_Left:
-                case CharacterAnimationType.Run_Back_Right: 
-                    playAnimation(CharacterAnimationType.Run_Back);
-                    break;
                 case CharacterAnimationType.OOC_Idle_Front:
                 case CharacterAnimationType.Secondary_Idle_Front:
-                case CharacterAnimationType.Run_Front:
                 case CharacterAnimationType.Secondary_Idle:
                 case CharacterAnimationType.Spawn:
                     playIdleAnimation(CharacterAnimationType.Idle_Front);
                     break;
                 case CharacterAnimationType.OOC_Idle_Back:
                 case CharacterAnimationType.Secondary_Idle_Back:
-                case CharacterAnimationType.Run_Back:
                     playIdleAnimation(CharacterAnimationType.Idle_Back);
                     break;
                 default:
@@ -1345,10 +1326,6 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
                 return getFallBackIdleType(animationName, CharacterAnimationType.OOC_Idle_Front, retry);
             case CharacterAnimationType.Idle_Back:
                 return getFallBackIdleType(animationName, CharacterAnimationType.OOC_Idle_Back, retry);
-            case CharacterAnimationType.Run_Front:
-                return getFallBackIdleType(animationName, CharacterAnimationType.Idle_Front, retry);
-            case CharacterAnimationType.Run_Back:
-                return getFallBackIdleType(animationName, CharacterAnimationType.Idle_Back, retry);
             case CharacterAnimationType.Secondary_Idle:
                 return getFallBackIdleType(animationName, CharacterAnimationType.Idle_Front, false);
             default:

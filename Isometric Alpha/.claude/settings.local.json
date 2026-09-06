@@ -11,7 +11,9 @@
       "Bash(python -c \"from PIL import Image; print\\('PIL available'\\)\")",
       "Bash(pip install:*)",
       "Bash(python fix_outlines.py)",
-      "Bash(sort -t: -k2 -n -u)"
+      "Bash(sort -t: -k2 -n -u)",
+      "Bash(python -)",
+      "Bash(awk 'NR>=1400 && NR<=1500' Assets/Scenes/StartMenu/StartMenu.unity)"
     ]
   }
 }

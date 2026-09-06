@@ -45,8 +45,8 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
-  alignment: 0
+  spriteMeshType: 0
+  alignment: 9
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -107,16 +107,12 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -64, y: 64}
-        - {x: -64, y: -64}
-        - {x: 64, y: -64}
-        - {x: 64, y: 64}
+      outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c7dc1f6bdf1a3648b0b7279cc1437dd
-      internalID: 1352844271
+      spriteID: 811f9057110a054458f00f6d02b0fae4
+      internalID: -203440656
       vertices: []
       indices: 
       edges: []
@@ -132,66 +128,12 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -64, y: 64}
-        - {x: -64, y: -64}
-        - {x: 64, y: -64}
-        - {x: 64, y: 64}
+      outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f21e3acf552198448e19f19b087f183
-      internalID: 234230219
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_Front_2
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -64, y: 64}
-        - {x: -64, y: -64}
-        - {x: 64, y: -64}
-        - {x: 64, y: 64}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 56799e9458729654f8778e812034ead0
-      internalID: -212423139
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_Front_3
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.25}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -64, y: 64}
-        - {x: -64, y: -64}
-        - {x: 64, y: -64}
-        - {x: 64, y: 64}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3ed7ba4d9fe339c4f81dcd071830bf6e
-      internalID: -788443052
+      spriteID: 861b45110187f0a42a155fe0b88ff699
+      internalID: 1526822297
       vertices: []
       indices: 
       edges: []
@@ -207,10 +149,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Run_Front_0: 1352844271
-      Run_Front_1: 234230219
-      Run_Front_2: -212423139
-      Run_Front_3: -788443052
+      Run_Front_0: -203440656
+      Run_Front_1: 1526822297
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

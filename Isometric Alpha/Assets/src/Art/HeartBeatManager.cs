@@ -222,11 +222,23 @@ public static class IdleDictionary
 
         Sprite[] currentIdleSprites = idleDict[new KeyValuePair<string, CharacterAnimationType>(monsterName, animationType)];
 
-        int beats = HeartBeatManager.getHeartBeatsSentToRow(monsterName, row);
+        switch(animationType)
+        {
+            case CharacterAnimationType.Run_Back:
+            case CharacterAnimationType.Run_Back_Left:
+            case CharacterAnimationType.Run_Front:
+            case CharacterAnimationType.Run_Front_Left:
+                return currentIdleSprites[Constants.indexZero];
+            case CharacterAnimationType.Run_Front_Right:
+            case CharacterAnimationType.Run_Back_Right:
+                return currentIdleSprites[Constants.indexOne];
+            default:
+                int beats = HeartBeatManager.getHeartBeatsSentToRow(monsterName, row);
 
-        int currentSpriteIndex = beats % currentIdleSprites.Length;
+                int currentSpriteIndex = beats % currentIdleSprites.Length;
 
-        return currentIdleSprites[currentSpriteIndex];
+                return currentIdleSprites[currentSpriteIndex];
+        }
     }
 
     private static bool alwaysUseOOCIdleOutsideOfCombat(string monsterName)

@@ -137,7 +137,7 @@ public class CombatAnimationManager : MonoBehaviour
         }
 
 
-        if(!ignoreMissingTargets && 
+        if(ignoreMissingTargets && 
             (!CombatGrid.combatantExistsAtCoords(targetCoords, out Stats target) || (target.isDead() && !targetCanBeDead)))
         {
             return;

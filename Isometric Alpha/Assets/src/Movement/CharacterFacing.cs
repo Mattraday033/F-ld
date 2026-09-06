@@ -38,17 +38,18 @@ public class CharacterFacing
 		return currentFacing;
 	}
 
-    public override string ToString()
+    public bool facingNorth()
     {
-        return getFacing().ToString();
+        return currentFacing == Facing.NorthEast || 
+            currentFacing == Facing.NorthWest;
     }
 
-    public int getFacingInt()
-	{
-		return (int) currentFacing;
-	}
-	
-	
+    public bool facingSouth()
+    {
+        return currentFacing == Facing.SouthEast || 
+            currentFacing == Facing.SouthWest;
+    }
+
 	private void randomizeFacing()
 	{
 		setFacing((Facing) getRandomFacing());
