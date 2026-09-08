@@ -338,7 +338,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         greyedOut = true;
         iconOutline.enabled = false;
 
-        abilityIcon.color = ColorList.greyedOutIconColor;
+        abilityIcon.color = ColorList.whiteFadeOut75;
         iconBackground.color = ColorList.greyedOutBackgroundColor;
 
         disableButtonComponent();

@@ -13,7 +13,14 @@
       "Bash(python fix_outlines.py)",
       "Bash(sort -t: -k2 -n -u)",
       "Bash(python -)",
-      "Bash(awk 'NR>=1400 && NR<=1500' Assets/Scenes/StartMenu/StartMenu.unity)"
+      "Bash(awk 'NR>=1400 && NR<=1500' Assets/Scenes/StartMenu/StartMenu.unity)",
+      "Bash(grep -o \"m_OverrideReferenceName\\\\\\\\\\\\\\\\\\\\\": \\\\\\\\\\\\\\\\\\\\\"[^\\\\\\\\\\\\\\\\]*\" Assets/src/URP/ColorReplace/ColorReplaceMat.shadergraph)",
+      "Bash(python -c \"import PIL; print\\(PIL.__version__\\)\")",
+      "Bash(python -c ' *)",
+      "Bash(python -c \"from PIL import Image; im=Image.open\\('Assets/src/URP/ColorReplace/SpearmanAttackTest.png'\\); print\\(im.size, im.mode\\)\")",
+      "Bash(export SP=\"C:/Users/mattr/AppData/Local/Temp/claude/c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha/b5b80b3d-5023-4e44-88bb-2798d5fb6d0d/scratchpad\")",
+      "Bash(python)",
+      "Bash(python \"C:/Users/mattr/AppData/Local/Temp/claude/c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha/b5b80b3d-5023-4e44-88bb-2798d5fb6d0d/scratchpad/recolor.py\")"
     ]
   }
 }

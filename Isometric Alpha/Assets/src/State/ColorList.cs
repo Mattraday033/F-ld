@@ -6,18 +6,6 @@ public static class ColorList
 {
     public const float hoverSelectorAlpha = .65f;
 
-    #region Private Colors
-
-    #region Rubble Colors
-    public readonly static Color32 mineLvl3RubbleColor = new Color32(179, 175, 192, 255);
-    public readonly static Color32 mineLvl2RubbleColor = new Color32(175, 170, 160, 255);
-    public readonly static Color32 shackRubbleColor = new Color32(225, 205, 175, 255);
-    #endregion
-
-    #endregion
-
-    #region Public Colors
-
     #region Black Fadeouts
 
     public readonly static Color32 blackFadeOut75 = new Color32(0, 0, 0, 75);
@@ -28,13 +16,16 @@ public static class ColorList
 
     #region White Fadeouts
 
+    public readonly static Color whiteFadeOut75 = new Color32(255, 255, 255, 75);
+
     #endregion
 
     #region Greys
     public readonly static Color grey25 = new Color32(25, 25, 25, 255);
     public readonly static Color grey35 = new Color32(35, 35, 35, 255);
     public readonly static Color grey55 = new Color32(55, 55, 55, 255);
-    public readonly static Color grey75 = new Color32(75, 75, 75, 255);
+    public readonly static Color grey75 = new Color32(75, 75, 75, 255);    
+    public readonly static Color greyedOutBackgroundColor = grey75;
     public readonly static Color grey100 = new Color32(100, 100, 100, 255);
     public readonly static Color grey100Transparent = new Color32(100, 100, 100, 125);
     public readonly static Color grey125 = new Color32(125, 125, 125, 255);
@@ -79,10 +70,22 @@ public static class ColorList
 	public readonly static Color tutorialDefault = questCounterCyan;
     #endregion
 
+    #region Rubble Colors
+    public readonly static Color32 mineLvl3RubbleColor = new Color32(179, 175, 192, 255);
+    public readonly static Color32 mineLvl2RubbleColor = new Color32(175, 170, 160, 255);
+    public readonly static Color32 shackRubbleColor = new Color32(225, 205, 175, 255);
+    #endregion
+
+    #region Surprise Icon Colors
+
     public readonly static Color surpriseIconGrey = blackFadeOut75;
     public readonly static Color surpriseIconGreen = new Color32(25,185,25,255);
     public readonly static Color surpriseIconYellow = new Color32(255,230,30,255);
     public readonly static Color surpriseIconRed = new Color32(225,35,35,255);
+
+    #endregion
+
+    #region Misc
 
     public readonly static Color skillButtonOutlineHighlight = Color.yellow;
 
@@ -104,25 +107,72 @@ public static class ColorList
     public readonly static Color blueShieldTextColor = new Color32(25, 100, 255, 255); // color is a lighter blue than default Color.blue
 	public readonly static Color greenLeafTextColor = new Color32(25, 255, 0, 255); // color is a lighter green than default Color.green
 
-    public readonly static Color greyedOutIconColor = new Color32(255, 255, 255, 75);
-    public readonly static Color greyedOutBackgroundColor = grey75;
 
-    public readonly static Color usedCombatActionSlotColor = Color.green;
-	public readonly static Color unusedCombatActionSlotColor = Color.red;
-    public readonly static Color dormantCombatActionSlotColor = grey75;
-
-    public readonly static Color lockedBackgroundColor = grey55;
-
-    public readonly static Color costPayableColor = Color.green;
-    public readonly static Color costNotPayableColor = Color.red;
-    public readonly static Color cooldownColor = Color.yellow;
-
-    //HealthBarManager colors
+    #region HealthBarManager colors
     public readonly static Color healthyGreen = new Color32(0,175,55,255);
     public readonly static Color buffedBlue = new Color32(0,225,225,255);
     public readonly static Color debuffedPurple = new Color32(135,15,175,255);
     public readonly static Color buffedDebuffed = new Color32(230,190,186,255);
     #endregion
+
+    #endregion
+    
+    #region Sprite Colors
+
+    #region Skin Tones
+
+    public readonly static Color Skin_LightBrown = parseColor("#A2755F");
+
+    #endregion
+
+    #region Hair Tones
+
+    public readonly static Color Hair_DarkBrown = parseColor("#412B1F");
+
+    #endregion
+
+    #region Cloth
+
+    public readonly static Color Cloth_SuppressedBlue = parseColor("#182E61");
+    public readonly static Color Cloth_PaleBlue = parseColor("#5E83AE");    
+
+    #endregion
+
+    #region Leather
+
+    public readonly static Color Leather_BeltBrown = parseColor("#674330");
+    public readonly static Color Leather_DullGrey = parseColor("#2B2B2B");
+
+    #endregion
+
+    #region Wood
+
+    public readonly static Color Wood_WeaponShaft = parseColor("#674330");
+
+    #endregion
+
+    #region Metals
+    public readonly static Color Metal_Brass = parseColor("#FFC763");
+
+    public readonly static Color Metal_Bronze = parseColor("#FEBB8E");
+    public readonly static Color Metal_BronzeShadow = parseColor("#EA8A68");
+
+    public readonly static Color Metal_Shine = parseColor("#F9F9F9");
+
+    #endregion
+
+    #endregion
+
+    private static Color parseColor(string colorString)
+    {    
+        if(ColorUtility.TryParseHtmlString(colorString, out Color color))
+        {
+            return color;
+        } else
+        {
+            return Color.white;
+        }
+    }
 
     private static Dictionary<string, Color> rubbleColorDict;
     public static Color getRubbleColorFromLocationName()
@@ -162,4 +212,190 @@ public static class ColorList
         rubbleColorDict.Add(ZoneKeyList.mineLvl3, mineLvl3RubbleColor);
     }
 
+}
+
+public enum ColorReplaceSlot
+{
+    R,
+    G,
+    B,
+    C,
+    M,
+    Y,
+    O,
+    V,
+    T,
+    S,
+    P
+}
+
+public enum SpriteSection
+{
+    Weapon,
+    Body,
+    Face,
+    Hair,
+    Cloak,
+    Shield
+}
+
+public class ColorReplaceSchema
+{
+    private readonly Dictionary<ColorReplaceSlot, Color> weapon;
+    private readonly Dictionary<ColorReplaceSlot, Color> body;
+    private readonly Dictionary<ColorReplaceSlot, Color> face;
+    private readonly Dictionary<ColorReplaceSlot, Color> hair;
+    private readonly Dictionary<ColorReplaceSlot, Color> cloak;
+    private readonly Dictionary<ColorReplaceSlot, Color> shield;
+
+    public Color getColor(SpriteSection section, ColorReplaceSlot slot)
+    {
+        Dictionary<ColorReplaceSlot, Color> dict;
+
+        switch(section)
+        {
+            case SpriteSection.Weapon:
+                dict = weapon;
+                break;
+            case SpriteSection.Body:
+                dict = body;
+                break;
+            case SpriteSection.Face:
+                dict = face;
+                break;
+            case SpriteSection.Hair:
+                dict = hair;
+                break;
+            case SpriteSection.Cloak:
+                dict = cloak;
+                break;
+            case SpriteSection.Shield:
+                dict = shield;
+                break;
+
+            default:
+                return Color.black;
+        }
+
+        if(dict.ContainsKey(slot))
+        {
+            return dict[slot];
+        } else
+        {
+            return Color.black;
+        }
+    }
+
+    public ColorReplaceSchema(Dictionary<ColorReplaceSlot, Color> weapon = null,
+                                Dictionary<ColorReplaceSlot, Color> body = null,
+                                Dictionary<ColorReplaceSlot, Color> face = null,
+                                Dictionary<ColorReplaceSlot, Color> hair = null,
+                                Dictionary<ColorReplaceSlot, Color> cloak = null,
+                                Dictionary<ColorReplaceSlot, Color> shield = null)
+    {
+        if(weapon != null)
+        {
+            this.weapon = weapon;
+        } else
+        {
+            this.weapon = getDefaultReplaceSchema();
+        }
+
+        if(body != null)
+        {
+            this.body = body;
+        } else
+        {
+            this.body = getDefaultReplaceSchema();
+        }
+
+        if(face != null)
+        {
+            this.face = face;
+        } else
+        {
+            this.face = getDefaultReplaceSchema();
+        }
+
+        if(hair != null)
+        {
+            this.hair = hair;
+        } else
+        {
+            this.hair = getDefaultReplaceSchema();
+        }
+
+        if(cloak != null)
+        {
+            this.cloak = cloak;
+        } else
+        {
+            this.cloak = getDefaultReplaceSchema();
+        }
+
+        if(shield != null)
+        {
+            this.shield = shield;
+        } else
+        {
+            this.shield = getDefaultReplaceSchema();
+        }
+    }
+
+    private static Dictionary<ColorReplaceSlot, Color> getDefaultReplaceSchema()
+    {
+        return new Dictionary<ColorReplaceSlot, Color>();
+    }
+}
+
+public static class ColorSchemaList
+{
+    private static Dictionary<string, ColorReplaceSchema> colorSchemaDict;
+
+    public static ColorReplaceSchema getSchema(string name)
+    {
+        if(!colorSchemaDict.ContainsKey(name))
+        {
+            return new ColorReplaceSchema(); 
+        }
+
+        return colorSchemaDict[name];
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        colorSchemaDict = new Dictionary<string, ColorReplaceSchema>();
+
+        colorSchemaDict.Add(MonsterNameList.spearman, new ColorReplaceSchema(
+                                                                                weapon: new Dictionary<ColorReplaceSlot, Color>()
+                                                                                {
+                                                                                    [ColorReplaceSlot.R] = ColorList.Metal_Bronze,
+                                                                                    [ColorReplaceSlot.G] = ColorList.Cloth_PaleBlue,
+                                                                                    [ColorReplaceSlot.B] = ColorList.Wood_WeaponShaft
+                                                                                },
+                                                                                body: new Dictionary<ColorReplaceSlot, Color>()
+                                                                                {
+                                                                                    [ColorReplaceSlot.R] = ColorList.Skin_LightBrown,
+                                                                                    [ColorReplaceSlot.G] = ColorList.Metal_Bronze,
+                                                                                    [ColorReplaceSlot.B] = ColorList.Cloth_SuppressedBlue,
+                                                                                    [ColorReplaceSlot.C] = ColorList.Cloth_PaleBlue,            
+                                                                                    [ColorReplaceSlot.M] = ColorList.Metal_Bronze,
+                                                                                    [ColorReplaceSlot.Y] = ColorList.Metal_BronzeShadow,
+                                                                                    [ColorReplaceSlot.O] = ColorList.Metal_BronzeShadow,
+                                                                                    [ColorReplaceSlot.V] = ColorList.Leather_DullGrey,
+                                                                                    [ColorReplaceSlot.T] = ColorList.Leather_BeltBrown,
+                                                                                    [ColorReplaceSlot.S] = ColorList.Metal_Brass
+                                                                                },
+                                                                                hair: new Dictionary<ColorReplaceSlot, Color>()
+                                                                                {
+                                                                                    [ColorReplaceSlot.G] = ColorList.Hair_DarkBrown
+                                                                                },
+                                                                                face: new Dictionary<ColorReplaceSlot, Color>()
+                                                                                {
+                                                                                    [ColorReplaceSlot.R] = ColorList.Skin_LightBrown,
+                                                                                    [ColorReplaceSlot.G] = ColorList.Hair_DarkBrown
+                                                                                }
+                                                                            ));
+    }
 }

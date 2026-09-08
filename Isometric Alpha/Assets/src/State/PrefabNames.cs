@@ -190,6 +190,7 @@ public static class PrefabNames
     public const string gameplayOption = gameplayFolder + "Gameplay Option";
 
     public const string outlineMaterial = "Sprite-Outline-Material";
+    public const string colorReplaceMaterial = "ColorReplace";
 
     #endregion
 
