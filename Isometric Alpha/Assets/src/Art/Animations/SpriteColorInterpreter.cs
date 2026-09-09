@@ -22,31 +22,46 @@ public class SpriteColorInterpreter : MonoBehaviour
 
     private ColorReplaceSchema colorSchema;
 
+    private Dictionary<SpriteLayer, SpriteRenderer> spriteLayers;
+
+    public SpriteRenderer shieldBackRenderer;
     public SpriteRenderer weaponRenderer;
     public SpriteRenderer bodyRenderer;
+    public SpriteRenderer cloakRenderer;
     public SpriteRenderer faceRenderer;
     public SpriteRenderer hairRenderer;
-    public SpriteRenderer cloakRenderer;
-    public SpriteRenderer shieldRenderer;
+    public SpriteRenderer shieldFrontRenderer;
 
-    void Start()
+    private void Awake()
     {
         interpretSchema(ColorSchemaList.getSchema(MonsterNameList.spearman));
+
+        spriteLayers = new Dictionary<SpriteLayer, SpriteRenderer>()
+        {
+            [SpriteLayer.Shield_Back] = shieldBackRenderer,  
+            [SpriteLayer.Weapon] = weaponRenderer,  
+            [SpriteLayer.Body] = bodyRenderer,  
+            [SpriteLayer.Cloak] = cloakRenderer,  
+            [SpriteLayer.Face] = faceRenderer,  
+            [SpriteLayer.Hair] = hairRenderer,  
+            [SpriteLayer.Shield_Front] = shieldFrontRenderer  
+        };
     }
 
     public void interpretSchema(ColorReplaceSchema schema)
     {
         colorSchema = schema;
 
-        setRendererMaterial(weaponRenderer, SpriteSection.Weapon);
-        setRendererMaterial(bodyRenderer, SpriteSection.Body);
-        setRendererMaterial(faceRenderer, SpriteSection.Face);
-        setRendererMaterial(hairRenderer, SpriteSection.Hair);
-        setRendererMaterial(cloakRenderer, SpriteSection.Cloak);
-        setRendererMaterial(shieldRenderer, SpriteSection.Shield);
+        setRendererMaterial(shieldBackRenderer, SpriteLayer.Shield_Back);
+        setRendererMaterial(weaponRenderer, SpriteLayer.Weapon);
+        setRendererMaterial(bodyRenderer, SpriteLayer.Body);
+        setRendererMaterial(cloakRenderer, SpriteLayer.Cloak);
+        setRendererMaterial(faceRenderer, SpriteLayer.Face);
+        setRendererMaterial(hairRenderer, SpriteLayer.Hair);
+        setRendererMaterial(shieldFrontRenderer, SpriteLayer.Shield_Front);
     }
 
-    private void setRendererMaterial(SpriteRenderer renderer, SpriteSection section)
+    private void setRendererMaterial(SpriteRenderer renderer, SpriteLayer section)
     {
         renderer.material.SetColor(ColorReplaceVARNames._R_Replace.ToString(), colorSchema.getColor(section, ColorReplaceSlot.R));
         renderer.material.SetColor(ColorReplaceVARNames._G_Replace.ToString(), colorSchema.getColor(section, ColorReplaceSlot.G));

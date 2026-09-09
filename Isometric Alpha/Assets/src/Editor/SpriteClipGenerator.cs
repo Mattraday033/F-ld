@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.Presets;
 using UnityEngine;
@@ -187,7 +186,7 @@ public static class SpriteClipGenerator
     {
         Sprite[] sprites = AssetDatabase.LoadAllAssetsAtPath(spriteSheetPath)
                                         .OfType<Sprite>()
-                                        .OrderBy(sprite => sprite.name, new NaturalNameComparer())
+                                        .OrderBy(sprite => sprite.name, NaturalNameComparer.instance)
                                         .ToArray();
 
         AnimationClip clip = new AnimationClip { frameRate = DefaultFrameRate };
@@ -356,44 +355,6 @@ public static class SpriteClipGenerator
         }
 
         return times;
-    }
-
-    /// <summary>
-    /// Orders sprite names so that "Frame_2" sorts before "Frame_10" (numeric-aware),
-    /// keeping generated keyframes in the order an artist would expect.
-    /// </summary>
-    private class NaturalNameComparer : IComparer<string>
-    {
-        public int Compare(string left, string right)
-        {
-            if (left == right)
-            {
-                return 0;
-            }
-
-            string[] leftChunks = Regex.Split(left ?? string.Empty, "([0-9]+)");
-            string[] rightChunks = Regex.Split(right ?? string.Empty, "([0-9]+)");
-
-            int count = Mathf.Min(leftChunks.Length, rightChunks.Length);
-
-            for (int i = 0; i < count; i++)
-            {
-                if (leftChunks[i] == rightChunks[i])
-                {
-                    continue;
-                }
-
-                if (int.TryParse(leftChunks[i], out int leftNumber) &&
-                    int.TryParse(rightChunks[i], out int rightNumber))
-                {
-                    return leftNumber.CompareTo(rightNumber);
-                }
-
-                return string.Compare(leftChunks[i], rightChunks[i], System.StringComparison.Ordinal);
-            }
-
-            return leftChunks.Length.CompareTo(rightChunks.Length);
-        }
     }
 }
 #endif

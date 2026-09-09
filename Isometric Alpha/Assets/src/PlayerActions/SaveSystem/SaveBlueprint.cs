@@ -28,7 +28,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
 	public bool terrainHidden;
 
-	public string overworldSpriteSortingLayer;
     public int gold;
 	public int cunningsRemaining;
 	public int intimidatesRemaining;
@@ -73,8 +72,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 	public static SaveBlueprint build(string saveName, int saveNumber)
 	{
 		SaveBlueprint saveBlueprint = new SaveBlueprint();
-
-		saveBlueprint.overworldSpriteSortingLayer = PlayerMovement.getInstance().playerSpriteRenderer.sortingLayerName;
 
 		saveBlueprint.onLeftFoot = State.onLeftFoot;
 		saveBlueprint.saveNumber = saveNumber;
@@ -156,8 +153,6 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 		this.currentLocation = GetFromJson.getElementFromJson(this.saveName, nameof(currentLocation), jsonDynamic, SaveDefaultValues.defaultLocationName);
 		this.playerCell = GetFromJson.getElementFromJson(this.saveName, nameof(playerCell), jsonDynamic, SaveDefaultValues.defaultPlayerCell);
 		this.terrainHidden = GetFromJson.getElementFromJson(this.saveName, nameof(terrainHidden), jsonDynamic, SaveDefaultValues.defaultBoolFalse);
-
-		this.overworldSpriteSortingLayer = GetFromJson.getElementFromJson(this.saveName, nameof(overworldSpriteSortingLayer), jsonDynamic, SaveDefaultValues.defaultOverworldSpriteSortingLayer);
 
 		this.gold = GetFromJson.getElementFromJson(this.saveName, nameof(gold), jsonDynamic, SaveDefaultValues.defaultStatZero);
 

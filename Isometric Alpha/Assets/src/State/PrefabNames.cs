@@ -280,7 +280,8 @@ public static class PrefabNames
 
     #endregion
 
-    public const string playerPrefab = "PlayerOOC";
+    private const string creaturesFolder = "Creatures/";
+    public const string playerPrefab = creaturesFolder + "PlayerOOC";
 
     #region Interactable Game Objects
     public const string interactablesFolder = "Interactables/";

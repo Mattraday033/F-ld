@@ -20,7 +20,16 @@
       "Bash(python -c \"from PIL import Image; im=Image.open\\('Assets/src/URP/ColorReplace/SpearmanAttackTest.png'\\); print\\(im.size, im.mode\\)\")",
       "Bash(export SP=\"C:/Users/mattr/AppData/Local/Temp/claude/c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha/b5b80b3d-5023-4e44-88bb-2798d5fb6d0d/scratchpad\")",
       "Bash(python)",
-      "Bash(python \"C:/Users/mattr/AppData/Local/Temp/claude/c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha/b5b80b3d-5023-4e44-88bb-2798d5fb6d0d/scratchpad/recolor.py\")"
+      "Bash(python \"C:/Users/mattr/AppData/Local/Temp/claude/c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha/b5b80b3d-5023-4e44-88bb-2798d5fb6d0d/scratchpad/recolor.py\")",
+      "PowerShell(Get-ChildItem -Path \"Assets\\\\Resources\\\\Sprites\\\\SpriteLayers\" -Recurse -File | Where-Object { $_.Extension -ne '.meta' } | ForEach-Object { $_.FullName.Substring\\(\\(Get-Location\\).Path.Length + 1\\) })",
+      "PowerShell(& \"C:\\\\Users\\\\mattr\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha\\\\cce87464-f7a8-494f-be52-f0393890d397\\\\scratchpad\\\\gen-spritepath.ps1\")",
+      "PowerShell(Select-String -Path \"Assembly-CSharp.csproj\" -Pattern \"UnityEngine\\\\.dll|<HintPath>\" | Select-Object -First 3 | ForEach-Object { $_.Line.Trim\\(\\) })",
+      "Read(//d/2022.3.62f2/Editor/Data/Managed/UnityEngine/**)",
+      "Read(//d/2022.3.62f2/Editor/Data/**)",
+      "PowerShell(& \"C:\\\\Users\\\\mattr\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha\\\\cce87464-f7a8-494f-be52-f0393890d397\\\\scratchpad\\\\compile-check.ps1\" 2>&1)",
+      "PowerShell(& \"C:\\\\Users\\\\mattr\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha\\\\cce87464-f7a8-494f-be52-f0393890d397\\\\scratchpad\\\\compile-check.ps1\" 6>&1)",
+      "PowerShell(git --no-pager diff -U2 -- \"Assets/src/Editor/ResourceEnumGenerator.cs\")",
+      "PowerShell(& \"C:\\\\Users\\\\mattr\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha\\\\cce87464-f7a8-494f-be52-f0393890d397\\\\scratchpad\\\\verify-manifests.ps1\")"
     ]
   }
 }

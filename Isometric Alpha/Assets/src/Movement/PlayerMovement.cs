@@ -82,8 +82,6 @@ public class PlayerMovement : MovementTracker
 
     private static PlayerMovement instance;
 
-    public SpriteRenderer playerSpriteRenderer;
-
     [RuntimeInitializeOnLoadMethod]
     private static void initializePlayerMovement()
     {

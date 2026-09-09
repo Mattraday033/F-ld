@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 793dca42b22ddf14daf64dc3dba3c241
+guid: 538c630bbc8f9a34fa2e7a4dd7bdab56
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,13 +47,13 @@ TextureImporter:
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 9
-  spritePivot: {x: 0.5, y: 0.5}
+  spritePivot: {x: 0.5, y: 0.25}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -97,10 +97,72 @@ TextureImporter:
     serializedVersion: 2
     sprites: []
     outline: []
-    physicsShape: []
+    physicsShape:
+    - - {x: 15, y: -47}
+      - {x: 15, y: -36}
+      - {x: 18, y: -33}
+      - {x: 18, y: -27}
+      - {x: 17, y: -25}
+      - {x: 19, y: -21}
+      - {x: 19, y: -17}
+      - {x: 21, y: -13}
+      - {x: 21, y: -10}
+      - {x: 22, y: -9}
+      - {x: 22, y: -7}
+      - {x: 26, y: -3}
+      - {x: 26, y: 7}
+      - {x: 25, y: 8}
+      - {x: 23, y: 16}
+      - {x: 21, y: 19}
+      - {x: 15, y: 22}
+      - {x: 11, y: 25}
+      - {x: 13, y: 28}
+      - {x: 13, y: 31}
+      - {x: 15, y: 34}
+      - {x: 15, y: 42}
+      - {x: 13, y: 47}
+      - {x: 10, y: 50}
+      - {x: 7, y: 51}
+      - {x: -3, y: 51}
+      - {x: -8, y: 49}
+      - {x: -11, y: 46}
+      - {x: -12, y: 43}
+      - {x: -12, y: 27}
+      - {x: -11, y: 26}
+      - {x: -12, y: 25}
+      - {x: -15, y: 23}
+      - {x: -17, y: 18}
+      - {x: -17, y: 14}
+      - {x: -18, y: 13}
+      - {x: -18, y: 5}
+      - {x: -15, y: 2}
+      - {x: -15, y: 0}
+      - {x: -16, y: -1}
+      - {x: -17, y: -9}
+      - {x: -19, y: -11}
+      - {x: -19, y: -17}
+      - {x: -15, y: -21}
+      - {x: -15, y: -33}
+      - {x: -11, y: -37}
+      - {x: -11, y: -42}
+      - {x: -14, y: -45}
+      - {x: -15, y: -45}
+      - {x: -18, y: -48}
+      - {x: -18, y: -52}
+      - {x: -16, y: -54}
+      - {x: -9, y: -54}
+      - {x: -8, y: -53}
+      - {x: -5, y: -53}
+      - {x: -5, y: -56}
+      - {x: -4, y: -58}
+      - {x: -1, y: -59}
+      - {x: 5, y: -59}
+      - {x: 12, y: -56}
+      - {x: 16, y: -51}
+      - {x: 16, y: -48}
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []

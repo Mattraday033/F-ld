@@ -70,27 +70,27 @@ public static class SpawnInfoManager
 
         allSpawnedObjects.AddRange(spawnPlayer());
 
-        allSpawnedObjects.AddRange(spawnAllInteractables());
+        // allSpawnedObjects.AddRange(spawnAllInteractables());
 
         spawnAllTransitions();
 
-        allSpawnedObjects.AddRange(instantiateAllAxisSpawnDetails());
+        // allSpawnedObjects.AddRange(instantiateAllAxisSpawnDetails());
 
-        PartyMemberTrainManager.createPartyMemberTrain();
+        // PartyMemberTrainManager.createPartyMemberTrain();
 
-        performButtonScriptStartingAction();
+        // performButtonScriptStartingAction();
 
-        spawnAllMonsters();
+        // spawnAllMonsters();
 
-        TrapAndButtonStateManager.setTrapsAndButtons();
+        // TrapAndButtonStateManager.setTrapsAndButtons();
 
         if(lastSaveBlueprint != null)
         {
-            PartyMemberPlacer.placeAllPartyMembers();
+            // PartyMemberPlacer.placeAllPartyMembers();
             lastSaveBlueprint = null;
         } else if(TrapAndButtonStateManager.trapKeyCount() <= 0)
         {
-            setDefaultTrapStates();
+            // setDefaultTrapStates();
         }
     }
 

@@ -15,7 +15,6 @@ public static class SaveDefaultValues
     public const bool defaultBoolFalse = false;
     public const bool defaultBoolTrue = true;
 
-    public const string defaultOverworldSpriteSortingLayer = "First";
     public const string defaultPlayerName = "Brandon";
 
     public const string defaultPortraitName = NPCNameList.thatch;

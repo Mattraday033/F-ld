@@ -21,8 +21,8 @@ public class PlayerObject : MonoBehaviour
     public GameObject pressButtonPrompt;
     public LayoutElement pressButtonPromptBackgroundLayout;
     public TextMeshProUGUI pressButtonPromptText;
-    public AnimationManager animationManager;
-    public SpriteRenderer playerSpriteRenderer;
+    // public AnimationManager animationManager;
+    // public SpriteRenderer playerSpriteRenderer;
 
     public MapPopUpButton mapPopUpButton;
     public WorldMapPopUpButton worldMapPopUpButton;
@@ -46,11 +46,11 @@ public class PlayerObject : MonoBehaviour
         instance = this;
 
         setAsCameraTarget();
-        animationManager.setAnimations(PartyManager.getPlayer().getName());
+        // animationManager.setAnimations(PartyManager.getPlayer().getName());
 
         playerMovement.Awake();
         playerMovement.updateFacing();
-        playerMovement.updateIdleDirection();
+        // playerMovement.updateIdleDirection();
         
         TerrainVisibilityManager.initializeOnTransition();
 
@@ -92,7 +92,7 @@ public class PlayerObject : MonoBehaviour
     {
         transitionCollider.enabled = toggleHover;
         terrainCollider.enabled = toggleHover;
-        animationManager.polygonCollider2D.enabled = toggleHover;
+        // animationManager.polygonCollider2D.enabled = toggleHover;
     }
 
     private void setAsCameraTarget()
@@ -118,28 +118,28 @@ public class PlayerObject : MonoBehaviour
 
     public static void hidePlayerSprite()
     {
-        if(instance == null || 
-            instance.playerSpriteRenderer == null ||
-            instance.animationManager == null)
-        {
-            return;
-        }
+        // if(instance == null || 
+        //     instance.playerSpriteRenderer == null ||
+        //     instance.animationManager == null)
+        // {
+        //     return;
+        // }
 
-        instance.playerSpriteRenderer.color = Color.clear;
-        instance.animationManager.disableExtras();
+        // instance.playerSpriteRenderer.color = Color.clear;
+        // instance.animationManager.disableExtras();
     }
 
     public static void showPlayerSprite()
     {
-        if(instance == null || 
-            instance.playerSpriteRenderer == null ||
-            instance.animationManager == null)
-        {
-            return;
-        }
+        // if(instance == null || 
+        //     instance.playerSpriteRenderer == null ||
+        //     instance.animationManager == null)
+        // {
+        //     return;
+        // }
 
-        instance.playerSpriteRenderer.color = Color.white;
-        instance.animationManager.enableExtras();
+        // instance.playerSpriteRenderer.color = Color.white;
+        // instance.animationManager.enableExtras();
     }
 
     public static bool isBehindTerrain()
@@ -350,7 +350,8 @@ public class PlayerObject : MonoBehaviour
 
     public static AnimationManager getAnimationManager()
     {
-        return instance.animationManager;
+        return null;
+        // return instance.animationManager;
     }
 
     public static void playLevelUpEffect()
@@ -391,14 +392,14 @@ public class PlayerObject : MonoBehaviour
 
     public static void playDeathAnimation()
     {
-        if(instance == null || instance.animationManager == null)
-        {
-            return;
-        }
+        // if(instance == null || instance.animationManager == null)
+        // {
+        //     return;
+        // }
 
-        AnimationManager animationManager = getAnimationManager();
+        // AnimationManager animationManager = getAnimationManager();
 
-        animationManager.playDeathAnimation();
+        // animationManager.playDeathAnimation();
     }
 
     public static void spawnGameOverPopUp()
@@ -426,12 +427,12 @@ public class PlayerObject : MonoBehaviour
 
     public static void setSpriteSortingLayer(SortingLayerInfo sortingLayerInfo)
     {
-        if(instance == null || instance.playerSpriteRenderer == null)
-        {
-            return;
-        }
+        // if(instance == null || instance.playerSpriteRenderer == null)
+        // {
+        //     return;
+        // }
 
-        sortingLayerInfo.setRendererSortingLayer(instance.playerSpriteRenderer);
+        // sortingLayerInfo.setRendererSortingLayer(instance.playerSpriteRenderer);
     }
 
 }

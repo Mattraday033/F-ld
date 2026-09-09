@@ -146,13 +146,13 @@ public class DropInFromAboveTransitionScript : PlayerInteractionScript
 
     private float player_spriteHeight()
     {
-        PlayerObject player = PlayerObject.getInstance();
+        // PlayerObject player = PlayerObject.getInstance();
 
-        if (player == null || player.playerSpriteRenderer == null)
-        {
+        // if (player == null || player.playerSpriteRenderer == null)
+        // {
             return 0f;
-        }
+        // }
 
-        return player.playerSpriteRenderer.bounds.size.y;
+        // return player.playerSpriteRenderer.bounds.size.y;
     }
 }

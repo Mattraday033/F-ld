@@ -229,48 +229,53 @@ public enum ColorReplaceSlot
     P
 }
 
-public enum SpriteSection
+public enum SpriteLayer
 {
+    Shield_Back,
     Weapon,
     Body,
+    Cloak,
     Face,
     Hair,
-    Cloak,
-    Shield
+    Shield_Front
 }
 
 public class ColorReplaceSchema
 {
+    private readonly Dictionary<ColorReplaceSlot, Color> shieldBack;
     private readonly Dictionary<ColorReplaceSlot, Color> weapon;
     private readonly Dictionary<ColorReplaceSlot, Color> body;
+    private readonly Dictionary<ColorReplaceSlot, Color> cloak;
     private readonly Dictionary<ColorReplaceSlot, Color> face;
     private readonly Dictionary<ColorReplaceSlot, Color> hair;
-    private readonly Dictionary<ColorReplaceSlot, Color> cloak;
-    private readonly Dictionary<ColorReplaceSlot, Color> shield;
+    private readonly Dictionary<ColorReplaceSlot, Color> shieldFront;
 
-    public Color getColor(SpriteSection section, ColorReplaceSlot slot)
+    public Color getColor(SpriteLayer section, ColorReplaceSlot slot)
     {
         Dictionary<ColorReplaceSlot, Color> dict;
 
         switch(section)
         {
-            case SpriteSection.Weapon:
+            case SpriteLayer.Shield_Back:
+                dict = shieldBack;
+                break;
+            case SpriteLayer.Weapon:
                 dict = weapon;
                 break;
-            case SpriteSection.Body:
+            case SpriteLayer.Body:
                 dict = body;
                 break;
-            case SpriteSection.Face:
-                dict = face;
-                break;
-            case SpriteSection.Hair:
-                dict = hair;
-                break;
-            case SpriteSection.Cloak:
+            case SpriteLayer.Cloak:
                 dict = cloak;
                 break;
-            case SpriteSection.Shield:
-                dict = shield;
+            case SpriteLayer.Face:
+                dict = face;
+                break;
+            case SpriteLayer.Hair:
+                dict = hair;
+                break;
+            case SpriteLayer.Shield_Front:
+                dict = shieldFront;
                 break;
 
             default:
@@ -286,13 +291,23 @@ public class ColorReplaceSchema
         }
     }
 
-    public ColorReplaceSchema(Dictionary<ColorReplaceSlot, Color> weapon = null,
+    public ColorReplaceSchema(  Dictionary<ColorReplaceSlot, Color> shieldBack = null,
+                                Dictionary<ColorReplaceSlot, Color> weapon = null,
                                 Dictionary<ColorReplaceSlot, Color> body = null,
+                                Dictionary<ColorReplaceSlot, Color> cloak = null,
                                 Dictionary<ColorReplaceSlot, Color> face = null,
                                 Dictionary<ColorReplaceSlot, Color> hair = null,
-                                Dictionary<ColorReplaceSlot, Color> cloak = null,
-                                Dictionary<ColorReplaceSlot, Color> shield = null)
+                                Dictionary<ColorReplaceSlot, Color> shieldFront = null)
     {
+
+        if(shieldBack != null)
+        {
+            this.shieldBack = shieldBack;
+        } else
+        {
+            this.shieldBack = getDefaultReplaceSchema();
+        }
+
         if(weapon != null)
         {
             this.weapon = weapon;
@@ -307,6 +322,14 @@ public class ColorReplaceSchema
         } else
         {
             this.body = getDefaultReplaceSchema();
+        }
+        
+        if(cloak != null)
+        {
+            this.cloak = cloak;
+        } else
+        {
+            this.cloak = getDefaultReplaceSchema();
         }
 
         if(face != null)
@@ -325,20 +348,12 @@ public class ColorReplaceSchema
             this.hair = getDefaultReplaceSchema();
         }
 
-        if(cloak != null)
+        if(shieldFront != null)
         {
-            this.cloak = cloak;
+            this.shieldFront = shieldFront;
         } else
         {
-            this.cloak = getDefaultReplaceSchema();
-        }
-
-        if(shield != null)
-        {
-            this.shield = shield;
-        } else
-        {
-            this.shield = getDefaultReplaceSchema();
+            this.shieldFront = getDefaultReplaceSchema();
         }
     }
 

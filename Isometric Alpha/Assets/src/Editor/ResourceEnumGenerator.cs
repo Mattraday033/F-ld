@@ -34,6 +34,15 @@ public class ResourceEnumDefinition
     // N + ReservedMemberNames.Length. The matching runtime reservedKeyCount must equal this length.
     public string[] ReservedMemberNames = Array.Empty<string>();
 
+    // Names members after the asset's whole path below SourceFolderPath
+    // (Body_LovashiArmor_Run_Front) rather than after its file name. Opt-in, because it is only the
+    // right answer when the leaf file names are a small shared vocabulary that repeats across
+    // sibling folders by design - sprite layers, where every variant owns its own Run_Front. For
+    // asset sets whose file name is already the unique thing about them (audio clips, ink stories)
+    // the default keeps members short and pays for a folder prefix only where two files actually
+    // clash.
+    public bool UseFullPathMemberNames = false;
+
     // Extensions Unity actually imports as the target asset type. Filtering on these drops .meta
     // files and anything Unity cannot import, which must not enter the enum.
     public HashSet<string> Extensions;
@@ -67,6 +76,7 @@ public static class ResourceEnumGenerator
         {
             yield return SFXTypeGenerator.Definition;
             yield return DialogueKeyGenerator.Definition;
+            yield return SpritePathGenerator.Definition;
         }
     }
 
@@ -202,10 +212,30 @@ public static class ResourceEnumGenerator
 
     /// <summary>
     /// One enum member name per asset path, positionally matched to <paramref name="assetPaths"/>.
-    /// Unique file names stay bare (Splash); names shared by several folders take their folder as a
-    /// prefix (MaleHuman_Death, SECamp_Carter), since an enum can't hold duplicate members.
+    /// Which naming strategy applies is the definition's choice; both route every candidate through
+    /// MakeUnique against the same used-name set, so whatever the asset folder comes to contain, the
+    /// generated enum compiles.
     /// </summary>
     private static List<string> BuildEnumMemberNames(ResourceEnumDefinition definition, List<string> assetPaths)
+    {
+        // Seeded with the reserved names so an asset file literally called NoSFX is renamed rather
+        // than silently duplicating the sentinel.
+        HashSet<string> usedNames = new HashSet<string>(definition.ReservedMemberNames, StringComparer.Ordinal);
+
+        if (definition.UseFullPathMemberNames)
+        {
+            return BuildFullPathMemberNames(definition, assetPaths, usedNames);
+        }
+
+        return BuildFileNameMemberNames(assetPaths, usedNames);
+    }
+
+    /// <summary>
+    /// The default naming. Unique file names stay bare (Splash); names shared by several folders
+    /// take their folder as a prefix (MaleHuman_Death, SECamp_Carter), since an enum can't hold
+    /// duplicate members.
+    /// </summary>
+    private static List<string> BuildFileNameMemberNames(List<string> assetPaths, HashSet<string> usedNames)
     {
         List<string> fileNames = assetPaths
             .Select(path => SanitizeIdentifier(Path.GetFileName(path)))
@@ -221,10 +251,6 @@ public static class ResourceEnumGenerator
 
         List<string> memberNames = new List<string>(assetPaths.Count);
 
-        // Seeded with the reserved names so an asset file literally called NoSFX is renamed rather
-        // than silently duplicating the sentinel.
-        HashSet<string> usedNames = new HashSet<string>(definition.ReservedMemberNames, StringComparer.Ordinal);
-
         for (int i = 0; i < assetPaths.Count; i++)
         {
             string memberName = fileNames[i];
@@ -236,6 +262,46 @@ public static class ResourceEnumGenerator
             }
 
             memberNames.Add(MakeUnique(memberName, usedNames));
+        }
+
+        return memberNames;
+    }
+
+    /// <summary>
+    /// Path-qualified naming: every folder between the source folder and the asset becomes a segment
+    /// of the member name, so Sprites/SpriteLayers/Body/Lovashi Armor/Run_Front becomes
+    /// Body_LovashiArmor_Run_Front. Nothing here is conditional on collisions - the path is the
+    /// identity whether or not the file name happens to be unique today - because a member that
+    /// gained or lost a folder prefix as siblings came and went would rename itself out from under
+    /// every call site.
+    ///
+    /// Separators are swapped for underscores *before* sanitizing rather than sanitizing each
+    /// segment and joining afterwards: SanitizeIdentifier drops '/' outright, since it isn't
+    /// identifier-legal, so sanitizing first would fuse the segments into BodyLovashiArmorRun_Front.
+    /// This order also runs the leading-digit guard once, on the finished name, rather than once per
+    /// segment.
+    /// </summary>
+    private static List<string> BuildFullPathMemberNames(
+        ResourceEnumDefinition definition, List<string> assetPaths, HashSet<string> usedNames)
+    {
+        // assetPaths are Resources-relative (Sprites/SpriteLayers/Body/...) while SourceFolderPath is
+        // Assets-relative (Assets/Resources/Sprites/SpriteLayers), so the prefix to strip has to be
+        // put into the same shape before it will match. TrimEnd tolerates a definition that writes
+        // the folder with a trailing slash.
+        string sourceFolder = definition.SourceFolderPath.Substring(ResourcesPrefix.Length).TrimEnd('/') + "/";
+
+        List<string> memberNames = new List<string>(assetPaths.Count);
+
+        foreach (string assetPath in assetPaths)
+        {
+            // CollectAssetPaths only ever walks below the source folder, so this guard is belt and
+            // braces - but a path that somehow isn't below it keeps its whole name rather than
+            // throwing out of a generator that runs on every asset import.
+            string relativePath = assetPath.StartsWith(sourceFolder, StringComparison.Ordinal)
+                ? assetPath.Substring(sourceFolder.Length)
+                : assetPath;
+
+            memberNames.Add(MakeUnique(SanitizeIdentifier(relativePath.Replace('/', '_')), usedNames));
         }
 
         return memberNames;
