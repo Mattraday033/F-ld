@@ -517,7 +517,9 @@ public struct TutorialSequenceStep : IDescribable
                     {
                         if (currentSelector.hasAtLeastOneTarget(SelectorManager.enemyTagCriteria))
                         {
-                            if (CombatGrid.enemyHasMandatoryTarget() && !currentSelector.hasAtLeastOneMandatoryTarget() && !loadedCombatAction.isSelfTargeting())
+                            if (CombatGrid.enemyHasMandatoryTarget(out Stats mandatoryTarget) &&
+                                !currentSelector.hasAtLeastOneMandatoryTarget() && 
+                                !loadedCombatAction.isSelfTargeting())
                             {
                                 return false;
                             }
@@ -529,7 +531,9 @@ public struct TutorialSequenceStep : IDescribable
                     {
                         if (currentSelector.hasAtLeastOneLivingTarget(SelectorManager.enemyTagCriteria))
                         {
-                            if (CombatGrid.enemyHasMandatoryTarget() && !currentSelector.hasAtLeastOneMandatoryTarget() && !loadedCombatAction.isSelfTargeting())
+                            if (CombatGrid.enemyHasMandatoryTarget(out Stats mandatoryTarget) && 
+                                !currentSelector.hasAtLeastOneMandatoryTarget() && 
+                                !loadedCombatAction.isSelfTargeting())
                             {
                                 return false;
                             }

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.Events; 
 
 
-public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescribableInBlocks
+public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, ICostumeSource
 {
 
     #region Constants
@@ -166,7 +166,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual GameObject instantiateCombatSprite(List<GridCoords> initialPositions)
     {
-        combatSprite = Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
+        combatSprite = GameObject.Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
 
         positions = initialPositions.Select(p => p.clone()).ToList();
 
@@ -225,6 +225,8 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
         }
     }
 
+    public abstract Costume getCostume();
+
     private void setToDeadIdle()
     {
         if(positions.Count <= 0)
@@ -282,7 +284,7 @@ public abstract class Stats : ScriptableObject, ICloneable, IDescribable, IDescr
 
     public virtual void destroyCombatSprite()
     {
-        Destroy(combatSprite);
+        GameObject.Destroy(combatSprite);
     }
 
     public void playSpawnAnimation()

@@ -1,7 +1,7 @@
-Sprites/SpriteLayers/Body/Lovashi Armor/OOC_Idle_Back
-Sprites/SpriteLayers/Body/Lovashi Armor/OOC_Idle_Front
-Sprites/SpriteLayers/Body/Lovashi Armor/Run_Back
-Sprites/SpriteLayers/Body/Lovashi Armor/Run_Front
+Sprites/SpriteLayers/Body/Lovashi Armor/NoWeapon/OOC_Idle_Back
+Sprites/SpriteLayers/Body/Lovashi Armor/NoWeapon/OOC_Idle_Front
+Sprites/SpriteLayers/Body/Lovashi Armor/NoWeapon/Run_Back
+Sprites/SpriteLayers/Body/Lovashi Armor/NoWeapon/Run_Front
 Sprites/SpriteLayers/Face/Short_Goatee/OOC_Idle_Front
 Sprites/SpriteLayers/Hair/Short_1
-Sprites/SpriteLayers/Weapon/Spear (Simple)/Idle_Front
+Sprites/SpriteLayers/Weapon/SpearSimple/Idle_Front

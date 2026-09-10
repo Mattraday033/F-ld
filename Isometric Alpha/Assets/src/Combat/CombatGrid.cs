@@ -524,14 +524,18 @@ public static class CombatGrid
 		return allSpaces;
 	}
 	
-	public static Stats enemyHasMandatoryTarget()
+	public static bool enemyHasMandatoryTarget(out Stats mandatoryTarget)
 	{
-		return getMandatoryTargetFromList(getAllAliveEnemyCombatants());
+        mandatoryTarget = getMandatoryTargetFromList(getAllAliveEnemyCombatants());
+
+		return mandatoryTarget != null;
 	}
 	
-	public static Stats allyHasMandatoryTarget()
-	{		
-		return getMandatoryTargetFromList(getAllAliveAllyCombatants());
+	public static bool allyHasMandatoryTarget(out Stats mandatoryTarget)
+	{
+        mandatoryTarget = getMandatoryTargetFromList(getAllAliveAllyCombatants());
+
+		return mandatoryTarget != null;
 	}
 
 	private static Stats getMandatoryTargetFromList(List<Stats> targets)

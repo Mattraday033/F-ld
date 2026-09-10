@@ -21,6 +21,9 @@ public static class SpriteList
     private const int reservedSpritePathCount = 1;
     public const string spriteLayerFilePathsFileName = "SpriteLayerFilePaths";
 
+    private readonly static Sprite blankTexture = Resources.Load<Sprite>(PrefabNames.blankTexture);
+    private readonly static Sprite[] blankTextureArray = new Sprite[]{ Resources.Load<Sprite>(PrefabNames.blankTexture) };
+
     private readonly static ResourceList<SpritePath, Sprite> sprites =
         new ResourceList<SpritePath, Sprite>(spriteLayerFilePathsFileName,
                                              reservedSpritePathCount,
@@ -51,7 +54,19 @@ public static class SpriteList
     /// </summary>
     public static Sprite[] getSprites(SpritePath spritePath)
     {
-        return sprites.getAssets(spritePath);
+        if(spritePath == SpritePath.NoSprite)
+        {
+            return blankTextureArray;
+        }
+
+        Sprite[] spritesAtPath = sprites.getAssets(spritePath);
+
+        if(spritesAtPath.Length <= 0)
+        {
+            return blankTextureArray;
+        }
+
+        return spritesAtPath;
     }
 
     /// <summary>
@@ -60,6 +75,18 @@ public static class SpriteList
     /// </summary>
     public static Sprite getSprite(SpritePath spritePath)
     {
-        return sprites.getAsset(spritePath);
+        if(spritePath == SpritePath.NoSprite)
+        {
+            return blankTexture;
+        }
+
+        Sprite spriteAtPath = sprites.getAsset(spritePath);
+
+        if(spriteAtPath == null)
+        {
+            return blankTexture;
+        }
+
+        return spriteAtPath;
     }
 }

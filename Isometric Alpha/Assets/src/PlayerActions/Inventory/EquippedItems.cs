@@ -6,7 +6,7 @@ using UnityEngine.Events;
 using System.Linq;
 using System;
 
-public class EquippedItems : StatBoostSourceCombiner, ICloneable
+public class EquippedItems : StatBoostSourceCombiner, ICloneable, ICostumeSource
 {
     public const int totalEquipmentSlots = 6;
     public readonly static UnityEvent OnEquipmentChange = new UnityEvent();
@@ -300,5 +300,10 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable
     }
 
     #endregion
+
+    public Costume getCostume()
+    {
+        return Costume.getDefaultCostume();
+    }
 
 }

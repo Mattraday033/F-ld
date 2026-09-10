@@ -294,7 +294,9 @@ public class SelectorManager : MonoBehaviour
 			{
 				if (currentSelector.hasAtLeastOneTarget(enemyTagCriteria))
 				{
-					if (CombatGrid.enemyHasMandatoryTarget() && !currentSelector.hasAtLeastOneMandatoryTarget() && !loadedCombatAction.isSelfTargeting())
+					if (CombatGrid.enemyHasMandatoryTarget(out Stats mandatoryTarget) &&
+                        !currentSelector.hasAtLeastOneMandatoryTarget() &&
+                        !loadedCombatAction.isSelfTargeting())
 					{
                         AudioManager.playCannotChooseActorAbilityLocationSFX();
                         CombatantHover.HighlightAllMandatoryTargets.Invoke();
@@ -322,7 +324,9 @@ public class SelectorManager : MonoBehaviour
 				{
 					if (currentSelector.hasAtLeastOneLivingTarget(enemyTagCriteria))
 					{
-						if (CombatGrid.enemyHasMandatoryTarget() && !currentSelector.hasAtLeastOneMandatoryTarget() && !loadedCombatAction.isSelfTargeting())
+						if (CombatGrid.enemyHasMandatoryTarget(out Stats mandatoryTarget) &&
+                            !currentSelector.hasAtLeastOneMandatoryTarget() && 
+                            !loadedCombatAction.isSelfTargeting())
 						{
                             AudioManager.playCannotChooseActorAbilityLocationSFX();
                             CombatantHover.HighlightAllMandatoryTargets.Invoke();

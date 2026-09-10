@@ -121,7 +121,7 @@ public static class PartyMemberList
 
         PartyMember defaultPartyMember = getResetPartyMember(NPCNameList.carter);
 
-        defaultPartyMember.stats.name = biffName;
+        defaultPartyMember.stats.characterName = biffName;
 
         return defaultPartyMember;
     }

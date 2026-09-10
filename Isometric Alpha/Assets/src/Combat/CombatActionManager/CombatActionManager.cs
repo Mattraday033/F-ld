@@ -205,9 +205,7 @@ public class CombatActionManager : MonoBehaviour
 	
 	public void promptLaterCombatActionsToFindNewTarget()
 	{
-		Stats mandatoryTargetAlly = CombatGrid.allyHasMandatoryTarget();
-
-		if (mandatoryTargetAlly == null)
+		if (!CombatGrid.allyHasMandatoryTarget(out Stats mandatoryTargetAlly))
 		{
 			return;
 		}

@@ -65,7 +65,7 @@ public class AllyStats : Stats
 
     public AllyStats(string name, int Str, int Dex, int Wis, int Cha) : base(name) 
     {
-        this.name = name;
+        this.characterName = name;
 
         this.strength = Str;
         this.dexterity = Dex;
@@ -84,7 +84,7 @@ public class AllyStats : Stats
 
     public AllyStats(StatsWrapper wrapper) : base(wrapper.key)
     {
-        this.name = wrapper.key;
+        this.characterName = wrapper.key;
 
         this.strength = wrapper.strength;
         this.dexterity = wrapper.dexterity;
@@ -788,6 +788,12 @@ public class AllyStats : Stats
     #endregion
 
     #region Equipment
+    
+    public override Costume getCostume()
+    {
+        return equippedItems.getCostume();
+    }
+    
     public override EquippedItems getEquippedItems()
     {
         return equippedItems;

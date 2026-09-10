@@ -1198,23 +1198,4 @@ public static class EnemyPackInfoList
 
         #endregion
     }
-
-
-
-
-
-    private static EnemyStats loadEnemyStatsFromResources(string enemyStatsName)
-    {
-        EnemyStats loadedStats = Resources.Load<EnemyStats>(enemyStatsName);
-
-        if (loadedStats == null)
-        {
-            Debug.LogError("Couldn't find any EnemyStats object named: '" + enemyStatsName + "'");
-        }
-
-        return loadedStats;
-    }
-
-
-
 }

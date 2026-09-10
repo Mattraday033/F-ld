@@ -5,9 +5,77 @@ using UnityEngine.Events;
 using System;
 using System.Linq;
 
+public interface ICostumeSource
+{
+    public Costume getCostume();
+}
+
 public class NewAnimationManager : MonoBehaviour
 {
     public PolygonCollider2D polygonCollider2D;
+    public SpriteLayerRendererList rendererList;
+
+    private CharacterAnimationType _CurrentIdle;
+    public CharacterAnimationType currentIdle
+    {
+        set
+        {
+            switch(value)
+            {
+                case CharacterAnimationType.Idle_Back:
+                case CharacterAnimationType.Idle_Front:
+                case CharacterAnimationType.OOC_Idle_Back:
+                case CharacterAnimationType.OOC_Idle_Front:
+                case CharacterAnimationType.Death_Back:
+                case CharacterAnimationType.Death_Front:
+                case CharacterAnimationType.Secondary_Idle_Back:
+                case CharacterAnimationType.Secondary_Idle_Front:
+                case CharacterAnimationType.Secondary_Death:
+                    _CurrentIdle = value;
+                    return;
+            }   
+        }
+        private get
+        {
+            return _CurrentIdle;
+        }
+    }
+
+    public Coroutine currentAnimation;
+
+    private ICostumeSource _CostumeSource;
+    public ICostumeSource costumeSource
+    {
+        set
+        {
+            _CostumeSource = value;
+            playAnimation(currentIdle);
+        }
+    }
+    public Costume costume
+    {
+        get
+        {
+            return _CostumeSource.getCostume();
+        }
+    }
+
+    public void playAnimation(CharacterAnimationType animationType)
+    {
+        currentIdle = animationType;
+
+        switch(animationType)
+        {
+            case CharacterAnimationType.OOC_Idle_Front:
+
+                
+
+                return;
+            default:
+                return;
+        }
+    }
+
 
 
 /*

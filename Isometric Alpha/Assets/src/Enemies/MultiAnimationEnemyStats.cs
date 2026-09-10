@@ -61,7 +61,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
         foreach(GridCoords coords in spawnDetails.allSpawnPositions)
         {
-            combatSprites[coords] = Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
+            combatSprites[coords] = GameObject.Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
 
             if(getName().Contains(NPCNameList.barricade))
             {
@@ -132,7 +132,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
     {
         foreach(GameObject gameObject in combatSprites.Values)
         {
-            Destroy(gameObject);
+            GameObject.Destroy(gameObject);
         }
     }
 

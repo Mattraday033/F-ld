@@ -308,9 +308,9 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         //loadedCombatAction.getSelector().setToStartLocation();
 
-        Stats mandatoryTarget = CombatGrid.enemyHasMandatoryTarget();
-
-        if (mandatoryTarget != null && !loadedCombatAction.getSelector().hasAtLeastOneMandatoryTarget() && loadedCombatAction.getSelector().singleTile())
+        if (CombatGrid.enemyHasMandatoryTarget(out Stats mandatoryTarget) &&
+            !loadedCombatAction.getSelector().hasAtLeastOneMandatoryTarget() && 
+            loadedCombatAction.getSelector().singleTile())
         {
             GridCoords mandatoryTargetCoords = mandatoryTarget.positions.Count > 0 ? mandatoryTarget.positions[0] : GridCoords.getDefaultCoords();
 

@@ -78,6 +78,11 @@ public class EnemyStats : Stats
 
     #region Sprite and GameObject
 
+    public override Costume getCostume()
+    {
+        return Costume.getDefaultCostume();
+    }
+
     public override GameObject instantiateCombatSprite(List<GridCoords> coords)
     {
         SpawnDetails spawnDetails = obtainSpawnDetails();
