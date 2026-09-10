@@ -40,10 +40,10 @@ public class PlayerMovement : MovementTracker
     {
         return MovementManager.playerSpriteIndex;
     }
-    public override AnimationManager getAnimationManager()
-    {
-        return PlayerObject.getAnimationManager();
-	}
+    // public override AnimationManager getAnimationManager()
+    // {
+    //     return PlayerObject.getAnimationManager();
+	// }
 
     public static void updatePlayerFacing()
     {
@@ -57,10 +57,10 @@ public class PlayerMovement : MovementTracker
 
 	public override void setFacing(Facing newFacing)
 	{
-        State.playerFacing.setFacing(newFacing);
-		getCharacterFacing().setFacing(newFacing);
+        State.playerFacing.currentFacing = newFacing;
+		getCharacterFacing().currentFacing = newFacing;
 
-        updateAnimationDirection();
+        // updateAnimationDirection();
 	}
 
 	public override CharacterFacing getCharacterFacing()
@@ -100,7 +100,8 @@ public class PlayerMovement : MovementTracker
 
     public void preventAnimationStall(int index)
     {
-        if(index != getMovementIndex() || getAnimationManager() == null)
+        if(index != getMovementIndex())
+        //  || getAnimationManager() == null)
         {
             return;
         }
@@ -112,10 +113,10 @@ public class PlayerMovement : MovementTracker
     {
         yield return null;
 
-        if(getAnimationManager().animancer.enabled && !canPlayRunAnimation())
-        {
-            getAnimationManager().haltAllAnimations();
-        }
+        // if(getAnimationManager().animancer.enabled && !canPlayRunAnimation())
+        // {
+        //     getAnimationManager().haltAllAnimations();
+        // }
     }
 
     public static void updateStartEndPosition()

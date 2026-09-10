@@ -97,19 +97,19 @@ public class CunningBlocker : CunningObject
         {
             foreach(MovementTracker movementTracker in MovementManager.allMovementTrackers)
             {
-                if(movementTracker != PlayerMovement.getInstance() &&
-                    movementTracker != null &&
-                    movementTracker.getAnimationManager() != null &&
-                    movementTracker.getCell().Equals(coord))
-                {
-                    movementTracker.getAnimationManager().playDeathAnimationThenHide();
-                    EnemyMovement enemyMovement = movementTracker as EnemyMovement;
+                // if(movementTracker != PlayerMovement.getInstance() &&
+                //     movementTracker != null &&
+                //     movementTracker.getAnimationManager() != null &&
+                //     movementTracker.getCell().Equals(coord))
+                // {
+                //     movementTracker.getAnimationManager().playDeathAnimationThenHide();
+                //     EnemyMovement enemyMovement = movementTracker as EnemyMovement;
 
-                    if(enemyMovement != null)
-                    {
-                        enemyMovement.setToDefeated();
-                    }
-                }
+                //     if(enemyMovement != null)
+                //     {
+                //         enemyMovement.setToDefeated();
+                //     }
+                // }
             }
         }
     }

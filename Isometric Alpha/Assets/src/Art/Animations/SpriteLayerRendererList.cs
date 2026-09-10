@@ -50,4 +50,12 @@ public class SpriteLayerRendererList : MonoBehaviour
         get { return spriteLayers[layer]; }
     }
 
+    public void setFlipX(bool flip)
+    {
+        foreach(SpriteRenderer renderer in spriteLayers.Values)
+        {
+            renderer.flipX = flip;
+        }
+    }
+
 }

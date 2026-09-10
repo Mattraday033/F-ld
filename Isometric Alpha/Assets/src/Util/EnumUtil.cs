@@ -116,12 +116,94 @@ public static class EnumUtil
         }
     }
 
-    public static string getMaterialVARName(this ColorReplaceSlot slot)
+    public static string getMaterialVARName(this ColorReplacementSlot slot)
     {
         return "_"+slot.ToString()+"_Replace";
     }
 
-    public static IEnumerable<T> getValues<T>() {
+	public static Facing getOpposingFacing(this Facing facing)
+	{
+        switch(facing)
+        {
+            case Facing.NorthEast:
+                return Facing.SouthWest;
+            case Facing.NorthWest:
+                return Facing.SouthEast;            
+            case Facing.SouthWest:
+                return Facing.NorthEast;
+            case Facing.SouthEast:
+                return Facing.NorthWest;
+            default:
+                return CharacterFacing.getRandomFacing();
+        }
+	}
+
+    private static IEnumerable<T> getValues<T>() {
         return (T[]) Enum.GetValues(typeof(T));
     }
+
+    public static CharacterAnimationType nextAnimationType(this CharacterAnimationType animationType)
+    {
+        switch(animationType)
+        {
+            case CharacterAnimationType.Stand_Up_Front:
+                return CharacterAnimationType.OOC_Idle_Front;            
+            case CharacterAnimationType.Stand_Up_Back:
+                return CharacterAnimationType.OOC_Idle_Back;
+
+
+            case CharacterAnimationType.Attack_Special_Front:
+                return CharacterAnimationType.Attack_Normal_Front;
+
+            case CharacterAnimationType.Attack_Special_Back:
+                return CharacterAnimationType.Attack_Normal_Back;
+
+
+            case CharacterAnimationType.Death_Front:
+            case CharacterAnimationType.Wounded_Front:
+            case CharacterAnimationType.Secondary_Idle_Front:
+            case CharacterAnimationType.Spawn_Front:
+            case CharacterAnimationType.Attack_Normal_Front:
+                return CharacterAnimationType.Idle_Front;
+
+            case CharacterAnimationType.Death_Back:
+            case CharacterAnimationType.Wounded_Back:
+            case CharacterAnimationType.Secondary_Idle_Back:
+            case CharacterAnimationType.Spawn_Back:
+            case CharacterAnimationType.Attack_Normal_Back:
+                return CharacterAnimationType.Idle_Back;
+
+            case CharacterAnimationType.Run_Front_Left:
+            case CharacterAnimationType.Run_Front_Right:
+                return CharacterAnimationType.Run_Front;
+
+            case CharacterAnimationType.Run_Back_Left:
+            case CharacterAnimationType.Run_Back_Right:
+                return CharacterAnimationType.Run_Back;
+
+            case CharacterAnimationType.Vertical_Falling:
+            case CharacterAnimationType.Idle_Front:
+            case CharacterAnimationType.Run_Front:
+                return CharacterAnimationType.OOC_Idle_Front;
+
+            case CharacterAnimationType.Run_Back:
+            case CharacterAnimationType.Idle_Back:
+                return CharacterAnimationType.OOC_Idle_Back;
+
+
+            default:
+                return CharacterAnimationType.None;
+        }
+    }
+
+    public readonly static IEnumerable<SpriteLayer> SpriteLayers = getValues<SpriteLayer>();
+    public readonly static IEnumerable<ColorReplacementSlot> ColorReplacementSlots = getValues<ColorReplacementSlot>();
+
+    public readonly static IEnumerable<WeaponPose> WeaponPoses = getValues<WeaponPose>();
+
+    public readonly static IEnumerable<BodyType> BodyTypes = getValues<BodyType>();
+    public readonly static IEnumerable<WeaponAppearanceType> WeaponAppearanceTypes = getValues<WeaponAppearanceType>();
+    public readonly static IEnumerable<FacialFeatureType> FacialFeatureTypes = getValues<FacialFeatureType>();
+    public readonly static IEnumerable<HairType> HairTypes = getValues<HairType>();
+    public readonly static IEnumerable<CloakType> CloakTypes = getValues<CloakType>();
 }

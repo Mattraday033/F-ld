@@ -214,7 +214,7 @@ public static class ColorList
 
 }
 
-public enum ColorReplaceSlot
+public enum ColorReplacementSlot
 {
     R,
     G,
@@ -242,17 +242,17 @@ public enum SpriteLayer
 
 public class ColorReplaceSchema
 {
-    private readonly Dictionary<ColorReplaceSlot, Color> shieldBack;
-    private readonly Dictionary<ColorReplaceSlot, Color> weapon;
-    private readonly Dictionary<ColorReplaceSlot, Color> body;
-    private readonly Dictionary<ColorReplaceSlot, Color> cloak;
-    private readonly Dictionary<ColorReplaceSlot, Color> face;
-    private readonly Dictionary<ColorReplaceSlot, Color> hair;
-    private readonly Dictionary<ColorReplaceSlot, Color> shieldFront;
+    private readonly Dictionary<ColorReplacementSlot, Color> shieldBack;
+    private readonly Dictionary<ColorReplacementSlot, Color> weapon;
+    private readonly Dictionary<ColorReplacementSlot, Color> body;
+    private readonly Dictionary<ColorReplacementSlot, Color> cloak;
+    private readonly Dictionary<ColorReplacementSlot, Color> face;
+    private readonly Dictionary<ColorReplacementSlot, Color> hair;
+    private readonly Dictionary<ColorReplacementSlot, Color> shieldFront;
 
-    public Color getColor(SpriteLayer section, ColorReplaceSlot slot)
+    public Color getColor(SpriteLayer section, ColorReplacementSlot slot)
     {
-        Dictionary<ColorReplaceSlot, Color> dict;
+        Dictionary<ColorReplacementSlot, Color> dict;
 
         switch(section)
         {
@@ -291,13 +291,13 @@ public class ColorReplaceSchema
         }
     }
 
-    public ColorReplaceSchema(  Dictionary<ColorReplaceSlot, Color> shieldBack = null,
-                                Dictionary<ColorReplaceSlot, Color> weapon = null,
-                                Dictionary<ColorReplaceSlot, Color> body = null,
-                                Dictionary<ColorReplaceSlot, Color> cloak = null,
-                                Dictionary<ColorReplaceSlot, Color> face = null,
-                                Dictionary<ColorReplaceSlot, Color> hair = null,
-                                Dictionary<ColorReplaceSlot, Color> shieldFront = null)
+    public ColorReplaceSchema(  Dictionary<ColorReplacementSlot, Color> shieldBack = null,
+                                Dictionary<ColorReplacementSlot, Color> weapon = null,
+                                Dictionary<ColorReplacementSlot, Color> body = null,
+                                Dictionary<ColorReplacementSlot, Color> cloak = null,
+                                Dictionary<ColorReplacementSlot, Color> face = null,
+                                Dictionary<ColorReplacementSlot, Color> hair = null,
+                                Dictionary<ColorReplacementSlot, Color> shieldFront = null)
     {
 
         if(shieldBack != null)
@@ -357,9 +357,9 @@ public class ColorReplaceSchema
         }
     }
 
-    private static Dictionary<ColorReplaceSlot, Color> getDefaultReplaceSchema()
+    private static Dictionary<ColorReplacementSlot, Color> getDefaultReplaceSchema()
     {
-        return new Dictionary<ColorReplaceSlot, Color>();
+        return new Dictionary<ColorReplacementSlot, Color>();
     }
 }
 
@@ -383,33 +383,34 @@ public static class ColorSchemaList
         colorSchemaDict = new Dictionary<string, ColorReplaceSchema>();
 
         colorSchemaDict.Add(MonsterNameList.spearman, new ColorReplaceSchema(
-                                                                                weapon: new Dictionary<ColorReplaceSlot, Color>()
+                                                                                weapon: new Dictionary<ColorReplacementSlot, Color>()
                                                                                 {
-                                                                                    [ColorReplaceSlot.R] = ColorList.Metal_Bronze,
-                                                                                    [ColorReplaceSlot.G] = ColorList.Cloth_PaleBlue,
-                                                                                    [ColorReplaceSlot.B] = ColorList.Wood_WeaponShaft
+                                                                                    [ColorReplacementSlot.R] = ColorList.Metal_Bronze,
+                                                                                    [ColorReplacementSlot.G] = ColorList.Cloth_PaleBlue,
+                                                                                    [ColorReplacementSlot.B] = ColorList.Wood_WeaponShaft
                                                                                 },
-                                                                                body: new Dictionary<ColorReplaceSlot, Color>()
+                                                                                body: new Dictionary<ColorReplacementSlot, Color>()
                                                                                 {
-                                                                                    [ColorReplaceSlot.R] = ColorList.Skin_LightBrown,
-                                                                                    [ColorReplaceSlot.G] = ColorList.Metal_Bronze,
-                                                                                    [ColorReplaceSlot.B] = ColorList.Cloth_SuppressedBlue,
-                                                                                    [ColorReplaceSlot.C] = ColorList.Cloth_PaleBlue,            
-                                                                                    [ColorReplaceSlot.M] = ColorList.Metal_Bronze,
-                                                                                    [ColorReplaceSlot.Y] = ColorList.Metal_BronzeShadow,
-                                                                                    [ColorReplaceSlot.O] = ColorList.Metal_BronzeShadow,
-                                                                                    [ColorReplaceSlot.V] = ColorList.Leather_DullGrey,
-                                                                                    [ColorReplaceSlot.T] = ColorList.Leather_BeltBrown,
-                                                                                    [ColorReplaceSlot.S] = ColorList.Metal_Brass
+                                                                                    [ColorReplacementSlot.R] = ColorList.Skin_LightBrown,
+                                                                                    [ColorReplacementSlot.G] = ColorList.Skin_LightBrown,
+                                                                                    [ColorReplacementSlot.B] = ColorList.Metal_Bronze,
+                                                                                    [ColorReplacementSlot.C] = ColorList.Metal_BronzeShadow,            
+                                                                                    [ColorReplacementSlot.M] = ColorList.Metal_Bronze,
+                                                                                    [ColorReplacementSlot.Y] = ColorList.Metal_BronzeShadow,
+                                                                                    [ColorReplacementSlot.O] = ColorList.Metal_Brass,
+                                                                                    [ColorReplacementSlot.V] = ColorList.Cloth_SuppressedBlue,
+                                                                                    [ColorReplacementSlot.T] = ColorList.Cloth_PaleBlue,
+                                                                                    [ColorReplacementSlot.S] = ColorList.Leather_DullGrey,
+                                                                                    [ColorReplacementSlot.P] = ColorList.Leather_BeltBrown,
                                                                                 },
-                                                                                hair: new Dictionary<ColorReplaceSlot, Color>()
+                                                                                hair: new Dictionary<ColorReplacementSlot, Color>()
                                                                                 {
-                                                                                    [ColorReplaceSlot.G] = ColorList.Hair_DarkBrown
+                                                                                    [ColorReplacementSlot.G] = ColorList.Hair_DarkBrown
                                                                                 },
-                                                                                face: new Dictionary<ColorReplaceSlot, Color>()
+                                                                                face: new Dictionary<ColorReplacementSlot, Color>()
                                                                                 {
-                                                                                    [ColorReplaceSlot.R] = ColorList.Skin_LightBrown,
-                                                                                    [ColorReplaceSlot.G] = ColorList.Hair_DarkBrown
+                                                                                    [ColorReplacementSlot.R] = ColorList.Skin_LightBrown,
+                                                                                    [ColorReplacementSlot.G] = ColorList.Hair_DarkBrown
                                                                                 }
                                                                             ));
     }

@@ -57,16 +57,6 @@ public class MovableObjectMovement : EnemyMovement
         //Empty on purpose
     }
 
-    public override void updateIdleDirection()
-    {
-        //Empty on purpose
-    }
-
-    public override void updateRunDirection()
-    {
-        //Empty on purpose
-    }
-
     public override string getName()
     {
         return MonsterNameList.movableObject;

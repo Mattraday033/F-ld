@@ -25,11 +25,6 @@ public class PartyMemberMovement : MovementTracker
                 canMoveInTrain() && !PlayerMovement.getInstance().directionMod.Equals(Vector3Int.zero);
     }
 
-    public override AnimationManager getAnimationManager()
-    {
-        return animationManager;
-    }
-
 	public override CharacterFacing getCharacterFacing()
 	{
         return animationManager.facing;

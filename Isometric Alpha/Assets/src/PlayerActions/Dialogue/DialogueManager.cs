@@ -1036,19 +1036,19 @@ public class DialogueManager : MonoBehaviour
                     {
                         case "ne":
                         case "northeast":
-                            PlayerMovement.getInstance().getAnimationManager().setFacing(Facing.NorthEast);
+                            State.playerFacing.currentFacing = Facing.NorthEast;
                             break;
                         case "nw":
                         case "northwest":
-                            PlayerMovement.getInstance().getAnimationManager().setFacing(Facing.NorthWest);
+                            State.playerFacing.currentFacing = Facing.NorthWest;
                             break;
                         case "se":
                         case "southeast":
-                            PlayerMovement.getInstance().getAnimationManager().setFacing(Facing.SouthEast);
+                            State.playerFacing.currentFacing = Facing.SouthEast;
                             break;
                         case "sw":
                         case "southwest":
-                            PlayerMovement.getInstance().getAnimationManager().setFacing(Facing.SouthWest);
+                            State.playerFacing.currentFacing = Facing.SouthWest;
                             break;
                     }
 

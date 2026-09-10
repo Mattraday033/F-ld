@@ -147,8 +147,6 @@ public class PathToPlayer
 
 public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutorialSequenceTarget, IDescribableInBlocks, IOverHeadIconSource
 {
-    private const int cunningChargeCost = 2;
-    private const int intimidateChargeCost = 2;
 	public const int pathIndexHardCutoff = 1000;
     private const bool skipFileCreation = true;
 
@@ -271,11 +269,6 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     public override bool isDefeated()
     {
         return MonsterDefeatKeysList.monsterIsDefeated(getMonsterPackIndex());
-    }
-
-    public override AnimationManager getAnimationManager()
-    {
-        return animationManager;
     }
 
     public override int getMovementIndex()
@@ -668,7 +661,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     {
         cunningStunCounter = CunningManager.cunningRange / 2;
 
-        setFacing(CharacterFacing.getOpposingFacing(enemyFacing.getFacing()));
+        enemyFacing.setToOpposingFacing();
 
         iconManager.createOverHeadIcon(OverHeadIconType.Cunning, this);
     }
@@ -768,15 +761,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         EnemyPackInfo enemyPackInfo = getEnemyPackInfo();
 
         animationManager.setAnimations(enemyPackInfo.FoeTypes[0].enemyStats.getName());
-
-        updateIdleDirection();
     }
 
 	public override void setFacing(Facing newFacing)
 	{
-		getCharacterFacing().setFacing(newFacing);
-
-        updateAnimationDirection();
+		getCharacterFacing().currentFacing = newFacing;
 	}
 
 	public override CharacterFacing getCharacterFacing()

@@ -18,7 +18,8 @@ public class MovementManager : MonoBehaviour
                                                                                 distance1TileNorthWestGrid,
                                                                                 distance1TileSouthWestGrid,
                                                                                 distance1TileSouthEastGrid};
-    public readonly static UnityEvent OnMoveStarted = new UnityEvent();
+    public readonly static UnityEvent BeforeMoveStarted = new UnityEvent();
+    public readonly static UnityEvent AfterMoveStarted = new UnityEvent();
 
     public readonly static UnityEvent<int> OnMoveFinished = new UnityEvent<int>();
 
@@ -116,7 +117,7 @@ public class MovementManager : MonoBehaviour
 
         //movement loop
 
-        OnMoveStarted.Invoke();
+        BeforeMoveStarted.Invoke();
 
         foreach (MovementTracker movement in allMovementTrackers)
         {
@@ -134,6 +135,8 @@ public class MovementManager : MonoBehaviour
                 }
             }
         }
+
+        AfterMoveStarted.Invoke();
 
         smallWaitAfterMoving = true;
 
@@ -231,7 +234,7 @@ public class MovementManager : MonoBehaviour
         float elapsedTime = 0;
 
         movement.updateFacing();
-        movement.updateAnimationDirection();
+        // movement.updateAnimationDirection();
 
         while (elapsedTime <= timeToMove)
         {
@@ -252,12 +255,12 @@ public class MovementManager : MonoBehaviour
 
         currentMovements.Remove(movement);
 
-        if(movement.getAnimationManager() != null)
-        {
-            movement.getAnimationManager().haltAllAnimations();
-        }
+        // if(movement.getAnimationManager() != null)
+        // {
+        //     movement.getAnimationManager().haltAllAnimations();
+        // }
 
-        movement.updateAnimationDirection();
+        // movement.updateAnimationDirection();
 
         movement.updateFacing();
 

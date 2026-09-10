@@ -16,9 +16,9 @@ public enum CharacterAnimationType {
                                     Wounded, Wounded_Front, Wounded_Back, OOC_Wounded_Front, OOC_Wounded_Back,
                                     Death, Secondary_Death, Death_Front, Death_Back, Death_Front_Weaponless, Death_Back_Weaponless,
                                     Attack_Normal, Attack_Normal_Front, Attack_Normal_Back, 
-                                    Attack_Special, 
-                                    StandUp, 
-                                    Spawn,
+                                    Attack_Special, Attack_Special_Front, Attack_Special_Back,
+                                    StandUp, Stand_Up_Front, Stand_Up_Back, 
+                                    Spawn, Spawn_Front, Spawn_Back,
                                     Vertical_Falling
                                     }
 
@@ -1143,7 +1143,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             return;
         }  
 
-        facing.setFacing(newFacing);
+        facing.currentFacing = newFacing;
 
         switch(facing.getFacing())
         {

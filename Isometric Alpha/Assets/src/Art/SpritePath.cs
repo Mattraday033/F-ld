@@ -6,11 +6,12 @@
 public enum SpritePath
 {
     NoSprite, // reserved: no asset
-    Body_LovashiArmor_NoWeapon_OOC_Idle_Back, // Sprites/SpriteLayers/Body/Lovashi Armor/NoWeapon/OOC_Idle_Back
-    Body_LovashiArmor_NoWeapon_OOC_Idle_Front, // Sprites/SpriteLayers/Body/Lovashi Armor/NoWeapon/OOC_Idle_Front
-    Body_LovashiArmor_NoWeapon_Run_Back, // Sprites/SpriteLayers/Body/Lovashi Armor/NoWeapon/Run_Back
-    Body_LovashiArmor_NoWeapon_Run_Front, // Sprites/SpriteLayers/Body/Lovashi Armor/NoWeapon/Run_Front
+    Body_LovashiArmor_NoWeapon_OOC_Idle_Back, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Back
+    Body_LovashiArmor_NoWeapon_OOC_Idle_Front, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Front
+    Body_LovashiArmor_NoWeapon_Run_Back, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Back
+    Body_LovashiArmor_NoWeapon_Run_Front_Left, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Front_Left
+    Body_LovashiArmor_NoWeapon_Run_Front_Right, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Front_Right
     Face_Short_Goatee_OOC_Idle_Front, // Sprites/SpriteLayers/Face/Short_Goatee/OOC_Idle_Front
-    Hair_Short_1, // Sprites/SpriteLayers/Hair/Short_1
+    Hair_Short_Ruffled_OOC_Idle_Front, // Sprites/SpriteLayers/Hair/Short_Ruffled/OOC_Idle_Front
     Weapon_SpearSimple_Idle_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/Idle_Front
 }

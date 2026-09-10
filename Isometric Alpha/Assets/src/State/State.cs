@@ -78,7 +78,7 @@ public static class State
 
     private static void readSaveBlueprint(SaveBlueprint blueprint)
     {
-        playerFacing.setFacing((Facing) blueprint.playerFacing);
+        playerFacing.currentFacing = (Facing) blueprint.playerFacing;
         terrainHidden = blueprint.terrainHidden;
 
         inventory = SaveBlueprint.extractInventoryItemsFromJson(blueprint.currentInventory);

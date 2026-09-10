@@ -233,12 +233,17 @@ PrefabInstance:
     - target: {fileID: 678842703478935922, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 2710500209770885916, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
+        type: 3}
+      propertyPath: movementTracker
+      value: 
+      objectReference: {fileID: 4515325223350563496}
     - target: {fileID: 3653720939992594567, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3669987315045099205, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
@@ -248,7 +253,7 @@ PrefabInstance:
     - target: {fileID: 3734413944433061566, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5109375849736145976, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
@@ -303,22 +308,22 @@ PrefabInstance:
     - target: {fileID: 5975059076501007699, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7520374739509906328, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7945619172883210900, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 9063004995715628410, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -426,8 +431,6 @@ MonoBehaviour:
   pressButtonPrompt: {fileID: 8057564549275594285}
   pressButtonPromptBackgroundLayout: {fileID: 7224950228136221221}
   pressButtonPromptText: {fileID: 6790793084201413763}
-  animationManager: {fileID: 0}
-  playerSpriteRenderer: {fileID: 0}
   mapPopUpButton: {fileID: 1865087468414780995}
   worldMapPopUpButton: {fileID: 3811710906599074067}
   gameOverPopUpButton: {fileID: 5230923714248326009}

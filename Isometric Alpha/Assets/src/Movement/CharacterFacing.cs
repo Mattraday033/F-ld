@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum Facing{
 	Random = 0, NorthEast = 1, NorthWest = 2, SouthWest = 3, SouthEast = 4
@@ -10,27 +11,38 @@ public enum Facing{
 
 public class CharacterFacing
 {
-	private Facing currentFacing;
+	private Facing _CurrentFacing;
+    public Facing currentFacing
+    {
+        set
+        {
+            if(value == Facing.Random)
+            {
+                _CurrentFacing = getRandomFacing();
+            } else
+            {
+                _CurrentFacing = value;
+            }
+        }
+        get
+        {
+            return _CurrentFacing;
+        }
+    }
 
 	public CharacterFacing()
 	{
-		setFacing(Facing.Random);
+		currentFacing = Facing.Random;
 	}
 
-	public void setFacing(Facing direction)
-    {
-		if(direction == Facing.Random)
-		{
-			randomizeFacing();
-        } else
-		{
-			currentFacing = direction;
-		}
-    }
+	public Facing getOpposingFacing()
+	{
+		return currentFacing.getOpposingFacing();
+	}
 
 	public void setToOpposingFacing()
 	{
-		currentFacing = getOpposingFacing(currentFacing);
+		currentFacing = currentFacing.getOpposingFacing();
 	}
 
 	public Facing getFacing()
@@ -50,62 +62,9 @@ public class CharacterFacing
             currentFacing == Facing.SouthWest;
     }
 
-	private void randomizeFacing()
-	{
-		setFacing((Facing) getRandomFacing());
-	}
-	
-	public static bool withinRange(int possibleFacing)
-	{
-		if(possibleFacing < (int) Facing.NorthEast || possibleFacing > (int) Facing.SouthEast)
-		{
-			return false;
-		} else
-		{
-			return true;
-		}
-	}
-
-    public static bool withinRange(Facing possibleFacing)
-    {
-        if (possibleFacing < Facing.NorthEast || possibleFacing > Facing.SouthEast)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-
     public static Facing getRandomFacing()
 	{
-		return (Facing) (new System.Random()).Next((int) Facing.NorthEast, (int) Facing.SouthEast+1);
+		return (Facing) new System.Random().Next((int) Facing.NorthEast, (int) Facing.SouthEast+1);
 	}
 	
-	public static Facing getOpposingFacing(int facing)
-	{
-		return getOpposingFacing((Facing) facing);
-	}
-	
-	public static Facing getOpposingFacing(Facing facing)
-	{
-		if(facing.Equals(Facing.NorthEast))
-		{
-			return Facing.SouthWest;
-		} else if(facing.Equals(Facing.NorthWest))
-		{
-			return Facing.SouthEast;
-		} else if(facing.Equals(Facing.SouthWest))
-		{
-			return Facing.NorthEast;
-		} else if(facing.Equals(Facing.SouthEast))
-		{
-			return Facing.NorthWest;
-		} else
-		{
-			throw new IOException("Unknown facing: " + facing);
-		}
-	}
-
 }

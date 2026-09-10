@@ -135,6 +135,8 @@ public static class SpawnInfoManager
 
         Transform player = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.playerPrefab), AreaManager.getPlayerParent()).transform;
 
+        NewAnimationManager animationManager = player.GetComponent<NewAnimationManager>();
+
         if (AreaManager.saveBlueprint != null)
         {
             player.position = AreaManager.getMasterGrid().GetCellCenterWorld(AreaManager.saveBlueprint.playerCell);
@@ -144,6 +146,8 @@ public static class SpawnInfoManager
         {
             player.position = AreaManager.getMasterGrid().GetCellCenterWorld(getDefaultCell());
         }
+
+        animationManager.setCostumeSource(PartyManager.getPlayerStats(), CharacterAnimationType.OOC_Idle_Front);
 
         Helpers.updateGameObjectPosition(player);
 

@@ -3,21 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ColorReplaceVARNames
-{
-    _R_Replace,
-    _G_Replace,
-    _B_Replace,
-    _C_Replace,
-    _M_Replace,
-    _Y_Replace,
-    _O_Replace,
-    _V_Replace,
-    _T_Replace,
-    _S_Replace,
-    _P_Replace
-}
-
 public class SpriteColorInterpreter : MonoBehaviour
 {
 
@@ -35,8 +20,7 @@ public class SpriteColorInterpreter : MonoBehaviour
     {
         colorSchema = schema;
 
-        IEnumerable allSpriteLayers = EnumUtil.getValues<SpriteLayer>();
-        foreach(SpriteLayer layer in allSpriteLayers)
+        foreach(SpriteLayer layer in EnumUtil.SpriteLayers)
         {
             setRendererMaterial(layer);
         }
@@ -46,8 +30,7 @@ public class SpriteColorInterpreter : MonoBehaviour
     {
         SpriteRenderer renderer = rendererList[layer];
 
-        IEnumerable allColorSlots = EnumUtil.getValues<ColorReplaceSlot>();
-        foreach(ColorReplaceSlot slot in allColorSlots)
+        foreach(ColorReplacementSlot slot in EnumUtil.ColorReplacementSlots)
         {
             renderer.material.SetColor(slot.getMaterialVARName(), colorSchema.getColor(layer, slot));
         }

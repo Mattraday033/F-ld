@@ -257,7 +257,7 @@ public class SaveHandler : ScreenManager, IEscapable
             return;
         }
 
-        autosave(transition.getPositionOnSaveMultiplier(), CharacterFacing.getOpposingFacing(transition.playerSpawnDirection));
+        autosave(transition.getPositionOnSaveMultiplier(), transition.playerSpawnDirection.getOpposingFacing());
     }
 
     public static void autosave(Vector3Int cellCoords, Facing facing)

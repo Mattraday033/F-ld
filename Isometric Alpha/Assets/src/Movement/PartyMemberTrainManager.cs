@@ -13,7 +13,7 @@ public static class PartyMemberTrainManager
         TransitionManager.AfterTransition.AddListener(createPartyMemberTrain);
         MovementManager.OnMoveFinished.AddListener(incrementStepCounter);
         MovementManager.OnMoveFinished.AddListener(hideOverlappingPartyMembersOnMoveEnded);
-        MovementManager.OnMoveStarted.AddListener(showPartyMemberTrain);
+        MovementManager.BeforeMoveStarted.AddListener(showPartyMemberTrain);
 
         PlayerOOCStateManager.OnStateChangeToInDialogue.AddListener(createPartyMemberTrain);
         PlayerOOCStateManager.OnStateChangeFromInDialogue.AddListener(destroyPartyMemberTrainIfAreaIsHostile);
@@ -54,9 +54,9 @@ public static class PartyMemberTrainManager
             partyMemberMovement.partyMember = partyMember;
             partyMemberMovement.placeInTrain = index+1;
             
-            partyMemberMovement.getAnimationManager().setAnimations(partyMemberMovement.getName());
+            // partyMemberMovement.getAnimationManager().setAnimations(partyMemberMovement.getName());
 
-            partyMemberMovement.getAnimationManager().setFacing(State.playerFacing.getFacing());
+            // partyMemberMovement.getAnimationManager().setFacing(State.playerFacing.getFacing());
 
             partyMemberMovement.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(PlayerMovement.getInstance().getCell());
 

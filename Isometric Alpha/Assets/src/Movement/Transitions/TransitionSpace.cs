@@ -39,7 +39,7 @@ public class Transition
         this.cellCoords = PlayerMovement.getMovementGridCoords();
 
         this.index = 0;
-        this.playerSpawnDirection = CharacterFacing.getOpposingFacing(State.playerFacing.getFacing());
+        this.playerSpawnDirection = State.playerFacing.getOpposingFacing();
         this.outputMultiplier = 0; //to prevent autosave from moving player
 
         whichConstructor = "first";

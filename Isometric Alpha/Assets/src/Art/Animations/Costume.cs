@@ -96,36 +96,41 @@ public class Costume
 
     private WeaponPose getWeaponPose(CharacterAnimationType animationType)
     {
-        if(weaponAnimationInfo.ContainsKey(animationType))
-        {
-            return weaponAnimationInfo[animationType];
-        } else
-        {
+        // if(weaponAnimationInfo.ContainsKey(animationType))
+        // {
+        //     return weaponAnimationInfo[animationType];
+        // } else
+        // {
             return WeaponPose.NoWeapon;
-        }
+        // }
     }
 
-    public Sprite[] getSprite(SpriteLayer layer, CharacterAnimationType animationType)
+    public Sprite[] getSprites(SpriteLayer layer, CharacterAnimationType animationType)
     {
         SpritePath spritePath = SpritePath.NoSprite;
 
         switch(layer)
         {
             case SpriteLayer.Body:
-                spritePath = getSpritePath(layer, bodyType, animationType);
+                spritePath = getSpritePath(layer, bodyType, animationType, getWeaponPose(animationType));
                 break;
             case SpriteLayer.Weapon:
-                spritePath = getSpritePath(layer, weaponAppearanceType, animationType, getWeaponPose(animationType));
+                spritePath = getSpritePath(layer, weaponAppearanceType, animationType);
                 break;
             case SpriteLayer.Face:
-                spritePath = getSpritePath(layer, facialFeatureType, animationType);
+                spritePath = getSpritePath(layer, facialFeatureType, animationType, getWeaponPose(animationType));
                 break;
             case SpriteLayer.Hair:
-                spritePath = getSpritePath(layer, hairType, animationType);
+                spritePath = getSpritePath(layer, hairType, animationType, getWeaponPose(animationType));
                 break;
         }
 
         return SpriteList.getSprites(spritePath);
+    }
+
+    public Sprite getSprite(SpriteLayer layer, CharacterAnimationType animationType)
+    {
+        return getSprites(layer, animationType)[0];
     }
 
     public static Costume getDefaultCostume()
@@ -139,38 +144,38 @@ public class Costume
                             );
     }
 
-    // private static SpritePath getWeaponAppearanceTypeSpritePath(CharacterAnimationType animationType, WeaponAppearanceType appearanceType)
-    // {
-    //     if(Enum.TryParse(SpriteLayer.Weapon.ToString() + "_" + 
-    //                         appearanceType.ToString() + "_" + 
-    //                         animationType.ToString(),
-    //                         out SpritePath spritePath))
-    //     {
-    //         return spritePath;
-    //     }
-
-    //     return SpritePath.NoSprite;
-    // }
-
     private static SpritePath getSpritePath(SpriteLayer layer, 
                                             Enum type, 
                                             CharacterAnimationType animationType,
                                             WeaponPose weaponPose = WeaponPose.PoseAgnostic)
     {
-        string spritePathName = layer.ToString() + "_" + type.ToString() + "_";
+        string poseName = "";
 
         if(weaponPose != WeaponPose.PoseAgnostic)
         {
-            spritePathName += weaponPose.ToString() + "_";
+            poseName = weaponPose.ToString() + "_";
         }
 
-        spritePathName += animationType.ToString();
-
-        if(Enum.TryParse( spritePathName,
-                            out SpritePath spritePath))
+        do
         {
-            return spritePath;
-        }
+            if(Enum.TryParse(layer.ToString() + "_" + 
+                                type.ToString() + "_" + 
+                                poseName + 
+                                animationType.ToString(),
+                                out SpritePath spritePath))
+            {
+                return spritePath;
+            } else if(Enum.TryParse(layer.ToString() + "_" + 
+                                    type.ToString() + "_" + 
+                                    animationType.ToString(),
+                                    out spritePath))
+            {
+                return spritePath;
+            } else
+            {
+                animationType = animationType.nextAnimationType();
+            }
+        } while(animationType != CharacterAnimationType.None);
 
         return SpritePath.NoSprite;
     }

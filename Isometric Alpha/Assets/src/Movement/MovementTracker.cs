@@ -133,11 +133,9 @@ public abstract class MovementTracker : MonoBehaviour
 
     #region Animation
 
-    public abstract AnimationManager getAnimationManager();
-
     public virtual void setFacing(Facing facing)
     {
-        getCharacterFacing().setFacing(facing);
+        getCharacterFacing().currentFacing = facing;
     }
 
     public abstract CharacterFacing getCharacterFacing();
@@ -167,79 +165,6 @@ public abstract class MovementTracker : MonoBehaviour
         else if (directionMod.Equals(MovementManager.distance1TileNorthWestGrid))
         {
             setFacing(Facing.NorthWest);
-        }
-    }
-
-    public void updateAnimationDirection()
-    {
-        if(canPlayRunAnimation())
-        {
-            updateRunDirection();
-        } else
-        {
-            updateIdleDirection();
-        }
-    }
-
-    public virtual void updateIdleDirection()
-    {
-        switch (getCharacterFacing().getFacing())
-        {
-            case Facing.NorthEast:
-                if(AreaList.currentAreaIsHostile())
-                {
-                    getAnimationManager().playNorthEastIdle();
-                } else
-                {
-                    getAnimationManager().playNorthEastOOCIdle();
-                }
-                break;
-            case Facing.NorthWest:
-                if(AreaList.currentAreaIsHostile())
-                {
-                    getAnimationManager().playNorthWestIdle();
-                } else
-                {
-                    getAnimationManager().playNorthWestOOCIdle();
-                }
-                break;
-            case Facing.SouthEast:
-                if(AreaList.currentAreaIsHostile())
-                {
-                    getAnimationManager().playSouthEastIdle();
-                } else
-                {
-                    getAnimationManager().playSouthEastOOCIdle();
-                }
-                break;
-            default:
-                if(AreaList.currentAreaIsHostile())
-                {
-                    getAnimationManager().playSouthWestIdle();
-                } else
-                {
-                    getAnimationManager().playSouthWestOOCIdle();
-                }
-                break;
-        }
-    }
-
-    public virtual void updateRunDirection()
-    {
-        switch (getCharacterFacing().getFacing())
-        {
-            case Facing.NorthEast:
-                getAnimationManager().playNorthEastRun();
-                break;
-            case Facing.NorthWest:
-                getAnimationManager().playNorthWestRun();
-                break;
-            case Facing.SouthEast:
-                getAnimationManager().playSouthEastRun();
-                break;
-            default:
-                getAnimationManager().playSouthWestRun();
-                break;
         }
     }
 
@@ -274,7 +199,7 @@ public abstract class MovementTracker : MonoBehaviour
         
         if(Helpers.checkPositionForColliders(PlayerMovement.getColliderWorldPosition(), LayerAndTagManager.blocksMoveableObjectLayerMask))
         {
-            nextInTrain.updateAnimationDirection();
+            // nextInTrain.updateAnimationDirection();
             return;
         } 
 
@@ -288,14 +213,14 @@ public abstract class MovementTracker : MonoBehaviour
 
     public void hideSprite()
     {
-        getAnimationManager().spriteRenderer.enabled = false;
-        getAnimationManager().disableExtras();
+        // getAnimationManager().spriteRenderer.enabled = false;
+        // getAnimationManager().disableExtras();
     }
 
     public void showSprite()
     {
-        getAnimationManager().spriteRenderer.enabled = true;
-        getAnimationManager().enableExtras();
+        // getAnimationManager().spriteRenderer.enabled = true;
+        // getAnimationManager().enableExtras();
     }
 
     public static MovementTracker determineLowestTrainPriority(MovementTracker movementOne, MovementTracker movementTwo)
