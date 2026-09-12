@@ -282,10 +282,10 @@ public static class PrefabNames
 
     private const string creaturesFolder = "Creatures/";
     public const string playerPrefab = creaturesFolder + "PlayerOOC";
+    public const string NPC = creaturesFolder + "NPC";
 
     #region Interactable Game Objects
     public const string interactablesFolder = "Interactables/";
-    public const string NPC = interactablesFolder + "NPC";
     public const string fallingNPC = interactablesFolder + "Falling NPC";
     public const string placedPartyMember = interactablesFolder + "PlacedPartyMember";
     public const string partyMemberFollower = interactablesFolder + "PartyMemberFollower";

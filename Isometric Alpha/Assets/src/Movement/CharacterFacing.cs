@@ -11,6 +11,8 @@ public enum Facing{
 
 public class CharacterFacing
 {
+    public UnityEvent OnFacingChange = new UnityEvent();
+
 	private Facing _CurrentFacing;
     public Facing currentFacing
     {
@@ -23,6 +25,8 @@ public class CharacterFacing
             {
                 _CurrentFacing = value;
             }
+
+            OnFacingChange.Invoke();
         }
         get
         {

@@ -70,7 +70,7 @@ public static class SpawnInfoManager
 
         allSpawnedObjects.AddRange(spawnPlayer());
 
-        // allSpawnedObjects.AddRange(spawnAllInteractables());
+        allSpawnedObjects.AddRange(spawnAllInteractables());
 
         spawnAllTransitions();
 

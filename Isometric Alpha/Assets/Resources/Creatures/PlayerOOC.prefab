@@ -250,6 +250,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerOOC
       objectReference: {fileID: 0}
+    - target: {fileID: 3669987315045099205, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 3734413944433061566, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
       propertyPath: m_SortingLayer

@@ -15,7 +15,33 @@ public class NewAnimationManager : MonoBehaviour
     public PolygonCollider2D polygonCollider2D;
     public SpriteLayerRendererList rendererList;
 
-    public MovementTracker movementTracker;
+    private MovementTracker _MovementTracker;
+    public MovementTracker movementTracker
+    {
+        set
+        {
+            if(value == null)
+            {
+                return;
+            }
+
+            if(characterFacing != null)
+            {
+                characterFacing.OnFacingChange.RemoveListener(handleMovementAnimation);
+            }
+
+            _MovementTracker = value;
+            MovementManager.AfterMoveStarted.RemoveListener(handleMovementAnimation);
+            MovementManager.OnMoveFinished.RemoveListener(handleMovementAnimation);
+            MovementManager.AfterMoveStarted.AddListener(handleMovementAnimation);
+            MovementManager.OnMoveFinished.AddListener(handleMovementAnimation);
+            characterFacing.OnFacingChange.AddListener(handleMovementAnimation);
+        }
+        get
+        {
+            return _MovementTracker;
+        }
+    }
 
     public CharacterFacing characterFacing
     {
@@ -61,12 +87,9 @@ public class NewAnimationManager : MonoBehaviour
 
     private ICostumeSource _CostumeSource;
     public void setCostumeSource(ICostumeSource costumeSource,
-                                    CharacterAnimationType newIdle, 
-                                    CharacterFacing characterFacing = null)
+                                    CharacterAnimationType newIdle)
     {
         _CostumeSource = costumeSource;
-
-        // characterFacing = facing;
 
         playAnimation(newIdle);
     }
@@ -164,14 +187,21 @@ public class NewAnimationManager : MonoBehaviour
 
     private void OnEnable()
     {
-        MovementManager.AfterMoveStarted.AddListener(handleMovementAnimation);
-        MovementManager.OnMoveFinished.AddListener(handleMovementAnimation);
+        if(movementTracker == null)
+        {
+            movementTracker = GetComponent<MovementTracker>();
+        }
     }
 
     private void OnDestroy()
     {
         MovementManager.AfterMoveStarted.RemoveListener(handleMovementAnimation);
         MovementManager.OnMoveFinished.RemoveListener(handleMovementAnimation);
+
+        if(characterFacing != null)
+        {
+            characterFacing.OnFacingChange.RemoveListener(handleMovementAnimation);
+        }
     }
 
 }

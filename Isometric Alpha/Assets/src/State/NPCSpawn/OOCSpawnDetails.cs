@@ -1037,29 +1037,29 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
 
     public virtual void spawnActions(AnimationManager animationManager)
     {
-        if(animationName == null)
-        {
-            return;
-        }
+        // if(animationName == null)
+        // {
+        //     return;
+        // }
 
-        animationManager.setAnimations(animationName);
-        animationManager.setFacing(facing);
-        animationManager.npcName = npcName;
+        // animationManager.setAnimations(animationName);
+        // animationManager.setFacing(facing);
+        // animationManager.npcName = npcName;
 
-        if(animationType != CharacterAnimationType.None)
-        {
-            string characterToAnimate = "";
+        // if(animationType != CharacterAnimationType.None)
+        // {
+        //     string characterToAnimate = "";
 
-            if(animationName != null)
-            {
-                characterToAnimate = animationName;
-            } else
-            {
-                characterToAnimate = npcName;
-            }
+        //     if(animationName != null)
+        //     {
+        //         characterToAnimate = animationName;
+        //     } else
+        //     {
+        //         characterToAnimate = npcName;
+        //     }
 
-            animationManager.setCurrentIdle(AnimationManager.getFallBackIdleType(characterToAnimate, animationType));
-        }
+        //     animationManager.setCurrentIdle(AnimationManager.getFallBackIdleType(characterToAnimate, animationType));
+        // }
     }
 }
 
@@ -1124,13 +1124,13 @@ public class HorseSpawnDetails : NPCWithAnimationsSpawnDetails
 
     public override void spawnActions(AnimationManager animationManager)
     {
-        base.spawnActions(animationManager);
+        // base.spawnActions(animationManager);
         
-        if(animationManager != null)
-        {
-            animationManager.changesFacing = false;
-            // animationManager.disableExtras();
-        }
+        // if(animationManager != null)
+        // {
+        //     animationManager.changesFacing = false;
+        //     // animationManager.disableExtras();
+        // }
     }
 }
 
