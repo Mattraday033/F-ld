@@ -229,7 +229,7 @@ public class ButtonOrderLogicScript : ButtonLogicScript
 
         for(int index = 0; index < obstacleCoords.Length && index < spriteNames.Length; index++)
         {
-            obstacleSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.obstacle, obstacleCoords[index], spriteNames[index], getColorBySpriteName(spriteNames[index])));
+            // obstacleSpawnDetails.Add(new ObstacleSpawnDetails(NPCNameList.obstacle, obstacleCoords[index], spriteNames[index], getColorBySpriteName(spriteNames[index])));
         }
     }
 
