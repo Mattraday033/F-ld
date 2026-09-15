@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 8556038871526208797}
   - component: {fileID: -4968793318184311776}
   - component: {fileID: 517585897779863325}
-  - component: {fileID: -5299874797357560549}
   - component: {fileID: 3876896030663513859}
   - component: {fileID: 2738034900309326918}
   - component: {fileID: 3634232630484593473}
@@ -61,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityMenuManager: {fileID: 0}
   animationManager: {fileID: 5460278621860717577}
-  healthBarManager: {fileID: 0}
+  healthBarParent: {fileID: 0}
   spriteRenderer: {fileID: -4968793318184311776}
   combatantHover: {fileID: 0}
   tutorialTarget: {fileID: 0}
@@ -153,41 +152,6 @@ MonoBehaviour:
   speakAtStartScript: {fileID: 0}
   animationManager: {fileID: 5460278621860717577}
   extraSpaces: []
---- !u!114 &-5299874797357560549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555899077454664655}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c69f60ef7a01214c95ee62b51123366, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignoreHover: 0
-  name: 
-  currentDialogue:
-    names: []
-    cameraFoci: []
-    random: 0
-    convoEndableAtStart: 0
-    isVaultable: 0
-    inkJSON: {fileID: 0}
-    startWithUIDisabled: 0
-    secondaryInkJSONs: []
-    npcCombatInfo: {fileID: 0}
-  dontSpawnUntilFlag: 
-  dontSpawnUntilFlags: []
-  stopSpawningAfterFlag: 
-  stopSpawningAfterFlags: []
-  ignoreInPartyForSpawning: 0
-  spawnWhileHostile: 0
-  onlySpawnWhileHostile: 0
-  noNameTag: 0
-  nameTag: {fileID: 0}
-  scripts: []
-  targetCanvas: {fileID: 0}
 --- !u!1839735485 &3876896030663513859
 Tilemap:
   m_ObjectHideFlags: 0

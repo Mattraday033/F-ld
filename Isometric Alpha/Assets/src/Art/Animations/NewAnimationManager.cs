@@ -105,10 +105,7 @@ public class NewAnimationManager : MonoBehaviour
     {
         currentIdle = animationType;
 
-        foreach(SpriteLayer layer in EnumUtil.SpriteLayers)
-        {
-            rendererList[layer].sprite = costume.getSprite(layer, animationType);
-        }
+        costume.applyAppearance(rendererList, animationType);
 
         // switch(animationType)
         // {

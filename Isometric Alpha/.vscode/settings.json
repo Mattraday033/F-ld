@@ -76,9 +76,11 @@
         "obj/": true,
         "Obj/": true,
         "Other Assets/": true,
-        "packages/": true,
-        "Packages/": true,
         "temp/": true
+    },
+    "search.exclude": {
+        "packages/": true,
+        "Packages/": true
     },
     "dotnet.defaultSolution": "Isometric Alpha.slnx",
     "files.associations": {

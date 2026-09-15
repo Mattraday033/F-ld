@@ -11,8 +11,13 @@ public class MonsterSpawnDetails : OOCSpawnDetails
     public Facing facing;
     public MonsterMovementType movementType;
 
-    public MonsterSpawnDetails(string npcName, Vector3Int cellCoords, Facing facing = Facing.Random, MonsterMovementType movementType = MonsterMovementType.Random, string tutorialTargetHash = "") :
-    base(npcName, cellCoords, tutorialTargetHash: tutorialTargetHash)
+    public MonsterSpawnDetails(string npcName, 
+                                Vector3Int cellCoords, 
+                                Facing facing = Facing.Random, 
+                                MonsterMovementType movementType = MonsterMovementType.Random, 
+                                string tutorialTargetHash = "",
+                                IAppearance appearance = null) :
+    base(npcName, appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash)
     {
         this.facing =  facing;
         this.movementType = movementType;
@@ -21,11 +26,6 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         {
             this.movementType = MonsterMovementType.Stationary;
         }
-    }
-
-    public override string getSpriteName()
-    {
-        return null;
     }
 
     public override string getPrefabName()
@@ -62,16 +62,16 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
 {
     private string spritePath;
 
-    public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spritePath) :
-    base(npcName, cellCoords)
+    public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spritePath, IAppearance appearance = null) :
+    base(npcName, cellCoords, appearance: appearance)
     {
         this.facing = Facing.Random;
         this.movementType = MonsterMovementType.Random;
         this.spritePath = spritePath;
     }
 
-    public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spritePath, string tutorialTargetHash) :
-    base(npcName, cellCoords)
+    public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spritePath, string tutorialTargetHash, IAppearance appearance = null) :
+    base(npcName, cellCoords, appearance: appearance)
     {
         this.facing = Facing.Random;
         this.movementType = MonsterMovementType.Random;
@@ -84,11 +84,6 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
         return PrefabNames.movableObject;
     }
 
-    public override string getSpriteName()
-    {
-        return spritePath;
-    }
-
     public override Transform getParent()
     {
         return AreaManager.getMovableObjectParent();
@@ -96,15 +91,14 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
 
     public override void spawnActions(EnemyMovement enemyMovement)
     {
-        if (hasTutorialTargetHash())
-        {
-            addTutorialTargetComponent(enemyMovement, tutorialTargetHash);
-        }
+        // if (hasTutorialTargetHash())
+        // {
+        //     addTutorialTargetComponent(enemyMovement, tutorialTargetHash);
+        // }
 
-        MovementManager.addMovementTracker(enemyMovement);
+        // MovementManager.addMovementTracker(enemyMovement);
 
-        enemyMovement.getSpriteRenderer().sprite = Helpers.loadSpriteFromResources(getSpriteName());
-        // enemyMovement.packName = npcName;
+        // enemyMovement.getSpriteRenderer().sprite = Helpers.loadSpriteFromResources(getSpriteName());
     }
 
 

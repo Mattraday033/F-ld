@@ -1,0 +1,259 @@
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="ooc-spawn-details-hierarchy" name="OOCSpawnDetails Hierarchy">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="2200" pageHeight="1450" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title and legend -->
+        <mxCell id="title" value="OOCSpawnDetails Class Hierarchy" style="text;html=1;fontSize=18;fontStyle=1;align=left;verticalAlign=middle;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="400" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legendRoot" value="Root class" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bfdbfe;strokeColor=#1d4ed8;fontColor=#000000;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="70" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legendAbstract" value="Abstract class" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fde68a;strokeColor=#b45309;fontColor=#000000;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="180" y="70" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legendClass" value="Class" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="320" y="70" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="legendArrows" value="Arrows point from parent to child" style="text;html=1;align=left;verticalAlign=middle;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="460" y="70" width="260" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Root -->
+        <mxCell id="OOC" value="OOCSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#bfdbfe;strokeColor=#1d4ed8;fontColor=#000000;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="624" width="300" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- Cunning objects -->
+        <mxCell id="CunningObj" value="CunningObjectSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fde68a;strokeColor=#b45309;fontColor=#000000;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="155" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="CunningBlocker" value="CunningBlockerSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="155" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="DoubleCunning" value="DoubleCunningBlockerSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="130" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="LinkedCunning" value="LinkedCunningBlockerSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="180" width="300" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- Hidden terrain -->
+        <mxCell id="HiddenTerrain" value="HiddenTerrainSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="400" y="230" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="HostilityTerrain" value="HostilityTerrainSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="230" width="300" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- Monsters -->
+        <mxCell id="Monster" value="MonsterSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="400" y="280" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="Movable" value="MovableObjectSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="280" width="300" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- Quest activation -->
+        <mxCell id="Chest" value="ChestSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="380" width="300" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- Tutorial -->
+        <mxCell id="TutorialCollider" value="TutorialColliderSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="400" y="480" width="300" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- Book, Button, Obstacle and NPC families -->
+        <mxCell id="Book" value="BookSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="400" y="530" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="Button" value="ButtonSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="400" y="580" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="HiddenButton" value="HiddenButtonSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="580" width="300" height="36" as="geometry" />
+        </mxCell>
+
+        <mxCell id="Obstacle" value="ObstacleSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="400" y="705" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="DeadBody" value="DeadBodySpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="630" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="ObstacleSecret" value="ObstacleWithSecretDoorFlagSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="680" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="Wave" value="Wave" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="680" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="RubbleObstacle" value="RubbleObstacleSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="730" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="Spike" value="SpikeSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="780" width="300" height="36" as="geometry" />
+        </mxCell>
+
+        <mxCell id="NPC" value="NPCSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="400" y="1093" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="Gate" value="GateSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="880" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="GateHidden" value="GateWithHiddenTerrainSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="830" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="GateKey" value="GateWithKeySpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="880" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="TempGate" value="TemporaryGateSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="930" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="Ladder" value="LadderSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="980" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="NPCAnim" value="NPCWithAnimationsSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="1105" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="Dependant" value="DependantSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="1030" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="Horse" value="HorseSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="1080" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="NonDialogue" value="NonDialogueNPCSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="1130" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="RestStop" value="RestStopAndShopkeeperSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="1180" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="SecretDoor" value="SecretDoorSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="1230" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="Vaultable" value="VaultableObjectSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="760" y="1305" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="VaultDestroy" value="VaultableOrDestroyableObjectSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="1280" width="300" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="VaultRubble" value="VaultableRubbleSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="1330" width="300" height="36" as="geometry" />
+        </mxCell>
+
+        <!-- Edges (parent -> child) -->
+        <mxCell id="e_OOC_CunningObj" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OOC" target="CunningObj">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_CunningObj_CunningBlocker" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CunningObj" target="CunningBlocker">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_CunningBlocker_DoubleCunning" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CunningBlocker" target="DoubleCunning">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_CunningBlocker_LinkedCunning" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="CunningBlocker" target="LinkedCunning">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_OOC_HiddenTerrain" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OOC" target="HiddenTerrain">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_HiddenTerrain_HostilityTerrain" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="HiddenTerrain" target="HostilityTerrain">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_OOC_Monster" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OOC" target="Monster">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_Monster_Movable" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Monster" target="Movable">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_OOC_Chest" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OOC" target="Chest">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_OOC_TutorialCollider" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OOC" target="TutorialCollider">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_OOC_Book" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OOC" target="Book">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_OOC_Button" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OOC" target="Button">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_Button_HiddenButton" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Button" target="HiddenButton">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_OOC_Obstacle" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OOC" target="Obstacle">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_Obstacle_DeadBody" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Obstacle" target="DeadBody">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_Obstacle_ObstacleSecret" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Obstacle" target="ObstacleSecret">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_ObstacleSecret_Wave" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ObstacleSecret" target="Wave">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_Obstacle_RubbleObstacle" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Obstacle" target="RubbleObstacle">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_Obstacle_Spike" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Obstacle" target="Spike">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e_OOC_NPC" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="OOC" target="NPC">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_NPC_Gate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="Gate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_Gate_GateHidden" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Gate" target="GateHidden">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_Gate_GateKey" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Gate" target="GateKey">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_Gate_TempGate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Gate" target="TempGate">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_NPC_Ladder" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="Ladder">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_NPC_NPCAnim" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="NPCAnim">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_NPCAnim_Dependant" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPCAnim" target="Dependant">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_NPCAnim_Horse" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPCAnim" target="Horse">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_NPCAnim_NonDialogue" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPCAnim" target="NonDialogue">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_NPCAnim_RestStop" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPCAnim" target="RestStop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_NPC_SecretDoor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="SecretDoor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_NPC_Vaultable" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="Vaultable">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_Vaultable_VaultDestroy" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Vaultable" target="VaultDestroy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_Vaultable_VaultRubble" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Vaultable" target="VaultRubble">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

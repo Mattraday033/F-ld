@@ -67,8 +67,113 @@ public enum CloakType
     None
 }
 
-#nullable enable
-public class Costume
+public interface IAppearance
+{
+    public void applyAppearance(SpriteLayerRendererList rendererList, CharacterAnimationType type = CharacterAnimationType.OOC_Idle_Front);
+
+    public bool withScale
+    {
+        get;
+    }
+}
+
+public class SpriteDescription: IAppearance
+{
+    private string spriteName;
+    private SortingLayerInfo sortingLayerInfo;
+    private bool flipX;
+
+    private Color tint;
+    private bool useRubbleColor;
+
+    private bool _WithScale;
+    public bool withScale
+    {
+        get
+        {
+            return _WithScale;
+        }
+        private set
+        {
+            _WithScale = value;
+        }
+    }
+    private float offset;
+
+    public SpriteDescription(string spriteName = PrefabNames.blankTexture,
+                                bool flipX = false,
+                                SortingLayerInfo sortingLayerInfo = null,
+                                Color tint = default,
+                                bool useRubbleColor = false,
+                                bool withScale = false,
+                                float offset = 0f
+                                )
+    {
+        this.spriteName = spriteName;
+        this.flipX = flipX;
+        this.sortingLayerInfo = sortingLayerInfo ?? SortingLayerManager.firstSortingLayerInfo;
+
+        if(tint == default)
+        {
+            this.tint = Color.white;
+        } else
+        {
+            this.tint = tint;
+        }
+        
+        this.useRubbleColor = useRubbleColor;
+
+        this._WithScale = withScale;
+        this.offset = offset;
+    }
+
+    public void applyAppearance(SpriteLayerRendererList rendererList, CharacterAnimationType type = CharacterAnimationType.OOC_Idle_Front)
+    {
+        if(rendererList == null)
+        {
+            return;
+        }
+
+        rendererList.ignoreColorReplace();
+        rendererList.setToSingleLayer(SpriteLayer.Body);
+
+        rendererList[SpriteLayer.Body].sprite = Helpers.loadSpriteFromResources(spriteName);
+        rendererList[SpriteLayer.Body].color = tint;
+
+        rendererList.setFlipX(flipX);
+
+        sortingLayerInfo.setRendererSortingLayer(rendererList[SpriteLayer.Body]);
+
+        if(offset == 0f)
+        {
+            return;
+        }
+
+        Transform transform = rendererList.GetComponent<RectTransform>();
+
+        if(transform == null)
+        {
+            transform = rendererList.transform;
+        }
+
+        Vector3 currentPosition = transform.position;
+
+        currentPosition.y -= offset;
+        // Collider2D collider2D = interactable.GetComponent<Collider2D>();
+
+        // if(collider2D != null)
+        // {
+        //     collider2D.offset += new Vector2(0f, offset);
+        // }
+
+        transform.position = currentPosition;
+
+        // transform.
+    }
+
+}
+
+public class Costume: IAppearance
 {
 
     public readonly BodyType bodyType;
@@ -77,6 +182,14 @@ public class Costume
     public readonly FacialFeatureType facialFeatureType;
     public readonly HairType hairType;
     public readonly CloakType cloakType;
+
+    public bool withScale
+    {
+        get
+        {
+            return false;
+        }
+    }
 
     public Costume  (
                         BodyType bodyType, 
@@ -178,6 +291,19 @@ public class Costume
         } while(animationType != CharacterAnimationType.None);
 
         return SpritePath.NoSprite;
+    }
+
+    public void applyAppearance(SpriteLayerRendererList rendererList, CharacterAnimationType type = CharacterAnimationType.OOC_Idle_Front)
+    {
+        if(rendererList == null)
+        {
+            return;
+        }
+
+        foreach(SpriteLayer layer in EnumUtil.SpriteLayers)
+        {
+            rendererList[layer].sprite = getSprite(layer, type);
+        }
     }
 
 }

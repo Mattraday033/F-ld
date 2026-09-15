@@ -17,26 +17,29 @@ public abstract class OOCSpawnDetails
 
     public string npcName;
     public Vector3Int cellCoords;
-    protected string spriteName;
-    protected Color tint = Color.white;
-    private bool flipX = false;
-    protected SortingLayerInfo sortingLayerInfo;
-    protected bool withScale;
 
-    public OOCSpawnDetails( string npcName = "",
+    private IAppearance appearance;
+
+    protected Color tint = Color.white;
+    protected float offset = 0f;
+    protected bool ignoresSecretDoors;
+    protected QuestStepActivationScript script;
+
+    public OOCSpawnDetails( 
+                            string npcName = "",
+                            IAppearance appearance = null,
                             Vector3Int cellCoords = new Vector3Int(),
-                            string spriteName = null,
-                            SortingLayerInfo sortingLayerInfo = null,
-                            bool flipX = false,
                             string tutorialTargetHash = "",
-                            bool withScale = false)
+                            float offset = 0f,
+                            bool ignoresSecretDoors = false,
+                            QuestStepActivationScript script = null)
     {
         this.npcName = npcName;
+        this.appearance = appearance ?? new SpriteDescription();
         this.cellCoords = cellCoords;
-        this.spriteName = spriteName;
-        this.sortingLayerInfo = sortingLayerInfo;
-        this.flipX = flipX;
-        this.withScale = withScale;
+        this.offset = offset;
+        this.ignoresSecretDoors = ignoresSecretDoors;
+        this.script = script;
 
         if(tutorialTargetHash == null)
         {
@@ -47,34 +50,19 @@ public abstract class OOCSpawnDetails
         }
     }
 
-    public virtual string getSpriteName()
-    {
-        switch(spriteName)
-        {
-            case null:
-                return PrefabNames.defaultNPCSprite;
-            default:
-                return spriteName;
-        }
-    }
-
-    public virtual bool flipSprite()
-    {
-        switch(spriteName)
-        {
-            default:
-                return flipX;
-        }
-    }
-
     public virtual string getPrefabName()
     {
         return null;
     }
 
+    protected virtual void setScript(IQuestActivationObject questActivationObject)
+    {
+        questActivationObject.setScript(script);
+    }
+
     public virtual Transform getParent()
     {
-        if(withScale)
+        if(appearance.withScale)
         {
             return AreaManager.getNPCParentWithScale();
         }
@@ -113,35 +101,43 @@ public abstract class OOCSpawnDetails
 
     public virtual void spawnActions(GameObject interactable)
     {
-        SpriteRenderer spriteRenderer = interactable.GetComponent<SpriteRenderer>();
+        appearance.applyAppearance(interactable.GetComponent<SpriteLayerRendererList>());
 
-        spawnActions(spriteRenderer);
+        applyOffset(interactable);
+
+        setIgnoresSecretDoors(interactable);
     }
 
-    public virtual void spawnActions(SpriteRenderer spriteRenderer)
+    protected virtual void applyOffset(GameObject interactable)
     {
-        if (spriteRenderer == null)
+        if(offset == 0f)
         {
             return;
         }
 
-        spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
+        Vector3 currentPosition = interactable.transform.position;
 
-        if(useRubbleColor)
+        currentPosition.y -= offset;
+        Collider2D collider2D = interactable.GetComponent<Collider2D>();
+
+        if(collider2D != null)
         {
-            spriteRenderer.color = ColorList.getRubbleColorFromLocationName();
-        } else
-        {
-            spriteRenderer.color = tint;
+            collider2D.offset += new Vector2(0f, offset);
         }
 
-        if(sortingLayerInfo != null) 
-        {
-            sortingLayerInfo.setRendererSortingLayer(spriteRenderer);
-        }
-
-        spriteRenderer.flipX = flipSprite();
+        interactable.transform.position = currentPosition;
     }
+
+    protected virtual void setIgnoresSecretDoors(GameObject interactable)
+    {
+        NameTagGenerator nameTagGenerator = interactable.GetComponent<NameTagGenerator>();
+
+        if(nameTagGenerator != null && ignoresSecretDoors)
+        {
+            nameTagGenerator.setToIgnoreSecretDoors();
+        }
+    }
+
     public static void addTutorialTargetComponent(GameObject gameObject, string tutorialTargetHash)
     {
         SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
@@ -205,42 +201,11 @@ public abstract class OOCSpawnDetails
         nameTagGenerator.nameSource = nameSource;
     }
 
-    // public static void setMouseHoverTileMap(string spriteName, Transform transform)
-    // {
-    //     foreach(Transform child in transform)
-    //     {
-    //         if(child.GetComponent<NPCMouseHover>() != null)
-    //         {
-    //             GameObject.Destroy(child.gameObject);
-    //         }
-    //     }
-
-    //     Tilemap npcMouseHover = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.mouseHoverTileMap), transform).GetComponent<Tilemap>();
-
-    //     Tile tile = ScriptableObject.CreateInstance<Tile>();
-
-    //     tile.sprite = Helpers.loadSpriteFromResources(spriteName);
-
-    //     npcMouseHover.SetTile(new Vector3Int(-1, -1), tile);
-    // }
 }
 
 public interface IQuestActivationObject
 {
     public void setScript(QuestStepActivationScript script);
-}
-public abstract class QuestActivationObjectSpawnDetails : OOCSpawnDetails
-{
-
-    protected QuestStepActivationScript script;
-
-    public QuestActivationObjectSpawnDetails(string npcName, Vector3Int cellCoords, QuestStepActivationScript script = null, bool withScale = false) :
-    base(npcName, cellCoords, withScale: withScale)
-    {
-        this.script = script;
-    }
-
-    protected abstract void setScript(IQuestActivationObject questActivationObject);
 }
 
 public class TutorialColliderSpawnDetails : OOCSpawnDetails
@@ -252,40 +217,14 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
     public int monsterDefeatKeyIndex;
     public bool alwaysSpawn;
 
-    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, bool alwaysSpawn = false) :
-    base(cellCoords: cellCoords)
+    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, StartSpawningAllTrueFlagList startSpawningFlagList = null, bool alwaysSpawn = false, IAppearance appearance = null) :
+    base(appearance: appearance, cellCoords: cellCoords)
     {
         this.tutorialKey = tutorialKey;
         this.seenFlagName = seenFlagName;
-        this.startSpawningFlagList = new StartSpawningAllTrueFlagList();
+        this.startSpawningFlagList = startSpawningFlagList ?? new StartSpawningAllTrueFlagList();
         this.monsterDefeatKeyIndex = -1;
         this.alwaysSpawn = alwaysSpawn;
-    }
-
-    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, StartSpawningAllTrueFlagList startSpawningFlagList, bool alwaysSpawn = false) :
-    base(cellCoords: cellCoords)
-    {
-        this.tutorialKey = tutorialKey;
-        this.seenFlagName = seenFlagName;
-        this.startSpawningFlagList = startSpawningFlagList;
-        this.monsterDefeatKeyIndex = -1;
-        this.alwaysSpawn = alwaysSpawn;
-    }
-
-    public TutorialColliderSpawnDetails(Vector3Int cellCoords, string tutorialKey, string seenFlagName, StartSpawningAllTrueFlagList startSpawningFlagList, int monsterDefeatKeyIndex, bool alwaysSpawn = false) :
-    base(cellCoords: cellCoords)
-    {
-        this.tutorialKey = tutorialKey;
-        this.seenFlagName = seenFlagName;
-        this.startSpawningFlagList = startSpawningFlagList;
-        this.monsterDefeatKeyIndex = monsterDefeatKeyIndex;
-        this.alwaysSpawn = alwaysSpawn;
-    }
-
-
-    public override string getSpriteName()
-    {
-        return PrefabNames.defaultNPCSprite;
     }
 
     public override string getPrefabName()
@@ -331,8 +270,15 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
     public CunningObjectSpriteCategory category;
     public int index;
 
-    public CunningObjectSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, CunningObjectSpriteCategory category, Facing endFacing = Facing.Random, string tutorialTargetHash = null, bool withScale = false) :
-    base(category.ToString(), cellCoords, tutorialTargetHash: tutorialTargetHash, withScale: withScale)
+    public CunningObjectSpawnDetails(int index,
+                                     Vector3Int cellCoords, 
+                                     Facing startFacing, 
+                                     CunningObjectSpriteCategory category, 
+                                     Facing endFacing = Facing.Random, 
+                                     string tutorialTargetHash = null,
+                                     QuestStepActivationScript script = null,
+                                     IAppearance appearance = null) :
+    base(category.ToString(), appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, script: script)
     {
         this.index = index;
 
@@ -364,11 +310,19 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
 public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
 {
 
-    private QuestStepActivationScript script;
     private List<ObstacleSpawnDetails> allBlockerSpawnDetails;
 
-    public CunningBlockerSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails = null, ObstacleSpawnDetails blockerSpawnDetails = null, Facing endFacing = Facing.Random, QuestStepActivationScript script = null, string tutorialTargetHash = null, bool withScale = false) :
-    base(index, cellCoords, startFacing, category, endFacing: endFacing, tutorialTargetHash: tutorialTargetHash, withScale: withScale)
+    public CunningBlockerSpawnDetails(int index, 
+                                        Vector3Int cellCoords, 
+                                        Facing startFacing,
+                                        CunningObjectSpriteCategory category, 
+                                        List<ObstacleSpawnDetails> allBlockerSpawnDetails = null, 
+                                        ObstacleSpawnDetails blockerSpawnDetails = null, 
+                                        Facing endFacing = Facing.Random, 
+                                        QuestStepActivationScript script = null, 
+                                        string tutorialTargetHash = null,
+                                        IAppearance appearance = null) :
+    base(index, cellCoords, startFacing, category, endFacing: endFacing, tutorialTargetHash: tutorialTargetHash, script: script, appearance: appearance)
     {
         if(allBlockerSpawnDetails == null)
         {
@@ -381,9 +335,7 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
         if(blockerSpawnDetails != null)
         {
             this.allBlockerSpawnDetails.Add(blockerSpawnDetails);
-        } 
-
-        this.script = script;
+        }
     }
 
     public override string getPrefabName()
@@ -445,8 +397,16 @@ public class LinkedCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
 
     private int linkedIndex;
 
-    public LinkedCunningBlockerSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> allBlockerSpawnDetails, int linkedIndex, string tutorialTargetHash = null, bool withScale = false) :
-    base(index, cellCoords, startFacing, category, allBlockerSpawnDetails, endFacing: endFacing, tutorialTargetHash: tutorialTargetHash, withScale: withScale)
+    public LinkedCunningBlockerSpawnDetails(int index, 
+                                            Vector3Int cellCoords, 
+                                            Facing startFacing, 
+                                            Facing endFacing, 
+                                            CunningObjectSpriteCategory category, 
+                                            List<ObstacleSpawnDetails> allBlockerSpawnDetails, 
+                                            int linkedIndex,
+                                            string tutorialTargetHash = null,
+                                            IAppearance appearance = null) :
+    base(index, cellCoords, startFacing, category, allBlockerSpawnDetails, endFacing: endFacing, tutorialTargetHash: tutorialTargetHash, appearance: appearance)
     {
         this.linkedIndex = linkedIndex;
     }
@@ -472,8 +432,15 @@ public class DoubleCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
 
     private List<ObstacleSpawnDetails> deactivatedBlockerSpawnDetails;
 
-    public DoubleCunningBlockerSpawnDetails(int index, Vector3Int cellCoords, Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category, List<ObstacleSpawnDetails> activatedBlockerSpawnDetails, List<ObstacleSpawnDetails> deactivatedBlockerSpawnDetails, bool withScale = false) :
-    base(index, cellCoords, startFacing, category, activatedBlockerSpawnDetails, endFacing: endFacing, withScale: withScale)
+    public DoubleCunningBlockerSpawnDetails(int index, 
+                                            Vector3Int cellCoords, 
+                                            Facing startFacing, 
+                                            Facing endFacing, 
+                                            CunningObjectSpriteCategory category, 
+                                            List<ObstacleSpawnDetails> activatedBlockerSpawnDetails, 
+                                            List<ObstacleSpawnDetails> deactivatedBlockerSpawnDetails,
+                                            IAppearance appearance = null) :
+    base(index, cellCoords, startFacing, category, activatedBlockerSpawnDetails, endFacing: endFacing, appearance: appearance)
     {
         this.deactivatedBlockerSpawnDetails = deactivatedBlockerSpawnDetails;
     }
@@ -495,25 +462,16 @@ public class DoubleCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
     }
 }
 
-public class ObstacleSpawnDetails : OffSetSpawnDetails
+public class ObstacleSpawnDetails : OOCSpawnDetails
 {
 
-    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false, bool withScale = true, bool ignoresSecretDoors = true) :
-    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX, ignoresSecretDoors: ignoresSecretDoors, withScale: withScale)
+    public ObstacleSpawnDetails(string npcName, 
+                                Vector3Int cellCoords, 
+                                bool ignoresSecretDoors = true,
+                                IAppearance appearance = null) :
+    base(npcName, appearance: appearance, cellCoords: cellCoords, ignoresSecretDoors: ignoresSecretDoors)
     {
-        this.tint = Color.white;
-    }
-
-    public ObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Color tint, bool ignoresSecretDoors = true, bool withScale = true) :
-    base(npcName, cellCoords, spriteName, ignoresSecretDoors: ignoresSecretDoors, withScale: withScale)
-    {
-        useRubbleColor = false;
-        this.tint = tint;
-    }
-
-    public override string getSpriteName()
-    {
-        return spriteName;
+        
     }
 
     public override string getPrefabName()
@@ -521,34 +479,34 @@ public class ObstacleSpawnDetails : OffSetSpawnDetails
         return PrefabNames.oocObstacle;
     }
 
-    public override void spawnActions(GameObject interactable)
-    {
-        base.spawnActions(interactable);
+    // public override void spawnActions(GameObject interactable)
+    // {
+    //     base.spawnActions(interactable);
 
-        Obstacle obstacle = interactable.GetComponent<Obstacle>();
-        obstacle.setObstacleName(npcName);
+    //     Obstacle obstacle = interactable.GetComponent<Obstacle>();
+    //     obstacle.setObstacleName(npcName);
 
-        spawnActions(interactable.GetComponent<SpriteRenderer>());
-    }
+    //     spawnActions(interactable.GetComponent<SpriteRenderer>());
+    // }
 
-    public override void spawnActions(SpriteRenderer spriteRenderer)
-    {
-        if (spriteRenderer == null)
-        {
-            return;
-        }
+    // public override void spawnActions(SpriteRenderer spriteRenderer)
+    // {
+    //     if (spriteRenderer == null)
+    //     {
+    //         return;
+    //     }
 
-        base.spawnActions(spriteRenderer);
+    //     base.spawnActions(spriteRenderer);
 
-        spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
+    //     spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
 
-        if(sortingLayerInfo != null)
-        {
-            sortingLayerInfo.setRendererSortingLayer(spriteRenderer);
-        }
+    //     if(sortingLayerInfo != null)
+    //     {
+    //         sortingLayerInfo.setRendererSortingLayer(spriteRenderer);
+    //     }
 
-        spriteRenderer.flipX = flipSprite();
-    }
+    //     spriteRenderer.flipX = flipSprite();
+    // }
 
     protected override void setIgnoresSecretDoors(GameObject interactable)
     {
@@ -568,83 +526,91 @@ public class DeadBodySpawnDetails : ObstacleSpawnDetails
     private Facing facing;
     private bool weaponless;
 
-    public DeadBodySpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, Facing facing = Facing.NorthEast, SortingLayerInfo sortingLayerInfo = null, float offset = 0f, bool flipX = false, bool withScale = false, bool ignoresSecretDoors = true, bool weaponless = false) :
-    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX, withScale: withScale, ignoresSecretDoors: ignoresSecretDoors)
+    public DeadBodySpawnDetails(string npcName, 
+                                Vector3Int cellCoords, 
+                                Facing facing = Facing.NorthEast, 
+                                bool ignoresSecretDoors = true, 
+                                bool weaponless = false,
+                                IAppearance appearance = null) :
+    base(npcName, cellCoords, ignoresSecretDoors: ignoresSecretDoors, appearance: appearance)
     {
         this.facing = facing;
         this.weaponless = weaponless;
     }
 
-    public Sprite getSprite()
-    {
-        string path = EnemyTypeFolderPathList.getEnemyTypeFolderPath(spriteName);
-        string sheetName = "";
+    // public Sprite getSprite()
+    // {
+    //     string path = EnemyTypeFolderPathList.getEnemyTypeFolderPath(spriteName);
+    //     string sheetName = "";
 
-        switch(facing)
-        {
-            case Facing.SouthEast:
-            case Facing.SouthWest:
-                sheetName = CharacterAnimationType.Death_Front.ToString();
-                break;
-            default:
-                sheetName = CharacterAnimationType.Death_Back.ToString();
-                break;
-        }
+    //     switch(facing)
+    //     {
+    //         case Facing.SouthEast:
+    //         case Facing.SouthWest:
+    //             sheetName = CharacterAnimationType.Death_Front.ToString();
+    //             break;
+    //         default:
+    //             sheetName = CharacterAnimationType.Death_Back.ToString();
+    //             break;
+    //     }
 
-        if(weaponless)
-        {
-            sheetName += "_Weaponless";
-        }
+    //     if(weaponless)
+    //     {
+    //         sheetName += "_Weaponless";
+    //     }
 
-        Sprite[] sprites = Resources.LoadAll<Sprite>(path+sheetName);
+    //     Sprite[] sprites = Resources.LoadAll<Sprite>(path+sheetName);
 
-        if(sprites == null || sprites.Length <= 0)
-        {
-            sprites = Resources.LoadAll<Sprite>(path+CharacterAnimationType.Death.ToString());
-        }
+    //     if(sprites == null || sprites.Length <= 0)
+    //     {
+    //         sprites = Resources.LoadAll<Sprite>(path+CharacterAnimationType.Death.ToString());
+    //     }
 
-        return sprites[sprites.Length - 1];
-    }
+    //     return sprites[sprites.Length - 1];
+    // }
 
-    public override void spawnActions(SpriteRenderer spriteRenderer)
-    {
-        if (spriteRenderer == null)
-        {
-            return;
-        }
+    // public override void spawnActions(SpriteRenderer spriteRenderer)
+    // {
+    //     if (spriteRenderer == null)
+    //     {
+    //         return;
+    //     }
 
-        if(sortingLayerInfo != null) 
-        {
-            sortingLayerInfo.setRendererSortingLayer(spriteRenderer);
-        }
+    //     if(sortingLayerInfo != null) 
+    //     {
+    //         sortingLayerInfo.setRendererSortingLayer(spriteRenderer);
+    //     }
 
-        spriteRenderer.sprite = getSprite();
-    }
+    //     spriteRenderer.sprite = getSprite();
+    // }
 }
 
 public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
 {
     protected string secretDoorFlag;
 
-    public ObstacleWithSecretDoorFlagSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName = "", SortingLayerInfo sortingLayerInfo = null, string secretDoorFlag = "", bool withScale = true, float offset = 0f) :
-    base(npcName, cellCoords, spriteName: spriteName, sortingLayerInfo: sortingLayerInfo, withScale: withScale, offset: offset)
+    public ObstacleWithSecretDoorFlagSpawnDetails(  string npcName, 
+                                                    Vector3Int cellCoords, 
+                                                    string secretDoorFlag = "", 
+                                                    IAppearance appearance = null) :
+    base(npcName, cellCoords, appearance: appearance)
     {
         this.secretDoorFlag = secretDoorFlag;
     }
 
     protected void setOffset(Transform transform)
     {
-        switch(spriteName)
-        {
-            case PrefabNames.water:
-                transform.position = new Vector3(transform.position.x, transform.position.y - Constants.onTableHeightOffset*2);
-                break;
-            case PrefabNames.waterShort:
-                transform.position = new Vector3(transform.position.x, transform.position.y - Constants.waterShortOffset);
-                break;
-            default:
-                break;
-        }
+        // switch(spriteName)
+        // {
+        //     case PrefabNames.water:
+        //         transform.position = new Vector3(transform.position.x, transform.position.y - Constants.onTableHeightOffset*2);
+        //         break;
+        //     case PrefabNames.waterShort:
+        //         transform.position = new Vector3(transform.position.x, transform.position.y - Constants.waterShortOffset);
+        //         break;
+        //     default:
+        //         break;
+        // }
     }
 
     public override string getPrefabName()
@@ -657,44 +623,47 @@ public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
         return new SecretDoorObstacleSpawnParams(secretDoorFlag);
     }
 
-    public override void spawnActions(GameObject interactable)
-    {
-        GameObject.Destroy(interactable.GetComponent<Obstacle>());
+    // public override void spawnActions(GameObject interactable)
+    // {
+    //     GameObject.Destroy(interactable.GetComponent<Obstacle>());
 
-        ObstacleWithSecretDoorFlag obstacle = interactable.AddComponent<ObstacleWithSecretDoorFlag>();
+    //     ObstacleWithSecretDoorFlag obstacle = interactable.AddComponent<ObstacleWithSecretDoorFlag>();
 
-        obstacle.setObstacleName(npcName);
-        obstacle.secretDoorFlag = secretDoorFlag;
+    //     obstacle.setObstacleName(npcName);
+    //     obstacle.secretDoorFlag = secretDoorFlag;
 
-        setOffset(interactable.transform);
+    //     setOffset(interactable.transform);
 
-        spawnActions(interactable.GetComponent<SpriteRenderer>());
-    }
+    //     spawnActions(interactable.GetComponent<SpriteRenderer>());
+    // }
 
-    public override void spawnActions(SpriteRenderer spriteRenderer)
-    {
-        if (spriteRenderer == null)
-        {
-            return;
-        }
+    // public override void spawnActions(SpriteRenderer spriteRenderer)
+    // {
+    //     if (spriteRenderer == null)
+    //     {
+    //         return;
+    //     }
 
-        if(getSpriteName() == null)
-        {
-            spriteRenderer.sprite = null;
-        }
-        else
-        {
-            base.spawnActions(spriteRenderer);
-        }
-    }
+    //     if(getSpriteName() == null)
+    //     {
+    //         spriteRenderer.sprite = null;
+    //     }
+    //     else
+    //     {
+    //         base.spawnActions(spriteRenderer);
+    //     }
+    // }
 
 }
 
 
 public class Wave : ObstacleWithSecretDoorFlagSpawnDetails 
 {
-    public Wave(string npcName, Vector3Int cellCoords, string spriteName, SortingLayerInfo sortingLayerInfo, string secretDoorFlag = "", float offset = 0f) :
-    base(npcName, cellCoords, spriteName: spriteName, sortingLayerInfo: sortingLayerInfo, secretDoorFlag: secretDoorFlag, withScale: true, offset: offset)
+    public Wave(string npcName, 
+                Vector3Int cellCoords, 
+                string secretDoorFlag = "",
+                IAppearance appearance = null) :
+    base(npcName, cellCoords, secretDoorFlag: secretDoorFlag, appearance: appearance)
     {
     }
 
@@ -718,33 +687,28 @@ public class Wave : ObstacleWithSecretDoorFlagSpawnDetails
 
     public virtual void spawnActions(Tilemap tilemap)
     {
-        if(tilemap != null && spriteName != null)
-        {
-            AnimatedTile tile = Resources.Load<AnimatedTile>(spriteName);
-            tilemap.SetTile(Vector3Int.zero, tile);
-        }
+        // if(tilemap != null && spriteName != null)
+        // {
+        //     AnimatedTile tile = Resources.Load<AnimatedTile>(spriteName);
+        //     tilemap.SetTile(Vector3Int.zero, tile);
+        // }
     }
     public virtual void spawnActions(TilemapRenderer tilemapRenderer)
     {
-        if(tilemapRenderer != null && sortingLayerInfo != null)
-        {
-            sortingLayerInfo.setRendererSortingLayer(tilemapRenderer);
-        }
+        // if(tilemapRenderer != null && sortingLayerInfo != null)
+        // {
+        //     sortingLayerInfo.setRendererSortingLayer(tilemapRenderer);
+        // }
     }
 }
 
 public class SpikeSpawnDetails : ObstacleSpawnDetails
 {
 
-    public SpikeSpawnDetails(Vector3Int cellCoords, bool withScale = true) :
-    base(NPCNameList.spike, cellCoords, PrefabNames.spikesDown, Color.white, withScale: withScale)
+    public SpikeSpawnDetails(Vector3Int cellCoords,
+                            IAppearance appearance = null) :
+    base(NPCNameList.spike, cellCoords, appearance: appearance)
     {
-    }
-
-    public SpikeSpawnDetails(Vector3Int cellCoords, Color tint, bool withScale = true) :
-    base(NPCNameList.spike, cellCoords, PrefabNames.spikesDown, tint, withScale: withScale)
-    {
-
     }
 
     public override string getPrefabName()
@@ -756,22 +720,28 @@ public class SpikeSpawnDetails : ObstacleSpawnDetails
 
 public class RubbleObstacleSpawnDetails : ObstacleSpawnDetails
 {
-    public RubbleObstacleSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, bool withScale = true) :
-    base(npcName, cellCoords, spriteName, withScale: withScale)
+    public RubbleObstacleSpawnDetails(string npcName, 
+                                        Vector3Int cellCoords,
+                                        IAppearance appearance = null) :
+    base(npcName, cellCoords, appearance: appearance)
     {
-        useRubbleColor = true;
     }
 }
 
-public class ButtonSpawnDetails : OffSetSpawnDetails
+public class ButtonSpawnDetails : OOCSpawnDetails
 {
 
     private int index;
     private int weight;
     private int charismaRequirement;
 
-    public ButtonSpawnDetails(Vector3Int cellCoords, int index = 0, int weight = 1, int charismaRequirement = 1, string tutorialTargetHash = null, bool withScale = true) :
-    base(NPCNameList.button, cellCoords, offset: Constants.onTableHeightOffset*-3, withScale: withScale)
+    public ButtonSpawnDetails(Vector3Int cellCoords, 
+                                int index = 0, 
+                                int weight = 1, 
+                                int charismaRequirement = 1, 
+                                string tutorialTargetHash = null,
+                                IAppearance appearance = null) :
+    base(NPCNameList.button, appearance: appearance, cellCoords: cellCoords, offset: Constants.onTableHeightOffset*-3, ignoresSecretDoors: true)
     {
         this.index = index;
         this.weight = weight;
@@ -818,8 +788,11 @@ public class HiddenButtonSpawnDetails : ButtonSpawnDetails
 {
     private string secretDoorFlag;
 
-    public HiddenButtonSpawnDetails(Vector3Int cellCoords, string secretDoorFlag, int index = 0, bool withScale = true) :
-    base(cellCoords, index: index, withScale: withScale)
+    public HiddenButtonSpawnDetails(Vector3Int cellCoords, 
+                                    string secretDoorFlag, 
+                                    int index = 0,
+                                    IAppearance appearance = null) :
+    base(cellCoords, index: index, appearance: appearance)
     {
         this.secretDoorFlag = secretDoorFlag;
     }
@@ -844,7 +817,7 @@ public class HiddenButtonSpawnDetails : ButtonSpawnDetails
 
 
 
-public class NPCSpawnDetails : OffSetSpawnDetails
+public class NPCSpawnDetails : OOCSpawnDetails
 {
 
     public const string extraSpaceNameSuffix = "'s Extra Space GameObject";
@@ -857,18 +830,17 @@ public class NPCSpawnDetails : OffSetSpawnDetails
 
     public NPCSpawnDetails( string npcName, 
                             Vector3Int cellCoords, 
-                            string areaName = null, 
-                            string spriteName = null, 
-                            SortingLayerInfo sortingLayerInfo = null, 
+                            string areaName = null,
+                            SortingLayerInfo sortingLayerInfo = null,
                             float offset = 0f, 
-                            bool flipX = false,
                             Vector3Int[] extraSpaces = null,
                             SpeakAtStartScript speakAtStartScript = null,
                             string tutorialTargetHash = "",
                             bool ignoresSecretDoors = true,
                             bool sleepingDialogueIntro = false,
-                            bool withScale = true) :
-    base(npcName, cellCoords, spriteName, sortingLayerInfo, offset, flipX, ignoresSecretDoors: ignoresSecretDoors, tutorialTargetHash: tutorialTargetHash, withScale: withScale)
+                            QuestStepActivationScript script = null,
+                            IAppearance appearance = null) :
+    base(npcName, appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, offset: offset, ignoresSecretDoors: ignoresSecretDoors, script: script)
     {
         if(areaName == null)
         {
@@ -992,8 +964,8 @@ public class NPCWithAnimationsSpawnDetails : NPCSpawnDetails
                                          float offset = 0f,
                                          SortingLayerInfo sortingLayerInfo = null,
                                          bool sleepingDialogueIntro = false,
-                                         bool withScale = false) :
-    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset, sortingLayerInfo: sortingLayerInfo, sleepingDialogueIntro: sleepingDialogueIntro, withScale: withScale)
+                                         IAppearance appearance = null) :
+    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset, sortingLayerInfo: sortingLayerInfo, sleepingDialogueIntro: sleepingDialogueIntro, appearance: appearance)
     {
         if(animationName == null)
         {
@@ -1076,8 +1048,8 @@ public class HorseSpawnDetails : NPCWithAnimationsSpawnDetails
                                          CharacterAnimationType animationType = CharacterAnimationType.None, 
                                          bool ignoresSecretDoors = true,
                                          float offset = 0f,
-                                         bool withScale = false) :
-    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset, animationName: animationName, facing: facing, animationType: animationType, withScale: withScale)
+                                         IAppearance appearance = null) :
+    base(npcName, cellCoords, areaName, extraSpaces: extraSpaces, speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, offset: offset, animationName: animationName, facing: facing, animationType: animationType, appearance: appearance)
     {
         List<Vector3Int> extraCoords = new List<Vector3Int>();
 
@@ -1144,8 +1116,8 @@ public class NonDialogueNPCSpawnDetails : NPCWithAnimationsSpawnDetails
                                         bool ignoresSecretDoors = true,
                                         CharacterAnimationType animationType = CharacterAnimationType.None,
                                         SortingLayerInfo sortingLayerInfo = null,
-                                        bool withScale = false) :
-    base(npcName, cellCoords, "", animationName, facing, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, sortingLayerInfo: sortingLayerInfo, withScale: withScale)
+                                        IAppearance appearance = null) :
+    base(npcName, cellCoords, "", animationName, facing, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, sortingLayerInfo: sortingLayerInfo, appearance: appearance)
     {
 
     }
@@ -1184,8 +1156,8 @@ public class DependantSpawnDetails : NPCWithAnimationsSpawnDetails
                                     Facing facing = Facing.Random,
                                     bool normalScale = false,
                                     CharacterAnimationType animationType = CharacterAnimationType.None,
-                                    bool withScale = true) :
-    base(npcName, cellCoords, areaName, facing: facing, animationType: animationType, withScale: withScale)
+                                    IAppearance appearance = null) :
+    base(npcName, cellCoords, areaName, facing: facing, animationType: animationType, appearance: appearance)
     {
         this.parentName = parentName;
         this.normalScale = normalScale;
@@ -1235,76 +1207,7 @@ public class DependantSpawnDetails : NPCWithAnimationsSpawnDetails
 
 }
 
-
-
-public class NPCOffGridSpawnDetails : NPCSpawnDetails
-{
-
-    public NPCOffGridSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, bool withScale = true) :
-    base(npcName, cellCoords, areaName, spriteName, withScale: withScale)
-    {
-    }
-
-    public NPCOffGridSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, bool flipX, float offset, bool withScale = true) :
-    base(npcName, cellCoords, areaName, spriteName, flipX: flipX, offset: offset, withScale: withScale)
-    {
-    }
-
-    public NPCOffGridSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, Vector3Int[] extraSpaces, bool withScale = true, float offset = 0f) :
-    base(npcName, cellCoords, areaName, spriteName, extraSpaces: extraSpaces, withScale: withScale, offset: offset)
-    {
-    }
-}
-
-public class CustomMouseHoverNPCSpawnDetails : NPCSpawnDetails
-{
-
-    public CustomMouseHoverNPCSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, bool withScale = true):
-    base(npcName, cellCoords, currentArea, spriteName, withScale: withScale)
-    {
-
-    }
-
-    public CustomMouseHoverNPCSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, string spriteName, bool flipX, float offset, bool withScale = true) :
-    base(npcName, cellCoords, areaName, spriteName, flipX: flipX, offset: offset, withScale: withScale)
-    {
-
-    }
-
-    public virtual bool hasSprite()
-    {
-        return true;
-    }
-
-    public void setUpMouseHover(GameObject gameObject)
-    {
-
-        // foreach(Transform child in gameObject.transform)
-        // {
-        //     GameObject.Destroy(child.gameObject);
-        // }
-
-        if(!hasSprite())
-        {
-            NameTagGenerator nameTagGenerator = gameObject.GetComponent<NameTagGenerator>();
-
-            if(nameTagGenerator != null)
-            {
-                GameObject.Destroy(nameTagGenerator);
-            }
-        }
-    }
-
-    public override void spawnActions(GameObject gameObject)
-    {
-        base.spawnActions(gameObject);
-
-        setUpMouseHover(gameObject);
-    }
-
-}
-
-public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
+public class GateSpawnDetails : NPCSpawnDetails
 {
     private bool showSprite;
     private Axis axis;
@@ -1319,8 +1222,8 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
                             Axis axis,
                             Dictionary<string, int> statDifficulties,
                             bool useRubbleColor,
-                            bool withScale = true) :
-    base(npcName, cellCoords, currentArea, spriteName, withScale: withScale)
+                            IAppearance appearance = null) :
+    base(npcName, cellCoords, currentArea, appearance: appearance)
     {
         this.tutorialTargetHash = tutorialTargetHash;
         this.showSprite = showSprite;
@@ -1338,23 +1241,18 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
         }
     }
 
-    public override bool hasSprite()
-    {
-        return showSprite;
-    }
-
-    public override bool flipSprite()
-    {
-        switch(spriteName)
-        {
-            case PrefabNames.portcullis1x1Path:
-            case PrefabNames.portcullis2x1Path:
-            case PrefabNames.portcullis3x1Path:
-                return axis == Axis.DescendingX;
-            default:
-                return false;
-        }
-    }
+    // public override bool flipSprite()
+    // {
+    //     switch(spriteName)
+    //     {
+    //         case PrefabNames.portcullis1x1Path:
+    //         case PrefabNames.portcullis2x1Path:
+    //         case PrefabNames.portcullis3x1Path:
+    //             return axis == Axis.DescendingX;
+    //         default:
+    //             return false;
+    //     }
+    // }
 
     public virtual Gate addGate(GameObject gateGameObject)
     {
@@ -1380,23 +1278,10 @@ public class GateSpawnDetails : CustomMouseHoverNPCSpawnDetails
             animationManager.disableExtras();
         }
 
-        if(!hasSprite())
-        {
-            gate.spriteRenderer.enabled = false;
-
-            foreach(Transform child in gateGameObject.transform)
-            {
-                Collider2D childCollider = child.GetComponent<Collider2D>();
-                if(childCollider != null)
-                {
-                    childCollider.enabled = false;
-                }
-            }
-
-        } else if(flipSprite())
-        {
-            gate.spriteRenderer.flipX = true;
-        }
+        // if(flipSprite())
+        // {
+        //     gate.spriteRenderer.flipX = true;
+        // }
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)
@@ -1415,8 +1300,8 @@ public class GateWithKeySpawnDetails : GateSpawnDetails
 {
     private GateKeyDetails gateKeyDetails;
 
-    public GateWithKeySpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, bool showSprite, Axis axis, GateKeyDetails gateKeyDetails, bool withScale = true) :
-    base(npcName, cellCoords, currentArea, spriteName, noTutorialTargetHash, showSprite, axis, new Dictionary<string, int>(), useRubbleColor: false, withScale: withScale)
+    public GateWithKeySpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, bool showSprite, Axis axis, GateKeyDetails gateKeyDetails, bool withScale = true, IAppearance appearance = null) :
+    base(npcName, cellCoords, currentArea, spriteName, noTutorialTargetHash, showSprite, axis, new Dictionary<string, int>(), useRubbleColor: false, appearance: appearance)
     {
         this.gateKeyDetails = gateKeyDetails;
     }
@@ -1436,8 +1321,8 @@ public class GateWithKeySpawnDetails : GateSpawnDetails
 
 public class TemporaryGateSpawnDetails : GateSpawnDetails
 {
-    public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, Axis axis, Dictionary<string, int> statDifficulties, bool withScale = true) :
-    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, true, axis, statDifficulties, useRubbleColor: false, withScale: withScale)
+    public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, Axis axis, Dictionary<string, int> statDifficulties, bool withScale = true, IAppearance appearance = null) :
+    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, true, axis, statDifficulties, useRubbleColor: false, appearance: appearance)
     {
 
     }
@@ -1458,8 +1343,8 @@ public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
 {
     private string hiddenTerrainFlag;
 
-    public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag, Color tint, bool withScale = true) :
-    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, true, Axis.DescendingX, statDifficulties, useRubbleColor: false, withScale: withScale)
+    public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag, Color tint, bool withScale = true, IAppearance appearance = null) :
+    base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, true, Axis.DescendingX, statDifficulties, useRubbleColor: false, appearance: appearance)
     {
         this.hiddenTerrainFlag = hiddenTerrainFlag;
         this.tint = tint;
@@ -1497,8 +1382,9 @@ public class RestStopAndShopkeeperSpawnDetails : NPCWithAnimationsSpawnDetails
                                              Facing facing = Facing.Random, 
                                              bool withScale = false,
                                              bool isShopkeeper = false,
-                                             bool isRestStop = false) :
-    base(npcName, cellCoords, areaName, animationName: animationName, extraSpaces: extraSpaces, ignoresSecretDoors: ignoresSecretDoors, facing: facing, withScale: withScale)
+                                             bool isRestStop = false,
+                                             IAppearance appearance = null) :
+    base(npcName, cellCoords, areaName, animationName: animationName, extraSpaces: extraSpaces, ignoresSecretDoors: ignoresSecretDoors, facing: facing, appearance: appearance)
     {
         this.isShopkeeper = isShopkeeper;
         this.isRestStop = isRestStop;
@@ -1533,10 +1419,9 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
     private SecretDoorInfo secretDoorInfo;
     private string terrainSpriteName;
     private ObservableDelegate observable;
-    private QuestStepActivationScript script;
 
-    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo, string tutorialTargetHash, string spriteName, string terrainSpriteName, ObservableDelegate observable = null, QuestStepActivationScript script = null, bool withScale = true) :
-    base(npcName, cellCoords, areaName, spriteName, withScale: withScale)
+    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo, string tutorialTargetHash, string spriteName, string terrainSpriteName, ObservableDelegate observable = null, QuestStepActivationScript script = null, bool withScale = true, IAppearance appearance = null) :
+    base(npcName, cellCoords, areaName, script: script, appearance: appearance)
     {
         this.secretDoorInfo = secretDoorInfo;
 
@@ -1546,7 +1431,6 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
         dialogue = getDialogue(areaName);
     
         this.observable = observable;
-        this.script = script;
     }
 
     public override Dialogue getDialogue(string areaName)
@@ -1621,8 +1505,8 @@ public class LadderSpawnDetails : NPCSpawnDetails
 
     public Ladder ladder;
 
-    public LadderSpawnDetails(Vector3Int cellCoords, string spriteName, Ladder ladder, bool flipX = doNotFlipX, float offset = offsetY, SortingLayerInfo sortingLayerInfo = null, bool withScale = true) :
-    base(NPCNameList.ladder, cellCoords, Constants.emptyString, spriteName, flipX: flipX, offset: offset, sortingLayerInfo: sortingLayerInfo, withScale: withScale)
+    public LadderSpawnDetails(Vector3Int cellCoords, Ladder ladder, bool withScale = true, IAppearance appearance = null) :
+    base(NPCNameList.ladder, cellCoords, Constants.emptyString, appearance: appearance)
     {
         this.ladder = ladder;
     }
@@ -1662,18 +1546,13 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
     public VaultableObjectSpawnDetails(string npcName,
                                         Vector3Int cellCoords,
                                         VaultableObject vaultableObject,
-                                        string spriteName = null,
-                                        float offset = 0f,
-                                        SortingLayerInfo sortingLayerInfo = null,
                                         string tutorialTargetHash = "",
-                                        bool withScale = true) :
+                                        bool withScale = true,
+                                        IAppearance appearance = null) :
     base(npcName,
          cellCoords,
-         spriteName: spriteName,
-         offset: offset,
-         sortingLayerInfo: sortingLayerInfo,
          tutorialTargetHash: tutorialTargetHash,
-         withScale: withScale)
+         appearance: appearance)
     {
         this.vaultableObject = vaultableObject;
         this.dialogue = getDialogue(npcName);
@@ -1696,23 +1575,23 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
         return true;
     }
 
-    public override string getSpriteName()
-    {
-        if(spriteName != null)
-        {
-            return spriteName;
-        }
+    // public override string getSpriteName()
+    // {
+    //     if(spriteName != null)
+    //     {
+    //         return spriteName;
+    //     }
 
-        switch (vaultableObject.objectName)
-        {
-            case NPCNameList.barricade:
-                return PrefabNames.destroyableBarricade;
-            case VaultableObject.barrelName:
-                return PrefabNames.vaultableBarrels;
-            default:
-                return null;
-        }
-    }
+    //     switch (vaultableObject.objectName)
+    //     {
+    //         case NPCNameList.barricade:
+    //             return PrefabNames.destroyableBarricade;
+    //         case VaultableObject.barrelName:
+    //             return PrefabNames.vaultableBarrels;
+    //         default:
+    //             return null;
+    //     }
+    // }
 
     public override string getPrefabName()
     {
@@ -1744,16 +1623,16 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
 public class VaultableRubbleSpawnDetails : VaultableObjectSpawnDetails
 {
 
-    public VaultableRubbleSpawnDetails(string npcName, Vector3Int cellCoords, int difficulty, int vaultDistance, string spriteName = null, bool withScale = true) :
-    base(npcName, cellCoords, new VaultableObject(difficulty, vaultDistance, VaultableObject.isPlural, VaultableObject.rockName), spriteName: spriteName, withScale: withScale)
+    public VaultableRubbleSpawnDetails(string npcName, Vector3Int cellCoords, int difficulty, int vaultDistance, bool withScale = true, IAppearance appearance = null) :
+    base(npcName, cellCoords, new VaultableObject(difficulty, vaultDistance, VaultableObject.isPlural, VaultableObject.rockName), withScale: withScale, appearance: appearance)
     {
         useRubbleColor = true;
     }
 
-    public override string getSpriteName()
-    {
-        return PrefabNames.vaultableRocks;
-    }
+    // public override string getSpriteName()
+    // {
+    //     return PrefabNames.vaultableRocks;
+    // }
 }
 
 
@@ -1762,8 +1641,8 @@ public class VaultableOrDestroyableObjectSpawnDetails : VaultableObjectSpawnDeta
 
     public int index;
 
-    public VaultableOrDestroyableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableOrDestroyableObject vaultableOrDestroyableObject, string spriteName = null, int index = 0, bool withScale = true) :
-    base(npcName, cellCoords, vaultableOrDestroyableObject, spriteName: spriteName, withScale: withScale)
+    public VaultableOrDestroyableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableOrDestroyableObject vaultableOrDestroyableObject, int index = 0, bool withScale = true, IAppearance appearance = null) :
+    base(npcName, cellCoords, vaultableOrDestroyableObject, withScale: withScale, appearance: appearance)
     {
         this.index = index;
     }
@@ -1778,19 +1657,49 @@ public class VaultableOrDestroyableObjectSpawnDetails : VaultableObjectSpawnDeta
     }
 }
 
-public class ChestSpawnDetails : QuestActivationObjectSpawnDetails
+public class ChestSpawnDetails : OOCSpawnDetails
 {
     protected int index;
     protected Facing facing;
     protected string secretDoorFlag;
+    private ChestType type;
 
-    public ChestSpawnDetails(int index, Vector3Int cellCoords, Facing facing, QuestStepActivationScript script = null, string secretDoorFlag = null, bool withScale = true) :
-    base(generateName(index), cellCoords, script, withScale: withScale)
+    // Single sprite chests (e.g. dead bodies)
+    private string chestName;
+    private bool deadBody;
+    private bool weaponless;
+
+    public ChestSpawnDetails(int index,
+                             Vector3Int cellCoords,
+                             Facing facing,
+                             QuestStepActivationScript script = null,
+                             string secretDoorFlag = null,
+                             ChestType type = ChestType.Chest,
+                             string chestName = null,
+                             bool deadBody = false,
+                             bool weaponless = false,
+                             IAppearance appearance = null) :
+    base(npcName: generateName(index), appearance: appearance, cellCoords: cellCoords, script: script)
     {
         this.index = index;
         this.facing = facing;
         this.secretDoorFlag = secretDoorFlag;
+        this.type = type;
+
+        if(chestName != null)
+        {
+            this.chestName = chestName;
+            this.npcName = chestName;
+        }
+
+        this.deadBody = deadBody;
+        this.weaponless = weaponless;
     }
+
+    // public bool isSingleSpriteChest()
+    // {
+    //     return spriteName != null;
+    // }
 
     public override string getPrefabName()
     {
@@ -1804,96 +1713,76 @@ public class ChestSpawnDetails : QuestActivationObjectSpawnDetails
 
     public virtual ChestType getType()
     {
-        return ChestType.Chest;
+        return type;
     }
 
-    public override void spawnActions(GameObject chestGameObject)
-    {
-        Chest chest = chestGameObject.GetComponent<Chest>();
+    // public override void spawnActions(GameObject chestGameObject)
+    // {
+    //     if(isSingleSpriteChest())
+    //     {
+    //         spawnSingleSpriteChest(chestGameObject);
+    //         return;
+    //     }
 
-        chest.populate(index, facing, getType());
+    //     Chest chest = chestGameObject.GetComponent<Chest>();
 
-        setScript(chest);
+    //     chest.populate(index, facing, getType());
 
-        chest.setSecretDoorFlag(secretDoorFlag);
-    }
+    //     setScript(chest);
 
-    protected override void setScript(IQuestActivationObject questActivationObject)
-    {
-        questActivationObject.setScript(script);
-    }
-}
+    //     chest.setSecretDoorFlag(secretDoorFlag);
+    // }
 
-public class SingleSpriteChestSpawnDetails: ChestSpawnDetails
-{
+    // private Sprite getSprite()
+    // {
+    //     if(deadBody)
+    //     {
+    //         string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(spriteName);
 
-    private string chestName;
+    //         if(weaponless)
+    //         {
+    //             switch(facing)
+    //             {
+    //                 case Facing.NorthEast:
+    //                 case Facing.NorthWest:
+    //                     return Helpers.loadSpriteFromResources(folderPath + CharacterAnimationType.Death_Back_Weaponless);
+    //                 default:
+    //                     return Helpers.loadSpriteFromResources(folderPath + CharacterAnimationType.Death_Front_Weaponless);
+    //             }
+    //         } else
+    //         {
+    //             Sprite[] deathSprites = null;
 
-    private bool deadBody;
-    private bool weaponless;
+    //             switch(facing)
+    //             {
+    //                 case Facing.NorthEast:
+    //                 case Facing.NorthWest:
+    //                     deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death_Back);
+    //                     break;
+    //                 default:
+    //                     deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death_Front);
+    //                     break;
+    //             }
 
-    public SingleSpriteChestSpawnDetails(int index, string chestName, Vector3Int cellCoords, Facing facing, string spriteName, QuestStepActivationScript script = null, string secretDoorFlag = null, bool withScale = true, bool deadBody = false, bool weaponless = false) :
-    base(index, cellCoords, facing, script: script, secretDoorFlag: secretDoorFlag, withScale: withScale)
-    {
-        this.chestName = chestName;
-        this.npcName = chestName;
+    //             if(deathSprites == null || deathSprites.Length <= 0)
+    //             {
+    //                 deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death);
+    //             }
 
-        this.spriteName = spriteName;
-        
-        this.deadBody = deadBody;
-        this.weaponless = weaponless;
-    }
+    //             return deathSprites[deathSprites.Length - 1];
+    //         }
+    //     }
 
-    private Sprite getSprite()
-    {
-        if(deadBody)
-        {
-            string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(spriteName);
+    //     return Helpers.loadSpriteFromResources(spriteName);
+    // }
 
-            if(weaponless)
-            {
-                switch(facing)
-                {
-                    case Facing.NorthEast:
-                    case Facing.NorthWest:
-                        return Helpers.loadSpriteFromResources(folderPath + CharacterAnimationType.Death_Back_Weaponless);
-                    default:
-                        return Helpers.loadSpriteFromResources(folderPath + CharacterAnimationType.Death_Front_Weaponless);
-                }
-            } else
-            {
-                Sprite[] deathSprites = null;
-
-                switch(facing)
-                {
-                    case Facing.NorthEast:
-                    case Facing.NorthWest:
-                        deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death_Back);
-                        break;
-                    default:
-                        deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death_Front);
-                        break;
-                }
-
-                if(deathSprites == null || deathSprites.Length <= 0)
-                {
-                    deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death);
-                }
-
-                return deathSprites[deathSprites.Length - 1];
-            }
-        }
-
-        return Helpers.loadSpriteFromResources(spriteName);
-    }
-
-    public override void spawnActions(GameObject chestGameObject)
+    private void spawnSingleSpriteChest(GameObject chestGameObject)
     {
         Chest chest = chestGameObject.GetComponent<Chest>();
 
         SingleSpriteChest singleSpriteChest = chestGameObject.AddComponent<SingleSpriteChest>();
 
-        singleSpriteChest.sprite = getSprite();
+        // singleSpriteChest.sprite = getSprite();
         singleSpriteChest.chestName = chestName;
         singleSpriteChest.mouseHoverCollider = chest.mouseHoverCollider;
 
@@ -1918,94 +1807,15 @@ public class SingleSpriteChestSpawnDetails: ChestSpawnDetails
 }
 
 
-public class ShelfSpawnDetails : ChestSpawnDetails
-{
-
-    public ShelfSpawnDetails(int index, Vector3Int cellCoords, Facing facing, bool withScale = true) :
-    base(index, cellCoords, facing, withScale: withScale)
-    {
-
-    }
-
-    public override ChestType getType()
-    {
-        return ChestType.Shelf;
-    }
-}
-
-public class WeaponRackSpawnDetails : ChestSpawnDetails
-{
-    private ChestType type;
-
-    public WeaponRackSpawnDetails(int index, Vector3Int cellCoords, Facing facing, ChestType type, QuestStepActivationScript script = null, bool withScale = true) :
-    base(index, cellCoords, facing, script, withScale: withScale)
-    {
-        this.type = type;
-    }
-
-    public override ChestType getType()
-    {
-        return type;
-    }
-}
-
-
-public class OffSetSpawnDetails : OOCSpawnDetails
-{
-    protected float offset = 0f;
-    protected bool ignoresSecretDoors;
-
-    public OffSetSpawnDetails(string npcName, 
-                              Vector3Int cellCoords, 
-                              string spriteName = null, 
-                              SortingLayerInfo sortingLayerInfo = null, 
-                              float offset = 0f, 
-                              bool flipX = false, 
-                              bool ignoresSecretDoors = true,
-                              bool withScale = true,
-                              string tutorialTargetHash = "") :
-    base(npcName, cellCoords, spriteName, sortingLayerInfo, flipX, tutorialTargetHash: tutorialTargetHash, withScale: withScale)
-    {
-        this.offset = offset;
-        this.ignoresSecretDoors = ignoresSecretDoors;
-    }
-
-    public override void spawnActions(GameObject interactable)
-    {
-        base.spawnActions(interactable);
-
-        Vector3 currentPosition = interactable.transform.position;
-
-        currentPosition.y -= offset;
-        Collider2D collider2D = interactable.GetComponent<Collider2D>();
-        collider2D.offset += new Vector2(0f, offset);
-
-        interactable.transform.position = currentPosition;
-
-        setIgnoresSecretDoors(interactable);
-    }
-
-    protected virtual void setIgnoresSecretDoors(GameObject interactable)
-    {
-        NameTagGenerator nameTagGenerator = interactable.GetComponent<NameTagGenerator>();
-
-        if(nameTagGenerator != null && ignoresSecretDoors)
-        {
-            nameTagGenerator.setToIgnoreSecretDoors();
-        }
-    }
-}
-
-public class BookSpawnDetails : OffSetSpawnDetails
+public class BookSpawnDetails : OOCSpawnDetails
 {
 
     private int bookIndex;
 
-    public BookSpawnDetails(string npcName, Vector3Int cellCoords, string spriteName, int bookIndex, float offset = Constants.onTableHeightOffset*2, bool withScale = true) :
-    base(npcName, cellCoords, spriteName, withScale: withScale)
+    public BookSpawnDetails(string npcName, Vector3Int cellCoords, int bookIndex, IAppearance appearance = null) :
+    base(npcName, appearance: appearance, cellCoords: cellCoords, ignoresSecretDoors: true)
     {
         this.bookIndex = bookIndex;
-        this.offset = offset;
     }
 
     public override string getPrefabName()
@@ -2045,8 +1855,8 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
 
     protected int index;
 
-    public HiddenTerrainSpawnDetails(string secretDoorKey = null, List<string> secretDoorKeys = null, string locationName = "", int index = 0, bool withScale = true) :
-    base()
+    public HiddenTerrainSpawnDetails(string secretDoorKey = null, List<string> secretDoorKeys = null, string locationName = "", int index = 0, bool withScale = true, IAppearance appearance = null) :
+    base(appearance: appearance)
     {
         if(secretDoorKey != null)
         {
@@ -2066,8 +1876,8 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
         this.sectionName = null;
     }
 
-    public HiddenTerrainSpawnDetails(string secretDoorKey = null, List<string> secretDoorKeys = null, string areaName = "", string sectionName = "", int index = 0) :
-    base()
+    public HiddenTerrainSpawnDetails(string secretDoorKey = null, List<string> secretDoorKeys = null, string areaName = "", string sectionName = "", int index = 0, IAppearance appearance = null) :
+    base(appearance: appearance)
     {
 
         if(secretDoorKey != null)
@@ -2129,8 +1939,8 @@ public class HostilityTerrainSpawnDetails : HiddenTerrainSpawnDetails
 
     private const string hostilitySecretDoorFlagPlaceholder = "Hostility-";
 
-    public HostilityTerrainSpawnDetails(string locationName, int index, bool withScale = true) :
-    base(hostilitySecretDoorFlagPlaceholder+index, locationName: locationName, index: index, withScale: withScale)
+    public HostilityTerrainSpawnDetails(string locationName, int index, bool withScale = true, IAppearance appearance = null) :
+    base(hostilitySecretDoorFlagPlaceholder+index, locationName: locationName, index: index, withScale: withScale, appearance: appearance)
     {
     }
 

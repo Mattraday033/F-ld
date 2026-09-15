@@ -29,7 +29,19 @@
       "PowerShell(& \"C:\\\\Users\\\\mattr\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha\\\\cce87464-f7a8-494f-be52-f0393890d397\\\\scratchpad\\\\compile-check.ps1\" 2>&1)",
       "PowerShell(& \"C:\\\\Users\\\\mattr\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha\\\\cce87464-f7a8-494f-be52-f0393890d397\\\\scratchpad\\\\compile-check.ps1\" 6>&1)",
       "PowerShell(git --no-pager diff -U2 -- \"Assets/src/Editor/ResourceEnumGenerator.cs\")",
-      "PowerShell(& \"C:\\\\Users\\\\mattr\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha\\\\cce87464-f7a8-494f-be52-f0393890d397\\\\scratchpad\\\\verify-manifests.ps1\")"
+      "PowerShell(& \"C:\\\\Users\\\\mattr\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha\\\\cce87464-f7a8-494f-be52-f0393890d397\\\\scratchpad\\\\verify-manifests.ps1\")",
+      "Bash(git check-ignore *)",
+      "Bash(git rm *)",
+      "PowerShell(Get-ItemProperty 'HKCU:\\\\Software\\\\Unity Technologies\\\\Unity Editor 5.x' | Get-Member -MemberType NoteProperty | Where-Object Name -match 'kScriptsDefaultApp|project_generation|unity_project' | ForEach-Object { $v = \\(Get-ItemProperty 'HKCU:\\\\Software\\\\Unity Technologies\\\\Unity Editor 5.x'\\).\\($_.Name\\); if \\($v -is [byte[]]\\) { $v = [Text.Encoding]::UTF8.GetString\\($v\\).TrimEnd\\([char]0\\) }; \"$\\($_.Name\\) = $v\" })",
+      "Bash(grep -n '\"Packages/\"\\\\|\\\\*\\\\*/\\\\*.3ds\\\\|Library/' com.unity.ide.visualstudio@2.0.27/Editor/VisualStudioCodeInstallation.cs)",
+      "Read(//c/Users/mattr/OneDrive/Documents/GitHub/**)",
+      "Bash(git restore *)",
+      "Bash(awk '{ if \\($0 ~ /^[ \\\\t]*$/\\) next; if \\($0 ~ /^[ \\\\t]*\\\\/\\\\//\\) next; if \\($0 ~ /NPCWithAnimationsSpawnDetails|NonDialogueNPCSpawnDetails|RestStopAndShopkeeperSpawnDetails|TutorialColliderSpawnDetails\\\\\\(|HiddenTerrainSpawnDetails\\\\\\(|HostilityTerrainSpawnDetails\\\\\\(|oocSpawnDetailsDict.Add|list = new List|#region|#endregion/\\) next; print NR\": \"$0 }' 'C:/Users/mattr/OneDrive/Documents/GitHub/F-ld/Isometric Alpha/Assets/src/State/NPCSpawn/OOCSpawnDetailsList.cs')",
+      "Bash(python \"C:/Users/mattr/AppData/Local/Temp/claude/c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha/7f385a08-a0bc-47f0-a97d-ae64a5f07ab2/scratchpad/populate.py\")",
+      "Bash(git diff *)",
+      "Bash(grep -v \"^\\\\s*[0-9]*:\\\\s*//\")",
+      "Bash(python \"C:/Users/mattr/AppData/Local/Temp/claude/c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha/7f385a08-a0bc-47f0-a97d-ae64a5f07ab2/scratchpad/strip.py\")",
+      "Bash(grep -vE \"^[0-9]+:\\\\s*//\")"
     ]
   }
 }

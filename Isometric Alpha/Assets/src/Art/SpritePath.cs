@@ -8,7 +8,8 @@ public enum SpritePath
     NoSprite, // reserved: no asset
     Body_LovashiArmor_NoWeapon_OOC_Idle_Back, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Back
     Body_LovashiArmor_NoWeapon_OOC_Idle_Front, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Front
-    Body_LovashiArmor_NoWeapon_Run_Back, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Back
+    Body_LovashiArmor_NoWeapon_Run_Back_Left, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Back_Left
+    Body_LovashiArmor_NoWeapon_Run_Back_Right, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Back_Right
     Body_LovashiArmor_NoWeapon_Run_Front_Left, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Front_Left
     Body_LovashiArmor_NoWeapon_Run_Front_Right, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Front_Right
     Face_Short_Goatee_OOC_Idle_Front, // Sprites/SpriteLayers/Face/Short_Goatee/OOC_Idle_Front

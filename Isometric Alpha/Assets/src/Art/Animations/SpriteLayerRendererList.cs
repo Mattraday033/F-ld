@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpriteLayerRendererList : MonoBehaviour
 {
+    private const string replaceVarName = "_Replace";
+
     #region SpriteRenderers
     [SerializeField]
     private SpriteRenderer shieldBackRenderer;
@@ -55,6 +57,30 @@ public class SpriteLayerRendererList : MonoBehaviour
         foreach(SpriteRenderer renderer in spriteLayers.Values)
         {
             renderer.flipX = flip;
+        }
+    }
+
+    public void setToSingleLayer(SpriteLayer spriteLayer)
+    {
+        foreach(KeyValuePair<SpriteLayer, SpriteRenderer> kvp in spriteLayers)
+        {
+            kvp.Value.enabled = kvp.Key == spriteLayer;
+        }
+    }
+
+    public void enableAllLayers()
+    {
+        foreach(SpriteRenderer renderer in spriteLayers.Values)
+        {
+            renderer.enabled = true;
+        }
+    }
+
+    public void ignoreColorReplace()
+    {
+        foreach(SpriteRenderer renderer in spriteLayers.Values)
+        {
+            renderer.material.SetFloat(replaceVarName, Constants.falseFloatToBool);
         }
     }
 

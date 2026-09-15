@@ -200,6 +200,13 @@ public static class Constants
     public const int onSettingIndex = 0;
 
     #endregion
+
+    #region Material Variables
+
+    public const float falseFloatToBool = 0f;
+    public const float trueFloatToBool = 1f;
+
+    #endregion
 }
 
 public static class StatDifficultyList
