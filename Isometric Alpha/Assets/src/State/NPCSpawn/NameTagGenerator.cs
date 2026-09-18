@@ -7,9 +7,15 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
     public bool ignoreHover;
 	public bool noNameTag = false;
 
-    public SpriteOutline outline;
-
-    public SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private SpriteLayerRendererList _RendererList;
+    public SpriteLayerRendererList rendererList
+    {
+        get
+        {
+            return _RendererList;
+        }
+    }
 
     public INameSource nameSource;
 	public DescriptionPanel nameTag;
@@ -20,12 +26,6 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
 	private void Awake()
 	{
-        if(spriteRenderer != null)
-        {
-            outline = new SpriteOutline();
-            outline.setSpriteRenderer(spriteRenderer); 
-        }
-
         INonRevealableNameSource nonRevealableNameSource = GetComponent<INonRevealableNameSource>();
 
         if(nonRevealableNameSource != null)
@@ -83,21 +83,16 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
         }
     }
 
-    public SpriteOutline getSpriteOutline()
-    {
-        return outline;
-    }
-
 	public void onReveal(bool toggleReveal)
 	{
-        if(!INonRevealableNameSource.nameSourceIsRevealable(this) || outline == null)
+        if(!INonRevealableNameSource.nameSourceIsRevealable(this) || rendererList == null)
         {
             return;
         }
 
-        if(toggleReveal && spriteRenderer != null && !spriteRenderer.color.Equals(Color.clear))
+        if(toggleReveal)
         {
-            outline.createOutline(getRevealColor());
+            rendererList.createOutline(getRevealColor());
 
             if(!this.hasGenericName())
             {
@@ -106,7 +101,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
         } else
         {
-            outline.removeOutline();
+            rendererList.removeOutline();
 
             destroyNameTag();
         }
@@ -125,7 +120,7 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
 	public void spawnNameTag()
 	{
-        if(!gameObject.activeInHierarchy || (spriteRenderer != null && spriteRenderer.color.Equals(Color.clear)))
+        if(!gameObject.activeInHierarchy)
         { 
             destroyNameTag();
             return;
@@ -200,17 +195,16 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
     public void OnPointerEnter(PointerEventData eventData) 
     {
         if (INonRevealableNameSource.nameSourceIsRevealable(this) && 
-            !ignoreHover && (eventData == null || !eventData.used) &&
-            !spriteRenderer.color.Equals(Color.clear))
+            !ignoreHover && (eventData == null || !eventData.used))
         {
             if (eventData != null)
             {
                 eventData.Use();
             }
 
-            if(!RevealManager.currentlyRevealed && outline != null)
+            if(!RevealManager.currentlyRevealed)
             {
-                outline.createOutline(getRevealColor());
+                rendererList.createOutline(getRevealColor());
             }
 
             PlayerObject.toggleButtonPrompt(false);
@@ -224,9 +218,9 @@ public class NameTagGenerator : MonoBehaviour, IRevealable
 
 		if (!ignoreHover)
 		{
-            if(!RevealManager.currentlyRevealed && outline != null)
+            if(!RevealManager.currentlyRevealed && rendererList != null)
             {
-                outline.removeOutline();
+                rendererList.removeOutline();
             }
 			
             if(this.hasGenericName() || !RevealManager.currentlyRevealed)

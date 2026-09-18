@@ -54,34 +54,34 @@ public class TemporaryGate : Gate
 
     private void hideSelf()
     {
-        colliderTileMap.enabled = false;
-        spriteRenderer.color = Color.clear;
+        // colliderTileMap.enabled = false;
+        // spriteRenderer.color = Color.clear;
 
-        if(nameTagGenerator != null)
-        {
-            nameTagGenerator.onReveal(false);
-        }
+        // if(nameTagGenerator != null)
+        // {
+        //     nameTagGenerator.onReveal(false);
+        // }
 
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
-        {
-            AudioManager.playGateOpenShortSFX();
-        }
+        // if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
+        // {
+        //     AudioManager.playGateOpenShortSFX();
+        // }
     }
 
     private void showSelf() 
     {
-        colliderTileMap.enabled = true;
-        spriteRenderer.color = Color.white;
+        // colliderTileMap.enabled = true;
+        // spriteRenderer.color = Color.white;
 
-        if(nameTagGenerator != null)
-        {
-            nameTagGenerator.onReveal(RevealManager.currentlyRevealed);
-        }
+        // if(nameTagGenerator != null)
+        // {
+        //     nameTagGenerator.onReveal(RevealManager.currentlyRevealed);
+        // }
 
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
-        {
-            AudioManager.playGateOpenShortSFX();
-        }
+        // if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
+        // {
+        //     AudioManager.playGateOpenShortSFX();
+        // }
     }
 
 }

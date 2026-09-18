@@ -15,18 +15,19 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
     public int index;
     public bool activated = false;
-    public SpriteRenderer spriteRenderer;
-    public SpriteOutline outline;
+    [SerializeField]
+    private SpriteLayerRendererList _RendererList;
+    public SpriteLayerRendererList rendererList
+    {
+        get
+        {
+            return _RendererList;
+        }
+    }
     public Facing startFacing;
     public Facing endFacing;
     public CunningObjectSpriteCategory category;
 
-
-    private void Awake()
-    {
-        outline = new SpriteOutline();
-        outline.setSpriteRenderer(GetComponent<SpriteRenderer>());
-    }
 
     public void intimidate() { }
 
@@ -60,7 +61,7 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
     public void setToCurrentSprite()
     {
-        spriteRenderer.sprite = CunningObjectSpriteList.getCurrentSprite(getCurrentFacing(), category);
+        rendererList[SpriteLayer.Body].sprite = CunningObjectSpriteList.getCurrentSprite(getCurrentFacing(), category);
     }
 
     public int getChargeCost(SkillType skillType)
@@ -114,11 +115,6 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
     //IRevealable interface methods
 
-    public SpriteOutline getSpriteOutline()
-    {
-        return outline;
-    }
-
     public virtual void createListeners()
     {
         RevealManager.OnReveal.AddListener(onReveal);
@@ -135,10 +131,10 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
     {
         if(toggleReveal)
         {
-            outline.createOutline(getRevealColor());
+            rendererList.createOutline(getRevealColor());
         } else
         {
-            outline.removeOutline();
+            rendererList.removeOutline();
         }
     }
 
@@ -158,7 +154,7 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
         if (!RevealManager.currentlyRevealed)
         {
-            outline.createOutline(getRevealColor());
+            rendererList.createOutline(getRevealColor());
         }
     }
 
@@ -168,7 +164,7 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
         if (!RevealManager.currentlyRevealed)
         {
-            outline.removeOutline();
+            rendererList.removeOutline();
         }
     }
 

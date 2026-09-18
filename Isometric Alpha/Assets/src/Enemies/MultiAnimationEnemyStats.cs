@@ -18,9 +18,8 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
     #region Global Variables
     public Dictionary<GridCoords, GameObject> combatSprites;
-    public Dictionary<GridCoords, SpriteRenderer> spriteRenderers;
+    public Dictionary<GridCoords, SpriteLayerRendererList> rendererLists;
     public Dictionary<GridCoords, AnimationManager> animationManagers;
-    public Dictionary<GridCoords, SpriteOutline> outlines;
     public Dictionary<GridCoords, CombatantHover> combatantHovers;
     public Dictionary<GridCoords, TutorialSequenceStepTargetObject> tutorialTargets;
 
@@ -54,8 +53,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
         combatSprites = new Dictionary<GridCoords, GameObject>();
         animationManagers = new Dictionary<GridCoords, AnimationManager>();
-        spriteRenderers = new Dictionary<GridCoords, SpriteRenderer>();
-        outlines = new Dictionary<GridCoords, SpriteOutline>();
+        rendererLists = new Dictionary<GridCoords, SpriteLayerRendererList>();
         combatantHovers = new Dictionary<GridCoords, CombatantHover>();
         tutorialTargets = new Dictionary<GridCoords, TutorialSequenceStepTargetObject>();
 
@@ -116,10 +114,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
     {
         animationManagers[coords] = list.animationManager;
         
-        spriteRenderers[coords] = list.spriteRenderer;
-
-        outlines[coords] = new SpriteOutline();
-        outlines[coords].setSpriteRenderer(spriteRenderers[coords]);
+        rendererLists[coords] = list.rendererList;
 
         combatantHovers[coords] = list.combatantHover;
         combatantHovers[coords].linkedStats = this;
@@ -169,9 +164,9 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
     public override void setOutline()
     {
-        foreach(SpriteOutline outline in outlines.Values)
+        foreach(SpriteLayerRendererList rendererList in rendererLists.Values)
         {
-            outline.createOutline(getOutlineColor());
+            rendererList.createOutline(getOutlineColor());
         }
     }
 
@@ -181,23 +176,18 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
         color.a = alpha;
 
-        foreach(SpriteOutline outline in outlines.Values)
+        foreach(SpriteLayerRendererList rendererList in rendererLists.Values)
         {
-            outline.createOutline(color);
+            rendererList.createOutline(color);
         }
     }
 
     public override void removeOutline()
     {
-        foreach(SpriteOutline outline in outlines.Values)
+        foreach(SpriteLayerRendererList rendererList in rendererLists.Values)
         {
-            outline.removeOutline();
+            rendererList.removeOutline();
         }
-    }
-
-    public override SpriteOutline[] getOutlines()
-    {
-        return outlines.Values.ToArray();
     }
 
     // public override bool isInsideCoordinates(GridCoords coords)

@@ -50,7 +50,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     public PlaySFXLogic introAudioClipLogic;
 
-    public AnimationManager animationManager;
+    public NewAnimationManager animationManager;
 
     public GameObject[] extraSpaces;
 
@@ -106,21 +106,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
             return;
         }
 
-        switch(State.playerFacing.getFacing())
-        {
-            case Facing.NorthEast:
-                animationManager.playSouthWestOOCIdle();
-                break;
-            case Facing.NorthWest:
-                animationManager.playSouthEastOOCIdle();
-                break;
-            case Facing.SouthEast:
-                animationManager.playNorthWestOOCIdle();
-                break;
-            default:
-                animationManager.playNorthEastOOCIdle();
-                break;
-        }
+        animationManager.characterFacing.currentFacing = State.playerFacing.getOpposingFacing();
     }
 
     public string getName()
@@ -131,6 +117,11 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
     private void OnEnable()
     {
         setExtraSpacesActive(true);
+
+        if(animationManager == null)
+        {
+            animationManager = GetComponent<NewAnimationManager>();
+        }
     }
 
     private void OnDisable()

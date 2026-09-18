@@ -421,7 +421,7 @@ public class DialogueManager : MonoBehaviour
 
         foreach (Transform child in children)
         {
-            if(child.gameObject.name.Contains(NPCSpawnDetails.extraSpaceNameSuffix))
+            if(child.gameObject.name.Contains(OOCSpawnDetails.extraSpaceNameSuffix))
             {
                 continue;
             }

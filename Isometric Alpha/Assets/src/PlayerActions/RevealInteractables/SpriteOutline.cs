@@ -14,8 +14,7 @@ public class SpriteOutline
 
     private const string blackBorderColorVarName = "_BlackBorderColor";
 
-    private Material outlineMaterial;
-    private SpriteRenderer spriteRenderer;
+    public SpriteLayerRendererList rendererList;
     private Transform spriteTransform;
 
     private float _NormalZPos;
@@ -34,68 +33,54 @@ public class SpriteOutline
 
     public SpriteOutline()
     {
-        Material outlineMaterialTemplate = Resources.Load<Material>(PrefabNames.outlineMaterial);
 
-        outlineMaterial = new Material(outlineMaterialTemplate);
-        outlineMaterial.color = Color.clear;
-        outlineMaterial.SetColor(blackBorderColorVarName, Color.clear);
-    }
-
-    public void setSpriteRenderer(SpriteRenderer spriteRenderer)
-    {
-        this.spriteRenderer = spriteRenderer;
-
-        if(this.spriteRenderer != null)
-        {
-            spriteRenderer.material = outlineMaterial;
-        }
     }
 
     public void createOutline(Color color, float sizeMod = 4f)
     {
-        if(!spriteRenderer.gameObject.activeInHierarchy || 
-            spriteRenderer.color.Equals(Color.clear))
-        {
-            removeOutline();
-            return;
-        }
+        // if(!spriteRenderer.gameObject.activeInHierarchy || 
+        //     spriteRenderer.color.Equals(Color.clear))
+        // {
+        //     removeOutline();
+        //     return;
+        // }
 
 
-        outlineMaterial.color = color;
-        outlineMaterial.SetColor(blackBorderColorVarName, Color.black);
+        // outlineMaterial.color = color;
+        // outlineMaterial.SetColor(blackBorderColorVarName, Color.black);
 
-        spriteRenderer.material = outlineMaterial;
+        // spriteRenderer.material = outlineMaterial;
 
-        setSpriteTransformZPos();
+        // setSpriteTransformZPos();
 
-        try
-        {
+        // try
+        // {
             
-            float width = spriteRenderer.sprite.texture.width;
-            float height = spriteRenderer.sprite.texture.height;
+        //     float width = spriteRenderer.sprite.texture.width;
+        //     float height = spriteRenderer.sprite.texture.height;
 
-            setMaterialOutlineSize(spriteRenderer.material, sizeMod/width, sizeMod/height);
-        } catch(Exception e)
-        {
-            Debug.LogError("Caught exception null sprite");
-        }
+        //     setMaterialOutlineSize(spriteRenderer.material, sizeMod/width, sizeMod/height);
+        // } catch(Exception e)
+        // {
+        //     Debug.LogError("Caught exception null sprite");
+        // }
     }
 
     private void setSpriteTransformZPos()
     {
-        spriteTransform = spriteRenderer.transform;
+        // spriteTransform = spriteRenderer.transform;
 
-        if(spriteTransform == null)
-        {
-            return;
-        }
+        // if(spriteTransform == null)
+        // {
+        //     return;
+        // }
 
-        if((CombatStateManager.inCombat && spriteTransform.position.z > normalZPos) || 
-            (!CombatStateManager.inCombat && spriteTransform.position.z != normalZPos))
-        {
-            Vector3 oldPos = spriteTransform.position;
-            spriteTransform.position = new Vector3(oldPos.x, oldPos.y, normalZPos);
-        } 
+        // if((CombatStateManager.inCombat && spriteTransform.position.z > normalZPos) || 
+        //     (!CombatStateManager.inCombat && spriteTransform.position.z != normalZPos))
+        // {
+        //     Vector3 oldPos = spriteTransform.position;
+        //     spriteTransform.position = new Vector3(oldPos.x, oldPos.y, normalZPos);
+        // } 
     }
 
     private static void setMaterialOutlineSize(Material material, float sizeX, float sizeY)
@@ -110,15 +95,15 @@ public class SpriteOutline
 
     public void removeOutline()
     {
-        if(spriteRenderer == null)
-        {
-            return;
-        }
+        // if(spriteRenderer == null)
+        // {
+        //     return;
+        // }
 
-        outlineMaterial.color = Color.clear;
-        outlineMaterial.SetColor(blackBorderColorVarName, Color.clear);
+        // outlineMaterial.color = Color.clear;
+        // outlineMaterial.SetColor(blackBorderColorVarName, Color.clear);
         
-        spriteRenderer.material = outlineMaterial;
+        // spriteRenderer.material = outlineMaterial;
     }
 
 }

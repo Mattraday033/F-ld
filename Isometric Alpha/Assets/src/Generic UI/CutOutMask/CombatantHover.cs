@@ -12,6 +12,16 @@ public class CombatantHover : CombatMouseHover, IRevealable
     private const float timeToWaitFull = .5f;
     private const float timeToWaitFade = 1f;
 
+    [SerializeField]
+    private SpriteLayerRendererList _RendererList;
+    public SpriteLayerRendererList rendererList
+    {
+        get
+        {
+            return _RendererList;
+        }
+    }
+
     public Stats linkedStats;
     private List<Selector> selectors = new List<Selector>();
 
@@ -335,16 +345,6 @@ public class CombatantHover : CombatMouseHover, IRevealable
         {
             return "";
         }
-    }
-
-    public SpriteOutline getSpriteOutline()
-    {
-        if(!hasTargetStats(out Stats target))
-        {
-            return new SpriteOutline();
-        }
-
-        return target.getOutlines()[0];
     }
 
     private void holdRevealPriority(Stats stats)

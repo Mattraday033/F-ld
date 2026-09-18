@@ -69,6 +69,22 @@ public static class SpriteDescriptionList
     public readonly static SpriteDescription lavaVaultableGapHalfButtonSortingLayer = new SpriteDescription(spriteName: PrefabNames.lavaVaultableGapHalf, sortingLayerInfo: SortingLayerManager.buttonSortingLayerInfo, offset: Constants.onTableHeightOffset);
 
     #endregion
+    #region Gates
+
+    // Gate rubble is tinted white rather than rubble coloured, matching the gates' old useRubbleColor: false
+    public readonly static SpriteDescription blockRubbleGate = new SpriteDescription(spriteName: PrefabNames.blockRubble);
+    public readonly static SpriteDescription lowRubbleGate = new SpriteDescription(spriteName: PrefabNames.lowRubble);
+
+    // Portcullises are flipped on the descending X axis only
+    public readonly static SpriteDescription portcullis1x1 = new SpriteDescription(spriteName: PrefabNames.portcullis1x1Path);
+
+    public readonly static SpriteDescription portcullis2x1 = new SpriteDescription(spriteName: PrefabNames.portcullis2x1Path);
+    public readonly static SpriteDescription portcullis2x1Flipped = new SpriteDescription(spriteName: PrefabNames.portcullis2x1Path, flipX: Constants.flipX);
+
+    public readonly static SpriteDescription portcullis3x1 = new SpriteDescription(spriteName: PrefabNames.portcullis3x1Path, offset: Constants.onTableHeightOffset*5);
+    public readonly static SpriteDescription portcullis3x1Flipped = new SpriteDescription(spriteName: PrefabNames.portcullis3x1Path, flipX: Constants.flipX, offset: Constants.onTableHeightOffset*5);
+
+    #endregion
     #region Books
 
     public readonly static SpriteDescription note = new SpriteDescription(spriteName: PrefabNames.note, offset: Constants.onTableHeightOffset*2);

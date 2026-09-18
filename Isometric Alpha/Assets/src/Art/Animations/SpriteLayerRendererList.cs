@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class SpriteLayerRendererList : MonoBehaviour
 {
-    private const string replaceVarName = "_Replace";
+    private const string replaceVarName = "_Replace";    
+
+    private const string blackBorderSizeXVarName = "_BlackBorderSizeX";
+    private const string blackBorderSizeYVarName = "_BlackBorderSizeY";
+    private const string colorOutlineSizeXVarName = "_ColorOutlineSizeX";
+    private const string colorOutlineSizeYVarName = "_ColorOutlineSizeY";
+
+    private const string blackBorderColorVarName = "_BlackBorderColor";
+    private const string outlineColorVarName = "_OutlineColor";
+
 
     #region SpriteRenderers
+    [SerializeField]
+    private SpriteRenderer outlineRenderer;
     [SerializeField]
     private SpriteRenderer shieldBackRenderer;
     [SerializeField]
@@ -24,6 +35,7 @@ public class SpriteLayerRendererList : MonoBehaviour
     #endregion
 
     private bool instantiated = false;
+    private ColorReplaceSchema colorSchema;
     private Dictionary<SpriteLayer, SpriteRenderer> spriteLayers;
 
     public void Awake()
@@ -83,5 +95,54 @@ public class SpriteLayerRendererList : MonoBehaviour
             renderer.material.SetFloat(replaceVarName, Constants.falseFloatToBool);
         }
     }
+
+    public void interpretSchema(ColorReplaceSchema schema)
+    {
+        colorSchema = schema;
+
+        foreach(SpriteLayer layer in EnumUtil.SpriteLayers)
+        {
+            applySchemaToLayer(layer);
+        }
+    }
+
+    private void applySchemaToLayer(SpriteLayer layer)
+    {
+        foreach(ColorReplacementSlot slot in EnumUtil.ColorReplacementSlots)
+        {
+            spriteLayers[layer].material.SetColor(slot.getMaterialVARName(), colorSchema.getColor(layer, slot));
+        }
+    }
+
+
+    #region Outline
+    public void createOutline(Color color, float sizeMod = 4f)
+    {
+        outlineRenderer.enabled = true;
+
+        foreach(SpriteLayer layer in EnumUtil.SpriteLayers)
+        {
+            outlineRenderer.material.SetTexture("_" + layer.ToString(), spriteLayers[layer].sprite.texture);
+        }
+
+        outlineRenderer.material.SetColor(outlineColorVarName, color);
+
+        float sizeX = sizeMod/spriteLayers[SpriteLayer.Body].sprite.texture.width;
+        float sizeY = sizeMod/spriteLayers[SpriteLayer.Body].sprite.texture.height;
+
+        outlineRenderer.material.SetFloat(blackBorderSizeXVarName, sizeX/4f);
+        outlineRenderer.material.SetFloat(blackBorderSizeYVarName, sizeY/4f);
+        outlineRenderer.material.SetFloat(colorOutlineSizeXVarName, sizeX);
+        outlineRenderer.material.SetFloat(colorOutlineSizeYVarName, sizeY);
+
+        outlineRenderer.material.SetColor(blackBorderColorVarName, Color.black);
+    }
+
+    public void removeOutline()
+    {
+        outlineRenderer.enabled = false;
+    }
+
+    #endregion
 
 }

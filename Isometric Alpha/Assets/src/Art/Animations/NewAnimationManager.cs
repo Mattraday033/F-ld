@@ -5,9 +5,9 @@ using UnityEngine.Events;
 using System;
 using System.Linq;
 
-public interface ICostumeSource
+public interface IAppearanceSource
 {
-    public Costume getCostume();
+    public IAppearance getAppearance();
 }
 
 public class NewAnimationManager : MonoBehaviour
@@ -25,17 +25,11 @@ public class NewAnimationManager : MonoBehaviour
                 return;
             }
 
-            if(characterFacing != null)
-            {
-                characterFacing.OnFacingChange.RemoveListener(handleMovementAnimation);
-            }
-
             _MovementTracker = value;
             MovementManager.AfterMoveStarted.RemoveListener(handleMovementAnimation);
             MovementManager.OnMoveFinished.RemoveListener(handleMovementAnimation);
             MovementManager.AfterMoveStarted.AddListener(handleMovementAnimation);
             MovementManager.OnMoveFinished.AddListener(handleMovementAnimation);
-            characterFacing.OnFacingChange.AddListener(handleMovementAnimation);
         }
         get
         {
@@ -43,19 +37,7 @@ public class NewAnimationManager : MonoBehaviour
         }
     }
 
-    public CharacterFacing characterFacing
-    {
-        get
-        {
-            if(movementTracker != null)
-            {
-                return movementTracker.getCharacterFacing();
-            } else
-            {
-                return null;
-            }
-        }
-    }
+    public CharacterFacing characterFacing = new CharacterFacing();
 
     private CharacterAnimationType _CurrentIdle;
     public CharacterAnimationType currentIdle
@@ -85,19 +67,41 @@ public class NewAnimationManager : MonoBehaviour
 
     public Coroutine currentAnimation;
 
-    private ICostumeSource _CostumeSource;
-    public void setCostumeSource(ICostumeSource costumeSource,
-                                    CharacterAnimationType newIdle)
+    private IAppearanceSource _AppearanceSource;
+    public IAppearanceSource appearanceSource
     {
-        _CostumeSource = costumeSource;
-
-        playAnimation(newIdle);
+        set
+        {
+            _AppearanceSource = value;
+        } 
     }
-    public Costume costume
+    public void setAppearanceSource(IAppearanceSource appearanceSource,
+                                    CharacterAnimationType newIdle = CharacterAnimationType.None)
+    {
+        _AppearanceSource = appearanceSource;
+
+        if(newIdle != CharacterAnimationType.None)
+        {
+            playAnimation(newIdle);
+        } else
+        {
+            handleMovementAnimation();
+        }
+    }
+
+    public IAppearance appearance
     {
         get
         {
-            return _CostumeSource.getCostume();
+            return _AppearanceSource.getAppearance();
+        }
+    }
+
+    public bool changesFacing
+    {
+        get
+        {
+            return !appearance.large;
         }
     }
 
@@ -105,7 +109,7 @@ public class NewAnimationManager : MonoBehaviour
     {
         currentIdle = animationType;
 
-        costume.applyAppearance(rendererList, animationType);
+        appearance.applyAppearance(rendererList, animationType);
 
         // switch(animationType)
         // {
@@ -121,12 +125,17 @@ public class NewAnimationManager : MonoBehaviour
 
     public void handleMovementAnimation(int i)
     {
+        if(i != movementTracker.getMovementIndex())
+        {
+            return;
+        }
+
         handleMovementAnimation();
     }
 
     public void handleMovementAnimation()
     {
-        if(movementTracker.isMoving())
+        if(movementTracker != null && movementTracker.isMoving())
         {
             switch(characterFacing.getFacing())
             {
@@ -188,6 +197,8 @@ public class NewAnimationManager : MonoBehaviour
         {
             movementTracker = GetComponent<MovementTracker>();
         }
+
+        characterFacing.OnFacingChange.AddListener(handleMovementAnimation);
     }
 
     private void OnDestroy()
@@ -195,10 +206,7 @@ public class NewAnimationManager : MonoBehaviour
         MovementManager.AfterMoveStarted.RemoveListener(handleMovementAnimation);
         MovementManager.OnMoveFinished.RemoveListener(handleMovementAnimation);
 
-        if(characterFacing != null)
-        {
-            characterFacing.OnFacingChange.RemoveListener(handleMovementAnimation);
-        }
+        characterFacing.OnFacingChange.RemoveListener(handleMovementAnimation);
     }
 
 }

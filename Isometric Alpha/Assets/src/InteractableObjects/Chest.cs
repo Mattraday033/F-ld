@@ -246,17 +246,6 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
     }
 
-    private void OnEnable()
-    {
-        if(spriteRenderer == null)
-        {
-            spriteRenderer = GetComponent<SpriteRenderer>();
-        }
-
-        outline = new SpriteOutline();
-        outline.setSpriteRenderer(spriteRenderer);
-    }
-
     private void OnDestroy()
     {
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(show);

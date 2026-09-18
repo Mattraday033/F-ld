@@ -1,4 +1,5 @@
 using Ink.Runtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ public static class SecretDoorFlags
 
     public static void addSecretDoorFlag(string secretDoorKey)
     {
-        if(secretDoorKey.Length > 0 && !secretDoorFlags.ContainsKey(secretDoorKey))
+        if(!string.IsNullOrEmpty(secretDoorKey) && !secretDoorFlags.ContainsKey(secretDoorKey))
         {
             secretDoorFlags.Add(secretDoorKey, true);
         }

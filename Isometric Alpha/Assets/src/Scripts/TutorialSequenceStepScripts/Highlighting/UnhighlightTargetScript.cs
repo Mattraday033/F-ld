@@ -6,9 +6,9 @@ public class UnhighlightTargetScript : TutorialSequenceStepScript
 {
     public override void runScript(GameObject target = null)
     {
-        IRevealable revealable = target.GetComponent<IRevealable>();
+        // IRevealable revealable = target.GetComponent<IRevealable>();
 
-        revealable.getSpriteOutline().removeOutline();
+        // revealable.getSpriteOutline().removeOutline();
     }
 }
 

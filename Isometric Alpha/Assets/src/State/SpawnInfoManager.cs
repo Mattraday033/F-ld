@@ -147,7 +147,8 @@ public static class SpawnInfoManager
             player.position = AreaManager.getMasterGrid().GetCellCenterWorld(getDefaultCell());
         }
 
-        animationManager.setCostumeSource(PartyManager.getPlayerStats(), CharacterAnimationType.OOC_Idle_Front);
+        animationManager.characterFacing = State.playerFacing;
+        animationManager.setAppearanceSource(PartyManager.getPlayerStats());
 
         Helpers.updateGameObjectPosition(player);
 

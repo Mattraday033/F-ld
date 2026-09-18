@@ -789,9 +789,9 @@ public class AllyStats : Stats
 
     #region Equipment
     
-    public override Costume getCostume()
+    public override IAppearance getAppearance()
     {
-        return equippedItems.getCostume();
+        return equippedItems.getAppearance();
     }
     
     public override EquippedItems getEquippedItems()

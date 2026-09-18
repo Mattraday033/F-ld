@@ -41,7 +41,18 @@
       "Bash(git diff *)",
       "Bash(grep -v \"^\\\\s*[0-9]*:\\\\s*//\")",
       "Bash(python \"C:/Users/mattr/AppData/Local/Temp/claude/c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha/7f385a08-a0bc-47f0-a97d-ae64a5f07ab2/scratchpad/strip.py\")",
-      "Bash(grep -vE \"^[0-9]+:\\\\s*//\")"
+      "Bash(grep -vE \"^[0-9]+:\\\\s*//\")",
+      "Skill(claude-api)",
+      "Skill(claude-api:*)",
+      "WebSearch",
+      "Bash(awk '-F, ' '{ bad=\"\"; for\\(i=4;i<=NF;i++\\){ if \\($i !~ /:/\\) bad=bad\" [\"$i\"]\" } if \\(bad!=\"\"\\) print NR\": \"bad }')",
+      "Read(//c/Users/mattr/OneDrive/Documents/GitHub/F-ld/Docs/**)",
+      "Read(//c/Users/mattr/OneDrive/Documents/GitHub/F-ld/**)",
+      "Bash(cd \"C:/Users/mattr/OneDrive/Documents/GitHub/F-ld/Isometric Alpha\" && git rev-parse --show-toplevel && grep -rn \"NPCWithAnimationsSpawnDetails\" ../../F-ld/Docs 2>/dev/null | head)",
+      "Bash(cd \"C:/Users/mattr/OneDrive/Documents/GitHub/F-ld\" && grep -rln \"NPCWithAnimationsSpawnDetails\" Docs 2>/dev/null)",
+      "Bash(cd \"C:/Users/mattr/OneDrive/Documents/GitHub/F-ld\" && ls && grep -l \"NPCWithAnimationsSpawnDetails\" Docs/* 2>&1 | head)",
+      "Bash(dotnet build *)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $i=[System.Drawing.Image]::FromFile\\(\"$PWD\\\\Assets\\\\Resources\\\\UI\\\\UI Textures\\\\Blank.png\"\\); \"$\\($i.Width\\)x$\\($i.Height\\)\"; $b=New-Object System.Drawing.Bitmap $i; $b.GetPixel\\(0,0\\); $i.Dispose\\(\\))"
     ]
   }
 }

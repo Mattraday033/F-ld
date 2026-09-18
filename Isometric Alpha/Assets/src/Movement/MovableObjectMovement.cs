@@ -22,11 +22,6 @@ public class MovableObjectMovement : EnemyMovement
         //prevents setting linked stats
     }
 
-    public override SpriteRenderer getSpriteRenderer()
-    {
-        return spriteRenderer;
-    }
-
     public override void determineDirection()
     {
         if (MovementManager.getCellWorld(PlayerMovement.getInstance().endingPosition) == MovementTracker.getCurrentCell(this))

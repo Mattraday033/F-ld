@@ -27,11 +27,11 @@ public static class RepositionPlaceholderGenerator
         CombatantHover hover = placeHolderObject.AddComponent<CombatantHover>();
 
         hover.linkedStats = combatantToBeMoved;
-        placeHolderObject.AddComponent<PolygonCollider2D>();
+        // placeHolderObject.AddComponent<PolygonCollider2D>();
 
-        SpriteOutline spriteOutline = new SpriteOutline();
-        spriteOutline.setSpriteRenderer(placeHolderSprite);
-        combatantToBeMoved.outline = spriteOutline;
+        // SpriteOutline spriteOutline = new SpriteOutline();
+        // spriteOutline.setSpriteRenderer(placeHolderSprite);
+        // combatantToBeMoved.outline = spriteOutline;
 
 		return placeHolderObject;
 	}

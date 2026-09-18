@@ -405,8 +405,8 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
         shadow.transform.SetAsFirstSibling();
         shadowSprite = shadow.GetComponent<SpriteRenderer>();
 
-        shadowOutline = new SpriteOutline();
-        shadowOutline.setSpriteRenderer(shadowSprite);
+        // shadowOutline = new SpriteOutline();
+        // shadowOutline.setSpriteRenderer(shadowSprite);
 
         if(CombatStateManager.inCombat)
         {
@@ -774,7 +774,7 @@ public class AnimationManager : MonoBehaviour, IAnimationTracker
             linkedStats.isDead() && 
             linkedStats.notResurrectable())
         {
-            linkedStats.outline.createOutline(Color.clear);
+            // linkedStats.outline.createOutline(Color.clear);
             playAnimation(createClipTransitionSpecialAnimationThenHide());
         } else
         {

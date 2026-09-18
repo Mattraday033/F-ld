@@ -307,6 +307,18 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 7340769690538186609}
   m_SourcePrefab: {fileID: 100100000, guid: fb1f1404d90bc934e96f1a2b9b0ca67b, type: 3}
+--- !u!114 &471480233147298130 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5485853204581675763, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
+    type: 3}
+  m_PrefabInstance: {fileID: 5380291559002178465}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8666272234650232164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e5de506e1bbc04293e8e8f30e25b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &883414615212429209 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5109375849736145976, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
@@ -472,6 +484,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ignoreHover: 0
   noNameTag: 0
-  spriteRenderer: {fileID: 1747693764556320498}
+  _RendererList: {fileID: 471480233147298130}
   nameTag: {fileID: 0}
   overHeadIconManager: {fileID: 4758136991772869269}

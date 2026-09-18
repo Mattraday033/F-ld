@@ -78,7 +78,7 @@ public class EnemyStats : Stats
 
     #region Sprite and GameObject
 
-    public override Costume getCostume()
+    public override IAppearance getAppearance()
     {
         return Costume.getDefaultCostume();
     }

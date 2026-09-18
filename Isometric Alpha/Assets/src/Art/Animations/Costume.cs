@@ -69,7 +69,14 @@ public enum CloakType
 
 public interface IAppearance
 {
-    public void applyAppearance(SpriteLayerRendererList rendererList, CharacterAnimationType type = CharacterAnimationType.OOC_Idle_Front);
+    public void applyAppearance(SpriteLayerRendererList rendererList, 
+                                CharacterAnimationType type = CharacterAnimationType.OOC_Idle_Front, 
+                                bool updateColors = false);
+
+    public bool large
+    {
+        get;
+    }
 
     public bool withScale
     {
@@ -83,8 +90,33 @@ public class SpriteDescription: IAppearance
     private SortingLayerInfo sortingLayerInfo;
     private bool flipX;
 
-    private Color tint;
+    private Color _Tint = Color.white;
+    private Color tint
+    {
+        get
+        {
+            if(useRubbleColor)
+            {
+                return ColorList.getRubbleColorFromLocationName();
+            }
+
+            return _Tint;
+        }
+        set
+        {
+            _Tint = value;
+        }
+    }
     private bool useRubbleColor;
+
+    private bool _Large;
+    public bool large
+    {
+        get
+        {
+            return _Large;
+        }
+    }
 
     private bool _WithScale;
     public bool withScale
@@ -102,15 +134,18 @@ public class SpriteDescription: IAppearance
 
     public SpriteDescription(string spriteName = PrefabNames.blankTexture,
                                 bool flipX = false,
+                                bool large = false,
                                 SortingLayerInfo sortingLayerInfo = null,
                                 Color tint = default,
                                 bool useRubbleColor = false,
-                                bool withScale = false,
+                                bool withScale = true,
                                 float offset = 0f
                                 )
     {
         this.spriteName = spriteName;
         this.flipX = flipX;
+        this._Large = large;
+        
         this.sortingLayerInfo = sortingLayerInfo ?? SortingLayerManager.firstSortingLayerInfo;
 
         if(tint == default)
@@ -120,14 +155,14 @@ public class SpriteDescription: IAppearance
         {
             this.tint = tint;
         }
-        
+
         this.useRubbleColor = useRubbleColor;
 
         this._WithScale = withScale;
         this.offset = offset;
     }
 
-    public void applyAppearance(SpriteLayerRendererList rendererList, CharacterAnimationType type = CharacterAnimationType.OOC_Idle_Front)
+    public void applyAppearance(SpriteLayerRendererList rendererList, CharacterAnimationType type = CharacterAnimationType.OOC_Idle_Front, bool updateColors = false)
     {
         if(rendererList == null)
         {
@@ -183,6 +218,15 @@ public class Costume: IAppearance
     public readonly HairType hairType;
     public readonly CloakType cloakType;
 
+    private bool _Large;
+    public bool large
+    {
+        get
+        {
+            return _Large;
+        }
+    }
+
     public bool withScale
     {
         get
@@ -196,7 +240,8 @@ public class Costume: IAppearance
                         WeaponAppearanceType weaponAppearanceType = WeaponAppearanceType.Unarmed,
                         FacialFeatureType facialFeatureType = FacialFeatureType.None,
                         HairType hairType = HairType.Bald,
-                        CloakType cloakType = CloakType.None
+                        CloakType cloakType = CloakType.None,
+                        bool large = false
                     )
     {
         this.bodyType = bodyType;
@@ -205,6 +250,13 @@ public class Costume: IAppearance
         this.facialFeatureType = facialFeatureType;
         this.hairType = hairType;
         this.cloakType = cloakType;
+
+        this._Large = large;
+    }
+
+    private ColorReplaceSchema getColorSchema()
+    {
+        return ColorSchemaList.getSchema(MonsterNameList.spearman);
     }
 
     private WeaponPose getWeaponPose(CharacterAnimationType animationType)
@@ -293,11 +345,16 @@ public class Costume: IAppearance
         return SpritePath.NoSprite;
     }
 
-    public void applyAppearance(SpriteLayerRendererList rendererList, CharacterAnimationType type = CharacterAnimationType.OOC_Idle_Front)
+    public void applyAppearance(SpriteLayerRendererList rendererList, CharacterAnimationType type = CharacterAnimationType.OOC_Idle_Front, bool updateColors = false)
     {
         if(rendererList == null)
         {
             return;
+        }
+
+        if(updateColors)
+        {
+            rendererList.interpretSchema(getColorSchema());
         }
 
         foreach(SpriteLayer layer in EnumUtil.SpriteLayers)

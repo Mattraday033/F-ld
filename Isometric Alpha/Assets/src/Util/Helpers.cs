@@ -579,7 +579,7 @@ public static class Helpers
 
     public static void updatePolygonCollider(SpriteRenderer spriteRenderer, PolygonCollider2D polygonCollider2D)
     {
-        if(spriteRenderer.sprite == null)
+        if(spriteRenderer.sprite == null || spriteRenderer.sprite.GetPhysicsShapeCount() <= 0)
         {
             return;
         }

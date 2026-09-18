@@ -5,7 +5,6 @@ using UnityEngine;
 public class PartyMemberMovement : MovementTracker
 {
     public PartyMember partyMember;
-    public AnimationManager animationManager;
 
     public int placeInTrain = -1;
 
@@ -24,11 +23,6 @@ public class PartyMemberMovement : MovementTracker
         return (PlayerMovement.getInstance().isMoving() || KeyBindingList.movementKeyPressed()) && 
                 canMoveInTrain() && !PlayerMovement.getInstance().directionMod.Equals(Vector3Int.zero);
     }
-
-	public override CharacterFacing getCharacterFacing()
-	{
-        return animationManager.facing;
-	}
 
     public override bool canMoveInTrain()
     {

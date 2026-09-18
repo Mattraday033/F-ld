@@ -10,7 +10,7 @@ public class ComponentList : MonoBehaviour
 
     public RectTransform healthBarParent;
 
-    public SpriteRenderer spriteRenderer;
+    public SpriteLayerRendererList rendererList;
     public CombatantHover combatantHover;
     public TutorialSequenceStepTargetObject tutorialTarget;
     

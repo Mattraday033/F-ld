@@ -176,9 +176,9 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
             return;
         }
 
-        SpriteOutline spriteOutline = revealable.getSpriteOutline();
+        // SpriteOutline spriteOutline = revealable.getSpriteOutline();
 
-        spriteOutline.createOutline(ColorList.tutorialDefault);
+        // spriteOutline.createOutline(ColorList.tutorialDefault);
         
         PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
 	}
@@ -202,9 +202,9 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
             return;
         }
 
-        SpriteOutline spriteOutline = revealable.getSpriteOutline();
+        // SpriteOutline spriteOutline = revealable.getSpriteOutline();
 
-        spriteOutline.removeOutline();
+        // spriteOutline.removeOutline();
 
         PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
 	}

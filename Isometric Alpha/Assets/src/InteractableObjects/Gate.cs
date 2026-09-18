@@ -8,17 +8,22 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
     protected bool playSFX = false;
 
     private string gateKey;
-    public string hoverName;
+    public string hoverName;    
+    public string hiddenTerrainFlag;    
 
-    public SpriteRenderer spriteRenderer;
-    public SpriteOutline outline;
+    [SerializeField]
+    private SpriteLayerRendererList _RendererList;
+    public SpriteLayerRendererList rendererList
+    {
+        get
+        {
+            return _RendererList;
+        }
+    }
 
     protected virtual void Awake()
     {
-        outline = new SpriteOutline();
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        outline.setSpriteRenderer(spriteRenderer);
-
+        _RendererList = GetComponent<SpriteLayerRendererList>();
         playSFX = !GateAndChestManager.hasBeenOpened(getGateKey());
     }
 
@@ -37,13 +42,14 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
             {
                 playSFX = false;
                 
-            } else if(playSFX )
+            } else if(playSFX)
             {
                 playSFX = false;
                 playOpeningAudioClip();
             }
 
             gameObject.SetActive(false);
+            SecretDoorFlags.addSecretDoorFlag(hiddenTerrainFlag);
         }
     }
 
@@ -92,11 +98,6 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 
 	//IRevealable interface methods
 
-    public SpriteOutline getSpriteOutline()
-    {
-        return outline;
-    }
-
 	public virtual void createListeners()
 	{
         RevealManager.OnReveal.AddListener(onReveal);
@@ -111,12 +112,12 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 
 	public void onReveal(bool toggleReveal)
 	{
-        if(toggleReveal && !spriteRenderer.color.Equals(Color.clear))
+        if(toggleReveal && !rendererList[SpriteLayer.Body].color.Equals(Color.clear))
         {
-            outline.createOutline(getRevealColor());
+            rendererList.createOutline(getRevealColor());
         } else
         {
-            outline.removeOutline();
+            rendererList.removeOutline();
         }
 	}
 
@@ -149,7 +150,7 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 
 		if (!RevealManager.currentlyRevealed)
 		{
-            outline.createOutline(getRevealColor());
+            rendererList.createOutline(getRevealColor());
 			createHoverTag();
 		}
 	}
@@ -172,7 +173,7 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 
 		if (!RevealManager.currentlyRevealed)
 		{
-			outline.removeOutline();
+			rendererList.removeOutline();
 		}
 
 		MouseHoverManager.destroyMouseHoverBase();

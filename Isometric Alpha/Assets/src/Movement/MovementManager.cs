@@ -131,7 +131,7 @@ public class MovementManager : MonoBehaviour
 
                 if (movement.getMovementIndex() == playerSpriteIndex)
                 {
-                    movement.moveNextInTrain();
+                    // movement.moveNextInTrain();
                 }
             }
         }
@@ -264,7 +264,10 @@ public class MovementManager : MonoBehaviour
 
         movement.updateFacing();
 
-        OnMoveFinished.Invoke(movement.getMovementIndex());
+        if(movement.canDropRunAnimation)
+        {
+            OnMoveFinished.Invoke(movement.getMovementIndex());
+        }
     }
 
     private void preventCollidingEndingPositions()

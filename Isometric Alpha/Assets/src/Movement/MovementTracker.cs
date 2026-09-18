@@ -7,6 +7,11 @@ public abstract class MovementTracker : MonoBehaviour
     protected virtual void OnEnable()
     {
         TransitionManager.AfterTransition.AddListener(resetPreviousDirectionMod);
+
+        if(animationManager == null)
+        {
+            animationManager = GetComponent<NewAnimationManager>();
+        }
     }
 
     protected virtual void OnDestroy()
@@ -80,6 +85,8 @@ public abstract class MovementTracker : MonoBehaviour
         }
     }
 
+
+
     public Vector3Int getCell()
     {
         return AreaManager.getMasterGrid().WorldToCell(transform.position);
@@ -133,12 +140,29 @@ public abstract class MovementTracker : MonoBehaviour
 
     #region Animation
 
-    public virtual void setFacing(Facing facing)
+    public NewAnimationManager animationManager;
+
+    public virtual CharacterFacing characterFacing
     {
-        getCharacterFacing().currentFacing = facing;
+        get
+        {
+            if(animationManager != null)
+            {
+                return animationManager.characterFacing;
+            } else
+            {
+                return null;
+            }
+        }
     }
 
-    public abstract CharacterFacing getCharacterFacing();
+    public virtual bool canDropRunAnimation
+    {
+        get
+        {
+            return !isMoving();
+        }
+    }
 
     public void updateFacing()
     {
@@ -149,22 +173,22 @@ public abstract class MovementTracker : MonoBehaviour
 
         if (directionMod.Equals(MovementManager.distance1TileNorthEastGrid))
         {
-            setFacing(Facing.NorthEast);
+            characterFacing.currentFacing = Facing.NorthEast;
 
         }
         else if (directionMod.Equals(MovementManager.distance1TileSouthEastGrid))
         {
-            setFacing(Facing.SouthEast);
+            characterFacing.currentFacing = Facing.SouthEast;
 
         }
         else if (directionMod.Equals(MovementManager.distance1TileSouthWestGrid))
         {
-            setFacing(Facing.SouthWest);
+            characterFacing.currentFacing = Facing.SouthWest;
 
         }
         else if (directionMod.Equals(MovementManager.distance1TileNorthWestGrid))
         {
-            setFacing(Facing.NorthWest);
+            characterFacing.currentFacing = Facing.NorthWest;
         }
     }
 

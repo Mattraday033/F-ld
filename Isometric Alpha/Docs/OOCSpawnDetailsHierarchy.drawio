@@ -57,9 +57,9 @@
           <mxGeometry x="760" y="280" width="300" height="36" as="geometry" />
         </mxCell>
 
-        <!-- Quest activation -->
+        <!-- Chests -->
         <mxCell id="Chest" value="ChestSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="760" y="380" width="300" height="36" as="geometry" />
+          <mxGeometry x="400" y="380" width="300" height="36" as="geometry" />
         </mxCell>
 
         <!-- Tutorial -->
@@ -114,9 +114,6 @@
         </mxCell>
         <mxCell id="Ladder" value="LadderSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="760" y="980" width="300" height="36" as="geometry" />
-        </mxCell>
-        <mxCell id="NPCAnim" value="NPCWithAnimationsSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="760" y="1105" width="300" height="36" as="geometry" />
         </mxCell>
         <mxCell id="Dependant" value="DependantSpawnDetails" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#333333;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1120" y="1030" width="300" height="36" as="geometry" />
@@ -226,19 +223,16 @@
         <mxCell id="e_NPC_Ladder" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="Ladder">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_NPC_NPCAnim" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="NPCAnim">
+        <mxCell id="e_NPC_Dependant" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="Dependant">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_NPCAnim_Dependant" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPCAnim" target="Dependant">
+        <mxCell id="e_NPC_Horse" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="Horse">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_NPCAnim_Horse" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPCAnim" target="Horse">
+        <mxCell id="e_NPC_NonDialogue" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="NonDialogue">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_NPCAnim_NonDialogue" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPCAnim" target="NonDialogue">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e_NPCAnim_RestStop" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPCAnim" target="RestStop">
+        <mxCell id="e_NPC_RestStop" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="RestStop">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_NPC_SecretDoor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;endArrow=block;endFill=1;strokeColor=#333333;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NPC" target="SecretDoor">

@@ -7,7 +7,10 @@ using UnityEngine.EventSystems;
 public interface IRevealable : INameSource, IPointerEnterHandler,
 	IPointerExitHandler
 {
-    public SpriteOutline getSpriteOutline();
+    public SpriteLayerRendererList rendererList
+    {
+        get;
+    }
     
 	public void createListeners();
 
@@ -28,7 +31,7 @@ public static class IRevealableExtensions
             RevealManager.currentlyRevealed && 
             INonRevealableNameSource.nameSourceIsRevealable(revealable))
         {
-            revealable.getSpriteOutline().createOutline(revealable.getRevealColor());
+            revealable.rendererList.createOutline(revealable.getRevealColor());
         } else if(PlayerOOCStateManager.currentActivity != OOCActivity.walking)
         {
             revealable.onReveal(false);

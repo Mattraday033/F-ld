@@ -18,7 +18,10 @@ public class CharacterFacing
     {
         set
         {
-            if(value == Facing.Random)
+            if(value == _CurrentFacing)
+            {
+                return;
+            } else if(value == Facing.Random)
             {
                 _CurrentFacing = getRandomFacing();
             } else

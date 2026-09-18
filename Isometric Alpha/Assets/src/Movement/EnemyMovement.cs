@@ -170,9 +170,15 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public bool movesEveryTurn = false;
 	public bool neverMoves = false;
 
-    public AnimationManager animationManager;
-    public SpriteRenderer spriteRenderer;
-    public SpriteOutline outline;
+    [SerializeField]
+    private SpriteLayerRendererList _RendererList;
+    public SpriteLayerRendererList rendererList
+    {
+        get
+        {
+            return _RendererList;
+        }
+    }
 
     public OverHeadIconManager iconManager;
 
@@ -225,8 +231,8 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     private void Awake()
     {
-        outline = new SpriteOutline();
-        outline.setSpriteRenderer(spriteRenderer);
+        // rendererList = new SpriteOutline();
+        // rendererList.setSpriteRenderer(spriteRenderer);
 
         if(getMonsterPackIndex() == CombatStateManager.retreatedFromIndex)
         {
@@ -261,7 +267,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     public virtual void Start()
     {
-        animationManager.linkedStats = EnemyPackInfoList.getEnemyPackInfo(AreaManager.locationName, getMonsterPackIndex()).FoeTypes[0].enemyStats.clone();
+        // animationManager.linkedStats = EnemyPackInfoList.getEnemyPackInfo(AreaManager.locationName, getMonsterPackIndex()).FoeTypes[0].enemyStats.clone();
     }
 
     #region MovementTracker Overrides
@@ -299,11 +305,6 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     public AllyPackInfo getAllyPackInfo()
     {
         return AllyPackInfoList.getAllyPackInfo(AreaManager.locationName, monsterPackIndex);
-    }
-
-    public virtual SpriteRenderer getSpriteRenderer()
-    {
-        return animationManager.spriteRenderer;
     }
 
     private void OnDrawGizmos()
@@ -753,32 +754,17 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
             retreatStunCounter = statsWrapper.retreatCounter;
         }
 
-        setFacing(statsWrapper.facing);
+        characterFacing.currentFacing = statsWrapper.facing;
     }
 
     public void initializeAnimationManager()
     {
         EnemyPackInfo enemyPackInfo = getEnemyPackInfo();
 
-        animationManager.setAnimations(enemyPackInfo.FoeTypes[0].enemyStats.getName());
+        // animationManager.setAnimations(enemyPackInfo.FoeTypes[0].enemyStats.getName());
     }
-
-	public override void setFacing(Facing newFacing)
-	{
-		getCharacterFacing().currentFacing = newFacing;
-	}
-
-	public override CharacterFacing getCharacterFacing()
-	{
-        return enemyFacing;
-	}
 
     //IRevealable interface methods
-
-    public SpriteOutline getSpriteOutline()
-    {
-        return outline;
-    }
 
     public void createListeners()
     {
@@ -819,10 +805,10 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	{
         if(toggleReveal)
         {
-            outline.createOutline(getRevealColor());
+            rendererList.createOutline(getRevealColor());
         } else
         {
-            outline.removeOutline();
+            rendererList.removeOutline();
         }
 	}
 
@@ -859,7 +845,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 		if (!RevealManager.currentlyRevealed)
 		{
-            outline.createOutline(getRevealColor());
+            rendererList.createOutline(getRevealColor());
 		}
 
         PlayerObject.toggleButtonPrompt(false);
@@ -877,7 +863,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 		if (!RevealManager.currentlyRevealed)
 		{
-			outline.removeOutline();
+			rendererList.removeOutline();
 		}
 
         MouseHoverManager.destroyMouseHoverBase();
@@ -951,7 +937,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 			return;
 		}
 
-        outline.createOutline(ColorList.tutorialDefault);
+        rendererList.createOutline(ColorList.tutorialDefault);
 	}
 	public void unhighlight(bool skip)
 	{
@@ -960,7 +946,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 			return;
 		}
 		
-        outline.removeOutline();
+        rendererList.removeOutline();
 	}
 
 	public Vector2 getDimensions()

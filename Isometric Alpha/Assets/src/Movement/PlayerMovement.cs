@@ -40,10 +40,6 @@ public class PlayerMovement : MovementTracker
     {
         return MovementManager.playerSpriteIndex;
     }
-    // public override AnimationManager getAnimationManager()
-    // {
-    //     return PlayerObject.getAnimationManager();
-	// }
 
     public static void updatePlayerFacing()
     {
@@ -52,20 +48,7 @@ public class PlayerMovement : MovementTracker
 
 	public static void setPlayerFacing(Facing newFacing)
 	{
-        instance.setFacing(newFacing);
-	}
-
-	public override void setFacing(Facing newFacing)
-	{
-        State.playerFacing.currentFacing = newFacing;
-		getCharacterFacing().currentFacing = newFacing;
-
-        // updateAnimationDirection();
-	}
-
-	public override CharacterFacing getCharacterFacing()
-	{
-        return State.playerFacing;
+        instance.characterFacing.currentFacing = newFacing;
 	}
 
     public override bool canPlayRunAnimation()
@@ -78,6 +61,21 @@ public class PlayerMovement : MovementTracker
         // AudioManager.playFootStep();
     }
 
+    public override bool canDropRunAnimation
+    {
+        get
+        {
+            return !isMoving() && !KeyBindingList.movementKeyPressed();
+        }
+    }
+
+    public override CharacterFacing characterFacing
+    {
+        get
+        {
+            return State.playerFacing;
+        }
+    }
     #endregion
 
     private static PlayerMovement instance;

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using UnityEngine.Events; 
 
 
-public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, ICostumeSource
+public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IAppearanceSource
 {
 
     #region Constants
@@ -81,17 +81,25 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IC
 
     #region Sprite and GameObject
 
-    public SpriteRenderer spriteRenderer;
-    public SpriteOutline outline;
+    private ComponentList _ComponentList;
+    
+    [SerializeField]
+    private SpriteLayerRendererList _RendererList;
+    public SpriteLayerRendererList rendererList
+    {
+        get
+        {
+            return rendererList;
+        }
+        set
+        {
+            _RendererList = value;
+        }
+    }
 
     public virtual Color getOutlineColor()
     {
         return ColorList.canBeInteractedWith;
-    }
-
-    public virtual SpriteOutline[] getOutlines()
-    {
-        return new SpriteOutline[]{outline};
     }
 
     public void setPreviousColor(Color newColor)
@@ -200,10 +208,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IC
 
         list.combatantHover.linkedStats = this;
 
-        spriteRenderer = list.spriteRenderer;
-
-        outline = new SpriteOutline();
-        outline.setSpriteRenderer(spriteRenderer);
+        rendererList = list.rendererList;
 
         animationManager = list.animationManager;
         animationManager.linkedStats = this;
@@ -225,7 +230,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IC
         }
     }
 
-    public abstract Costume getCostume();
+    public abstract IAppearance getAppearance();
 
     private void setToDeadIdle()
     {
@@ -255,7 +260,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IC
 
     public virtual void setOutline()
     {
-        outline.createOutline(getOutlineColor());
+        rendererList.createOutline(getOutlineColor());
     }
 
     public virtual void setOutline(byte alpha)
@@ -264,7 +269,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IC
 
         color.a = alpha;
 
-        outline.createOutline(color);
+        rendererList.createOutline(color);
     }
 
     public virtual void removeOutline()
@@ -274,7 +279,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IC
             return;
         }
         
-        outline.removeOutline();
+        rendererList.removeOutline();
     }
 
     public virtual bool multiSpaceEnemy()

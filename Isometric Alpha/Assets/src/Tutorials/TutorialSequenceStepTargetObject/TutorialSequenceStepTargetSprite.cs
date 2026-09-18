@@ -16,11 +16,11 @@ public class TutorialSequenceStepTargetSprite : TutorialSequenceStepTargetObject
             return;
         }
 
-        if(spriteOutline == null)
-        {
-            spriteOutline = new SpriteOutline();
-            spriteOutline.setSpriteRenderer(spriteRenderer);
-        }
+        // if(spriteOutline == null)
+        // {
+        //     spriteOutline = new SpriteOutline();
+        //     spriteOutline.setSpriteRenderer(spriteRenderer);
+        // }
 
         if(revealable != null)
         {
