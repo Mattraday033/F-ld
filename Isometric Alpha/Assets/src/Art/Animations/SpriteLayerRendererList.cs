@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpriteLayerRendererList : MonoBehaviour
 {
+    private readonly static Dictionary<Sprite, Sprite> outlineCache = new Dictionary<Sprite, Sprite>();
+
     private const string replaceVarName = "_Replace";    
 
     private const string blackBorderSizeXVarName = "_BlackBorderSizeX";
@@ -127,6 +129,9 @@ public class SpriteLayerRendererList : MonoBehaviour
 
         outlineRenderer.material.SetColor(outlineColorVarName, color);
 
+        outlineRenderer.sprite = createBlankSpriteFromTemplate(spriteLayers[SpriteLayer.Body].sprite);
+        outlineRenderer.flipX = spriteLayers[SpriteLayer.Body].flipX;
+
         float sizeX = sizeMod/spriteLayers[SpriteLayer.Body].sprite.texture.width;
         float sizeY = sizeMod/spriteLayers[SpriteLayer.Body].sprite.texture.height;
 
@@ -141,6 +146,40 @@ public class SpriteLayerRendererList : MonoBehaviour
     public void removeOutline()
     {
         outlineRenderer.enabled = false;
+    }
+
+    #endregion
+
+    #region Textures
+
+    private static Sprite createBlankSpriteFromTemplate(Sprite template)
+    {
+        if(outlineCache.ContainsKey(template))
+        {
+            return outlineCache[template];
+        } 
+
+        Sprite outline = Sprite.Create(createBlankTextureFromTemplate(template.texture),
+                            template.rect,
+                            new Vector2(template.pivot.x / template.rect.width, template.pivot.y / template.rect.height),
+                            template.pixelsPerUnit);
+
+        outlineCache[template] = outline;
+
+        return outline;
+    }
+
+    private static Texture2D createBlankTextureFromTemplate(Texture2D template)
+    {
+        Texture2D tex = new Texture2D(template.width, template.height, TextureFormat.RGBA32, false);
+        tex.filterMode = FilterMode.Point;
+        tex.wrapMode = TextureWrapMode.Clamp;
+
+        Color32[] pixels = new Color32[template.width * template.height];
+
+        tex.SetPixels32(pixels);
+        tex.Apply();
+        return tex;
     }
 
     #endregion
