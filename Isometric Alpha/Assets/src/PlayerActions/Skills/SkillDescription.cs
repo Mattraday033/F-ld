@@ -37,7 +37,7 @@ public class SkillDescription : IDescribable, IDescribableInBlocks
     }
     public Sprite getIconSprite()
     {
-        return Helpers.loadSpriteFromResources(getIconName());
+        return SpriteUtil.loadSpriteFromResources(getIconName());
     }
     public string getRange()
     {

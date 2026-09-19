@@ -821,7 +821,7 @@ public class PlayerInput : MonoBehaviour
         }
         else if (chestCollider != null)
         {
-            Chest currentChest = chestCollider.gameObject.GetComponent<Chest>();
+            Container currentChest = chestCollider.gameObject.GetComponent<Container>();
 
             if (!currentChest.hasBeenOpened())
             {

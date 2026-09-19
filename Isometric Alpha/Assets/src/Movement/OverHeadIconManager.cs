@@ -7,20 +7,43 @@ using TMPro;
 
 public class OverHeadIconManager : MonoBehaviour
 {
+    private const float twentyFivePercentMultiplier = 1.25f;
+
     public Canvas canvas;
     public Transform iconParent;
+
+    public SpriteLayerRendererList rendererList;
+
     private Dictionary<OverHeadIconType, GameObject> icons = new Dictionary<OverHeadIconType, GameObject>();
 
     private void OnEnable()
     {
         PlayerOOCStateManager.OnStateChangeToInDialogue.AddListener(disableCanvas);
         PlayerOOCStateManager.OnStateChangeFromInDialogue.AddListener(enableCanvas);
+
+        if(rendererList != null)
+        {
+            rendererList.registerBehaviour(SpriteLayer.Body, this, () => onSpriteHeightChange());
+        }
     }
 
     private void OnDisable()
     {
         PlayerOOCStateManager.OnStateChangeToInDialogue.RemoveListener(disableCanvas);
         PlayerOOCStateManager.OnStateChangeFromInDialogue.RemoveListener(enableCanvas);
+
+        if(rendererList != null)
+        {
+            rendererList.unregisterComponent(SpriteLayer.Body, this);
+        }
+    }
+
+    private void onSpriteHeightChange()
+    {
+        if(rendererList != null)
+        {
+            iconParent.position = SpriteUtil.getTopOfBounds(rendererList[SpriteLayer.Body], twentyFivePercentMultiplier);
+        }
     }
 
     private void disableCanvas()

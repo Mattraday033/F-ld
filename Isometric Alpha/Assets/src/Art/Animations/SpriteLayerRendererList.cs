@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SpriteLayerRendererList : MonoBehaviour
 {
-    private readonly static Dictionary<Sprite, Sprite> outlineCache = new Dictionary<Sprite, Sprite>();
-
     private const string replaceVarName = "_Replace";    
 
     private const string blackBorderSizeXVarName = "_BlackBorderSizeX";
@@ -15,7 +14,6 @@ public class SpriteLayerRendererList : MonoBehaviour
 
     private const string blackBorderColorVarName = "_BlackBorderColor";
     private const string outlineColorVarName = "_OutlineColor";
-
 
     #region SpriteRenderers
     [SerializeField]
@@ -58,12 +56,25 @@ public class SpriteLayerRendererList : MonoBehaviour
             [SpriteLayer.Shield_Front] = shieldFrontRenderer  
         };
 
+        foreach(SpriteRenderer renderer in spriteLayers.Values)
+        {
+            renderer.RegisterSpriteChangeCallback(onSpriteChange);
+        }
+
+
+        foreach(SpriteRenderer renderer in spriteLayers.Values)
+        {
+            registeredBehaviours[renderer] = new Dictionary<Component, List<RegisterBehaviour>>();
+        }
+
         instantiated = true;
     }
 
     public SpriteRenderer this[SpriteLayer layer]
     {
-        get { return spriteLayers[layer]; }
+        get { 
+                return spriteLayers[layer];
+            }
     }
 
     public void setFlipX(bool flip)
@@ -129,7 +140,7 @@ public class SpriteLayerRendererList : MonoBehaviour
 
         outlineRenderer.material.SetColor(outlineColorVarName, color);
 
-        outlineRenderer.sprite = createBlankSpriteFromTemplate(spriteLayers[SpriteLayer.Body].sprite);
+        outlineRenderer.sprite = SpriteUtil.createBlankSpriteFromTemplate(spriteLayers[SpriteLayer.Body].sprite);
         outlineRenderer.flipX = spriteLayers[SpriteLayer.Body].flipX;
 
         float sizeX = sizeMod/spriteLayers[SpriteLayer.Body].sprite.texture.width;
@@ -150,38 +161,45 @@ public class SpriteLayerRendererList : MonoBehaviour
 
     #endregion
 
-    #region Textures
+    private Dictionary<SpriteRenderer, Dictionary<Component, List<RegisterBehaviour>>> registeredBehaviours = new();
 
-    private static Sprite createBlankSpriteFromTemplate(Sprite template)
+    public void registerBehaviour(SpriteLayer layer, Component component, RegisterBehaviour behaviour)
     {
-        if(outlineCache.ContainsKey(template))
+        if(!registeredBehaviours[spriteLayers[layer]].ContainsKey(component))
         {
-            return outlineCache[template];
+            registeredBehaviours[spriteLayers[layer]][component] = new List<RegisterBehaviour>(); 
         } 
 
-        Sprite outline = Sprite.Create(createBlankTextureFromTemplate(template.texture),
-                            template.rect,
-                            new Vector2(template.pivot.x / template.rect.width, template.pivot.y / template.rect.height),
-                            template.pixelsPerUnit);
-
-        outlineCache[template] = outline;
-
-        return outline;
+        registeredBehaviours[spriteLayers[layer]][component].Add(behaviour);
     }
 
-    private static Texture2D createBlankTextureFromTemplate(Texture2D template)
+    // public void UnregisterBehaviour(SpriteLayer layer, Component component, RegisterBehaviour behaviour)
+    // {
+    //     if(!registeredBehaviours[spriteLayers[layer]].ContainsKey(component))
+    //     {
+    //         registeredBehaviours[spriteLayers[layer]][component] = new List<RegisterBehaviour>(); 
+    //     } 
+    // }
+
+    public void unregisterComponent(SpriteLayer layer, Component component)
     {
-        Texture2D tex = new Texture2D(template.width, template.height, TextureFormat.RGBA32, false);
-        tex.filterMode = FilterMode.Point;
-        tex.wrapMode = TextureWrapMode.Clamp;
+        if(!registeredBehaviours[spriteLayers[layer]].ContainsKey(component))
+        {
+            return;
+        } 
 
-        Color32[] pixels = new Color32[template.width * template.height];
-
-        tex.SetPixels32(pixels);
-        tex.Apply();
-        return tex;
+        registeredBehaviours[spriteLayers[layer]].Remove(component);
     }
 
-    #endregion
+    private void onSpriteChange(SpriteRenderer renderer)
+    {
+        foreach(List<RegisterBehaviour> behaviours in registeredBehaviours[renderer].Values)
+        {
+            foreach(RegisterBehaviour behaviour in behaviours)
+            {
+                behaviour();
+            }
+        }
+    }
 
 }

@@ -121,25 +121,80 @@ public static class ColorList
 
     #region Skin Tones
 
+    public readonly static Color Skin_PaleWhite = parseColor("#FDD9BC");
+    public readonly static Color Skin_Asian = parseColor("#F4C999");
+    public readonly static Color Skin_MiddleEastern = parseColor("#C49B78");
+    public readonly static Color Skin_Tan = parseColor("#BE9562");
     public readonly static Color Skin_LightBrown = parseColor("#A2755F");
+    public readonly static Color Skin_Brown = parseColor("#936745");
+    public readonly static Color Skin_DeepBrown = parseColor("#774D26");
+    public readonly static Color Skin_Black = parseColor("#634934");
+
+    public readonly static Color Hair_BrandedScar = parseColor("#702626");
 
     #endregion
 
     #region Hair Tones
 
-    public readonly static Color Hair_DarkBrown = parseColor("#412B1F");
+    public readonly static Color Hair_White = parseColor("#D7D7D7");
+    public readonly static Color Hair_Grey2 = parseColor("#959595");
+    public readonly static Color Hair_Grey1 = parseColor("#757575");
+    public readonly static Color Hair_Blonde1 = parseColor("#FFC964");
+    public readonly static Color Hair_TanBlonde = parseColor("#9E8051");
+    public readonly static Color Hair_GrayishBrown = parseColor("#796960");
+    public readonly static Color Hair_Clay = parseColor("#563122");
+    public readonly static Color Hair_Brown = parseColor("#382A1B");
+    public readonly static Color Hair_DarkBrown = parseColor("#2E231C");
+    public readonly static Color Hair_LightBlack = parseColor("#2C2C2C");
+    public readonly static Color Hair_DarkBlack = parseColor("#201D1B");
+    public readonly static Color Hair_Orange = parseColor("#CB5A20");
+    public readonly static Color Hair_Ginger = parseColor("#B3492B");
+    public readonly static Color Hair_DeepRed = parseColor("#522E2E");
 
     #endregion
 
     #region Cloth
 
+    public readonly static Color Cloth_PatchBrown = parseColor("#A9614A");
+    public readonly static Color Cloth_TerraCottaBrown = parseColor("#975434");
+    public readonly static Color Cloth_Brown = parseColor("#775F55");
+    public readonly static Color Cloth_DeepBrown = parseColor("#3A2C1D");
+    public readonly static Color Cloth_FadedBrown = parseColor("#554137");
+
+    public readonly static Color Cloth_Blood = parseColor("#AA3333");
+    public readonly static Color Cloth_DeepRed = parseColor("#6E2323");
+    public readonly static Color Cloth_DesaturatedRed = parseColor("#9A635C");
+    public readonly static Color Cloth_FadedRed = parseColor("#9D4B42"); //Red of Branded Clothes
+
+    public readonly static Color Cloth_RoyalPurple = parseColor("#3B2365");
+    public readonly static Color Cloth_FadedPurple = parseColor("#605F84");
+
     public readonly static Color Cloth_SuppressedBlue = parseColor("#182E61");
     public readonly static Color Cloth_PaleBlue = parseColor("#5E83AE");    
+    public readonly static Color Cloth_DesaturatedBlue = parseColor("#42628B");
+
+    public readonly static Color Cloth_MossGreen = parseColor("#516243");
+    public readonly static Color Cloth_DarkOliveGreen = parseColor("#30520D");
+
+    public readonly static Color Cloth_TunicCuffAndCollarYellow = parseColor("#FEC662");
+
+    public readonly static Color Cloth_White = parseColor("#F9F9F9");
+    public readonly static Color Cloth_ServantsTunicWhite = parseColor("#ECE7E2");
+    public readonly static Color Cloth_BandageWhite = parseColor("#EAE5E0");
+    public readonly static Color Cloth_AltBandageWhite = parseColor("#FEFEFE");
+
+    public readonly static Color Cloth_LightGrey = parseColor("#A6A6A6");
+    public readonly static Color Cloth_Grey = parseColor("#7E7E7E");
+    public readonly static Color Cloth_DarkerGrey = parseColor("#5C5B5B");
+
+    public readonly static Color Cloth_LightBlack = parseColor("#272727");
 
     #endregion
 
     #region Leather
 
+    public readonly static Color Leather_Blue = parseColor("#224B84");
+    public readonly static Color Leather_Red = parseColor("#AA3333");
     public readonly static Color Leather_BeltBrown = parseColor("#674330");
     public readonly static Color Leather_DullGrey = parseColor("#2B2B2B");
 
@@ -156,6 +211,9 @@ public static class ColorList
 
     public readonly static Color Metal_Bronze = parseColor("#FEBB8E");
     public readonly static Color Metal_BronzeShadow = parseColor("#EA8A68");
+
+    public readonly static Color Metal_Iron = parseColor("#A7A6A6");
+    public readonly static Color Metal_IronShadow = parseColor("#313131");
 
     public readonly static Color Metal_Shine = parseColor("#F9F9F9");
 

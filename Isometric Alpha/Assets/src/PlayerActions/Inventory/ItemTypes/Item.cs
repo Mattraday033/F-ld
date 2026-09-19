@@ -480,8 +480,8 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
         DescriptionPanel.setText(panel.loreDescriptionText, getLoreDescription());
 
         DescriptionPanel.setImageColor(panel.typeIconBackgroundPanel, getTypeIconBackgroundColor());
-        DescriptionPanel.setImage(panel.typeIconPanel, Helpers.loadSpriteFromResources(getTypeIconName()));
-        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getTypeIconName()));
+        DescriptionPanel.setImage(panel.typeIconPanel, SpriteUtil.loadSpriteFromResources(getTypeIconName()));
+        DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(getTypeIconName()));
     }
 
 	public virtual void describeSelfRow(DescriptionPanel panel)

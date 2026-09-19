@@ -176,7 +176,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         if(bubble != null)
         {
             backgroundImage.color = ColorList.bubbleBackgroundColor;
-            bubble.sprite = Helpers.loadSpriteFromResources(PrefabNames.UIBubble);
+            bubble.sprite = SpriteUtil.loadSpriteFromResources(PrefabNames.UIBubble);
             bubble.gameObject.SetActive(true);
             backgroundTransform.offsetMax = new Vector2(-3,-3);
             backgroundTransform.offsetMin = new Vector2(3,3);

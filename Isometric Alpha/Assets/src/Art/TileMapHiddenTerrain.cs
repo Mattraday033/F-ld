@@ -23,7 +23,7 @@ public struct TileMapEdits
         {
             Tile tile = ScriptableObject.CreateInstance<Tile>();
 
-            tile.sprite = Helpers.loadSpriteFromResources(spriteName);
+            tile.sprite = SpriteUtil.loadSpriteFromResources(spriteName);
             tilemap.SetTile(cellCoords, tile);
         }
     }

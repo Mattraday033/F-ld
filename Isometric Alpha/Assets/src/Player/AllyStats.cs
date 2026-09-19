@@ -47,6 +47,14 @@ public class AllyStats : Stats
     private int level;
     public int xp;
 
+    public override IAppearance appearance
+    {
+        get
+        {
+            return equippedItems.appearance;
+        }
+    }
+
     public AbilityMenuManager lastCombatAbilityMenuManager;
 
     public CombatActionArray combatActionArray;
@@ -788,11 +796,6 @@ public class AllyStats : Stats
     #endregion
 
     #region Equipment
-    
-    public override IAppearance getAppearance()
-    {
-        return equippedItems.getAppearance();
-    }
     
     public override EquippedItems getEquippedItems()
     {

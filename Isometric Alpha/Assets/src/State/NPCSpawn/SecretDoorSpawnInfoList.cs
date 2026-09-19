@@ -301,7 +301,7 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
                 currentCell.y -= index;
             }
 
-            list.Add(new SecretDoorSpawnDetails(secretDoorName, currentCell, currentArea, secretDoorInfo, tutorialTargetHash, spritePathName, terrainSpriteName, observable, script));
+            // list.Add(new SecretDoorSpawnDetails(secretDoorName, currentCell, currentArea, secretDoorInfo, tutorialTargetHash, spritePathName, terrainSpriteName, observable, script));
         }
 
         return list;

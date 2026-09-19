@@ -75,7 +75,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
                 setToFilledAndUnusable(currentAttackIndex);
             }
 
-            DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(getItemInSlot().getIconName()));
+            DescriptionPanel.setImage(iconImage, SpriteUtil.loadSpriteFromResources(getItemInSlot().getIconName()));
         }
 
         if (!item.isUnequippable())
@@ -94,11 +94,11 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
         {
             if (getItemInSlot().getSubtype().Equals(Weapon.subtype))
             {
-                DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(getItemInSlot().getIconName()));
+                DescriptionPanel.setImage(iconImage, SpriteUtil.loadSpriteFromResources(getItemInSlot().getIconName()));
             }
             else
             {
-                DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(getItemInSlot().getSlotIconName()));
+                DescriptionPanel.setImage(iconImage, SpriteUtil.loadSpriteFromResources(getItemInSlot().getSlotIconName()));
             }
         }
     }
@@ -159,7 +159,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
 
         if (getItemInSlot() != null && getItemInSlot().getSlotID() == Armor.offHandSlotIndex)
         {
-            DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(getItemInSlot().getIconName()));
+            DescriptionPanel.setImage(iconImage, SpriteUtil.loadSpriteFromResources(getItemInSlot().getIconName()));
         }
 
         boxCollider.enabled = true;
@@ -183,7 +183,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
 
         if (getItemInSlot() != null && getItemInSlot().getSlotID() == Armor.offHandSlotIndex)
         {
-            DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(getItemInSlot().getIconName()));
+            DescriptionPanel.setImage(iconImage, SpriteUtil.loadSpriteFromResources(getItemInSlot().getIconName()));
         }
 
         boxCollider.enabled = true;
@@ -242,7 +242,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     public void setToJunk()
     {
         slotType = DragDrogItemSlotType.Junk;
-        DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(IconList.junkIconName));
+        DescriptionPanel.setImage(iconImage, SpriteUtil.loadSpriteFromResources(IconList.junkIconName));
 
         setHoverMessage(HoverMessageList.getMessage(HoverMessageList.junkSlotKey));
     }
@@ -250,7 +250,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     public void setToInventory()
     {
         slotType = DragDrogItemSlotType.Inventory;
-        DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(IconList.amountIconName));
+        DescriptionPanel.setImage(iconImage, SpriteUtil.loadSpriteFromResources(IconList.amountIconName));
 
         setHoverMessage(HoverMessageList.getMessage(HoverMessageList.toInvSlotKey));
     }
@@ -288,11 +288,11 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     {
         if (slotIndex >= Armor.offHandSlotIndex && slotIndex <= Armor.trinketSlotIndex)
         {
-            DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(Armor.getSlotIconName(slotIndex)));
+            DescriptionPanel.setImage(iconImage, SpriteUtil.loadSpriteFromResources(Armor.getSlotIconName(slotIndex)));
         }
         else if (slotIndex >= Weapon.mainHandSlotIndex)
         {
-            DescriptionPanel.setImage(iconImage, Helpers.loadSpriteFromResources(Weapon.mainHandSlotIconName));
+            DescriptionPanel.setImage(iconImage, SpriteUtil.loadSpriteFromResources(Weapon.mainHandSlotIconName));
         }
     }
 

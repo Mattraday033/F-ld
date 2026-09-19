@@ -14,6 +14,14 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable, IAppearanceSou
     public Stats owner;
     public EquippableItem[] equippedItems = new EquippableItem[totalEquipmentSlots];
 
+    public IAppearance appearance
+    {
+        get
+        {
+            return Costume.getDefaultCostume();
+        }
+    }
+
     public EquippedItems(Stats owner)
     {
         this.owner = owner;
@@ -300,10 +308,4 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable, IAppearanceSou
     }
 
     #endregion
-
-    public IAppearance getAppearance()
-    {
-        return Costume.getDefaultCostume();
-    }
-
 }

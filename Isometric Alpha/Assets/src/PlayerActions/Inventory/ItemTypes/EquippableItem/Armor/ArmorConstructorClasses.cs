@@ -97,7 +97,7 @@ public class Shield : Armor
         
         DescriptionPanel.setText(panel.nameText, getName());
 
-        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getSlotIconName()));
+        DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(getSlotIconName()));
 
         DescriptionPanel.setText(panel.damageText, getDamageFormulaTotal());
         DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());

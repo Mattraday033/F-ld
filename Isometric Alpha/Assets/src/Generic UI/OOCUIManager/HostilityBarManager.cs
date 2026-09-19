@@ -46,13 +46,13 @@ public class HostilityBarManager : MonoBehaviour
     private void setIconToPeaceful(Image icon)
     {
         icon.color = ColorList.surpriseIconGreen;
-        icon.sprite = Helpers.loadSpriteFromResources(IconList.flowerIcon);
+        icon.sprite = SpriteUtil.loadSpriteFromResources(IconList.flowerIcon);
     }
 
     private void setIconToHostile(Image icon)
     {
         icon.color = ColorList.surpriseIconRed;
-        icon.sprite = Helpers.loadSpriteFromResources(IconList.hostileSkullIcon);
+        icon.sprite = SpriteUtil.loadSpriteFromResources(IconList.hostileSkullIcon);
     }
 
     private void revealAlertIcons()

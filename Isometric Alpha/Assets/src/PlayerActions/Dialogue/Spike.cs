@@ -20,8 +20,8 @@ public class Spike : Obstacle
     [RuntimeInitializeOnLoadMethod]
     private static void initializeSpike()
     {
-        downSprite = Helpers.loadSpriteFromResources(PrefabNames.spikesDown);
-        upSprite = Helpers.loadSpriteFromResources(PrefabNames.spikesUp);
+        downSprite = SpriteUtil.loadSpriteFromResources(PrefabNames.spikesDown);
+        upSprite = SpriteUtil.loadSpriteFromResources(PrefabNames.spikesUp);
     }
 
     public override void setToDown()

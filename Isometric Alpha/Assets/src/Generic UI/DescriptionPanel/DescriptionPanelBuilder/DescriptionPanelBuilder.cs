@@ -97,7 +97,7 @@ public class DescriptionPanelBuildingBlock
     }
     public virtual Sprite getIcon()
     {
-        return Helpers.loadSpriteFromResources(iconName);
+        return SpriteUtil.loadSpriteFromResources(iconName);
     }
 
     #region 
@@ -481,7 +481,7 @@ public class DescriptionPanelTypeBuildingBlock : DescriptionPanelBuildingBlock
 
     public override Sprite getIcon()
     {
-        return Helpers.loadSpriteFromResources(iconName);
+        return SpriteUtil.loadSpriteFromResources(iconName);
     }
 }
 

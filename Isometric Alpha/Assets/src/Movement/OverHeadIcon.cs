@@ -155,23 +155,23 @@ public class OverHeadIcon : SlotIconHover
         switch(type)
         {
             case OverHeadIconType.Intimidate:
-                iconImage.sprite = Helpers.loadSpriteFromResources(IconList.intimidateIconName);
+                iconImage.sprite = SpriteUtil.loadSpriteFromResources(IconList.intimidateIconName);
                 hoverMessageKey = source.getIntimidatedDescriptionKey();
                 break;
             case OverHeadIconType.Cunning:
-                iconImage.sprite = Helpers.loadSpriteFromResources(IconList.cunningIconName);
+                iconImage.sprite = SpriteUtil.loadSpriteFromResources(IconList.cunningIconName);
                 hoverMessageKey = HoverMessageList.distractedKey;
                 break;
             case OverHeadIconType.Retreat:
-                iconImage.sprite = Helpers.loadSpriteFromResources(IconList.retreatChanceIconName);
+                iconImage.sprite = SpriteUtil.loadSpriteFromResources(IconList.retreatChanceIconName);
                 hoverMessageKey = HoverMessageList.evadedKey;
                 break;
             case OverHeadIconType.Shopkeeper:
-                iconImage.sprite = Helpers.loadSpriteFromResources(IconList.shopIcon);
+                iconImage.sprite = SpriteUtil.loadSpriteFromResources(IconList.shopIcon);
                 hoverMessageKey = HoverMessageList.shopkeeperIconKey;
                 break;
             case OverHeadIconType.RestStop:
-                iconImage.sprite = Helpers.loadSpriteFromResources(IconList.restPointIcon);
+                iconImage.sprite = SpriteUtil.loadSpriteFromResources(IconList.restPointIcon);
                 hoverMessageKey = HoverMessageList.restPointCharacterKey;
                 break;
             default:

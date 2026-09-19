@@ -16,7 +16,7 @@ public static class Inventory
         addItem(item, State.inventory, ignoreEvent);
     }
 
-    //Sprite square = Helpers.loadSpriteFromResources("Square"); 
+    //Sprite square = SpriteUtil.loadSpriteFromResources("Square"); 
     //Packages/com.unity.2d.sprite/Editor/ObjectMenuCreation/DefaultAssets/Textures/v2/Square.png
     public static void addItem(Item item, Dictionary<string, Item> pocket, bool ignoreEvent = false)
     {

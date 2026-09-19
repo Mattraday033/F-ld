@@ -141,7 +141,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
 
     public Sprite getIconSprite()
     {
-        return Helpers.loadSpriteFromResources(getIconName());
+        return SpriteUtil.loadSpriteFromResources(getIconName());
     }
 
     public virtual bool isMandatoryTarget()

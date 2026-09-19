@@ -191,7 +191,7 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         showPageDetails();
 
         statIcon.setHoverMessage(currentPrimaryStatPage.ToString(), HoverMessageList.getMessage(currentPrimaryStatPage.ToString()));
-        statIcon.iconImage.sprite = Helpers.loadSpriteFromResources(currentPrimaryStatPage.ToString());
+        statIcon.iconImage.sprite = SpriteUtil.loadSpriteFromResources(currentPrimaryStatPage.ToString());
 
         primaryStatsPanel.updateStatsPanel(currentStats);
 
@@ -406,12 +406,12 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
     private Sprite getSprite()
     {
-        return Helpers.loadSpriteFromResources(EnemyTypeFolderPathList.getEnemyTypeFolderPath(portraitSpriteNameList[spriteNameIndex])+characterSpriteExampleName);
+        return SpriteUtil.loadSpriteFromResources(EnemyTypeFolderPathList.getEnemyTypeFolderPath(portraitSpriteNameList[spriteNameIndex])+characterSpriteExampleName);
     }
 
     private Sprite getPortrait()
     {
-        return Helpers.loadSpriteFromResources(PrefabNames.portraitFolder + portraitSpriteNameList[portraitNameIndex]);
+        return SpriteUtil.loadSpriteFromResources(PrefabNames.portraitFolder + portraitSpriteNameList[portraitNameIndex]);
     }
 
     public void incrementSpriteIndex()

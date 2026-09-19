@@ -243,7 +243,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		DescriptionPanel.setText(panel.typeText, getDisplayType());
 
 
-		DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
+		DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(getIconName()));
 
 		/* commented out because apparently getIconBackgroundColor() doesn't exist (was thinking fo traits
 			may implement later

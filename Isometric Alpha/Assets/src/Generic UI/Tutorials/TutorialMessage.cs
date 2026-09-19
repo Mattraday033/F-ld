@@ -70,7 +70,7 @@ public class TutorialMessage : IDescribable
         panel.setObjectBeingDescribed(this);
 
         DescriptionPanel.setText(panel.useDescriptionText, message);
-        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(imageKey));
+        DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(imageKey));
     }
 
     public void describeSelfRow(DescriptionPanel panel)

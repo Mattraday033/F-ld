@@ -17,13 +17,13 @@ public class FastTravelIcon : MonoBehaviour
     public void setToFastTravelAllowed()
     {
         interiorImage.color = ColorList.surpriseIconGreen;
-        arrowIconImage.sprite = Helpers.loadSpriteFromResources(MapTileSpriteList.fastTravelIndicatorSprite);
+        arrowIconImage.sprite = SpriteUtil.loadSpriteFromResources(MapTileSpriteList.fastTravelIndicatorSprite);
     }
 
     public void setToFastTravelNotAllowed()
     {
         interiorImage.color = ColorList.surpriseIconRed;
-        arrowIconImage.sprite = Helpers.loadSpriteFromResources(MapTileSpriteList.fastTravelBlockedSprite);
+        arrowIconImage.sprite = SpriteUtil.loadSpriteFromResources(MapTileSpriteList.fastTravelBlockedSprite);
     }
 
 }

@@ -28,10 +28,10 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         }
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.oocMonster;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.oocMonster;
+    // }
 
     public override Transform getParent()
     {
@@ -79,10 +79,10 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
         this.tutorialTargetHash = tutorialTargetHash;
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.movableObject;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.movableObject;
+    // }
 
     public override Transform getParent()
     {
@@ -98,7 +98,7 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
 
         // MovementManager.addMovementTracker(enemyMovement);
 
-        // enemyMovement.getSpriteRenderer().sprite = Helpers.loadSpriteFromResources(getSpriteName());
+        // enemyMovement.getSpriteRenderer().sprite = SpriteUtil.loadSpriteFromResources(getSpriteName());
     }
 
 

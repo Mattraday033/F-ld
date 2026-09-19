@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public interface IExtraSpawnBehaviour
-{
-    public void addBehaviour(GameObject gameObject);
-}
-
-public abstract class OOCSpawnDetails: IAppearanceSource
+public class OOCSpawnDetails: IAppearanceSource
 {
 
     public const string gameObjectNameSuffix = "'s GameObject";
@@ -18,30 +13,55 @@ public abstract class OOCSpawnDetails: IAppearanceSource
     public string tutorialTargetHash = "";
 
     public string npcName;
+
     public Vector3Int cellCoords;
     public Vector3Int[] extraSpaces = new Vector3Int[0];
+    
+    protected Facing facing;
 
-    private IAppearance appearance;
+    private IAppearance _Appearance;
+    public IAppearance appearance
+    {
+        get
+        {
+            return _Appearance;
+        }
+    }
+
+    protected virtual bool applyAppearance
+    {
+        get
+        {
+            return true;
+        }
+    }
+
+    public virtual string prefabName
+    {
+        get
+        {
+            return PrefabNames.creaturePrefab;
+        }
+    }
 
     protected bool ignoresSecretDoors;
-    protected QuestStepActivationScript script;
     protected List<IExtraSpawnBehaviour> spawnBehaviours;
 
     public OOCSpawnDetails(
                             string npcName = "",
                             IAppearance appearance = null,
                             Vector3Int cellCoords = new Vector3Int(),
+                            Facing facing = Facing.Random,
                             string tutorialTargetHash = "",
                             bool ignoresSecretDoors = false,
-                            QuestStepActivationScript script = null,
                             Vector3Int[] extraSpaces = null,
                             List<IExtraSpawnBehaviour> spawnBehaviours = null)
     {
         this.npcName = npcName;
-        this.appearance = appearance ?? Costume.getDefaultCostume();
+        this._Appearance = appearance ?? Costume.getDefaultCostume();
         this.cellCoords = cellCoords;
         this.ignoresSecretDoors = ignoresSecretDoors;
-        this.script = script;
+        this.facing = facing;
 
         if(extraSpaces != null)
         {
@@ -57,16 +77,6 @@ public abstract class OOCSpawnDetails: IAppearanceSource
         }
         
         this.spawnBehaviours = spawnBehaviours ?? new List<IExtraSpawnBehaviour>();
-    }
-
-    public virtual string getPrefabName()
-    {
-        return null;
-    }
-
-    protected virtual void setScript(IQuestActivationObject questActivationObject)
-    {
-        questActivationObject.setScript(script);
     }
 
     public virtual Transform getParent()
@@ -110,7 +120,10 @@ public abstract class OOCSpawnDetails: IAppearanceSource
 
     public virtual void spawnActions(GameObject interactable)
     {
-        appearance.applyAppearance(interactable.GetComponent<SpriteLayerRendererList>(), updateColors: true);
+        if(applyAppearance)
+        {
+            appearance.applyAppearance(interactable.GetComponent<SpriteLayerRendererList>(), updateColors: true);
+        }
 
         setIgnoresSecretDoors(interactable);
 
@@ -225,9 +238,133 @@ public abstract class OOCSpawnDetails: IAppearanceSource
     
 }
 
+public class ContainerSpawnDetails : OOCSpawnDetails
+{
+    public ContainerSpawnDetails(int index,
+                             Vector3Int cellCoords,
+                             Facing facing,
+                             ChestType type,
+                             QuestStepActivationScript script = null,
+                             string secretDoorFlag = null,
+                             IAppearance appearance = null) :
+    base(npcName: generateName(index), facing: facing, appearance: appearance, cellCoords: cellCoords)
+    {
+        spawnBehaviours.Add(new ContainerSpawnBehaviour(index, script, secretDoorFlag, type));
+    }
+
+    public static string generateName(int index)
+    {
+        return NPCNameList.chest + "-" + index;
+    }
+
+    // public bool isSingleSpriteChest()
+    // {
+    //     return spriteName != null;
+    // }
+
+    // public virtual ChestType getType()
+    // {
+    //     return type;
+    // }
+
+    // public override void spawnActions(GameObject chestGameObject)
+    // {
+    //     if(isSingleSpriteChest())
+    //     {
+    //         spawnSingleSpriteChest(chestGameObject);
+    //         return;
+    //     }
+
+    //     Container chest = chestGameObject.GetComponent<Container>();
+
+    //     chest.populate(index, facing, getType());
+
+    //     setScript(chest);
+
+    //     chest.setSecretDoorFlag(secretDoorFlag);
+    // }
+
+    // private Sprite getSprite()
+    // {
+    //     if(deadBody)
+    //     {
+    //         string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(spriteName);
+
+    //         if(weaponless)
+    //         {
+    //             switch(facing)
+    //             {
+    //                 case Facing.NorthEast:
+    //                 case Facing.NorthWest:
+    //                     return SpriteUtil.loadSpriteFromResources(folderPath + CharacterAnimationType.Death_Back_Weaponless);
+    //                 default:
+    //                     return SpriteUtil.loadSpriteFromResources(folderPath + CharacterAnimationType.Death_Front_Weaponless);
+    //             }
+    //         } else
+    //         {
+    //             Sprite[] deathSprites = null;
+
+    //             switch(facing)
+    //             {
+    //                 case Facing.NorthEast:
+    //                 case Facing.NorthWest:
+    //                     deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death_Back);
+    //                     break;
+    //                 default:
+    //                     deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death_Front);
+    //                     break;
+    //             }
+
+    //             if(deathSprites == null || deathSprites.Length <= 0)
+    //             {
+    //                 deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death);
+    //             }
+
+    //             return deathSprites[deathSprites.Length - 1];
+    //         }
+    //     }
+
+    //     return SpriteUtil.loadSpriteFromResources(spriteName);
+    // }
+
+    // private void spawnSingleSpriteChest(GameObject chestGameObject)
+    // {
+    //     Container chest = chestGameObject.GetComponent<Container>();
+
+    //     SingleSpriteChest singleSpriteChest = chestGameObject.AddComponent<SingleSpriteChest>();
+
+    //     // singleSpriteChest.sprite = getSprite();
+    //     singleSpriteChest.chestName = chestName;
+    //     singleSpriteChest.mouseHoverCollider = chest.mouseHoverCollider;
+
+    //     NameTagGenerator nameTagGenerator = chestGameObject.GetComponent<NameTagGenerator>();
+
+    //     if(nameTagGenerator != null)
+    //     {
+    //         nameTagGenerator.nameSource = singleSpriteChest;
+    //     }
+
+    //     if(chest != null)
+    //     {
+    //         GameObject.Destroy(chest);
+    //     }
+
+    //     singleSpriteChest.populate(index, facing, getType());
+
+    //     setScript(singleSpriteChest);
+
+    //     singleSpriteChest.setSecretDoorFlag(secretDoorFlag);
+    // }
+}
+
+
 public interface IQuestActivationObject
 {
-    public void setScript(QuestStepActivationScript script);
+    public QuestStepActivationScript script
+    {
+        set;
+        get;
+    }
 }
 
 public class TutorialColliderSpawnDetails : OOCSpawnDetails
@@ -249,10 +386,10 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
         this.alwaysSpawn = alwaysSpawn;
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.tutorialCollider;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.tutorialCollider;
+    // }
 
     public override Transform getParent()
     {
@@ -300,7 +437,7 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
                                      string tutorialTargetHash = null,
                                      QuestStepActivationScript script = null,
                                      IAppearance appearance = null) :
-    base(category.ToString(), appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, script: script)
+    base(category.ToString(), appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash)
     {
         this.index = index;
 
@@ -360,10 +497,10 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
         }
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.cunningBlocker;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.cunningBlocker;
+    // }
 
     public override void spawnActions(CunningObject cunningObject)
     {
@@ -372,7 +509,7 @@ public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
         cunningBlocker.index = index;
 
         cunningBlocker.build(startFacing,endFacing, category);
-        cunningBlocker.script = script;
+        // cunningBlocker.script = script;
 
         addNameTagGenerator(cunningBlocker.gameObject, cunningBlocker, cunningTarget: true);
 
@@ -481,18 +618,19 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 {
 
     public ObstacleSpawnDetails(string npcName, 
-                                Vector3Int cellCoords, 
+                                Vector3Int cellCoords,
+                                Facing facing = Facing.Random, 
                                 bool ignoresSecretDoors = true,
                                 IAppearance appearance = null) :
-    base(npcName, appearance: appearance, cellCoords: cellCoords, ignoresSecretDoors: ignoresSecretDoors)
+    base(npcName, facing: facing, appearance: appearance, cellCoords: cellCoords, ignoresSecretDoors: ignoresSecretDoors)
     {
         
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.oocObstacle;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.oocObstacle;
+    // }
 
     // public override void spawnActions(GameObject interactable)
     // {
@@ -513,7 +651,7 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
     //     base.spawnActions(spriteRenderer);
 
-    //     spriteRenderer.sprite = Helpers.loadSpriteFromResources(getSpriteName());
+    //     spriteRenderer.sprite = SpriteUtil.loadSpriteFromResources(getSpriteName());
 
     //     if(sortingLayerInfo != null)
     //     {
@@ -538,7 +676,6 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 public class DeadBodySpawnDetails : ObstacleSpawnDetails
 {
 
-    private Facing facing;
     private bool weaponless;
 
     public DeadBodySpawnDetails(string npcName, 
@@ -547,9 +684,8 @@ public class DeadBodySpawnDetails : ObstacleSpawnDetails
                                 bool ignoresSecretDoors = true, 
                                 bool weaponless = false,
                                 IAppearance appearance = null) :
-    base(npcName, cellCoords, ignoresSecretDoors: ignoresSecretDoors, appearance: appearance)
+    base(npcName, cellCoords, facing: facing, ignoresSecretDoors: ignoresSecretDoors, appearance: appearance)
     {
-        this.facing = facing;
         this.weaponless = weaponless;
     }
 
@@ -628,10 +764,10 @@ public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
         // }
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.oocObstacle;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.oocObstacle;
+    // }
 
     public override SpawnParams getSpawnParams()
     {
@@ -682,10 +818,10 @@ public class Wave : ObstacleWithSecretDoorFlagSpawnDetails
     {
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.wave;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.wave;
+    // }
 
     public override void spawnActions(GameObject interactable)
     {
@@ -726,10 +862,10 @@ public class SpikeSpawnDetails : ObstacleSpawnDetails
     {
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.spikes;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.spikes;
+    // }
 
 }
 
@@ -764,10 +900,10 @@ public class ButtonSpawnDetails : OOCSpawnDetails
         this.tutorialTargetHash = tutorialTargetHash;
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.floorButton;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.floorButton;
+    // }
 
     public override void spawnActions(GameObject button)
     {
@@ -834,6 +970,13 @@ public class HiddenButtonSpawnDetails : ButtonSpawnDetails
 
 public class NPCSpawnDetails : OOCSpawnDetails
 {
+    public override string prefabName
+    {
+        get
+        {
+            return PrefabNames.NPC;
+        }
+    }
 
     public Dialogue dialogue;
     public SpeakAtStartScript speakAtStartScript;
@@ -841,7 +984,6 @@ public class NPCSpawnDetails : OOCSpawnDetails
     public bool sleepingDialogueIntro;
 
     private string animationName;
-    protected Facing facing;
     private CharacterAnimationType animationType;
 
     public NPCSpawnDetails( string npcName,
@@ -855,10 +997,9 @@ public class NPCSpawnDetails : OOCSpawnDetails
                             string tutorialTargetHash = "",
                             bool ignoresSecretDoors = true,
                             bool sleepingDialogueIntro = false,
-                            QuestStepActivationScript script = null,
                             IAppearance appearance = null,
                             List<IExtraSpawnBehaviour> spawnBehaviours =  null) :
-    base(npcName, appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, ignoresSecretDoors: ignoresSecretDoors, script: script, extraSpaces: extraSpaces, spawnBehaviours: spawnBehaviours)
+    base(npcName, facing: facing, appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, ignoresSecretDoors: ignoresSecretDoors, extraSpaces: extraSpaces, spawnBehaviours: spawnBehaviours)
     {
         if(areaName == null)
         {
@@ -880,7 +1021,6 @@ public class NPCSpawnDetails : OOCSpawnDetails
             this.animationName = animationName;
         }
 
-        this.facing = facing;
         this.animationType = animationType;
     }
 
@@ -899,10 +1039,10 @@ public class NPCSpawnDetails : OOCSpawnDetails
         return dialogue != null;
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.NPC;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.NPC;
+    // }
 
     public override Transform getParent()
     {
@@ -1048,7 +1188,6 @@ public class NonDialogueNPCSpawnDetails : NPCSpawnDetails
                                         Facing facing = Facing.Random,
                                         bool ignoresSecretDoors = true,
                                         CharacterAnimationType animationType = CharacterAnimationType.None,
-                                        SortingLayerInfo sortingLayerInfo = null,
                                         IAppearance appearance = null) :
     base(npcName, cellCoords, "", animationName, facing, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, appearance: appearance)
     {
@@ -1308,7 +1447,6 @@ public class RestStopAndShopkeeperSpawnDetails : NPCSpawnDetails
                                              Vector3Int[] extraSpaces = null, 
                                              bool ignoresSecretDoors = true, 
                                              Facing facing = Facing.Random, 
-                                             bool withScale = false,
                                              bool isShopkeeper = false,
                                              bool isRestStop = false,
                                              IAppearance appearance = null) :
@@ -1348,8 +1486,16 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
     private string terrainSpriteName;
     private ObservableDelegate observable;
 
-    public SecretDoorSpawnDetails(string npcName, Vector3Int cellCoords, string areaName, SecretDoorInfo secretDoorInfo, string tutorialTargetHash, string spriteName, string terrainSpriteName, ObservableDelegate observable = null, QuestStepActivationScript script = null, bool withScale = true, IAppearance appearance = null) :
-    base(npcName, cellCoords, areaName, script: script, appearance: appearance)
+    public SecretDoorSpawnDetails(string npcName, 
+                                    Vector3Int cellCoords, 
+                                    string areaName, 
+                                    SecretDoorInfo secretDoorInfo, 
+                                    string tutorialTargetHash, 
+                                    string terrainSpriteName, 
+                                    ObservableDelegate observable = null, 
+                                    QuestStepActivationScript script = null, 
+                                    IAppearance appearance = null) :
+    base(npcName, cellCoords, areaName, appearance: appearance)
     {
         this.secretDoorInfo = secretDoorInfo;
 
@@ -1376,10 +1522,10 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
         return true;
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.secretDoor;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.secretDoor;
+    // }
 
     public override void spawnActions(GameObject secretDoor)
     {
@@ -1396,7 +1542,7 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
 
         if(terrainSpriteName != null && terrainSpriteName.Length > 0)
         {
-            observableObject.terrainSprite = Helpers.loadSpriteFromResources(terrainSpriteName);
+            observableObject.terrainSprite = SpriteUtil.loadSpriteFromResources(terrainSpriteName);
         }
 
         if(hasTutorialTargetHash())
@@ -1413,7 +1559,7 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
             secretDoor.layer = LayerAndTagManager.objectLayer;
         }
 
-        observableObject.script = script;
+        // observableObject.script = script;
     }
 
     public override void spawnActions(DialogueTrigger dialogueTrigger)
@@ -1521,10 +1667,10 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
     //     }
     // }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.vaultableObject;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.vaultableObject;
+    // }
 
     public override void spawnActions(GameObject gameObject)
     {
@@ -1584,156 +1730,6 @@ public class VaultableOrDestroyableObjectSpawnDetails : VaultableObjectSpawnDeta
     }
 }
 
-public class ChestSpawnDetails : OOCSpawnDetails
-{
-    protected int index;
-    protected Facing facing;
-    protected string secretDoorFlag;
-    private ChestType type;
-
-    // Single sprite chests (e.g. dead bodies)
-    private string chestName;
-    private bool deadBody;
-    private bool weaponless;
-
-    public ChestSpawnDetails(int index,
-                             Vector3Int cellCoords,
-                             Facing facing,
-                             QuestStepActivationScript script = null,
-                             string secretDoorFlag = null,
-                             ChestType type = ChestType.Chest,
-                             string chestName = null,
-                             bool deadBody = false,
-                             bool weaponless = false,
-                             IAppearance appearance = null) :
-    base(npcName: generateName(index), appearance: appearance, cellCoords: cellCoords, script: script)
-    {
-        this.index = index;
-        this.facing = facing;
-        this.secretDoorFlag = secretDoorFlag;
-        this.type = type;
-
-        if(chestName != null)
-        {
-            this.chestName = chestName;
-            this.npcName = chestName;
-        }
-
-        this.deadBody = deadBody;
-        this.weaponless = weaponless;
-    }
-
-    // public bool isSingleSpriteChest()
-    // {
-    //     return spriteName != null;
-    // }
-
-    public override string getPrefabName()
-    {
-        return PrefabNames.chest;
-    }
-
-    public static string generateName(int index)
-    {
-        return NPCNameList.chest + "-" + index;
-    }
-
-    public virtual ChestType getType()
-    {
-        return type;
-    }
-
-    // public override void spawnActions(GameObject chestGameObject)
-    // {
-    //     if(isSingleSpriteChest())
-    //     {
-    //         spawnSingleSpriteChest(chestGameObject);
-    //         return;
-    //     }
-
-    //     Chest chest = chestGameObject.GetComponent<Chest>();
-
-    //     chest.populate(index, facing, getType());
-
-    //     setScript(chest);
-
-    //     chest.setSecretDoorFlag(secretDoorFlag);
-    // }
-
-    // private Sprite getSprite()
-    // {
-    //     if(deadBody)
-    //     {
-    //         string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(spriteName);
-
-    //         if(weaponless)
-    //         {
-    //             switch(facing)
-    //             {
-    //                 case Facing.NorthEast:
-    //                 case Facing.NorthWest:
-    //                     return Helpers.loadSpriteFromResources(folderPath + CharacterAnimationType.Death_Back_Weaponless);
-    //                 default:
-    //                     return Helpers.loadSpriteFromResources(folderPath + CharacterAnimationType.Death_Front_Weaponless);
-    //             }
-    //         } else
-    //         {
-    //             Sprite[] deathSprites = null;
-
-    //             switch(facing)
-    //             {
-    //                 case Facing.NorthEast:
-    //                 case Facing.NorthWest:
-    //                     deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death_Back);
-    //                     break;
-    //                 default:
-    //                     deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death_Front);
-    //                     break;
-    //             }
-
-    //             if(deathSprites == null || deathSprites.Length <= 0)
-    //             {
-    //                 deathSprites = Resources.LoadAll<Sprite>(folderPath + CharacterAnimationType.Death);
-    //             }
-
-    //             return deathSprites[deathSprites.Length - 1];
-    //         }
-    //     }
-
-    //     return Helpers.loadSpriteFromResources(spriteName);
-    // }
-
-    private void spawnSingleSpriteChest(GameObject chestGameObject)
-    {
-        Chest chest = chestGameObject.GetComponent<Chest>();
-
-        SingleSpriteChest singleSpriteChest = chestGameObject.AddComponent<SingleSpriteChest>();
-
-        // singleSpriteChest.sprite = getSprite();
-        singleSpriteChest.chestName = chestName;
-        singleSpriteChest.mouseHoverCollider = chest.mouseHoverCollider;
-
-        NameTagGenerator nameTagGenerator = chestGameObject.GetComponent<NameTagGenerator>();
-
-        if(nameTagGenerator != null)
-        {
-            nameTagGenerator.nameSource = singleSpriteChest;
-        }
-
-        if(chest != null)
-        {
-            GameObject.Destroy(chest);
-        }
-
-        singleSpriteChest.populate(index, facing, getType());
-
-        setScript(singleSpriteChest);
-
-        singleSpriteChest.setSecretDoorFlag(secretDoorFlag);
-    }
-}
-
-
 public class BookSpawnDetails : OOCSpawnDetails
 {
 
@@ -1745,10 +1741,10 @@ public class BookSpawnDetails : OOCSpawnDetails
         this.bookIndex = bookIndex;
     }
 
-    public override string getPrefabName()
-    {
-        return PrefabNames.book;
-    }
+    // public override string getPrefabName()
+    // {
+    //     return PrefabNames.book;
+    // }
 
     public override void spawnActions(GameObject interactable)
     {
@@ -1830,17 +1826,17 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
         return true;
     }
 
-    public override string getPrefabName()
-    {
-        if (locationName == null)
-        {        
-            return HiddenTerrainList.getHiddenTerrainFolderPath(areaName, sectionName, index);
-        }
-        else
-        {
-            return HiddenTerrainList.getHiddenTerrainFolderPath(locationName, index);
-        }
-    }
+    // public override string getPrefabName()
+    // {
+    //     if (locationName == null)
+    //     {        
+    //         return HiddenTerrainList.getHiddenTerrainFolderPath(areaName, sectionName, index);
+    //     }
+    //     else
+    //     {
+    //         return HiddenTerrainList.getHiddenTerrainFolderPath(locationName, index);
+    //     }
+    // }
 
     public override SpawnParams getSpawnParams()
     {

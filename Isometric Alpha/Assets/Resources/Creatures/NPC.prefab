@@ -48,6 +48,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8029013861167577970, guid: 0d732796882597a4b8fd107b0481c523,
+        type: 3}
+      propertyPath: rendererList
+      value: 
+      objectReference: {fileID: 471480233147298130}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

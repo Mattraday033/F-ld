@@ -172,7 +172,7 @@ public class SpriteDescription: IAppearance
         rendererList.ignoreColorReplace();
         rendererList.setToSingleLayer(SpriteLayer.Body);
 
-        rendererList[SpriteLayer.Body].sprite = Helpers.loadSpriteFromResources(spriteName);
+        rendererList[SpriteLayer.Body].sprite = SpriteUtil.loadSpriteFromResources(spriteName);
         rendererList[SpriteLayer.Body].color = tint;
 
         rendererList.setFlipX(flipX);

@@ -42,7 +42,7 @@ public class MapTile : MonoBehaviour, IQuestListSource
 
         if (mapTileFormat.mapIconKey != null && mapTileFormat.mapIconKey != "")
         {
-            setMapIcon(Helpers.loadSpriteFromResources(MapTileSpriteList.getSpriteFullPath(mapTileFormat.mapIconKey)), mapTileFormat.flipMapIcon);
+            setMapIcon(SpriteUtil.loadSpriteFromResources(MapTileSpriteList.getSpriteFullPath(mapTileFormat.mapIconKey)), mapTileFormat.flipMapIcon);
         }
 
         if (mapObject != null && !mapObject.hasBeenDiscovered())
@@ -59,7 +59,7 @@ public class MapTile : MonoBehaviour, IQuestListSource
 
         if (mapTileFormat.floorImageKey != null && mapTileFormat.floorImageKey != "")
         {
-            setFloorImage(Helpers.loadSpriteFromResources(MapTileSpriteList.getSpriteFullPath(mapTileFormat.floorImageKey)));
+            setFloorImage(SpriteUtil.loadSpriteFromResources(MapTileSpriteList.getSpriteFullPath(mapTileFormat.floorImageKey)));
         }
         else
         {

@@ -177,7 +177,7 @@ public static class CunningObjectSpriteList
 
     public static Sprite getCurrentSprite(Facing facing, CunningObjectSpriteCategory category)
     {
-        return Helpers.loadSpriteFromResources(cunningObjectSprites[new KeyValuePair<Facing, CunningObjectSpriteCategory>(facing, category)]);
+        return SpriteUtil.loadSpriteFromResources(cunningObjectSprites[new KeyValuePair<Facing, CunningObjectSpriteCategory>(facing, category)]);
     }
 
     [RuntimeInitializeOnLoadMethod]

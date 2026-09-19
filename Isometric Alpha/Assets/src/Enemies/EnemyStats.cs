@@ -78,9 +78,12 @@ public class EnemyStats : Stats
 
     #region Sprite and GameObject
 
-    public override IAppearance getAppearance()
+    public override IAppearance appearance
     {
-        return Costume.getDefaultCostume();
+        get
+        {
+            return Costume.getDefaultCostume();
+        }
     }
 
     public override GameObject instantiateCombatSprite(List<GridCoords> coords)

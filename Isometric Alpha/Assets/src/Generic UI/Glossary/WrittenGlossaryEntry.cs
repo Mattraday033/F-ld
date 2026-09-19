@@ -75,7 +75,7 @@ public class StatGlossaryEntry: WrittenGlossaryEntry
 		panel.setObjectBeingDescribed(this);
 
 		DescriptionPanel.setText(panel.nameText, getName());
-        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(iconName));
+        DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(iconName));
         
         if(panel.iconBackgroundPanel != null)
         {

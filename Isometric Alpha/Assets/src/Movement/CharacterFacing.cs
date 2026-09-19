@@ -69,6 +69,18 @@ public class CharacterFacing
             currentFacing == Facing.SouthWest;
     }
 
+    public bool flipSprite()
+    {
+        switch(currentFacing)
+        {
+            case Facing.NorthWest:
+            case Facing.SouthEast:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     public static Facing getRandomFacing()
 	{
 		return (Facing) new System.Random().Next((int) Facing.NorthEast, (int) Facing.SouthEast+1);

@@ -24,7 +24,7 @@ public interface INonRevealableNameSource: INameSource
     }
 }
 
-public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationObject
+public class Container : MonoBehaviour, INonRevealableNameSource, IQuestActivationObject, IAppearanceSource
 {
 
     #region Chest Sprite Dictionary
@@ -165,26 +165,26 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         #endregion
     }
 
-    private static Sprite getCurrentSprite(Facing facing, ChestState chestState, ChestType type)
+    private static string getCurrentSprite(Facing facing, ChestState chestState, ChestType type)
     {
         switch(type)
         {
             case ChestType.Shelf:
-                return Helpers.loadSpriteFromResources(shelfSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
+                return shelfSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
             case ChestType.MattockRack:
-                return Helpers.loadSpriteFromResources(mattockRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
+                return mattockRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
             case ChestType.AxeRack:
-                return Helpers.loadSpriteFromResources(axeRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
+                return axeRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
             case ChestType.ShovelRack:
-                return Helpers.loadSpriteFromResources(shovelRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
+                return shovelRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
             case ChestType.SpearRack:
-                return Helpers.loadSpriteFromResources(spearRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
+                return spearRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
             case ChestType.SwordTable:
-                return Helpers.loadSpriteFromResources(swordTableSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
+                return swordTableSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
             case ChestType.PickaxeTable:
-                return Helpers.loadSpriteFromResources(pickaxeTableSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
+                return pickaxeTableSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
             default:
-                return Helpers.loadSpriteFromResources(chestSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)]);
+                return chestSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
         }
     }
 
@@ -213,12 +213,22 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
     #endregion
 
     public PolygonCollider2D mouseHoverCollider;
-    public Facing facing = Facing.NorthEast;
     public ChestState chestState = ChestState.Closed;
     public ChestType chestType = ChestType.Chest;
 
-    public SpriteRenderer spriteRenderer;
-    public SpriteOutline outline;
+    public NewAnimationManager animationManager;
+
+    public IAppearance appearance
+    {
+        get
+        {
+            return new SpriteDescription(getCurrentSprite(animationManager.characterFacing.currentFacing, chestState, chestType),
+                                            flipX: animationManager.characterFacing.flipSprite(),
+                                            large: false,
+                                            withScale: true
+                                        );
+        }
+    }
 
     private string secretDoorFlag;
 
@@ -226,7 +236,19 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
 
     public DescriptionPanel chestItemDescriptionPanel;
 
-    private QuestStepActivationScript script;
+    private QuestStepActivationScript _Script;
+    public QuestStepActivationScript script
+    {
+        get
+        {
+            return _Script;
+        }
+        set
+        {
+            this.script = script;
+            OpenChestsSharingIndex.AddListener(openWithoutActivatingScripts);
+        }
+    }
 
     public PlayerInteractionScript[] scripts;
 
@@ -239,11 +261,6 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
     public bool isRevealable()
     {
         return !GateAndChestManager.hasBeenOpened(getChestKey());
-    }
-
-    private void Awake()
-    {
-
     }
 
     private void OnDestroy()
@@ -275,13 +292,15 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         }
     }
 
-    public void populate(int index, Facing facing, ChestType type)
+    public void populate(int index, ChestType type)
     {
+        animationManager = GetComponent<NewAnimationManager>();
+        animationManager.appearanceSource = this;
+
         chestIndex = index;
 
-        this.facing = facing;
         chestType = type;
-        setMouseHoverPosition();
+        // setMouseHoverPosition();
 
         if (GateAndChestManager.hasBeenOpened(getChestKey()))
         {
@@ -295,28 +314,15 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
     
     protected virtual void setToCurrentSprite()
     {
-        spriteRenderer.sprite = getCurrentSprite(facing, chestState, chestType);
-
-        switch(facing)
-        {
-            case Facing.NorthEast:
-            case Facing.SouthWest:
-                spriteRenderer.flipX = true;
-                break;
-            case Facing.NorthWest:
-            case Facing.SouthEast:
-                spriteRenderer.flipX = false;
-                break;
-        }    
-
-        setMouseHoverPosition();
+        animationManager.playAnimation();
+        // setMouseHoverPosition();
     }
 
-    protected void setMouseHoverPosition()
-    {
-        Helpers.updatePolygonCollider(spriteRenderer, mouseHoverCollider);
-        // Helpers.updateGameObjectPosition(gameObject);
-    }
+    // protected void setMouseHoverPosition()
+    // {
+    //     Helpers.updatePolygonCollider(spriteRenderer, mouseHoverCollider);
+    //     // Helpers.updateGameObjectPosition(gameObject);
+    // }
 
     public void playerOpensChest()
     {
@@ -331,7 +337,6 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
         Inventory.addItem(ChestItemIDList.getChestItem(AreaManager.locationName, chestIndex));
 
         setSpriteToOpenFilled();
-        outline.removeOutline();
 
         GateAndChestManager.addKey(getChestKey());
 
@@ -402,12 +407,6 @@ public class Chest : MonoBehaviour, INonRevealableNameSource, IQuestActivationOb
     public bool hasBeenOpened()
     {
         return chestState != ChestState.Closed;
-    }
-
-    public void setScript(QuestStepActivationScript script)
-    {
-        this.script = script;
-        OpenChestsSharingIndex.AddListener(openWithoutActivatingScripts);
     }
 
     private void openWithoutActivatingScripts(int index)

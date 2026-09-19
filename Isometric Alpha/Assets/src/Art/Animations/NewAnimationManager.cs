@@ -7,7 +7,10 @@ using System.Linq;
 
 public interface IAppearanceSource
 {
-    public IAppearance getAppearance();
+    public IAppearance appearance
+    {
+        get;
+    }
 }
 
 public class NewAnimationManager : MonoBehaviour
@@ -93,7 +96,7 @@ public class NewAnimationManager : MonoBehaviour
     {
         get
         {
-            return _AppearanceSource.getAppearance();
+            return _AppearanceSource.appearance;
         }
     }
 
@@ -105,7 +108,7 @@ public class NewAnimationManager : MonoBehaviour
         }
     }
 
-    public void playAnimation(CharacterAnimationType animationType)
+    public void playAnimation(CharacterAnimationType animationType = CharacterAnimationType.None)
     {
         currentIdle = animationType;
 
@@ -187,8 +190,7 @@ public class NewAnimationManager : MonoBehaviour
             }
         }
 
-        rendererList.setFlipX(characterFacing.getFacing() == Facing.NorthWest || 
-                                characterFacing.getFacing() == Facing.SouthEast);
+        rendererList.setFlipX(characterFacing.flipSprite());
     }
 
     private void OnEnable()

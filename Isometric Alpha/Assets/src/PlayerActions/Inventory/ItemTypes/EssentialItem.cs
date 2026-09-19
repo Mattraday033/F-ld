@@ -48,7 +48,7 @@ public class EssentialItem : Item, IJSONConvertable
 		base.describeSelfFull(panel);
 
 		DescriptionPanel.setImageColor(panel.iconBackgroundPanel, getTypeIconBackgroundColor());
-		DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getTypeIconName()));
+		DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(getTypeIconName()));
 	}
 
 }

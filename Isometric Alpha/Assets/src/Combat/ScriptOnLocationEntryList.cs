@@ -102,8 +102,8 @@ public static class ScriptOnLocationEntryList
 public class EnteredManse2F1a : PlayerInteractionScript
 {
     private const string manse2F1AGateKey = ZoneKeyList.manseSecondFloor+LocationNameList.section1a+NPCNameList.gate;
-    private const string manse2F1cShelfIndexZeroKey = ZoneKeyList.manseSecondFloor+LocationNameList.section1c+Chest.chestKeyMarker+Constants.zeroRating;
-    private const string manse2F1cShelfIndexOneKey = ZoneKeyList.manseSecondFloor+LocationNameList.section1c+Chest.chestKeyMarker+"1";
+    private const string manse2F1cShelfIndexZeroKey = ZoneKeyList.manseSecondFloor+LocationNameList.section1c+Container.chestKeyMarker+Constants.zeroRating;
+    private const string manse2F1cShelfIndexOneKey = ZoneKeyList.manseSecondFloor+LocationNameList.section1c+Container.chestKeyMarker+"1";
 
     public override void runScript(GameObject target = null)
     {

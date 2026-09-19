@@ -82,7 +82,7 @@ public abstract class EquippableItem : Item, IJSONConvertable
 
         // if (panel.slotIconPanel != null && !(panel.slotIconPanel is null))
         // {
-        //     panel.slotIconPanel.sprite = Helpers.loadSpriteFromResources(getSlotIconName());
+        //     panel.slotIconPanel.sprite = SpriteUtil.loadSpriteFromResources(getSlotIconName());
         // }
 
         // if (panel.slotIconBackgroundPanel != null && !(panel.slotIconBackgroundPanel is null))

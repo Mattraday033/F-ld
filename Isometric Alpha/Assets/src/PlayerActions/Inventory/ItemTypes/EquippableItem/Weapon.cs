@@ -165,7 +165,7 @@ public class Weapon : EquippableItem, IJSONConvertable
 		}
 
 		DescriptionPanel.setText(panel.rangeText, getRange());
-		DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
+		DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(getIconName()));
 	}
 
 	public override void describeSelfRow(DescriptionPanel panel)
@@ -176,7 +176,7 @@ public class Weapon : EquippableItem, IJSONConvertable
 		DescriptionPanel.setText(panel.damageText, getDamageFormulaTotal());
 		DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());
 
-		DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
+		DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(getIconName()));
 
 	}
 

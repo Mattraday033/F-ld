@@ -44,7 +44,7 @@ public class WinCondition : IDescribable
 
     public Sprite getSprite()
     {
-        return Helpers.loadSpriteFromResources(iconName);
+        return SpriteUtil.loadSpriteFromResources(iconName);
     }
 
     public virtual bool playerHasWon()

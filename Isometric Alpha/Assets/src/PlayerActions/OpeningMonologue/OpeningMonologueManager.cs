@@ -319,7 +319,7 @@ public class OpeningMonologueManager : MonoBehaviour
         {
             if(i < PrefabNames.openingMonologueSlideGroups[monologueImageGroupIndex].Length)
             {
-                openingMonologueImages[i].sprite = Helpers.loadSpriteFromResources(PrefabNames.openingMonologueSlideGroups[monologueImageGroupIndex][i]);
+                openingMonologueImages[i].sprite = SpriteUtil.loadSpriteFromResources(PrefabNames.openingMonologueSlideGroups[monologueImageGroupIndex][i]);
             } else
             {
                 openingMonologueImages[i].sprite = null;

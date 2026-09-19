@@ -281,6 +281,7 @@ public static class PrefabNames
     #endregion
 
     private const string creaturesFolder = "Creatures/";
+    public const string creaturePrefab = creaturesFolder + "Creature";
     public const string playerPrefab = creaturesFolder + "PlayerOOC";
     public const string NPC = creaturesFolder + "NPC";
 

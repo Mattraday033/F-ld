@@ -222,12 +222,12 @@ public class MapPopUpWindow : PopUpWindow, IEscapable
 
 	public static Sprite getDefaultFloorImage()
 	{
-		return Helpers.loadSpriteFromResources(MapTileSpriteList.getSpriteFullPath(getInstance().currentMapFormat.defaultFloorImage));
+		return SpriteUtil.loadSpriteFromResources(MapTileSpriteList.getSpriteFullPath(getInstance().currentMapFormat.defaultFloorImage));
 	}
 
 	public static Sprite getDefaultMapIcon()
 	{
-		return Helpers.loadSpriteFromResources(MapTileSpriteList.getSpriteFullPath(getInstance().currentMapFormat.defaultMapIcon));
+		return SpriteUtil.loadSpriteFromResources(MapTileSpriteList.getSpriteFullPath(getInstance().currentMapFormat.defaultMapIcon));
 	}
 
 	public static MapPopUpWindow getInstance()

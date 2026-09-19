@@ -267,7 +267,7 @@ public static class EnemyTypeFolderPathList
                 break;
         }
 
-        return Helpers.loadSpriteFromResources(getEnemyTypeFolderPath(enemyType) + PrefabNames.headsSpriteName);
+        return SpriteUtil.loadSpriteFromResources(getEnemyTypeFolderPath(enemyType) + PrefabNames.headsSpriteName);
     }
 
 

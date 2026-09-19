@@ -575,7 +575,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public Sprite getIconSprite()
     {
-        return Helpers.loadSpriteFromResources(getIconName());
+        return SpriteUtil.loadSpriteFromResources(getIconName());
     }
 
     public virtual void highlightActorSprites()
@@ -1515,7 +1515,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         DescriptionPanel.setText(panel.timerText, getMaximumCooldownForDisplay());
         DescriptionPanel.setText(panel.useDescriptionText, getUseDescription());
 
-        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
+        DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(getIconName()));
 
         /* commented out because apparently getIconBackgroundColor() doesn't exist (was thinking fo traits
 			may implement later
@@ -1531,7 +1531,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         DescriptionPanel.setText(panel.nameText, getName());
 
-        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
+        DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(getIconName()));
 
         if(getActorStats() != null)
         {

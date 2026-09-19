@@ -47,6 +47,12 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         }
     }
 
+    
+    public virtual IAppearance appearance
+    {
+        get;
+    }
+
     public Color previousColor = Color.clear;
 
     public bool inPreviewMode = false;
@@ -229,8 +235,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             }
         }
     }
-
-    public abstract IAppearance getAppearance();
 
     private void setToDeadIdle()
     {

@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SingleSpriteChest : Chest
+public class SingleSpriteChest : Container
 {
-    public Sprite sprite;
-    public string chestName;
+    // public Sprite sprite;
+    // public string chestName;
 
-    public override string getName()
-    {
-        return chestName;
-    }
+    // public override string getName()
+    // {
+    //     return chestName;
+    // }
 
-    protected override void setToCurrentSprite()
-    {
-        spriteRenderer.sprite = sprite;
+    // protected override void setToCurrentSprite()
+    // {
+    //     spriteRenderer.sprite = sprite;
 
-        setMouseHoverPosition();
-    }
+    //     setMouseHoverPosition();
+    // }
 
-    public override SFXType getChestOpenSFX(ChestType type)
-    {
-        return SFXType.OnTransition;
-    }
+    // public override SFXType getChestOpenSFX(ChestType type)
+    // {
+    //     return SFXType.OnTransition;
+    // }
 
 }

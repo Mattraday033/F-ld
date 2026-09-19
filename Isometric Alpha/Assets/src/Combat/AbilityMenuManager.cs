@@ -512,7 +512,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
             abilityButtons[index].loadCombatAction(action);
             abilityButtons[index].enable();
-            abilityButtons[index].enable(Helpers.loadSpriteFromResources(action.getIconName()), ColorList.bubbleBackgroundColor, action);
+            abilityButtons[index].enable(SpriteUtil.loadSpriteFromResources(action.getIconName()), ColorList.bubbleBackgroundColor, action);
 
             index++;
         }
@@ -718,7 +718,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
             return;
         }
 
-        abilityButtons[abilityIndex].enable(Helpers.loadSpriteFromResources(combatAction.getIconName()), Color.clear, combatAction);
+        abilityButtons[abilityIndex].enable(SpriteUtil.loadSpriteFromResources(combatAction.getIconName()), Color.clear, combatAction);
 
         if (selectButton)
         {

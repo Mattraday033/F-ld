@@ -52,7 +52,18 @@
       "Bash(cd \"C:/Users/mattr/OneDrive/Documents/GitHub/F-ld\" && grep -rln \"NPCWithAnimationsSpawnDetails\" Docs 2>/dev/null)",
       "Bash(cd \"C:/Users/mattr/OneDrive/Documents/GitHub/F-ld\" && ls && grep -l \"NPCWithAnimationsSpawnDetails\" Docs/* 2>&1 | head)",
       "Bash(dotnet build *)",
-      "PowerShell(Add-Type -AssemblyName System.Drawing; $i=[System.Drawing.Image]::FromFile\\(\"$PWD\\\\Assets\\\\Resources\\\\UI\\\\UI Textures\\\\Blank.png\"\\); \"$\\($i.Width\\)x$\\($i.Height\\)\"; $b=New-Object System.Drawing.Bitmap $i; $b.GetPixel\\(0,0\\); $i.Dispose\\(\\))"
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $i=[System.Drawing.Image]::FromFile\\(\"$PWD\\\\Assets\\\\Resources\\\\UI\\\\UI Textures\\\\Blank.png\"\\); \"$\\($i.Width\\)x$\\($i.Height\\)\"; $b=New-Object System.Drawing.Bitmap $i; $b.GetPixel\\(0,0\\); $i.Dispose\\(\\))",
+      "Bash(xargs ls -S)",
+      "Bash(sort -t: -k3)",
+      "Bash(uniq -f1 -c)",
+      "PowerShell(Get-Process Unity -ErrorAction SilentlyContinue)",
+      "Bash(cat)",
+      "Bash(python - \"SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Front.png\" \"CratesAndBarrels/TripleBarrels.png\")",
+      "Bash(python \"C:/Users/mattr/AppData/Local/Temp/claude/c--Users-mattr-OneDrive-Documents-GitHub-F-ld-Isometric-Alpha/6715325a-005f-495e-8ebf-7967cd562003/scratchpad/pngtop.py\" \"SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Front.png\" \"CratesAndBarrels/TripleBarrels.png\")",
+      "PowerShell($paths = @\\(\"C:\\\\Program Files\\\\Unity\\\\Hub\\\\Editor\\\\2022.3.62f2\\\\Editor\\\\Data\\\\Managed\\\\UnityEngine\\\\UnityEngine.CoreModule.xml\"\\); foreach\\($p in $paths\\){ if\\(Test-Path $p\\){ Select-String -Path $p -Pattern \"SpriteChangeCallback\" -Context 0,12 } else { \"missing $p\" } })",
+      "PowerShell($p = \\(Get-Process -Id 19768 -ErrorAction SilentlyContinue\\).Path; $p; if\\($p\\){ $dir = Split-Path $p; Get-ChildItem -Path \"$dir\\\\Data\\\\Managed\" -Recurse -Filter \"UnityEngine.CoreModule.xml\" -ErrorAction SilentlyContinue | ForEach-Object { Select-String -Path $_.FullName -Pattern \"SpriteChangeCallback\" -Context 0,14 } })",
+      "Bash(grep -v \"^--$\")",
+      "Bash(git -C .. status --short)"
     ]
   }
 }

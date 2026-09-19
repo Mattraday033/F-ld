@@ -164,7 +164,7 @@ public abstract class UsableItem : Item, IJSONConvertable
         DescriptionPanel.setText(panel.useDescriptionText, getUseDescription());
 
         DescriptionPanel.setImageColor(panel.iconBackgroundPanel, Color.black);
-        DescriptionPanel.setImage(panel.iconPanel, Helpers.loadSpriteFromResources(getIconName()));
+        DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(getIconName()));
     }
 
     public override string getTypeIconName()

@@ -58,8 +58,8 @@ public class GameplayOptionManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     private static void init()
     {
-        boxOutlineEmpty = Helpers.loadSpriteFromResources(IconList.settingBoxEmpty);
-        boxOutlineFull = Helpers.loadSpriteFromResources(IconList.settingBoxFull);
+        boxOutlineEmpty = SpriteUtil.loadSpriteFromResources(IconList.settingBoxEmpty);
+        boxOutlineFull = SpriteUtil.loadSpriteFromResources(IconList.settingBoxFull);
     }
 
 }

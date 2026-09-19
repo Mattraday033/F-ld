@@ -203,7 +203,7 @@ public static class SpawnInfoManager
 
     public static GameObject spawnInteractable(OOCSpawnDetails details)
     {
-        GameObject interactable = GameObject.Instantiate(Resources.Load<GameObject>(details.getPrefabName()), details.getParent());
+        GameObject interactable = GameObject.Instantiate(Resources.Load<GameObject>(details.prefabName), details.getParent());
 
         Canvas.ForceUpdateCanvases();
 
@@ -303,7 +303,7 @@ public static class SpawnInfoManager
 
     public static Transform spawnMonster(MonsterSpawnDetails details, int index)
     {
-        GameObject monsterGameObject = GameObject.Instantiate(Resources.Load<GameObject>(details.getPrefabName()), details.getParent());
+        GameObject monsterGameObject = GameObject.Instantiate(Resources.Load<GameObject>(details.prefabName), details.getParent());
         EnemyMovement monsterMovement = monsterGameObject.GetComponent<EnemyMovement>();
 
         monsterMovement.setMonsterPackIndex(index);
