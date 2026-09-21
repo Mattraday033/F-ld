@@ -27,25 +27,25 @@ public class RepositionAbility : Ability, IJSONConvertable
             return;
         }
 
-        CombatAnimationManager.getInstance().StartCoroutine(waitForAttackAnimationToStop(getActorStats().animationManager, combatantToBeMoved));
+        CombatAnimationManager.getInstance().StartCoroutine(waitForAttackAnimationToStop(/*getActorStats().animationManager,*/ combatantToBeMoved));
     }
 
-    public virtual IEnumerator waitForAttackAnimationToStop(AnimationManager animationManager, Stats combatantToBeMoved)
+    public virtual IEnumerator waitForAttackAnimationToStop(/*AnimationManager animationManager,*/ Stats combatantToBeMoved)
     {
 
-        while(CombatAnimationManager.trackerBeingTracked(animationManager))
-        {
+        // while(CombatAnimationManager.trackerBeingTracked(animationManager))
+        // {
             yield return null;
-        }
+        // }
 
-        combatantToBeMoved.moveTo(new List<GridCoords> { getDestinationCoords() });
+        // combatantToBeMoved.moveTo(new List<GridCoords> { getDestinationCoords() });
 
-        applyTrait(combatantToBeMoved);
+        // applyTrait(combatantToBeMoved);
 
-        if (!inPreviewMode && actorIsAlly())
-        {
-            Exuberances.addExuberance(MultiStackProcType.BlueShield, singleExuberanceStack);
-        }
+        // if (!inPreviewMode && actorIsAlly())
+        // {
+        //     Exuberances.addExuberance(MultiStackProcType.BlueShield, singleExuberanceStack);
+        // }
     }
 
     public override void queueingAction()

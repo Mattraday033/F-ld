@@ -348,11 +348,11 @@ public class PlayerObject : MonoBehaviour
         return instance.worldMapPopUpButton;
     }
 
-    public static AnimationManager getAnimationManager()
-    {
-        return null;
-        // return instance.animationManager;
-    }
+    // public static AnimationManager getAnimationManager()
+    // {
+    //     return null;
+    //     // return instance.animationManager;
+    // }
 
     public static void playLevelUpEffect()
     {
@@ -376,18 +376,18 @@ public class PlayerObject : MonoBehaviour
 
         AudioManager.playLvlUpSFX();
 
-        EffectAnimationManager frontEffect = EffectAnimationManager.instantiatePrefab(instance.transform);
-        frontEffect.transform.position = instance.transform.position;
-        frontEffect.setAnimations(EffectAnimationType.FrontLvlUp);
+        // EffectAnimationManager frontEffect = EffectAnimationManager.instantiatePrefab(instance.transform);
+        // frontEffect.transform.position = instance.transform.position;
+        // frontEffect.setAnimations(EffectAnimationType.FrontLvlUp);
 
-        EffectAnimationManager backEffect = EffectAnimationManager.instantiatePrefab(instance.transform);
-        backEffect.transform.position = instance.transform.position;
-        backEffect.setAnimations(EffectAnimationType.BackLvlUp);
+        // EffectAnimationManager backEffect = EffectAnimationManager.instantiatePrefab(instance.transform);
+        // backEffect.transform.position = instance.transform.position;
+        // backEffect.setAnimations(EffectAnimationType.BackLvlUp);
 
-        while (frontEffect != null || backEffect != null)
-        {
-            yield return null;
-        }
+        // while (frontEffect != null || backEffect != null)
+        // {
+        //     yield return null;
+        // }
     }
 
     public static void playDeathAnimation()

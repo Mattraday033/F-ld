@@ -458,15 +458,15 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         return allTraitTypesGlossaryEntries;
     }
 
-    public virtual void setIdleAnimationOnApplication(AnimationManager animationManager)
-    {
-        //empty on purpose
-    }
+    // public virtual void setIdleAnimationOnApplication(AnimationManager animationManager)
+    // {
+    //     //empty on purpose
+    // }
 
-    public virtual void setIdleAnimationOnRemoval(AnimationManager animationManager)
-    {
-        //empty on purpose
-    }
+    // public virtual void setIdleAnimationOnRemoval(AnimationManager animationManager)
+    // {
+    //     //empty on purpose
+    // }
 
     //ICloneable methods
     public object Clone()

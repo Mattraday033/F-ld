@@ -33,7 +33,7 @@ public static class Helpers
     {
         List<Collider2D> intersectingColliders = new List<Collider2D>();
 
-        if (currentCollider.OverlapCollider(filter, intersectingColliders) > 0)
+        if (currentCollider.Overlap(filter, intersectingColliders) > 0)
         {
             return intersectingColliders[0];
         }
@@ -50,7 +50,7 @@ public static class Helpers
     {
         List<Collider2D> intersectingColliders = new List<Collider2D>();
 
-        currentCollider.OverlapCollider(filter, intersectingColliders);
+        currentCollider.Overlap(filter, intersectingColliders);
 
         return intersectingColliders.ToArray();
     }
@@ -59,7 +59,7 @@ public static class Helpers
     {
         List<Collider2D> intersectingColliders = new List<Collider2D>();
 
-        return currentCollider.OverlapCollider(emptyFilter.NoFilter(), intersectingColliders) > 0;
+        return currentCollider.Overlap(emptyFilter.NoFilter(), intersectingColliders) > 0;
     }
 
     public static bool hasCollision(Collider2D currentCollider, LayerMask layerMask)
@@ -97,7 +97,7 @@ public static class Helpers
             return false;
         }
 
-        return currentCollider.OverlapCollider(filter, intersectingColliders) > 0;
+        return currentCollider.Overlap(filter, intersectingColliders) > 0;
     }
 
     //updates colliders attached to a transform's .gameObject by setting it to inactive and then reactivating it.

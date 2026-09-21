@@ -218,9 +218,9 @@ public class TransitionSpace : MonoBehaviour, ICounter
             indicatorSpriteRenderer.enabled = SecretDoorFlags.secretDoorHasBeenDiscovered(transition.indicatorFlag);
         }
 
-        EffectAnimationManager effect = indicator.GetComponent<EffectAnimationManager>();
-        effect.loops = true;
-        effect.setAnimations(EffectAnimationType.TransitionIndicator);
+        // EffectAnimationManager effect = indicator.GetComponent<EffectAnimationManager>();
+        // effect.loops = true;
+        // effect.setAnimations(EffectAnimationType.TransitionIndicator);
     }
 
     private void handleTransitionVisibilitySettingChange()

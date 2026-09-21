@@ -15,8 +15,8 @@ public class SkillIndicator : MonoBehaviour
     public SpriteRenderer frontSelector;
     public SpriteRenderer backSelector;
 
-    public EffectAnimationManager frontSelectorTwo;
-    public EffectAnimationManager backSelectorTwo;
+    // public EffectAnimationManager frontSelectorTwo;
+    // public EffectAnimationManager backSelectorTwo;
 
     public GameObject tileMapGameObject;
 
@@ -30,11 +30,11 @@ public class SkillIndicator : MonoBehaviour
 
     private void Awake()
     {        
-        frontSelectorTwo.loops = true;
-        frontSelectorTwo.setAnimations(EffectAnimationType.FrontSelector2);
+        // frontSelectorTwo.loops = true;
+        // frontSelectorTwo.setAnimations(EffectAnimationType.FrontSelector2);
 
-        backSelectorTwo.loops = true;
-        backSelectorTwo.setAnimations(EffectAnimationType.BackSelector2);
+        // backSelectorTwo.loops = true;
+        // backSelectorTwo.setAnimations(EffectAnimationType.BackSelector2);
 
         mouseHoverCollider.enabled = PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence;
     }
@@ -100,8 +100,8 @@ public class SkillIndicator : MonoBehaviour
         backSelector.color = Color.clear;
         frontSelector.color = Color.clear;
 
-        backSelectorTwo.spriteRenderer.color = color;
-        frontSelectorTwo.spriteRenderer.color = color;
+        // backSelectorTwo.spriteRenderer.color = color;
+        // frontSelectorTwo.spriteRenderer.color = color;
     }
 
     public void setToNoTargetFoundSelector()
@@ -109,8 +109,8 @@ public class SkillIndicator : MonoBehaviour
         setColorWithTransparency(backSelector);
         setColorWithTransparency(frontSelector);
 
-        backSelectorTwo.spriteRenderer.color = Color.clear;
-        frontSelectorTwo.spriteRenderer.color = Color.clear;
+        // backSelectorTwo.spriteRenderer.color = Color.clear;
+        // frontSelectorTwo.spriteRenderer.color = Color.clear;
     }
 
     public void OnMouseEnter()
@@ -121,8 +121,8 @@ public class SkillIndicator : MonoBehaviour
 
             setColor(Color.green);
             setToTargetFoundSelector();
-            setColorWithTransparency(backSelectorTwo.spriteRenderer);
-            setColorWithTransparency(frontSelectorTwo.spriteRenderer);
+            // setColorWithTransparency(backSelectorTwo.spriteRenderer);
+            // setColorWithTransparency(frontSelectorTwo.spriteRenderer);
         }
     }
 

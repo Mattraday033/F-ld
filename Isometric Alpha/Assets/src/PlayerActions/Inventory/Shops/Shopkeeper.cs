@@ -48,7 +48,7 @@ public class Shopkeeper : OverHeadIconComponent, ISkillTarget
         }
         else
         {
-            shopkeeperInventoryKey = gameObject.GetComponent<DialogueTrigger>().getDialogue().getName();
+            shopkeeperInventoryKey = gameObject.GetComponent<DialogueTrigger>().dialogue.getName();
 
             return shopkeeperInventoryKey;
         }

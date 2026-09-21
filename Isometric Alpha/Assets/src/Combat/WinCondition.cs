@@ -236,10 +236,10 @@ public class EndOfCombatCutSceneScript
             yield return new WaitForSeconds(.5f);
         }
         
-        foreach (string spriteName in cutSceneSpriteNames)
-        {
-            AnimationManager.PlayAnimationByNPCName.Invoke(MonsterNameList.puppetedPrefix + spriteName, CharacterAnimationType.Attack_Normal_Front);
-        }
+        // foreach (string spriteName in cutSceneSpriteNames)
+        // {
+        //     AnimationManager.PlayAnimationByNPCName.Invoke(MonsterNameList.puppetedPrefix + spriteName, CharacterAnimationType.Attack_Normal_Front);
+        // }
 
         playBluntEffectOnAllAllies();
 

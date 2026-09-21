@@ -17,8 +17,8 @@ public class SkillIndicatorState
         frontSelectorColor = indicator.frontSelector.color;
         backSelectorColor = indicator.backSelector.color;
 
-        frontSelectorTwoColor = indicator.frontSelectorTwo.spriteRenderer.color;
-        backSelectorTwoColor = indicator.backSelectorTwo.spriteRenderer.color;
+        // frontSelectorTwoColor = indicator.frontSelectorTwo.spriteRenderer.color;
+        // backSelectorTwoColor = indicator.backSelectorTwo.spriteRenderer.color;
     }
 
     public void restore(SkillIndicator indicator)
@@ -28,7 +28,7 @@ public class SkillIndicatorState
         indicator.frontSelector.color = frontSelectorColor;
         indicator.backSelector.color = backSelectorColor;
 
-        indicator.frontSelectorTwo.spriteRenderer.color = frontSelectorTwoColor;
-        indicator.backSelectorTwo.spriteRenderer.color = backSelectorTwoColor;
+        // indicator.frontSelectorTwo.spriteRenderer.color = frontSelectorTwoColor;
+        // indicator.backSelectorTwo.spriteRenderer.color = backSelectorTwoColor;
     }
 }

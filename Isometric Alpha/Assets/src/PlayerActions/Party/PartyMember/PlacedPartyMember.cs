@@ -11,7 +11,7 @@ public class PlacedPartyMember : MonoBehaviour
     public List<MovementTracker> movementTrackers = new List<MovementTracker>();
 
     public SpriteRenderer sprite;
-    public AnimationManager animationManager;
+    // public AnimationManager animationManager;
     private PartyMember _PartyMember;
     public PartyMember partyMember
     {
@@ -22,8 +22,8 @@ public class PlacedPartyMember : MonoBehaviour
         set
         {
             _PartyMember = value;
-            animationManager.setAnimations(_PartyMember.getName());
-            animationManager.setFacing(State.playerFacing.getFacing());
+            // animationManager.setAnimations(_PartyMember.getName());
+            // animationManager.setFacing(State.playerFacing.getFacing());
         }
     }
     public Vector3Int currentCell;
@@ -86,12 +86,12 @@ public class PlacedPartyMember : MonoBehaviour
     private void hideSelf()
     {
         sprite.color = Color.clear;
-        animationManager.disableExtras();
+        // animationManager.disableExtras();
     }
 
     private void revealSelf()
     {
         sprite.color = Color.white;    
-        animationManager.enableExtras();    
+        // animationManager.enableExtras();
     }
 }

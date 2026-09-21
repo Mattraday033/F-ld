@@ -138,6 +138,19 @@ public static class EnumUtil
         }
 	}
 
+    public static bool withScaleByChestType(this ChestType type)
+    {
+        switch(type)
+        {
+            case ChestType.Shelf:
+                // return true;
+                return false;
+            default:
+                // return false;
+                return true;
+        }
+    }
+
     private static IEnumerable<T> getValues<T>() {
         return (T[]) Enum.GetValues(typeof(T));
     }

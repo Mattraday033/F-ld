@@ -34,6 +34,7 @@ public static class LayerAndTagManager
     public const string mapSortingLayerName = "Map";
     public const string tutorialSequenceWindowSortingLayerName = "Tutorial Sequence Window";
 
+    public const string untaggedTag = "Untagged";
 	public const string playerTag = "Player";
 	public const string enemyTag = "Enemy";
 	public const string npcTag = "NPC";

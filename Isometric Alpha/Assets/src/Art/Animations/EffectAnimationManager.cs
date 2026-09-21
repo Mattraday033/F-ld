@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using Animancer;
-using Animancer.FSM;
+// using Animancer;
+// using Animancer.FSM;
 
 public enum EffectAnimationType
 {
@@ -59,59 +59,59 @@ public class EffectAnimationManager : AnimationManager
 
     public void setAnimations(EffectAnimationType effectType)
     {
-        setAnimations(effectType.ToString());
+        // setAnimations(effectType.ToString());
     }
 
-    public override void setAnimations(string effectType)
-    {
-        string folderPath = PrefabNames.abilityEffectFolderPath + effectType;
+    // public override void setAnimations(string effectType)
+    // {
+        // string folderPath = PrefabNames.abilityEffectFolderPath + effectType;
 
-        if(Enum.TryParse(effectType, ignoreCase: true, out EffectAnimationType animationType))
-        {
-            type = animationType;
-        }
+        // if(Enum.TryParse(effectType, ignoreCase: true, out EffectAnimationType animationType))
+        // {
+        //     type = animationType;
+        // }
 
-        setSpriteRenderer();
-        determineOutline();
+        // setSpriteRenderer();
+        // determineOutline();
 
-        animationClip = Resources.Load<AnimationClip>(folderPath);
+        // animationClip = Resources.Load<AnimationClip>(folderPath);
 
-        spawnDamageNumbersTime = animationClip.length * (3f/4f);
+        // spawnDamageNumbersTime = animationClip.length * (3f/4f);
 
-        if(loops)
-        {
-            createClipTransitionThenLoop(animationClip);
-        } else
-        {
-            animancer.Play(createClipTransitionThenDelete(animationClip));
-        }
+        // if(loops)
+        // {
+        //     createClipTransitionThenLoop(animationClip);
+        // } else
+        // {
+        //     animancer.Play(createClipTransitionThenDelete(animationClip));
+        // }
 
-        if(playSFX)
-        {
-            if(waitBeforeSFX)
-            {
-                StartCoroutine(waitThenPlaySFX());
-            } else
-            {
-                AudioManager.playEffectAnimationSFX(type);
-            }
-        }
-    }
+        // if(playSFX)
+        // {
+        //     if(waitBeforeSFX)
+        //     {
+        //         StartCoroutine(waitThenPlaySFX());
+        //     } else
+        //     {
+        //         AudioManager.playEffectAnimationSFX(type);
+        //     }
+        // }
+    // }
 
     private void setSpriteRenderer()
     {
         switch(type)
         {
             case EffectAnimationType.FrontLvlUp:
-                spriteRenderer.sortingLayerName = LayerAndTagManager.firstSortingLayerName;
-                spriteRenderer.sortingOrder = Constants.indexOne;
-                spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+                // spriteRenderer.sortingLayerName = LayerAndTagManager.firstSortingLayerName;
+                // spriteRenderer.sortingOrder = Constants.indexOne;
+                // spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
                 return;
             case EffectAnimationType.BackLvlUp:
-                spriteRenderer.sortingLayerName = LayerAndTagManager.firstSortingLayerName;
-                spriteRenderer.sortingOrder = Constants.indexOne;
-                spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
-                spriteRenderer.transform.localPosition = new Vector3(0f, .15f, 0f);
+                // spriteRenderer.sortingLayerName = LayerAndTagManager.firstSortingLayerName;
+                // spriteRenderer.sortingOrder = Constants.indexOne;
+                // spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
+                // spriteRenderer.transform.localPosition = new Vector3(0f, .15f, 0f);
                 return;
         }
     }
@@ -130,7 +130,7 @@ public class EffectAnimationManager : AnimationManager
             case EffectAnimationType.Confused:
                 return;
             default:
-                spriteRenderer.material = Resources.Load<Material>(PrefabNames.outlineMaterial);
+                // spriteRenderer.material = Resources.Load<Material>(PrefabNames.outlineMaterial);
                 return;
         }
     }
@@ -180,63 +180,63 @@ public class EffectAnimationManager : AnimationManager
         }
     }
 
-    private ClipTransition createClipTransitionThenDelete(AnimationClip clip)
-    {
-        ClipTransition clipTransition = new ClipTransition();
-        clipTransition.Clip = clip;
-        clipTransition.Events.OnEnd = () => removeAnimation();
+    // private ClipTransition createClipTransitionThenDelete(AnimationClip clip)
+    // {
+    //     ClipTransition clipTransition = new ClipTransition();
+    //     clipTransition.Clip = clip;
+    //     clipTransition.Events.OnEnd = () => removeAnimation();
 
-        if(damage > 0)
-        {
-            StartCoroutine(handleDamageNumbersAndWoundedAnim());
-        }
+    //     if(damage > 0)
+    //     {
+    //         StartCoroutine(handleDamageNumbersAndWoundedAnim());
+    //     }
 
-        return clipTransition;
-    }
+    //     return clipTransition;
+    // }
 
-    private void createClipTransitionThenLoop(AnimationClip clip)
-    {
-        ClipTransition clipTransition = new ClipTransition();
-        clipTransition.Clip = clip;
-        clipTransition.Events.OnEnd = () => createClipTransitionThenLoop(clip);
+    // private void createClipTransitionThenLoop(AnimationClip clip)
+    // {
+    //     ClipTransition clipTransition = new ClipTransition();
+    //     clipTransition.Clip = clip;
+    //     clipTransition.Events.OnEnd = () => createClipTransitionThenLoop(clip);
 
-        animancer.Play(clipTransition);
-    }
+    //     animancer.Play(clipTransition);
+    // }
 
 
-    public static EffectAnimationManager instantiatePrefab(Transform parent = null)
-    {
-        return Instantiate(Resources.Load<GameObject>(PrefabNames.effect), parent).GetComponent<EffectAnimationManager>();
-    }
+    // public static EffectAnimationManager instantiatePrefab(Transform parent = null)
+    // {
+    //     return Instantiate(Resources.Load<GameObject>(PrefabNames.effect), parent).GetComponent<EffectAnimationManager>();
+    // }
 
-    public override bool spriteSetByHeartBeat()
-    {
-        return false;
-    }
+    // public override bool spriteSetByHeartBeat()
+    // {
+    //     return false;
+    // }
 
-    public override void removeAnimation()
-    {
-        DestroyImmediate(gameObject);
+    // public override void removeAnimation()
+    // {
+    //     DestroyImmediate(gameObject);
 
-        base.removeAnimation();
-    }
+    //     base.removeAnimation();
+    // }
 
-    private void destroyEffectOfType(EffectAnimationType type)
-    {
-        if(this.type == type)
-        {
-            Destroy(gameObject);
-        }
-    }
+    // private void destroyEffectOfType(EffectAnimationType type)
+    // {
+    //     if(this.type == type)
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
 
-    private void OnEnable()
-    {
-        DestroyAllEffectsOfType.AddListener(destroyEffectOfType);
-    }
+    // private void OnEnable()
+    // {
+    //     DestroyAllEffectsOfType.AddListener(destroyEffectOfType);
+    // }
 
-    private void OnDisable()
-    {
-        DestroyAllEffectsOfType.RemoveListener(destroyEffectOfType);
-    }
+    // private void OnDisable()
+    // {
+    //     DestroyAllEffectsOfType.RemoveListener(destroyEffectOfType);
+    // }
 
 }

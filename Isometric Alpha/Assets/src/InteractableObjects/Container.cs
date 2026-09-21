@@ -223,9 +223,7 @@ public class Container : MonoBehaviour, INonRevealableNameSource, IQuestActivati
         get
         {
             return new SpriteDescription(getCurrentSprite(animationManager.characterFacing.currentFacing, chestState, chestType),
-                                            flipX: animationManager.characterFacing.flipSprite(),
-                                            large: false,
-                                            withScale: true
+                                            large: false
                                         );
         }
     }
@@ -245,7 +243,7 @@ public class Container : MonoBehaviour, INonRevealableNameSource, IQuestActivati
         }
         set
         {
-            this.script = script;
+            _Script = value;
             OpenChestsSharingIndex.AddListener(openWithoutActivatingScripts);
         }
     }
@@ -314,7 +312,7 @@ public class Container : MonoBehaviour, INonRevealableNameSource, IQuestActivati
     
     protected virtual void setToCurrentSprite()
     {
-        animationManager.playAnimation();
+        animationManager.handleMovementAnimation();
         // setMouseHoverPosition();
     }
 

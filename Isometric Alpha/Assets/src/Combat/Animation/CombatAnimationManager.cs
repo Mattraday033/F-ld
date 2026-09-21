@@ -143,21 +143,21 @@ public class CombatAnimationManager : MonoBehaviour
             return;
         }
 
-        EffectAnimationManager currentEffect = EffectAnimationManager.instantiatePrefab();
+        // EffectAnimationManager currentEffect = EffectAnimationManager.instantiatePrefab();
 
-        currentEffect.damage = damageNumber;
-        currentEffect.crit = crit;
-        currentEffect.healsTarget = healsTarget;
+        // currentEffect.damage = damageNumber;
+        // currentEffect.crit = crit;
+        // currentEffect.healsTarget = healsTarget;
 
-        currentEffect.targetCoords = targetCoords;
+        // currentEffect.targetCoords = targetCoords;
 
-        currentEffect.transform.position = CombatGrid.getEffectPositionAt(targetCoords);
+        // currentEffect.transform.position = CombatGrid.getEffectPositionAt(targetCoords);
 
-        AnimationClip clip = Resources.Load<AnimationClip>(PrefabNames.abilityEffectFolderPath + animationType);
-        float effectDuration = clip != null ? clip.length : 2f;
-        trackAnimation(currentEffect.key, currentEffect, effectDuration);
+        // AnimationClip clip = Resources.Load<AnimationClip>(PrefabNames.abilityEffectFolderPath + animationType);
+        // float effectDuration = clip != null ? clip.length : 2f;
+        // trackAnimation(currentEffect.key, currentEffect, effectDuration);
 
-        currentEffect.setAnimations(animationType);
+        // currentEffect.setAnimations(animationType);
     }
 
     public static Projectile loadProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)

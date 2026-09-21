@@ -134,10 +134,10 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             healthBarManager.hide();
         }
         
-        if(CombatStateManager.whoseTurn == WhoseTurn.Start)
-        {
-            animationManager.setCurrentIdle(CharacterAnimationType.Death);
-        }
+        // if(CombatStateManager.whoseTurn == WhoseTurn.Start)
+        // {
+        //     animationManager.setCurrentIdle(CharacterAnimationType.Death);
+        // }
         
         if(CombatStateManager.whoseTurn != WhoseTurn.Start)
         {
@@ -148,8 +148,8 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     public virtual void bringBackFromDeath()
     {
         healthBarManager.show();
-        animationManager.setToDefaultIdle();
-        animationManager.playSpawnAnimation();
+        // animationManager.setToDefaultIdle();
+        // animationManager.playSpawnAnimation();
     }
 
     public virtual GridCoords getPositionToHit(Selector selector, int skips)
@@ -216,10 +216,10 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
         rendererList = list.rendererList;
 
-        animationManager = list.animationManager;
-        animationManager.linkedStats = this;
-        animationManager.healthBarManager = healthBarManager;
-        animationManager.setAnimations(getName() + getGenderMarker() + getAnimationSuffixes());
+        // animationManager = list.animationManager;
+        // animationManager.linkedStats = this;
+        // animationManager.healthBarManager = healthBarManager;
+        // animationManager.setAnimations(getName() + getGenderMarker() + getAnimationSuffixes());
 
         tutorialTarget = list.tutorialTarget;
         tutorialTarget.tutorialHash = getTutorialTargetHash();
@@ -227,13 +227,14 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         if(isDead())
         {
             setToDeadIdle();
-        } else
-        {
-            foreach(Trait trait in traitContainer)
-            {
-                trait.setIdleAnimationOnApplication(animationManager);
-            }
         }
+        // else
+        // {
+        //     foreach(Trait trait in traitContainer)
+        //     {
+        //         trait.setIdleAnimationOnApplication(animationManager);
+        //     }
+        // }
     }
 
     private void setToDeadIdle()
@@ -243,13 +244,13 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             return;
         }
 
-        if(CombatGrid.positionIsOnAlliedSide(positions[0]))
-        {
-            animationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
-        } else if(CombatGrid.positionIsOnEnemySide(positions[0]))
-        {
-            animationManager.setCurrentIdle(CharacterAnimationType.Death_Front);
-        }
+        // if(CombatGrid.positionIsOnAlliedSide(positions[0]))
+        // {
+        //     animationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
+        // } else if(CombatGrid.positionIsOnEnemySide(positions[0]))
+        // {
+        //     animationManager.setCurrentIdle(CharacterAnimationType.Death_Front);
+        // }
     }
 
     public virtual void spawningActions()
@@ -298,7 +299,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public void playSpawnAnimation()
     {
-        animationManager.playSpawnAnimation();
+        // animationManager.playSpawnAnimation();
     }
 
     public List<Vector3> getAllWorldPositions()
@@ -416,43 +417,44 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     #endregion
 
     #region AnimationManager
-    public AnimationManager animationManager;
+    // public AnimationManager animationManager;
 
     public virtual void playAnimationOnDamage()
     {
         if (isDead())
         {
-            animationManager.playDeathAnimation();
+            // animationManager.playDeathAnimation();
             healthBarManager.hide();
-        } else
-        {
-            animationManager.playWoundedAnimation();
         }
+        // else
+        // {
+        //     animationManager.playWoundedAnimation();
+        // }
     }
 
     public void playAttackAnimation()
     {
-        if(animationManager == null)
-        {
-            return;
-        }
+        // if(animationManager == null)
+        // {
+        //     return;
+        // }
 
-        animationManager.playAttackAnimation();
+        // animationManager.playAttackAnimation();
     }
 
     public void playAttackIntoFrontIdleAnimation()
     {
-        animationManager.playAttackIntoFrontIdleAnimation();
+        // animationManager.playAttackIntoFrontIdleAnimation();
     }
 
     public void playAttackIntoSecondaryIdleAnimation()
     {
-        animationManager.playAttackIntoSecondaryIdleAnimation();
+        // animationManager.playAttackIntoSecondaryIdleAnimation();
     }
 
     public void playSpecialAttackAnimation()
     {
-        animationManager.playSpecialAttackAnimation();
+        // animationManager.playSpecialAttackAnimation();
     }
 
     #endregion
@@ -1023,10 +1025,10 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         newTrait.onApplication();
         newTrait.setTraitHolder(this);
 
-        if (CombatStateManager.inCombat)
-        {
-            newTrait.setIdleAnimationOnApplication(animationManager);
-        }
+        // if (CombatStateManager.inCombat)
+        // {
+        //     newTrait.setIdleAnimationOnApplication(animationManager);
+        // }
 
         if(!newTrait.isHiddenTrait())
         {
@@ -1096,10 +1098,10 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     {
         if(traitContainer.removeTrait(traitToRemove))
         {
-            if(!isDead())
-            {
-                traitToRemove.setIdleAnimationOnRemoval(animationManager);
-            }
+            // if(!isDead())
+            // {
+            //     traitToRemove.setIdleAnimationOnRemoval(animationManager);
+            // }
             
             Trait.OnTraitRemoval.Invoke(traitToRemove);
         }
@@ -1256,10 +1258,10 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public void disablePolygonCollider()
     {
-        if(animationManager != null && animationManager.polygonCollider2D != null)
-        {
-            animationManager.polygonCollider2D.enabled = false;
-        }
+        // if(animationManager != null && animationManager.polygonCollider2D != null)
+        // {
+        //     animationManager.polygonCollider2D.enabled = false;
+        // }
     }
 
     public virtual string getGenderMarker()

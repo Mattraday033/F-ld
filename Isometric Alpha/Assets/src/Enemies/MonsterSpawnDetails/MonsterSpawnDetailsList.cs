@@ -111,12 +111,12 @@ public static class MonsterSpawnDetailsList
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-7, -4), movementType: MonsterMovementType.Chases));
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(4, -5), movementType: MonsterMovementType.Chases));
 
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, 4), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, 3), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(5, 3), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(5, 2), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(6, 2), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(4, 2), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, 4), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, 3), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(5, 3), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(5, 2), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(6, 2), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(4, 2), appearance: SpriteDescriptionList.pushableCrate));
 
 
         monsterSpawnDetailsDict.Add(LocationNameList.guardHouseTopFloor, list);
@@ -216,8 +216,8 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, -1), PrefabNames.pushableCrate, TutorialSequenceList.tutorialCrateTargetHash));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(1, 2), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, -1), tutorialTargetHash: TutorialSequenceList.tutorialCrateTargetHash, appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(1, 2), appearance: SpriteDescriptionList.pushableCrate));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1a, list);
 
@@ -272,9 +272,9 @@ public static class MonsterSpawnDetailsList
         // list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(0, 0), Facing.SouthEast));
         // list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-4, 0), Facing.SouthWest));
 
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, -10), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-1, -10), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, -10), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, -10), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-1, -10), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, -10), appearance: SpriteDescriptionList.pushableCrate));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3b, list);
 
@@ -357,8 +357,8 @@ public static class MonsterSpawnDetailsList
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(1, 2)));
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(5, 3)));
 
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(9, 3), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, -2), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(9, 3), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, -2), appearance: SpriteDescriptionList.pushableCrate));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section2b, list);
 
@@ -390,7 +390,7 @@ public static class MonsterSpawnDetailsList
 
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, 0), Facing.SouthWest, MonsterMovementType.Chases));
 
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, 13), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, 13), appearance: SpriteDescriptionList.pushableCrate));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section4b, list);
 
@@ -416,12 +416,12 @@ public static class MonsterSpawnDetailsList
         // list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-16, 9)));
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-14, -4)));
         
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, 13), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-7, 12), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, 11), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, 10), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, 9), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-4, 12), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, 13), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-7, 12), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, 11), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, 10), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, 9), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-4, 12), appearance: SpriteDescriptionList.pushableCrate));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section6a, list);
 
@@ -436,11 +436,11 @@ public static class MonsterSpawnDetailsList
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-5, -13), Facing.NorthEast, MonsterMovementType.Chases));
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.worms, new Vector3Int(-16, -2), Facing.SouthEast, MonsterMovementType.Chases));
         
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(8, 0), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(6, 2), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(6, -2), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(4, -1), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(3, -3), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(8, 0), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(6, 2), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(6, -2), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(4, -1), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(3, -3), appearance: SpriteDescriptionList.pushableCrate));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section7, list);
 
@@ -502,7 +502,7 @@ public static class MonsterSpawnDetailsList
 
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(4, 0), facing: Facing.SouthWest, movementType: MonsterMovementType.Chases));
 
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(1, 0), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(1, 0), appearance: SpriteDescriptionList.pushableCrate));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3a, list);
 
@@ -518,8 +518,8 @@ public static class MonsterSpawnDetailsList
 
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(1, -2), Facing.SouthEast, movementType: MonsterMovementType.Chases));
 
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, -3), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-3, -2), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(2, -3), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-3, -2), appearance: SpriteDescriptionList.pushableCrate));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2a, list);
 
@@ -532,7 +532,7 @@ public static class MonsterSpawnDetailsList
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-1, -3), Facing.SouthWest, movementType: MonsterMovementType.Stationary));
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(2, 2), Facing.NorthWest, movementType: MonsterMovementType.Chases));
 
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, -3), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, -3), appearance: SpriteDescriptionList.pushableCrate));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, list);
 
@@ -562,25 +562,25 @@ public static class MonsterSpawnDetailsList
 
         list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.lovashi, new Vector3Int(-5, -12), Facing.NorthWest, movementType: MonsterMovementType.Chases));
 
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, -10), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-2, -6), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, -10), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-2, -6), appearance: SpriteDescriptionList.pushableCrate));
 
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, -5), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, -5), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, -4), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, -3), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-4, -2), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, -2), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, -1), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, -1), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-7, -1), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-4, 0), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, 0), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, 0), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-8, 0), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-7, 1), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, 2), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-7, 2), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, -5), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, -5), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, -4), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, -3), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-4, -2), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, -2), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, -1), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, -1), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-7, -1), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-4, 0), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-5, 0), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, 0), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-8, 0), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-7, 1), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-6, 2), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-7, 2), appearance: SpriteDescriptionList.pushableCrate));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, list);
 
@@ -614,10 +614,10 @@ public static class MonsterSpawnDetailsList
 
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(15, -8), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-4, 14), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-7, -8), PrefabNames.pushableCrate));
-        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(14, 11), PrefabNames.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(15, -8), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-4, 14), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(-7, -8), appearance: SpriteDescriptionList.pushableCrate));
+        list.Add(new MovableObjectSpawnDetails(EnemyCategoryNameList.pushableCrate, new Vector3Int(14, 11), appearance: SpriteDescriptionList.pushableCrate));
 
         monsterSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section2c, list);
 

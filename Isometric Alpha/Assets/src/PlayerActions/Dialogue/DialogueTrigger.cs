@@ -39,20 +39,44 @@ public static class NameSourceExtensions
 
 public interface IDialogueParticipant: INameSource
 {
-    public Dialogue getDialogue();
+    public Dialogue dialogue { get; }
+}
+
+public interface IDialogueSource
+{
+    public Dialogue dialogue { get; }
 }
 
 public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 {
 
-    public Dialogue dialogue;
+    public string npcName = "";
+
+    private IDialogueSource _DialogueSource;
+    public IDialogueSource dialogueSource
+    {
+        set
+        {
+           _DialogueSource = value; 
+        }
+    }
+    public Dialogue dialogue { get { 
+                                        if(_DialogueSource != null)
+                                        {
+                                            return _DialogueSource.dialogue;
+                                        } else
+                                        {
+                                            return DialogueList.getDialogue(npcName, AreaManager.locationName);
+                                        }
+                                    }
+                             }
     public SpeakAtStartScript speakAtStartScript;
 
     public PlaySFXLogic introAudioClipLogic;
 
     public NewAnimationManager animationManager;
 
-    public GameObject[] extraSpaces;
+    // public GameObject[] extraSpaces;
 
     public virtual void Start()
     {
@@ -61,11 +85,6 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
             speakAtStartScript.dialogueTrigger = this;
             speakAtStartScript.runScript();
         }
-    }
-
-    public virtual Dialogue getDialogue()
-    {
-        return dialogue;
     }
 
     public virtual void triggerDialogue()
@@ -111,12 +130,12 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     public string getName()
     {
-        return getDialogue().getName();
+        return dialogue.getName();
     }
 
     private void OnEnable()
     {
-        setExtraSpacesActive(true);
+        EventList.SetActiveByNameChannel.Invoke(npcName, true);
 
         if(animationManager == null)
         {
@@ -126,19 +145,24 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     private void OnDisable()
     {
-        setExtraSpacesActive(false);
+        EventList.SetActiveByNameChannel.Invoke(npcName, false);
     }
 
-    private void setExtraSpacesActive(bool status)
+    private void OnDestroy()
     {
-        foreach(GameObject extraSpace in extraSpaces)
-        {
-            if(extraSpace == null)
-            {
-                continue;
-            }
+        EventList.SetActiveByNameChannel.RemoveListener(setActiveByName);
+    }
 
-            extraSpace.SetActive(status);
+    public void listenForActivationByName()
+    {
+        EventList.SetActiveByNameChannel.AddListener(setActiveByName);
+    }
+
+    private void setActiveByName(string incomingName, bool status)
+    {
+        if(incomingName.Equals(npcName))
+        {
+            gameObject.SetActive(status);
         }
     }
 

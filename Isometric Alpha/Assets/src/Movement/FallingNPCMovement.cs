@@ -53,11 +53,11 @@ public class FallingNPCMovement : MonoBehaviour
             return;
         }
 
-        EffectAnimationManager effect = EffectAnimationManager.instantiatePrefab();
+        // EffectAnimationManager effect = EffectAnimationManager.instantiatePrefab();
 
-        effect.transform.position = endingPosition;
-        effect.waitBeforeSFX = false;
-        effect.setAnimations(effectType);
+        // effect.transform.position = endingPosition;
+        // effect.waitBeforeSFX = false;
+        // effect.setAnimations(effectType);
     }
 
 }

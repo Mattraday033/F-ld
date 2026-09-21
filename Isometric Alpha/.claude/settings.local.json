@@ -63,7 +63,28 @@
       "PowerShell($paths = @\\(\"C:\\\\Program Files\\\\Unity\\\\Hub\\\\Editor\\\\2022.3.62f2\\\\Editor\\\\Data\\\\Managed\\\\UnityEngine\\\\UnityEngine.CoreModule.xml\"\\); foreach\\($p in $paths\\){ if\\(Test-Path $p\\){ Select-String -Path $p -Pattern \"SpriteChangeCallback\" -Context 0,12 } else { \"missing $p\" } })",
       "PowerShell($p = \\(Get-Process -Id 19768 -ErrorAction SilentlyContinue\\).Path; $p; if\\($p\\){ $dir = Split-Path $p; Get-ChildItem -Path \"$dir\\\\Data\\\\Managed\" -Recurse -Filter \"UnityEngine.CoreModule.xml\" -ErrorAction SilentlyContinue | ForEach-Object { Select-String -Path $_.FullName -Pattern \"SpriteChangeCallback\" -Context 0,14 } })",
       "Bash(grep -v \"^--$\")",
-      "Bash(git -C .. status --short)"
+      "Bash(git -C .. status --short)",
+      "Bash(grep -vE \"^\\\\S+:[0-9]+:\\\\s*//\")",
+      "Bash(awk '{ $1=$1; print }')",
+      "Bash(grep -v '^\\\\S*:[0-9]*: *//')",
+      "Bash(grep -v ': *//')",
+      "Bash(grep -n -B6 -A4 \"^-$\")",
+      "Bash(grep -n \"^\\\\\\\\$\\\\|\\\\\\\\^M\")",
+      "Bash(git show *)",
+      "Read(//tmp/**)",
+      "Bash(cd \"C:/Users/mattr/OneDrive/Documents/GitHub/F-ld/Isometric Alpha\" && awk -F'|' '{print $2\"  \"$3}' /tmp/out.txt | sed -E 's/[0-9]+/N/g' | sort | uniq -c | sort -rn | head -50; echo \"=== slot None ===\"; grep \"slot=None\" /tmp/out.txt)",
+      "Bash(perl -pi -e 's/\\(animationName: [^,]+, \\)\\(Facing\\\\.\\\\w+\\\\\\)\\\\\\)\\)/${1}facing: $2/ if /animationName: [^,]+, Facing\\\\./' \"Assets/src/State/NPCSpawn/OOCSpawnDetailsList.cs\")",
+      "Bash(grep -v \"^\\\\S*: *//\")",
+      "Bash(grep -vE \"^\\\\S+:[0-9]+: *//\")",
+      "Bash(grep -B3 -A3 \"^+.*new \\\\\\(NPCSpawnDetails\\\\|HorseSpawnDetails\\\\\\)\\([^\\)]*$\")",
+      "Bash(awk -F: '{print $1}')",
+      "Bash(grep -cv ': *//')",
+      "Bash(grep -v \"/\\\\*\")",
+      "Bash(grep -nE \"animationName: [^*]*\\\\*/\\\\\\)\" \"Assets/src/State/NPCSpawn/OOCSpawnDetailsList.cs\")",
+      "Bash(grep -c \"/\\\\*, animationName:\" \"Assets/src/State/NPCSpawn/OOCSpawnDetailsList.cs\")",
+      "Bash(grep -v \"/\\\\*, animationName:\")",
+      "Bash(grep -v \"^\\\\s*//\")",
+      "PowerShell([System.TimeZoneInfo]::Local.Id; Get-Date; Get-Date -Format \"zzz\")"
     ]
   }
 }

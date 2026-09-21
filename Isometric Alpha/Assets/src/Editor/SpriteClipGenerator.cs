@@ -14,7 +14,7 @@ public static class SpriteClipGenerator
 
     // Cached set of tempAnimationType names so each imported asset is a cheap O(1) lookup.
     private static readonly HashSet<string> tempAnimationNames =
-        new HashSet<string>(AnimationManager.tempAnimationTypes.Select(type => type.ToString()));
+        new HashSet<string>(/*AnimationManager.tempAnimationTypes.Select(type => type.ToString())*/);
 
     // Records every sprite path we've applied a preset to, so the preset is applied exactly
     // once. Lives under Library/ (not Assets/) so writing it doesn't trigger another import,

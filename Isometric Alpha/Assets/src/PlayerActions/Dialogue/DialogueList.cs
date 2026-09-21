@@ -23,7 +23,7 @@ public static class DialogueList
     private readonly static StoryStatRequirementVariableSource unstablePillarStrengthRequirement = new StoryStatRequirementVariableSource(StoryVariableNameList.strReqVariableName, Constants.sizeThree);
     private readonly static Dialogue unstablePillarDialogue = new Dialogue(new string[] { "", NPCNameList.unstablePillar},
                                                              InkAssetList.getInkJSON(DialogueKey.UnstablePillar),
-                                                             unstablePillarStrengthRequirement);
+                                                             variableSource: unstablePillarStrengthRequirement);
 
     private readonly static Dialogue liftableRubbleDialogue = new Dialogue(new string[] { NPCNameList.liftableRubble },
                             InkAssetList.getInkJSON(DialogueKey.LiftableRubble));
@@ -644,7 +644,7 @@ public static class DialogueList
                                                             NPCNameList.thatch
                                                         },
                             InkAssetList.getInkJSON(DialogueKey.Kastor),
-                            new TextAsset[]{InkAssetList.getInkJSON(DialogueKey.SECamp_Nandor)}));
+                            secondaryInkJSONs: new TextAsset[]{InkAssetList.getInkJSON(DialogueKey.SECamp_Nandor)}));
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.brush,
                             new SingleCharacterDialogue(NPCNameList.brush,
@@ -689,7 +689,7 @@ public static class DialogueList
                                                             NPCNameList.nandor+1
                                                         },
                             InkAssetList.getInkJSON(DialogueKey.GuardPunishmentStartConvo),
-                            new TextAsset[]{InkAssetList.getInkJSON(DialogueKey.SECamp_Nandor)}));
+                            secondaryInkJSONs: new TextAsset[]{InkAssetList.getInkJSON(DialogueKey.SECamp_Nandor)}));
 
 
         addDialogueToList(LocationNameList.campSouthEast, NPCNameList.nandor+1,
@@ -759,7 +759,7 @@ public static class DialogueList
                                                             NPCNameList.chiefTabor
                                                         },
                             InkAssetList.getInkJSON(DialogueKey.TaborAfterClayFight),
-                            new TextAsset[]{InkAssetList.getInkJSON(DialogueKey.SECamp_ChiefTabor)}));             
+                            secondaryInkJSONs: new TextAsset[]{InkAssetList.getInkJSON(DialogueKey.SECamp_ChiefTabor)}));             
 
         #endregion
 
@@ -873,7 +873,7 @@ public static class DialogueList
                                                         NPCNameList.chiefTabor+1
                                                       },
                             InkAssetList.getInkJSON(DialogueKey.NWCampGuard),
-                            new TextAsset[]
+                            secondaryInkJSONs: new TextAsset[]
                             {
                                 InkAssetList.getInkJSON(DialogueKey.TaborEndOfTutorial)
                             }));
@@ -1063,7 +1063,7 @@ public static class DialogueList
                                                             },
                                                              InkAssetList.getInkJSON(DialogueKey.GuardLiftableGate),
                                                              DialogueCombatInfoList.mineLvl3GuardsCombatInfo, 
-                                                             new TextAsset[]
+                                                             secondaryInkJSONs: new TextAsset[]
                                                              {
                                                                  InkAssetList.getInkJSON(DialogueKey.GuardsCrate)
                                                              }));
@@ -1130,7 +1130,7 @@ public static class DialogueList
                                                                 NPCNameList.guardMarcos
                                                             },
                                                              InkAssetList.getInkJSON(DialogueKey.MinersCrate),
-                                                             new TextAsset[]{ 
+                                                             secondaryInkJSONs: new TextAsset[]{ 
                                                                                 InkAssetList.getInkJSON(DialogueKey.GuardMarcos),
                                                                                 InkAssetList.getInkJSON(DialogueKey.MinersCrate)
                                                                             }));

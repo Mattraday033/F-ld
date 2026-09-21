@@ -99,79 +99,26 @@ public class Dialogue : ICloneable
 
 	public bool startWithUIDisabled;
 
-
     public TextAsset[] secondaryInkJSONs;
 
 	public NPCCombatInfo npcCombatInfo;
 
-	public Dialogue(string name, GameObject npc)
-    {
-        this.names = Helpers.appendArray<string>(stringArrayWithPlayerSpace, new string[] { name });
-
-		this.cameraFoci = new GameObject[2] {null, npc };
-		this.inkJSON = null;
-	}
-
-    public Dialogue(string[] names, TextAsset inkJSON)
-    {
-        this.names = createNameArray(names);
-
-        this.cameraFoci = new GameObject[this.names.Length];
-        this.inkJSON = inkJSON;
-    }
-
-    public Dialogue(string[] names, TextAsset inkJSON, IStoryVariableSource variableSource)
+    public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo = null, IStoryVariableSource variableSource = null, TextAsset[] secondaryInkJSONs = null)
     {
         this.names = createNameArray(names);
 
         this.cameraFoci = new GameObject[this.names.Length];
         this.inkJSON = inkJSON;
 
-        variableSources.Add(variableSource);
-    }
-
-	public Dialogue(string[] names, GameObject[] cameraFoci, TextAsset inkJSON, TextAsset[] secondaryInkJSONs)
-	{
-        this.names = createNameArray(names);
-
-		this.cameraFoci = cameraFoci;
-		this.inkJSON = inkJSON;
-		this.secondaryInkJSONs = secondaryInkJSONs;
-	}
-
-	public Dialogue(string[] names, TextAsset inkJSON, TextAsset[] secondaryInkJSONs)
-	{
-        this.names = createNameArray(names);
-
-        this.cameraFoci = new GameObject[this.names.Length];
-
-		this.inkJSON = inkJSON;
-		this.secondaryInkJSONs = secondaryInkJSONs;
-	}
-
-    public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo, IStoryVariableSource variableSource = null)
-	{
-        this.names = createNameArray(names);
-
-        this.cameraFoci = new GameObject[this.names.Length];
-		this.inkJSON = inkJSON;
-		this.npcCombatInfo = npcCombatInfo;
+        this.npcCombatInfo = npcCombatInfo;
 
         if(variableSource != null)
         {
-            this.variableSources.Add(variableSource);
+            variableSources.Add(variableSource);
         }
-	}
 
-	public Dialogue(string[] names, TextAsset inkJSON, NPCCombatInfo npcCombatInfo, TextAsset[] secondaryInkJSONs)
-	{
-        this.names = createNameArray(names);
-
-        this.cameraFoci = new GameObject[this.names.Length];
-		this.inkJSON = inkJSON;
-		this.npcCombatInfo = npcCombatInfo;
-        this.secondaryInkJSONs = secondaryInkJSONs;
-	}
+		this.secondaryInkJSONs = secondaryInkJSONs ?? new TextAsset[0];
+    }
 
     public virtual bool findNPCGameObjectsInScene()
     {

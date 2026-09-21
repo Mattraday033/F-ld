@@ -252,39 +252,39 @@ public class ButtonOrderLogicScript : ButtonLogicScript
 
     public override void startingAction()
     {
-        monstersToSpawn = MonsterSpawnDetailsList.getMonsterSpawnDetails();
-        obstacles = new List<Obstacle>();
+        // monstersToSpawn = MonsterSpawnDetailsList.getMonsterSpawnDetails();
+        // obstacles = new List<Obstacle>();
 
-        foreach(ObstacleSpawnDetails spawnDetails in obstacleSpawnDetails)
-        {
-            GameObject gameObject = SpawnInfoManager.spawnInteractable(spawnDetails);
-            Obstacle obstacle = gameObject.GetComponent<Obstacle>();
+        // foreach(ObstacleSpawnDetails spawnDetails in obstacleSpawnDetails)
+        // {
+        //     GameObject gameObject = SpawnInfoManager.spawnInteractable(spawnDetails);
+        //     Obstacle obstacle = gameObject.GetComponent<Obstacle>();
 
-            if(obstacle.spriteRenderer.color.Equals(Color.white))
-            {
-                obstacle.spriteRenderer.color = tint;
-            }
+        //     if(obstacle.spriteRenderer.color.Equals(Color.white))
+        //     {
+        //         obstacle.spriteRenderer.color = tint;
+        //     }
 
-            obstacle.setToDown();
+        //     obstacle.setToDown();
 
-            SpawnInfoManager.addGameObject(gameObject);
+        //     SpawnInfoManager.addGameObject(gameObject);
 
-            obstacles.Add(obstacle);
-        }
+        //     obstacles.Add(obstacle);
+        // }
 
-        if(SpawnInfoManager.lastSaveBlueprint == null)
-        {
-            for(int index = 0; index < monstersToSpawn.Count; index++)
-            {
-                MonsterDefeatKeysList.setDefeatKey(MonsterDefeatKeysList.generateMonsterDefeatKey(index), true);
-            }
-        } else if(PuzzleFlags.currentPuzzleIndex > 0)
-        {
-            for(int index = 0; index < PuzzleFlags.currentPuzzleIndex; index++)
-            {
-                obstacles[index].setToUp();
-            }
-        }
+        // if(SpawnInfoManager.lastSaveBlueprint == null)
+        // {
+        //     for(int index = 0; index < monstersToSpawn.Count; index++)
+        //     {
+        //         MonsterDefeatKeysList.setDefeatKey(MonsterDefeatKeysList.generateMonsterDefeatKey(index), true);
+        //     }
+        // } else if(PuzzleFlags.currentPuzzleIndex > 0)
+        // {
+        //     for(int index = 0; index < PuzzleFlags.currentPuzzleIndex; index++)
+        //     {
+        //         obstacles[index].setToUp();
+        //     }
+        // }
     }
 
     public override void getFloorButtonStatus(FloorButton floorButton)
@@ -347,19 +347,19 @@ public class ButtonOrderLogicScript : ButtonLogicScript
 
     private void spawnMonster()
     {
-        for(int index = 0; index < monstersToSpawn.Count; index++)
-        {
-            if(!MonsterDefeatKeysList.monsterIsDefeated(MonsterDefeatKeysList.generateMonsterDefeatKey(index)))
-            {
-                continue;
-            }
+        // for(int index = 0; index < monstersToSpawn.Count; index++)
+        // {
+        //     if(!MonsterDefeatKeysList.monsterIsDefeated(MonsterDefeatKeysList.generateMonsterDefeatKey(index)))
+        //     {
+        //         continue;
+        //     }
 
-            MonsterDefeatKeysList.setDefeatKey(MonsterDefeatKeysList.generateMonsterDefeatKey(index), false);
+        //     MonsterDefeatKeysList.setDefeatKey(MonsterDefeatKeysList.generateMonsterDefeatKey(index), false);
 
-            Transform monster = SpawnInfoManager.spawnMonster(monstersToSpawn[index], index);
+        //     Transform monster = SpawnInfoManager.spawnMonster(monstersToSpawn[index], index);
 
-            MovementManager.replaceMovementTracker(monster.GetComponent<EnemyMovement>());
-        }
+        //     MovementManager.replaceMovementTracker(monster.GetComponent<EnemyMovement>());
+        // }
     }
 
 }

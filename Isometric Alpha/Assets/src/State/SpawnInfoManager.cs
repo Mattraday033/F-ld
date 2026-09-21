@@ -166,14 +166,17 @@ public static class SpawnInfoManager
         {
             SpawnParams spawnParams = details.getSpawnParams();
 
-            GameObject interactable = spawnInteractable(details);
+            List<GameObject> interactables = details.spawnInteractables();
 
-            if (spawnParams != null && interactable != null && !spawnParams.canSpawn(details.npcName))
+            if (spawnParams != null && !spawnParams.canSpawn(details.npcName))
             {
-                interactable.SetActive(false);
+                foreach(GameObject interactable in interactables)
+                {
+                    interactable.SetActive(false);
+                }
             }
 
-            spawnedObjects.Add(interactable);
+            spawnedObjects.AddRange(interactables);
         }
 
         return spawnedObjects;
@@ -181,44 +184,40 @@ public static class SpawnInfoManager
 
     private static void spawnHiddenTerrain(string secretDoorFlag)
     {
-        List<OOCSpawnDetails> oocSpawnDetailsList = OOCSpawnDetailsList.getOOCSpawnDetails(AreaManager.locationName);
+        // List<OOCSpawnDetails> oocSpawnDetailsList = OOCSpawnDetailsList.getOOCSpawnDetails(AreaManager.locationName);
 
-        foreach (OOCSpawnDetails details in oocSpawnDetailsList)
-        {
-            if(!details.spawnsOnSecretDoorActivation())
-            {
-                continue;
-            } 
+        // foreach (OOCSpawnDetails details in oocSpawnDetailsList)
+        // {
+        //     if(!details.spawnsOnSecretDoorActivation())
+        //     {
+        //         continue;
+        //     } 
 
-            HiddenTerrainSpawnDetails hiddenTerrainDetails = details as HiddenTerrainSpawnDetails;
+        //     HiddenTerrainSpawnDetails hiddenTerrainDetails = details as HiddenTerrainSpawnDetails;
 
-            if (hiddenTerrainDetails.secretDoorKeys.Contains(secretDoorFlag))
-            {
-                GameObject spawnedObject = spawnInteractable(details);
-                allSpawnedObjects.Add(spawnedObject);
-                return;
-            }
-        }
+        //     if (hiddenTerrainDetails.secretDoorKeys.Contains(secretDoorFlag))
+        //     {
+        //         GameObject spawnedObject = spawnInteractable(details);
+        //         allSpawnedObjects.Add(spawnedObject);
+        //         return;
+        //     }
+        // }
     }
 
-    public static GameObject spawnInteractable(OOCSpawnDetails details)
-    {
-        GameObject interactable = GameObject.Instantiate(Resources.Load<GameObject>(details.prefabName), details.getParent());
+    // public static GameObject spawnInteractable(OOCSpawnDetails details)
+    // {
+    //     GameObject interactable = GameObject.Instantiate(Resources.Load<GameObject>(details.prefabName), details.parent);
 
-        Canvas.ForceUpdateCanvases();
+    //     Canvas.ForceUpdateCanvases();
 
-        Transform transform = interactable.transform;
+    //     Transform transform = interactable.transform;
 
-        transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
+    //     transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
 
-        Helpers.updateGameObjectPosition(interactable);
+    //     Helpers.updateGameObjectPosition(interactable);
 
-        details.setGameObjectName(interactable);
-
-        details.spawnActions(interactable);
-
-        return interactable;
-    }
+    //     return interactable;
+    // }
 
     private static void spawnAllTransitions()
     {
@@ -257,87 +256,87 @@ public static class SpawnInfoManager
 
     private static List<GameObject> instantiateAllAxisSpawnDetails()
     {
-        List<AxisSpawnInfo> listOfSpawnInfo = new List<AxisSpawnInfo>();
+        // List<AxisSpawnInfo> listOfSpawnInfo = new List<AxisSpawnInfo>();
 
-        listOfSpawnInfo.AddRange(GateSpawnInfoList.getGateSpawnInfo(AreaManager.locationName));
-        listOfSpawnInfo.AddRange(SecretDoorSpawnInfoList.getSecretDoorSpawnDetails(AreaManager.locationName));
-        listOfSpawnInfo.AddRange(TutorialColliderSpawnDetailsList.getTutorialColliderSpawnDetails(AreaManager.locationName));
+        // listOfSpawnInfo.AddRange(GateSpawnInfoList.getGateSpawnInfo(AreaManager.locationName));
+        // listOfSpawnInfo.AddRange(SecretDoorSpawnInfoList.getSecretDoorSpawnDetails(AreaManager.locationName));
+        // listOfSpawnInfo.AddRange(TutorialColliderSpawnDetailsList.getTutorialColliderSpawnDetails(AreaManager.locationName));
 
         List<GameObject> spawnedObjects = new List<GameObject>();
 
-        foreach (AxisSpawnInfo spawnInfo in listOfSpawnInfo)
-        {
-            if(!spawnInfo.shouldSpawn())
-            {
-                continue;
-            }
+        // foreach (AxisSpawnInfo spawnInfo in listOfSpawnInfo)
+        // {
+        //     if(!spawnInfo.shouldSpawn())
+        //     {
+        //         continue;
+        //     }
 
-            List<OOCSpawnDetails> allSpawnsAlongAxis = spawnInfo.getSpawnDetails();
+        //     List<OOCSpawnDetails> allSpawnsAlongAxis = spawnInfo.getSpawnDetails();
 
-            foreach (OOCSpawnDetails spawnDetails in allSpawnsAlongAxis)
-            {
-                spawnedObjects.Add(spawnInteractable(spawnDetails));
-            }
-        }
+        //     foreach (OOCSpawnDetails spawnDetails in allSpawnsAlongAxis)
+        //     {
+        //         spawnedObjects.Add(spawnInteractable(spawnDetails));
+        //     }
+        // }
 
         return spawnedObjects;
     }
 
     public static void spawnAllMonsters()
     {
-        if(!AreaList.currentAreaIsHostile())
-        {
-            return;
-        }
+        // if(!AreaList.currentAreaIsHostile())
+        // {
+        //     return;
+        // }
 
-        List<MonsterSpawnDetails> monsterDetailsList = MonsterSpawnDetailsList.getMonsterSpawnDetails();
+        // List<MonsterSpawnDetails> monsterDetailsList = MonsterSpawnDetailsList.getMonsterSpawnDetails();
 
-        int index = 0;
-        foreach (MonsterSpawnDetails details in monsterDetailsList)
-        {
-            spawnMonster(details, index);
+        // int index = 0;
+        // foreach (MonsterSpawnDetails details in monsterDetailsList)
+        // {
+        //     spawnMonster(details, index);
 
-            index++;
-        }
+        //     index++;
+        // }
     }
 
-    public static Transform spawnMonster(MonsterSpawnDetails details, int index)
-    {
-        GameObject monsterGameObject = GameObject.Instantiate(Resources.Load<GameObject>(details.prefabName), details.getParent());
-        EnemyMovement monsterMovement = monsterGameObject.GetComponent<EnemyMovement>();
+    // public static Transform spawnMonster(MonsterSpawnDetails details, int index)
+    // {
+    //     GameObject monsterGameObject = GameObject.Instantiate(Resources.Load<GameObject>(details.prefabName), details.parent);
+    //     EnemyMovement monsterMovement = monsterGameObject.GetComponent<EnemyMovement>();
 
-        monsterMovement.setMonsterPackIndex(index);
+    //     monsterMovement.setMonsterPackIndex(index);
 
-        details.spawnActions(monsterGameObject);
+    //     details.spawnActions(monsterGameObject);
 
-        InteractableSpawnParams spawnParams = SpawnParamsList.getMonsterSpawnParams(AreaManager.locationName, index.ToString());
+    //     InteractableSpawnParams spawnParams = SpawnParamsList.getMonsterSpawnParams(AreaManager.locationName, index.ToString());
 
-        string key = MonsterDefeatKeysList.generateMonsterDefeatKey(monsterMovement.getMonsterPackIndex());
+    //     string key = MonsterDefeatKeysList.generateMonsterDefeatKey(monsterMovement.getMonsterPackIndex());
 
-        if (!spawnParams.canSpawn(key))
-        {
-            monsterMovement.setToDefeatedMode();
-        } 
+    //     if (!spawnParams.canSpawn(key))
+    //     {
+    //         monsterMovement.setToDefeatedMode();
+    //     } 
 
-        details.spawnActions(monsterMovement);
+    //     details.spawnActions(monsterMovement);
 
-        if (lastSaveBlueprint != null)
-        {
-            if (lastSaveBlueprint.monsterLocations.Length > index)
-            {
-                monsterMovement.setFromWrapper(lastSaveBlueprint.monsterLocations[index]);
-            }
-        }
-        else
-        {   
-            Vector3 newPos = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
-            newPos.z = Helpers.calculateColliderZPosition(details.cellCoords);
-            monsterGameObject.transform.position = newPos;
-        }
+    //     if (lastSaveBlueprint != null)
+    //     {
+    //         if (lastSaveBlueprint.monsterLocations.Length > index)
+    //         {
+    //             monsterMovement.setFromWrapper(lastSaveBlueprint.monsterLocations[index]);
+    //         }
+    //     }
+    //     else
+    //     {   
+    //         Vector3 newPos = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
+    //         newPos.z = Helpers.calculateColliderZPosition(details.cellCoords);
+    //         monsterGameObject.transform.position = newPos;
+    //     }
 
-        addGameObject(monsterGameObject);
+    //     addGameObject(monsterGameObject);
 
-        return monsterGameObject.transform;
-    }
+    //     return monsterGameObject.transform;
+    // }
 
 }

@@ -18,8 +18,8 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
     public SpriteRenderer arrowSpriteRenderer;
 
-    public EffectAnimationManager frontEffectManager;
-    public EffectAnimationManager backEffectManager;
+    // public EffectAnimationManager frontEffectManager;
+    // public EffectAnimationManager backEffectManager;
 
     private bool inVisibleSelector = false;
 
@@ -52,11 +52,11 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     {
         hoverCollider = GetComponent<PolygonCollider2D>();
 
-        backEffectManager.loops = true;
-        backEffectManager.setAnimations(EffectAnimationType.BackSelector2);
+        // backEffectManager.loops = true;
+        // backEffectManager.setAnimations(EffectAnimationType.BackSelector2);
 
-        frontEffectManager.loops = true;
-        frontEffectManager.setAnimations(EffectAnimationType.FrontSelector2);
+        // frontEffectManager.loops = true;
+        // frontEffectManager.setAnimations(EffectAnimationType.FrontSelector2);
 
         CombatStateManager.OnActivityChangeToInEscapeMenu.AddListener(disableHoverCollider);
         CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(enableHoverCollider);

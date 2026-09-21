@@ -20,6 +20,11 @@ public static class SpriteDescriptionList
     public readonly static SpriteDescription spikesDown = new SpriteDescription(spriteName: PrefabNames.spikesDown, tint: Color.white);
 
     #endregion
+    #region Movable Objects
+
+    public readonly static SpriteDescription pushableCrate = new SpriteDescription(spriteName: PrefabNames.pushableCrate);
+
+    #endregion
     #region Rubble Obstacles
 
     public readonly static SpriteDescription tutorialRubble = new SpriteDescription(spriteName: PrefabNames.tutorialRubble, useRubbleColor: true);
@@ -35,6 +40,9 @@ public static class SpriteDescriptionList
     public readonly static SpriteDescription mineLvl3WallSecretDoor = new SpriteDescription(spriteName: PrefabNames.mineLvl3WallSecretDoor);
     public readonly static SpriteDescription mineLvl3GroundSecretDoor = new SpriteDescription(spriteName: PrefabNames.mineLvl3GroundSecretDoor, sortingLayerInfo: SortingLayerManager.secondSortingLayerInfo);
     public readonly static SpriteDescription manseHalfWallSecretDoor = new SpriteDescription(spriteName: PrefabNames.manseHalfWallSecretDoor);
+
+    // Unseen barriers were spawned with a null sprite name, which left their renderer empty
+    public readonly static SpriteDescription unseenBarrier = new SpriteDescription(spriteName: PrefabNames.blankTexture);
 
     #endregion
     #region NPCs

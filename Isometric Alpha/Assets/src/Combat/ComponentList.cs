@@ -6,7 +6,7 @@ public class ComponentList : MonoBehaviour
 {
     public AbilityMenuManager abilityMenuManager;
 
-    public AnimationManager animationManager;
+    // public AnimationManager animationManager;
 
     public RectTransform healthBarParent;
 

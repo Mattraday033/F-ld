@@ -15,15 +15,15 @@ public class ShieldTrait : Trait
     {
     }
 
-    public override void setIdleAnimationOnApplication(AnimationManager animationManager)
-    {
-        animationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle);
-    }
+    // public override void setIdleAnimationOnApplication(AnimationManager animationManager)
+    // {
+    //     animationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle);
+    // }
 
-    public override void setIdleAnimationOnRemoval(AnimationManager animationManager)
-    {
-        animationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
-    }
+    // public override void setIdleAnimationOnRemoval(AnimationManager animationManager)
+    // {
+    //     animationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
+    // }
 
 }
 
@@ -40,15 +40,15 @@ public class HiddenShieldTrait : ShieldTrait
         return true;
     }
 
-    public override void setIdleAnimationOnApplication(AnimationManager animationManager)
-    {
-        //empty on purpose
-    }
+    // public override void setIdleAnimationOnApplication(AnimationManager animationManager)
+    // {
+    //     //empty on purpose
+    // }
 
-    public override void setIdleAnimationOnRemoval(AnimationManager animationManager)
-    {
-        //empty on purpose
-    }
+    // public override void setIdleAnimationOnRemoval(AnimationManager animationManager)
+    // {
+    //     //empty on purpose
+    // }
 }
 
 public class CaveMatronShieldTrait : ShieldTrait
@@ -65,16 +65,16 @@ public class CaveMatronShieldTrait : ShieldTrait
         EnemyStats.OnEnemyDeath.AddListener(checkForNoOtherCreatures);
     }
 
-    public override void setIdleAnimationOnApplication(AnimationManager animationManager)
-    {
-        if(CombatGrid.getEnemyMasterCount() == 1 && CombatGrid.getEnemyMinionCount() == 0)
-        {
-            animationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
-        } else
-        {
-            animationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle);
-        }
-    }
+    // public override void setIdleAnimationOnApplication(AnimationManager animationManager)
+    // {
+    //     if(CombatGrid.getEnemyMasterCount() == 1 && CombatGrid.getEnemyMinionCount() == 0)
+    //     {
+    //         animationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
+    //     } else
+    //     {
+    //         animationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle);
+    //     }
+    // }
 
     private void checkForNoOtherCreatures()
     {

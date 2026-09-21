@@ -22,9 +22,9 @@ public class RepositionEnemyAbility : RepositionAbility
 		return CombatGrid.getPositionAt(tertiaryCoords); 
 	}
 
-    public override IEnumerator waitForAttackAnimationToStop(AnimationManager animationManager, Stats combatantToBeMoved)
+    public override IEnumerator waitForAttackAnimationToStop(/*AnimationManager animationManager,*/ Stats combatantToBeMoved)
     {
-        yield return base.waitForAttackAnimationToStop(animationManager, combatantToBeMoved);
+        yield return base.waitForAttackAnimationToStop(/*animationManager,*/ combatantToBeMoved);
 
         if(combatantToBeMoved != null)
         {

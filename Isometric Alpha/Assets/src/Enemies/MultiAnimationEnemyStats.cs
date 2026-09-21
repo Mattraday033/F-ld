@@ -19,7 +19,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
     #region Global Variables
     public Dictionary<GridCoords, GameObject> combatSprites;
     public Dictionary<GridCoords, SpriteLayerRendererList> rendererLists;
-    public Dictionary<GridCoords, AnimationManager> animationManagers;
+    // public Dictionary<GridCoords, AnimationManager> animationManagers;
     public Dictionary<GridCoords, CombatantHover> combatantHovers;
     public Dictionary<GridCoords, TutorialSequenceStepTargetObject> tutorialTargets;
 
@@ -52,7 +52,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
         }
 
         combatSprites = new Dictionary<GridCoords, GameObject>();
-        animationManagers = new Dictionary<GridCoords, AnimationManager>();
+        // animationManagers = new Dictionary<GridCoords, AnimationManager>();
         rendererLists = new Dictionary<GridCoords, SpriteLayerRendererList>();
         combatantHovers = new Dictionary<GridCoords, CombatantHover>();
         tutorialTargets = new Dictionary<GridCoords, TutorialSequenceStepTargetObject>();
@@ -83,12 +83,12 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
             CombatGrid.setCombatantAtCoords(coords, this);
         }
 
-        foreach(AnimationManager animationManager in animationManagers.Values)
-        {
-            animationManager.linkedStats = this;
-            animationManager.healthBarManager = healthBarManager;
-            animationManager.setAnimations(getName());
-        }
+        // foreach(AnimationManager animationManager in animationManagers.Values)
+        // {
+        //     animationManager.linkedStats = this;
+        //     animationManager.healthBarManager = healthBarManager;
+        //     animationManager.setAnimations(getName());
+        // }
 
         combatSprite = combatSprites[spawnDetails.baseStatsPosition];
 
@@ -112,7 +112,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
 
     public void setUpComponents(GridCoords coords, ComponentList list)
     {
-        animationManagers[coords] = list.animationManager;
+        // animationManagers[coords] = list.animationManager;
         
         rendererLists[coords] = list.rendererList;
 
@@ -208,19 +208,20 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
     {
         if (isDead())
         {
-            foreach(AnimationManager animationManager in animationManagers.Values)
-            {
-                animationManager.playDeathAnimation();
-            }
+            // foreach(AnimationManager animationManager in animationManagers.Values)
+            // {
+            //     animationManager.playDeathAnimation();
+            // }
 
             healthBarManager.hide();
-        } else
-        {
-            foreach(AnimationManager animationManager in animationManagers.Values)
-            {
-                animationManager.playWoundedAnimation();
-            }
         }
+        // else
+        // {
+        //     foreach(AnimationManager animationManager in animationManagers.Values)
+        //     {
+        //         animationManager.playWoundedAnimation();
+        //     }
+        // }
     }
 
     #endregion

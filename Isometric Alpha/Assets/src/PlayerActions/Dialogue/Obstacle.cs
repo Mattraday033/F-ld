@@ -7,6 +7,12 @@ public class Obstacle : MonoBehaviour, IDialogueParticipant
     private bool ignoreSecretDoors;
     public string obstacleName;
     public SpriteRenderer spriteRenderer;
+    public Dialogue dialogue { 
+                                get
+                                {
+                                    return null;
+                                } 
+                            }
 
 	private void Awake()
 	{
@@ -26,11 +32,6 @@ public class Obstacle : MonoBehaviour, IDialogueParticipant
     public string getName()
     {
         return obstacleName;
-    }
-
-    public Dialogue getDialogue()
-    {
-        return null;
     }
 
     public virtual void setToDown()

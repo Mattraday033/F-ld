@@ -47,13 +47,13 @@ public class DialogueManager : MonoBehaviour
 
     private void setNameText(int targetIndex)
     {
-        AnimationManager.RemoveAllShadowOutlines.Invoke();
+        // AnimationManager.RemoveAllShadowOutlines.Invoke();
 
-        _NameText = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[targetIndex]) + ":";
+        _NameText = DialogueList.scrubNameOfEndNumbers(dialogue.names[targetIndex]) + ":";
 
         if(targetIndex > 0)
         {
-            highlightSpeaker(currentDialogue.cameraFoci[targetIndex]);
+            highlightSpeaker(dialogue.cameraFoci[targetIndex]);
         }
     }
 
@@ -61,12 +61,12 @@ public class DialogueManager : MonoBehaviour
     {
         if(GameplaySettingsList.highlightSpeakerInDialogue.settingOptions[Constants.onSettingIndex].set)
         {
-            AnimationManager animationManager = cameraFoci.GetComponent<AnimationManager>();
-        
-            if(animationManager != null)
-            {
-                animationManager.showShadowOutline();
-            }
+            // AnimationManager animationManager = cameraFoci.GetComponent<AnimationManager>();
+
+            // if(animationManager != null)
+            // {
+            //     animationManager.showShadowOutline();
+            // }
         }
     }
 
@@ -81,7 +81,9 @@ public class DialogueManager : MonoBehaviour
 	private ChoiceKey previousChoice;
 
 	private Conversation currentConversation;
-	private Dialogue currentDialogue;
+	private Dialogue _Dialogue;
+    public Dialogue dialogue {  get { return _Dialogue; }
+                                set { _Dialogue = value;} }
 	private static DialogueManager instance;
 
 	private bool addItemText = false;
@@ -175,7 +177,7 @@ public class DialogueManager : MonoBehaviour
 
 	public Dialogue getDialogue()
 	{
-		return currentDialogue;
+		return dialogue;
 	}
 
 	public bool convoAtEndPoint()
@@ -202,6 +204,8 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+		this.dialogue = dialogue;
+
 		if (RevealManager.currentlyRevealed)
 		{
 			returnToRevealAfterDialogue = true;
@@ -218,19 +222,17 @@ public class DialogueManager : MonoBehaviour
         setCameraToDialogueSpeed();
 		oocUIManager.disableOOCUI();
 
-		currentDialogue = dialogue;
-
         PartyMemberPlacer.HideAllFollowers.Invoke();
         
-        if(currentDialogue.findNPCGameObjectsInScene())
+        if(dialogue.findNPCGameObjectsInScene())
         {
             findNPCGameObject();
         } else
         {
-            currentDialogue.cameraFoci[Constants.indexOne] = PlayerMovement.getCurrentInteractableBeforePlayer();
+            dialogue.cameraFoci[Constants.indexOne] = PlayerMovement.getCurrentInteractableBeforePlayer();
         }
 
-        NPCCombatInfo combatInfo = currentDialogue.npcCombatInfo;
+        NPCCombatInfo combatInfo = dialogue.npcCombatInfo;
 
 		setNameText(Dialogue.mainNPCIndex);
 		currentStory = addAllVariables(new Story(dialogue.inkJSON.text), dialogue.variableSources);
@@ -238,9 +240,9 @@ public class DialogueManager : MonoBehaviour
 		storyName = dialogue.inkJSON.name;
 		atConvoEndPoint = dialogue.convoEndableAtStart;
 
-        if (currentDialogue.isVaultable)
+        if (dialogue.isVaultable)
         {
-            VaultableObject vaultableObject = currentDialogue.cameraFoci[Dialogue.mainNPCIndex].GetComponent<VaultableObject>();
+            VaultableObject vaultableObject = dialogue.cameraFoci[Dialogue.mainNPCIndex].GetComponent<VaultableObject>();
 
             if (currentStory.variablesState[InkVariableNameList.objectName] != null)
             {
@@ -287,7 +289,7 @@ public class DialogueManager : MonoBehaviour
 
 		oocUIManager.enableOOCUI();
 
-		currentDialogue = null;
+		dialogue = null;
 		currentChoiceInkObjects = null;
 
 		currentConversation.addEndOfDialogueLine();
@@ -443,20 +445,20 @@ public class DialogueManager : MonoBehaviour
 
     public void findNPCGameObject()
     {
-        currentDialogue.names[0] = PartyManager.getPlayerStats().getName();
-        currentDialogue.cameraFoci[0] = PlayerMovement.getInstance().gameObject;
+        dialogue.names[0] = PartyManager.getPlayerStats().getName();
+        dialogue.cameraFoci[0] = PlayerMovement.getInstance().gameObject;
 
-        for (int nameIndex = 1; nameIndex < currentDialogue.names.Length; nameIndex++)
+        for (int nameIndex = 1; nameIndex < dialogue.names.Length; nameIndex++)
         {
-            GameObject npcObject = findNPCGameObject(currentDialogue.names[nameIndex]);
+            GameObject npcObject = findNPCGameObject(dialogue.names[nameIndex]);
 
             if(npcObject != null)
             {
-                currentDialogue.names[nameIndex] = currentDialogue.names[nameIndex];
-                currentDialogue.cameraFoci[nameIndex] = npcObject;
+                dialogue.names[nameIndex] = dialogue.names[nameIndex];
+                dialogue.cameraFoci[nameIndex] = npcObject;
             } else
             {
-                Debug.LogError(currentDialogue.names[nameIndex] + " was not found");
+                Debug.LogError(dialogue.names[nameIndex] + " was not found");
             }
         }
     }
@@ -472,7 +474,7 @@ public class DialogueManager : MonoBehaviour
         int intParameter = 0;
         string parameter = "";
         string[] args = new string[0];
-        AnimationManager targetAnimationManager = null;
+        // AnimationManager targetAnimationManager = null;
 
         if (currentStory.canContinue)
         {
@@ -529,7 +531,7 @@ public class DialogueManager : MonoBehaviour
                         PlayerObject.showPlayerSprite();
                     } else
                     {
-                        currentDialogue.cameraFoci[intParameter].SetActive(true);
+                        dialogue.cameraFoci[intParameter].SetActive(true);
                     }
 
                     continueStory();
@@ -545,7 +547,7 @@ public class DialogueManager : MonoBehaviour
                         PlayerObject.hidePlayerSprite();
                     } else
                     {
-                        currentDialogue.cameraFoci[intParameter].SetActive(false);
+                        dialogue.cameraFoci[intParameter].SetActive(false);
                     }
 
                     continueStory();
@@ -1062,30 +1064,30 @@ public class DialogueManager : MonoBehaviour
                     camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
                     string npcFacingArgs = getArgument(buffer, Constants.indexOne);
 
-                    targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+                    // targetAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
 
-                    if(targetAnimationManager != null)
-                    {
-                        switch (npcFacingArgs.ToLower().Replace(" ",""))
-                        {
-                            case "ne":
-                            case "northeast":
-                                targetAnimationManager.setFacing(Facing.NorthEast);
-                                break;
-                            case "nw":
-                            case "northwest":
-                                targetAnimationManager.setFacing(Facing.NorthWest);
-                                break;
-                            case "se":
-                            case "southeast":
-                                targetAnimationManager.setFacing(Facing.SouthEast);
-                                break;
-                            case "sw":
-                            case "southwest":
-                                targetAnimationManager.setFacing(Facing.SouthWest);
-                                break;
-                        }
-                    }
+                    // if(targetAnimationManager != null)
+                    // {
+                    //     switch (npcFacingArgs.ToLower().Replace(" ",""))
+                    //     {
+                    //         case "ne":
+                    //         case "northeast":
+                    //             targetAnimationManager.setFacing(Facing.NorthEast);
+                    //             break;
+                    //         case "nw":
+                    //         case "northwest":
+                    //             targetAnimationManager.setFacing(Facing.NorthWest);
+                    //             break;
+                    //         case "se":
+                    //         case "southeast":
+                    //             targetAnimationManager.setFacing(Facing.SouthEast);
+                    //             break;
+                    //         case "sw":
+                    //         case "southwest":
+                    //             targetAnimationManager.setFacing(Facing.SouthWest);
+                    //             break;
+                    //     }
+                    // }
 
                     continueStory();
 
@@ -1095,7 +1097,7 @@ public class DialogueManager : MonoBehaviour
                 case "faceoppositeplayer":
 
                     camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
-                    DialogueTrigger dialogueTrigger = currentDialogue.cameraFoci[camTargetIndex].GetComponent<DialogueTrigger>();
+                    DialogueTrigger dialogueTrigger = dialogue.cameraFoci[camTargetIndex].GetComponent<DialogueTrigger>();
 
                     if(dialogueTrigger != null)
                     {
@@ -1110,78 +1112,78 @@ public class DialogueManager : MonoBehaviour
                     camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
                     string npcAnimationArgs = getArgument(buffer, Constants.indexOne);
 
-                    targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+                    // targetAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
 
-                    if(targetAnimationManager != null && Enum.TryParse(npcAnimationArgs, ignoreCase: true, out CharacterAnimationType animationType))
-                    {
-                        switch (animationType)
-                        {
-                            case CharacterAnimationType.Attack_Normal:
-                            case CharacterAnimationType.Attack_Normal_Front:
-                                targetAnimationManager.playAttackFrontAnimation();
-                                break;
-                            case CharacterAnimationType.Attack_Normal_Back:
-                                targetAnimationManager.playAttackBackAnimation();
-                                break;
-                            case CharacterAnimationType.Idle_Back:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Idle_Back);
-                                break;
-                            case CharacterAnimationType.Idle_Front:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
-                                break;
-                            case CharacterAnimationType.OOC_Idle_Back:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Back);
-                                break;
-                            case CharacterAnimationType.OOC_Idle_Front:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
-                                break;
-                            case CharacterAnimationType.Secondary_Idle:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle);
-                                break;
-                            case CharacterAnimationType.Secondary_Idle_Back:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle_Back);
-                                break;
-                            case CharacterAnimationType.Secondary_Idle_Front:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle_Front);
-                                break;
-                          case CharacterAnimationType.Death:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death);
-                                targetAnimationManager.playDeathAnimationThenHide();
-                                break;
-                          case CharacterAnimationType.Secondary_Death:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Death);
-                                targetAnimationManager.playSecondaryDeathAnimation();
-                                break;
-                            case CharacterAnimationType.Death_Back:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
-                                break;
-                            case CharacterAnimationType.Death_Front:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Front);
-                                targetAnimationManager.playDeathAnimationThenHide();
-                                break;
-                            case CharacterAnimationType.StandUp:
-                                targetAnimationManager.playAnimation(CharacterAnimationType.StandUp);
-                                break;
-                            case CharacterAnimationType.Death_Front_Weaponless:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Front_Weaponless);
-                                break;
-                            case CharacterAnimationType.Death_Back_Weaponless:
-                                targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back_Weaponless);
-                                break;
-                            case CharacterAnimationType.Wounded_Back:
-                                targetAnimationManager.playAnimation(CharacterAnimationType.Wounded_Back);
-                                break;
-                            case CharacterAnimationType.Wounded_Front:
-                                targetAnimationManager.playAnimation(CharacterAnimationType.Wounded_Front);
-                                break;
-                            case CharacterAnimationType.OOC_Wounded_Back:
-                                targetAnimationManager.playAnimation(CharacterAnimationType.OOC_Wounded_Back);
-                                break;
-                            case CharacterAnimationType.OOC_Wounded_Front:
-                                targetAnimationManager.playAnimation(CharacterAnimationType.OOC_Wounded_Front);
-                                break;
-                        }
-                    } 
+                    // if(targetAnimationManager != null && Enum.TryParse(npcAnimationArgs, ignoreCase: true, out CharacterAnimationType animationType))
+                    // {
+                    //     switch (animationType)
+                    //     {
+                    //         case CharacterAnimationType.Attack_Normal:
+                    //         case CharacterAnimationType.Attack_Normal_Front:
+                    //             targetAnimationManager.playAttackFrontAnimation();
+                    //             break;
+                    //         case CharacterAnimationType.Attack_Normal_Back:
+                    //             targetAnimationManager.playAttackBackAnimation();
+                    //             break;
+                    //         case CharacterAnimationType.Idle_Back:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.Idle_Back);
+                    //             break;
+                    //         case CharacterAnimationType.Idle_Front:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.Idle_Front);
+                    //             break;
+                    //         case CharacterAnimationType.OOC_Idle_Back:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Back);
+                    //             break;
+                    //         case CharacterAnimationType.OOC_Idle_Front:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.OOC_Idle_Front);
+                    //             break;
+                    //         case CharacterAnimationType.Secondary_Idle:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle);
+                    //             break;
+                    //         case CharacterAnimationType.Secondary_Idle_Back:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle_Back);
+                    //             break;
+                    //         case CharacterAnimationType.Secondary_Idle_Front:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Idle_Front);
+                    //             break;
+                    //       case CharacterAnimationType.Death:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death);
+                    //             targetAnimationManager.playDeathAnimationThenHide();
+                    //             break;
+                    //       case CharacterAnimationType.Secondary_Death:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.Secondary_Death);
+                    //             targetAnimationManager.playSecondaryDeathAnimation();
+                    //             break;
+                    //         case CharacterAnimationType.Death_Back:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
+                    //             break;
+                    //         case CharacterAnimationType.Death_Front:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Front);
+                    //             targetAnimationManager.playDeathAnimationThenHide();
+                    //             break;
+                    //         case CharacterAnimationType.StandUp:
+                    //             targetAnimationManager.playAnimation(CharacterAnimationType.StandUp);
+                    //             break;
+                    //         case CharacterAnimationType.Death_Front_Weaponless:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Front_Weaponless);
+                    //             break;
+                    //         case CharacterAnimationType.Death_Back_Weaponless:
+                    //             targetAnimationManager.setCurrentIdle(CharacterAnimationType.Death_Back_Weaponless);
+                    //             break;
+                    //         case CharacterAnimationType.Wounded_Back:
+                    //             targetAnimationManager.playAnimation(CharacterAnimationType.Wounded_Back);
+                    //             break;
+                    //         case CharacterAnimationType.Wounded_Front:
+                    //             targetAnimationManager.playAnimation(CharacterAnimationType.Wounded_Front);
+                    //             break;
+                    //         case CharacterAnimationType.OOC_Wounded_Back:
+                    //             targetAnimationManager.playAnimation(CharacterAnimationType.OOC_Wounded_Back);
+                    //             break;
+                    //         case CharacterAnimationType.OOC_Wounded_Front:
+                    //             targetAnimationManager.playAnimation(CharacterAnimationType.OOC_Wounded_Front);
+                    //             break;
+                    //     }
+                    // }
 
                     continueStory();
 
@@ -1196,21 +1198,21 @@ public class DialogueManager : MonoBehaviour
                     bool disableAtEnd = getArgumentBool(buffer, Constants.indexSix);
                     string effectName = getArgument(buffer, Constants.indexSeven);
 
-                    currentDialogue.cameraFoci[camTargetIndex].SetActive(true);
+                    dialogue.cameraFoci[camTargetIndex].SetActive(true);
 
-                    FallingNPCMovement targetFallingNPC = currentDialogue.cameraFoci[camTargetIndex].GetComponent<FallingNPCMovement>();
+                    FallingNPCMovement targetFallingNPC = dialogue.cameraFoci[camTargetIndex].GetComponent<FallingNPCMovement>();
                     
                     if(targetFallingNPC == null)
                     {
-                        targetFallingNPC = currentDialogue.cameraFoci[camTargetIndex].AddComponent<FallingNPCMovement>();
+                        targetFallingNPC = dialogue.cameraFoci[camTargetIndex].AddComponent<FallingNPCMovement>();
                     }
 
-                    targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+                    // targetAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
 
-                    if(targetAnimationManager != null)
-                    {
-                        targetAnimationManager.disableExtras();
-                    }
+                    // if(targetAnimationManager != null)
+                    // {
+                    //     targetAnimationManager.disableExtras();
+                    // }
 
                     targetFallingNPC.moveBetweenCells(startCoords, endCoords, durationSeconds, disableAtEnd, effectAtEndName: effectName);
 
@@ -1224,12 +1226,12 @@ public class DialogueManager : MonoBehaviour
 
                     camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
 
-                    AnimationManager animationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+                    // AnimationManager animationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
 
-                    if(animationManager != null)
-                    {
-                        animationManager.disableExtras();
-                    }
+                    // if(animationManager != null)
+                    // {
+                    //     animationManager.disableExtras();
+                    // }
 
                     continueStory();
 
@@ -1240,7 +1242,7 @@ public class DialogueManager : MonoBehaviour
 
                     camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
 
-                    AnimationManager.resetIdleDictionaryEntry(currentDialogue.names[camTargetIndex]);
+                    // AnimationManager.resetIdleDictionaryEntry(dialogue.names[camTargetIndex]);
 
                     continueStory();
                     break;
@@ -1253,7 +1255,7 @@ public class DialogueManager : MonoBehaviour
 
                     if(Enum.TryParse(effectName, ignoreCase: true, out EffectAnimationType effectType))
                     {
-                        AnimationManager.CreateEffectByNPCName.Invoke(npcName, effectType);
+                        // AnimationManager.CreateEffectByNPCName.Invoke(npcName, effectType);
                     }
 
                     continueStory();
@@ -1262,7 +1264,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "hideallstapledeffects":
 
-                    AnimationManager.HideAllStapledEffects.Invoke();
+                    // AnimationManager.HideAllStapledEffects.Invoke();
 
                     continueStory();
 
@@ -1275,7 +1277,7 @@ public class DialogueManager : MonoBehaviour
 
                     if(Enum.TryParse(effectName, ignoreCase: true, out effectType))
                     {
-                        AnimationManager.ShowStapledEffectByNPCName.Invoke(npcName, effectType);
+                        // AnimationManager.ShowStapledEffectByNPCName.Invoke(npcName, effectType);
                     }
 
                     continueStory();
@@ -1289,7 +1291,7 @@ public class DialogueManager : MonoBehaviour
 
                     if(Enum.TryParse(idleName, ignoreCase: true, out CharacterAnimationType idleType))
                     {
-                        AnimationManager.SetIdleByNPCName.Invoke(npcName, idleType);
+                        // AnimationManager.SetIdleByNPCName.Invoke(npcName, idleType);
                     }
 
                     continueStory();
@@ -1306,24 +1308,24 @@ public class DialogueManager : MonoBehaviour
                     camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
                     string animThenFadeArg = getArgument(buffer, Constants.indexOne);
 
-                    targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+                    // targetAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
 
-                    if(targetAnimationManager != null && 
-                        Enum.TryParse(animThenFadeArg, ignoreCase: true, out CharacterAnimationType animThenFadeType))
-                    {
-                        if(animThenFadeType != CharacterAnimationType.None)
-                        {
-                            StartCoroutine(playAnimationThenFadeToBlack(targetAnimationManager, animThenFadeType));
-                        }
-                        else
-                        {
-                            continueStory();
-                        }
-                    }
-                    else
-                    {
+                    // if(targetAnimationManager != null &&
+                    //     Enum.TryParse(animThenFadeArg, ignoreCase: true, out CharacterAnimationType animThenFadeType))
+                    // {
+                    //     if(animThenFadeType != CharacterAnimationType.None)
+                    //     {
+                    //         StartCoroutine(playAnimationThenFadeToBlack(targetAnimationManager, animThenFadeType));
+                    //     }
+                    //     else
+                    //     {
+                    //         continueStory();
+                    //     }
+                    // }
+                    // else
+                    // {
                         continueStory();
-                    }
+                    // }
 
                     return;
 
@@ -1336,21 +1338,21 @@ public class DialogueManager : MonoBehaviour
 
                     float secondsToWait = ((float) intParameter)/1000f;
 
-                    targetAnimationManager = currentDialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+                    // targetAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
 
-                    AnimationDelegate<AnimationManager> animationDelegate = null;
+                    // AnimationDelegate<AnimationManager> animationDelegate = null;
 
-                    switch (parameter.ToLower().Replace(" ",""))
-                    {
-                        case "wounded":
-                            animationDelegate = t => t.playWoundedAnimation();
-                            break;
-                    }
+                    // switch (parameter.ToLower().Replace(" ",""))
+                    // {
+                    //     case "wounded":
+                    //         animationDelegate = t => t.playWoundedAnimation();
+                    //         break;
+                    // }
 
-                    if(animationDelegate != null && targetAnimationManager != null)
-                    {
-                        StartCoroutine(waitThenPlayAnimation(secondsToWait, animationDelegate, targetAnimationManager));
-                    }
+                    // if(animationDelegate != null && targetAnimationManager != null)
+                    // {
+                    //     StartCoroutine(waitThenPlayAnimation(secondsToWait, animationDelegate, targetAnimationManager));
+                    // }
 
                     continueStory();
 
@@ -1469,7 +1471,7 @@ public class DialogueManager : MonoBehaviour
                     EscapeStack.escapeAll();
 
                     ShopPopUpButton shopPopUpButton = new ShopPopUpButton();
-                    Shopkeeper shopkeeper = currentDialogue.cameraFoci[Dialogue.mainNPCIndex].GetComponent<Shopkeeper>();
+                    Shopkeeper shopkeeper = dialogue.cameraFoci[Dialogue.mainNPCIndex].GetComponent<Shopkeeper>();
 
                     endDialogue();
 
@@ -1497,7 +1499,7 @@ public class DialogueManager : MonoBehaviour
 
                     GameObject mobTarget = changeCameraTarget(mobDeadNameIndex);
 
-                    DeathFlagManager.addName(currentDialogue.names[mobDeadNameIndex]);
+                    DeathFlagManager.addName(dialogue.names[mobDeadNameIndex]);
 
                     StartCoroutine(handleMob(mobTarget));
 
@@ -1507,9 +1509,9 @@ public class DialogueManager : MonoBehaviour
 
                     int deadNameIndex = getArgumentInt(buffer, Constants.indexZero);
 
-                    DeathFlagManager.addName(currentDialogue.names[deadNameIndex]);
+                    DeathFlagManager.addName(dialogue.names[deadNameIndex]);
 
-                    currentDialogue.cameraFoci[deadNameIndex].SetActive(false);
+                    dialogue.cameraFoci[deadNameIndex].SetActive(false);
 
                     continueStory();
 
@@ -1517,7 +1519,7 @@ public class DialogueManager : MonoBehaviour
 
                 case "killwithoutdeactivation":
 
-                    DeathFlagManager.addName(currentDialogue.names[getArgumentInt(buffer, Constants.indexZero)]);
+                    DeathFlagManager.addName(dialogue.names[getArgumentInt(buffer, Constants.indexZero)]);
 
                     continueStory();
 
@@ -1535,7 +1537,7 @@ public class DialogueManager : MonoBehaviour
                 case "addtoparty":
                 case "addtopartywithoutpopup":          
 
-                    partyMemberName = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[getArgumentInt(buffer, Constants.indexZero)]);
+                    partyMemberName = DialogueList.scrubNameOfEndNumbers(dialogue.names[getArgumentInt(buffer, Constants.indexZero)]);
 
                     PartyMember newPartyMember = PartyManager.getPartyMember(partyMemberName);
 
@@ -1564,7 +1566,7 @@ public class DialogueManager : MonoBehaviour
             
                 case "addtopartybutnotformation":
 
-                    partyMemberName = DialogueList.scrubNameOfEndNumbers(currentDialogue.names[getArgumentInt(buffer, Constants.indexZero)]);
+                    partyMemberName = DialogueList.scrubNameOfEndNumbers(dialogue.names[getArgumentInt(buffer, Constants.indexZero)]);
 
 
                     newPartyMember = PartyManager.getPartyMember(partyMemberName);
@@ -1580,7 +1582,7 @@ public class DialogueManager : MonoBehaviour
                     int nameIndex = getArgumentInt(buffer, Constants.indexZero);
                     bool preventInventoryLoss = getArgumentBool(buffer, Constants.indexOne);
 
-                    partyMemberName = currentDialogue.names[nameIndex];
+                    partyMemberName = dialogue.names[nameIndex];
 
                     if(partyMemberName.Contains(NPCNameList.overseer) || 
                         partyMemberName.Contains(NPCNameList.chief))
@@ -1618,7 +1620,7 @@ public class DialogueManager : MonoBehaviour
                     break;
                 case "opengate":
 
-                    Gate gate = currentDialogue.cameraFoci[getArgumentInt(buffer, Constants.indexZero)].GetComponent<Gate>();
+                    Gate gate = dialogue.cameraFoci[getArgumentInt(buffer, Constants.indexZero)].GetComponent<Gate>();
 
                     GateAndChestManager.addKey(gate.getGateKey());
 
@@ -1664,9 +1666,9 @@ public class DialogueManager : MonoBehaviour
 
                     GameObject effectGO = Instantiate(Resources.Load<GameObject>(PrefabNames.effect), PlayerObject.getInstanceTransform());
 
-                    EffectAnimationManager effect = effectGO.GetComponent<EffectAnimationManager>();
+                    // EffectAnimationManager effect = effectGO.GetComponent<EffectAnimationManager>();
 
-                    effect.setAnimations(EffectAnimationType.BlastingJelly);
+                    // effect.setAnimations(EffectAnimationType.BlastingJelly);
                     
                     PlayerObject.playDeathAnimation();
 
@@ -1696,10 +1698,10 @@ public class DialogueManager : MonoBehaviour
 
                     effectGO.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(targetCellCoords);
 
-                    effect = effectGO.GetComponent<EffectAnimationManager>();
-                    effect.loops = loopEffect;
-                    
-                    effect.setAnimations(effectName);
+                    // effect = effectGO.GetComponent<EffectAnimationManager>();
+                    // effect.loops = loopEffect;
+
+                    // effect.setAnimations(effectName);
                     
                     continueStory();
                     
@@ -1713,7 +1715,7 @@ public class DialogueManager : MonoBehaviour
                     
                     if(Enum.TryParse(effectName, ignoreCase: true, out effectType))
                     {
-                        EffectAnimationManager.DestroyAllEffectsOfType.Invoke(effectType);
+                        // EffectAnimationManager.DestroyAllEffectsOfType.Invoke(effectType);
                     }
 
                     continueStory();
@@ -1745,15 +1747,15 @@ public class DialogueManager : MonoBehaviour
 
                     currentStory = new Story(getSecondaryStoryJSON(secondaryInkFileIndex).text);
 
-                    currentStory = addAllVariables(currentStory, currentDialogue.variableSources);
+                    currentStory = addAllVariables(currentStory, dialogue.variableSources);
                     currentStory.variablesState[startingBoolName.Replace(" ", "")] = true;
 
                     storyName = getSecondaryStoryJSON(secondaryInkFileIndex).name;
-                    atConvoEndPoint = currentDialogue.convoEndableAtStart;
+                    atConvoEndPoint = dialogue.convoEndableAtStart;
 
                     if (safeToSwapDialogueObjects)
                     {
-                        currentDialogue = currentDialogue.cameraFoci[1].GetComponent<DialogueTrigger>().dialogue;
+                        dialogue = dialogue.cameraFoci[1].GetComponent<DialogueTrigger>().dialogue;
                     }
 
                     continueStory();
@@ -1803,7 +1805,7 @@ public class DialogueManager : MonoBehaviour
 
                     int enemyPackInfoIndex = getArgumentInt(buffer, Constants.indexZero);
 
-                    NPCCombatInfo npcCombatInfo = currentDialogue.npcCombatInfo;
+                    NPCCombatInfo npcCombatInfo = dialogue.npcCombatInfo;
 
                     State.enemyPackInfo = npcCombatInfo.getEnemyInfo(enemyPackInfoIndex);
                     State.allyPackInfo = AllyPackInfoList.defaultAllyPackInfoByZone();
@@ -1813,16 +1815,16 @@ public class DialogueManager : MonoBehaviour
                     NotificationManager.skipNextNotificationSpawn();
                     CombatStateManager.whoIsSurprised = SurpriseState.NoOneSurprised;
 
-                    if (!currentDialogue.npcCombatInfo.ignoreDeathFlags)
+                    if (!dialogue.npcCombatInfo.ignoreDeathFlags)
                     {
 
-                        if (!currentDialogue.npcCombatInfo.hasDeadNames())
+                        if (!dialogue.npcCombatInfo.hasDeadNames())
                         {
-                            currentDialogue.npcCombatInfo.deadNameList = new DeadNameList[1];
-                            currentDialogue.npcCombatInfo.deadNameList[0] = new DeadNameList(new string[] { currentDialogue.names[1] });
+                            dialogue.npcCombatInfo.deadNameList = new DeadNameList[1];
+                            dialogue.npcCombatInfo.deadNameList[0] = new DeadNameList(new string[] { dialogue.names[1] });
                         }
 
-                        currentDialogue.npcCombatInfo.addAllDeadNames(enemyPackInfoIndex);
+                        dialogue.npcCombatInfo.addAllDeadNames(enemyPackInfoIndex);
                     }
 
                     QuestList.checkForDeadNames();
@@ -1992,7 +1994,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            mainCM.Follow = currentDialogue.cameraFoci[targetIndex].transform;
+            mainCM.Follow = dialogue.cameraFoci[targetIndex].transform;
 
         }
 
@@ -2075,8 +2077,8 @@ public class DialogueManager : MonoBehaviour
 
         foreach(int index in allIndexes)
         {
-            executionTargets.Add(currentDialogue.cameraFoci[index]);    
-            DeathFlagManager.addName(currentDialogue.names[index]);
+            executionTargets.Add(dialogue.cameraFoci[index]);    
+            DeathFlagManager.addName(dialogue.names[index]);
         }
 
         StartCoroutine(handleExecution(executionTargets, leaveDeadBodies));
@@ -2168,35 +2170,22 @@ public class DialogueManager : MonoBehaviour
         return buffer.Split("(")[1].Split(")")[0].Split("|");
     }
 
-    // private string getArgument(string buffer, int argIndex)
-    // {
-    //     return buffer.Split("(")[1].Split(")")[0].Split(",")[argIndex];
-    // }
-
-    // private string getArgument(string buffer, int argIndex)
-    // {
-    //     return buffer.Split("(")[1].Split(")")[0].Split(",")[argIndex];
-    // }
-
     private TextAsset getSecondaryStoryJSON(int secondaryInkFileIndex)
     {
-        // Helpers.debugNullCheck("currentDialogue.secondaryInkJSONs",currentDialogue.secondaryInkJSONs);
-        // Debug.LogError("currentDialogue.secondaryInkJSONs.Length = " + currentDialogue.secondaryInkJSONs.Length);
-        // Debug.LogError("secondaryInkFileIndex = " + secondaryInkFileIndex);
-        // Helpers.debugNullCheck("currentDialogue.secondaryInkJSONs[secondaryInkFileIndex]", currentDialogue.secondaryInkJSONs[secondaryInkFileIndex]);
 
-        if (currentDialogue.secondaryInkJSONs == null || currentDialogue.secondaryInkJSONs.Length <= secondaryInkFileIndex || currentDialogue.secondaryInkJSONs[secondaryInkFileIndex] == null)
+        if (dialogue.secondaryInkJSONs == null || 
+            dialogue.secondaryInkJSONs.Length <= secondaryInkFileIndex || 
+            dialogue.secondaryInkJSONs[secondaryInkFileIndex] == null)
         {
-            GameObject tabor = currentDialogue.cameraFoci[1];
+            GameObject tabor = dialogue.cameraFoci[1];
             DialogueTrigger trigger = tabor.GetComponent<DialogueTrigger>();
-            Dialogue dialogue = trigger.getDialogue();
-            TextAsset[] secondaryInkJSONs = dialogue.secondaryInkJSONs;
+            TextAsset[] secondaryInkJSONs = trigger.dialogue.secondaryInkJSONs;
 
             return secondaryInkJSONs[secondaryInkFileIndex];
         }
         else
         {
-            return currentDialogue.secondaryInkJSONs[secondaryInkFileIndex];
+            return dialogue.secondaryInkJSONs[secondaryInkFileIndex];
         }
     }
 
@@ -2366,15 +2355,15 @@ public class DialogueManager : MonoBehaviour
 
             if(leaveDeadBodies)
             {
-                AnimationManager animationManager = target.GetComponent<AnimationManager>();
+                // AnimationManager animationManager = target.GetComponent<AnimationManager>();
 
-                if(animationManager == null)
-                {
+                // if(animationManager == null)
+                // {
                     target.SetActive(false);
                     continue;
-                }
+                // }
 
-                animationManager.setCurrentIdle(CharacterAnimationType.Death_Front_Weaponless);
+                // animationManager.setCurrentIdle(CharacterAnimationType.Death_Front_Weaponless);
 
             } else
             {
@@ -2508,32 +2497,32 @@ public class DialogueManager : MonoBehaviour
         return story;
 	}
 
-    private IEnumerator playAnimationThenFadeToBlack(AnimationManager targetAnimationManager, CharacterAnimationType animationType)
-    {
-        float animLength = targetAnimationManager.getAnimationLength(animationType);
-        targetAnimationManager.playAnimation(animationType);
+    // private IEnumerator playAnimationThenFadeToBlack(AnimationManager targetAnimationManager, CharacterAnimationType animationType)
+    // {
+    //     float animLength = targetAnimationManager.getAnimationLength(animationType);
+    //     targetAnimationManager.playAnimation(animationType);
 
-        yield return new WaitForSeconds(animLength + 1f);
+    //     yield return new WaitForSeconds(animLength + 1f);
 
-        fadeToBlackManager.setAndStartFadeToBlack();
-        waitingOnFadeToBlack = true;
+    //     fadeToBlackManager.setAndStartFadeToBlack();
+    //     waitingOnFadeToBlack = true;
 
-        StartCoroutine(handleDialogueUIDuringFadeOut(true, true));
-    }
+    //     StartCoroutine(handleDialogueUIDuringFadeOut(true, true));
+    // }
 
-    private static IEnumerator waitThenPlayAnimation(float secondsToWait, AnimationDelegate<AnimationManager> playAnimation, AnimationManager animationManager)
-    {
-        float timeWaited = 0f;
+    // private static IEnumerator waitThenPlayAnimation(float secondsToWait, AnimationDelegate<AnimationManager> playAnimation, AnimationManager animationManager)
+    // {
+    //     float timeWaited = 0f;
 
-        while(timeWaited <= secondsToWait)
-        {
-            yield return null;
+    //     while(timeWaited <= secondsToWait)
+    //     {
+    //         yield return null;
 
-            timeWaited += Time.deltaTime;
-        }
+    //         timeWaited += Time.deltaTime;
+    //     }
 
-        playAnimation(animationManager);
-    }
+    //     playAnimation(animationManager);
+    // }
 
     private static IEnumerator waitThenPlaySFX(float secondsToWait, SFXType sfxType)
     {

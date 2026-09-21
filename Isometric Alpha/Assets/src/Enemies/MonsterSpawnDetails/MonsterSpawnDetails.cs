@@ -8,7 +8,7 @@ public class MonsterSpawnDetails : OOCSpawnDetails
 {
     public const bool followsPlayer = true;
 
-    public Facing facing;
+    public override Transform parent { get { return AreaManager.getMonsterParent(); } }
     public MonsterMovementType movementType;
 
     public MonsterSpawnDetails(string npcName, 
@@ -33,11 +33,6 @@ public class MonsterSpawnDetails : OOCSpawnDetails
     //     return PrefabNames.oocMonster;
     // }
 
-    public override Transform getParent()
-    {
-        return AreaManager.getMonsterParent();
-    }
-
     public virtual void spawnActions(EnemyMovement enemyMovement)
     {
         if (hasTutorialTargetHash())
@@ -50,32 +45,18 @@ public class MonsterSpawnDetails : OOCSpawnDetails
         enemyMovement.characterFacing.currentFacing = facing;
         enemyMovement.movementType = movementType;
     }
-
-
-    public override void spawnActions(GameObject interactable)
-    {
-        
-    }
 }
 
 public class MovableObjectSpawnDetails: MonsterSpawnDetails
 {
-    private string spritePath;
 
-    public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spritePath, IAppearance appearance = null) :
+    public override Transform parent { get { return AreaManager.getMovableObjectParent(); } }
+
+    public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string tutorialTargetHash = "", IAppearance appearance = null) :
     base(npcName, cellCoords, appearance: appearance)
     {
         this.facing = Facing.Random;
         this.movementType = MonsterMovementType.Random;
-        this.spritePath = spritePath;
-    }
-
-    public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string spritePath, string tutorialTargetHash, IAppearance appearance = null) :
-    base(npcName, cellCoords, appearance: appearance)
-    {
-        this.facing = Facing.Random;
-        this.movementType = MonsterMovementType.Random;
-        this.spritePath = spritePath;
         this.tutorialTargetHash = tutorialTargetHash;
     }
 
@@ -83,11 +64,6 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
     // {
     //     return PrefabNames.movableObject;
     // }
-
-    public override Transform getParent()
-    {
-        return AreaManager.getMovableObjectParent();
-    }
 
     public override void spawnActions(EnemyMovement enemyMovement)
     {
@@ -99,12 +75,5 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
         // MovementManager.addMovementTracker(enemyMovement);
 
         // enemyMovement.getSpriteRenderer().sprite = SpriteUtil.loadSpriteFromResources(getSpriteName());
-    }
-
-
-    public override void spawnActions(GameObject interactable)
-    {
-        // base.spawnActions(interactable);
-        
     }
 }

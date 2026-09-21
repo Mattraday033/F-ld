@@ -45,9 +45,9 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 9
-  spritePivot: {x: 0.5, y: 0.425}
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 16384
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -105,18 +105,15 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.41}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -64, y: 64}
-        - {x: -64, y: -64}
-        - {x: 64, y: -64}
-        - {x: 64, y: 64}
+      customData: 
+      outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2f2c5d3bd2b358241acd5c7633211478
-      internalID: -847121567
+      spriteID: 019a2d728b1cb26409f24e035e45ec2d
+      internalID: 1583615005
       vertices: []
       indices: 
       edges: []
@@ -130,18 +127,15 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.41}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -64, y: 64}
-        - {x: -64, y: -64}
-        - {x: 64, y: -64}
-        - {x: 64, y: 64}
+      customData: 
+      outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 241af6b06f6d49742b16374e4ef8accf
-      internalID: -2031847342
+      spriteID: 0ca4bd7518494f24fae03045fc0ea4c1
+      internalID: 208698421
       vertices: []
       indices: 
       edges: []
@@ -155,18 +149,15 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.41}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -64, y: 64}
-        - {x: -64, y: -64}
-        - {x: 64, y: -64}
-        - {x: 64, y: 64}
+      customData: 
+      outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1da3a03fe40c0a0418e4aad714308482
-      internalID: 1268072703
+      spriteID: aa8c20f8b4ea4af46bbcc98af2bc0927
+      internalID: -360402392
       vertices: []
       indices: 
       edges: []
@@ -180,18 +171,15 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.41}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -64, y: 64}
-        - {x: -64, y: -64}
-        - {x: 64, y: -64}
-        - {x: 64, y: 64}
+      customData: 
+      outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b993331d96ecc10458413555ac28a19f
-      internalID: 648956853
+      spriteID: 026cd9beff42f7348a07e474226cfa10
+      internalID: 1766349085
       vertices: []
       indices: 
       edges: []
@@ -205,73 +193,21 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 9
-      pivot: {x: 0.5, y: 0.41}
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -64, y: 64}
-        - {x: -64, y: -64}
-        - {x: 64, y: -64}
-        - {x: 64, y: 64}
+      customData: 
+      outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aa4556ef140d2ec47b408f3cf5fabd8b
-      internalID: 1143316655
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wounded_Front_5
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.41}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -64, y: 64}
-        - {x: -64, y: -64}
-        - {x: 64, y: -64}
-        - {x: 64, y: 64}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dc53637d60ff9a0489981c5c3de9dbcb
-      internalID: 1993340844
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Wounded_Front_6
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 128
-        height: 128
-      alignment: 9
-      pivot: {x: 0.5, y: 0.41}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -64, y: 64}
-        - {x: -64, y: -64}
-        - {x: 64, y: -64}
-        - {x: 64, y: 64}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ea3cc060d091dee4491375d7475b7bd4
-      internalID: -2061783173
+      spriteID: f6b31e2a23d41ef46b6152b153abb80d
+      internalID: 1672579162
       vertices: []
       indices: 
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -281,14 +217,14 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
-      Wounded_Front_0: -847121567
-      Wounded_Front_1: -2031847342
-      Wounded_Front_2: 1268072703
-      Wounded_Front_3: 648956853
-      Wounded_Front_4: 1143316655
-      Wounded_Front_5: 1993340844
-      Wounded_Front_6: -2061783173
+      Wounded_Front_0: 1583615005
+      Wounded_Front_1: 208698421
+      Wounded_Front_2: -360402392
+      Wounded_Front_3: 1766349085
+      Wounded_Front_4: 1672579162
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -140,7 +140,7 @@ public class LargeEnemyStats : EnemyStats
                 return;
         }
 
-        animationManager.heartBeatRow = heartBeatRow;
+        // animationManager.heartBeatRow = heartBeatRow;
     }
 
     #endregion

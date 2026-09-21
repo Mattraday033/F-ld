@@ -182,12 +182,12 @@ public abstract class SkillManager
 
     public void createEffect(Vector3 targetWorldPos)
     {
-        EffectAnimationManager effect = EffectAnimationManager.instantiatePrefab();
-        Transform effectTransform = effect.transform;
-        effectTransform.position = targetWorldPos;
+        // EffectAnimationManager effect = EffectAnimationManager.instantiatePrefab();
+        // Transform effectTransform = effect.transform;
+        // effectTransform.position = targetWorldPos;
 
-        effect.waitBeforeSFX = false;
-        effect.setAnimations(getEffectType());
+        // effect.waitBeforeSFX = false;
+        // effect.setAnimations(getEffectType());
     }
 
     public virtual string getEffectType()

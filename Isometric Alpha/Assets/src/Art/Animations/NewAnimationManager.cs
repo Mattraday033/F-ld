@@ -108,6 +108,13 @@ public class NewAnimationManager : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        rendererList = GetComponent<SpriteLayerRendererList>();
+        rendererList.Awake();
+        polygonCollider2D = rendererList[SpriteLayer.Body].GetComponent<PolygonCollider2D>();
+    }
+
     public void playAnimation(CharacterAnimationType animationType = CharacterAnimationType.None)
     {
         currentIdle = animationType;

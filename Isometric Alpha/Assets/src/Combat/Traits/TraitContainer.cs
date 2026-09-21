@@ -96,10 +96,10 @@ public class TraitContainer : StatBoostSourceCombiner, ICloneable
         {
             traits.Remove(trait);
 
-            if(!owner.isDead())
-            {
-                trait.setIdleAnimationOnRemoval(owner.animationManager);
-            }
+            // if(!owner.isDead())
+            // {
+            //     trait.setIdleAnimationOnRemoval(owner.animationManager);
+            // }
         }
     }
 
@@ -109,12 +109,12 @@ public class TraitContainer : StatBoostSourceCombiner, ICloneable
 
         foreach(Trait trait in traitsToRemove)
         {
-            traits.Remove(trait);            
-            
-            if(!owner.isDead())
-            {
-                trait.setIdleAnimationOnRemoval(owner.animationManager);
-            }
+            traits.Remove(trait);
+
+            // if(!owner.isDead())
+            // {
+            //     trait.setIdleAnimationOnRemoval(owner.animationManager);
+            // }
         }
     }
 

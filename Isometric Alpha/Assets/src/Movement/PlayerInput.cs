@@ -331,7 +331,7 @@ public class PlayerInput : MonoBehaviour
             && DialogueManager.getInstance().storyCanContinue() && 
                 !FadeToBlackManager.isMidScreenFade())
         {
-            if (!DialogueManager.getInstance().getDialogue().random)
+            if (!DialogueManager.getInstance().dialogue.random)
             {
                 DialogueManager.getInstance().continueStory();
             }
@@ -341,7 +341,6 @@ public class PlayerInput : MonoBehaviour
         }
 
         toggleTerrainKeyCheck();
-
 
         if (Input.GetKey(KeyCode.Alpha1))
         {
@@ -882,31 +881,31 @@ public class PlayerInput : MonoBehaviour
     //current sprite against everything else in the scene.
     private static void drawSpriteSortPoint()
     {
-        AnimationManager animationManager = PlayerObject.getAnimationManager();
+        // AnimationManager animationManager = PlayerObject.getAnimationManager();
 
-        if (animationManager == null || animationManager.spriteRenderer == null)
-        {
-            return;
-        }
+        // if (animationManager == null || animationManager.spriteRenderer == null)
+        // {
+        //     return;
+        // }
 
-        SpriteRenderer spriteRenderer = animationManager.spriteRenderer;
+        // SpriteRenderer spriteRenderer = animationManager.spriteRenderer;
 
-        if (spriteRenderer.sprite == null)
-        {
-            return;
-        }
+        // if (spriteRenderer.sprite == null)
+        // {
+        //     return;
+        // }
 
-        //Pivot sorting uses the renderer's transform position, center sorting uses the middle of its bounds.
-        Bounds bounds = spriteRenderer.bounds;
-        Vector3 sortPoint = spriteRenderer.spriteSortPoint == SpriteSortPoint.Pivot
-            ? spriteRenderer.transform.position
-            : bounds.center;
+        // //Pivot sorting uses the renderer's transform position, center sorting uses the middle of its bounds.
+        // Bounds bounds = spriteRenderer.bounds;
+        // Vector3 sortPoint = spriteRenderer.spriteSortPoint == SpriteSortPoint.Pivot
+        //     ? spriteRenderer.transform.position
+        //     : bounds.center;
 
-        float halfWidth = Mathf.Max(bounds.size.x, 1f) / 2f;
+        // float halfWidth = Mathf.Max(bounds.size.x, 1f) / 2f;
 
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawLine(new Vector3(sortPoint.x - halfWidth, sortPoint.y, sortPoint.z),
-                        new Vector3(sortPoint.x + halfWidth, sortPoint.y, sortPoint.z));
+        // Gizmos.color = Color.cyan;
+        // Gizmos.DrawLine(new Vector3(sortPoint.x - halfWidth, sortPoint.y, sortPoint.z),
+        //                 new Vector3(sortPoint.x + halfWidth, sortPoint.y, sortPoint.z));
     }
 
     public static void toggleTerrainKeyCheck()

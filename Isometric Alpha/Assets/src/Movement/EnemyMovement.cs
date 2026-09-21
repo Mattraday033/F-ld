@@ -623,11 +623,11 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
         List<MonsterSpawnDetails> list = MonsterSpawnDetailsList.getMonsterSpawnDetails();
 
-        Transform newMonster = SpawnInfoManager.spawnMonster(list[monsterPackIndex], monsterPackIndex);
+        // Transform newMonster = SpawnInfoManager.spawnMonster(list[monsterPackIndex], monsterPackIndex);
 
-        MovementManager.replaceMovementTracker(newMonster.GetComponent<MovementTracker>());
+        // MovementManager.replaceMovementTracker(newMonster.GetComponent<MovementTracker>());
         
-        DestroyImmediate(gameObject);
+        // DestroyImmediate(gameObject);
 	}
 
     public bool canBePutBackToStartingPosition()

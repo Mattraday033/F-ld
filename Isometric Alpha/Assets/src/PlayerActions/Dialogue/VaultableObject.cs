@@ -8,7 +8,7 @@ public interface IStoryVariableSource
     public Story addVariables(Story story);
 }
 
-public class VaultableObject : IStoryVariableSource
+public class VaultableObject : IStoryVariableSource, IDialogueSource
 {
     public const bool isPlural = true;
     public const bool notPlural = false;
@@ -24,6 +24,10 @@ public class VaultableObject : IStoryVariableSource
     public readonly static VaultableObject diffTwoVaultableGap = new VaultableObject(Constants.difficultyTwo, Constants.sizeThree, notPlural, gapName);
     public readonly static VaultableObject diffThreeVaultableGap = new VaultableObject(Constants.difficultyThree, Constants.sizeThree, notPlural, gapName);
 
+    public readonly static VaultableObject diffTwoSizeOneVaultableRocks = new VaultableObject(Constants.difficultyTwo, Constants.sizeOne, isPlural, rockName);
+    public readonly static VaultableObject diffTwoSizeTwoVaultableRocks = new VaultableObject(Constants.difficultyTwo, Constants.sizeTwo, isPlural, rockName);
+
+
     public int dexDifficulty;
 
     public int size;
@@ -32,17 +36,23 @@ public class VaultableObject : IStoryVariableSource
 
     public string objectName;
 
+    public virtual Dialogue dialogue
+    {
+        get
+        { 
+            Dialogue newDialogue = new SingleCharacterDialogue(getCharacterNameFromObjectName(objectName), InkAssetList.getInkJSON(DialogueKey.VaultableObject));
+            newDialogue.variableSources.Add(this);
+            
+            return newDialogue;
+        }
+    }
+
     public VaultableObject(int dexDifficulty, int size, bool plural, string objectName)
     {
         this.dexDifficulty = dexDifficulty;
         this.size = size;
         this.plural = plural;
         this.objectName = objectName;
-    }
-
-    public virtual Dialogue getDialogue(string name)
-    {
-        return new Dialogue(new string[] { Constants.emptyString, name }, InkAssetList.getInkJSON(DialogueKey.VaultableObject));
     }
 
     public virtual Story addVariables(Story story)
@@ -55,6 +65,10 @@ public class VaultableObject : IStoryVariableSource
         return story;
     }
 
+    private static string getCharacterNameFromObjectName(string objectName)
+    {
+        return NPCNameList.vaultablePrefix + objectName.Substring(0,1).ToUpper() + objectName.Substring(1);
+    }
 }
 
 public class VaultableOrDestroyableObject : VaultableObject
@@ -68,17 +82,20 @@ public class VaultableOrDestroyableObject : VaultableObject
     public string explanation;
     public int index;
 
+    public override Dialogue dialogue
+    {
+        get
+        {
+            return new SingleCharacterDialogue(objectName, InkAssetList.getInkJSON(DialogueKey.VaultableOrDestroyableObject));
+        }
+    }
+
     public VaultableOrDestroyableObject(int dexDifficulty, int strDifficulty, int size, bool plural, string objectName, string explanation, int index):
     base(dexDifficulty, size, plural, objectName)
     {
         this.strDifficulty = strDifficulty;
         this.explanation = explanation;
         this.index = index;
-    }
-
-    public override Dialogue getDialogue(string name)
-    {
-        return new Dialogue(new string[] { Constants.emptyString, name }, InkAssetList.getInkJSON(DialogueKey.VaultableOrDestroyableObject));
     }
 
     public override Story addVariables(Story story)

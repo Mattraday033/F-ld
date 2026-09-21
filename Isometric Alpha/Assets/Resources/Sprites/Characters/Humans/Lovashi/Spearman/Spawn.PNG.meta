@@ -67,7 +67,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 16384
     resizeAlgorithm: 0
@@ -80,7 +80,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Spawn_Front_0
+      name: Spawn_0
       rect:
         serializedVersion: 2
         x: 0
@@ -107,18 +107,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 058983aaf232af74b97476c3e03040bc
-      internalID: -214331898
+      spriteID: 62ddeddb2db63714db314274f5633ae8
+      internalID: 2090489378
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_1
+      name: Spawn_1
       rect:
         serializedVersion: 2
         x: 128
@@ -128,18 +129,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a0ce145e3934d17429f555b3d85f6d16
-      internalID: -1400221810
+      spriteID: a9cd5450d69e87a4ca24c96ae10b17a7
+      internalID: -1952989299
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_2
+      name: Spawn_2
       rect:
         serializedVersion: 2
         x: 256
@@ -149,18 +151,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cee5d729075d8ed42a47e24917aee6aa
-      internalID: 329914327
+      spriteID: 9cc45379265efef48861a73ea341b02f
+      internalID: 1096027453
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_3
+      name: Spawn_3
       rect:
         serializedVersion: 2
         x: 384
@@ -170,18 +173,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6cdc31ad23d775b42b265aadb3cf1844
-      internalID: 225596061
+      spriteID: 90c40760513dc2242b75b23a5510e232
+      internalID: 1254528767
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_4
+      name: Spawn_4
       rect:
         serializedVersion: 2
         x: 512
@@ -191,18 +195,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5bb4a001fc2475e48980452d832f970e
-      internalID: 276969438
+      spriteID: e9eef0fc9433df140a9abaf5bf0e5cb6
+      internalID: 571250108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_5
+      name: Spawn_5
       rect:
         serializedVersion: 2
         x: 640
@@ -212,18 +217,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ffd4886ea89de644a009f686b60c6e9
-      internalID: 857951547
+      spriteID: 03ba0c4a2d54f6441842074b29bc0746
+      internalID: 1521722221
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_6
+      name: Spawn_6
       rect:
         serializedVersion: 2
         x: 768
@@ -233,18 +239,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e8f03b2c45eb2446aa4326064f14513
-      internalID: 1010644330
+      spriteID: 886688351950f684d98e9c263e935cfb
+      internalID: -781196485
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_7
+      name: Spawn_7
       rect:
         serializedVersion: 2
         x: 896
@@ -254,18 +261,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1e77d0e7fccf3db4eb6faf4432204ff3
-      internalID: -1092082409
+      spriteID: 2d1ef9ca891b78644b0eef3c30a4b476
+      internalID: 578530853
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_8
+      name: Spawn_8
       rect:
         serializedVersion: 2
         x: 1024
@@ -275,18 +283,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1f2e0f6b0b3e64468557d21800c6a84
-      internalID: -1558340117
+      spriteID: 9f6d0a3f7ce51644a897298e52620dcb
+      internalID: -1350767851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_9
+      name: Spawn_9
       rect:
         serializedVersion: 2
         x: 1152
@@ -296,18 +305,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af90ff9aef3828d4a908e98e459c62bd
-      internalID: -15279654
+      spriteID: a52d8fc1890c1ce4ca76b4af2b75e7c3
+      internalID: 1995068900
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spawn_Front_10
+      name: Spawn_10
       rect:
         serializedVersion: 2
         x: 1280
@@ -317,17 +327,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9729acbb84582c0419cfbd223aeaae1a
-      internalID: 1757401755
+      spriteID: c6ec0b38328cb37429a2c74f76c0e53b
+      internalID: -436228822
       vertices: []
       indices: 
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -337,18 +349,20 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
-      Spawn_Front_0: -214331898
-      Spawn_Front_1: -1400221810
-      Spawn_Front_10: 1757401755
-      Spawn_Front_2: 329914327
-      Spawn_Front_3: 225596061
-      Spawn_Front_4: 276969438
-      Spawn_Front_5: 857951547
-      Spawn_Front_6: 1010644330
-      Spawn_Front_7: -1092082409
-      Spawn_Front_8: -1558340117
-      Spawn_Front_9: -15279654
+      Spawn_0: 2090489378
+      Spawn_1: -1952989299
+      Spawn_10: -436228822
+      Spawn_2: 1096027453
+      Spawn_3: 1254528767
+      Spawn_4: 571250108
+      Spawn_5: 1521722221
+      Spawn_6: -781196485
+      Spawn_7: 578530853
+      Spawn_8: -1350767851
+      Spawn_9: 1995068900
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

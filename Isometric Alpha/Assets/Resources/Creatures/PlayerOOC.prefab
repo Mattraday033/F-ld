@@ -49,6 +49,9 @@ SpriteMask:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -84,6 +87,7 @@ SpriteMask:
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 1
   m_SpriteSortPoint: 0
+  m_MaskSource: 0
 --- !u!1 &3351383313945578375
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +132,7 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3351383313945578375}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -151,9 +156,9 @@ CircleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.325}
-  serializedVersion: 2
   m_Radius: 0.05
 --- !u!1 &8394458897026931008
 GameObject:
@@ -195,6 +200,7 @@ CapsuleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8394458897026931008}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -218,7 +224,8 @@ CapsuleCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.35}
   m_Size: {x: 0.2, y: 0.2}
   m_Direction: 0
@@ -352,6 +359,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3669987315045099205, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 7143663090522905980}
+    - targetCorrespondingSourceObject: {fileID: 3669987315045099205, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
+        type: 3}
       insertIndex: -1
       addedObject: {fileID: 4515325223350563496}
     - targetCorrespondingSourceObject: {fileID: 3669987315045099205, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
@@ -393,6 +404,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 269913657597576416}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7143663090522905980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3553488601844195877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b304b129d26e8841b313eecd15e2e59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  polygonCollider2D: {fileID: 4442573640036380627}
+  rendererList: {fileID: 5737382954714674707}
 --- !u!114 &4515325223350563496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextInTrain: {fileID: 0}
+  animationManager: {fileID: 0}
 --- !u!114 &7051487444379834427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,12 +549,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 15
+--- !u!60 &4442573640036380627 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 4474849849518369587, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
+    type: 3}
+  m_PrefabInstance: {fileID: 269913657597576416}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4996404352657311960 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5109375849736145976, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
     type: 3}
   m_PrefabInstance: {fileID: 269913657597576416}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5737382954714674707 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5485853204581675763, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
+    type: 3}
+  m_PrefabInstance: {fileID: 269913657597576416}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3553488601844195877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6e5de506e1bbc04293e8e8f30e25b0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1778327692186268204
 PrefabInstance:
   m_ObjectHideFlags: 0

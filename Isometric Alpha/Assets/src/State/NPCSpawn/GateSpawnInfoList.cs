@@ -923,8 +923,10 @@ public class GateSpawnInfo : AxisSpawnInfo
 
     public NPCSpawnDetails createSpawnDetails()
     {
-        return new NPCSpawnDetails(getGateName(), startCell, currentArea, extraSpaces: getExtraSpaces(), tutorialTargetHash: tutorialTargetHash, appearance: appearance,
-                                    spawnBehaviours: new List<IExtraSpawnBehaviour>() { new GateSpawnBehaviour(getGateName(), statDifficulties) });
+        return null;
+
+        // return new NPCSpawnDetails(getGateName(), startCell, extraSpaces: getExtraSpaces(), tutorialTargetHash: tutorialTargetHash, appearance: appearance,
+        //                             universalSpawnBehaviours: new List<IExtraSpawnBehaviour>() { new GateSpawnBehaviour(getGateName(), statDifficulties) });
     }
 
     public override List<OOCSpawnDetails> getSpawnDetails()
