@@ -226,7 +226,7 @@ public class Selector : ICloneable
 
 			GameObject combatSprite = stats.combatSprite;
 
-			if (Helpers.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
+			if (GameObjectUtil.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
 			{
 				return true;
 			} else if(stats.queuedToMove())
@@ -259,7 +259,7 @@ public class Selector : ICloneable
 
 			GameObject combatSprite = stats.combatSprite;
 
-			if (Helpers.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
+			if (GameObjectUtil.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
 			{
 				return true;
 			}else if(stats.queuedToMove())

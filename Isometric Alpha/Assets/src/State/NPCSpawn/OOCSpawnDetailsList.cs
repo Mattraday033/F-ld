@@ -86,8 +86,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.kastor+2, new Vector3Int(4, 6), facing: Facing.SouthEast));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(1, 6), TutorialSequenceList.secondCunningTutorialSequenceKey,
-                                                                          TutorialSequenceList.secondCunningTutorialSeenFlag,
-                                                                          alwaysSpawn: true));
+                                                                          TutorialSequenceList.secondCunningTutorialSeenFlag));
 
         list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(2, 7), Facing.SouthEast, CunningObjectSpriteCategory.Crank, endFacing: Facing.NorthWest, allBlockerSpawnDetails:
                  new List<ObstacleSpawnDetails>()
@@ -115,8 +114,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(4, 10), tutorialTargetHash: TutorialSequenceList.tutorialButtonTwoTargetHash));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(2, 9), TutorialSequenceList.leadershipTutorialSequenceKey,
-                                                                          TutorialSequenceList.leadershipTutorialSeenFlag,
-                                                                          alwaysSpawn: true));
+                                                                          TutorialSequenceList.leadershipTutorialSeenFlag));
         #endregion
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackFour, list);
@@ -920,8 +918,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor+1, new Vector3Int(-7, -1), facing: Facing.SouthWest));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-5, 0), TutorialSequenceList.intimidateTutorialSequenceKey,
-                                                                          TutorialSequenceList.intimidateTutorialSeenFlag,
-                                                                          alwaysSpawn: true));
+                                                                          TutorialSequenceList.intimidateTutorialSeenFlag));
 
         #endregion
 
@@ -930,8 +927,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor+2, new Vector3Int(-4, -5), facing: Facing.SouthWest));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-4, -4), TutorialSequenceList.secondCunningTutorialSequenceKey,
-                                                                          TutorialSequenceList.secondCunningTutorialSeenFlag,
-                                                                          alwaysSpawn: true));
+                                                                          TutorialSequenceList.secondCunningTutorialSeenFlag));
 
         list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-3, -3), Facing.SouthEast, CunningObjectSpriteCategory.Crank, endFacing: Facing.NorthWest, allBlockerSpawnDetails:
                  new List<ObstacleSpawnDetails>()
@@ -958,8 +954,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor+4, new Vector3Int(1, 0), facing: Facing.SouthWest));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(1, 0), TutorialSequenceList.observationTutorialSequenceKey,
-                                                                          TutorialSequenceList.observationTutorialSeenFlag,
-                                                                          alwaysSpawn: true));
+                                                                          TutorialSequenceList.observationTutorialSeenFlag));
 
         #endregion
 
@@ -971,8 +966,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(-1, 1), tutorialTargetHash: TutorialSequenceList.tutorialButtonTwoTargetHash));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-3, 0), TutorialSequenceList.leadershipTutorialSequenceKey,
-                                                                          TutorialSequenceList.leadershipTutorialSeenFlag,
-                                                                          alwaysSpawn: true));
+                                                                          TutorialSequenceList.leadershipTutorialSeenFlag));
 
         #endregion
 

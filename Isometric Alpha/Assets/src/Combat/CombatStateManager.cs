@@ -286,7 +286,7 @@ public class CombatStateManager : MonoBehaviour
 		yield return null;
 		yield return null;
 
-		Helpers.updateGameObjectPosition(PartyManager.getPlayerStats().combatSprite);
+		GameObjectUtil.updateGameObjectPosition(PartyManager.getPlayerStats().combatSprite);
 
 		SelectorManager.displayCurrentHoverUI();
 	}

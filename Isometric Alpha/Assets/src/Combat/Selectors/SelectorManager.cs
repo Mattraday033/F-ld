@@ -213,7 +213,7 @@ public class SelectorManager : MonoBehaviour
 
 		GameObject sprite = target.combatSprite;
 
-		if (currentSelector.singleTile() && Helpers.tagMatchesCriteria(sprite, selectableAllyTagCriteria))
+		if (currentSelector.singleTile() && GameObjectUtil.tagMatchesCriteria(sprite, selectableAllyTagCriteria))
 		{
 			if (CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
 			{
@@ -944,7 +944,7 @@ public static class SelectionInfo
 	public static bool selectionIsAlly(GridCoords coords)
 	{
 		return CombatGrid.combatantExistsAtCoords(coords, out Stats target) && 
-                Helpers.tagMatchesCriteria(target.combatSprite, SelectorManager.allyTagCriteria);
+                GameObjectUtil.tagMatchesCriteria(target.combatSprite, SelectorManager.allyTagCriteria);
 	}
 
 	public static bool selectionIsPartyMember(GridCoords coords)

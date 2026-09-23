@@ -306,6 +306,7 @@ public static class PrefabNames
 
     public const string commonComponentsFolder = interactablesFolder + "CommonComponents/";
     public const string overHeadIconManager = commonComponentsFolder + "OverHeadIconManager";
+    public const string overHeadIconFormatter = commonComponentsFolder + "OverHeadIconFormatter";
     public const string overHeadIcon = commonComponentsFolder + "OverHeadIcon";
     public const string overHeadNameTag = commonComponentsFolder + "NPC Name Tag OverHead";
 

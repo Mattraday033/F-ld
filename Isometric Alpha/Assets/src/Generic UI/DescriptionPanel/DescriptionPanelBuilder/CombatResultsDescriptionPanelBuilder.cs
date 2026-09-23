@@ -52,7 +52,7 @@ public class CombatResultsDescriptionPanelBuilder : CombatDescriptionPanelBuilde
         rectTransform.pivot = new Vector2(rectTransform.pivot.x, newPivot);
         rectTransform.localPosition = Vector3.zero;
 
-        Helpers.updateGameObjectPosition(rowObject);
+        GameObjectUtil.updateGameObjectPosition(rowObject);
     }
 
     private bool blockIsTypeBlock(DescriptionPanelBuildingBlock block)

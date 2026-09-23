@@ -43,6 +43,6 @@ public class NPCNameTag : MonoBehaviour
     private void updatePosition()
     {
         textTransform.localPosition = Vector3.zero;
-        Helpers.updateGameObjectPosition(textTransform);
+        GameObjectUtil.updateGameObjectPosition(textTransform);
     }
 }

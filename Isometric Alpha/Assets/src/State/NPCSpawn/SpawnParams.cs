@@ -277,14 +277,9 @@ public abstract class FlagList : IEnumerable
 {
     public string[] flags;
 
-    public FlagList()
+    public FlagList(string[] flags = null)
     {
-        this.flags = new string[0];
-    }
-
-    public FlagList(string[] flags)
-    {
-        this.flags = flags;
+        this.flags = flags ?? new string[0];
     }
 
     public abstract bool evaluateFlags();

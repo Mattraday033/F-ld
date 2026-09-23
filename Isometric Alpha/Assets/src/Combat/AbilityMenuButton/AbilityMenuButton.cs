@@ -139,7 +139,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     public void selectButton(bool playSFX = true)
     {
         iconOutline.color = Color.yellow;
-        Helpers.updateSpritePosition(iconOutline.gameObject);
+        GameObjectUtil.updateGameObjectPosition(iconOutline.gameObject);
 
         if(playSFX)
         {
@@ -150,7 +150,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     public void deselectButton()
     {
         iconOutline.color = ColorList.grey25;
-        Helpers.updateSpritePosition(iconOutline.gameObject);
+        GameObjectUtil.updateGameObjectPosition(iconOutline.gameObject);
     }
 
     public virtual void enable()
@@ -343,8 +343,8 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         disableButtonComponent();
 
-        Helpers.updateGameObjectPosition(abilityIcon.gameObject);
-        Helpers.updateGameObjectPosition(iconBackground.gameObject);
+        GameObjectUtil.updateGameObjectPosition(abilityIcon.gameObject);
+        GameObjectUtil.updateGameObjectPosition(iconBackground.gameObject);
     }
 
     public void resetGreyOutStatus()
@@ -358,8 +358,8 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         enableButtonComponent();
 
-        Helpers.updateGameObjectPosition(abilityIcon.gameObject);
-        Helpers.updateGameObjectPosition(iconBackground.gameObject);
+        GameObjectUtil.updateGameObjectPosition(abilityIcon.gameObject);
+        GameObjectUtil.updateGameObjectPosition(iconBackground.gameObject);
     }
 
     public bool isSelected()

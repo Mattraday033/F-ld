@@ -596,7 +596,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
         }
 
         yield return new WaitForEndOfFrame();
-        Helpers.updateGameObjectPosition(rowParent.gameObject);
+        GameObjectUtil.updateGameObjectPosition(rowParent.gameObject);
     }
 
     public virtual DescriptionPanelRow buildRow(DescriptionPanelBuildingBlock block)

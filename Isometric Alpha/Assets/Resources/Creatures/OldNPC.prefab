@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 517585897779863325}
   - component: {fileID: 3876896030663513859}
   - component: {fileID: 2738034900309326918}
-  - component: {fileID: 3634232630484593473}
-  - component: {fileID: 5927826668492765011}
   - component: {fileID: 5460278621860717577}
   - component: {fileID: 1099698400944458396}
   m_Layer: 16
@@ -59,9 +57,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityMenuManager: {fileID: 0}
-  animationManager: {fileID: 5460278621860717577}
   healthBarParent: {fileID: 0}
-  spriteRenderer: {fileID: -4968793318184311776}
+  rendererList: {fileID: 0}
   combatantHover: {fileID: 0}
   tutorialTarget: {fileID: 0}
   overHeadIconManager: {fileID: 4610789351265232034}
@@ -82,6 +79,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -129,29 +129,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ad51eb9e1ce59c4c96448057e437b25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    names:
-    - 
-    - Broglin
-    - Garcha
-    - Guard Alajos
-    - Guard Alajos
-    cameraFoci:
-    - {fileID: 0}
-    - {fileID: 5555899077454664655}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    random: 0
-    convoEndableAtStart: 0
-    isVaultable: 0
-    inkJSON: {fileID: 4900000, guid: 5e4bfc0a83ae16e4bae7e2c1234c4a81, type: 3}
-    startWithUIDisabled: 0
-    secondaryInkJSONs: []
-    npcCombatInfo: {fileID: 0}
+  npcName: 
   speakAtStartScript: {fileID: 0}
-  animationManager: {fileID: 5460278621860717577}
-  extraSpaces: []
+  animationManager: {fileID: 0}
 --- !u!1839735485 &3876896030663513859
 Tilemap:
   m_ObjectHideFlags: 0
@@ -232,6 +212,7 @@ TilemapCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5555899077454664655}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -255,45 +236,12 @@ TilemapCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.1}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!114 &3634232630484593473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555899077454664655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce29e502aaff19e4d925b1cf00eaa5b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignoreHover: 0
-  noNameTag: 0
-  spriteRenderer: {fileID: -4968793318184311776}
-  nameTag: {fileID: 0}
-  overHeadIconManager: {fileID: 4610789351265232034}
---- !u!114 &5927826668492765011
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5555899077454664655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c75c0dcb6d50eb64abd727a90406ca2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _Animator: {fileID: 1099698400944458396}
-  _Transitions: {fileID: 0}
-  _ActionOnDisable: 0
-  _PlayAutomatically: 1
-  _Animations: []
 --- !u!114 &5460278621860717577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,19 +254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3584462627e7c4ba6323639e9738e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changesFacing: 0
-  spriteRenderer: {fileID: -4968793318184311776}
-  shadowSprite: {fileID: 0}
-  polygonCollider2D: {fileID: 7677208454153757089}
-  healthBarManager: {fileID: 0}
-  npcName: 
-  animationName: 
-  heartBeatRow: 0
-  animancer: {fileID: 5927826668492765011}
-  key: 0
 --- !u!95 &1099698400944458396
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -332,6 +270,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -549,12 +488,6 @@ PrefabInstance:
 --- !u!4 &6908409747782613640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4474464932253563614, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
-    type: 3}
-  m_PrefabInstance: {fileID: 7045851063119233110}
-  m_PrefabAsset: {fileID: 0}
---- !u!60 &7677208454153757089 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 814316315059823095, guid: 6c7cc65b1d74e894dbc5acbd7bb050ca,
     type: 3}
   m_PrefabInstance: {fileID: 7045851063119233110}
   m_PrefabAsset: {fileID: 0}

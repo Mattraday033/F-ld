@@ -5,11 +5,16 @@ using UnityEngine;
 public class NPCMouseHover : MonoBehaviour
 {
 
-    //Needs to be attached to an object with a 2DCollider Component
-
     public IRevealable[] revealables;
-    public PolygonCollider2D polygonCollider2D;
-    public SpriteRenderer spriteRenderer;
+    public PolygonCollider2D polygonCollider2D
+    {
+        get
+        {
+            return rendererList.bodyCollider;
+        }
+    }
+
+    public SpriteLayerRendererList rendererList; 
 
     public void OnEnable()
     {
@@ -23,8 +28,8 @@ public class NPCMouseHover : MonoBehaviour
 
     public void createListeners()
     {
-        MovementManager.OnMoveFinished.AddListener(setColliderPosition);
-        TransitionManager.AfterTransition.AddListener(setColliderPosition);
+        // MovementManager.OnMoveFinished.AddListener(setColliderPosition);
+        // TransitionManager.AfterTransition.AddListener(setColliderPosition);
 
         PlayerOOCStateManager.OnStateChangeToSkill.AddListener(disableHover);
         PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(enableHover);
@@ -32,8 +37,8 @@ public class NPCMouseHover : MonoBehaviour
 
     public void destroyListeners()
     {
-        MovementManager.OnMoveFinished.RemoveListener(setColliderPosition);
-        TransitionManager.AfterTransition.RemoveListener(setColliderPosition);
+        // MovementManager.OnMoveFinished.RemoveListener(setColliderPosition);
+        // TransitionManager.AfterTransition.RemoveListener(setColliderPosition);
 
         PlayerOOCStateManager.OnStateChangeToSkill.RemoveListener(disableHover);
         PlayerOOCStateManager.OnStateChangeFromSkill.RemoveListener(enableHover);
@@ -51,31 +56,29 @@ public class NPCMouseHover : MonoBehaviour
 
     void Start()
     {
-        revealables = transform.parent.GetComponents<IRevealable>();
+        // setColliderPosition();
+    }
+
+    // private void setColliderPosition()
+    // {
+    //     setColliderPosition(0);
+    // }
+
+    // private void setColliderPosition(int index = 0)
+    // {
+    //     // transform.parent.position = new Vector2(transform.parent.position.x, transform.parent.position.y);
         
-        setColliderPosition();
-    }
+    //     // Vector3Int currentCell = AreaManager.getMasterGrid().WorldToCell(transform.parent.position);
 
-    private void setColliderPosition()
-    {
-        setColliderPosition(0);
-    }
+    //     // transform.position = new Vector3(transform.position.x, transform.position.y, Helpers.calculateColliderZPosition(currentCell));
 
-    private void setColliderPosition(int index = 0)
-    {
-        transform.parent.position = new Vector2(transform.parent.position.x, transform.parent.position.y);
-        
-        Vector3Int currentCell = AreaManager.getMasterGrid().WorldToCell(transform.parent.position);
+    //     // if(spriteRenderer == null)
+    //     // {
+    //     //     spriteRenderer = transform.parent.GetComponent<SpriteRenderer>();
+    //     // }
 
-        transform.position = new Vector3(transform.position.x, transform.position.y, Helpers.calculateColliderZPosition(currentCell));
-
-        if(spriteRenderer == null)
-        {
-            spriteRenderer = transform.parent.GetComponent<SpriteRenderer>();
-        }
-
-        Helpers.updatePolygonCollider(spriteRenderer, polygonCollider2D);
-    }
+    //     // Helpers.updatePolygonCollider(spriteRenderer, polygonCollider2D);
+    // }
 
     private void OnMouseEnter()
     {

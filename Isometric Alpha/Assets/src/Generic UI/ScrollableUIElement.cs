@@ -165,8 +165,8 @@ public class ScrollableUIElement : MonoBehaviour
 		if (scrollContainer != null && !(scrollContainer is null) &&
 			scrollableArea != null && !(scrollableArea is null))
 		{
-			Helpers.updateGameObjectPosition(scrollContainer);
-			Helpers.updateGameObjectPosition(scrollableArea);
+			GameObjectUtil.updateGameObjectPosition(scrollContainer);
+			GameObjectUtil.updateGameObjectPosition(scrollableArea);
 		}
 
 		// if (performDisableScrollBarCheck)
@@ -546,8 +546,8 @@ public class ScrollableUIElement : MonoBehaviour
 		RectTransform containerRectTransform = scrollContainer.GetComponent<RectTransform>();
 		RectTransform areaRectTransform = scrollableArea.GetComponent<RectTransform>();
 
-		Helpers.updateGameObjectPosition(scrollContainer);
-		Helpers.updateGameObjectPosition(scrollableArea);
+		GameObjectUtil.updateGameObjectPosition(scrollContainer);
+		GameObjectUtil.updateGameObjectPosition(scrollableArea);
 
 		LayoutRebuilder.ForceRebuildLayoutImmediate(containerRectTransform);
 		LayoutRebuilder.ForceRebuildLayoutImmediate(areaRectTransform);

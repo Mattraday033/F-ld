@@ -148,7 +148,7 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
         rectTransform.pivot = new Vector2(rectTransform.pivot.x, newPivot);
         rectTransform.localPosition = Vector3.zero;
 
-        Helpers.updateGameObjectPosition(rowObject);
+        GameObjectUtil.updateGameObjectPosition(rowObject);
     }
 
     public override void activateInspectNode()

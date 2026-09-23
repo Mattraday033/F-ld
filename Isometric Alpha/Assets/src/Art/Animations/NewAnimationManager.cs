@@ -15,7 +15,14 @@ public interface IAppearanceSource
 
 public class NewAnimationManager : MonoBehaviour
 {
-    public PolygonCollider2D polygonCollider2D;
+    public PolygonCollider2D polygonCollider2D
+    {
+        get
+        {
+            return rendererList.bodyCollider;
+        }
+    }
+
     public SpriteLayerRendererList rendererList;
 
     private MovementTracker _MovementTracker;
@@ -112,7 +119,6 @@ public class NewAnimationManager : MonoBehaviour
     {
         rendererList = GetComponent<SpriteLayerRendererList>();
         rendererList.Awake();
-        polygonCollider2D = rendererList[SpriteLayer.Body].GetComponent<PolygonCollider2D>();
     }
 
     public void playAnimation(CharacterAnimationType animationType = CharacterAnimationType.None)

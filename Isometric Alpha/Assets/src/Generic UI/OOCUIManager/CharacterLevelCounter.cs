@@ -12,7 +12,7 @@ public class CharacterLevelCounter : MonoBehaviour
 
     public void setCounter()
     {
-        if (Flags.isInNewGameMode())
+        if (PlayerOOCStateManager.inMainMenu())
         {
             return;
         }

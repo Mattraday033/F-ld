@@ -219,12 +219,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8588120976706130315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce29e502aaff19e4d925b1cf00eaa5b7, type: 3}
+  m_Script: {fileID: 11500000, guid: 968586eaf55716d43846208d27d2a22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  iconParent: {fileID: 0}
+  _RendererList: {fileID: 0}
   ignoreHover: 0
   noNameTag: 0
-  spriteRenderer: {fileID: 8906184145710315767}
   nameTag: {fileID: 0}
 --- !u!1001 &3750060608050428494
 PrefabInstance:

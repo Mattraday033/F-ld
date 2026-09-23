@@ -123,7 +123,7 @@ public class FadeToBlackTransition : FullScreenTransition
 
 		FadeToBlackManager.OnFadeToBlack.Invoke();
 
-        if(Flags.isInNewGameMode())
+        if(PlayerOOCStateManager.inMainMenu())
         {
             fadeTime = slowFadeInSpeed;
         }
@@ -229,7 +229,7 @@ public class FadeBackInTransition : FullScreenTransition
 		
         setToClear();
         
-        if(!Flags.isInNewGameMode())
+        if(!PlayerOOCStateManager.inMainMenu())
         {
             FadeToBlackManager.OnFadeBackInFinished.Invoke();
         }
@@ -262,7 +262,7 @@ public abstract class CircleTransition : ScreenFade
                                                 circleTransition.position.y,
                                                 -10f);
 
-        Helpers.updateColliderPosition(circleTransition);
+        GameObjectUtil.updateGameObjectPosition(circleTransition);
 
         return circleTransition;
     }

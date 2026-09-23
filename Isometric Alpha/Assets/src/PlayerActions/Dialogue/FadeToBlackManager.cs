@@ -83,7 +83,9 @@ public class FadeToBlackManager : MonoBehaviour
     {
         StartCoroutine(waitTwoFramesThenStartFadeBackIn(new FadeBackInTransition(exitActivity: PlayerOOCStateManager.currentActivity)));
 
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking && !Flags.isInNewGameMode())
+        //The start menu is its own activity now, so being in walking is already enough to say a game is
+        //running - the old check needed the newGame flag because the menu also sat in walking.
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking)
         {
             PlayerOOCStateManager.setCurrentActivity(OOCActivity.inFade);
         }

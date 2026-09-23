@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//This project has its own Key item class in the global namespace, which would win over the Input System's
+//Key enum, so the enum is aliased rather than imported.
+using InputKey = UnityEngine.InputSystem.Key;
 
 public static class EnumUtil
 {
@@ -28,6 +31,122 @@ public static class EnumUtil
         return newName;
     }
 
+    private const string keyboardPathPrefix = "<Keyboard>/";
+    private const string digitKeyPrefix = "Digit";
+
+    //Legacy KeyCodes and the new Input System's Keys do not line up by name (KeyCode.Alpha1 is Key.Digit1,
+    //KeyCode.Return is Key.Enter, KeyCode.Keypad1 is Key.Numpad1), so the pairs are spelled out here.
+    //
+    //LeftApple and RightApple are deliberately absent - they share their underlying values with LeftCommand
+    //and RightCommand, so listing both would throw when this dictionary is built. KeyCodes with no keyboard
+    //equivalent at all (mouse buttons, joystick buttons, Break, SysReq, Help, Clear) are absent as well.
+    private static readonly Dictionary<KeyCode, InputKey> keyCodeToKey = new Dictionary<KeyCode, InputKey>()
+    {
+        { KeyCode.A, InputKey.A }, { KeyCode.B, InputKey.B }, { KeyCode.C, InputKey.C }, { KeyCode.D, InputKey.D },
+        { KeyCode.E, InputKey.E }, { KeyCode.F, InputKey.F }, { KeyCode.G, InputKey.G }, { KeyCode.H, InputKey.H },
+        { KeyCode.I, InputKey.I }, { KeyCode.J, InputKey.J }, { KeyCode.K, InputKey.K }, { KeyCode.L, InputKey.L },
+        { KeyCode.M, InputKey.M }, { KeyCode.N, InputKey.N }, { KeyCode.O, InputKey.O }, { KeyCode.P, InputKey.P },
+        { KeyCode.Q, InputKey.Q }, { KeyCode.R, InputKey.R }, { KeyCode.S, InputKey.S }, { KeyCode.T, InputKey.T },
+        { KeyCode.U, InputKey.U }, { KeyCode.V, InputKey.V }, { KeyCode.W, InputKey.W }, { KeyCode.X, InputKey.X },
+        { KeyCode.Y, InputKey.Y }, { KeyCode.Z, InputKey.Z },
+
+        { KeyCode.Alpha0, InputKey.Digit0 }, { KeyCode.Alpha1, InputKey.Digit1 }, { KeyCode.Alpha2, InputKey.Digit2 },
+        { KeyCode.Alpha3, InputKey.Digit3 }, { KeyCode.Alpha4, InputKey.Digit4 }, { KeyCode.Alpha5, InputKey.Digit5 },
+        { KeyCode.Alpha6, InputKey.Digit6 }, { KeyCode.Alpha7, InputKey.Digit7 }, { KeyCode.Alpha8, InputKey.Digit8 },
+        { KeyCode.Alpha9, InputKey.Digit9 },
+
+        { KeyCode.Keypad0, InputKey.Numpad0 }, { KeyCode.Keypad1, InputKey.Numpad1 }, { KeyCode.Keypad2, InputKey.Numpad2 },
+        { KeyCode.Keypad3, InputKey.Numpad3 }, { KeyCode.Keypad4, InputKey.Numpad4 }, { KeyCode.Keypad5, InputKey.Numpad5 },
+        { KeyCode.Keypad6, InputKey.Numpad6 }, { KeyCode.Keypad7, InputKey.Numpad7 }, { KeyCode.Keypad8, InputKey.Numpad8 },
+        { KeyCode.Keypad9, InputKey.Numpad9 },
+        { KeyCode.KeypadPeriod, InputKey.NumpadPeriod },
+        { KeyCode.KeypadDivide, InputKey.NumpadDivide },
+        { KeyCode.KeypadMultiply, InputKey.NumpadMultiply },
+        { KeyCode.KeypadMinus, InputKey.NumpadMinus },
+        { KeyCode.KeypadPlus, InputKey.NumpadPlus },
+        { KeyCode.KeypadEnter, InputKey.NumpadEnter },
+        { KeyCode.KeypadEquals, InputKey.NumpadEquals },
+
+        { KeyCode.F1, InputKey.F1 }, { KeyCode.F2, InputKey.F2 }, { KeyCode.F3, InputKey.F3 }, { KeyCode.F4, InputKey.F4 },
+        { KeyCode.F5, InputKey.F5 }, { KeyCode.F6, InputKey.F6 }, { KeyCode.F7, InputKey.F7 }, { KeyCode.F8, InputKey.F8 },
+        { KeyCode.F9, InputKey.F9 }, { KeyCode.F10, InputKey.F10 }, { KeyCode.F11, InputKey.F11 }, { KeyCode.F12, InputKey.F12 },
+        { KeyCode.F13, InputKey.F13 }, { KeyCode.F14, InputKey.F14 }, { KeyCode.F15, InputKey.F15 },
+
+        { KeyCode.UpArrow, InputKey.UpArrow },
+        { KeyCode.DownArrow, InputKey.DownArrow },
+        { KeyCode.LeftArrow, InputKey.LeftArrow },
+        { KeyCode.RightArrow, InputKey.RightArrow },
+
+        { KeyCode.Escape, InputKey.Escape },
+        { KeyCode.Space, InputKey.Space },
+        { KeyCode.Tab, InputKey.Tab },
+        { KeyCode.Return, InputKey.Enter },
+        { KeyCode.Backspace, InputKey.Backspace },
+        { KeyCode.Insert, InputKey.Insert },
+        { KeyCode.Delete, InputKey.Delete },
+        { KeyCode.Home, InputKey.Home },
+        { KeyCode.End, InputKey.End },
+        { KeyCode.PageUp, InputKey.PageUp },
+        { KeyCode.PageDown, InputKey.PageDown },
+
+        { KeyCode.LeftShift, InputKey.LeftShift },
+        { KeyCode.RightShift, InputKey.RightShift },
+        { KeyCode.LeftAlt, InputKey.LeftAlt },
+        { KeyCode.RightAlt, InputKey.RightAlt },
+        { KeyCode.AltGr, InputKey.RightAlt },
+        { KeyCode.LeftControl, InputKey.LeftCtrl },
+        { KeyCode.RightControl, InputKey.RightCtrl },
+        { KeyCode.LeftCommand, InputKey.LeftMeta },
+        { KeyCode.RightCommand, InputKey.RightMeta },
+        { KeyCode.LeftWindows, InputKey.LeftMeta },
+        { KeyCode.RightWindows, InputKey.RightMeta },
+        { KeyCode.Menu, InputKey.ContextMenu },
+
+        { KeyCode.CapsLock, InputKey.CapsLock },
+        { KeyCode.Numlock, InputKey.NumLock },
+        { KeyCode.ScrollLock, InputKey.ScrollLock },
+        { KeyCode.Print, InputKey.PrintScreen },
+        { KeyCode.Pause, InputKey.Pause },
+
+        { KeyCode.BackQuote, InputKey.Backquote },
+        { KeyCode.Quote, InputKey.Quote },
+        { KeyCode.Semicolon, InputKey.Semicolon },
+        { KeyCode.Comma, InputKey.Comma },
+        { KeyCode.Period, InputKey.Period },
+        { KeyCode.Slash, InputKey.Slash },
+        { KeyCode.Backslash, InputKey.Backslash },
+        { KeyCode.LeftBracket, InputKey.LeftBracket },
+        { KeyCode.RightBracket, InputKey.RightBracket },
+        { KeyCode.Minus, InputKey.Minus },
+        { KeyCode.Equals, InputKey.Equals },
+    };
+
+    //Turns a KeyCode into the binding path the Input System expects, for example "<Keyboard>/leftShift".
+    //Returns null for KeyCodes with no keyboard equivalent - an action bound to a path that resolves to
+    //nothing never fires and never complains, so callers have to handle the miss themselves.
+    public static string ToKeyboardPath(this KeyCode keyCode)
+    {
+        if (!keyCodeToKey.TryGetValue(keyCode, out InputKey key))
+        {
+            return null;
+        }
+
+        return keyboardPathPrefix + key.toControlName();
+    }
+
+    //The keyboard's controls are named after the Keys with a lower case first letter, apart from the number
+    //row, where Key.Digit1 is named "1".
+    private static string toControlName(this InputKey key)
+    {
+        string name = key.ToString();
+
+        if (name.StartsWith(digitKeyPrefix))
+        {
+            return name.Substring(digitKeyPrefix.Length);
+        }
+
+        return Char.ToLowerInvariant(name[0]) + name.Substring(1);
+    }
 
     public static Trait getCostTrait(this ActionCostType costType)
     {

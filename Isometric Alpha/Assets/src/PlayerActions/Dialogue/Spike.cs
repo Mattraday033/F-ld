@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Spike : Obstacle
 {
@@ -12,8 +13,16 @@ public class Spike : Obstacle
     private static Sprite downSprite;
     private static Sprite upSprite;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
+        //spikes spawned from the creature prefab block movement with the tilemap collider sitting on their own root
+        if(movementBlockingCollider == null)
+        {
+            movementBlockingCollider = GetComponent<TilemapCollider2D>();
+        }
+
         setToDown();
     }
 
@@ -27,15 +36,23 @@ public class Spike : Obstacle
     public override void setToDown()
     {
         movementBlockingCollider.enabled = false;
-        spriteRenderer.sprite = downSprite;
-        SortingLayerManager.getSpikeSortingLayerInfo(down).setRendererSortingLayer(spriteRenderer);
+        setSprite(downSprite, SortingLayerManager.getSpikeSortingLayerInfo(down));
     }
-    
+
     public override void setToUp()
     {
         movementBlockingCollider.enabled = true;
-        spriteRenderer.sprite = upSprite;
-        SortingLayerManager.getSpikeSortingLayerInfo(up).setRendererSortingLayer(spriteRenderer);
+        setSprite(upSprite, SortingLayerManager.getSpikeSortingLayerInfo(up));
+    }
+
+    //the spikes ride on the body layer, the way every other single sprite obstacle does
+    private void setSprite(Sprite sprite, SortingLayerInfo sortingLayerInfo)
+    {
+        SpriteRenderer bodyRenderer = rendererList[SpriteLayer.Body];
+
+        bodyRenderer.sprite = sprite;
+
+        sortingLayerInfo.setRendererSortingLayer(bodyRenderer);
     }
 
 }

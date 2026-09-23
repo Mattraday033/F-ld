@@ -5,39 +5,28 @@ using UnityEngine;
 public class TutorialSequenceStepTargetSprite : TutorialSequenceStepTargetObject 
 {
     public IRevealable revealable;
-	public SpriteRenderer spriteRenderer;
-    public SpriteOutline spriteOutline;
-	public Color previousColor = Color.white;
+	public SpriteLayerRendererList rendererList;
+    private Color previousColor = Color.clear;
 
     public override void highlight(bool skip)
     {
-        if (skip)
+        if (skip || rendererList == null)
         {
             return;
         }
 
-        // if(spriteOutline == null)
-        // {
-        //     spriteOutline = new SpriteOutline();
-        //     spriteOutline.setSpriteRenderer(spriteRenderer);
-        // }
+        previousColor = rendererList.getOutlineColor();
 
-        if(revealable != null)
-        {
-            spriteOutline.createOutline(revealable.getRevealColor());
-        } else
-        {
-            spriteOutline.createOutline(ColorList.tutorialDefault);
-        }
+        rendererList.createOutline(ColorList.tutorialDefault);
     }
 	
     public override void unhighlight(bool skip)
 	{
-		if(skip || spriteOutline == null)
+		if(skip || rendererList == null)
 		{
 			return;
 		}
 
-        spriteOutline.removeOutline();
+        rendererList.createOutline(previousColor);
 	}
 }

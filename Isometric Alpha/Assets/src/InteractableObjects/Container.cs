@@ -2,29 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public enum ChestType {Chest, Shelf, MattockRack, AxeRack, ShovelRack, SpearRack, SwordTable, PickaxeTable }
 public enum ChestState { Closed, OpenFilled, OpenEmpty }
 
-public interface INonRevealableNameSource: INameSource
-{
-    public bool isRevealable();
+// public interface INonRevealableNameSource: INameSource
+// {
+//     public bool isRevealable
+//     {
+//         get;   
+//     }
 
-    public static bool nameSourceIsRevealable(INameSource nameSource)
-    {
-        INonRevealableNameSource nonRevealableNameSource = nameSource as INonRevealableNameSource;
+//     public static bool nameSourceIsRevealable(INameSource nameSource)
+//     {
+//         INonRevealableNameSource nonRevealableNameSource = nameSource as INonRevealableNameSource;
 
-        if(nonRevealableNameSource == null)
-        {
-            return true;
-        } else
-        {
-            return nonRevealableNameSource.isRevealable();
-        }   
-    }
-}
+//         if(nonRevealableNameSource == null)
+//         {
+//             return true;
+//         } else
+//         {
+//             return nonRevealableNameSource.isRevealable;
+//         }   
+//     }
+// }
 
-public class Container : MonoBehaviour, INonRevealableNameSource, IQuestActivationObject, IAppearanceSource
+public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAppearanceSource
 {
 
     #region Chest Sprite Dictionary
@@ -218,6 +222,20 @@ public class Container : MonoBehaviour, INonRevealableNameSource, IQuestActivati
 
     public NewAnimationManager animationManager;
 
+    public SpriteLayerRendererList rendererList
+    {
+        get
+        {
+            if(animationManager != null)
+            {
+                return animationManager.rendererList;
+            } else
+            {
+                return null;
+            }
+        }
+    }
+
     public IAppearance appearance
     {
         get
@@ -256,14 +274,112 @@ public class Container : MonoBehaviour, INonRevealableNameSource, IQuestActivati
         return chestType.ToString();
     }
 
-    public bool isRevealable()
+    private void Awake()
     {
-        return !GateAndChestManager.hasBeenOpened(getChestKey());
+        createListeners();
     }
 
     private void OnDestroy()
     {
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(show);
+
+        destroyListeners();
+    }
+
+    //IRevealable interface methods
+
+    public void createListeners()
+    {
+        RevealManager.OnReveal.AddListener(onReveal);
+    }
+
+    public void destroyListeners()
+    {
+        RevealManager.OnReveal.RemoveListener(onReveal);
+    }
+
+    public void onReveal(bool toggleReveal)
+    {
+        if(rendererList == null)
+        {
+            return;
+        }
+
+        if(toggleReveal && !GateAndChestManager.hasBeenOpened(getChestKey()))
+        {
+            rendererList.createOutline(getRevealColor());
+        } else
+        {
+            rendererList.removeOutline();
+        }
+    }
+
+    public Color getRevealColor()
+    {
+        return ColorList.canBeInteractedWith;
+    }
+
+    public void createHoverTag()
+    {
+        MouseHoverManager.getMouseHoverBase();
+        MouseHoverManager.createHoverTag(getName());
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if(GateAndChestManager.hasBeenOpened(getChestKey()) || rendererList == null)
+        {
+            return;
+        }
+
+        switch(PlayerOOCStateManager.currentActivity)
+        {
+            case OOCActivity.walking:
+            case OOCActivity.inChestUI:
+            case OOCActivity.cunning:
+            case OOCActivity.intimidating:
+            case OOCActivity.observing:
+                break;
+            default:
+                return;
+        }
+
+        PlayerObject.toggleButtonPrompt(false);
+
+        if(!RevealManager.currentlyRevealed)
+        {
+            rendererList.createOutline(getRevealColor());
+            createHoverTag();
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if(GateAndChestManager.hasBeenOpened(getChestKey()) || rendererList == null)
+        {
+            return;
+        }
+
+        PlayerObject.restoreButtonPrompt();
+
+        switch(PlayerOOCStateManager.currentActivity)
+        {
+            case OOCActivity.walking:
+            case OOCActivity.inChestUI:
+            case OOCActivity.cunning:
+            case OOCActivity.intimidating:
+            case OOCActivity.observing:
+                break;
+            default:
+                return;
+        }
+
+        if(!RevealManager.currentlyRevealed)
+        {
+            rendererList.removeOutline();
+        }
+
+        MouseHoverManager.destroyMouseHoverBase();
     }
 
     private void show(string secretDoorFlag)
@@ -319,7 +435,7 @@ public class Container : MonoBehaviour, INonRevealableNameSource, IQuestActivati
     // protected void setMouseHoverPosition()
     // {
     //     Helpers.updatePolygonCollider(spriteRenderer, mouseHoverCollider);
-    //     // Helpers.updateGameObjectPosition(gameObject);
+    //     // GameObjectUtil.updateGameObjectPosition(gameObject);
     // }
 
     public void playerOpensChest()

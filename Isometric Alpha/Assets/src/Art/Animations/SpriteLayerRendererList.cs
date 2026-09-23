@@ -38,6 +38,8 @@ public class SpriteLayerRendererList : MonoBehaviour
     private ColorReplaceSchema colorSchema;
     private Dictionary<SpriteLayer, SpriteRenderer> spriteLayers;
 
+    public PolygonCollider2D bodyCollider;
+
     public void Awake()
     {
         if(instantiated)
@@ -157,6 +159,11 @@ public class SpriteLayerRendererList : MonoBehaviour
     public void removeOutline()
     {
         outlineRenderer.enabled = false;
+    }
+
+    public Color getOutlineColor()
+    {
+        return outlineRenderer.material.GetColor(outlineColorVarName);
     }
 
     #endregion

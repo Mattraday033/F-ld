@@ -35,10 +35,10 @@ public class MonsterSpawnDetails : OOCSpawnDetails
 
     public virtual void spawnActions(EnemyMovement enemyMovement)
     {
-        if (hasTutorialTargetHash())
-        {
-            addTutorialTargetComponent(enemyMovement, tutorialTargetHash);
-        }
+        // if (hasTutorialTargetHash())
+        // {
+        //     addTutorialTargetComponent(enemyMovement, tutorialTargetHash);
+        // }
 
         MovementManager.addMovementTracker(enemyMovement);
         enemyMovement.initializeAnimationManager();
@@ -53,11 +53,10 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
     public override Transform parent { get { return AreaManager.getMovableObjectParent(); } }
 
     public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string tutorialTargetHash = "", IAppearance appearance = null) :
-    base(npcName, cellCoords, appearance: appearance)
+    base(npcName, cellCoords, appearance: appearance, tutorialTargetHash: tutorialTargetHash)
     {
         this.facing = Facing.Random;
         this.movementType = MonsterMovementType.Random;
-        this.tutorialTargetHash = tutorialTargetHash;
     }
 
     // public override string getPrefabName()

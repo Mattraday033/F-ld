@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequenceTarget 
 {
-	public static Dictionary<string, List<ITutorialSequenceTarget>> hashDictionary = new Dictionary<string, List<ITutorialSequenceTarget>>(); 
+	public static Dictionary<string, List<ITutorialSequenceTarget>> hashDictionary;
 
 	public bool useUltraWideTutorialWindow = false;
 	public RectTransform rectTransform;
@@ -217,5 +217,12 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
         }
 
         visibility.visible = visibility.tutorialHash.Equals(tutorialHash) && gameObject.activeInHierarchy;
+    }
+
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+         hashDictionary = new Dictionary<string, List<ITutorialSequenceTarget>>();
     }
 }

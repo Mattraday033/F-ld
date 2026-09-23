@@ -54,7 +54,7 @@ public class GroundEffect
 		
 		indicator.transform.position = CombatGrid.getPositionAt(position);
 		
-		Helpers.updateGameObjectPosition(indicator);
+		GameObjectUtil.updateGameObjectPosition(indicator);
 	}
 	
 	public void destroy()

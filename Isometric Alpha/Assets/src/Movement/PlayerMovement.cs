@@ -10,14 +10,12 @@ public class PlayerMovement : MovementTracker
     {
         base.OnEnable();
         PlacedPartyMember.PartyMemberLocationRequest.AddListener(addToList);
-        MovementManager.OnMoveFinished.AddListener(preventAnimationStall);
     }
 
     protected override void OnDestroy()
     {
         base.OnDestroy();
         PlacedPartyMember.PartyMemberLocationRequest.RemoveListener(addToList);
-        MovementManager.OnMoveFinished.RemoveListener(preventAnimationStall);
     }
 
 	public override string getName()
@@ -80,6 +78,7 @@ public class PlayerMovement : MovementTracker
 
     private static PlayerMovement instance;
 
+
     [RuntimeInitializeOnLoadMethod]
     private static void initializePlayerMovement()
     {
@@ -96,25 +95,36 @@ public class PlayerMovement : MovementTracker
         instance = this;
     }
 
-    public void preventAnimationStall(int index)
+    private static Coroutine pollMovementRoutine;
+    public static void pollMovementAtEndOfMove()
     {
-        if(index != getMovementIndex())
-        //  || getAnimationManager() == null)
+        if(pollMovementRoutine != null || 
+            instance == null)
         {
             return;
         }
 
-        StartCoroutine(preventAnimationStallCoroutine());
+        pollMovementRoutine = instance.StartCoroutine(instance.pollMovementWait());
     }
 
-    private IEnumerator preventAnimationStallCoroutine()
+    private IEnumerator pollMovementWait()
     {
-        yield return null;
+        if(animationManager == null)
+        {
+            yield break;
+        }
 
-        // if(getAnimationManager().animancer.enabled && !canPlayRunAnimation())
-        // {
-        //     getAnimationManager().haltAllAnimations();
-        // }
+        while(isMoving())
+        {
+            yield return null;
+        }
+
+        pollMovementRoutine = null; 
+        
+        if(!PlayerInput.handleWASDMovement())
+        {
+            animationManager.handleMovementAnimation();
+        }
     }
 
     public static void updateStartEndPosition()

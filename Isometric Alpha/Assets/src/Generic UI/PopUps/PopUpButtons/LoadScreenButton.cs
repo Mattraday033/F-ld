@@ -53,7 +53,7 @@ public class LoadScreenButton : PopUpButton
 
         // Transform parent;
 
-        // if(CombatStateManager.inCombat || Flags.isInNewGameMode())
+        // if(CombatStateManager.inCombat || PlayerOOCStateManager.inMainMenu())
         // {
         //     GameObject outline = Instantiate(Resources.Load<GameObject>(PrefabNames.screenOutline), PopUpScreenBlockerManager.getPopUpParent(PopUpType.LoadOnlyScreen));
         //     parent = outline.transform;

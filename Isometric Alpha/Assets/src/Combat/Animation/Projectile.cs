@@ -144,7 +144,7 @@ public class Projectile : MonoBehaviour, IAnimationTracker
     {
         transform.position = newPosition;
 
-        // Helpers.updateColliderPosition(gameObject);
+        // GameObjectUtil.updateGameObjectPosition(gameObject);
     }
 
     private static int getCurrentFrameIndex(float elapsedTime, float maxTime, int numberOfPointsAlongTrajectory)

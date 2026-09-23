@@ -150,7 +150,7 @@ public static class SpawnInfoManager
         animationManager.characterFacing = State.playerFacing;
         animationManager.setAppearanceSource(PartyManager.getPlayerStats());
 
-        Helpers.updateGameObjectPosition(player);
+        GameObjectUtil.updateGameObjectPosition(player);
 
         spawnedObjects.Add(player.gameObject);
 
@@ -164,7 +164,7 @@ public static class SpawnInfoManager
 
         foreach (OOCSpawnDetails details in oocSpawnDetailsList)
         {
-            SpawnParams spawnParams = details.getSpawnParams();
+            SpawnParams spawnParams = details.spawnParams;
 
             List<GameObject> interactables = details.spawnInteractables();
 
@@ -214,7 +214,7 @@ public static class SpawnInfoManager
 
     //     transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
 
-    //     Helpers.updateGameObjectPosition(interactable);
+    //     GameObjectUtil.updateGameObjectPosition(interactable);
 
     //     return interactable;
     // }

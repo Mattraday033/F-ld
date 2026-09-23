@@ -77,7 +77,7 @@ public class SkillIndicator : MonoBehaviour
 	
     public void updateColliderPosition()
     {
-        Helpers.updateColliderPosition(tileMapGameObject);
+        GameObjectUtil.updateGameObjectPosition(tileMapGameObject);
     }
 
     public void setColor(Color color)

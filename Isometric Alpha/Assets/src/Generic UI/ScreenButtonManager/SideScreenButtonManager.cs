@@ -15,6 +15,8 @@ public class SideScreenButtonManager : MonoBehaviour
 
     public void setCurrentScreenType(ScreenType screenType)
     {
+        EscapeStack.escapeAll();
+
         OverallUIManager.changeScreen(screenType);
         
         PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);

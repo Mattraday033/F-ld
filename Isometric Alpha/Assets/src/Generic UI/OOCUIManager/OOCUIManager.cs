@@ -72,7 +72,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public void updateUI()
     {
-        if (Flags.isInNewGameMode() || CombatStateManager.inCombat || gameObject == null)
+        if (PlayerOOCStateManager.inMainMenu() || CombatStateManager.inCombat || gameObject == null)
         {
             disableOOCUI();
             return;

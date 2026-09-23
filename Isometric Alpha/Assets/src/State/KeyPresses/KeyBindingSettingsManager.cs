@@ -48,9 +48,18 @@ public class KeyBindingSettingsManager : MonoBehaviour
 
     private void OnDisable()
     {
+        bool wasListening = listeningForKeyBinding();
+
         newKeyCode = KeyCode.None;
         currentKeyIndex = default;
         keybindToOverwrite = null;
+
+        //Closing the screen while a bind button is armed is the third way out of listening mode. Without
+        //this the actions KeybindingButton.listenForKeyPress disabled would stay disabled for good.
+        if (wasListening)
+        {
+            PlayerOOCStateManager.updateEnabledInputActions();
+        }
     }
 
     private void OnDestroy()
@@ -207,6 +216,9 @@ public class KeyBindingSettingsManager : MonoBehaviour
         newKeyCode = KeyCode.None;
         keybindToOverwrite = null;
         EnableAllKeyBindButtons.Invoke();
+
+        //Puts back the actions KeybindingButton.listenForKeyPress disabled.
+        PlayerOOCStateManager.updateEnabledInputActions();
     }
 
     public void endListening()
@@ -236,6 +248,9 @@ public class KeyBindingSettingsManager : MonoBehaviour
         KeyPressManager.handlingSecondaryKeyPress = true;
 
         EnableAllKeyBindButtons.Invoke();
+
+        //Puts back the actions KeybindingButton.listenForKeyPress disabled.
+        PlayerOOCStateManager.updateEnabledInputActions();
     }
 
     public void spawnReturnToDefaultsPopUp()

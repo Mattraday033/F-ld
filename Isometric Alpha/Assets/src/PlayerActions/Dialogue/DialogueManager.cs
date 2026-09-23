@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -301,9 +301,11 @@ public class DialogueManager : MonoBehaviour
 
         PartyMemberPlacer.RevealAllFollowers.Invoke();
 
-        if (Flags.getFlag(FlagNameList.newGameFlagName))
+        //A dialogue that runs to its end means a game is under way, so the start menu state is left here the
+        //way clearing the newGame flag used to leave it.
+        if (PlayerOOCStateManager.inMainMenu())
         {
-            Flags.setFlag(FlagNameList.newGameFlagName, false);
+            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
         }
 
 		if (returnToRevealAfterDialogue)
@@ -1020,7 +1022,7 @@ public class DialogueManager : MonoBehaviour
 
                     PlayerMovement.updateStartEndPosition();
 
-                    Helpers.updateColliderPosition(PlayerObject.getInstanceTransform());
+                    GameObjectUtil.updateGameObjectPosition(PlayerObject.getInstanceTransform());
 
                     PartyMemberTrainManager.createPartyMemberTrain();
 
@@ -1424,7 +1426,7 @@ public class DialogueManager : MonoBehaviour
 
                     PlayerMovement.updateStartEndPosition();
 
-                    Helpers.updateColliderPosition(PlayerObject.getInstanceTransform());
+                    GameObjectUtil.updateGameObjectPosition(PlayerObject.getInstanceTransform());
 
                     PartyMemberTrainManager.createPartyMemberTrain();
 

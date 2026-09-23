@@ -59,7 +59,7 @@ public class SaveHandler : ScreenManager, IEscapable
 
 		instance = this;
 
-		if(Flags.isInNewGameMode())
+		if(PlayerOOCStateManager.inMainMenu())
         {
             OverallUIManager.setCurrentScreenType(this);
         }
@@ -75,7 +75,7 @@ public class SaveHandler : ScreenManager, IEscapable
             }
 		}
 
-        saveButton.gameObject.SetActive(!Flags.isInNewGameMode() && !CombatStateManager.inCombat);
+        saveButton.gameObject.SetActive(!PlayerOOCStateManager.inMainMenu() && !CombatStateManager.inCombat);
 
         base.Awake();
 
@@ -115,7 +115,7 @@ public class SaveHandler : ScreenManager, IEscapable
 
 	public static bool cannotSaveInCurrentState()
 	{
-		return Flags.getFlag(FlagNameList.newGameFlagName) || CombatStateManager.inCombat;
+		return PlayerOOCStateManager.inMainMenu() || CombatStateManager.inCombat;
 	}
 
     public void removeInvalidFileNameCharacter()
@@ -200,7 +200,7 @@ public class SaveHandler : ScreenManager, IEscapable
 	{
 		if(saveNameField.text.Length <= 0 || 
 			saveNameField.text.Length > saveNameCharacterLimit || 
-            Flags.isInNewGameMode())
+            PlayerOOCStateManager.inMainMenu())
 		{
 			return;
 		}
@@ -548,7 +548,7 @@ public class SaveHandler : ScreenManager, IEscapable
 
     public void handleEscapePress()
 	{
-		if (Flags.isInNewGameMode() && OverallUIManager.UIParentPanel && gameObject)
+		if (PlayerOOCStateManager.inMainMenu() && OverallUIManager.UIParentPanel && gameObject)
 		{
             AudioManager.playChangeScreenSFX();
             OverallUIManager.UIParentPanel.SetActive(false);
@@ -598,7 +598,7 @@ public class SaveHandler : ScreenManager, IEscapable
 
     private void OnDisable()
     {
-        if(Flags.isInNewGameMode() && redCloseButton != null)
+        if(PlayerOOCStateManager.inMainMenu() && redCloseButton != null)
         {
             redCloseButton.SetActive(false);
         }

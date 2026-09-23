@@ -1,7 +1,38 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git -C \"c:/Users/mattr/OneDrive/Documents/GitHub/F-ld/Isometric Alpha\" diff --stat -- \"Assets/src/State/NPCSpawn/OOCSpawnDetails.cs\")"
+      "Bash(git -C \"c:/Users/mattr/OneDrive/Documents/GitHub/F-ld/Isometric Alpha\" diff --stat -- \"Assets/src/State/NPCSpawn/OOCSpawnDetails.cs\")",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(py:*)",
+      "Bash(bash:*)",
+      "Bash(sh:*)",
+      "Bash(cd:*)",
+      "Bash(dotnet:*)",
+      "Bash(grep:*)",
+      "Bash(sort:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(awk:*)",
+      "Bash(sed:*)",
+      "Bash(uniq:*)",
+      "Bash(xargs:*)",
+      "Bash(find:*)",
+      "Bash(echo:*)",
+      "Bash(printf:*)",
+      "Bash(for:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git rev-parse:*)",
+      "PowerShell(Get-ChildItem:*)",
+      "PowerShell(Get-Content:*)",
+      "PowerShell(Test-Path:*)",
+      "PowerShell(Select-String:*)"
     ]
   }
 }

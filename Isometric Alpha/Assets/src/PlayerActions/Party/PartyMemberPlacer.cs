@@ -70,17 +70,17 @@ public class PartyMemberPlacer : MonoBehaviour
 
         GameObject placedPartyMemberObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.placedPartyMember), AreaManager.getNPCParentWithoutScale());
 
-        OOCSpawnDetails.addTutorialTargetComponent(placedPartyMemberObject, TutorialSequenceList.placedCharacterTargetHash);
+        // OOCSpawnDetails.addTutorialTargetComponent(placedPartyMemberObject, TutorialSequenceList.placedCharacterTargetHash);
 
         if (PartyManager.getPartyMember(nameOfPartyMember).placed)
         {
             placedPartyMemberObject.transform.position = PartyManager.getPartyMember(nameOfPartyMember).placedPosition;
-            Helpers.updateGameObjectPosition(placedPartyMemberObject);
+            GameObjectUtil.updateGameObjectPosition(placedPartyMemberObject);
         }
         else
         {
             placedPartyMemberObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(SkillManager.getPlayerCoords());
-            Helpers.updateGameObjectPosition(placedPartyMemberObject);
+            GameObjectUtil.updateGameObjectPosition(placedPartyMemberObject);
 
             PartyManager.getPartyMember(nameOfPartyMember).placed = true;
             PartyManager.getPartyMember(nameOfPartyMember).placedPosition = placedPartyMemberObject.transform.position;

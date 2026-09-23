@@ -9,6 +9,24 @@ public class CombatEscapeMenuPopUpButton : PopUpButton
 {
     private CurrentActivity previousActivity;
 
+    private static CombatEscapeMenuPopUpButton instance;
+
+    public static CombatEscapeMenuPopUpButton getInstance()
+    {
+        return instance;
+    }
+
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(instance);
+        }
+
+        instance = this;
+    }
+
 	public CombatEscapeMenuPopUpButton():
     base(PopUpType.CombatEscapeMenu)
     {

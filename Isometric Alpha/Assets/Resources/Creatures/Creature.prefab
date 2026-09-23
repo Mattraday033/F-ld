@@ -437,6 +437,7 @@ MonoBehaviour:
   faceRenderer: {fileID: 3734413944433061566}
   hairRenderer: {fileID: 3653720939992594567}
   shieldFrontRenderer: {fileID: 9063004995715628410}
+  bodyCollider: {fileID: 4474849849518369587}
 --- !u!1839735485 &615710888011936069
 Tilemap:
   m_ObjectHideFlags: 0

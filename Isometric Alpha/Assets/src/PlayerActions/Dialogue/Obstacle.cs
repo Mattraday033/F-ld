@@ -6,16 +6,21 @@ public class Obstacle : MonoBehaviour, IDialogueParticipant
 {
     private bool ignoreSecretDoors;
     public string obstacleName;
-    public SpriteRenderer spriteRenderer;
-    public Dialogue dialogue { 
+
+    private SpriteLayerRendererList _RendererList;
+    public SpriteLayerRendererList rendererList { get { return _RendererList; } }
+
+    public Dialogue dialogue {
                                 get
                                 {
                                     return null;
-                                } 
+                                }
                             }
 
-	private void Awake()
+	protected virtual void Awake()
 	{
+        _RendererList = GetComponent<SpriteLayerRendererList>();
+
         createListeners();
 	}
 
@@ -23,11 +28,6 @@ public class Obstacle : MonoBehaviour, IDialogueParticipant
 	{
 		destroyListeners();
 	}
-
-    public void setObstacleName(string obstacleName)
-    {
-        this.obstacleName = obstacleName;
-    }
 
     public string getName()
     {

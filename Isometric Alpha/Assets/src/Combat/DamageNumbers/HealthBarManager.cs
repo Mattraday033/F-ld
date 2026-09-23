@@ -177,8 +177,8 @@ public class HealthBarManager : MonoBehaviour
         emptySlider.maxValue = totalHealth;
         previewSlider.maxValue = totalHealth;
 
-        Helpers.updateGameObjectPosition(previewImage.gameObject);
-        Helpers.updateGameObjectPosition(emptyImage.gameObject);
+        GameObjectUtil.updateGameObjectPosition(previewImage.gameObject);
+        GameObjectUtil.updateGameObjectPosition(emptyImage.gameObject);
     }
 
 	public int getTotalHealth()
@@ -197,7 +197,7 @@ public class HealthBarManager : MonoBehaviour
 		
 		if(emptySlider.value > 0 && emptyImage.gameObject != null)
 		{
-			Helpers.updateGameObjectPosition(emptyImage.gameObject);
+			GameObjectUtil.updateGameObjectPosition(emptyImage.gameObject);
 		} else if(emptyImage.gameObject != null)
 		{
 			emptyImage.gameObject.SetActive(false);
@@ -216,7 +216,7 @@ public class HealthBarManager : MonoBehaviour
 
 		if (previewSlider.value > 0 && previewImage.gameObject != null)
 		{
-			Helpers.updateGameObjectPosition(previewImage.gameObject);
+			GameObjectUtil.updateGameObjectPosition(previewImage.gameObject);
 		}
 		else if (previewImage.gameObject != null)
 		{
@@ -243,7 +243,7 @@ public class HealthBarManager : MonoBehaviour
 		
 		if(previewSlider.value > 0 && previewImage.gameObject != null)
 		{
-			Helpers.updateGameObjectPosition(previewImage.gameObject);
+			GameObjectUtil.updateGameObjectPosition(previewImage.gameObject);
 		} else if(previewImage.gameObject != null)
 		{
 			previewImage.gameObject.SetActive(false);
@@ -267,7 +267,7 @@ public class HealthBarManager : MonoBehaviour
 
         transform.position = worldPosition;
 
-        Helpers.updateGameObjectPosition(gameObject);
+        GameObjectUtil.updateGameObjectPosition(gameObject);
     }
 
     public static void createHealthBar(Stats stats, Transform parent)

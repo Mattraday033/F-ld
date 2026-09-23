@@ -19,7 +19,7 @@ public static class CombatHoverManager
 
                 combatHoverTileGameObject.transform.localPosition = CombatGrid.getPositionAt(row, col);
 
-                Helpers.updateGameObjectPosition(combatHoverTileGameObject);
+                GameObjectUtil.updateGameObjectPosition(combatHoverTileGameObject);
             }
         }
     }

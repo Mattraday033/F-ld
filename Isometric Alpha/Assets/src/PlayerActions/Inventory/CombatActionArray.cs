@@ -48,7 +48,7 @@ public class CombatActionArray : StatBoostSourceCombiner
         {
             if (combatActions[index] != null)
             {
-                equipCombatAction(index, combatActions[index], removeItem: false);
+                equipCombatAction(index, combatActions[index], removeItem: false, skipUIUpdate: true);
             }
 
         }
@@ -152,7 +152,7 @@ public class CombatActionArray : StatBoostSourceCombiner
             // EquippedItems.OnEquipmentChange.Invoke();
         }
 
-        if(!Flags.isInNewGameMode() && !LoadSaveFile.midLoad && 
+        if(!PlayerOOCStateManager.inMainMenu() && !LoadSaveFile.midLoad && 
             PlayerOOCStateManager.currentActivity == OOCActivity.inUI)
         {
             combatActions[slotIndex].playUnequipSFX();
@@ -234,12 +234,12 @@ public class CombatActionArray : StatBoostSourceCombiner
         equipCombatAction(newCombatAction, firstAvailableSlotIndex);
     }
 
-    public void equipCombatAction(int slotIndex, CombatAction newCombatAction, bool removeItem = true)
+    public void equipCombatAction(int slotIndex, CombatAction newCombatAction, bool removeItem = true, bool skipUIUpdate = false)
     {
-        equipCombatAction(newCombatAction, slotIndex, removeItem);
+        equipCombatAction(newCombatAction, slotIndex, removeItem, skipUIUpdate);
     }
 
-    public void equipCombatAction(CombatAction newCombatAction, int slotIndex, bool removeItem = true)
+    public void equipCombatAction(CombatAction newCombatAction, int slotIndex, bool removeItem = true, bool skipUIUpdate = false)
     {
         if (slotIndex >= combatActions.Length || slotIndex < 0)
         {
@@ -272,7 +272,7 @@ public class CombatActionArray : StatBoostSourceCombiner
 
         if(!LoadSaveFile.midLoad)
         {
-            if(!Flags.isInNewGameMode() &&
+            if(!PlayerOOCStateManager.inMainMenu() &&
                 PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
                 OverallUIManager.lastScreenType != ScreenType.SaveAndLoad)
             {

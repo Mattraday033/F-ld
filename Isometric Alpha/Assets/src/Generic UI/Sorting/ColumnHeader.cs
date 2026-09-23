@@ -60,7 +60,7 @@ public class ColumnHeader : MonoBehaviour
         // {
         //     ScreenManager.OnScreenInteriorUpdate.Invoke();
         // }
-        // else if (Flags.getFlag(FlagNameList.newGameFlagName) || CombatStateManager.inCombat)
+        // else if (PlayerOOCStateManager.inMainMenu() || CombatStateManager.inCombat)
         // {
         //     grid.populatePanels(Tab.getList(DescribableList.Saves));
         // }

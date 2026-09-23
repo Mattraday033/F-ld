@@ -10,12 +10,6 @@ public static class Flags
 
 	private static Dictionary<string, bool> flags = new Dictionary<string, bool>();
 
-    static Flags()
-    {
-        flags[FlagNameList.newGameFlagName] = true; //is a new game 
-
-    }
-
 	public static bool getFlag(string flagName)
 	{
 		if (!flags.ContainsKey(flagName))
@@ -94,17 +88,10 @@ public static class Flags
 
 	public static void resetAllFlags()
 	{
-		resetAllFlags(false);
-	}
-
-	public static void resetAllFlags(bool newGame)
-	{
 		foreach (var key in flags.Keys.ToList())
 		{
 			flags[key] = false;
 		}
-
-		flags["newGame"] = newGame;
 	}
 
 	public static string getFlagsForSave()
@@ -112,15 +99,8 @@ public static class Flags
 		return JsonConvert.SerializeObject(flags, Formatting.Indented);
 	}
 
-	public static bool isInNewGameMode()
-	{
-		return getFlag(FlagNameList.newGameFlagName);
-	}
-
-	public static void exitNewGameMode()
-	{
-		flags[FlagNameList.newGameFlagName] = false;
-	}
+	//New game mode is no longer a flag: it is OOCActivity.MainMenu, asked through
+	//PlayerOOCStateManager.inMainMenu() and left by moving to another activity.
 
 	public static void stopPartyTrainSpawning()
 	{

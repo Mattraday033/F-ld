@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TemporaryGate : Gate
 {
-    private NameTagGenerator nameTagGenerator;
+    private OverHeadIconManager overHeadIconManager;
     private Collider2D colliderTileMap;
 
     protected override void Awake()
@@ -12,7 +12,7 @@ public class TemporaryGate : Gate
         base.Awake();
 
         colliderTileMap = GetComponent<Collider2D>();
-        nameTagGenerator = GetComponent<NameTagGenerator>();
+        overHeadIconManager = GetComponent<OverHeadIconManager>();
     }
 
     public override void checkGateStatus()
@@ -57,9 +57,9 @@ public class TemporaryGate : Gate
         // colliderTileMap.enabled = false;
         // spriteRenderer.color = Color.clear;
 
-        // if(nameTagGenerator != null)
+        // if(overHeadIconManager != null)
         // {
-        //     nameTagGenerator.onReveal(false);
+        //     overHeadIconManager.onReveal(false);
         // }
 
         // if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
@@ -73,9 +73,9 @@ public class TemporaryGate : Gate
         // colliderTileMap.enabled = true;
         // spriteRenderer.color = Color.white;
 
-        // if(nameTagGenerator != null)
+        // if(overHeadIconManager != null)
         // {
-        //     nameTagGenerator.onReveal(RevealManager.currentlyRevealed);
+        //     overHeadIconManager.onReveal(RevealManager.currentlyRevealed);
         // }
 
         // if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)

@@ -242,9 +242,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5bc4a5ae4cba964b875ec182f3a410a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  iconParent: {fileID: 0}
+  _RendererList: {fileID: 0}
   ignoreHover: 0
   noNameTag: 0
-  spriteRenderer: {fileID: 3868892900884546479}
   nameTag: {fileID: 0}
 --- !u!1001 &5790972736350243900
 PrefabInstance:

@@ -73,9 +73,20 @@ public class InspectNode : MonoBehaviour
         }
     }
 
+    //PlayerInput.Update returns early while inspecting, but the CustomInputActions are event driven rather
+    //than polled, so they would keep firing underneath the inspect node - one Space would dismiss the node
+    //and close the chest behind it. Same pattern as KeybindingButton.listenForKeyPress: pull the whole set
+    //and let PlayerOOCStateManager put back whatever the current activity calls for.
+    //Combat is left alone - no OOC action is enabled there, and CombatInputManager.Update already gates
+    //itself on InspectNode.inspecting.
     private void setToInspectingMode()
     {
         inspecting = true;
+
+        if (!CombatStateManager.inCombat)
+        {
+            CustomInputAction.DisableAllInputActions.Invoke();
+        }
 
         TutorialSequenceStepTargetUIObject.createCutOutMask(hover);
 
@@ -85,6 +96,11 @@ public class InspectNode : MonoBehaviour
     private void exitInspectingMode()
     {
         inspecting = false;
+
+        if (!CombatStateManager.inCombat)
+        {
+            PlayerOOCStateManager.updateEnabledInputActions();
+        }
 
         MouseHoverManager.OnHoverPanelCreation.Invoke();
     }

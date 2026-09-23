@@ -100,41 +100,11 @@ public static class Helpers
         return currentCollider.Overlap(filter, intersectingColliders) > 0;
     }
 
-    //updates colliders attached to a transform's .gameObject by setting it to inactive and then reactivating it.
-    //should update the collider's position in a single frame
-    public static void updateColliderPosition(Transform t)
-    {
-        updateColliderPosition(t.gameObject);
-    }
-
-    public static void updateColliderPosition(GameObject gObj)
-    {
-        gObj.SetActive(false);
-        gObj.SetActive(true);
-    }
-
-    public static void updateSpritePosition(GameObject gObj)
-    {
-        gObj.SetActive(false);
-        gObj.SetActive(true);
-    }
-
     public static Color cloneColor(Color colorToClone)
     {
         return new Color(colorToClone.r, colorToClone.b, colorToClone.g, colorToClone.a);
     }
 
-    public static void updateGameObjectPosition(GameObject gObj)
-    {
-        gObj.SetActive(false);
-        gObj.SetActive(true);
-    }
-
-    public static void updateGameObjectPosition(Transform transform)
-    {
-        transform.gameObject.SetActive(false);
-        transform.gameObject.SetActive(true);
-    }
 
     public static bool checkPositionForColliders(Vector3 position, LayerMask layerMask)
     {
@@ -438,19 +408,6 @@ public static class Helpers
     public static Vector2 findEighthPoint(Vector2 closerPoint, Vector2 fartherPoint)
     {
         return findMidPoint(closerPoint, findQuarterPoint(closerPoint, fartherPoint));
-    }
-
-    public static bool tagMatchesCriteria(GameObject combatSprite, string[] tagCriteria)
-    {
-        foreach (string tag in tagCriteria)
-        {
-            if (combatSprite.gameObject.tag.Equals(tag))
-            {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public static string removeSpacesOnEnds(string stringWithSpaces)

@@ -322,7 +322,7 @@ public struct TutorialSequenceStep : IDescribable
 
         describeSelfFull(currentTutorialMessageWindow);
 
-        //Helpers.updateGameObjectPosition(currentTutorialMessageWindow.gameObject.transform);
+        //GameObjectUtil.updateGameObjectPosition(currentTutorialMessageWindow.gameObject.transform);
 
         currentTutorialMessageWindow.setWorldPositionForDescriptionPanel(tutorialTargetTransform, arrowDirection);
     }

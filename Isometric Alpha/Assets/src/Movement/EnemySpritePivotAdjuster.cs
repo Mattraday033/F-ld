@@ -12,6 +12,6 @@ public class EnemySpritePivotAdjuster : MonoBehaviour
     void Start()
     {
         rectTransform.pivot = newPivot;
-        Helpers.updateGameObjectPosition(gameObject);
+        GameObjectUtil.updateGameObjectPosition(gameObject);
     }
 }

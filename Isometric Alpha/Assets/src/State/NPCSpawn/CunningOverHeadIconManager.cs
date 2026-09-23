@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CunningNameTagGenerator : NameTagGenerator
+public class CunningOverHeadIconManager : OverHeadIconManager
 {
 	public override Color getRevealColor()
 	{

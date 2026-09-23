@@ -18,13 +18,11 @@ public class ReturnToMainMenu : IDecision
  
 	public void execute()
 	{
-        Flags.resetAllFlags(true);
+        Flags.resetAllFlags();
         PartyManager.resetPartyMembers();
-		
+
         CombatStateManager.inCombat = false;
         CombatStateManager.useReturnCell();
-
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
 
         AudioManager.endAmbience();
 

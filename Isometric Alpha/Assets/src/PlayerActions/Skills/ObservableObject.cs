@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using Ink.Runtime;
 
 public class SecretDoorInfo : IStoryVariableSource
@@ -171,7 +172,7 @@ public class TutorialSecretDoorInfo : SecretDoorInfo
     }
 }
 
-public class ObservableObject : MonoBehaviour, INonRevealableNameSource
+public class ObservableObject : MonoBehaviour, IRevealable
 {
     public bool observed = false;
     public List<string> secretDoorKeys = new List<string>();
@@ -195,6 +196,19 @@ public class ObservableObject : MonoBehaviour, INonRevealableNameSource
     public DialogueTrigger dialogueTrigger;
     
     public QuestStepActivationScript script;
+    public bool isRevealable
+    {
+        get
+        {
+            if(gameObject.layer == LayerAndTagManager.npcLayer)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
+    }
 
     public readonly static UnityEvent SetAllSecretDoorsObservable = new UnityEvent();
 
@@ -203,30 +217,79 @@ public class ObservableObject : MonoBehaviour, INonRevealableNameSource
         return dialogueTrigger.getName();
     }
 
-    public bool isRevealable()
-    {
-        if(gameObject.layer == LayerAndTagManager.npcLayer)
-        {
-            return true;
-        } else
-        {
-            return false;
-        }
-    }
-
-
     private void OnEnable()
     {
-        SecretDoorFlags.OnSecretDoorDiscovery.AddListener(hideSecretDoor);
-        TerrainVisibilityManager.OnTerrainVisibilityChange.AddListener(setTerrainSprite);
-        SetAllSecretDoorsObservable.AddListener(setGameObjectObservable);
+        createListeners();
     }
 
     private void OnDestroy()
     {
+        destroyListeners();
+    }
+
+    //IRevealable interface methods
+
+    public SpriteLayerRendererList rendererList
+    {
+        get
+        {
+            //Observable objects draw through spriteRenderer/terrainRenderer rather than a layered list
+            return null;
+        }
+    }
+
+    public void createListeners()
+    {
+        SecretDoorFlags.OnSecretDoorDiscovery.AddListener(hideSecretDoor);
+        TerrainVisibilityManager.OnTerrainVisibilityChange.AddListener(setTerrainSprite);
+        SetAllSecretDoorsObservable.AddListener(setGameObjectObservable);
+
+        RevealManager.OnReveal.AddListener(onReveal);
+    }
+
+    public void destroyListeners()
+    {
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(hideSecretDoor);
         TerrainVisibilityManager.OnTerrainVisibilityChange.RemoveListener(setTerrainSprite);
         SetAllSecretDoorsObservable.RemoveListener(setGameObjectObservable);
+
+        RevealManager.OnReveal.RemoveListener(onReveal);
+    }
+
+    public void onReveal(bool toggleReveal)
+    {
+        if(!isRevealable || rendererList == null)
+        {
+            return;
+        }
+
+        if(toggleReveal)
+        {
+            rendererList.createOutline(getRevealColor());
+        } else
+        {
+            rendererList.removeOutline();
+        }
+    }
+
+    public Color getRevealColor()
+    {
+        return ColorList.observationColor;
+    }
+
+    public void createHoverTag()
+    {
+        //Empty on purpose (the secret door is meant to read as terrain until it is observed)
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        onReveal(true);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        onReveal(false);
     }
 
     private void setGameObjectObservable()

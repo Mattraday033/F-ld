@@ -99,7 +99,7 @@ public class EnemyStats : Stats
 
         combatSprite.transform.localScale = new Vector3(1f, 1f, 1f);
 
-        Helpers.updateGameObjectPosition(combatSprite);
+        GameObjectUtil.updateGameObjectPosition(combatSprite);
 
         return combatSprite;
     }

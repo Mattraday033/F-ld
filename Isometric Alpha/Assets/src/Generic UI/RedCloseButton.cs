@@ -7,7 +7,7 @@ public class RedCloseButton : MonoBehaviour
 
     private void OnEnable()
     {
-        if(Flags.isInNewGameMode() && SaveHandler.getInstance() != null)
+        if(PlayerOOCStateManager.inMainMenu() && SaveHandler.getInstance() != null)
         {
             SaveHandler.getInstance().redCloseButton = gameObject;
         }
@@ -15,7 +15,7 @@ public class RedCloseButton : MonoBehaviour
 
     public void closeUI()
     {
-        if(Flags.isInNewGameMode() && StartingMenuManager.getInstance() != null)
+        if(PlayerOOCStateManager.inMainMenu() && StartingMenuManager.getInstance() != null)
         {
             StartingMenuManager.getInstance().handleESCPress();
         } else

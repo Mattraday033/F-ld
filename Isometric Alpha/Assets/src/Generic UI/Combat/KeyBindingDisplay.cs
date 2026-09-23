@@ -343,7 +343,7 @@ public class KeyBindingDisplay : MonoBehaviour
 
     private void Awake()
     {
-        if(Flags.isInNewGameMode() && !LoadSaveFile.midLoad)
+        if(PlayerOOCStateManager.inMainMenu() && !LoadSaveFile.midLoad)
         {
             gameObject.SetActive(false);
             return;

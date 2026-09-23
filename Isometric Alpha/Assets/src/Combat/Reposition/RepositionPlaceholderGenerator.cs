@@ -22,7 +22,7 @@ public static class RepositionPlaceholderGenerator
 		
 		placeHolderObject.transform.position = CombatGrid.getPositionAt(placeHolderPosition);
 		placeHolderObject.transform.localScale = combatantToBeMoved.combatSprite.transform.localScale;
-		Helpers.updateGameObjectPosition(placeHolderObject);
+		GameObjectUtil.updateGameObjectPosition(placeHolderObject);
 		
         CombatantHover hover = placeHolderObject.AddComponent<CombatantHover>();
 

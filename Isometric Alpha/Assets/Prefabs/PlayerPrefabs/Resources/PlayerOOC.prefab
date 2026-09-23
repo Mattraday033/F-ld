@@ -513,10 +513,10 @@ SpriteMask:
   m_Sprite: {fileID: 8177471321811730583, guid: 87aaca0a643d54397ba969dab4fc8875,
     type: 3}
   m_MaskAlphaCutoff: 0.2
-  m_FrontSortingLayerID: 592294213
-  m_BackSortingLayerID: 0
-  m_FrontSortingLayer: 18
-  m_BackSortingLayer: 0
+  m_FrontSortingLayerID: 847938393
+  m_BackSortingLayerID: 877229515
+  m_FrontSortingLayer: 11
+  m_BackSortingLayer: 6
   m_FrontSortingOrder: 10
   m_BackSortingOrder: 0
   m_IsCustomRangeActive: 1

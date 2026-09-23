@@ -27,11 +27,10 @@ public static class IRevealableExtensions
 {
     public static void revealBasedOnStateChange(this IRevealable revealable)
     {
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking && 
-            RevealManager.currentlyRevealed && 
-            INonRevealableNameSource.nameSourceIsRevealable(revealable))
+        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking &&
+            RevealManager.currentlyRevealed)
         {
-            revealable.rendererList.createOutline(revealable.getRevealColor());
+            revealable.onReveal(true);
         } else if(PlayerOOCStateManager.currentActivity != OOCActivity.walking)
         {
             revealable.onReveal(false);

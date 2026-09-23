@@ -84,6 +84,11 @@ public static class SceneChange
 
     public static void changeSceneToStartMenu()
     {
+        //Every route back to the start menu comes through here, so this is where the game re-enters the state
+        //the newGame flag used to stand for. The bypass is needed because setCurrentActivity otherwise refuses
+        //to leave inTutorialSequence for anything but walking.
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.MainMenu, tutorialSequenceCheckBypass: true);
+
         SceneManager.LoadScene(SceneNameList.startMenu);
     }
 

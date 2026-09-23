@@ -47,7 +47,7 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
         }else if (alwaysTop || boxAlwaysOnTop)
         {
             direction = ArrowDirection.Top;
-        } else if(Flags.isInNewGameMode())
+        } else if(PlayerOOCStateManager.inMainMenu())
         {
             direction = ArrowDirection.Bottom;
         } else if(PlayerOOCStateManager.currentActivity == OOCActivity.inShopUI)
@@ -236,7 +236,7 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
             transform.localScale = Constants.flippedXScale;
         }
 
-        Helpers.updateGameObjectPosition(gameObject);
+        GameObjectUtil.updateGameObjectPosition(gameObject);
     }
 
     private void setPadding()
