@@ -149,25 +149,25 @@ public static class PartyMemberTrainManager
 
 	public static void hideOverlappingPartyMembers()
 	{
-        foreach(PartyMemberMovement partyMemberMovement in partyMemberTrain)
-        {
-            Vector3Int cell = partyMemberMovement.getCell();
+        // foreach(PartyMemberMovement partyMemberMovement in partyMemberTrain)
+        // {
+        //     Vector3Int cell = partyMemberMovement.getCell();
 
-            if(cell.Equals(PlayerMovement.getInstance().getCell()))
-            {
-                partyMemberMovement.hideSprite();
-                continue;
-            }
+        //     if(cell.Equals(PlayerMovement.getInstance().getCell()))
+        //     {
+        //         partyMemberMovement.hideSprite();
+        //         continue;
+        //     }
 
-            foreach(PartyMemberMovement otherPartyMember in partyMemberTrain)
-            {
-                if(cell.Equals(otherPartyMember.getCell()) && !otherPartyMember.partyMember.Equals(partyMemberMovement.partyMember))
-                {
-                    MovementTracker.determineLowestTrainPriority(partyMemberMovement, otherPartyMember).hideSprite();
-                    break;
-                }
-            }
-        }
+        //     foreach(PartyMemberMovement otherPartyMember in partyMemberTrain)
+        //     {
+        //         if(cell.Equals(otherPartyMember.getCell()) && !otherPartyMember.partyMember.Equals(partyMemberMovement.partyMember))
+        //         {
+        //             MovementTracker.determineLowestTrainPriority(partyMemberMovement, otherPartyMember).hideSprite();
+        //             break;
+        //         }
+        //     }
+        // }
 	}
 
     public static void hideOverlappingPartyMembersOnMoveEnded(int index)

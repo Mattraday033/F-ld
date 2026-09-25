@@ -15,8 +15,8 @@ public class SkillIndicator : MonoBehaviour
     public SpriteRenderer frontSelector;
     public SpriteRenderer backSelector;
 
-    // public EffectAnimationManager frontSelectorTwo;
-    // public EffectAnimationManager backSelectorTwo;
+    public EffectAnimationManager frontSelectorTwo;
+    public EffectAnimationManager backSelectorTwo;
 
     public GameObject tileMapGameObject;
 
@@ -28,13 +28,17 @@ public class SkillIndicator : MonoBehaviour
 
     #region Awake/OnEnable/OnDisable
 
-    private void Awake()
-    {        
-        // frontSelectorTwo.loops = true;
-        // frontSelectorTwo.setAnimations(EffectAnimationType.FrontSelector2);
+    public void Awake()
+    {
+        frontSelectorTwo.Awake();
+        frontSelectorTwo.loops = true;
+        frontSelectorTwo.animationData = AnimationDataList.frontSelector2;
+        frontSelectorTwo.startAnimation();
 
-        // backSelectorTwo.loops = true;
-        // backSelectorTwo.setAnimations(EffectAnimationType.BackSelector2);
+        backSelectorTwo.Awake();
+        backSelectorTwo.loops = true;
+        backSelectorTwo.animationData = AnimationDataList.backSelector2;
+        backSelectorTwo.startAnimation();
 
         mouseHoverCollider.enabled = PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence;
     }
@@ -95,13 +99,31 @@ public class SkillIndicator : MonoBehaviour
         spriteRenderer.color = new Color(color.r, color.g, color.b, ColorList.hoverSelectorAlpha);
     }
 
+    private void setSelectorTwoColor(EffectAnimationManager selectorTwo, Color newColor)
+    {
+        if(selectorTwo.rendererList == null)
+        {
+            return;
+        }
+
+        foreach(SpriteLayer layer in EnumUtil.SpriteLayers)
+        {
+            selectorTwo.rendererList[layer].color = newColor;
+        }
+    }
+
+    private Color getColorWithTransparency()
+    {
+        return new Color(color.r, color.g, color.b, ColorList.hoverSelectorAlpha);
+    }
+
     public void setToTargetFoundSelector()
     {
         backSelector.color = Color.clear;
         frontSelector.color = Color.clear;
 
-        // backSelectorTwo.spriteRenderer.color = color;
-        // frontSelectorTwo.spriteRenderer.color = color;
+        setSelectorTwoColor(backSelectorTwo, color);
+        setSelectorTwoColor(frontSelectorTwo, color);
     }
 
     public void setToNoTargetFoundSelector()
@@ -109,8 +131,8 @@ public class SkillIndicator : MonoBehaviour
         setColorWithTransparency(backSelector);
         setColorWithTransparency(frontSelector);
 
-        // backSelectorTwo.spriteRenderer.color = Color.clear;
-        // frontSelectorTwo.spriteRenderer.color = Color.clear;
+        setSelectorTwoColor(backSelectorTwo, Color.clear);
+        setSelectorTwoColor(frontSelectorTwo, Color.clear);
     }
 
     public void OnMouseEnter()
@@ -121,8 +143,8 @@ public class SkillIndicator : MonoBehaviour
 
             setColor(Color.green);
             setToTargetFoundSelector();
-            // setColorWithTransparency(backSelectorTwo.spriteRenderer);
-            // setColorWithTransparency(frontSelectorTwo.spriteRenderer);
+            setSelectorTwoColor(backSelectorTwo, getColorWithTransparency());
+            setSelectorTwoColor(frontSelectorTwo, getColorWithTransparency());
         }
     }
 

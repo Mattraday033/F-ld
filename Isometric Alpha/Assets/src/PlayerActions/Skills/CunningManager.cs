@@ -271,7 +271,8 @@ public class CunningManager : SkillManager
             if (collision != null && 
                 (collision.gameObject.layer == LayerAndTagManager.colliderLayer || 
                  collision.gameObject.layer == LayerAndTagManager.observableLayer || 
-                 collision.gameObject.layer == LayerAndTagManager.npcLayer))
+                 collision.gameObject.layer == LayerAndTagManager.npcLayer ||
+                 collision.gameObject.layer == LayerAndTagManager.chestLayer))
             {
                 return true;
             }

@@ -66,7 +66,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
                                             return _DialogueSource.dialogue;
                                         } else
                                         {
-                                            return DialogueList.getDialogue(npcName, AreaManager.locationName);
+                                            return null;
                                         }
                                     }
                              }
@@ -130,7 +130,13 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     public string getName()
     {
-        return dialogue.getName();
+        if(dialogue == null)
+        {
+            return npcName;
+        } else
+        {
+            return dialogue.getName();
+        }
     }
 
     private void OnEnable()

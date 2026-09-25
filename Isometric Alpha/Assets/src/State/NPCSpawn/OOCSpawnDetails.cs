@@ -47,7 +47,8 @@ public class OOCSpawnDetails: IAppearanceSource
                             Facing facing = Facing.Random,
                             string tutorialTargetHash = "",
                             bool ignoresSecretDoors = false,
-                            Vector3Int[] extraSpaces = null
+                            Vector3Int[] extraSpaces = null,
+                            float colliderOffset = -2f
                             )
     {
         this.npcName = npcName;
@@ -64,8 +65,13 @@ public class OOCSpawnDetails: IAppearanceSource
         if(!string.IsNullOrEmpty(tutorialTargetHash))
         {
             aestheticSpawnBehaviours[typeof(TutorialTargetSpawnBehaviour)] = new TutorialTargetSpawnBehaviour(tutorialTargetHash);
-        } 
-        
+        }
+
+        if(colliderOffset >= -1f && colliderOffset <= 1f)
+        {
+            universalSpawnBehaviours[typeof(TilemapOffsetSpawnBehaviour)] = new TilemapOffsetSpawnBehaviour(colliderOffset);
+        }
+
         // this.universalSpawnBehaviours = universalSpawnBehaviours ?? new List<IExtraSpawnBehaviour>();
         // this.aestheticSpawnBehaviours = aestheticSpawnBehaviours ?? new List<IExtraSpawnBehaviour>();
     }
@@ -192,6 +198,7 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
 
 public class ObstacleSpawnDetails : OOCSpawnDetails
 {
+    protected override int layer { get { return LayerAndTagManager.objectLayer; } }
 
     public ObstacleSpawnDetails(string npcName, 
                                 Vector3Int cellCoords,
@@ -244,10 +251,18 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
 }
 
-public class NPCSpawnDetails : OOCSpawnDetails
+public class NPCSpawnDetails : OOCSpawnDetails, IDialogueSource
 {
     protected override string tag { get { return LayerAndTagManager.npcTag; } }
     protected override int layer { get { return LayerAndTagManager.npcLayer; } }
+
+    public virtual Dialogue dialogue
+    {
+        get
+        {
+            return DialogueList.getDialogue(AreaManager.locationName, npcName);
+        }
+    }
 
     public NPCSpawnDetails( string npcName,
                             Vector3Int cellCoords,
@@ -258,14 +273,16 @@ public class NPCSpawnDetails : OOCSpawnDetails
                             string tutorialTargetHash = "",
                             bool ignoresSecretDoors = true,
                             bool sleepingDialogueIntro = false,
-                            IAppearance appearance = null) :
-    base(npcName, facing: facing, appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, ignoresSecretDoors: ignoresSecretDoors, extraSpaces: extraSpaces)
+                            IAppearance appearance = null,
+                            float colliderOffset = -2f) :
+    base(npcName, facing: facing, appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, ignoresSecretDoors: ignoresSecretDoors, extraSpaces: extraSpaces, colliderOffset: colliderOffset)
     {
         aestheticSpawnBehaviours[typeof(AnimationManagerSpawnBehaviour)] = new AnimationManagerSpawnBehaviour(this, facing, animationType);
         aestheticSpawnBehaviours[typeof(NPCMouseHoverSpawnBehaviour)] = new NPCMouseHoverSpawnBehaviour();
         aestheticSpawnBehaviours[typeof(OverHeadIconManagerSpawnBehaviour)] = new OverHeadIconManagerSpawnBehaviour();
 
         universalSpawnBehaviours[typeof(DialogueTriggerSpawnBehaviour)] = new DialogueTriggerSpawnBehaviour(npcName,
+                                                                            dialogueSource: this,
                                                                             AudioClipList.getDialogueIntroSFXLogic(npcName, sleepingDialogueIntro),
                                                                             speakAtStartScript);
 
@@ -276,6 +293,60 @@ public class NPCSpawnDetails : OOCSpawnDetails
     }
 }
 
+public class LadderSpawnDetails : NPCSpawnDetails
+{
+    public const float offsetY = .1f;
+    public const bool doNotFlipX = false;
+
+    public override Dialogue dialogue
+    {
+        get
+        {
+            return Ladder.getDialogue();
+        }
+    }
+
+    public Ladder ladder;
+
+    public LadderSpawnDetails(Vector3Int cellCoords, Ladder ladder, IAppearance appearance = null, float colliderOffset = -2f) :
+    base(NPCNameList.ladder, cellCoords, appearance: appearance, colliderOffset: colliderOffset)
+    {
+        this.ladder = ladder;
+    }
+
+}
+
+public class NonDialogueNPCSpawnDetails : NPCSpawnDetails
+{
+    public override SpawnParams spawnParams { 
+                                                get 
+                                                { 
+                                                    InteractableSpawnParams _SpawnParams = SpawnParamsList.getSpawnParams(AreaManager.locationName, npcName);
+
+                                                    if(_SpawnParams.startSpawningFlagList.flags.Length == 0 && 
+                                                        _SpawnParams.stopSpawningFlagList.flags.Length == 0)
+                                                    {
+                                                        return new NeverSpawnParams();
+                                                    } else
+                                                    {
+                                                        return _SpawnParams;
+                                                    }
+                                                }
+                                            }
+
+    public NonDialogueNPCSpawnDetails(string npcName,
+                                        Vector3Int cellCoords,
+                                        Facing facing = Facing.Random,
+                                        bool ignoresSecretDoors = true,
+                                        CharacterAnimationType animationType = CharacterAnimationType.None,
+                                        IAppearance appearance = null,
+                                        float colliderOffset = -2f) :
+    base(npcName, cellCoords, facing, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, appearance: appearance, colliderOffset: colliderOffset)
+    {
+        universalSpawnBehaviours[typeof(DialogueTriggerSpawnBehaviour)] = new DialogueTriggerSpawnBehaviour(npcName);
+    }
+}
+
 public class VaultableObjectSpawnDetails : NPCSpawnDetails
 {
 
@@ -283,11 +354,13 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
                                         Vector3Int cellCoords,
                                         VaultableObject vaultableObject,
                                         string tutorialTargetHash = "",
-                                        IAppearance appearance = null) :
+                                        IAppearance appearance = null,
+                                        float colliderOffset = -2f) :
     base(npcName,
          cellCoords,
          tutorialTargetHash: tutorialTargetHash,
-         appearance: appearance)
+         appearance: appearance,
+         colliderOffset: colliderOffset)
     {
         DialogueTriggerSpawnBehaviour dialogueTriggerSpawnBehaviour = universalSpawnBehaviours[typeof(DialogueTriggerSpawnBehaviour)] as DialogueTriggerSpawnBehaviour;
         dialogueTriggerSpawnBehaviour.dialogueSource = vaultableObject;
@@ -305,9 +378,10 @@ public class HorseSpawnDetails : NPCSpawnDetails
                                 SpeakAtStartScript speakAtStartScript = null,
                                 CharacterAnimationType animationType = CharacterAnimationType.None, 
                                 bool ignoresSecretDoors = true,
-                                IAppearance appearance = null) :
-    base(npcName, cellCoords, facing: facing, extraSpaces: generateRumpExtraSpace(extraSpaces ?? new Vector3Int[0], cellCoords, facing), 
-            speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, appearance: appearance)
+                                IAppearance appearance = null,
+                                float colliderOffset = -2f) :
+    base(npcName, cellCoords, facing: facing, extraSpaces: generateRumpExtraSpace(extraSpaces ?? new Vector3Int[0], cellCoords, facing),
+            speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, appearance: appearance, colliderOffset: colliderOffset)
     {
 
     }
@@ -967,36 +1041,6 @@ public class HiddenButtonSpawnDetails : ButtonSpawnDetails
     }
 }
 
-public class NonDialogueNPCSpawnDetails : NPCSpawnDetails
-{
-    public override SpawnParams spawnParams { 
-                                                get 
-                                                { 
-                                                    InteractableSpawnParams _SpawnParams = SpawnParamsList.getSpawnParams(AreaManager.locationName, npcName);
-
-                                                    if(_SpawnParams.startSpawningFlagList.flags.Length == 0 && 
-                                                        _SpawnParams.stopSpawningFlagList.flags.Length == 0)
-                                                    {
-                                                        return new NeverSpawnParams();
-                                                    } else
-                                                    {
-                                                        return _SpawnParams;
-                                                    }
-                                                }
-                                            }
-
-    public NonDialogueNPCSpawnDetails(string npcName,
-                                        Vector3Int cellCoords,
-                                        Facing facing = Facing.Random,
-                                        bool ignoresSecretDoors = true,
-                                        CharacterAnimationType animationType = CharacterAnimationType.None,
-                                        IAppearance appearance = null) :
-    base(npcName, cellCoords, facing, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, appearance: appearance)
-    {
-
-    }
-}
-
 public class DependantSpawnDetails : NPCSpawnDetails
 {
 
@@ -1010,8 +1054,9 @@ public class DependantSpawnDetails : NPCSpawnDetails
                                     Facing facing = Facing.Random,
                                     bool normalScale = false,
                                     CharacterAnimationType animationType = CharacterAnimationType.None,
-                                    IAppearance appearance = null) :
-    base(npcName, cellCoords, facing: facing, animationType: animationType, appearance: appearance)
+                                    IAppearance appearance = null,
+                                    float colliderOffset = -2f) :
+    base(npcName, cellCoords, facing: facing, animationType: animationType, appearance: appearance, colliderOffset: colliderOffset)
     {
         this.parentName = parentName;
         this.normalScale = normalScale;
@@ -1229,8 +1274,9 @@ public class RestStopAndShopkeeperSpawnDetails : NPCSpawnDetails
                                              Facing facing = Facing.Random, 
                                              bool isShopkeeper = false,
                                              bool isRestStop = false,
-                                             IAppearance appearance = null) :
-    base(npcName, cellCoords, facing: facing, extraSpaces: extraSpaces, ignoresSecretDoors: ignoresSecretDoors, appearance: appearance)
+                                             IAppearance appearance = null,
+                                             float colliderOffset = -2f) :
+    base(npcName, cellCoords, facing: facing, extraSpaces: extraSpaces, ignoresSecretDoors: ignoresSecretDoors, appearance: appearance, colliderOffset: colliderOffset)
     {
         this.isShopkeeper = isShopkeeper;
         this.isRestStop = isRestStop;
@@ -1267,9 +1313,10 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
                                     string tutorialTargetHash, 
                                     string terrainSpriteName, 
                                     ObservableDelegate observable = null, 
-                                    QuestStepActivationScript script = null, 
-                                    IAppearance appearance = null) :
-    base(npcName, cellCoords, appearance: appearance, tutorialTargetHash: tutorialTargetHash)
+                                    QuestStepActivationScript script = null,
+                                    IAppearance appearance = null,
+                                    float colliderOffset = -2f) :
+    base(npcName, cellCoords, appearance: appearance, tutorialTargetHash: tutorialTargetHash, colliderOffset: colliderOffset)
     {
         this.secretDoorInfo = secretDoorInfo;
 
@@ -1345,46 +1392,13 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
     // }
 }
 
-public class LadderSpawnDetails : NPCSpawnDetails
-{
-    public const float offsetY = .1f;
-    public const bool doNotFlipX = false;
-
-    public Ladder ladder;
-
-    public LadderSpawnDetails(Vector3Int cellCoords, Ladder ladder, IAppearance appearance = null) :
-    base(NPCNameList.ladder, cellCoords, appearance: appearance)
-    {
-        this.ladder = ladder;
-    }
-
-    // public override Dialogue getDialogue(string areaName)
-    // {
-    //     return Ladder.dialogue;
-    // }
-
-    // public override void spawnActions(GameObject npc)
-    // {
-    //     base.spawnActions(npc);
-    // }
-
-    // public override void spawnActions(DialogueTrigger mainTrigger)
-    // {
-    //     base.spawnActions(mainTrigger);
-
-    //     mainTrigger.dialogue.variableSources.Add(ladder);
-
-    //     SpawnInfoManager.spawnTransitionSpace(ladder.locationName, ladder.destinationName, cellCoords, ladder.facing);
-    // }
-}
-
 public class VaultableOrDestroyableObjectSpawnDetails : VaultableObjectSpawnDetails
 {
 
     public int index;
 
-    public VaultableOrDestroyableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableOrDestroyableObject vaultableOrDestroyableObject, int index = 0, IAppearance appearance = null) :
-    base(npcName, cellCoords, vaultableOrDestroyableObject, appearance: appearance)
+    public VaultableOrDestroyableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableOrDestroyableObject vaultableOrDestroyableObject, int index = 0, IAppearance appearance = null, float colliderOffset = -2f) :
+    base(npcName, cellCoords, vaultableOrDestroyableObject, appearance: appearance, colliderOffset: colliderOffset)
     {
         this.index = index;
     }

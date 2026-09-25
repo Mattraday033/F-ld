@@ -213,7 +213,7 @@ public class IntimidateManager : CunningManager
             //     return true;
             // }
 
-            if (collision != null)
+            if (collision != null && base.cullFromCollision(new Collider2D[] { collision }))
             {
                 ISkillTarget target = collision.GetComponent<ISkillTarget>();
 

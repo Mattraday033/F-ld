@@ -34,149 +34,169 @@ public enum EffectAnimationType
 }
 
 
-public class EffectAnimationManager : AnimationManager
+public struct DamagePacket
 {
-
-    public readonly static UnityEvent<EffectAnimationType> DestroyAllEffectsOfType = new UnityEvent<EffectAnimationType>();
-    
-    public EffectAnimationType type;
-    public AnimationClip animationClip;
-
-    public bool waitBeforeSFX = true;
-    public bool playSFX = true;
-    private const float timeToWaitBeforeSFX = .3f;
-    private const float secondsToWaitBeforeWoundedAnimation = 5f/6f;
-
-    public GridCoords targetCoords;
-
     public int damage;
     public bool crit;
     public bool healsTarget;
 
-    float spawnDamageNumbersTime;
-
-    public bool loops = false;
-
-    public void setAnimations(EffectAnimationType effectType)
+    public DamagePacket(int damage, bool crit = false, bool healsTarget = false)
     {
-        // setAnimations(effectType.ToString());
+        this.damage = damage;
+        this.crit = crit;
+        this.healsTarget = healsTarget;
+    }
+}
+
+public class AnimationData
+{
+    private Dictionary<SpriteLayer, Sprite[]> sprites;
+    private float[] timingInSeconds;
+
+    private SFXType? sfx;
+    private int sfxIndex;
+
+    public AnimationData(Dictionary<SpriteLayer, Sprite[]> sprites, float[] timingInSeconds, SFXType? sfx = null, int sfxIndex = 0)
+    {
+        this.sprites = sprites;
+        this.timingInSeconds = timingInSeconds;
+        this.sfx = sfx;
+        this.sfxIndex = sfxIndex;
     }
 
-    // public override void setAnimations(string effectType)
-    // {
-        // string folderPath = PrefabNames.abilityEffectFolderPath + effectType;
-
-        // if(Enum.TryParse(effectType, ignoreCase: true, out EffectAnimationType animationType))
-        // {
-        //     type = animationType;
-        // }
-
-        // setSpriteRenderer();
-        // determineOutline();
-
-        // animationClip = Resources.Load<AnimationClip>(folderPath);
-
-        // spawnDamageNumbersTime = animationClip.length * (3f/4f);
-
-        // if(loops)
-        // {
-        //     createClipTransitionThenLoop(animationClip);
-        // } else
-        // {
-        //     animancer.Play(createClipTransitionThenDelete(animationClip));
-        // }
-
-        // if(playSFX)
-        // {
-        //     if(waitBeforeSFX)
-        //     {
-        //         StartCoroutine(waitThenPlaySFX());
-        //     } else
-        //     {
-        //         AudioManager.playEffectAnimationSFX(type);
-        //     }
-        // }
-    // }
-
-    private void setSpriteRenderer()
+    public IEnumerator animationCoroutine(SpriteLayerRendererList rendererList, EffectAnimationManager effectAnimationManager, bool loopAnimation = false)
     {
-        switch(type)
+        if(rendererList == null)
         {
-            case EffectAnimationType.FrontLvlUp:
-                // spriteRenderer.sortingLayerName = LayerAndTagManager.firstSortingLayerName;
-                // spriteRenderer.sortingOrder = Constants.indexOne;
-                // spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
-                return;
-            case EffectAnimationType.BackLvlUp:
-                // spriteRenderer.sortingLayerName = LayerAndTagManager.firstSortingLayerName;
-                // spriteRenderer.sortingOrder = Constants.indexOne;
-                // spriteRenderer.spriteSortPoint = SpriteSortPoint.Pivot;
-                // spriteRenderer.transform.localPosition = new Vector3(0f, .15f, 0f);
-                return;
-        }
-    }
-
-    private void determineOutline()
-    {
-        switch(type)
-        {
-            case EffectAnimationType.BatSwarm:
-            case EffectAnimationType.FrontSelector:
-            case EffectAnimationType.BackSelector:                
-            case EffectAnimationType.FrontSelector2:
-            case EffectAnimationType.BackSelector2:
-            case EffectAnimationType.Bubbles:
-            case EffectAnimationType.Splash:
-            case EffectAnimationType.Confused:
-                return;
-            default:
-                // spriteRenderer.material = Resources.Load<Material>(PrefabNames.outlineMaterial);
-                return;
-        }
-    }
-
-    private IEnumerator waitThenPlaySFX()
-    {
-        float timeWaited = 0f;
-
-        while(timeWaited < timeToWaitBeforeSFX)
-        {
-            yield return null;
-
-            timeWaited += Time.deltaTime;
+            GameObject.Destroy(effectAnimationManager.gameObject);
+            yield break;
         }
 
-        AudioManager.playEffectAnimationSFX(type);
-    }
-    
-    private IEnumerator handleDamageNumbersAndWoundedAnim()
-    {
-        float elapsedTime = 0f;
-        bool spawnedDamageNumbers = false;
-        // bool playedWoundedAnimation = false;
+        int index = 0;
+        float wait = 0f;
+        bool moveToNextSprite = true;
 
-        while (elapsedTime < animationClip.length)
+        while(true)
         {
-            yield return null;
-
-            elapsedTime += Time.deltaTime;
-
-            if(elapsedTime >= spawnDamageNumbersTime && !spawnedDamageNumbers)
+            if(moveToNextSprite)
             {
-                DamageNumberPopup.create(targetCoords, damage, transform.position, DamageNumberPopup.getDirectionByTargetCoords(targetCoords),
-                                 CombatAnimationManager.getInstance().damageNumberCanvas, crit, healsTarget);
-                spawnedDamageNumbers = true;
-
-                if(CombatGrid.combatantExistsAtCoords(targetCoords, out Stats combatant))
+                foreach(KeyValuePair<SpriteLayer, Sprite[]> kvp in sprites)
                 {
-                    combatant.playAnimationOnDamage();
+                    rendererList[kvp.Key].sprite = kvp.Value[index];
                 }
             }
 
-            // if(elapsedTime >= secondsToWaitBeforeWoundedAnimation && !playedWoundedAnimation)
-            // {
+            yield return null;
 
-            // }
+            wait += Time.deltaTime;
+
+            if(wait >= timingInSeconds[index])
+            {
+                index++;
+                moveToNextSprite = true;
+
+                if(index == Constants.indexOne)
+                {
+
+                }
+
+                if(index >= timingInSeconds.Length && !loopAnimation)
+                {
+                    GameObject.Destroy(effectAnimationManager.gameObject);
+                    yield break;
+                } else if(index >= timingInSeconds.Length)
+                {
+                    index = 0;
+                }
+
+                if(sfx.HasValue && index == sfxIndex)
+                {
+                    AudioManager.playAudioClipAsSingleton(sfx.Value);
+                }
+
+                wait = 0f;
+            }
+        }
+    }
+}
+
+public class EffectAnimationManager : MonoBehaviour
+{
+
+    public readonly static UnityEvent<EffectAnimationType> DestroyAllEffectsOfType = new UnityEvent<EffectAnimationType>();
+    
+    public EffectAnimationType effectType;
+
+    public GridCoords targetCoords = default;
+
+    public DamagePacket? damagePacket;
+
+    public bool loops = false;
+    private bool started = false;
+
+    private AnimationData _AnimationData;
+    public AnimationData animationData
+    {
+        set
+        {
+            _AnimationData = value;
+        }
+    }
+
+    public SpriteLayerRendererList rendererList;
+
+    private bool initiated = false;
+
+    public void Awake()
+    {
+        if(initiated)
+        {
+            return;
+        }
+
+        rendererList = rendererList ?? GetComponent<SpriteLayerRendererList>();
+        rendererList.Awake();
+
+        initiated = true;
+    }
+
+    public static EffectAnimationManager createEffect(GridCoords coords,
+                                                        AnimationData animationData,
+                                                        bool loops = false,
+                                                        DamagePacket? damagePacket = null)
+    {
+        GameObject creature = Instantiate(Resources.Load<GameObject>(PrefabNames.creaturePrefab), CombatGrid.getPositionAt(coords), Quaternion.identity);
+
+        EffectAnimationManager effect = creature.AddComponent<EffectAnimationManager>();
+        effect.targetCoords = coords;
+        effect.animationData = animationData;
+        effect.loops = loops;
+
+        if(damagePacket.HasValue)
+        {
+            effect.damagePacket = damagePacket.Value;
+        }
+
+        effect.StartCoroutine(animationData.animationCoroutine(effect.rendererList, effect, loops));
+
+        return effect;
+    }
+
+    public void startAnimation()
+    {
+        if(_AnimationData != null && !started)
+        {
+            started = true;
+            StartCoroutine(_AnimationData.animationCoroutine(rendererList, this, loopAnimation: loops));
+        }
+    }
+
+    public void createDamagePopUp()
+    {
+        if(damagePacket.HasValue && damagePacket.Value.damage > 0)
+        {
+            DamageNumberPopup.create(targetCoords, damagePacket.Value.damage, transform.position, DamageNumberPopup.getDirectionByTargetCoords(targetCoords),
+                CombatAnimationManager.getInstance().damageNumberCanvas, damagePacket.Value.crit, damagePacket.Value.healsTarget);
         }
     }
 
@@ -209,21 +229,21 @@ public class EffectAnimationManager : AnimationManager
     //     return Instantiate(Resources.Load<GameObject>(PrefabNames.effect), parent).GetComponent<EffectAnimationManager>();
     // }
 
-    // public override bool spriteSetByHeartBeat()
+    // public bool spriteSetByHeartBeat()
     // {
     //     return false;
     // }
 
-    // public override void removeAnimation()
+    // public void removeAnimation()
     // {
     //     DestroyImmediate(gameObject);
 
     //     base.removeAnimation();
     // }
 
-    // private void destroyEffectOfType(EffectAnimationType type)
+    // private void destroyEffectOfType(EffectAnimationType effectType)
     // {
-    //     if(this.type == type)
+    //     if(this.effectType == effectType)
     //     {
     //         Destroy(gameObject);
     //     }

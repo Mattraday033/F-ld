@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public interface IExtraSpawnBehaviour
@@ -89,12 +90,14 @@ public class DialogueTriggerSpawnBehaviour : IExtraSpawnBehaviour
         }
     }
 
-    public DialogueTriggerSpawnBehaviour(string npcName, PlaySFXLogic introSFX, bool hasExtraSpaces, SpeakAtStartScript speakAtStartScript = null)
+    public DialogueTriggerSpawnBehaviour(string npcName, IDialogueSource dialogueSource = null, PlaySFXLogic introSFX = null, bool hasExtraSpaces = false, SpeakAtStartScript speakAtStartScript = null)
     {
         this.npcName = npcName;
         this.speakAtStartScript = speakAtStartScript;
-        this.introSFX = introSFX;
+        this.introSFX = introSFX ?? AudioClipList.getDialogueIntroSFXLogic(npcName);
         this.hasExtraSpaces = hasExtraSpaces;
+
+        this.dialogueSource = dialogueSource;
     }
 
     public void addBehaviour(GameObject gameObject)
@@ -285,6 +288,26 @@ public class TutorialTriggerColliderSpawnBehaviour : IExtraSpawnBehaviour
     {
         TutorialTriggerCollider tutorialCollider = gameObject.GetComponent<TutorialTriggerCollider>();
         tutorialCollider.tutorialSequenceKey = tutorialKey;
+    }
+}
+
+public class TilemapOffsetSpawnBehaviour : IExtraSpawnBehaviour
+{
+    private float offset;
+
+    public TilemapOffsetSpawnBehaviour(float offset)
+    {
+        this.offset = offset;
+    }
+
+    public void addBehaviour(GameObject gameObject)
+    {
+        TilemapCollider2D tilemapCollider = gameObject.GetComponent<TilemapCollider2D>();
+
+        if(tilemapCollider != null)
+        {
+            tilemapCollider.offset = new Vector2(tilemapCollider.offset.x, offset);
+        }
     }
 }
 

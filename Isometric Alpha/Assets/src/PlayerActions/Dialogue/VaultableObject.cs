@@ -122,14 +122,12 @@ public class Ladder : IStoryVariableSource
     public Facing facing;
     public int dexDifficulty;
 
-    public string locationName;
     public string destinationName;
     public string description;
 
-    public Ladder(int dexDifficulty, string locationName, string destinationName, string description, Facing facing)
+    public Ladder(int dexDifficulty, string destinationName, string description, Facing facing)
     {
         this.dexDifficulty = dexDifficulty;
-        this.locationName = locationName;
         this.destinationName = destinationName;
         this.description = description;
         this.facing = facing;

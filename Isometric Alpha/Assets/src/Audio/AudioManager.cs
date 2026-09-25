@@ -755,7 +755,7 @@ public static class AudioClipList
         return audioClips.getAsset(sfxType);
     }
 
-    public static PlaySFXLogic getDialogueIntroSFXLogic(string npcName, bool sleeping = false)
+    public static PlaySFXLogic getDialogueIntroSFXLogic(string npcName = "", bool sleeping = false)
     {
         if(sleeping)
         {

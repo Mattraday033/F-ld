@@ -288,7 +288,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(-13, -1), Facing.SouthWest, type: ChestType.Chest));
 
         list.Add(new LadderSpawnDetails(new Vector3Int(7, -4),
-                                        new Ladder(Constants.difficultyTwo, LocationNameList.guardHouseTopFloor, LocationNameList.campManse, 
+                                        new Ladder(Constants.difficultyTwo, LocationNameList.campManse,
                                                     Ladder.barracksLadderDescription, Facing.SouthWest), appearance: SpriteDescriptionList.ladderTallSW));
 
         oocSpawnDetailsDict.Add(LocationNameList.guardHouseTopFloor, list);
@@ -368,7 +368,7 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new LadderSpawnDetails(new Vector3Int(-9, -10),
-                                new Ladder(Constants.noDifficulty, LocationNameList.bodyPile, LocationNameList.campNorthWest, 
+                                new Ladder(Constants.noDifficulty, LocationNameList.campNorthWest,
                                             Ladder.bodyPileExitLadderDescription, Facing.NorthWest), appearance: SpriteDescriptionList.ladderTallNEFirstSortingLayer));
 
         // list.Add(new DeadBodySpawnDetails(NPCNameList.slave, new Vector3Int(0, 2), NPCNameList.slave, facing: Facing.NorthEast, weaponless: true));
@@ -876,7 +876,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.imre+1, new Vector3Int(-8, 1), facing: Facing.SouthEast));
 
         list.Add(new LadderSpawnDetails(new Vector3Int(-5, -20),
-                                        new Ladder(Constants.difficultyTwo, LocationNameList.campManse, LocationNameList.guardHouseTopFloor, 
+                                        new Ladder(Constants.difficultyTwo, LocationNameList.guardHouseTopFloor,
                                                     Ladder.barracksLadderDescription, Facing.SouthEast), appearance: SpriteDescriptionList.ladderTallSWFlipped));
 
         list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(6, -16), facing: Facing.SouthWest));
@@ -895,8 +895,8 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.guard+5, new Vector3Int(-3, 16)/*, animationName: MonsterNameList.spearman*/, facing: Facing.NorthWest));
 
         list.Add(new LadderSpawnDetails(new Vector3Int(-8, 16),
-                                        new Ladder(Constants.noDifficulty, LocationNameList.campNorthWest, LocationNameList.bodyPile, 
-                                                    Ladder.bodyPileLadderDescription, Facing.SouthEast), appearance: SpriteDescriptionList.ladderShortNEGroundSortingLayer));
+                                        new Ladder(Constants.noDifficulty, LocationNameList.bodyPile,
+                                                    Ladder.bodyPileLadderDescription, Facing.SouthEast), colliderOffset: .65f, appearance: SpriteDescriptionList.ladderShortNEGroundSortingLayer));
 
         #region Exiting body pile
 
@@ -1637,8 +1637,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.noBrand+3, new Vector3Int(-5, 4), facing: Facing.NorthEast)); 
 
         list.Add(new LadderSpawnDetails(new Vector3Int(1, 4),
-                                        new Ladder(Constants.difficultyThree, ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, 
-                                                    ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, 
+                                        new Ladder(Constants.difficultyThree, ZoneKeyList.manseSecondFloor + LocationNameList.stockroom,
                                                     Ladder.kitchensLadderDescription, Facing.SouthWest), appearance: SpriteDescriptionList.ladderTallNE)); //, flipX: Constants.flipX
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, list);
@@ -1945,8 +1944,7 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new LadderSpawnDetails(new Vector3Int(0, -2),
-                                        new Ladder(Constants.difficultyThree, ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, 
-                                                    ZoneKeyList.manseFirstFloor + LocationNameList.kitchens, 
+                                        new Ladder(Constants.difficultyThree, ZoneKeyList.manseFirstFloor + LocationNameList.kitchens,
                                                     Ladder.kitchensLadderDescription, Facing.SouthWest), appearance: SpriteDescriptionList.ladderShortNE)); //, flipX: Constants.flipX
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(0, -9)));

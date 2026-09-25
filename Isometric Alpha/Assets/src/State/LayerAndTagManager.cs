@@ -206,6 +206,7 @@ public static class LayerAndTagManager
         blocksCunningLayerMask |= (1 << openableDoorLayer);
 		blocksCunningLayerMask |= (1 << enemyLayer);
         blocksCunningLayerMask |= (1 << observableLayer);
+        blocksCunningLayerMask |= (1 << chestLayer);
 
         return blocksCunningLayerMask;
 	}
@@ -221,6 +222,7 @@ public static class LayerAndTagManager
         blocksIntimidateLayerMask |= (1 << openableDoorLayer);
 		blocksIntimidateLayerMask |= (1 << enemyLayer);
         blocksIntimidateLayerMask |= (1 << observableLayer);
+        blocksIntimidateLayerMask |= (1 << chestLayer);
 
         return blocksIntimidateLayerMask;
 	}
@@ -240,6 +242,7 @@ public static class LayerAndTagManager
         blocksObservationLayerMask |= (1 << objectLayer);
         blocksObservationLayerMask |= (1 << cunningableObjectLayer);
         blocksObservationLayerMask |= (1 << openableDoorLayer);
+        blocksObservationLayerMask |= (1 << chestLayer);
         return blocksObservationLayerMask;
     }
 

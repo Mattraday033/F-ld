@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 3060634069565429252}
   - component: {fileID: 3060634069565429307}
   - component: {fileID: 8123317049189917128}
-  - component: {fileID: 7304062698378934162}
-  - component: {fileID: 5092550638677199902}
+  - component: {fileID: 3009181488798987979}
   m_Layer: 0
   m_Name: Effect
   m_TagString: Enemy
@@ -52,6 +51,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -99,44 +101,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c6c8284735ecc4f99981890296a1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changesFacing: 0
-  spriteRenderer: {fileID: 3060634069565429307}
-  shadowSprite: {fileID: 0}
-  polygonCollider2D: {fileID: 0}
-  healthBarManager: {fileID: 0}
-  linkedStats: {fileID: 0}
-  characterToAnimate: 
-  heartBeatRow: 0
-  animancer: {fileID: 5092550638677199902}
-  key: 0
+  effectType: 0
   targetCoords:
     row: 0
     col: 0
-  damage: 0
-  crit: 0
-  healsTarget: 0
---- !u!95 &7304062698378934162
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3060634069565429253}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c6b8998df414d50499244156329c8cf3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5092550638677199902
+  loops: 0
+  rendererList: {fileID: 3009181488798987979}
+--- !u!114 &3009181488798987979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,11 +116,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3060634069565429253}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c75c0dcb6d50eb64abd727a90406ca2b, type: 3}
+  m_Script: {fileID: 11500000, guid: d6e5de506e1bbc04293e8e8f30e25b0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Animator: {fileID: 7304062698378934162}
-  _Transitions: {fileID: 0}
-  _ActionOnDisable: 0
-  _PlayAutomatically: 1
-  _Animations: []
+  outlineRenderer: {fileID: 0}
+  shieldBackRenderer: {fileID: 0}
+  weaponRenderer: {fileID: 0}
+  bodyRenderer: {fileID: 3060634069565429307}
+  cloakRenderer: {fileID: 0}
+  faceRenderer: {fileID: 0}
+  hairRenderer: {fileID: 0}
+  shieldFrontRenderer: {fileID: 0}
+  bodyCollider: {fileID: 0}

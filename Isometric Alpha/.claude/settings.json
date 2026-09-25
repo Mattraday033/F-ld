@@ -32,7 +32,10 @@
       "PowerShell(Get-ChildItem:*)",
       "PowerShell(Get-Content:*)",
       "PowerShell(Test-Path:*)",
-      "PowerShell(Select-String:*)"
+      "PowerShell(Select-String:*)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(cd \"C:/Users/mattr/OneDrive/Documents/GitHub/F-ld/Isometric Alpha\" && git status --short && git diff --stat && git diff -- Assets/src/Util/Helpers.cs Assets/src/Art/Animations/SpriteLayerRendererList.cs | head -250)"
     ]
   }
 }

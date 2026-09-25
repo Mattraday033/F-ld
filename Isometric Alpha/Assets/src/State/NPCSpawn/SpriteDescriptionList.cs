@@ -6,8 +6,8 @@ public static class SpriteDescriptionList
 {
     #region Obstacles
 
-    public readonly static SpriteDescription slaveBed = new SpriteDescription(spriteName: PrefabNames.slaveBed, offset: Constants.onTableHeightOffset*-3f);
-    public readonly static SpriteDescription slaveBedFlipped = new SpriteDescription(spriteName: PrefabNames.slaveBed, flipX: true, offset: Constants.onTableHeightOffset*-3f);
+    public readonly static SpriteDescription slaveBed = new SpriteDescription(spriteName: PrefabNames.slaveBed, offset: Constants.onTableHeightOffset*2, withScale: false);
+    public readonly static SpriteDescription slaveBedFlipped = new SpriteDescription(spriteName: PrefabNames.slaveBed, flipX: true, offset: Constants.onTableHeightOffset*-2f, withScale: false);
 
     public readonly static SpriteDescription shackWallHalf = new SpriteDescription(spriteName: PrefabNames.shackWallHalf);
 

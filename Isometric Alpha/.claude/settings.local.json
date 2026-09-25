@@ -138,7 +138,10 @@
       "Bash(python3:*)",
       "Bash(py:*)",
       "Bash(bash:*)",
-      "Bash(sh:*)"
+      "Bash(sh:*)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(cd \"C:/Users/mattr/OneDrive/Documents/GitHub/F-ld/Isometric Alpha\" && git status --short && git diff --stat && git diff -- Assets/src/Util/Helpers.cs Assets/src/Art/Animations/SpriteLayerRendererList.cs | head -250)"
     ],
     "additionalDirectories": [
       "C:\\Users\\mattr\\OneDrive\\Documents\\GitHub\\F-ld\\Isometric Alpha\\ProjectSettings",

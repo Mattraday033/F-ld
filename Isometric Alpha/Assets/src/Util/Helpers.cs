@@ -439,21 +439,6 @@ public static class Helpers
         return stringWithSpaces.Substring(startIndex,endIndex - startIndex);
     }
 
-    public static void updatePolygonCollider(SpriteRenderer spriteRenderer, PolygonCollider2D polygonCollider2D)
-    {
-        if(spriteRenderer.sprite == null || spriteRenderer.sprite.GetPhysicsShapeCount() <= 0)
-        {
-            return;
-        }
-
-        List<Vector2> pointsList = new List<Vector2>();
-
-        spriteRenderer.sprite.GetPhysicsShape(0, pointsList); 
-
-        polygonCollider2D.points = pointsList.ToArray();
-    }
-
-
     public static Vector3 getAveragePosition(List<Vector3> positions)
     {
         if(positions.Count <= 0)

@@ -49,13 +49,14 @@ public class SpriteLayerRendererList : MonoBehaviour
 
         spriteLayers = new Dictionary<SpriteLayer, SpriteRenderer>()
         {
-            [SpriteLayer.Shield_Back] = shieldBackRenderer,  
-            [SpriteLayer.Weapon] = weaponRenderer,  
-            [SpriteLayer.Body] = bodyRenderer,  
-            [SpriteLayer.Cloak] = cloakRenderer,  
-            [SpriteLayer.Face] = faceRenderer,  
-            [SpriteLayer.Hair] = hairRenderer,  
-            [SpriteLayer.Shield_Front] = shieldFrontRenderer  
+            [SpriteLayer.Body] = bodyRenderer, 
+
+            [SpriteLayer.Shield_Back] = orBody(shieldBackRenderer),
+            [SpriteLayer.Weapon] = orBody(weaponRenderer),   
+            [SpriteLayer.Cloak] = orBody(cloakRenderer),  
+            [SpriteLayer.Face] = orBody(faceRenderer),  
+            [SpriteLayer.Hair] = orBody(hairRenderer),  
+            [SpriteLayer.Shield_Front] = orBody(shieldFrontRenderer)
         };
 
         foreach(SpriteRenderer renderer in spriteLayers.Values)
@@ -69,7 +70,17 @@ public class SpriteLayerRendererList : MonoBehaviour
             registeredBehaviours[renderer] = new Dictionary<Component, List<RegisterBehaviour>>();
         }
 
+        if(bodyCollider != null)
+        {
+            registerBehaviour(SpriteLayer.Body, this, () => RendererUtil.updatePolygonCollider(bodyRenderer, bodyCollider));
+        }
+
         instantiated = true;
+    }
+
+    private SpriteRenderer orBody(SpriteRenderer renderer)
+    {
+        return renderer != null ? renderer : bodyRenderer;
     }
 
     public SpriteRenderer this[SpriteLayer layer]
@@ -144,6 +155,8 @@ public class SpriteLayerRendererList : MonoBehaviour
 
         outlineRenderer.sprite = SpriteUtil.createBlankSpriteFromTemplate(spriteLayers[SpriteLayer.Body].sprite);
         outlineRenderer.flipX = spriteLayers[SpriteLayer.Body].flipX;
+        outlineRenderer.sortingLayerID = spriteLayers[SpriteLayer.Body].sortingLayerID;
+        outlineRenderer.sortingOrder = spriteLayers[SpriteLayer.Body].sortingOrder;
 
         float sizeX = sizeMod/spriteLayers[SpriteLayer.Body].sprite.texture.width;
         float sizeY = sizeMod/spriteLayers[SpriteLayer.Body].sprite.texture.height;
