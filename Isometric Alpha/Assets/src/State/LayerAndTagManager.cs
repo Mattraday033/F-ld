@@ -23,6 +23,7 @@ public static class LayerAndTagManager
 	public readonly static int movableObjectBlockerLayer = LayerMask.NameToLayer("MovableObjectBlocker");
     public readonly static int UILayer = LayerMask.NameToLayer("UI");
 	public readonly static int observableLayer = LayerMask.NameToLayer("Observable");
+    public readonly static int mouseHoverLayer = LayerMask.NameToLayer("MouseHover");
 
 	public const string groundSortingLayerName = "Ground";	
     public const string firstSortingLayerName = "First";
@@ -67,6 +68,7 @@ public static class LayerAndTagManager
     public readonly static LayerMask terrainLayerMask = initializeTerrainLayerMask();
 	public readonly static LayerMask moveableObjectLayerMask = initializemoveableObjectLayerMask();
 	public readonly static LayerMask uiLayerMask = initializeUILayerMask();
+	public readonly static LayerMask mouseHoverMask = initializeMouseHoverLayerMask();
 
 
 	public readonly static LayerMask blocksPlayerMovementLayerMask = initializeBlocksPlayerMovementLayerMask();
@@ -145,6 +147,15 @@ public static class LayerAndTagManager
 
         return uiLayerMask;
 	}
+
+	private static LayerMask initializeMouseHoverLayerMask()
+	{
+		LayerMask mouseHoverLayerMask = new LayerMask();
+        mouseHoverLayerMask |= (1 << mouseHoverLayer);
+
+        return mouseHoverLayerMask;
+	}
+
 
 	private static LayerMask initializeBlocksPlayerMovementLayerMask()
 	{

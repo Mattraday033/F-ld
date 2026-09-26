@@ -282,6 +282,7 @@ public static class PrefabNames
 
     private const string creaturesFolder = "Creatures/";
     public const string creaturePrefab = creaturesFolder + "Creature";
+    public const string extraSpace = creaturesFolder + "Extra Space";
     public const string playerPrefab = creaturesFolder + "PlayerOOC";
     public const string NPC = creaturesFolder + "NPC";
 

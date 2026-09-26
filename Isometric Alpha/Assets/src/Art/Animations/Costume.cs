@@ -303,8 +303,8 @@ public class Costume: IAppearance
         return new Costume(
                             bodyType: BodyType.LovashiArmor,
                             weaponAppearanceType: WeaponAppearanceType.SpearSimple,
-                            facialFeatureType: FacialFeatureType.Short_Goatee,
-                            hairType: HairType.Short_Ruffled,
+                            // facialFeatureType: FacialFeatureType.Short_Goatee,
+                            // hairType: HairType.Short_Ruffled,
                             cloakType: CloakType.None
                             );
     }

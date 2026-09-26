@@ -44,7 +44,7 @@ public static class TerrainVisibilityManager
         TransitionManager.AfterTransition.AddListener(initializeOnTransition);
         TransitionManager.AfterTransition.AddListener(waitFrameAndCheckForTerrainOnTransition);
         FadeToBlackManager.OnFadeBackInFinished.AddListener(waitFrameAndCheckForTerrainOnTransition);
-        MovementManager.OnMoveFinished.AddListener(changeTerrainStateOnTerrainCollision);
+        MovementManager.OnStepFinished.AddListener(changeTerrainStateOnTerrainCollision);
     }
 
     private static void waitFrameAndCheckForTerrainOnTransition()

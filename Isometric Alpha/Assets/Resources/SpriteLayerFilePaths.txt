@@ -1,3 +1,4 @@
+Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Idle_Front
 Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Back
 Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Front
 Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Back_Left

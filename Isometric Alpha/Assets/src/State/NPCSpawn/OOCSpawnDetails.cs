@@ -7,6 +7,7 @@ using UnityEngine.Tilemaps;
 public class OOCSpawnDetails: IAppearanceSource
 {
     public string npcName;
+    public int index;
     public Vector3Int cellCoords;
     public Vector3Int[] extraSpaces = new Vector3Int[0];
     protected Facing facing;
@@ -17,7 +18,10 @@ public class OOCSpawnDetails: IAppearanceSource
     private IAppearance _Appearance;
     public IAppearance appearance { get { return _Appearance; } }
 
-    public virtual SpawnParams spawnParams { get { return SpawnParamsList.getSpawnParams(AreaManager.locationName, npcName); } }
+    //spawn details sharing an npcName are told apart by their index, which is appended to form the key their dialogue, spawn params and GameObject are found by
+    public virtual string uniqueName { get { return index == 0 ? npcName : npcName + index; } }
+
+    public virtual SpawnParams spawnParams { get { return SpawnParamsList.getSpawnParams(AreaManager.locationName, uniqueName); } }
     protected virtual string tag { get { return LayerAndTagManager.untaggedTag; } }
     protected virtual int layer { get { return LayerAndTagManager.defaultLayer; } }
 
@@ -48,10 +52,12 @@ public class OOCSpawnDetails: IAppearanceSource
                             string tutorialTargetHash = "",
                             bool ignoresSecretDoors = false,
                             Vector3Int[] extraSpaces = null,
-                            float colliderOffset = -2f
+                            float colliderOffset = -2f,
+                            int index = 0
                             )
     {
         this.npcName = npcName;
+        this.index = index;
         this._Appearance = appearance ?? Costume.getDefaultCostume();
         this.cellCoords = cellCoords;
         this.ignoresSecretDoors = ignoresSecretDoors;
@@ -132,10 +138,10 @@ public class OOCSpawnDetails: IAppearanceSource
         {
             if(extra)
             {
-                gameObject.name = npcName + extraSpaceNameSuffix;
+                gameObject.name = uniqueName + extraSpaceNameSuffix;
             } else
             {
-                gameObject.name = npcName + gameObjectNameSuffix;
+                gameObject.name = uniqueName + gameObjectNameSuffix;
             }
         }
         else
@@ -146,7 +152,7 @@ public class OOCSpawnDetails: IAppearanceSource
 
     private GameObject generateBlankPrefab(Vector3Int cell, bool extra = false)
     {
-        GameObject blank = GameObject.Instantiate(Resources.Load<GameObject>(prefabName), parent);
+        GameObject blank = GameObject.Instantiate(Resources.Load<GameObject>(extra ? PrefabNames.extraSpace : prefabName), parent);
         setGameObjectName(blank, extra);
 
         Transform transform = blank.transform;
@@ -185,8 +191,9 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
     public TutorialColliderSpawnDetails(Vector3Int cellCoords, 
                                         string tutorialKey, 
                                         string seenFlagName, 
-                                        StartSpawningAllTrueFlagList startSpawningFlagList = null) :
-    base(cellCoords: cellCoords)
+                                        StartSpawningAllTrueFlagList startSpawningFlagList = null,
+                                        int index = 0) :
+    base(cellCoords: cellCoords, index: index)
     {
         universalSpawnBehaviours[typeof(TutorialTriggerColliderSpawnBehaviour)] = new TutorialTriggerColliderSpawnBehaviour(tutorialKey);
 
@@ -204,10 +211,11 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
                                 Vector3Int cellCoords,
                                 Facing facing = Facing.Random, 
                                 bool ignoresSecretDoors = true,
-                                IAppearance appearance = null) :
-    base(npcName, facing: facing, appearance: appearance, cellCoords: cellCoords, ignoresSecretDoors: ignoresSecretDoors)
+                                IAppearance appearance = null,
+                                int index = 0) :
+    base(npcName, facing: facing, appearance: appearance, cellCoords: cellCoords, ignoresSecretDoors: ignoresSecretDoors, index: index)
     {
-        universalSpawnBehaviours[typeof(ObstacleSpawnBehaviour)] = new ObstacleSpawnBehaviour(npcName, ignoresSecretDoors);
+        universalSpawnBehaviours[typeof(ObstacleSpawnBehaviour)] = new ObstacleSpawnBehaviour(uniqueName, ignoresSecretDoors);
     }
 
     // public override void spawnActions(GameObject interactable)
@@ -260,7 +268,7 @@ public class NPCSpawnDetails : OOCSpawnDetails, IDialogueSource
     {
         get
         {
-            return DialogueList.getDialogue(AreaManager.locationName, npcName);
+            return DialogueList.getDialogue(AreaManager.locationName, uniqueName);
         }
     }
 
@@ -274,14 +282,15 @@ public class NPCSpawnDetails : OOCSpawnDetails, IDialogueSource
                             bool ignoresSecretDoors = true,
                             bool sleepingDialogueIntro = false,
                             IAppearance appearance = null,
-                            float colliderOffset = -2f) :
-    base(npcName, facing: facing, appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, ignoresSecretDoors: ignoresSecretDoors, extraSpaces: extraSpaces, colliderOffset: colliderOffset)
+                            float colliderOffset = -2f,
+                            int index = 0) :
+    base(npcName, facing: facing, appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, ignoresSecretDoors: ignoresSecretDoors, extraSpaces: extraSpaces, colliderOffset: colliderOffset, index: index)
     {
         aestheticSpawnBehaviours[typeof(AnimationManagerSpawnBehaviour)] = new AnimationManagerSpawnBehaviour(this, facing, animationType);
         aestheticSpawnBehaviours[typeof(NPCMouseHoverSpawnBehaviour)] = new NPCMouseHoverSpawnBehaviour();
         aestheticSpawnBehaviours[typeof(OverHeadIconManagerSpawnBehaviour)] = new OverHeadIconManagerSpawnBehaviour();
 
-        universalSpawnBehaviours[typeof(DialogueTriggerSpawnBehaviour)] = new DialogueTriggerSpawnBehaviour(npcName,
+        universalSpawnBehaviours[typeof(DialogueTriggerSpawnBehaviour)] = new DialogueTriggerSpawnBehaviour(uniqueName,
                                                                             dialogueSource: this,
                                                                             AudioClipList.getDialogueIntroSFXLogic(npcName, sleepingDialogueIntro),
                                                                             speakAtStartScript);
@@ -308,8 +317,8 @@ public class LadderSpawnDetails : NPCSpawnDetails
 
     public Ladder ladder;
 
-    public LadderSpawnDetails(Vector3Int cellCoords, Ladder ladder, IAppearance appearance = null, float colliderOffset = -2f) :
-    base(NPCNameList.ladder, cellCoords, appearance: appearance, colliderOffset: colliderOffset)
+    public LadderSpawnDetails(Vector3Int cellCoords, Ladder ladder, IAppearance appearance = null, float colliderOffset = -2f, int index = 0) :
+    base(NPCNameList.ladder, cellCoords, appearance: appearance, colliderOffset: colliderOffset, index: index)
     {
         this.ladder = ladder;
     }
@@ -321,7 +330,7 @@ public class NonDialogueNPCSpawnDetails : NPCSpawnDetails
     public override SpawnParams spawnParams { 
                                                 get 
                                                 { 
-                                                    InteractableSpawnParams _SpawnParams = SpawnParamsList.getSpawnParams(AreaManager.locationName, npcName);
+                                                    InteractableSpawnParams _SpawnParams = SpawnParamsList.getSpawnParams(AreaManager.locationName, uniqueName);
 
                                                     if(_SpawnParams.startSpawningFlagList.flags.Length == 0 && 
                                                         _SpawnParams.stopSpawningFlagList.flags.Length == 0)
@@ -340,10 +349,11 @@ public class NonDialogueNPCSpawnDetails : NPCSpawnDetails
                                         bool ignoresSecretDoors = true,
                                         CharacterAnimationType animationType = CharacterAnimationType.None,
                                         IAppearance appearance = null,
-                                        float colliderOffset = -2f) :
-    base(npcName, cellCoords, facing, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, appearance: appearance, colliderOffset: colliderOffset)
+                                        float colliderOffset = -2f,
+                                        int index = 0) :
+    base(npcName, cellCoords, facing, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, appearance: appearance, colliderOffset: colliderOffset, index: index)
     {
-        universalSpawnBehaviours[typeof(DialogueTriggerSpawnBehaviour)] = new DialogueTriggerSpawnBehaviour(npcName);
+        universalSpawnBehaviours[typeof(DialogueTriggerSpawnBehaviour)] = new DialogueTriggerSpawnBehaviour(uniqueName);
     }
 }
 
@@ -355,12 +365,14 @@ public class VaultableObjectSpawnDetails : NPCSpawnDetails
                                         VaultableObject vaultableObject,
                                         string tutorialTargetHash = "",
                                         IAppearance appearance = null,
-                                        float colliderOffset = -2f) :
+                                        float colliderOffset = -2f,
+                                        int index = 0) :
     base(npcName,
          cellCoords,
          tutorialTargetHash: tutorialTargetHash,
          appearance: appearance,
-         colliderOffset: colliderOffset)
+         colliderOffset: colliderOffset,
+         index: index)
     {
         DialogueTriggerSpawnBehaviour dialogueTriggerSpawnBehaviour = universalSpawnBehaviours[typeof(DialogueTriggerSpawnBehaviour)] as DialogueTriggerSpawnBehaviour;
         dialogueTriggerSpawnBehaviour.dialogueSource = vaultableObject;
@@ -379,9 +391,10 @@ public class HorseSpawnDetails : NPCSpawnDetails
                                 CharacterAnimationType animationType = CharacterAnimationType.None, 
                                 bool ignoresSecretDoors = true,
                                 IAppearance appearance = null,
-                                float colliderOffset = -2f) :
+                                float colliderOffset = -2f,
+                                int index = 0) :
     base(npcName, cellCoords, facing: facing, extraSpaces: generateRumpExtraSpace(extraSpaces ?? new Vector3Int[0], cellCoords, facing),
-            speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, appearance: appearance, colliderOffset: colliderOffset)
+            speakAtStartScript: speakAtStartScript, ignoresSecretDoors: ignoresSecretDoors, animationType: animationType, appearance: appearance, colliderOffset: colliderOffset, index: index)
     {
 
     }
@@ -446,13 +459,17 @@ public class ContainerSpawnDetails : OOCSpawnDetails
                              QuestStepActivationScript script = null,
                              string secretDoorFlag = null,
                              IAppearance appearance = null) :
-    base(npcName: generateName(index), facing: facing, appearance: appearance, cellCoords: cellCoords)
+    base(npcName: generateName(index), facing: facing, appearance: appearance, cellCoords: cellCoords, index: index)
     {
         this.type = type;
 
         aestheticSpawnBehaviours[typeof(AnimationManagerSpawnBehaviour)] = new AnimationManagerSpawnBehaviour(this, facing);
+        aestheticSpawnBehaviours[typeof(NPCMouseHoverSpawnBehaviour)] = new NPCMouseHoverSpawnBehaviour();
         universalSpawnBehaviours[typeof(ContainerSpawnBehaviour)] = new ContainerSpawnBehaviour(index, script, secretDoorFlag, type);
     }
+
+    //generateName already puts the index into the name
+    public override string uniqueName { get { return npcName; } }
 
     public static string generateName(int index)
     {
@@ -565,7 +582,9 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
     public Facing startFacing;
     public Facing endFacing;
     public CunningObjectSpriteCategory category;
-    public int index;
+
+    //the index identifies the cunning object itself, not a variant of its name
+    public override string uniqueName { get { return npcName; } }
 
     public CunningObjectSpawnDetails(int index,
                                      Vector3Int cellCoords, 
@@ -575,10 +594,8 @@ public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
                                      string tutorialTargetHash = null,
                                      QuestStepActivationScript script = null,
                                      IAppearance appearance = null) :
-    base(category.ToString(), appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash)
+    base(category.ToString(), appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, index: index)
     {
-        this.index = index;
-
         this.startFacing = startFacing;
 
         if(endFacing == Facing.Random)
@@ -762,8 +779,9 @@ public class DeadBodySpawnDetails : ObstacleSpawnDetails
                                 Facing facing = Facing.NorthEast, 
                                 bool ignoresSecretDoors = true, 
                                 bool weaponless = false,
-                                IAppearance appearance = null) :
-    base(npcName, cellCoords, facing: facing, ignoresSecretDoors: ignoresSecretDoors, appearance: appearance)
+                                IAppearance appearance = null,
+                                int index = 0) :
+    base(npcName, cellCoords, facing: facing, ignoresSecretDoors: ignoresSecretDoors, appearance: appearance, index: index)
     {
         this.weaponless = weaponless;
     }
@@ -823,9 +841,10 @@ public class ObstacleWithSecretDoorFlagSpawnDetails : ObstacleSpawnDetails
 
     public ObstacleWithSecretDoorFlagSpawnDetails(  string npcName, 
                                                     Vector3Int cellCoords, 
-                                                    string secretDoorFlag = "", 
-                                                    IAppearance appearance = null) :
-    base(npcName, cellCoords, appearance: appearance)
+                                                    string secretDoorFlag = "",
+                                                    IAppearance appearance = null,
+                                                    int index = 0) :
+    base(npcName, cellCoords, appearance: appearance, index: index)
     {
         this.secretDoorFlag = secretDoorFlag;
     }
@@ -889,8 +908,9 @@ public class Wave : ObstacleWithSecretDoorFlagSpawnDetails
     public Wave(string npcName, 
                 Vector3Int cellCoords, 
                 string secretDoorFlag = "",
-                IAppearance appearance = null) :
-    base(npcName, cellCoords, secretDoorFlag: secretDoorFlag, appearance: appearance)
+                IAppearance appearance = null,
+                int index = 0) :
+    base(npcName, cellCoords, secretDoorFlag: secretDoorFlag, appearance: appearance, index: index)
     {
     }
 
@@ -933,8 +953,9 @@ public class SpikeSpawnDetails : ObstacleSpawnDetails
 {
 
     public SpikeSpawnDetails(Vector3Int cellCoords,
-                            IAppearance appearance = null) :
-    base(NPCNameList.spike, cellCoords, appearance: appearance)
+                            IAppearance appearance = null,
+                            int index = 0) :
+    base(NPCNameList.spike, cellCoords, appearance: appearance, index: index)
     {
     }
 
@@ -949,8 +970,9 @@ public class RubbleObstacleSpawnDetails : ObstacleSpawnDetails
 {
     public RubbleObstacleSpawnDetails(string npcName, 
                                         Vector3Int cellCoords,
-                                        IAppearance appearance = null) :
-    base(npcName, cellCoords, appearance: appearance)
+                                        IAppearance appearance = null,
+                                        int index = 0) :
+    base(npcName, cellCoords, appearance: appearance, index: index)
     {
     }
 }
@@ -958,9 +980,11 @@ public class RubbleObstacleSpawnDetails : ObstacleSpawnDetails
 public class ButtonSpawnDetails : OOCSpawnDetails
 {
 
-    private int index;
     private int weight;
     private int charismaRequirement;
+
+    //the index identifies the floor button itself, not a variant of its name
+    public override string uniqueName { get { return npcName; } }
 
     public ButtonSpawnDetails(Vector3Int cellCoords, 
                                 int index = 0, 
@@ -968,9 +992,8 @@ public class ButtonSpawnDetails : OOCSpawnDetails
                                 int charismaRequirement = 1, 
                                 string tutorialTargetHash = "",
                                 IAppearance appearance = null) :
-    base(NPCNameList.button, appearance: appearance, cellCoords: cellCoords, ignoresSecretDoors: true, tutorialTargetHash: tutorialTargetHash)
+    base(NPCNameList.button, appearance: appearance, cellCoords: cellCoords, ignoresSecretDoors: true, tutorialTargetHash: tutorialTargetHash, index: index)
     {
-        this.index = index;
         this.weight = weight;
         this.charismaRequirement = charismaRequirement;
     }
@@ -1055,8 +1078,9 @@ public class DependantSpawnDetails : NPCSpawnDetails
                                     bool normalScale = false,
                                     CharacterAnimationType animationType = CharacterAnimationType.None,
                                     IAppearance appearance = null,
-                                    float colliderOffset = -2f) :
-    base(npcName, cellCoords, facing: facing, animationType: animationType, appearance: appearance, colliderOffset: colliderOffset)
+                                    float colliderOffset = -2f,
+                                    int index = 0) :
+    base(npcName, cellCoords, facing: facing, animationType: animationType, appearance: appearance, colliderOffset: colliderOffset, index: index)
     {
         this.parentName = parentName;
         this.normalScale = normalScale;
@@ -1106,58 +1130,19 @@ public class DependantSpawnDetails : NPCSpawnDetails
 
 }
 
-public class GateSpawnBehaviour : IExtraSpawnBehaviour
+public class GateSpawnDetails : NPCSpawnDetails
 {
 
-    public Dialogue dialogue;
-
-    protected string gateKey;
-
-    private Dictionary<string, int> statDifficulties;
-
-    public GateSpawnBehaviour(string gateKey, Dictionary<string, int> statDifficulties = null)
+    public GateSpawnDetails(string npcName,
+                            Vector3Int cellCoords,
+                            string tutorialTargetHash,
+                            IAppearance appearance = null,
+                            int index = 0) :
+    base(npcName, cellCoords, appearance: appearance, tutorialTargetHash: tutorialTargetHash, index: index)
     {
-        this.gateKey = gateKey;
-        this.statDifficulties = statDifficulties ?? new Dictionary<string, int>();
-    }
-
-    public void addBehaviour(GameObject gateGameObject)
-    {
-        Gate gate = gateGameObject.AddComponent<Gate>();
-
-        gate.setKey(gateKey);
-
-        if (dialogue == null)
-        {
-            return;
-        }
-
-        dialogue.cameraFoci[Constants.indexOne] = gateGameObject;
-
-        dialogue.variableSources.Add(new StoryStatRequirementVariableSource(statDifficulties));
+        universalSpawnBehaviours[typeof(GateSpawnBehaviour)] = new GateSpawnBehaviour(uniqueName);
     }
 }
-
-
-// public class GateSpawnDetails : NPCSpawnDetails
-// {
-//     private bool showSprite;
-//     private Axis axis;
-
-//     public GateSpawnDetails(string npcName,
-//                             Vector3Int cellCoords,
-//                             string currentArea,
-//                             string tutorialTargetHash,
-//                             bool showSprite,
-//                             Axis axis,
-//                             IAppearance appearance = null) :
-//     base(npcName, cellCoords, currentArea, appearance: appearance)
-//     {
-//         this.tutorialTargetHash = tutorialTargetHash;
-//         this.showSprite = showSprite;
-//         this.axis = axis;
-//     }
-// }
 
 // public class GateWithKeySpawnDetails : GateSpawnDetails
 // {
@@ -1275,8 +1260,9 @@ public class RestStopAndShopkeeperSpawnDetails : NPCSpawnDetails
                                              bool isShopkeeper = false,
                                              bool isRestStop = false,
                                              IAppearance appearance = null,
-                                             float colliderOffset = -2f) :
-    base(npcName, cellCoords, facing: facing, extraSpaces: extraSpaces, ignoresSecretDoors: ignoresSecretDoors, appearance: appearance, colliderOffset: colliderOffset)
+                                             float colliderOffset = -2f,
+                                             int index = 0) :
+    base(npcName, cellCoords, facing: facing, extraSpaces: extraSpaces, ignoresSecretDoors: ignoresSecretDoors, appearance: appearance, colliderOffset: colliderOffset, index: index)
     {
         this.isShopkeeper = isShopkeeper;
         this.isRestStop = isRestStop;
@@ -1315,8 +1301,9 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
                                     ObservableDelegate observable = null, 
                                     QuestStepActivationScript script = null,
                                     IAppearance appearance = null,
-                                    float colliderOffset = -2f) :
-    base(npcName, cellCoords, appearance: appearance, tutorialTargetHash: tutorialTargetHash, colliderOffset: colliderOffset)
+                                    float colliderOffset = -2f,
+                                    int index = 0) :
+    base(npcName, cellCoords, appearance: appearance, tutorialTargetHash: tutorialTargetHash, colliderOffset: colliderOffset, index: index)
     {
         this.secretDoorInfo = secretDoorInfo;
 
@@ -1395,12 +1382,12 @@ public class SecretDoorSpawnDetails : NPCSpawnDetails
 public class VaultableOrDestroyableObjectSpawnDetails : VaultableObjectSpawnDetails
 {
 
-    public int index;
+    //the index identifies the vaultable or destroyable object's gate, not a variant of its name
+    public override string uniqueName { get { return npcName; } }
 
     public VaultableOrDestroyableObjectSpawnDetails(string npcName, Vector3Int cellCoords, VaultableOrDestroyableObject vaultableOrDestroyableObject, int index = 0, IAppearance appearance = null, float colliderOffset = -2f) :
-    base(npcName, cellCoords, vaultableOrDestroyableObject, appearance: appearance, colliderOffset: colliderOffset)
+    base(npcName, cellCoords, vaultableOrDestroyableObject, appearance: appearance, colliderOffset: colliderOffset, index: index)
     {
-        this.index = index;
     }
 
     // public override void spawnActions(GameObject gameObject)
@@ -1418,8 +1405,8 @@ public class BookSpawnDetails : OOCSpawnDetails
 
     private int bookIndex;
 
-    public BookSpawnDetails(string npcName, Vector3Int cellCoords, int bookIndex, IAppearance appearance = null) :
-    base(npcName, appearance: appearance, cellCoords: cellCoords, ignoresSecretDoors: true)
+    public BookSpawnDetails(string npcName, Vector3Int cellCoords, int bookIndex, IAppearance appearance = null, int index = 0) :
+    base(npcName, appearance: appearance, cellCoords: cellCoords, ignoresSecretDoors: true, index: index)
     {
         this.bookIndex = bookIndex;
     }
@@ -1461,10 +1448,11 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
 
     protected string locationName;
 
-    protected int index;
+    //the index picks the hidden terrain prefab, not a variant of its name
+    public override string uniqueName { get { return npcName; } }
 
     public HiddenTerrainSpawnDetails(string secretDoorKey = null, List<string> secretDoorKeys = null, string locationName = "", int index = 0, IAppearance appearance = null) :
-    base(appearance: appearance)
+    base(appearance: appearance, index: index)
     {
         if(secretDoorKey != null)
         {
@@ -1478,14 +1466,12 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
 
         this.locationName = locationName;
 
-        this.index = index;
-
         this.areaName = null;
         this.sectionName = null;
     }
 
     public HiddenTerrainSpawnDetails(string secretDoorKey = null, List<string> secretDoorKeys = null, string areaName = "", string sectionName = "", int index = 0, IAppearance appearance = null) :
-    base(appearance: appearance)
+    base(appearance: appearance, index: index)
     {
 
         if(secretDoorKey != null)
@@ -1500,8 +1486,6 @@ public class HiddenTerrainSpawnDetails : OOCSpawnDetails
 
         this.areaName = areaName;
         this.sectionName = sectionName;
-
-        this.index = index;
 
         this.locationName = null;
     }

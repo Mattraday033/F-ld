@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CameraDefaultFollow : MonoBehaviour
+public class CameraDetails : MonoBehaviour
 {
 	public CinemachineVirtualCamera mainCM;
-	
+
+    void Awake()
+    {
+        Camera.main.eventMask = LayerAndTagManager.mouseHoverMask;
+    }
+
     void Start()
     {
         if(PlayerMovement.getInstance() != null && PlayerOOCStateManager.currentActivity != OOCActivity.inDialogue)

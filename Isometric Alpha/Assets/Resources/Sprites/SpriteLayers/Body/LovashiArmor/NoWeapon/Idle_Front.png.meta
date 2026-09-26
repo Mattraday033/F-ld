@@ -1,7 +1,19 @@
 fileFormatVersion: 2
-guid: 979f416e1b51e594083c67544bf982d7
+guid: 269fa7aeef7913647b623c9518b6ee33
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 6480931549013918676
+    second: Idle_Front_0
+  - first:
+      213: -3597985627546888914
+    second: Idle_Front_1
+  - first:
+      213: -1470650958574738517
+    second: Idle_Front_2
+  - first:
+      213: -6421393142994969892
+    second: Idle_Front_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -67,7 +79,7 @@ TextureImporter:
   swizzle: 50462976
   cookieLightType: 0
   platformSettings:
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 16384
     resizeAlgorithm: 0
@@ -80,7 +92,7 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -97,7 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OOC_Idle_Front_0
+      name: Idle_Front_0
       rect:
         serializedVersion: 2
         x: 0
@@ -107,18 +119,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 3c1f7a92e4d85b6049a1c2e7f0b3d816
-      internalID: 1480213967
+      spriteID: 4d3c89808e4e0f950800000000000000
+      internalID: 6480931549013918676
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OOC_Idle_Front_1
+      name: Idle_Front_1
       rect:
         serializedVersion: 2
         x: 164
@@ -128,18 +141,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 8e24b0d6a7f3c1954b6e2d09a8c7f351
-      internalID: -702518346
+      spriteID: e255b1b7223611ec0800000000000000
+      internalID: -3597985627546888914
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OOC_Idle_Front_2
+      name: Idle_Front_2
       rect:
         serializedVersion: 2
         x: 328
@@ -149,18 +163,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: d5a93f17c0e2b8464f7a1c6b3e9d0a28
-      internalID: 2031764855
+      spriteID: ba3a099beb2379be0800000000000000
+      internalID: -1470650958574738517
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OOC_Idle_Front_3
+      name: Idle_Front_3
       rect:
         serializedVersion: 2
         x: 492
@@ -170,17 +185,19 @@ TextureImporter:
       alignment: 9
       pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 61f8c4e2a9b7d3054c8e0f2a6d1b9e73
-      internalID: -1349870622
+      spriteID: cdad7ac55f0a2e6a0800000000000000
+      internalID: -6421393142994969892
       vertices: []
-      indices:
+      indices: 
       edges: []
       weights: []
     outline: []
+    customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
@@ -190,11 +207,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
-      OOC_Idle_Front_0: 1480213967
-      OOC_Idle_Front_1: -702518346
-      OOC_Idle_Front_2: 2031764855
-      OOC_Idle_Front_3: -1349870622
+      Idle_Front_0: 6480931549013918676
+      Idle_Front_1: -3597985627546888914
+      Idle_Front_2: -1470650958574738517
+      Idle_Front_3: -6421393142994969892
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

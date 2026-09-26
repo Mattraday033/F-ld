@@ -116,6 +116,27 @@ public class DialogueTriggerSpawnBehaviour : IExtraSpawnBehaviour
     }
 }
 
+public class GateSpawnBehaviour : IExtraSpawnBehaviour
+{
+    private string gateKey;
+    private string hiddenTerrainFlag;
+
+    public GateSpawnBehaviour(string gateKey, string hiddenTerrainFlag = null)
+    {
+        this.gateKey = gateKey;
+        this.hiddenTerrainFlag = hiddenTerrainFlag;
+    }
+
+    public void addBehaviour(GameObject gameObject)
+    {
+        Gate gate = gameObject.AddComponent<Gate>();
+
+        //setKey checks whether the gate is already open, which needs the flag in place first
+        gate.hiddenTerrainFlag = hiddenTerrainFlag;
+        gate.setKey(gateKey);
+    }
+}
+
 public class NPCMouseHoverSpawnBehaviour : IExtraSpawnBehaviour
 {
     public NPCMouseHoverSpawnBehaviour()

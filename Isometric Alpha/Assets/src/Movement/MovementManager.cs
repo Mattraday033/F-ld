@@ -21,6 +21,7 @@ public class MovementManager : MonoBehaviour
     public readonly static UnityEvent BeforeMoveStarted = new UnityEvent();
     public readonly static UnityEvent AfterMoveStarted = new UnityEvent();
 
+    public readonly static UnityEvent<int> OnStepFinished = new UnityEvent<int>();
     public readonly static UnityEvent<int> OnMoveFinished = new UnityEvent<int>();
 
     public Grid grid;
@@ -263,6 +264,8 @@ public class MovementManager : MonoBehaviour
         // movement.updateAnimationDirection();
 
         movement.updateFacing();
+
+        OnStepFinished.Invoke(movement.getMovementIndex());
 
         if(movement.canDropRunAnimation)
         {
