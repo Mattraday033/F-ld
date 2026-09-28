@@ -118,7 +118,7 @@ public class MultiTutorialColliderSpawnInfo : AxisSpawnInfo
     private StartSpawningAllTrueFlagList startSpawningFlagList;
 
     public MultiTutorialColliderSpawnInfo(string currentLocation, Vector3Int startCell, string tutorialKey, string seenFlagName) :
-    base(currentLocation, startCell)
+    base(startCell)
     {
         this.tutorialKey = tutorialKey;
         this.seenFlagName = seenFlagName;
@@ -126,7 +126,7 @@ public class MultiTutorialColliderSpawnInfo : AxisSpawnInfo
     }
 
     public MultiTutorialColliderSpawnInfo(string currentLocation, Vector3Int startCell, string tutorialKey, string seenFlagName, StartSpawningAllTrueFlagList startSpawningFlagList) :
-    base(currentLocation, startCell)
+    base(startCell)
     {
         this.tutorialKey = tutorialKey;
         this.seenFlagName = seenFlagName;
@@ -134,7 +134,7 @@ public class MultiTutorialColliderSpawnInfo : AxisSpawnInfo
     }
 
     public MultiTutorialColliderSpawnInfo(string currentLocation, Vector3Int startCell, string tutorialKey, string seenFlagName, int size, Axis axis) :
-    base(currentLocation, startCell, size, axis)
+    base(startCell, size, axis)
     {
         this.tutorialKey = tutorialKey;
         this.seenFlagName = seenFlagName;
@@ -142,7 +142,7 @@ public class MultiTutorialColliderSpawnInfo : AxisSpawnInfo
     }
 
     public MultiTutorialColliderSpawnInfo(string currentLocation, Vector3Int startCell, string tutorialKey, string seenFlagName, int size, Axis axis, StartSpawningAllTrueFlagList startSpawningFlagList) :
-    base(currentLocation, startCell, size, axis)
+    base(startCell, size, axis)
     {
         this.tutorialKey = tutorialKey;
         this.seenFlagName = seenFlagName;

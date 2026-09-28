@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkipTutorialScript : ScriptableObject
+public class SkipTutorialScript
 {
     public virtual void runScript()
     {

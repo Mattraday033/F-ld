@@ -90,16 +90,10 @@ public abstract class PopUpButton : MonoBehaviour
 	
 	public virtual bool shouldReturnToWalkingMode()
 	{ 
-        if (OverallUIManager.currentScreenManager == null && OverallUIManager.currentScreenManager is null && 
+        return OverallUIManager.currentScreenManager == null && OverallUIManager.currentScreenManager is null && 
             EscapeStack.getEscapableObjectsCount() == 0 && !TutorialSequence.currentlyInTutorialSequence() && 
-            PlayerOOCStateManager.currentActivity != OOCActivity.Defeat)
-		{
-			//Helpers.debugNullCheck("OverallUIManager.currentScreen", OverallUIManager.currentScreen);
-			return true;
-		} else
-		{
-			return false; 
-		}
+            PlayerOOCStateManager.currentActivity != OOCActivity.Defeat && 
+            PlayerOOCStateManager.currentActivity != OOCActivity.MainMenu;
 	}
 	
 	public static string getPopUpPrefabName(PopUpType type)

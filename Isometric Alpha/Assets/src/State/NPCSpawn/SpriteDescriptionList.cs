@@ -83,8 +83,9 @@ public static class SpriteDescriptionList
     public readonly static SpriteDescription blockRubbleGate = new SpriteDescription(spriteName: PrefabNames.blockRubble);
     public readonly static SpriteDescription lowRubbleGate = new SpriteDescription(spriteName: PrefabNames.lowRubble);
 
-    // Portcullises are flipped on the descending X axis only
+    // Portcullises are flipped on the descending Y axis only
     public readonly static SpriteDescription portcullis1x1 = new SpriteDescription(spriteName: PrefabNames.portcullis1x1Path);
+    public readonly static SpriteDescription portcullis1x1Flipped = new SpriteDescription(spriteName: PrefabNames.portcullis1x1Path, flipX: Constants.flipX);
 
     public readonly static SpriteDescription portcullis2x1 = new SpriteDescription(spriteName: PrefabNames.portcullis2x1Path);
     public readonly static SpriteDescription portcullis2x1Flipped = new SpriteDescription(spriteName: PrefabNames.portcullis2x1Path, flipX: Constants.flipX);

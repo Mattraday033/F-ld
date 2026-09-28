@@ -5,7 +5,7 @@ using UnityEngine;
 //The purpose of a PlayerInteractionScript is to perform an additional behavior when certain player actions are performed.
 //For example: Starting a quest or activating a quest step when opening a chest, setting a flag when walking through a door
 //Subclasses will handle individual behaviours 
-public class PlayerInteractionScript : ScriptableObject
+public class PlayerInteractionScript
 {
     public virtual bool evaluateScript()
     {

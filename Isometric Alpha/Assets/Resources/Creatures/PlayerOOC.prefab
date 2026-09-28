@@ -267,6 +267,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4474849849518369587, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5109375849736145976, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
         type: 3}
       propertyPath: m_Pivot.y
@@ -416,7 +421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b304b129d26e8841b313eecd15e2e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  polygonCollider2D: {fileID: 4442573640036380627}
   rendererList: {fileID: 5737382954714674707}
 --- !u!114 &4515325223350563496
 MonoBehaviour:
@@ -549,12 +553,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 15
---- !u!60 &4442573640036380627 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 4474849849518369587, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,
-    type: 3}
-  m_PrefabInstance: {fileID: 269913657597576416}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4996404352657311960 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5109375849736145976, guid: fb1f1404d90bc934e96f1a2b9b0ca67b,

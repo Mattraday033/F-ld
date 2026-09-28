@@ -9,7 +9,7 @@ public static class SpriteUtil
 {
 
     private readonly static Dictionary<Sprite, Sprite> outlineCache = new Dictionary<Sprite, Sprite>();
-    private static readonly Dictionary<Sprite, float> topCache = new Dictionary<Sprite, float>();
+    private static readonly Dictionary<Sprite, Vector2> opaqueTopCentreCache = new Dictionary<Sprite, Vector2>();
 
     public static Sprite loadSpriteFromResources(string spriteName)
     {
@@ -69,18 +69,26 @@ public static class SpriteUtil
             return Vector3.zero;
         }
 
-        return renderer.transform.TransformPoint(new Vector3(0f, getOpaqueTopLocal(renderer.sprite)*multiplier, 0f));
+        Vector2 topCentre = getOpaqueTopCentreLocal(renderer.sprite);
+
+        //flipX mirrors the drawn pixels around the pivot without touching the transform
+        float centreX = renderer.flipX ? -topCentre.x : topCentre.x;
+
+        return renderer.transform.TransformPoint(new Vector3(centreX, topCentre.y*multiplier, 0f));
     }
 
-    private static float getOpaqueTopLocal(Sprite sprite)
+    //x is the horizontal middle of the opaque pixels, y is their top, both in sprite-local space
+    private static Vector2 getOpaqueTopCentreLocal(Sprite sprite)
     {
-        if (topCache.TryGetValue(sprite, out float top))
+        if (opaqueTopCentreCache.TryGetValue(sprite, out Vector2 topCentre))
         {
-            return top;
+            return topCentre;
         }
 
         List<Vector2> shapePoints = new List<Vector2>();
-        top = float.MinValue;
+        float top = float.MinValue;
+        float minX = float.MaxValue;
+        float maxX = float.MinValue;
 
         int shapeCount = sprite.GetPhysicsShapeCount();
 
@@ -91,17 +99,22 @@ public static class SpriteUtil
             foreach (Vector2 point in shapePoints)
             {
                 top = Mathf.Max(top, point.y);
+                minX = Mathf.Min(minX, point.x);
+                maxX = Mathf.Max(maxX, point.x);
             }
         }
 
-        // no physics shape (e.g. a fully transparent sprite): fall back to the top of the rect
+        // no physics shape (e.g. a fully transparent sprite): fall back to the top centre of the rect
         if (shapeCount == 0)
         {
-            top = sprite.bounds.max.y;
+            topCentre = new Vector2(sprite.bounds.center.x, sprite.bounds.max.y);
+        } else
+        {
+            topCentre = new Vector2((minX + maxX) / 2f, top);
         }
 
-        topCache[sprite] = top;
-        return top;
+        opaqueTopCentreCache[sprite] = topCentre;
+        return topCentre;
     }
 
     public static Sprite createBlankSpriteFromTemplate(Sprite template)

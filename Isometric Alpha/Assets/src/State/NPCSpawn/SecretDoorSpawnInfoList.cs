@@ -209,18 +209,14 @@ public enum Axis { DescendingX = 0, DescendingY = 1}
 
 public abstract class AxisSpawnInfo
 {
-    public string currentArea;
-
     public Vector3Int startCell;
     public int size;
     public Axis axis;
 
     public string tutorialTargetHash = "";
 
-    public AxisSpawnInfo(string currentArea, Vector3Int startCell, int size = 1, Axis axis = Axis.DescendingX)
+    public AxisSpawnInfo(Vector3Int startCell, int size = 1, Axis axis = Axis.DescendingX)
     {
-        this.currentArea = currentArea;
-
         this.startCell = startCell;
         
         this.size = size;
@@ -255,7 +251,7 @@ public class SecretDoorSpawnInfo : AxisSpawnInfo
                                 string terrainSpriteName = "",
                                 ObservableDelegate observable = null,
                                 QuestStepActivationScript script = null):
-    base(currentArea, startCell, size, axis)
+    base(startCell, size, axis)
     {
         this.secretDoorName = secretDoorName;
         this.secretDoorInfo = secretDoorInfo;

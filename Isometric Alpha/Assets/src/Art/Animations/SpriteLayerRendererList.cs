@@ -92,9 +92,17 @@ public class SpriteLayerRendererList : MonoBehaviour
 
     public void setFlipX(bool flip)
     {
+        //flipping doesn't fire the sprite change callback, so the collider has to be rebuilt here
+        bool bodyFlipChanged = bodyRenderer.flipX != flip;
+
         foreach(SpriteRenderer renderer in spriteLayers.Values)
         {
             renderer.flipX = flip;
+        }
+
+        if(bodyFlipChanged && bodyCollider != null)
+        {
+            RendererUtil.updatePolygonCollider(bodyRenderer, bodyCollider);
         }
     }
 

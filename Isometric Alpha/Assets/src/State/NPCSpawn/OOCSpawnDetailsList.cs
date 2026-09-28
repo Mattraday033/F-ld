@@ -147,6 +147,15 @@ public static class OOCSpawnDetailsList
 
         #region Str Tutorial
 
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.blockRubbleGate,
+                                    NPCNameList.liftableRubble,
+                                    Constants.indexZero,
+                                    new Vector3Int(6, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY,
+                                    TutorialSequenceList.interactableRubbleTargetHash));
+
         // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.STRDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
         // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.STRDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
 
@@ -293,6 +302,19 @@ public static class OOCSpawnDetailsList
 
         oocSpawnDetailsDict.Add(LocationNameList.guardHouseTopFloor, list);
         #endregion
+        #region GuardHouse NE
+        list = new List<OOCSpawnDetails>();
+
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.barracksGate,
+                                    Constants.indexZero,
+                                    new Vector3Int(6, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        oocSpawnDetailsDict.Add(LocationNameList.guardHouseNorthEast, list);
+        #endregion
         #region GuardHouse SW
         list = new List<OOCSpawnDetails>();
 
@@ -307,6 +329,35 @@ public static class OOCSpawnDetailsList
         }
 
         list.Add(new NPCSpawnDetails(NPCNameList.guard, new Vector3Int(-8, -2)/*, animationName: MonsterNameList.spearman*/, facing: Facing.NorthWest));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.barracksGate,
+                                    Constants.indexZero,
+                                    new Vector3Int(-16, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        // list.Add(new GateWithKeySpawnInfo(Constants.indexOne,
+        //                             NPCNameList.barracksArmoryGate,
+        //                             LocationNameList.guardHouseSouthWest,
+        //                             SpriteDescriptionList.portcullis2x1Flipped,
+        //                             new Vector3Int(-6, 0),
+        //                             Constants.sizeTwo,
+        //                             Axis.DescendingX,
+        //                             new GateKeyDetails("*This is the gate to the Barracks' Armory. It is currently locked, and watched closely by the guards.*",
+        //                                                ItemList.barracksArmoryKeyName,
+        //                                                HostilityScriptList.openBarracksGateScriptKey,
+        //                                                "the " + MapDisplayNameList.lovashiCamp)));
+
+        // list.Add(new GateWithKeySpawnInfo(Constants.indexTwo,
+        //                                     NPCNameList.barracksArmoryGate,
+        //                                     LocationNameList.guardHouseSouthWest,
+        //                                     SpriteDescriptionList.portcullis2x1Flipped,
+        //                                     new Vector3Int(-6, 0),
+        //                                     Constants.sizeTwo,
+        //                                     Axis.DescendingX,
+        //                                     new GateKeyDetails("*This is the gate to the Barracks' Armory. It is currently locked.*",
+        //                                                     ItemList.barracksArmoryKeyName)));
 
         oocSpawnDetailsDict.Add(LocationNameList.guardHouseSouthWest, list);
         #endregion
@@ -568,6 +619,7 @@ public static class OOCSpawnDetailsList
 
         oocSpawnDetailsDict.Add(LocationNameList.campNorthEast, list);
         #endregion
+        
         #region CenterCamp
         list = new List<OOCSpawnDetails>();
 
@@ -646,6 +698,13 @@ public static class OOCSpawnDetailsList
 
 
         #endregion
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.campGate,
+                                    Constants.indexZero,
+                                    new Vector3Int(2, -17),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
 
         oocSpawnDetailsDict.Add(LocationNameList.campCenter, list);
         #endregion
@@ -850,6 +909,13 @@ public static class OOCSpawnDetailsList
 
         #endregion
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.barracksGate,
+                                    Constants.indexZero,
+                                    new Vector3Int(12, -14),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
         oocSpawnDetailsDict.Add(LocationNameList.campMineEntrance, list);
         #endregion
         #region Camp Manse
@@ -881,6 +947,29 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(6, -16), facing: Facing.SouthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(4, -17), facing: Facing.NorthEast));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.manseFrontDoor,
+                                    Constants.indexZero,
+                                    new Vector3Int(3, 15),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.manseServiceEntrance,
+                                    Constants.indexOne,
+                                    new Vector3Int(-6, 6),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.barracksGate,
+                                    Constants.indexTwo,
+                                    new Vector3Int(-1, -16),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
 
         oocSpawnDetailsDict.Add(LocationNameList.campManse, list);
         #endregion
@@ -1028,6 +1117,14 @@ public static class OOCSpawnDetailsList
 
         #endregion
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.blockRubbleGate,
+                                    NPCNameList.awkwardRubble,
+                                    Constants.indexZero,
+                                    new Vector3Int(-1, 2),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX,
+                                    TutorialSequenceList.fallenBeamTargetHash));
+
         oocSpawnDetailsDict.Add(LocationNameList.campNorthWest, list);
         #endregion
 
@@ -1043,6 +1140,14 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(6, 1), charismaRequirement: 2));
         list.Add(new ButtonSpawnDetails(new Vector3Int(6, -1), charismaRequirement: 2));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.lowRubbleGate,
+                                    NPCNameList.awkwardRubble,
+                                    Constants.indexZero,
+                                    new Vector3Int(5, 1),
+                                    Constants.sizeThree,
+                                    Axis.DescendingY,
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1b, list);
 
         #endregion
@@ -1054,6 +1159,13 @@ public static class OOCSpawnDetailsList
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthWest, type: ChestType.Chest));
     
         list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-1, 4), Facing.SouthEast, type: ChestType.Chest));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.liftableGate,
+                                    Constants.indexZero,
+                                    new Vector3Int(2, 1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1c, list);
 
@@ -1119,6 +1231,13 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(0, 9), facing: Facing.SouthWest));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(3, 3),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section2a, list);
 
         #endregion
@@ -1154,6 +1273,20 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(7, -5)));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(6, -4),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.mineArmoryGate,
+                                    Constants.indexOne,
+                                    new Vector3Int(6, 6),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section2b, list);
 
         #endregion
@@ -1177,6 +1310,22 @@ public static class OOCSpawnDetailsList
 
         list.Add(new BookSpawnDetails(NPCNameList.diary, new Vector3Int(0, 13), ItemList.mineGuardsDiaryIndex, appearance: SpriteDescriptionList.note));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.blockRubbleGate,
+                                    NPCNameList.awkwardRubble,
+                                    Constants.indexZero,
+                                    new Vector3Int(3, 7),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY,
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.blockRubbleGate,
+                                    NPCNameList.awkwardRubble,
+                                    Constants.indexOne,
+                                    new Vector3Int(10, 7),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY,
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3a, list);
 
         #endregion
@@ -1188,6 +1337,20 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(3, 5)));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-1, 5)));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 5)));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(5, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.liftableGate,
+                                    Constants.indexOne,
+                                    new Vector3Int(-11, -10),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3b, list);
 
@@ -1284,6 +1447,97 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(4, 5), Facing.SouthWest, type: ChestType.Chest));
 
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexZero, //A1 - S1
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(2, 9),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingY));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexOne, //B1 - S2
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(2, 5),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingY));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexTwo, //C1 - S3
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(2, 1),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingY));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexThree, //A1 - B1
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(4, 7),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingX));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexFour, //B1 - C1
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(4, 3),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingX));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexFive, //A1 - A2
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(6, 9),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingY));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexSix, //B1 - B2
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(6, 5),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingY));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexSeven, //C1 - C2
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(6, 1),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingY));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexEight, //A2 - B2
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(8, 7),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingX));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexNine, //B2 - C2
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(8, 3),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingX));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexTen, //B2 - 7A
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(10, 5),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingY));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexEleven, //C2 - C3
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(10, 1),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingY));
+
+        // list.Add(new TemporaryGateSpawnDetails(Constants.indexTwelve, //C3 - 7a
+        //                             NPCNameList.ancientPortcullis,
+        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
+        //                             new Vector3Int(12, 3),
+        //                             Constants.sizeOne,
+        //                             Axis.DescendingX));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section6, list);
 
         #endregion
@@ -1296,6 +1550,34 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(4, 0), Constants.indexOne));
         list.Add(new ButtonSpawnDetails(new Vector3Int(5, -2), Constants.indexTwo));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-3, -9), Constants.indexThree));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(-1, 5),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexOne,
+                                    new Vector3Int(1, 2),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexTwo,
+                                    new Vector3Int(1, -4),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexThree,
+                                    new Vector3Int(-1, -7),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7a, list);
 
@@ -1314,6 +1596,28 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(-11, -8)));
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(-9, -2), Constants.indexOne));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.blockRubbleGate,
+                                    NPCNameList.awkwardRubble,
+                                    Constants.indexZero,
+                                    new Vector3Int(-9, -7),
+                                    Constants.sizeThree,
+                                    Axis.DescendingX,
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexOne,
+                                    new Vector3Int(-10, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis1x1,
+                                    NPCNameList.liftableGate,
+                                    Constants.indexTwo,
+                                    new Vector3Int(-6, -4),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7b, list);
 
@@ -1430,6 +1734,20 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(4, 13), Constants.indexOne));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.liftableGate,
+                                    Constants.indexZero,
+                                    new Vector3Int(-6, 2),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexOne,
+                                    new Vector3Int(3, 10),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section2b, list);
 
         #endregion
@@ -1461,6 +1779,13 @@ public static class OOCSpawnDetailsList
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(6, 6), Facing.SouthWest, type: ChestType.Chest));
         list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(6, 0), Facing.SouthEast, type: ChestType.Chest));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.liftableGate,
+                                    Constants.indexZero,
+                                    new Vector3Int(5, 2),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section3b, list);
 
         #endregion
@@ -1490,6 +1815,20 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(1, 13), index: Constants.indexOne));  
         list.Add(new ButtonSpawnDetails(new Vector3Int(3, 11), index: Constants.indexOne));  
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(0, 15),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexOne,
+                                    new Vector3Int(-7, 1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section4b, list);
 
         #endregion
@@ -1499,6 +1838,13 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(20, 1), Facing.SouthWest, type: ChestType.Chest));  
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.liftableGate,
+                                    Constants.indexZero,
+                                    new Vector3Int(7, 2),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section5, list);
 
@@ -1545,6 +1891,31 @@ public static class OOCSpawnDetailsList
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-11, 2), VaultableObject.diffThreeVaultableGap, appearance: SpriteDescriptionList.stoneVaultableGap));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-13, 2), VaultableObject.diffThreeVaultableGap, appearance: SpriteDescriptionList.stoneVaultableGap));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis3x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(-4, 7),
+                                    Constants.sizeThree,
+                                    Axis.DescendingX));
+
+        // list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne,
+        //                             NPCNameList.unstablePillar,
+        //                             ZoneKeyList.mineLvl3 + LocationNameList.section6a,
+        //                             PrefabNames.unstablePillar,
+        //                             Color.white,
+        //                             new Vector3Int(-6, -1),
+        //                             SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain,
+        //                             StatDifficultyList.strengthDifficultyThree));
+
+        // list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne,
+        //                             NPCNameList.unstablePillar,
+        //                             ZoneKeyList.mineLvl3 + LocationNameList.section6a,
+        //                             PrefabNames.unstablePillar,
+        //                             Color.white,
+        //                             new Vector3Int(-6, -5),
+        //                             SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain,
+        //                             StatDifficultyList.strengthDifficultyThree));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section6a, list);
 
@@ -1607,6 +1978,22 @@ public static class OOCSpawnDetailsList
 
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7PocketSealedRubble, areaName:ZoneKeyList.mineLvl3,  sectionName: LocationNameList.section7, index: Constants.indexTwo));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis3x1,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(0, 2),
+                                    Constants.sizeThree,
+                                    Axis.DescendingY));
+
+        // list.Add(new GateWithHiddenTerrainSpawnInfo(Constants.indexOne,
+        //                             NPCNameList.unstablePillar,
+        //                             ZoneKeyList.mineLvl3 + LocationNameList.section7,
+        //                             PrefabNames.unstablePillar,
+        //                             Color.white,
+        //                             new Vector3Int(-9, -2),
+        //                             SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain,
+        //                             StatDifficultyList.strengthDifficultyThree));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section7, list);
 
         #endregion
@@ -1665,6 +2052,20 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.barricade, new Vector3Int(1, -4), facing: Facing.SouthEast, ignoresSecretDoors: false, index: 4));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardAndras, new Vector3Int(3, -6), facing: Facing.NorthWest, index: 4)); 
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.gate,
+                                    Constants.indexZero,
+                                    new Vector3Int(7, 1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.gate,
+                                    Constants.indexZero,
+                                    new Vector3Int(-4, 1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1a, list);
 
         #endregion
@@ -1703,6 +2104,13 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(-4, -1)));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(-1, 6),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.diningRoom, list);
 
         #endregion
@@ -1720,6 +2128,13 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(-4, 21), Facing.SouthEast, secretDoorFlag: SecretDoorKeyList.manseHiddenGardenFlag, type: ChestType.Chest));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(2, -4),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, list);
 
         #endregion
@@ -1729,6 +2144,13 @@ public static class OOCSpawnDetailsList
         list = new List<OOCSpawnDetails>();
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(-4, -5)));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(-5, -2),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2b, list);
 
@@ -1839,6 +2261,20 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.honorguard, new Vector3Int(9, 6)/*, animationName: MonsterNameList.linebreaker*/, facing: Facing.SouthWest));
         list.Add(new NPCSpawnDetails(NPCNameList.honorguard, new Vector3Int(9, 5)/*, animationName: MonsterNameList.lancer*/, facing: Facing.SouthWest));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.gate,
+                                    Constants.indexZero,
+                                    new Vector3Int(3, 8),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.gate,
+                                    Constants.indexZero,
+                                    new Vector3Int(-5, 6),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section1a, list);
 
         #endregion
@@ -1914,6 +2350,13 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 5)));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 8)));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(-3, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3a, list);
 
         #endregion
@@ -1925,6 +2368,14 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.captainAdela, new Vector3Int(-8, 5), facing: Facing.NorthEast));
 
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(1, 1), Facing.SouthEast, type: ChestType.SpearRack));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.liftableGate,
+                                    Constants.indexZero,
+                                    new Vector3Int(0, -3),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY,
+                                    statDifficulty: new KeyValuePair<string, int>(InkVariableNameList.strDiffVarName, Constants.difficultyThree)));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3b, list);
 
@@ -1962,6 +2413,22 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-7, 7), Facing.SouthEast, type: ChestType.Chest));
         list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-8, -6), Facing.NorthEast, type: ChestType.Chest));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.tripleBarrel,
+                                    NPCNameList.heavyBarrels,
+                                    Constants.indexZero,
+                                    new Vector3Int(-3, -3),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY,
+                                    layout: GateSpriteLayout.PerCell));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.tripleBarrel,
+                                    NPCNameList.heavyBarrels,
+                                    Constants.indexOne,
+                                    new Vector3Int(-3, 2),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY,
+                                    layout: GateSpriteLayout.PerCell));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.stockroom, list);
 
@@ -2004,6 +2471,13 @@ public static class OOCSpawnDetailsList
         
         // list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchThree, ZoneKeyList.manseSecondFloor + LocationNameList.office, Constants.indexOne));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.officeDoor,
+                                    Constants.indexZero,
+                                    new Vector3Int(-4, -1),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.office, list);
 
         #endregion
@@ -2027,6 +2501,13 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.brush, new Vector3Int(1, -1), facing: Facing.SouthWest, extraSpaces: new Vector3Int[]{new Vector3Int(0, -1)}));
 
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
+                                    NPCNameList.cellDoor,
+                                    Constants.indexZero,
+                                    new Vector3Int(0, -3),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingY));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section2b, list);
 
         #endregion
@@ -2043,6 +2524,13 @@ public static class OOCSpawnDetailsList
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(5, 19), Facing.SouthEast, type: ChestType.Chest));
         list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(4, 19), Facing.SouthEast, type: ChestType.Chest));
         list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(3, 19), Facing.SouthEast, type: ChestType.Chest));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(4, 12),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section2c, list);
 

@@ -258,7 +258,6 @@ public static class SpawnInfoManager
     {
         // List<AxisSpawnInfo> listOfSpawnInfo = new List<AxisSpawnInfo>();
 
-        // listOfSpawnInfo.AddRange(GateSpawnInfoList.getGateSpawnInfo(AreaManager.locationName));
         // listOfSpawnInfo.AddRange(SecretDoorSpawnInfoList.getSecretDoorSpawnDetails(AreaManager.locationName));
         // listOfSpawnInfo.AddRange(TutorialColliderSpawnDetailsList.getTutorialColliderSpawnDetails(AreaManager.locationName));
 

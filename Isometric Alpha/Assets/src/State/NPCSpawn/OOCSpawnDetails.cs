@@ -82,21 +82,17 @@ public class OOCSpawnDetails: IAppearanceSource
         // this.aestheticSpawnBehaviours = aestheticSpawnBehaviours ?? new List<IExtraSpawnBehaviour>();
     }
 
+    //when true, every extra space gets the full prefab, appearance and aesthetic behaviours instead of an invisible Extra Space
+    protected virtual bool extraSpacesAreVisible { get { return false; } }
+
     public List<GameObject> spawnInteractables()
     {
-        GameObject main = generateBlankPrefab(cellCoords);
+        GameObject main = spawnVisible(cellCoords);
         List<GameObject> allInteractables = new List<GameObject>() { main };
-
-        appearance.applyAppearance(main.GetComponent<SpriteLayerRendererList>(), updateColors: true);
-
-        foreach(IExtraSpawnBehaviour behaviour in aestheticSpawnBehaviours.Values)
-        {
-            behaviour.addBehaviour(main);
-        }
 
         foreach(Vector3Int cell in extraSpaces)
         {
-            GameObject extraSpace = generateBlankPrefab(cell, extra: true);
+            GameObject extraSpace = extraSpacesAreVisible ? spawnVisible(cell, extra: true) : generateBlankPrefab(cell, PrefabNames.extraSpace, extra: true);
             allInteractables.Add(extraSpace);
         }
 
@@ -150,9 +146,24 @@ public class OOCSpawnDetails: IAppearanceSource
         }
     }
 
-    private GameObject generateBlankPrefab(Vector3Int cell, bool extra = false)
+    private GameObject spawnVisible(Vector3Int cell, bool extra = false)
     {
-        GameObject blank = GameObject.Instantiate(Resources.Load<GameObject>(extra ? PrefabNames.extraSpace : prefabName), parent);
+        GameObject visible = generateBlankPrefab(cell, prefabName, extra);
+
+        appearance.applyAppearance(visible.GetComponent<SpriteLayerRendererList>(), updateColors: true);
+
+        foreach(IExtraSpawnBehaviour behaviour in aestheticSpawnBehaviours.Values)
+        {
+            behaviour.addBehaviour(visible);
+        }
+
+        return visible;
+    }
+
+    //extra decides the GameObject's name, so a visible extra space is still skipped when looking up the main GameObject by name
+    private GameObject generateBlankPrefab(Vector3Int cell, string prefabToLoad, bool extra = false)
+    {
+        GameObject blank = GameObject.Instantiate(Resources.Load<GameObject>(prefabToLoad), parent);
         setGameObjectName(blank, extra);
 
         Transform transform = blank.transform;
@@ -160,46 +171,6 @@ public class OOCSpawnDetails: IAppearanceSource
         GameObjectUtil.updateGameObjectPosition(blank);
 
         return blank;
-    }
-}
-
-public class TutorialColliderSpawnDetails : OOCSpawnDetails
-{
-
-    public override string prefabName { get { return PrefabNames.tutorialCollider; } }
-    public override Transform parent { get { return AreaManager.getNonTransitionColliderParent(); } }
-    protected override int layer { get { return LayerAndTagManager.tutorialLayer; } }
-
-    public override SpawnParams spawnParams { 
-                                                get
-                                                { 
-                                                    if(!TutorialFlags.getFlag(seenFlagName) && 
-                                                        ((monsterDefeatKeyIndex >= 0 && !MonsterDefeatKeysList.monsterIsDefeated(monsterDefeatKeyIndex)) || monsterDefeatKeyIndex < 0))
-                                                    {
-                                                        return new InteractableSpawnParams(startSpawningFlagList);
-                                                    } else
-                                                    {
-                                                        return new NeverSpawnParams();           
-                                                    }
-                                                }
-                                            }
-
-    private string seenFlagName;
-    private StartSpawningAllTrueFlagList startSpawningFlagList;
-    private int monsterDefeatKeyIndex;
-
-    public TutorialColliderSpawnDetails(Vector3Int cellCoords, 
-                                        string tutorialKey, 
-                                        string seenFlagName, 
-                                        StartSpawningAllTrueFlagList startSpawningFlagList = null,
-                                        int index = 0) :
-    base(cellCoords: cellCoords, index: index)
-    {
-        universalSpawnBehaviours[typeof(TutorialTriggerColliderSpawnBehaviour)] = new TutorialTriggerColliderSpawnBehaviour(tutorialKey);
-
-        this.seenFlagName = seenFlagName;
-        this.startSpawningFlagList = startSpawningFlagList ?? new StartSpawningAllTrueFlagList();
-        this.monsterDefeatKeyIndex = -1;
     }
 }
 
@@ -293,7 +264,7 @@ public class NPCSpawnDetails : OOCSpawnDetails, IDialogueSource
         universalSpawnBehaviours[typeof(DialogueTriggerSpawnBehaviour)] = new DialogueTriggerSpawnBehaviour(uniqueName,
                                                                             dialogueSource: this,
                                                                             AudioClipList.getDialogueIntroSFXLogic(npcName, sleepingDialogueIntro),
-                                                                            speakAtStartScript);
+                                                                            speakAtStartScript: speakAtStartScript);
 
         if(PartyMemberList.characterIsPartyMember(npcName))
         {
@@ -301,6 +272,359 @@ public class NPCSpawnDetails : OOCSpawnDetails, IDialogueSource
         }
     }
 }
+
+//Single: one visible sprite on the first cell, the rest are invisible extra spaces
+//PerCell: every cell is its own visible sprite, each with its own mouse hover and animation manager
+public enum GateSpriteLayout { Single, PerCell }
+
+public class GateSpawnDetails : NPCSpawnDetails
+{
+    protected Dictionary<string, int> statDifficulties = new Dictionary<string, int>();
+    private GateSpriteLayout layout;
+
+    protected override bool extraSpacesAreVisible { get { return layout == GateSpriteLayout.PerCell; } }
+
+    public GateSpawnDetails(IAppearance appearance,
+                            string npcName,
+                            int index = 0,
+                            Vector3Int cellCoords = default,
+                            int size = 1,
+                            Axis axis = Axis.DescendingX,
+                            string tutorialTargetHash = "",
+                            KeyValuePair<string, int> statDifficulty = new KeyValuePair<string, int>(),
+                            GateSpriteLayout layout = GateSpriteLayout.Single) :
+    base(npcName, cellCoords, extraSpaces: generateExtraSpaces(cellCoords, size, axis), appearance: appearance, tutorialTargetHash: tutorialTargetHash, index: index)
+    {
+        this.layout = layout;
+
+        if(layout == GateSpriteLayout.Single && aestheticSpawnBehaviours.ContainsKey(typeof(AnimationManagerSpawnBehaviour)))
+        {
+            aestheticSpawnBehaviours.Remove(typeof(AnimationManagerSpawnBehaviour));
+        }
+
+        universalSpawnBehaviours[typeof(GateSpawnBehaviour)] = new GateSpawnBehaviour(uniqueName);
+
+        if(statDifficulty.Key != null && statDifficulty.Key.Length > 0)
+        {
+            statDifficulties.Add(statDifficulty.Key, statDifficulty.Value);
+        }
+    }
+
+    private static Vector3Int[] generateExtraSpaces(Vector3Int cellCoords, int size, Axis axis)
+    {
+        List<Vector3Int> extraSpaces = new List<Vector3Int>();
+
+        for (int index = 1; index < size; index++)
+        {
+            Vector3Int currentCell = cellCoords;
+
+            if (axis == Axis.DescendingX)
+            {
+                currentCell.x -= index;
+            }
+            else if (axis == Axis.DescendingY)
+            {
+                currentCell.y -= index;
+            }
+
+            extraSpaces.Add(currentCell);
+        }
+
+        return extraSpaces.ToArray();
+    }
+}
+
+// public class GateWithKeySpawnDetails : GateSpawnDetails
+// {
+//     public GateWithKeySpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, bool showSprite, Axis axis, GateKeyDetails gateKeyDetails, IAppearance appearance = null) :
+//     base(npcName, cellCoords, currentArea, noTutorialTargetHash, showSprite, axis, new Dictionary<string, int>(), appearance: appearance,
+//          gateSpawnBehaviour: new GateWithKeySpawnBehaviour(npcName, noTutorialTargetHash, new Dictionary<string, int>(), gateKeyDetails))
+//     {
+//     }
+
+//     public override Dialogue getDialogue(string areaName)
+//     {
+//         return new SingleCharacterDialogue(npcName, InkAssetList.getInkJSON(DialogueKey.GateWithKey));
+//     }
+// }
+
+// public class GateWithKeySpawnBehaviour : GateSpawnBehaviour
+// {
+//     private GateKeyDetails gateKeyDetails;
+
+//     public GateWithKeySpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties, GateKeyDetails gateKeyDetails) :
+//     base(gateKey, tutorialTargetHash, statDifficulties)
+//     {
+//         this.gateKeyDetails = gateKeyDetails;
+//     }
+
+//     protected override void addDialogueBehaviour(GameObject gateGameObject)
+//     {
+//         base.addDialogueBehaviour(gateGameObject);
+
+//         if (dialogue == null)
+//         {
+//             return;
+//         }
+
+//         dialogue.variableSources.Add(gateKeyDetails);
+//     }
+// }
+
+// public class TemporaryGateSpawnDetails : GateSpawnDetails
+// {
+//     public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, Axis axis, Dictionary<string, int> statDifficulties, IAppearance appearance = null) :
+//     base(npcName, cellCoords, currentArea, true, axis, statDifficulties, appearance: appearance,
+//          gateSpawnBehaviour: new TemporaryGateSpawnBehaviour(npcName, statDifficulties))
+//     {
+
+//     }
+
+//     public override Dialogue getDialogue(string areaName)
+//     {
+//         return DialogueList.getDialogue(DialogueList.scrubNameOfEndNumbers(npcName), areaName);
+//     }
+
+// }
+
+// public class TemporaryGateSpawnBehaviour : GateSpawnBehaviour
+// {
+//     public TemporaryGateSpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties) :
+//     base(gateKey, tutorialTargetHash, statDifficulties)
+//     {
+//     }
+
+//     protected override Gate addGate(GameObject gateGameObject)
+//     {
+//         return gateGameObject.AddComponent<TemporaryGate>();
+//     }
+// }
+
+// public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
+// {
+//     public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag, IAppearance appearance = null) :
+//     base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, true, Axis.DescendingX, statDifficulties, appearance: appearance,
+//          gateSpawnBehaviour: new GateWithHiddenTerrainSpawnBehaviour(npcName, tutorialTargetHash, statDifficulties, hiddenTerrainFlag))
+//     {
+//     }
+
+//     public override Dialogue getDialogue(string areaName)
+//     {
+//         return DialogueList.getDialogue(DialogueList.scrubNameOfEndNumbers(npcName), areaName);
+//     }
+// }
+
+// public class GateWithHiddenTerrainSpawnBehaviour : GateSpawnBehaviour
+// {
+//     private string hiddenTerrainFlag;
+
+//     public GateWithHiddenTerrainSpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag) :
+//     base(gateKey, tutorialTargetHash, statDifficulties)
+//     {
+//         this.hiddenTerrainFlag = hiddenTerrainFlag;
+//     }
+
+//     protected override Gate addGate(GameObject gateGameObject)
+//     {
+//         GateWithHiddenTerrain gate = gateGameObject.AddComponent<GateWithHiddenTerrain>();
+//         gate.hiddenTerrainFlag = hiddenTerrainFlag;
+//         NameTagGenerator nameTagGenerator = gateGameObject.GetComponent<NameTagGenerator>();
+
+//         nameTagGenerator.nameSource = gate;
+
+//         return gate;
+//     }
+// }
+
+/// <summary>
+///  Moved GateSpawnInfo Child Classes to here safe keeping
+/// </summary>
+
+// public class TemporaryGateSpawnInfo : GateSpawnInfo
+// {
+
+//     public TemporaryGateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis) :
+//     base(gateIndex, npcName, currentArea, startCell, PrefabNames.portcullis1x1Path, size, axis)
+//     {
+//     }
+
+//     protected override string getGateName()
+//     {
+//         return npcName + gateIndex;
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, //skewed(),
+//          axis, statDifficulties);
+//     }
+
+// }
+
+// public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo
+// {
+//     private string hiddenTerrainFlag;
+
+//     public GateWithHiddenTerrainSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, string hiddenTerrainFlag, KeyValuePair<string, int> statDifficulty) :
+//     base(gateIndex, npcName, currentArea, startCell, spriteName, statDifficulty: statDifficulty)
+//     {
+//         this.hiddenTerrainFlag = hiddenTerrainFlag;        
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, statDifficulties, hiddenTerrainFlag);
+//     }
+
+// }
+
+
+// public class GateKeyDetails : IStoryVariableSource
+// {
+
+//     public string description = "";
+//     public string keyName = "";
+
+//     public string hostileAreaName = "";
+//     public string hostilityScriptKey = "";
+
+//     public GateKeyDetails(string description, string keyName)
+//     {
+//         this.description = description;
+//         this.keyName = keyName;
+//     }
+
+//     public GateKeyDetails(string description, string keyName, string hostilityScriptKey, string hostileAreaName)
+//     {
+//         this.description = description;
+//         this.keyName = keyName;
+
+//         this.hostilityScriptKey = hostilityScriptKey;
+//         this.hostileAreaName = hostileAreaName;
+//     }
+
+//     public Story addVariables(Story story)
+//     {
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.description, description);
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.keyName, keyName);
+
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostileAreaName, hostileAreaName);
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostilityScriptKey, hostilityScriptKey);
+  
+//         return story;
+//     }
+
+// }
+
+// public class GateWithKeySpawnInfo : GateSpawnInfo
+// {
+//     private GateKeyDetails gateKeyDetails;
+
+//     public GateWithKeySpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis, GateKeyDetails gateKeyDetails) :
+//     base(gateIndex, npcName, currentArea, startCell, spriteName, size, axis)
+//     {
+//         this.gateKeyDetails = gateKeyDetails;
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new GateWithKeySpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), //skewed(),  
+//         indexHasSprite(spriteName, index), axis, gateKeyDetails);
+//     }
+// }
+
+// public class TemporaryGateSpawnInfo : GateSpawnInfo
+// {
+
+//     public TemporaryGateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis) :
+//     base(gateIndex, npcName, currentArea, startCell, PrefabNames.portcullis1x1Path, size, axis)
+//     {
+//     }
+
+//     protected override string getGateName()
+//     {
+//         return npcName + gateIndex;
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, //skewed(),
+//          axis, statDifficulties);
+//     }
+
+// }
+
+// public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo
+// {
+//     private string hiddenTerrainFlag;
+
+//     public GateWithHiddenTerrainSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, string hiddenTerrainFlag, KeyValuePair<string, int> statDifficulty) :
+//     base(gateIndex, npcName, currentArea, startCell, spriteName, statDifficulty: statDifficulty)
+//     {
+//         this.hiddenTerrainFlag = hiddenTerrainFlag;        
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, statDifficulties, hiddenTerrainFlag);
+//     }
+
+// }
+
+
+// public class GateKeyDetails : IStoryVariableSource
+// {
+
+//     public string description = "";
+//     public string keyName = "";
+
+//     public string hostileAreaName = "";
+//     public string hostilityScriptKey = "";
+
+//     public GateKeyDetails(string description, string keyName)
+//     {
+//         this.description = description;
+//         this.keyName = keyName;
+//     }
+
+//     public GateKeyDetails(string description, string keyName, string hostilityScriptKey, string hostileAreaName)
+//     {
+//         this.description = description;
+//         this.keyName = keyName;
+
+//         this.hostilityScriptKey = hostilityScriptKey;
+//         this.hostileAreaName = hostileAreaName;
+//     }
+
+//     public Story addVariables(Story story)
+//     {
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.description, description);
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.keyName, keyName);
+
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostileAreaName, hostileAreaName);
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostilityScriptKey, hostilityScriptKey);
+  
+//         return story;
+//     }
+
+// }
+
+// public class GateWithKeySpawnInfo : GateSpawnInfo
+// {
+//     private GateKeyDetails gateKeyDetails;
+
+//     public GateWithKeySpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis, GateKeyDetails gateKeyDetails) :
+//     base(gateIndex, npcName, currentArea, startCell, spriteName, size, axis)
+//     {
+//         this.gateKeyDetails = gateKeyDetails;
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new GateWithKeySpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), //skewed(),  
+//         indexHasSprite(spriteName, index), axis, gateKeyDetails);
+//     }
+// }
 
 public class LadderSpawnDetails : NPCSpawnDetails
 {
@@ -1130,122 +1454,6 @@ public class DependantSpawnDetails : NPCSpawnDetails
 
 }
 
-public class GateSpawnDetails : NPCSpawnDetails
-{
-
-    public GateSpawnDetails(string npcName,
-                            Vector3Int cellCoords,
-                            string tutorialTargetHash,
-                            IAppearance appearance = null,
-                            int index = 0) :
-    base(npcName, cellCoords, appearance: appearance, tutorialTargetHash: tutorialTargetHash, index: index)
-    {
-        universalSpawnBehaviours[typeof(GateSpawnBehaviour)] = new GateSpawnBehaviour(uniqueName);
-    }
-}
-
-// public class GateWithKeySpawnDetails : GateSpawnDetails
-// {
-//     public GateWithKeySpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, bool showSprite, Axis axis, GateKeyDetails gateKeyDetails, IAppearance appearance = null) :
-//     base(npcName, cellCoords, currentArea, noTutorialTargetHash, showSprite, axis, new Dictionary<string, int>(), appearance: appearance,
-//          gateSpawnBehaviour: new GateWithKeySpawnBehaviour(npcName, noTutorialTargetHash, new Dictionary<string, int>(), gateKeyDetails))
-//     {
-//     }
-
-//     public override Dialogue getDialogue(string areaName)
-//     {
-//         return new SingleCharacterDialogue(npcName, InkAssetList.getInkJSON(DialogueKey.GateWithKey));
-//     }
-// }
-
-// public class GateWithKeySpawnBehaviour : GateSpawnBehaviour
-// {
-//     private GateKeyDetails gateKeyDetails;
-
-//     public GateWithKeySpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties, GateKeyDetails gateKeyDetails) :
-//     base(gateKey, tutorialTargetHash, statDifficulties)
-//     {
-//         this.gateKeyDetails = gateKeyDetails;
-//     }
-
-//     protected override void addDialogueBehaviour(GameObject gateGameObject)
-//     {
-//         base.addDialogueBehaviour(gateGameObject);
-
-//         if (dialogue == null)
-//         {
-//             return;
-//         }
-
-//         dialogue.variableSources.Add(gateKeyDetails);
-//     }
-// }
-
-// public class TemporaryGateSpawnDetails : GateSpawnDetails
-// {
-//     public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, Axis axis, Dictionary<string, int> statDifficulties, IAppearance appearance = null) :
-//     base(npcName, cellCoords, currentArea, true, axis, statDifficulties, appearance: appearance,
-//          gateSpawnBehaviour: new TemporaryGateSpawnBehaviour(npcName, statDifficulties))
-//     {
-
-//     }
-
-//     public override Dialogue getDialogue(string areaName)
-//     {
-//         return DialogueList.getDialogue(DialogueList.scrubNameOfEndNumbers(npcName), areaName);
-//     }
-
-// }
-
-// public class TemporaryGateSpawnBehaviour : GateSpawnBehaviour
-// {
-//     public TemporaryGateSpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties) :
-//     base(gateKey, tutorialTargetHash, statDifficulties)
-//     {
-//     }
-
-//     protected override Gate addGate(GameObject gateGameObject)
-//     {
-//         return gateGameObject.AddComponent<TemporaryGate>();
-//     }
-// }
-
-// public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
-// {
-//     public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag, IAppearance appearance = null) :
-//     base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, true, Axis.DescendingX, statDifficulties, appearance: appearance,
-//          gateSpawnBehaviour: new GateWithHiddenTerrainSpawnBehaviour(npcName, tutorialTargetHash, statDifficulties, hiddenTerrainFlag))
-//     {
-//     }
-
-//     public override Dialogue getDialogue(string areaName)
-//     {
-//         return DialogueList.getDialogue(DialogueList.scrubNameOfEndNumbers(npcName), areaName);
-//     }
-// }
-
-// public class GateWithHiddenTerrainSpawnBehaviour : GateSpawnBehaviour
-// {
-//     private string hiddenTerrainFlag;
-
-//     public GateWithHiddenTerrainSpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag) :
-//     base(gateKey, tutorialTargetHash, statDifficulties)
-//     {
-//         this.hiddenTerrainFlag = hiddenTerrainFlag;
-//     }
-
-//     protected override Gate addGate(GameObject gateGameObject)
-//     {
-//         GateWithHiddenTerrain gate = gateGameObject.AddComponent<GateWithHiddenTerrain>();
-//         gate.hiddenTerrainFlag = hiddenTerrainFlag;
-//         NameTagGenerator nameTagGenerator = gateGameObject.GetComponent<NameTagGenerator>();
-
-//         nameTagGenerator.nameSource = gate;
-
-//         return gate;
-//     }
-// }
-
 public class RestStopAndShopkeeperSpawnDetails : NPCSpawnDetails
 {
 
@@ -1529,4 +1737,44 @@ public class HostilityTerrainSpawnDetails : HiddenTerrainSpawnDetails
     {
     }
 
+}
+
+public class TutorialColliderSpawnDetails : OOCSpawnDetails
+{
+
+    public override string prefabName { get { return PrefabNames.tutorialCollider; } }
+    public override Transform parent { get { return AreaManager.getNonTransitionColliderParent(); } }
+    protected override int layer { get { return LayerAndTagManager.tutorialLayer; } }
+
+    public override SpawnParams spawnParams { 
+                                                get
+                                                { 
+                                                    if(!TutorialFlags.getFlag(seenFlagName) && 
+                                                        ((monsterDefeatKeyIndex >= 0 && !MonsterDefeatKeysList.monsterIsDefeated(monsterDefeatKeyIndex)) || monsterDefeatKeyIndex < 0))
+                                                    {
+                                                        return new InteractableSpawnParams(startSpawningFlagList);
+                                                    } else
+                                                    {
+                                                        return new NeverSpawnParams();           
+                                                    }
+                                                }
+                                            }
+
+    private string seenFlagName;
+    private StartSpawningAllTrueFlagList startSpawningFlagList;
+    private int monsterDefeatKeyIndex;
+
+    public TutorialColliderSpawnDetails(Vector3Int cellCoords, 
+                                        string tutorialKey, 
+                                        string seenFlagName, 
+                                        StartSpawningAllTrueFlagList startSpawningFlagList = null,
+                                        int index = 0) :
+    base(cellCoords: cellCoords, index: index)
+    {
+        universalSpawnBehaviours[typeof(TutorialTriggerColliderSpawnBehaviour)] = new TutorialTriggerColliderSpawnBehaviour(tutorialKey);
+
+        this.seenFlagName = seenFlagName;
+        this.startSpawningFlagList = startSpawningFlagList ?? new StartSpawningAllTrueFlagList();
+        this.monsterDefeatKeyIndex = -1;
+    }
 }

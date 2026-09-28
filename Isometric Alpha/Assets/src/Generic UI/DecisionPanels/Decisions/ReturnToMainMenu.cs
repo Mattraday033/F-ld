@@ -18,6 +18,8 @@ public class ReturnToMainMenu : IDecision
  
 	public void execute()
 	{
+        PlayerOOCStateManager.setCurrentActivity(OOCActivity.MainMenu);
+
         Flags.resetAllFlags();
         PartyManager.resetPartyMembers();
 
