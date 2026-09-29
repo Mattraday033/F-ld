@@ -88,15 +88,11 @@ public static class OOCSpawnDetailsList
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(1, 6), TutorialSequenceList.secondCunningTutorialSequenceKey,
                                                                           TutorialSequenceList.secondCunningTutorialSeenFlag));
 
-        list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(2, 7), CunningObjectSpriteCategory.Crank, allBlockerSpawnDetails:
-                 new List<ObstacleSpawnDetails>()
-                 {
-                    new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(2, 9), appearance: SpriteDescriptionList.tutorialRubble, index: 1),
-                    new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(1, 8), appearance: SpriteDescriptionList.tutorialRubble, index: 1),
-                    new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(2, 8), appearance: SpriteDescriptionList.tutorialRubble, index: 1)
-                 },
-                 script: new KastorCunningTutorialScript(),
-                 tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
+        list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(2, 7), CunningObjectSpriteCategory.Crank, 
+                                                cunningAction: null, script: new KastorCunningTutorialScript(), tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(2, 9), appearance: SpriteDescriptionList.tutorialRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(1, 8), appearance: SpriteDescriptionList.tutorialRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(2, 8), appearance: SpriteDescriptionList.tutorialRubble));
 
         #endregion
         #region Wis Tutorial
@@ -196,9 +192,9 @@ public static class OOCSpawnDetailsList
         //                         new StartSpawningAllTrueFlagList(new string[] { TutorialSequenceList.cunningTutorialSeenFlag }, useTutorialFlags: true),
         //                                                                   Constants.indexOne));
 
-        // list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), CunningObjectSpriteCategory.Crank, blockerSpawnDetails:
-        //          new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf),
-        //          tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
+        // list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), CunningObjectSpriteCategory.Crank,
+        //                                         cunningAction: null, tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf));
 
         // list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, -4), VaultableObject.diffTwoVaultableBarrelsOneTile, tutorialTargetHash: TutorialSequenceList.vaultableBarrelsTargetHash));
 
@@ -1026,17 +1022,13 @@ public static class OOCSpawnDetailsList
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-4, -4), TutorialSequenceList.secondCunningTutorialSequenceKey,
                                                                           TutorialSequenceList.secondCunningTutorialSeenFlag));
 
-        list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(-3, -3), CunningObjectSpriteCategory.Crank, allBlockerSpawnDetails:
-                 new List<ObstacleSpawnDetails>()
-                 {
-                    new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-3, -1), appearance: SpriteDescriptionList.shackWallHalf, index: 1),
-                    new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-3, -2), appearance: SpriteDescriptionList.shackWallHalf, index: 1),
-                    new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-4, 0), appearance: SpriteDescriptionList.shackWallHalf, index: 1),
-                    new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-4, -1), appearance: SpriteDescriptionList.shackWallHalf, index: 1),
-                    new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-4, -2), appearance: SpriteDescriptionList.shackWallHalf, index: 1)
-                 },
-                 script: new TaborCunningTutorialScript(),
-                 tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
+        list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(-3, -3), CunningObjectSpriteCategory.Crank,
+                                                cunningAction: null, script: new TaborCunningTutorialScript(), tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-3, -1), appearance: SpriteDescriptionList.shackWallHalf, index: 1));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-3, -2), appearance: SpriteDescriptionList.shackWallHalf, index: 1));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-4, 0), appearance: SpriteDescriptionList.shackWallHalf, index: 1));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-4, -1), appearance: SpriteDescriptionList.shackWallHalf, index: 1));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-4, -2), appearance: SpriteDescriptionList.shackWallHalf, index: 1));
 
         list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-3, -1), appearance: SpriteDescriptionList.shackWallHalf));
         list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-3, -2), appearance: SpriteDescriptionList.shackWallHalf));
@@ -2411,13 +2403,15 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(0, -5)));
 
         list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(-1, -7), CunningObjectSpriteCategory.Crank,
-                 allBlockerSpawnDetails: new List<ObstacleSpawnDetails>(){new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(-1, -6), appearance: SpriteDescriptionList.shackWallHalf)}));
+                                                cunningAction: null));
+        list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(-1, -6), appearance: SpriteDescriptionList.shackWallHalf));
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 4), Constants.indexOne));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-5, 4), Constants.indexOne));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-6, 4), Constants.indexOne));
         // list.Add(new CunningObjectSpawnDetails(Constants.indexTwo, new Vector3Int(-4, -2), CunningObjectSpriteCategory.Crank,
-        //          new List<ObstacleSpawnDetails>(){new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(-4, -2), PrefabNames.shackWallHalf)}));
+        //                                         cunningAction: null));
+        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(-4, -2), PrefabNames.shackWallHalf));
 
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-7, 7), Facing.SouthEast, type: ChestType.Chest));
         list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-8, -6), Facing.NorthEast, type: ChestType.Chest));

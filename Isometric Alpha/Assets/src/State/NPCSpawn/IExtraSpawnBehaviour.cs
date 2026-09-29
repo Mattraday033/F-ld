@@ -6,9 +6,21 @@ using UnityEngine.UI;
 
 public interface IExtraSpawnBehaviour
 {
-    public void addBehaviour(GameObject gameObject);
+    public Component addBehaviour(GameObject gameObject);
 
-} 
+}
+
+public class ActivationListenerSpawnBehaviour : IExtraSpawnBehaviour
+{
+    public ActivationListenerSpawnBehaviour()
+    {
+    }
+
+    public Component addBehaviour(GameObject gameObject)
+    {
+        return gameObject.AddComponent<ActivationListener>();
+    }
+}
 
 public class AnimationManagerSpawnBehaviour : IExtraSpawnBehaviour
 {
@@ -24,7 +36,7 @@ public class AnimationManagerSpawnBehaviour : IExtraSpawnBehaviour
         this.animationType = animationType;
     }
 
-    public void addBehaviour(GameObject gameObject)
+    public Component addBehaviour(GameObject gameObject)
     {
         NewAnimationManager animationManager = gameObject.AddComponent<NewAnimationManager>();
 
@@ -38,6 +50,8 @@ public class AnimationManagerSpawnBehaviour : IExtraSpawnBehaviour
         {
             animationManager.handleMovementAnimation();
         }
+
+        return animationManager;
     }
 }
 
@@ -62,7 +76,7 @@ public class ContainerSpawnBehaviour: IExtraSpawnBehaviour
         // this.chestName = chestName;
     }
 
-    public void addBehaviour(GameObject gameObject)
+    public Component addBehaviour(GameObject gameObject)
     {
         Container chest = gameObject.AddComponent<Container>();
 
@@ -71,6 +85,8 @@ public class ContainerSpawnBehaviour: IExtraSpawnBehaviour
         chest.script = script;
 
         chest.setSecretDoorFlag(secretDoorFlag);
+
+        return chest;
     }
 }
 
@@ -92,7 +108,7 @@ public class CunningObjectSpawnBehaviour : IExtraSpawnBehaviour
         this.cunningAction = cunningAction;
     }
 
-    public void addBehaviour(GameObject gameObject)
+    public Component addBehaviour(GameObject gameObject)
     {
         CunningObject cunningObject = gameObject.AddComponent<CunningObject>();
 
@@ -101,6 +117,8 @@ public class CunningObjectSpawnBehaviour : IExtraSpawnBehaviour
         cunningObject.script = script;
         cunningObject.cunningAction = cunningAction;
         cunningObject.category = category;
+
+        return cunningObject;
     }
 }
 
@@ -130,7 +148,7 @@ public class DialogueTriggerSpawnBehaviour : IExtraSpawnBehaviour
         this.dialogueSource = dialogueSource;
     }
 
-    public void addBehaviour(GameObject gameObject)
+    public Component addBehaviour(GameObject gameObject)
     {
         DialogueTrigger dialogueTrigger = gameObject.AddComponent<DialogueTrigger>();
 
@@ -139,10 +157,7 @@ public class DialogueTriggerSpawnBehaviour : IExtraSpawnBehaviour
         dialogueTrigger.introAudioClipLogic = introSFX;
         dialogueTrigger.dialogueSource = _DialogueSource;
 
-        if(hasExtraSpaces)
-        {
-            dialogueTrigger.listenForActivationByName();
-        }
+        return dialogueTrigger;
     }
 }
 
@@ -157,13 +172,15 @@ public class GateSpawnBehaviour : IExtraSpawnBehaviour
         this.hiddenTerrainFlag = hiddenTerrainFlag;
     }
 
-    public void addBehaviour(GameObject gameObject)
+    public Component addBehaviour(GameObject gameObject)
     {
         Gate gate = gameObject.AddComponent<Gate>();
 
         //setKey checks whether the gate is already open, which needs the flag in place first
         gate.hiddenTerrainFlag = hiddenTerrainFlag;
         gate.setKey(gateKey);
+
+        return gate;
     }
 }
 
@@ -173,16 +190,19 @@ public class NPCMouseHoverSpawnBehaviour : IExtraSpawnBehaviour
     {
     }
 
-    public void addBehaviour(GameObject gameObject)
+    //the hover component is only added next frame, so there is nothing to return yet
+    public Component addBehaviour(GameObject gameObject)
     {
         MonoBehaviour monoBehaviour = gameObject.GetComponent<MonoBehaviour>();
 
         if(monoBehaviour == null)
         {
-            return;
+            return null;
         }
 
         monoBehaviour.StartCoroutine(addBehaviourAtEndOfFrame(gameObject));
+
+        return null;
     }
 
     private IEnumerator addBehaviourAtEndOfFrame(GameObject gameObject)
@@ -215,7 +235,7 @@ public class ObstacleSpawnBehaviour : IExtraSpawnBehaviour
         this.ignoresSecretDoors = ignoresSecretDoors;
     }
 
-    public void addBehaviour(GameObject gameObject)
+    public Component addBehaviour(GameObject gameObject)
     {
         Obstacle obstacle = addObstacle(gameObject);
 
@@ -226,6 +246,8 @@ public class ObstacleSpawnBehaviour : IExtraSpawnBehaviour
         {
             obstacle.setToIgnoreSecretDoors();
         }
+
+        return obstacle;
     }
 
     protected virtual Obstacle addObstacle(GameObject gameObject)
@@ -240,7 +262,7 @@ public class OverHeadIconManagerSpawnBehaviour : IExtraSpawnBehaviour
     {
     }
 
-    public void addBehaviour(GameObject gameObject)
+    public Component addBehaviour(GameObject gameObject)
     {
         OverHeadIconManager iconManager = gameObject.AddComponent<OverHeadIconManager>();
 
@@ -259,6 +281,8 @@ public class OverHeadIconManagerSpawnBehaviour : IExtraSpawnBehaviour
         iconManager.setRendererList(gameObject.GetComponent<SpriteLayerRendererList>());
 
         iconManager.StartCoroutine(assignNameSourceAtEndOfFrame(iconManager));
+
+        return iconManager;
     }
 
     //the name source arrives with the universal spawn behaviours, which run after the aesthetic ones
@@ -287,11 +311,13 @@ public class PartyMemberDespawnListenerSpawnBehaviour : IExtraSpawnBehaviour
         this.npcName = npcName;
     }
 
-    public void addBehaviour(GameObject gameObject)
+    public Component addBehaviour(GameObject gameObject)
     {
         PartyMemberDespawnListener listener = gameObject.AddComponent<PartyMemberDespawnListener>();
 
         listener.partyMemberName = npcName;
+
+        return listener;
     }
 }
 
@@ -304,7 +330,7 @@ public class TutorialTargetSpawnBehaviour : IExtraSpawnBehaviour
         this.tutorialTargetHash = tutorialTargetHash;
     }
 
-    public void addBehaviour(GameObject gameObject)
+    public Component addBehaviour(GameObject gameObject)
     {
         GameObject targetRect = GameObjectUtil.createBlankGameObject(gameObject);
 
@@ -323,6 +349,7 @@ public class TutorialTargetSpawnBehaviour : IExtraSpawnBehaviour
         targetSprite.tutorialHash = tutorialTargetHash;
         targetSprite.rendererList = gameObject.GetComponent<SpriteLayerRendererList>();
 
+        return targetSprite;
     }
 }
 
@@ -335,10 +362,12 @@ public class TutorialTriggerColliderSpawnBehaviour : IExtraSpawnBehaviour
         this.tutorialKey = tutorialKey;
     }
 
-    public void addBehaviour(GameObject gameObject)
+    public Component addBehaviour(GameObject gameObject)
     {
         TutorialTriggerCollider tutorialCollider = gameObject.GetComponent<TutorialTriggerCollider>();
         tutorialCollider.tutorialSequenceKey = tutorialKey;
+
+        return tutorialCollider;
     }
 }
 
@@ -351,7 +380,7 @@ public class TilemapOffsetSpawnBehaviour : IExtraSpawnBehaviour
         this.offset = offset;
     }
 
-    public void addBehaviour(GameObject gameObject)
+    public Component addBehaviour(GameObject gameObject)
     {
         TilemapCollider2D tilemapCollider = gameObject.GetComponent<TilemapCollider2D>();
 
@@ -359,6 +388,8 @@ public class TilemapOffsetSpawnBehaviour : IExtraSpawnBehaviour
         {
             tilemapCollider.offset = new Vector2(tilemapCollider.offset.x, offset);
         }
+
+        return tilemapCollider;
     }
 }
 

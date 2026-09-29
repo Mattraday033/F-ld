@@ -98,32 +98,30 @@ public class OOCSpawnDetails: IAppearanceSource
 
         // setIgnoresSecretDoors(interactable);
 
+        ActivationListenerSpawnBehaviour activationListenerSpawnBehaviour = new ActivationListenerSpawnBehaviour();
+
         foreach(GameObject interactable in allInteractables)
         {
+            ActivationListener listener = activationListenerSpawnBehaviour.addBehaviour(interactable) as ActivationListener;
+            listener.index = index;
+
             foreach(IExtraSpawnBehaviour behaviour in universalSpawnBehaviours.Values)
             {
-                behaviour.addBehaviour(interactable);
+                Component component = behaviour.addBehaviour(interactable);
+                INameSource nameSource = component as INameSource;
+
+                listener.nameSource = nameSource ?? listener.nameSource;
             }
 
             interactable.layer = layer;
             interactable.tag = tag;
         }
         
-        Canvas.ForceUpdateCanvases();
+        // Canvas.ForceUpdateCanvases();
 
         return allInteractables;
     }
 
-    // protected virtual void setIgnoresSecretDoors(GameObject interactable)
-    // {
-    //     NameTagGenerator nameTagGenerator = interactable.GetComponent<NameTagGenerator>();
-
-    //     if(nameTagGenerator != null && ignoresSecretDoors)
-    //     {
-    //         nameTagGenerator.setToIgnoreSecretDoors();
-    //     }
-    // }
-    
     public const string gameObjectNameSuffix = "'s GameObject";
     public const string extraSpaceNameSuffix = "'s Extra Space GameObject";
     private const string gameObjectPlaceHolderName = "PlaceHolder GameObject";
@@ -184,9 +182,8 @@ public class CunningObjectSpawnDetails : OOCSpawnDetails
                                         CunningObjectSpriteCategory category,
                                         CunningAction cunningAction,
                                         QuestStepActivationScript script = null,
-                                        string tutorialTargetHash = null,
-                                        IAppearance appearance = null) :
-    base(category.ToString(), appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, index: index)
+                                        string tutorialTargetHash = null) :
+    base(category.ToString(), cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, index: index)
     {
         aestheticSpawnBehaviours[typeof(NPCMouseHoverSpawnBehaviour)] = new NPCMouseHoverSpawnBehaviour();
 

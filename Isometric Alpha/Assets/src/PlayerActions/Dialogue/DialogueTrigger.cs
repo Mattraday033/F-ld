@@ -141,7 +141,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     private void OnEnable()
     {
-        EventList.SetActiveByNameChannel.Invoke(npcName, true);
+        EventList.SetActiveByNameChannel.Invoke(ActivationCategory.Dialogue, npcName, true);
 
         if(animationManager == null)
         {
@@ -151,25 +151,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     private void OnDisable()
     {
-        EventList.SetActiveByNameChannel.Invoke(npcName, false);
-    }
-
-    private void OnDestroy()
-    {
-        EventList.SetActiveByNameChannel.RemoveListener(setActiveByName);
-    }
-
-    public void listenForActivationByName()
-    {
-        EventList.SetActiveByNameChannel.AddListener(setActiveByName);
-    }
-
-    private void setActiveByName(string incomingName, bool status)
-    {
-        if(incomingName.Equals(npcName))
-        {
-            gameObject.SetActive(status);
-        }
+        EventList.SetActiveByNameChannel.Invoke(ActivationCategory.Dialogue, npcName, true);
     }
 
 }

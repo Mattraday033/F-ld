@@ -7,14 +7,12 @@ public static class SpawnInfoManager
 {
 
     public static SaveBlueprint lastSaveBlueprint;
-    public static List<GameObject> allSpawnedObjects;
 
 
     [RuntimeInitializeOnLoadMethod]
     private static void initializeSpawnInfoManager()
     {
         lastSaveBlueprint = null;
-        allSpawnedObjects = null;
         AreaManager.OnAreaSpawn.AddListener(spawnDetails);
         SecretDoorFlags.OnSecretDoorDiscovery.AddListener(spawnHiddenTerrain);
         LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
@@ -42,20 +40,7 @@ public static class SpawnInfoManager
     {
         wipingSlate = true;
 
-        if (allSpawnedObjects == null)
-        {
-            return;
-        }
-
-        foreach (GameObject spawnedObject in allSpawnedObjects)
-        {
-            if (spawnedObject == null)
-            {
-                continue;
-            }
-
-            GameObject.DestroyImmediate(spawnedObject);
-        }
+        EventList.DestroyAllSpawnedGameObjects.Invoke();
 
         wipingSlate = false;
     }
@@ -64,17 +49,15 @@ public static class SpawnInfoManager
     {
         wipeSlate();
 
-        allSpawnedObjects = new List<GameObject>();
+        spawnBackground();
 
-        allSpawnedObjects.AddRange(spawnBackground());
+        spawnPlayer();
 
-        allSpawnedObjects.AddRange(spawnPlayer());
-
-        allSpawnedObjects.AddRange(spawnAllInteractables());
+        spawnAllInteractables();
 
         spawnAllTransitions();
 
-        // allSpawnedObjects.AddRange(instantiateAllAxisSpawnDetails());
+        // instantiateAllAxisSpawnDetails();
 
         // PartyMemberTrainManager.createPartyMemberTrain();
 
@@ -112,11 +95,6 @@ public static class SpawnInfoManager
         {
             script.startingAction();
         }
-    }
-
-    public static void addGameObject(GameObject spawnedObject)
-    {
-        allSpawnedObjects.Add(spawnedObject);
     }
 
     private static List<GameObject> spawnBackground()
@@ -248,8 +226,6 @@ public static class SpawnInfoManager
         transitionSpace.setTransition(transition);
 
         transitionGameObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(transition.cellCoords);
-
-        addGameObject(transitionGameObject);
 
         return transitionSpace;
     }

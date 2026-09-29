@@ -1,73 +1,73 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using UnityEngine.Events;
 
-public class LinkedCunningBlocker : CunningBlocker
-{
+// public class LinkedCunningBlocker : CunningBlocker
+// {
 
-    protected readonly static UnityEvent<LinkedCunningBlocker> GetLinkedBlocker = new UnityEvent<LinkedCunningBlocker>();
+//     protected readonly static UnityEvent<LinkedCunningBlocker> GetLinkedBlocker = new UnityEvent<LinkedCunningBlocker>();
 
-    public int linkedIndex = -1;
-    public bool midCunning = false;
+//     public int linkedIndex = -1;
+//     public bool midCunning = false;
 
-    public LinkedCunningBlocker linkedBlocker;
+//     public LinkedCunningBlocker linkedBlocker;
 
-    void Start()
-    {
-        GetLinkedBlocker.Invoke(this);
-    }
+//     void Start()
+//     {
+//         GetLinkedBlocker.Invoke(this);
+//     }
 
-    public override bool validTarget(SkillType skillType)
-    {
-        if(linkedBlocker.midCunning)
-        {
-            return base.validTarget(skillType);
-        }
+//     public override bool validTarget(SkillType skillType)
+//     {
+//         if(linkedBlocker.midCunning)
+//         {
+//             return base.validTarget(skillType);
+//         }
 
-        midCunning = true;
+//         midCunning = true;
 
-        bool valid = base.validTarget(skillType) && linkedBlocker.validTarget(skillType);
+//         bool valid = base.validTarget(skillType) && linkedBlocker.validTarget(skillType);
 
-        midCunning = false;
+//         midCunning = false;
 
-        return valid;
-    }
+//         return valid;
+//     }
 
-    public override void cunning(bool trackChangeInStateManager)
-    {
-        midCunning = true;
+//     public override void cunning(bool trackChangeInStateManager)
+//     {
+//         midCunning = true;
 
-        base.cunning(trackChangeInStateManager);
+//         base.cunning(trackChangeInStateManager);
 
-        if (!linkedBlocker.midCunning)
-        {
-            linkedBlocker.cunning(trackChangeInStateManager);
-        }
+//         if (!linkedBlocker.midCunning)
+//         {
+//             linkedBlocker.cunning(trackChangeInStateManager);
+//         }
 
-        midCunning = false;
-    }
+//         midCunning = false;
+//     }
 
-    public void linkSelf(LinkedCunningBlocker linkedCunningBlocker)
-    {
-        if(linkedCunningBlocker.linkedIndex == index)
-        {
-            linkedCunningBlocker.linkedBlocker = this;
-        }
-    }
+//     public void linkSelf(LinkedCunningBlocker linkedCunningBlocker)
+//     {
+//         if(linkedCunningBlocker.linkedIndex == index)
+//         {
+//             linkedCunningBlocker.linkedBlocker = this;
+//         }
+//     }
 
-    public override void createListeners()
-    {
-        base.createListeners();
+//     public override void createListeners()
+//     {
+//         base.createListeners();
 
-        GetLinkedBlocker.AddListener(linkSelf);
-    }
+//         GetLinkedBlocker.AddListener(linkSelf);
+//     }
 
-    public override void destroyListeners()
-    {
-        base.destroyListeners();
+//     public override void destroyListeners()
+//     {
+//         base.destroyListeners();
 
-        GetLinkedBlocker.RemoveListener(linkSelf);
-    }
+//         GetLinkedBlocker.RemoveListener(linkSelf);
+//     }
 
-}
+// }

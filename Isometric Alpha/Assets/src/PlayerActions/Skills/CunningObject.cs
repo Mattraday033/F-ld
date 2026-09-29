@@ -204,6 +204,6 @@ public static class CunningActionList
 {
     public readonly static CunningAction deactivateBlockers = (index, evenActivation) =>
     {
-        EventList.SetObstaclesActiveByIntChannel.Invoke(index, evenActivation);
+        EventList.SetActiveByIndexChannel.Invoke(ActivationCategory.Cunning, index, evenActivation);
     };
 }
