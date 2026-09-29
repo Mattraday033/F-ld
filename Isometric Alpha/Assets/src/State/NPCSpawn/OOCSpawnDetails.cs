@@ -174,6 +174,98 @@ public class OOCSpawnDetails: IAppearanceSource
     }
 }
 
+public class CunningObjectSpawnDetails : OOCSpawnDetails
+{
+    //the index identifies the cunning object itself, not a variant of its name
+    public override string uniqueName { get { return npcName; } }
+
+    public CunningObjectSpawnDetails(int index,
+                                        Vector3Int cellCoords,
+                                        CunningObjectSpriteCategory category,
+                                        CunningAction cunningAction,
+                                        QuestStepActivationScript script = null,
+                                        string tutorialTargetHash = null,
+                                        IAppearance appearance = null) :
+    base(category.ToString(), appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, index: index)
+    {
+        aestheticSpawnBehaviours[typeof(NPCMouseHoverSpawnBehaviour)] = new NPCMouseHoverSpawnBehaviour();
+
+        universalSpawnBehaviours[typeof(CunningObjectSpawnBehaviour)] = new CunningObjectSpawnBehaviour(index, cunningAction, category, script);
+    }
+
+}
+
+// public class LinkedCunningBlockerSpawnDetails : CunningObjectSpawnDetails
+// {
+
+//     private int linkedIndex;
+
+//     public LinkedCunningBlockerSpawnDetails(int index, 
+//                                             Vector3Int cellCoords, 
+//                                             Facing startFacing, 
+//                                             Facing endFacing, 
+//                                             CunningObjectSpriteCategory category, 
+//                                             List<ObstacleSpawnDetails> allBlockerSpawnDetails, 
+//                                             int linkedIndex,
+//                                             string tutorialTargetHash = null,
+//                                             IAppearance appearance = null) :
+//     base(index, cellCoords, startFacing, category, allBlockerSpawnDetails, endFacing: endFacing, tutorialTargetHash: tutorialTargetHash, appearance: appearance)
+//     {
+//         this.linkedIndex = linkedIndex;
+//     }
+
+//     public override void spawnActions(CunningObject cunningObject)
+//     {
+//         // GameObject gameObject = cunningObject.gameObject;
+
+//         // LinkedCunningBlocker linkedBlocker = gameObject.AddComponent<LinkedCunningBlocker>();
+//         // // linkedBlocker.spriteRenderer = cunningObject.spriteRenderer;
+//         // linkedBlocker.linkedIndex = linkedIndex;
+
+//         // addNameTagGenerator(gameObject, linkedBlocker, cunningTarget: true);
+
+//         // GameObject.Destroy(cunningObject);
+
+//         // base.spawnActions(linkedBlocker);
+//     }
+// }
+
+// public class DoubleCunningBlockerSpawnDetails : CunningObjectSpawnDetails
+// {
+
+//     private List<ObstacleSpawnDetails> deactivatedBlockerSpawnDetails;
+
+//     public DoubleCunningBlockerSpawnDetails(int index, 
+//                                             Vector3Int cellCoords, 
+//                                             Facing startFacing, 
+//                                             Facing endFacing, 
+//                                             CunningObjectSpriteCategory category, 
+//                                             List<ObstacleSpawnDetails> activatedBlockerSpawnDetails, 
+//                                             List<ObstacleSpawnDetails> deactivatedBlockerSpawnDetails,
+//                                             IAppearance appearance = null) :
+//     base(index, cellCoords, startFacing, category, activatedBlockerSpawnDetails, endFacing: endFacing, appearance: appearance)
+//     {
+//         this.deactivatedBlockerSpawnDetails = deactivatedBlockerSpawnDetails;
+//     }
+
+//     public override void spawnActions(CunningObject cunningObject)
+//     {
+//         // GameObject gameObject = cunningObject.gameObject;
+
+//         // DoubleCunningBlocker doubleBlocker = gameObject.AddComponent<DoubleCunningBlocker>();
+//         // // doubleBlocker.spriteRenderer = cunningObject.spriteRenderer;
+
+//         // addNameTagGenerator(gameObject, doubleBlocker, cunningTarget: true);
+
+//         // GameObject.Destroy(cunningObject);
+
+//         // base.spawnActions(doubleBlocker);
+
+//         // buildBlockers(doubleBlocker, deactivatedBlockerSpawnDetails);
+//     }
+// }
+
+
 public class ObstacleSpawnDetails : OOCSpawnDetails
 {
     protected override int layer { get { return LayerAndTagManager.objectLayer; } }
@@ -273,8 +365,6 @@ public class NPCSpawnDetails : OOCSpawnDetails, IDialogueSource
     }
 }
 
-//Single: one visible sprite on the first cell, the rest are invisible extra spaces
-//PerCell: every cell is its own visible sprite, each with its own mouse hover and animation manager
 public enum GateSpriteLayout { Single, PerCell }
 
 public class GateSpawnDetails : NPCSpawnDetails
@@ -333,298 +423,6 @@ public class GateSpawnDetails : NPCSpawnDetails
         return extraSpaces.ToArray();
     }
 }
-
-// public class GateWithKeySpawnDetails : GateSpawnDetails
-// {
-//     public GateWithKeySpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, bool showSprite, Axis axis, GateKeyDetails gateKeyDetails, IAppearance appearance = null) :
-//     base(npcName, cellCoords, currentArea, noTutorialTargetHash, showSprite, axis, new Dictionary<string, int>(), appearance: appearance,
-//          gateSpawnBehaviour: new GateWithKeySpawnBehaviour(npcName, noTutorialTargetHash, new Dictionary<string, int>(), gateKeyDetails))
-//     {
-//     }
-
-//     public override Dialogue getDialogue(string areaName)
-//     {
-//         return new SingleCharacterDialogue(npcName, InkAssetList.getInkJSON(DialogueKey.GateWithKey));
-//     }
-// }
-
-// public class GateWithKeySpawnBehaviour : GateSpawnBehaviour
-// {
-//     private GateKeyDetails gateKeyDetails;
-
-//     public GateWithKeySpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties, GateKeyDetails gateKeyDetails) :
-//     base(gateKey, tutorialTargetHash, statDifficulties)
-//     {
-//         this.gateKeyDetails = gateKeyDetails;
-//     }
-
-//     protected override void addDialogueBehaviour(GameObject gateGameObject)
-//     {
-//         base.addDialogueBehaviour(gateGameObject);
-
-//         if (dialogue == null)
-//         {
-//             return;
-//         }
-
-//         dialogue.variableSources.Add(gateKeyDetails);
-//     }
-// }
-
-// public class TemporaryGateSpawnDetails : GateSpawnDetails
-// {
-//     public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, Axis axis, Dictionary<string, int> statDifficulties, IAppearance appearance = null) :
-//     base(npcName, cellCoords, currentArea, true, axis, statDifficulties, appearance: appearance,
-//          gateSpawnBehaviour: new TemporaryGateSpawnBehaviour(npcName, statDifficulties))
-//     {
-
-//     }
-
-//     public override Dialogue getDialogue(string areaName)
-//     {
-//         return DialogueList.getDialogue(DialogueList.scrubNameOfEndNumbers(npcName), areaName);
-//     }
-
-// }
-
-// public class TemporaryGateSpawnBehaviour : GateSpawnBehaviour
-// {
-//     public TemporaryGateSpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties) :
-//     base(gateKey, tutorialTargetHash, statDifficulties)
-//     {
-//     }
-
-//     protected override Gate addGate(GameObject gateGameObject)
-//     {
-//         return gateGameObject.AddComponent<TemporaryGate>();
-//     }
-// }
-
-// public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
-// {
-//     public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag, IAppearance appearance = null) :
-//     base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, true, Axis.DescendingX, statDifficulties, appearance: appearance,
-//          gateSpawnBehaviour: new GateWithHiddenTerrainSpawnBehaviour(npcName, tutorialTargetHash, statDifficulties, hiddenTerrainFlag))
-//     {
-//     }
-
-//     public override Dialogue getDialogue(string areaName)
-//     {
-//         return DialogueList.getDialogue(DialogueList.scrubNameOfEndNumbers(npcName), areaName);
-//     }
-// }
-
-// public class GateWithHiddenTerrainSpawnBehaviour : GateSpawnBehaviour
-// {
-//     private string hiddenTerrainFlag;
-
-//     public GateWithHiddenTerrainSpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag) :
-//     base(gateKey, tutorialTargetHash, statDifficulties)
-//     {
-//         this.hiddenTerrainFlag = hiddenTerrainFlag;
-//     }
-
-//     protected override Gate addGate(GameObject gateGameObject)
-//     {
-//         GateWithHiddenTerrain gate = gateGameObject.AddComponent<GateWithHiddenTerrain>();
-//         gate.hiddenTerrainFlag = hiddenTerrainFlag;
-//         NameTagGenerator nameTagGenerator = gateGameObject.GetComponent<NameTagGenerator>();
-
-//         nameTagGenerator.nameSource = gate;
-
-//         return gate;
-//     }
-// }
-
-/// <summary>
-///  Moved GateSpawnInfo Child Classes to here safe keeping
-/// </summary>
-
-// public class TemporaryGateSpawnInfo : GateSpawnInfo
-// {
-
-//     public TemporaryGateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis) :
-//     base(gateIndex, npcName, currentArea, startCell, PrefabNames.portcullis1x1Path, size, axis)
-//     {
-//     }
-
-//     protected override string getGateName()
-//     {
-//         return npcName + gateIndex;
-//     }
-
-//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
-//     {
-//         return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, //skewed(),
-//          axis, statDifficulties);
-//     }
-
-// }
-
-// public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo
-// {
-//     private string hiddenTerrainFlag;
-
-//     public GateWithHiddenTerrainSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, string hiddenTerrainFlag, KeyValuePair<string, int> statDifficulty) :
-//     base(gateIndex, npcName, currentArea, startCell, spriteName, statDifficulty: statDifficulty)
-//     {
-//         this.hiddenTerrainFlag = hiddenTerrainFlag;        
-//     }
-
-//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
-//     {
-//         return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, statDifficulties, hiddenTerrainFlag);
-//     }
-
-// }
-
-
-// public class GateKeyDetails : IStoryVariableSource
-// {
-
-//     public string description = "";
-//     public string keyName = "";
-
-//     public string hostileAreaName = "";
-//     public string hostilityScriptKey = "";
-
-//     public GateKeyDetails(string description, string keyName)
-//     {
-//         this.description = description;
-//         this.keyName = keyName;
-//     }
-
-//     public GateKeyDetails(string description, string keyName, string hostilityScriptKey, string hostileAreaName)
-//     {
-//         this.description = description;
-//         this.keyName = keyName;
-
-//         this.hostilityScriptKey = hostilityScriptKey;
-//         this.hostileAreaName = hostileAreaName;
-//     }
-
-//     public Story addVariables(Story story)
-//     {
-//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.description, description);
-//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.keyName, keyName);
-
-//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostileAreaName, hostileAreaName);
-//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostilityScriptKey, hostilityScriptKey);
-  
-//         return story;
-//     }
-
-// }
-
-// public class GateWithKeySpawnInfo : GateSpawnInfo
-// {
-//     private GateKeyDetails gateKeyDetails;
-
-//     public GateWithKeySpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis, GateKeyDetails gateKeyDetails) :
-//     base(gateIndex, npcName, currentArea, startCell, spriteName, size, axis)
-//     {
-//         this.gateKeyDetails = gateKeyDetails;
-//     }
-
-//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
-//     {
-//         return new GateWithKeySpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), //skewed(),  
-//         indexHasSprite(spriteName, index), axis, gateKeyDetails);
-//     }
-// }
-
-// public class TemporaryGateSpawnInfo : GateSpawnInfo
-// {
-
-//     public TemporaryGateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis) :
-//     base(gateIndex, npcName, currentArea, startCell, PrefabNames.portcullis1x1Path, size, axis)
-//     {
-//     }
-
-//     protected override string getGateName()
-//     {
-//         return npcName + gateIndex;
-//     }
-
-//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
-//     {
-//         return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, //skewed(),
-//          axis, statDifficulties);
-//     }
-
-// }
-
-// public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo
-// {
-//     private string hiddenTerrainFlag;
-
-//     public GateWithHiddenTerrainSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, string hiddenTerrainFlag, KeyValuePair<string, int> statDifficulty) :
-//     base(gateIndex, npcName, currentArea, startCell, spriteName, statDifficulty: statDifficulty)
-//     {
-//         this.hiddenTerrainFlag = hiddenTerrainFlag;        
-//     }
-
-//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
-//     {
-//         return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, statDifficulties, hiddenTerrainFlag);
-//     }
-
-// }
-
-
-// public class GateKeyDetails : IStoryVariableSource
-// {
-
-//     public string description = "";
-//     public string keyName = "";
-
-//     public string hostileAreaName = "";
-//     public string hostilityScriptKey = "";
-
-//     public GateKeyDetails(string description, string keyName)
-//     {
-//         this.description = description;
-//         this.keyName = keyName;
-//     }
-
-//     public GateKeyDetails(string description, string keyName, string hostilityScriptKey, string hostileAreaName)
-//     {
-//         this.description = description;
-//         this.keyName = keyName;
-
-//         this.hostilityScriptKey = hostilityScriptKey;
-//         this.hostileAreaName = hostileAreaName;
-//     }
-
-//     public Story addVariables(Story story)
-//     {
-//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.description, description);
-//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.keyName, keyName);
-
-//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostileAreaName, hostileAreaName);
-//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostilityScriptKey, hostilityScriptKey);
-  
-//         return story;
-//     }
-
-// }
-
-// public class GateWithKeySpawnInfo : GateSpawnInfo
-// {
-//     private GateKeyDetails gateKeyDetails;
-
-//     public GateWithKeySpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis, GateKeyDetails gateKeyDetails) :
-//     base(gateIndex, npcName, currentArea, startCell, spriteName, size, axis)
-//     {
-//         this.gateKeyDetails = gateKeyDetails;
-//     }
-
-//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
-//     {
-//         return new GateWithKeySpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), //skewed(),  
-//         indexHasSprite(spriteName, index), axis, gateKeyDetails);
-//     }
-// }
 
 public class LadderSpawnDetails : NPCSpawnDetails
 {
@@ -898,199 +696,6 @@ public class ContainerSpawnDetails : OOCSpawnDetails
 
     //     singleSpriteChest.setSecretDoorFlag(secretDoorFlag);
     // }
-}
-
-
-public abstract class CunningObjectSpawnDetails : OOCSpawnDetails
-{
-    public Facing startFacing;
-    public Facing endFacing;
-    public CunningObjectSpriteCategory category;
-
-    //the index identifies the cunning object itself, not a variant of its name
-    public override string uniqueName { get { return npcName; } }
-
-    public CunningObjectSpawnDetails(int index,
-                                     Vector3Int cellCoords, 
-                                     Facing startFacing, 
-                                     CunningObjectSpriteCategory category, 
-                                     Facing endFacing = Facing.Random, 
-                                     string tutorialTargetHash = null,
-                                     QuestStepActivationScript script = null,
-                                     IAppearance appearance = null) :
-    base(category.ToString(), appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, index: index)
-    {
-        this.startFacing = startFacing;
-
-        if(endFacing == Facing.Random)
-        {
-            this.endFacing = startFacing;
-        } 
-        else
-        {
-            this.endFacing = endFacing;
-        }
-
-        this.category = category;
-    }
-
-    // public override void spawnActions(GameObject gameObject)
-    // {
-    //     CunningObject cunningObject = gameObject.GetComponent<CunningObject>();
-
-    //     spawnActions(cunningObject);
-    // }
-
-    public abstract void spawnActions(CunningObject cunningObject);
-
-}
-
-public class CunningBlockerSpawnDetails : CunningObjectSpawnDetails
-{
-
-    private List<ObstacleSpawnDetails> allBlockerSpawnDetails;
-
-    public CunningBlockerSpawnDetails(int index, 
-                                        Vector3Int cellCoords, 
-                                        Facing startFacing,
-                                        CunningObjectSpriteCategory category, 
-                                        List<ObstacleSpawnDetails> allBlockerSpawnDetails = null, 
-                                        ObstacleSpawnDetails blockerSpawnDetails = null, 
-                                        Facing endFacing = Facing.Random, 
-                                        QuestStepActivationScript script = null, 
-                                        string tutorialTargetHash = null,
-                                        IAppearance appearance = null) :
-    base(index, cellCoords, startFacing, category, endFacing: endFacing, tutorialTargetHash: tutorialTargetHash, script: script, appearance: appearance)
-    {
-        if(allBlockerSpawnDetails == null)
-        {
-            this.allBlockerSpawnDetails = new List<ObstacleSpawnDetails>();
-        } else
-        {
-            this.allBlockerSpawnDetails = allBlockerSpawnDetails;
-        }
-
-        if(blockerSpawnDetails != null)
-        {
-            this.allBlockerSpawnDetails.Add(blockerSpawnDetails);
-        }
-    }
-
-    // public override string getPrefabName()
-    // {
-    //     return PrefabNames.cunningBlocker;
-    // }
-
-    public override void spawnActions(CunningObject cunningObject)
-    {
-        // CunningBlocker cunningBlocker = cunningObject as CunningBlocker;
-
-        // cunningBlocker.index = index;
-
-        // cunningBlocker.build(startFacing,endFacing, category);
-        // // cunningBlocker.script = script;
-
-        // addNameTagGenerator(cunningBlocker.gameObject, cunningBlocker, cunningTarget: true);
-
-        // List<GameObject> blockers = buildBlockers(cunningBlocker, allBlockerSpawnDetails);
-
-        // foreach(GameObject blocker in blockers)
-        // {
-        //     blocker.SetActive(getSpawnParams().canSpawn(npcName));
-        // }
-
-        // if (hasTutorialTargetHash())
-        // {
-        //     // addTutorialTargetComponent(cunningBlocker.gameObject, cunningBlocker.spriteRenderer, tutorialTargetHash, cunningBlocker);
-        // }
-    }
-
-    protected static List<GameObject> buildBlockers(CunningBlocker cunningBlocker, List<ObstacleSpawnDetails> blockerSpawnDetails)
-    {
-        List<GameObject> blockers = new List<GameObject>();            
-
-        // foreach (ObstacleSpawnDetails details in blockerSpawnDetails)
-        // {
-        //     GameObject blocker = SpawnInfoManager.spawnInteractable(details);
-        //     cunningBlocker.addBlocker(blocker.GetComponent<Obstacle>(), details.cellCoords);
-        //     SpawnInfoManager.addGameObject(blocker);
-        //     blockers.Add(blocker);
-        // }
-
-        // cunningBlocker.setBlockerStatus();
-
-        return blockers;
-    }
-}
-
-public class LinkedCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
-{
-
-    private int linkedIndex;
-
-    public LinkedCunningBlockerSpawnDetails(int index, 
-                                            Vector3Int cellCoords, 
-                                            Facing startFacing, 
-                                            Facing endFacing, 
-                                            CunningObjectSpriteCategory category, 
-                                            List<ObstacleSpawnDetails> allBlockerSpawnDetails, 
-                                            int linkedIndex,
-                                            string tutorialTargetHash = null,
-                                            IAppearance appearance = null) :
-    base(index, cellCoords, startFacing, category, allBlockerSpawnDetails, endFacing: endFacing, tutorialTargetHash: tutorialTargetHash, appearance: appearance)
-    {
-        this.linkedIndex = linkedIndex;
-    }
-
-    public override void spawnActions(CunningObject cunningObject)
-    {
-        // GameObject gameObject = cunningObject.gameObject;
-
-        // LinkedCunningBlocker linkedBlocker = gameObject.AddComponent<LinkedCunningBlocker>();
-        // // linkedBlocker.spriteRenderer = cunningObject.spriteRenderer;
-        // linkedBlocker.linkedIndex = linkedIndex;
-
-        // addNameTagGenerator(gameObject, linkedBlocker, cunningTarget: true);
-
-        // GameObject.Destroy(cunningObject);
-
-        // base.spawnActions(linkedBlocker);
-    }
-}
-
-public class DoubleCunningBlockerSpawnDetails : CunningBlockerSpawnDetails
-{
-
-    private List<ObstacleSpawnDetails> deactivatedBlockerSpawnDetails;
-
-    public DoubleCunningBlockerSpawnDetails(int index, 
-                                            Vector3Int cellCoords, 
-                                            Facing startFacing, 
-                                            Facing endFacing, 
-                                            CunningObjectSpriteCategory category, 
-                                            List<ObstacleSpawnDetails> activatedBlockerSpawnDetails, 
-                                            List<ObstacleSpawnDetails> deactivatedBlockerSpawnDetails,
-                                            IAppearance appearance = null) :
-    base(index, cellCoords, startFacing, category, activatedBlockerSpawnDetails, endFacing: endFacing, appearance: appearance)
-    {
-        this.deactivatedBlockerSpawnDetails = deactivatedBlockerSpawnDetails;
-    }
-
-    public override void spawnActions(CunningObject cunningObject)
-    {
-        // GameObject gameObject = cunningObject.gameObject;
-
-        // DoubleCunningBlocker doubleBlocker = gameObject.AddComponent<DoubleCunningBlocker>();
-        // // doubleBlocker.spriteRenderer = cunningObject.spriteRenderer;
-
-        // addNameTagGenerator(gameObject, doubleBlocker, cunningTarget: true);
-
-        // GameObject.Destroy(cunningObject);
-
-        // base.spawnActions(doubleBlocker);
-
-        // buildBlockers(doubleBlocker, deactivatedBlockerSpawnDetails);
-    }
 }
 
 public class DeadBodySpawnDetails : ObstacleSpawnDetails
@@ -1778,3 +1383,295 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
         this.monsterDefeatKeyIndex = -1;
     }
 }
+
+// public class GateWithKeySpawnDetails : GateSpawnDetails
+// {
+//     public GateWithKeySpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, bool showSprite, Axis axis, GateKeyDetails gateKeyDetails, IAppearance appearance = null) :
+//     base(npcName, cellCoords, currentArea, noTutorialTargetHash, showSprite, axis, new Dictionary<string, int>(), appearance: appearance,
+//          gateSpawnBehaviour: new GateWithKeySpawnBehaviour(npcName, noTutorialTargetHash, new Dictionary<string, int>(), gateKeyDetails))
+//     {
+//     }
+
+//     public override Dialogue getDialogue(string areaName)
+//     {
+//         return new SingleCharacterDialogue(npcName, InkAssetList.getInkJSON(DialogueKey.GateWithKey));
+//     }
+// }
+
+// public class GateWithKeySpawnBehaviour : GateSpawnBehaviour
+// {
+//     private GateKeyDetails gateKeyDetails;
+
+//     public GateWithKeySpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties, GateKeyDetails gateKeyDetails) :
+//     base(gateKey, tutorialTargetHash, statDifficulties)
+//     {
+//         this.gateKeyDetails = gateKeyDetails;
+//     }
+
+//     protected override void addDialogueBehaviour(GameObject gateGameObject)
+//     {
+//         base.addDialogueBehaviour(gateGameObject);
+
+//         if (dialogue == null)
+//         {
+//             return;
+//         }
+
+//         dialogue.variableSources.Add(gateKeyDetails);
+//     }
+// }
+
+// public class TemporaryGateSpawnDetails : GateSpawnDetails
+// {
+//     public TemporaryGateSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, Axis axis, Dictionary<string, int> statDifficulties, IAppearance appearance = null) :
+//     base(npcName, cellCoords, currentArea, true, axis, statDifficulties, appearance: appearance,
+//          gateSpawnBehaviour: new TemporaryGateSpawnBehaviour(npcName, statDifficulties))
+//     {
+
+//     }
+
+//     public override Dialogue getDialogue(string areaName)
+//     {
+//         return DialogueList.getDialogue(DialogueList.scrubNameOfEndNumbers(npcName), areaName);
+//     }
+
+// }
+
+// public class TemporaryGateSpawnBehaviour : GateSpawnBehaviour
+// {
+//     public TemporaryGateSpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties) :
+//     base(gateKey, tutorialTargetHash, statDifficulties)
+//     {
+//     }
+
+//     protected override Gate addGate(GameObject gateGameObject)
+//     {
+//         return gateGameObject.AddComponent<TemporaryGate>();
+//     }
+// }
+
+// public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
+// {
+//     public GateWithHiddenTerrainSpawnDetails(string npcName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag, IAppearance appearance = null) :
+//     base(npcName, cellCoords, currentArea, spriteName, tutorialTargetHash, true, Axis.DescendingX, statDifficulties, appearance: appearance,
+//          gateSpawnBehaviour: new GateWithHiddenTerrainSpawnBehaviour(npcName, tutorialTargetHash, statDifficulties, hiddenTerrainFlag))
+//     {
+//     }
+
+//     public override Dialogue getDialogue(string areaName)
+//     {
+//         return DialogueList.getDialogue(DialogueList.scrubNameOfEndNumbers(npcName), areaName);
+//     }
+// }
+
+// public class GateWithHiddenTerrainSpawnBehaviour : GateSpawnBehaviour
+// {
+//     private string hiddenTerrainFlag;
+
+//     public GateWithHiddenTerrainSpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag) :
+//     base(gateKey, tutorialTargetHash, statDifficulties)
+//     {
+//         this.hiddenTerrainFlag = hiddenTerrainFlag;
+//     }
+
+//     protected override Gate addGate(GameObject gateGameObject)
+//     {
+//         GateWithHiddenTerrain gate = gateGameObject.AddComponent<GateWithHiddenTerrain>();
+//         gate.hiddenTerrainFlag = hiddenTerrainFlag;
+//         NameTagGenerator nameTagGenerator = gateGameObject.GetComponent<NameTagGenerator>();
+
+//         nameTagGenerator.nameSource = gate;
+
+//         return gate;
+//     }
+// }
+
+/// <summary>
+///  Moved GateSpawnInfo Child Classes to here safe keeping
+/// </summary>
+
+// public class TemporaryGateSpawnInfo : GateSpawnInfo
+// {
+
+//     public TemporaryGateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis) :
+//     base(gateIndex, npcName, currentArea, startCell, PrefabNames.portcullis1x1Path, size, axis)
+//     {
+//     }
+
+//     protected override string getGateName()
+//     {
+//         return npcName + gateIndex;
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, //skewed(),
+//          axis, statDifficulties);
+//     }
+
+// }
+
+// public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo
+// {
+//     private string hiddenTerrainFlag;
+
+//     public GateWithHiddenTerrainSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, string hiddenTerrainFlag, KeyValuePair<string, int> statDifficulty) :
+//     base(gateIndex, npcName, currentArea, startCell, spriteName, statDifficulty: statDifficulty)
+//     {
+//         this.hiddenTerrainFlag = hiddenTerrainFlag;        
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, statDifficulties, hiddenTerrainFlag);
+//     }
+
+// }
+
+
+// public class GateKeyDetails : IStoryVariableSource
+// {
+
+//     public string description = "";
+//     public string keyName = "";
+
+//     public string hostileAreaName = "";
+//     public string hostilityScriptKey = "";
+
+//     public GateKeyDetails(string description, string keyName)
+//     {
+//         this.description = description;
+//         this.keyName = keyName;
+//     }
+
+//     public GateKeyDetails(string description, string keyName, string hostilityScriptKey, string hostileAreaName)
+//     {
+//         this.description = description;
+//         this.keyName = keyName;
+
+//         this.hostilityScriptKey = hostilityScriptKey;
+//         this.hostileAreaName = hostileAreaName;
+//     }
+
+//     public Story addVariables(Story story)
+//     {
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.description, description);
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.keyName, keyName);
+
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostileAreaName, hostileAreaName);
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostilityScriptKey, hostilityScriptKey);
+  
+//         return story;
+//     }
+
+// }
+
+// public class GateWithKeySpawnInfo : GateSpawnInfo
+// {
+//     private GateKeyDetails gateKeyDetails;
+
+//     public GateWithKeySpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis, GateKeyDetails gateKeyDetails) :
+//     base(gateIndex, npcName, currentArea, startCell, spriteName, size, axis)
+//     {
+//         this.gateKeyDetails = gateKeyDetails;
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new GateWithKeySpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), //skewed(),  
+//         indexHasSprite(spriteName, index), axis, gateKeyDetails);
+//     }
+// }
+
+// public class TemporaryGateSpawnInfo : GateSpawnInfo
+// {
+
+//     public TemporaryGateSpawnInfo(int gateIndex, string npcName, string currentArea, Vector3Int startCell, int size, Axis axis) :
+//     base(gateIndex, npcName, currentArea, startCell, PrefabNames.portcullis1x1Path, size, axis)
+//     {
+//     }
+
+//     protected override string getGateName()
+//     {
+//         return npcName + gateIndex;
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, //skewed(),
+//          axis, statDifficulties);
+//     }
+
+// }
+
+// public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo
+// {
+//     private string hiddenTerrainFlag;
+
+//     public GateWithHiddenTerrainSpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, string hiddenTerrainFlag, KeyValuePair<string, int> statDifficulty) :
+//     base(gateIndex, npcName, currentArea, startCell, spriteName, statDifficulty: statDifficulty)
+//     {
+//         this.hiddenTerrainFlag = hiddenTerrainFlag;        
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new GateWithHiddenTerrainSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, statDifficulties, hiddenTerrainFlag);
+//     }
+
+// }
+
+
+// public class GateKeyDetails : IStoryVariableSource
+// {
+
+//     public string description = "";
+//     public string keyName = "";
+
+//     public string hostileAreaName = "";
+//     public string hostilityScriptKey = "";
+
+//     public GateKeyDetails(string description, string keyName)
+//     {
+//         this.description = description;
+//         this.keyName = keyName;
+//     }
+
+//     public GateKeyDetails(string description, string keyName, string hostilityScriptKey, string hostileAreaName)
+//     {
+//         this.description = description;
+//         this.keyName = keyName;
+
+//         this.hostilityScriptKey = hostilityScriptKey;
+//         this.hostileAreaName = hostileAreaName;
+//     }
+
+//     public Story addVariables(Story story)
+//     {
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.description, description);
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.keyName, keyName);
+
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostileAreaName, hostileAreaName);
+//         story = InkVariableNameList.setStoryVariable(story, InkVariableNameList.hostilityScriptKey, hostilityScriptKey);
+  
+//         return story;
+//     }
+
+// }
+
+// public class GateWithKeySpawnInfo : GateSpawnInfo
+// {
+//     private GateKeyDetails gateKeyDetails;
+
+//     public GateWithKeySpawnInfo(int gateIndex, string npcName, string currentArea, string spriteName, Vector3Int startCell, int size, Axis axis, GateKeyDetails gateKeyDetails) :
+//     base(gateIndex, npcName, currentArea, startCell, spriteName, size, axis)
+//     {
+//         this.gateKeyDetails = gateKeyDetails;
+//     }
+
+//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
+//     {
+//         return new GateWithKeySpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), //skewed(),  
+//         indexHasSprite(spriteName, index), axis, gateKeyDetails);
+//     }
+// }

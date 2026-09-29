@@ -88,7 +88,7 @@ public static class OOCSpawnDetailsList
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(1, 6), TutorialSequenceList.secondCunningTutorialSequenceKey,
                                                                           TutorialSequenceList.secondCunningTutorialSeenFlag));
 
-        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(2, 7), Facing.SouthEast, CunningObjectSpriteCategory.Crank, endFacing: Facing.NorthWest, allBlockerSpawnDetails:
+        list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(2, 7), CunningObjectSpriteCategory.Crank, allBlockerSpawnDetails:
                  new List<ObstacleSpawnDetails>()
                  {
                     new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(2, 9), appearance: SpriteDescriptionList.tutorialRubble, index: 1),
@@ -112,6 +112,15 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(2, 10), tutorialTargetHash: TutorialSequenceList.tutorialButtonOneTargetHash));
         list.Add(new ButtonSpawnDetails(new Vector3Int(4, 10), tutorialTargetHash: TutorialSequenceList.tutorialButtonTwoTargetHash));
+
+        list.Add(new GateSpawnDetails(SpriteDescriptionList.blockRubbleGate,
+                                    NPCNameList.awkwardRubble,
+                                    Constants.indexZero,
+                                    new Vector3Int(4, 11),
+                                    Constants.sizeTwo,
+                                    Axis.DescendingX,
+                                    TutorialSequenceList.fallenBeamTargetHash,
+                                    layout: GateSpriteLayout.PerCell));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(2, 9), TutorialSequenceList.leadershipTutorialSequenceKey,
                                                                           TutorialSequenceList.leadershipTutorialSeenFlag));
@@ -187,7 +196,7 @@ public static class OOCSpawnDetailsList
         //                         new StartSpawningAllTrueFlagList(new string[] { TutorialSequenceList.cunningTutorialSeenFlag }, useTutorialFlags: true),
         //                                                                   Constants.indexOne));
 
-        // list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthEast, CunningObjectSpriteCategory.Crank, endFacing: Facing.NorthWest, blockerSpawnDetails:
+        // list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), CunningObjectSpriteCategory.Crank, blockerSpawnDetails:
         //          new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf),
         //          tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
 
@@ -618,8 +627,7 @@ public static class OOCSpawnDetailsList
         #endregion
 
         oocSpawnDetailsDict.Add(LocationNameList.campNorthEast, list);
-        #endregion
-        
+        #endregion   
         #region CenterCamp
         list = new List<OOCSpawnDetails>();
 
@@ -1018,7 +1026,7 @@ public static class OOCSpawnDetailsList
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-4, -4), TutorialSequenceList.secondCunningTutorialSequenceKey,
                                                                           TutorialSequenceList.secondCunningTutorialSeenFlag));
 
-        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-3, -3), Facing.SouthEast, CunningObjectSpriteCategory.Crank, endFacing: Facing.NorthWest, allBlockerSpawnDetails:
+        list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(-3, -3), CunningObjectSpriteCategory.Crank, allBlockerSpawnDetails:
                  new List<ObstacleSpawnDetails>()
                  {
                     new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(-3, -1), appearance: SpriteDescriptionList.shackWallHalf, index: 1),
@@ -1370,57 +1378,57 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        List<ObstacleSpawnDetails> blockerSpawnDetails = new List<ObstacleSpawnDetails>();
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 8), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 8), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 8), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 7), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 7), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 6), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 7), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 6), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 5), appearance: SpriteDescriptionList.spikesDown));
+        // List<ObstacleSpawnDetails> blockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 8), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 8), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 8), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 7), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 7), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 6), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 7), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 6), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 5), appearance: SpriteDescriptionList.spikesDown));
 
-        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(8, 8), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexTwo));
+        // list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(8, 8), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexTwo));
 
-        blockerSpawnDetails = new List<ObstacleSpawnDetails>();
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 11), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 11), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 11), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 12), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 12), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 13), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 12), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 13), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 14), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 11), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 11), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 11), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 12), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 12), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(7, 13), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 12), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 13), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(8, 14), appearance: SpriteDescriptionList.spikesDown));
 
-        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexOne, new Vector3Int(8, 11), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexThree, tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
+        // list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexOne, new Vector3Int(8, 11), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexThree, tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
 
-        blockerSpawnDetails = new List<ObstacleSpawnDetails>();
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 8), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(13, 8), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(14, 8), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 7), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(13, 7), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 6), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 7), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 6), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 5), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 8), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(13, 8), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(14, 8), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 7), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(13, 7), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 6), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 7), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 6), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 5), appearance: SpriteDescriptionList.spikesDown));
 
-        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(11, 8), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexZero));
+        // list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(11, 8), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexZero));
         
-        blockerSpawnDetails = new List<ObstacleSpawnDetails>();
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 12), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 13), appearance: SpriteDescriptionList.spikesDown)); 
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 14), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 12), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 13), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(13, 12), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 11), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(13, 11), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(14, 11), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 12), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 13), appearance: SpriteDescriptionList.spikesDown)); 
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(11, 14), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 12), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 13), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(13, 12), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(12, 11), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(13, 11), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(14, 11), appearance: SpriteDescriptionList.spikesDown));
 
-        list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexThree, new Vector3Int(11, 11), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexOne));
+        // list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexThree, new Vector3Int(11, 11), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexOne));
 
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(8, 10), Facing.SouthWest, type: ChestType.Chest));
         list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(8, 9), Facing.SouthWest, type: ChestType.Chest));
@@ -1681,41 +1689,41 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        blockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        // blockerSpawnDetails = new List<ObstacleSpawnDetails>();
 
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 4), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 3), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 2), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 1), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 3), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 2), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 1), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 0), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(4, 2), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(4, 1), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(4, 0), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(3, 1), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(3, 0), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(2, 0), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 4), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 3), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 2), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(6, 1), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 3), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 2), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 1), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 0), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(4, 2), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(4, 1), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(4, 0), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(3, 1), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(3, 0), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(2, 0), appearance: SpriteDescriptionList.spikesDown));
 
-        List<ObstacleSpawnDetails> deactivatedblockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        // List<ObstacleSpawnDetails> deactivatedblockerSpawnDetails = new List<ObstacleSpawnDetails>();
 
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 5), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(4, 5), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(3, 5), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(2, 5), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(4, 4), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(3, 4), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(2, 4), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(1, 4), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(3, 3), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(2, 3), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(1, 3), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(2, 2), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(1, 2), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(1, 1), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(5, 5), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(4, 5), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(3, 5), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(2, 5), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(4, 4), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(3, 4), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(2, 4), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(1, 4), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(3, 3), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(2, 3), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(1, 3), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(2, 2), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(1, 2), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(1, 1), appearance: SpriteDescriptionList.spikesDown));
 
-        list.Add(new DoubleCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(4, -1), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, deactivatedblockerSpawnDetails));
+        // list.Add(new DoubleCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(4, -1), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, deactivatedblockerSpawnDetails));
 
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-1, -1), Facing.SouthEast, type: ChestType.Chest));
         list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(0, -2), Facing.SouthWest, type: ChestType.Chest));
@@ -1936,19 +1944,19 @@ public static class OOCSpawnDetailsList
 
         list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain, areaName:ZoneKeyList.mineLvl3,  sectionName: LocationNameList.section7, index: Constants.indexOne));
 
-        blockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        // blockerSpawnDetails = new List<ObstacleSpawnDetails>();
 
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-11, -4), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-12, -4), appearance: SpriteDescriptionList.spikesDown));
-        blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-13, -4), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-11, -4), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-12, -4), appearance: SpriteDescriptionList.spikesDown));
+        // blockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-13, -4), appearance: SpriteDescriptionList.spikesDown));
 
-        deactivatedblockerSpawnDetails = new List<ObstacleSpawnDetails>();
+        // deactivatedblockerSpawnDetails = new List<ObstacleSpawnDetails>();
 
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-11, -6), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-12, -6), appearance: SpriteDescriptionList.spikesDown));
-        deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-13, -6), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-11, -6), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-12, -6), appearance: SpriteDescriptionList.spikesDown));
+        // deactivatedblockerSpawnDetails.Add(new SpikeSpawnDetails(new Vector3Int(-13, -6), appearance: SpriteDescriptionList.spikesDown));
 
-        list.Add(new DoubleCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-12, -5), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, deactivatedblockerSpawnDetails));
+        // list.Add(new DoubleCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-12, -5), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, deactivatedblockerSpawnDetails));
 
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-5, -6), Facing.SouthWest, type: ChestType.Chest));  
 
@@ -2402,13 +2410,13 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(-7, -11)));
         list.Add(new ButtonSpawnDetails(new Vector3Int(0, -5)));
 
-        list.Add(new CunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-1, -7), Facing.NorthWest, CunningObjectSpriteCategory.Crank, endFacing: Facing.SouthEast,
+        list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(-1, -7), CunningObjectSpriteCategory.Crank,
                  allBlockerSpawnDetails: new List<ObstacleSpawnDetails>(){new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(-1, -6), appearance: SpriteDescriptionList.shackWallHalf)}));
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 4), Constants.indexOne));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-5, 4), Constants.indexOne));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-6, 4), Constants.indexOne));
-        // list.Add(new CunningBlockerSpawnDetails(Constants.indexTwo, new Vector3Int(-4, -2), Facing.NorthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank,
+        // list.Add(new CunningObjectSpawnDetails(Constants.indexTwo, new Vector3Int(-4, -2), CunningObjectSpriteCategory.Crank,
         //          new List<ObstacleSpawnDetails>(){new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(-4, -2), PrefabNames.shackWallHalf)}));
 
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-7, 7), Facing.SouthEast, type: ChestType.Chest));

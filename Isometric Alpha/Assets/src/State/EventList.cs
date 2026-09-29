@@ -8,5 +8,6 @@ public static class EventList
 
     public static readonly UnityEvent<string, bool> SetActiveByNameChannel = new UnityEvent<string, bool>();
 
+    public static readonly UnityEvent<int, bool> SetObstaclesActiveByIntChannel = new UnityEvent<int, bool>();
 
 }

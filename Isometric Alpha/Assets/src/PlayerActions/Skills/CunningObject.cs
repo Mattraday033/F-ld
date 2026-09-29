@@ -11,10 +11,8 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
     public const string tagText = "Device";
     public const string nameOnTag = "Cunning Target";
 
-    private const bool trackChangeInStateManager = true;
-
     public int index;
-    public bool activated = false;
+    public bool evenActivation = false;
     [SerializeField]
     private SpriteLayerRendererList _RendererList;
     public SpriteLayerRendererList rendererList
@@ -23,22 +21,24 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
         {
             return _RendererList;
         }
+        set
+        {
+            _RendererList = value;
+        }
     }
-    public Facing startFacing;
-    public Facing endFacing;
     public CunningObjectSpriteCategory category;
+    public CunningAction cunningAction;
+    private QuestStepActivationScript _Script;
+    public QuestStepActivationScript script
+    {
+        set
+        {
+            _Script = value;
+        }
+    }
 
 
     public void intimidate() { }
-
-    public void build(Facing startFacing, Facing endFacing, CunningObjectSpriteCategory category)
-    {
-        this.startFacing = startFacing;
-        this.endFacing = endFacing;
-        this.category = category;
-
-        setToCurrentSprite();
-    }
 
     public abstract void setStatus(string key, bool status);
     
@@ -49,13 +49,13 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
     protected Facing getCurrentFacing()
     {
-        if (!activated)
+        if (!evenActivation)
         {
-            return startFacing;
+            return Facing.NorthEast;
         }
         else
         {
-            return endFacing;
+            return Facing.SouthWest;
         }
     }
 
@@ -83,10 +83,19 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
     public void cunning()
     {
-        cunning(trackChangeInStateManager);
-    }
+        if(_Script != null && !TrapAndButtonStateManager.contains(getKey()))
+        {
+            _Script.runScript(gameObject);
+        }
 
-    public abstract void cunning(bool skipKeyHandling);
+        if(cunningAction != null)
+        {
+            cunningAction(index, evenActivation);
+        }
+
+        evenActivation = !evenActivation;
+        TrapAndButtonStateManager.setKey(getKey(), evenActivation);
+    }
 
     public string getKey()
     {
@@ -96,11 +105,6 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
     public static string generateKey(string locationName, int index)
     {
         return locationName + "_CO_" + index;
-    }
-
-    public void trackKey()
-    {
-        TrapAndButtonStateManager.setKey(getKey(), activated);
     }
 
     private void OnEnable()
@@ -192,4 +196,14 @@ public static class CunningObjectSpriteList
         cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.NorthEast, CunningObjectSpriteCategory.Crank), PrefabNames.crankSE);
         cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.SouthEast, CunningObjectSpriteCategory.Crank), PrefabNames.crankSE);
     }
+}
+
+public delegate void CunningAction(int index, bool evenActivation);
+
+public static class CunningActionList
+{
+    public readonly static CunningAction deactivateBlockers = (index, evenActivation) =>
+    {
+        EventList.SetObstaclesActiveByIntChannel.Invoke(index, evenActivation);
+    };
 }

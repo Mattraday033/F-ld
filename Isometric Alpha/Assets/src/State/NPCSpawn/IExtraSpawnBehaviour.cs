@@ -74,6 +74,36 @@ public class ContainerSpawnBehaviour: IExtraSpawnBehaviour
     }
 }
 
+public class CunningObjectSpawnBehaviour : IExtraSpawnBehaviour
+{
+    private int index;
+    private CunningAction cunningAction;
+    private CunningObjectSpriteCategory category;
+    private QuestStepActivationScript script;
+
+    public CunningObjectSpawnBehaviour(int index,
+                                        CunningAction cunningAction,
+                                        CunningObjectSpriteCategory category,
+                                        QuestStepActivationScript script = null)
+    {
+        this.index = index;
+        this.category = category;
+        this.script = script;
+        this.cunningAction = cunningAction;
+    }
+
+    public void addBehaviour(GameObject gameObject)
+    {
+        CunningObject cunningObject = gameObject.AddComponent<CunningObject>();
+
+        cunningObject.rendererList = gameObject.GetComponent<SpriteLayerRendererList>();
+        cunningObject.index = index;
+        cunningObject.script = script;
+        cunningObject.cunningAction = cunningAction;
+        cunningObject.category = category;
+    }
+}
+
 public class DialogueTriggerSpawnBehaviour : IExtraSpawnBehaviour
 {
     private string npcName;

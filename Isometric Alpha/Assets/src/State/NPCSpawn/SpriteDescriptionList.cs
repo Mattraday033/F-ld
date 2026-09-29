@@ -79,9 +79,8 @@ public static class SpriteDescriptionList
     #endregion
     #region Gates
 
-    // Gate rubble is tinted white rather than rubble coloured, matching the gates' old useRubbleColor: false
-    public readonly static SpriteDescription blockRubbleGate = new SpriteDescription(spriteName: PrefabNames.blockRubble);
-    public readonly static SpriteDescription lowRubbleGate = new SpriteDescription(spriteName: PrefabNames.lowRubble);
+    public readonly static SpriteDescription blockRubbleGate = new SpriteDescription(spriteName: PrefabNames.blockRubble, useRubbleColor: true);
+    public readonly static SpriteDescription lowRubbleGate = new SpriteDescription(spriteName: PrefabNames.lowRubble, useRubbleColor: true);
 
     // Portcullises are flipped on the descending Y axis only
     public readonly static SpriteDescription portcullis1x1 = new SpriteDescription(spriteName: PrefabNames.portcullis1x1Path);
