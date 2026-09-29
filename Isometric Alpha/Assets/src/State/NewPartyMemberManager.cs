@@ -31,7 +31,7 @@ public static class NewPartyMemberManager
             return;
         }
 
-        removePartyMember(partyMember.getName());
+        removePartyMember(partyMember.uniqueName);
 	}
 
     public static void removePartyMember(string newPartyMember)
@@ -55,7 +55,7 @@ public static class NewPartyMemberManager
             return false;
         }
 
-        return partyMemberIsNew(partyMember.getName());
+        return partyMemberIsNew(partyMember.uniqueName);
     }
 
     public static bool partyMemberIsNew(AllyStats partyMember)
@@ -65,7 +65,7 @@ public static class NewPartyMemberManager
             return false;
         }
 
-        return partyMemberIsNew(partyMember.getName());
+        return partyMemberIsNew(partyMember.uniqueName);
     }
 
     public static bool partyMemberIsNew(string partyMember)

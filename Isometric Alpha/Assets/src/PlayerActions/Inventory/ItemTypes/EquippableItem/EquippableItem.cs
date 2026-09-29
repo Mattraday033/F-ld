@@ -156,7 +156,7 @@ public abstract class EquippableItem : Item, IJSONConvertable
     {
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getWorthBlock(getWorthForDisplay()));
 

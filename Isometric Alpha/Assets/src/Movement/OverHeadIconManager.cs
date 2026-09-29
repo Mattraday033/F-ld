@@ -5,6 +5,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
+//lets a name source hide its overhead name tag and outline, such as a chest that has already been opened
+public interface INameTagSuppressor
+{
+    public bool suppressNameTag { get; }
+}
+
 public class OverHeadIconManager : MonoBehaviour, IRevealable
 {
     private const float twentyFivePercentMultiplier = 1.25f;
@@ -151,7 +157,7 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
             return;
         }
 
-        if(toggleReveal)
+        if(toggleReveal && !nameTagSuppressed())
         {
             rendererList.createOutline(getRevealColor());
 
@@ -173,6 +179,13 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
         return ColorList.canBeInteractedWith;
     }
 
+    private bool nameTagSuppressed()
+    {
+        INameTagSuppressor suppressor = nameSource as INameTagSuppressor;
+
+        return suppressor != null && suppressor.suppressNameTag;
+    }
+
     public void createHoverTag()
     {
         //Empty on purpose (may add for things like portcullis controls in mine lvl 2)
@@ -180,6 +193,11 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if(nameTagSuppressed())
+        {
+            return;
+        }
+
         if (!ignoreHover && (eventData == null || !eventData.used))
         {
             if (eventData != null)
@@ -215,21 +233,30 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
         }
     }
 
-    public string getName()
+    public string displayName
     {
-        if(nameSource == null)
+        get
         {
-            return Constants.emptyString;
+            if(nameSource == null)
+            {
+                return Constants.emptyString;
+            }
+
+            return nameSource.displayName;
         }
+    }
 
-        string name = nameSource.getName();
-
-        if(name.Contains("#"))
+    public string uniqueName
+    {
+        get
         {
-            return name;
-        }
+            if(nameSource == null)
+            {
+                return Constants.emptyString;
+            }
 
-        return DialogueList.scrubNameOfEndNumbers(name);
+            return nameSource.uniqueName;
+        }
     }
 
     #endregion
@@ -243,7 +270,7 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
             return;
         }
 
-        if(!SpawnParamsList.getSpawnParams(AreaManager.locationName, nameSource.getName()).canSpawn(nameSource.getName()))
+        if(!SpawnParamsList.getSpawnParams(AreaManager.locationName, nameSource.uniqueName).canSpawn(nameSource.uniqueName))
         {
             gameObject.SetActive(false);
         } else
@@ -277,7 +304,7 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
 
         if(iconParent != null)
         {
-            createOverHeadIcon(OverHeadIconType.NameTag, nameOfNPC: getName());
+            createOverHeadIcon(OverHeadIconType.NameTag, nameOfNPC: displayName);
             return;
         }
 
@@ -299,7 +326,7 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
 
         nameTag = Instantiate(Resources.Load<GameObject>(PrefabNames.npcNameTag), transform).GetComponent<DescriptionPanel>();
 
-        nameTag.nameText.text = getName();
+        nameTag.nameText.text = displayName;
 
         if(PlayerOOCStateManager.currentActivity == OOCActivity.inWorldMap)
         {
@@ -329,7 +356,8 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
     {
         if(PlayerOOCStateManager.currentActivity == OOCActivity.walking &&
             RevealManager.currentlyRevealed &&
-            !this.hasGenericName())
+            !this.hasGenericName() &&
+            !nameTagSuppressed())
         {
             spawnNameTag();
         }

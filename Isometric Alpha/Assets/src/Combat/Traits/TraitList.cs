@@ -184,7 +184,7 @@ public static class TraitList
 
 	//EquippedPassiveBuffs
 	public readonly static Trait wearyHeart = new Trait(StatSourceNameList.wearyHeartKey, TraitType.EquippedPassive, "This creature's Armor is increased by 5 and your chance to successfully retreat is increased by 20%.", iconName: "WearyHeart");
-	public readonly static Trait devastatingCriticals = new TraitWithRelatedTraits(StatSourceNameList.devastatingCriticalsKey, TraitType.EquippedPassive, new List<IDescribable>(){ afraid }, "This creature's critical hits deal D% of the victim's health as extra damage normally, and 2D% during a surprise round. Critical hits caused by single target actions can cause a random enemy to receive the '" + afraid.getName() + "' trait.", StatSourceNameList.devastatingCriticalsKey);
+	public readonly static Trait devastatingCriticals = new TraitWithRelatedTraits(StatSourceNameList.devastatingCriticalsKey, TraitType.EquippedPassive, new List<IDescribable>(){ afraid }, "This creature's critical hits deal D% of the victim's health as extra damage normally, and 2D% during a surprise round. Critical hits caused by single target actions can cause a random enemy to receive the '" + afraid.displayName + "' trait.", StatSourceNameList.devastatingCriticalsKey);
 	public readonly static Trait intimidatingPressence = new Trait(StatSourceNameList.intimidatingPressenceKey, TraitType.EquippedPassive, "Attacks by Territorial Enemies must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", iconName: TerritorialTargetPriorityTrait.initialTraitIconName);
     public readonly static Trait protectTheWeak = new Trait(StatSourceNameList.protectTheWeakKey, TraitType.EquippedPassive, "Attacks by Predatory Enemies must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", iconName: PredatoryTargetPriorityTrait.initialTraitIconName);
     public readonly static Trait avertBlame = new Trait(AbilityList.avertBlameName, TraitType.EquippedPassive, "Attacks by Chaotic Enemies must include this creature when possible. Useful for preventing enemies from attacking weaker or hurt allies.", iconName: AbilityList.avertBlameName);
@@ -211,43 +211,43 @@ public static class TraitList
         dictionaryOfTraits = new Dictionary<string,Trait>();
         dictionaryOfHiddenTraits = new Dictionary<string, Trait>();
 
-		dictionaryOfTraits.Add(master.getName(), master);
-		dictionaryOfTraits.Add(minion.getName(), minion);
-		dictionaryOfTraits.Add(summoned.getName(), summoned);
+		dictionaryOfTraits.Add(master.uniqueName, master);
+		dictionaryOfTraits.Add(minion.uniqueName, minion);
+		dictionaryOfTraits.Add(summoned.uniqueName, summoned);
 		
-		dictionaryOfTraits.Add(frontLine.getName(), frontLine);
-		dictionaryOfTraits.Add(backLine.getName(), backLine);
+		dictionaryOfTraits.Add(frontLine.uniqueName, frontLine);
+		dictionaryOfTraits.Add(backLine.uniqueName, backLine);
 		
-		dictionaryOfTraits.Add(catalytic.getName(), catalytic);
-		dictionaryOfTraits.Add(immobile.getName(), immobile);
-		dictionaryOfTraits.Add(large.getName(), large);
+		dictionaryOfTraits.Add(catalytic.uniqueName, catalytic);
+		dictionaryOfTraits.Add(immobile.uniqueName, immobile);
+		dictionaryOfTraits.Add(large.uniqueName, large);
 		
-		dictionaryOfTraits.Add(chaotic.getName(), chaotic);
+		dictionaryOfTraits.Add(chaotic.uniqueName, chaotic);
 		dictionaryOfTraits.Add(StatSourceNameList.clockwiseFourCornersEnemySideKey, clockwiseFourCornersEnemySide);
-		dictionaryOfTraits.Add(empty.getName(), empty);
-		dictionaryOfTraits.Add(emptyGenerated2.getName() + StatSourceNameList.generatedSuffix + 2, emptyGenerated2);
-		dictionaryOfTraits.Add(emptyGenerated3.getName() + StatSourceNameList.generatedSuffix + 3, emptyGenerated3);
-		dictionaryOfTraits.Add(territorial.getName(), territorial);
-		dictionaryOfTraits.Add(predatory.getName(), predatory);
-		dictionaryOfTraits.Add(closeRanged.getName(), closeRanged);
+		dictionaryOfTraits.Add(empty.uniqueName, empty);
+		dictionaryOfTraits.Add(emptyGenerated2.uniqueName + StatSourceNameList.generatedSuffix + 2, emptyGenerated2);
+		dictionaryOfTraits.Add(emptyGenerated3.uniqueName + StatSourceNameList.generatedSuffix + 3, emptyGenerated3);
+		dictionaryOfTraits.Add(territorial.uniqueName, territorial);
+		dictionaryOfTraits.Add(predatory.uniqueName, predatory);
+		dictionaryOfTraits.Add(closeRanged.uniqueName, closeRanged);
 		dictionaryOfTraits.Add(StatSourceNameList.inaccurateBombardmentKey, inaccurateBombardment);
 		dictionaryOfTraits.Add(StatSourceNameList.rapidInaccurateBombardmentKey, rapidInaccurateBombardment);
-		dictionaryOfTraits.Add(blocker.getName(), blocker);
-		dictionaryOfTraits.Add(buffer.getName(), buffer); //of the Support Targeting Priority subtypes, asking for "Support" gets you the buffer trait
+		dictionaryOfTraits.Add(blocker.uniqueName, blocker);
+		dictionaryOfTraits.Add(buffer.uniqueName, buffer); //of the Support Targeting Priority subtypes, asking for "Support" gets you the buffer trait
 		dictionaryOfTraits.Add(StatSourceNameList.bufferKey, buffer);
 		dictionaryOfTraits.Add(StatSourceNameList.healerKey, healer);
 		dictionaryOfTraits.Add(StatSourceNameList.singleTargetBuffKey, singleTargetBuffer);
-		dictionaryOfTraits.Add(saintly.getName(), saintly);
+		dictionaryOfTraits.Add(saintly.uniqueName, saintly);
 		
-		dictionaryOfTraits.Add(charged.getName(), charged);
-		dictionaryOfTraits.Add(shielded.getName(), shielded);
+		dictionaryOfTraits.Add(charged.uniqueName, charged);
+		dictionaryOfTraits.Add(shielded.uniqueName, shielded);
 		dictionaryOfTraits.Add(StatSourceNameList.extraShieldedKey, extraShielded);
-		dictionaryOfTraits.Add(signaling.getName(), signaling);
-		dictionaryOfTraits.Add(observing.getName(), observing);
+		dictionaryOfTraits.Add(signaling.uniqueName, signaling);
+		dictionaryOfTraits.Add(observing.uniqueName, observing);
 		dictionaryOfTraits.Add(StatSourceNameList.chewBuzzKey, chewBuzz);
 		
-		dictionaryOfTraits.Add(spawner.getName(), spawner);
-		dictionaryOfTraits.Add(fodder.getName(), fodder);
+		dictionaryOfTraits.Add(spawner.uniqueName, spawner);
+		dictionaryOfTraits.Add(fodder.uniqueName, fodder);
 		
 		dictionaryOfTraits.Add(StatSourceNameList.wormSplitsTraitKey, wormSplits);
 		dictionaryOfTraits.Add(StatSourceNameList.wormBossSplitsTraitKey, wormBossSplits);
@@ -255,23 +255,23 @@ public static class TraitList
 		dictionaryOfTraits.Add(StatSourceNameList.wormBossExplodesTraitKey,wormBossExplodes);
 		dictionaryOfTraits.Add(StatSourceNameList.wormReviveTraitKey, wormRevive);
 		dictionaryOfTraits.Add(StatSourceNameList.wormBossReviveTraitKey, wormBossRevive);
-		dictionaryOfTraits.Add(wormBossFumesOnDeath.getName(), wormBossFumesOnDeath);
+		dictionaryOfTraits.Add(wormBossFumesOnDeath.uniqueName, wormBossFumesOnDeath);
 		
 		mobLinked.setLinkedPercentage(.15);
 		bossLinked.setLinkedPercentage(.075);
 		
 		dictionaryOfTraits.Add(StatSourceNameList.chokingKey, choking);
 
-		dictionaryOfTraits.Add(mobLinked.getName(), mobLinked);
-		dictionaryOfTraits.Add(bossLinked.getName(), bossLinked);
+		dictionaryOfTraits.Add(mobLinked.uniqueName, mobLinked);
+		dictionaryOfTraits.Add(bossLinked.uniqueName, bossLinked);
 		
-		dictionaryOfTraits.Add(wearyHeart.getName(), wearyHeart);
-		dictionaryOfTraits.Add(stonewall.getName(), stonewall);
+		dictionaryOfTraits.Add(wearyHeart.uniqueName, wearyHeart);
+		dictionaryOfTraits.Add(stonewall.uniqueName, stonewall);
         
-		dictionaryOfTraits.Add(bloodlust.getName(), bloodlust);
-		dictionaryOfTraits.Add(predation.getName(), predation);
+		dictionaryOfTraits.Add(bloodlust.uniqueName, bloodlust);
+		dictionaryOfTraits.Add(predation.uniqueName, predation);
 		
-		dictionaryOfHiddenTraits.Add(untargetable.getName(), untargetable);
+		dictionaryOfHiddenTraits.Add(untargetable.uniqueName, untargetable);
 	}
 
 	public static Trait getTrait(string traitName)

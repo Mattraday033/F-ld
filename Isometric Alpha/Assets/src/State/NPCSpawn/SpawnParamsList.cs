@@ -35,11 +35,11 @@ public static class SpawnParamsList
     #endregion
 
     //list of npcNames that can only ever spawn in a hostile area, like Hastily Built Barricades
-    public static bool npcNameOnlySpawnsWhileHostile(string npcName)
+    public static bool npcNameOnlySpawnsWhileHostile(string displayName)
     {
-        npcName = DialogueList.scrubNameOfEndNumbers(npcName);
+        displayName = DialogueList.scrubNameOfEndNumbers(displayName);
 
-        switch(npcName)
+        switch(displayName)
         {
             case NPCNameList.hastilyBuiltBarricade:
                 return true;
@@ -48,16 +48,16 @@ public static class SpawnParamsList
         }
     }
 
-    public static InteractableSpawnParams getSpawnParams(string areaName, string npcName)
+    public static InteractableSpawnParams getSpawnParams(string areaName, string displayName)
     {
-        KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(areaName, npcName);
+        KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(areaName, displayName);
 
-        if (npcName.Length <= 0)
+        if (displayName.Length <= 0)
         {
             return noNameParams;
         }
 
-        if(npcNameOnlySpawnsWhileHostile(npcName))
+        if(npcNameOnlySpawnsWhileHostile(displayName))
         {
             return spawnOnlyWhenHostileParams;
         }
@@ -70,9 +70,9 @@ public static class SpawnParamsList
         return interactableSpawnParamsDict[kvp];
     }
 
-    public static InteractableSpawnParams getMonsterSpawnParams(string areaName, string npcName)
+    public static InteractableSpawnParams getMonsterSpawnParams(string areaName, string displayName)
     {
-        KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(areaName, npcName);
+        KeyValuePair<string, string> kvp = new KeyValuePair<string, string>(areaName, displayName);
 
         if (!interactableSpawnParamsDict.ContainsKey(kvp))
         {

@@ -25,10 +25,8 @@ public class TraitContainer : StatBoostSourceCombiner, ICloneable
         return traits;
     }
 
-    public override string getName()
-    {
-        return owner.getName() + "'s Trait Container";
-    }
+    public override string displayName { get { return owner.displayName + "'s Trait Container"; } }
+    public override string uniqueName { get { return owner.uniqueName + "'s Trait Container"; } }
 
     public override Stats getStatSource()
     {

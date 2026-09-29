@@ -21,7 +21,7 @@ public class EquippedPassive : Ability
 	{
 		if (settings.appliedTrait != null)
 		{
-			settings.descriptionParams = DescriptionParams.build(settings.appliedTrait.getName(), iconName: settings.appliedTrait.getIconName(), useDescription: settings.appliedTrait.getDescription());
+			settings.descriptionParams = DescriptionParams.build(settings.appliedTrait.displayName, iconName: settings.appliedTrait.getIconName(), useDescription: settings.appliedTrait.getDescription());
 			settings.frequencyParams = FrequencyParams.build(mustBeUnique, noCooldown);
 		}
 
@@ -111,10 +111,10 @@ public class EquippedPassive : Ability
     {
         if(getAppliedTrait() == null)
         {
-            Debug.LogError("Null applied Trait in Equipped Passive: " + getName());
+            Debug.LogError("Null applied Trait in Equipped Passive: " + uniqueName);
         }
 
-        return "Applies the " + getAppliedTrait().getName() + " Trait at the start of Combat to whoever equips this Ability to their Action Wheel.";
+        return "Applies the " + getAppliedTrait().displayName + " Trait at the start of Combat to whoever equips this Ability to their Action Wheel.";
     }
 
 	//ISortable Methods
@@ -129,7 +129,7 @@ public class EquippedPassive : Ability
 	{
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType(), HoverMessageList.actionTypePrefix + getType()));
 

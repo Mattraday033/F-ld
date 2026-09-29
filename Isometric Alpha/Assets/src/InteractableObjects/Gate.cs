@@ -8,7 +8,12 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
     protected bool playSFX = false;
 
     private string gateKey;
-    public string hoverName;    
+    public string uniqueName { get { return gateKey; } }
+
+    private string _NPCName = "";
+    public string displayName { get { return _NPCName; } }
+
+    public string hoverName;
     public string hiddenTerrainFlag;    
 
     [SerializeField]
@@ -30,6 +35,7 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
     public void setKey(string gateKey)
     {
         this.gateKey = gateKey;
+        _NPCName = NameSourceExtensions.toNPCName(gateKey);
 
         checkGateStatus();
     }
@@ -60,7 +66,7 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
             return;
         }
 
-        AudioManager.playAudioClipAsSingleton(getSFXType(getName()));
+        AudioManager.playAudioClipAsSingleton(getSFXType(uniqueName));
     }
 
     private static SFXType getSFXType(string gateKey)
@@ -74,11 +80,6 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
             default:
                 return SFXType.GateOpen;
         }
-    }
-
-    public string getName()
-    {
-        return gateKey;
     }
 
     public string getGateKey()

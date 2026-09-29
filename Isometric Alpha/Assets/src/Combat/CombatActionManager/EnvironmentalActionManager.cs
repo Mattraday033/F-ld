@@ -69,7 +69,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
         CombatAction envCombatAction;
         Trait targetingTrait;
 
-        switch(actorStats.getName())
+        switch(actorStats.uniqueName)
         {
             case NPCNameList.kende:
                 envCombatAction = AbilityList.getAbility(actorStats, AbilityList.turnUpTheHeatKey);

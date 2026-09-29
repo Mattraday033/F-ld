@@ -330,15 +330,15 @@ public class EnemyStats : Stats
 
         if (isMinion())
         {
-            DescriptionPanel.setText(panel.typeText, TraitList.minion.getName());
+            DescriptionPanel.setText(panel.typeText, TraitList.minion.displayName);
         }
         else if (isSummon())
         {
-            DescriptionPanel.setText(panel.typeText, TraitList.summoned.getName());
+            DescriptionPanel.setText(panel.typeText, TraitList.summoned.displayName);
         }
         else
         {
-            DescriptionPanel.setText(panel.typeText, TraitList.master.getName());
+            DescriptionPanel.setText(panel.typeText, TraitList.master.displayName);
         }
     }
 
@@ -351,7 +351,7 @@ public class EnemyStats : Stats
     // {
     //     List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-    //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+    //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
     //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth, getTotalHealth()));
 

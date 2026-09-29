@@ -22,7 +22,7 @@ public class WinConditionUI : SlotIconHover
 
         winCon = State.enemyPackInfo.winCon;
 
-        setHoverMessage(winCon.getName(), winCon.getWinConDescription());
+        setHoverMessage(winCon.displayName, winCon.getWinConDescription());
         iconImage.sprite = winCon.getSprite();
 
         CombatStateManager.OnActivityChangeToTutorial.AddListener(enableBoxCollider);
@@ -53,7 +53,7 @@ public class WinConditionUI : SlotIconHover
     {
         panel.setObjectBeingDescribed(this);
 
-        DescriptionPanel.setText(panel.nameText, winCon.getName());
+        DescriptionPanel.setText(panel.nameText, winCon.displayName);
         DescriptionPanel.setText(panel.useDescriptionText, winCon.getWinConDescription());
     }
 

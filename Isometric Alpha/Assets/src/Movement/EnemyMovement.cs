@@ -761,7 +761,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     {
         EnemyPackInfo enemyPackInfo = getEnemyPackInfo();
 
-        // animationManager.setAnimations(enemyPackInfo.FoeTypes[0].enemyStats.getName());
+        // animationManager.setAnimations(enemyPackInfo.FoeTypes[0].enemyStats.uniqueName);
     }
 
     //IRevealable interface methods
@@ -832,7 +832,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 	public void createHoverTag()
 	{
 		MouseHoverManager.getMouseHoverBase();
-		//MouseHoverManager.createHoverTag(getName());
+		//MouseHoverManager.createHoverTag(displayName);
 		MouseHoverManager.createHoverDescBlockPanel(this);
 	}
 
@@ -871,16 +871,14 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	//IDescribableInBlocks
 
-	public override string getName()
-	{
-        return getEnemyPackInfo().getPackName();
-	}
+	public override string displayName { get { return getEnemyPackInfo().getPackName(); } }
+	public override string uniqueName { get { return getEnemyPackInfo().getPackName(); } }
 
 	public virtual List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
 	{
 		List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
 
-		blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName() + "\n"));
+		blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName + "\n"));
 
         blocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(" Movement: " + movementType.ToString()+"  \n\n"));
 

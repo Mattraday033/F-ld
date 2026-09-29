@@ -189,10 +189,8 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     }
 
     //IDescribable methods
-    public string getName()
-    {
-        return hoverMessageKey;
-    }
+    public string displayName { get { return hoverMessageKey; } }
+    public string uniqueName { get { return hoverMessageKey; } }
     public bool ineligible()
     {
         return false;

@@ -47,7 +47,7 @@ public class LoadSaveFile: IDecision
 
     public string getMessage()
     {
-        return loadLostProgressMessageStart + saveBlueprint.getName() + loadLostProgressMessageEnd;
+        return loadLostProgressMessageStart + saveBlueprint.displayName + loadLostProgressMessageEnd;
     }
 
     public void execute()

@@ -203,10 +203,7 @@ public class DialogueBookItem : BookItem
         
     }
 
-    public override string getName()
-    {
-        return "Transcript";
-    }
+    public override string displayName { get { return "Transcript"; } }
 
     public override bool startAtTop()
     {
@@ -227,7 +224,7 @@ public class DialogueBookItem : BookItem
             return;
         }
 
-        DescriptionPanel.setText(panel.nameText, getName());
+        DescriptionPanel.setText(panel.nameText, displayName);
 
         BookPopUpWindow.disableDefaultContentsRow();
 

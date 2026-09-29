@@ -54,7 +54,7 @@ public static class PartyMemberTrainManager
             partyMemberMovement.partyMember = partyMember;
             partyMemberMovement.placeInTrain = index+1;
             
-            // partyMemberMovement.getAnimationManager().setAnimations(partyMemberMovement.getName());
+            // partyMemberMovement.getAnimationManager().setAnimations(partyMemberMovement.uniqueName);
 
             // partyMemberMovement.getAnimationManager().setFacing(State.playerFacing.getFacing());
 

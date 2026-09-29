@@ -25,7 +25,7 @@ public class ScrollableTabList : ScrollableUIElement
 
 			// if (describable != null && !(describable is null))
 			// {
-			// 	newTabs.Add(new Tab(currentRow, tabCollectionIndexToCreate, describable.getName()));
+			// 	newTabs.Add(new Tab(currentRow, tabCollectionIndexToCreate, describable.displayName));
 			// }
 
 			listOfRows.Add(currentRow);

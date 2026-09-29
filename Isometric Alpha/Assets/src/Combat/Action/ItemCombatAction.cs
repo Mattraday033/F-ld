@@ -59,10 +59,9 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		return this.sourceItem.getIconName();
 	}
 
-	public override string getName()
-	{
-		return getKey();
-	}
+	//item keys are written to be shown to the player
+	public override string displayName { get { return getKey(); } }
+	public override string uniqueName { get { return getKey(); } }
 
 	public override string getDamageTotalForDisplay()
 	{
@@ -233,7 +232,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 	{
 		panel.setObjectBeingDescribed(this);
 
-		DescriptionPanel.setText(panel.nameText, getName());
+		DescriptionPanel.setText(panel.nameText, displayName);
 		DescriptionPanel.setText(panel.damageText, getDamageTotalForDisplay());
 		DescriptionPanel.setText(panel.rangeText, getRangeTitle());
 		DescriptionPanel.setText(panel.typeText, getDisplayType());
@@ -268,7 +267,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType(), HoverMessageList.actionTypePrefix + getType()));
 

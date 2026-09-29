@@ -472,10 +472,8 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 	}
 
 	//IDescribable methods
-	public string getName()
-	{
-		return saveName;
-	}
+	public string displayName { get { return saveName; } }
+	public string uniqueName { get { return saveName; } }
 
 	public bool ineligible()
 	{
@@ -575,7 +573,7 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 	{
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock("Save Name: " + getName()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock("Save Name: " + displayName));
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Save Number: " + getSaveNumberForDisplay()));
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, "Location: " + getLocationUIDisplayName()));
 

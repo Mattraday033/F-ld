@@ -20,7 +20,7 @@ public class PartyMemberButton : MonoBehaviour
 		if(partyMember.canJoinParty)
 		{
 			this.partyMemberName = partyMemberName;
-			nameText.text = PartyManager.getPartyMember(partyMemberName).stats.getName();
+			nameText.text = PartyManager.getPartyMember(partyMemberName).stats.displayName;
 			button.interactable = true;
 		} else
 		{

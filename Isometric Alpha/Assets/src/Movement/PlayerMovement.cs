@@ -18,10 +18,8 @@ public class PlayerMovement : MovementTracker
         PlacedPartyMember.PartyMemberLocationRequest.RemoveListener(addToList);
     }
 
-	public override string getName()
-	{
-        return PartyManager.getPlayerStats().getName();
-	}
+	public override string displayName { get { return PartyManager.getPlayerStats().displayName; } }
+	public override string uniqueName { get { return PartyManager.getPlayerStats().uniqueName; } }
 
     public override void cancelMovement()
     {

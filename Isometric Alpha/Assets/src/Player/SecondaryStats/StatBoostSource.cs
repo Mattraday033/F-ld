@@ -5,7 +5,8 @@ using UnityEngine;
 
 public abstract class StatBoostSource : INameSource
 {
-    public abstract string getName();
+    public abstract string displayName { get; }
+    public abstract string uniqueName { get; }
 
     public abstract Stats getStatSource();
 
@@ -57,7 +58,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getArmorFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case ItemList.minersHelmetKey:
             case ItemList.rottenSandalsKey:
@@ -108,7 +109,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getArmorShredFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case ItemList.unsentLettersKey:
                 return "S+4";       
@@ -121,7 +122,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getCritFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case StatSourceNameList.riledKey:
                 return "3";
@@ -143,7 +144,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusDamageFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -152,7 +153,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getDamageFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case StatSourceNameList.halfHandStanceKey:
             case StatSourceNameList.bloodlustKey:
@@ -183,7 +184,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getInvulnerableFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case StatSourceNameList.halfHandStanceKey:
                 return "1";
@@ -203,7 +204,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getVulnerableFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case StatSourceNameList.roastedKey:
                 return "2";
@@ -222,7 +223,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getHealingBoostFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case NPCNameList.weft + ZoneOfInfluenceTrait.zoiTraitName:
                 return "2C";
@@ -239,7 +240,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusStrengthFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -248,7 +249,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusDexterityFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -257,7 +258,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusWisdomFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -266,7 +267,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusCharismaFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -280,7 +281,7 @@ public abstract class StatBoostSource : INameSource
     //Strength Stats
     public virtual string getBonusWoundResistanceFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case NPCNameList.gaspar + ZoneOfInfluenceTrait.zoiTraitName:
                 return Strength.woundResistPerStrength+"C";
@@ -293,7 +294,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusCriticalDamageMultiplierFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case ItemList.leatherArmorKey:
                 return "S+1";
@@ -309,7 +310,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusHealthFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case ItemList.bronzeCavalryHelmetKey:
                 return "5";
@@ -325,7 +326,7 @@ public abstract class StatBoostSource : INameSource
     //Dexterity Stats
     public virtual string getBonusSurpriseRoundDamageFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case NPCNameList.carter + ZoneOfInfluenceTrait.zoiTraitName:
                 return "5C";
@@ -336,7 +337,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusArmorFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case NPCNameList.thatch + ZoneOfInfluenceTrait.zoiTraitName:
                 int chaArmor = DamageCalculator.calculateFormula(Dexterity.extraArmorMultiplier + "C", PartyManager.getPartyMember(NPCNameList.thatch).stats);
@@ -356,7 +357,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusArmorPenetrationFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case StatSourceNameList.predationKey:
                 return "10";
@@ -368,7 +369,7 @@ public abstract class StatBoostSource : INameSource
     //Wisdom Stats
     public virtual string getBonusPassiveSlotsFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -377,7 +378,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusWeaponSlotsFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -386,7 +387,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusMentalResistanceFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case NPCNameList.nandor + ZoneOfInfluenceTrait.zoiTraitName:
                 return Wisdom.mentalResistPerWisdom+"C";
@@ -402,7 +403,7 @@ public abstract class StatBoostSource : INameSource
     //Charisma Stats
     public virtual string getBonusSynergyFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -411,7 +412,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusExuberancesFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -420,7 +421,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusZOIPotencyFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -433,7 +434,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusRegenFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -442,7 +443,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusSurpriseRoundsFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -451,7 +452,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusRetreatChanceFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -460,7 +461,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusPartyActionsFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -469,7 +470,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusPartySlotsFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -478,7 +479,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusGoldMultiplierFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case ItemList.silverSpoonKey:
                 return "20";
@@ -489,7 +490,7 @@ public abstract class StatBoostSource : INameSource
     
     public virtual string getBonusDiscountFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -498,7 +499,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusVolleyAccuracyFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             case ItemList.signalTorchKey:
                 return "20";
@@ -512,7 +513,7 @@ public abstract class StatBoostSource : INameSource
     #region Skills
     public virtual string getBonusIntimidateChargesFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -521,7 +522,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusCunningChargesFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -530,7 +531,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusObservationLevelFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;
@@ -539,7 +540,7 @@ public abstract class StatBoostSource : INameSource
 
     public virtual string getBonusLeadershipUsesFormula()
     {
-        switch (getName())
+        switch (uniqueName)
         {
             default:
                 return Constants.zeroRating;

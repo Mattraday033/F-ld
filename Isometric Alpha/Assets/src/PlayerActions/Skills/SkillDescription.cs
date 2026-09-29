@@ -65,10 +65,8 @@ public class SkillDescription : IDescribable, IDescribableInBlocks
     }
 
     // IDescribable Methods
-    public string getName()
-    {
-        return name;
-    }
+    public string displayName { get { return name; } }
+    public string uniqueName { get { return name; } }
 
     public bool ineligible()
     {
@@ -115,7 +113,7 @@ public class SkillDescription : IDescribable, IDescribableInBlocks
     {
         panel.setObjectBeingDescribed(this);
 
-        DescriptionPanel.setText(panel.nameText, getName());
+        DescriptionPanel.setText(panel.nameText, displayName);
         DescriptionPanel.setText(panel.useDescriptionText, getUseDescription());
         DescriptionPanel.setText(panel.typeText, getType());
         DescriptionPanel.setText(panel.rangeText, getRange());
@@ -153,7 +151,7 @@ public class SkillDescription : IDescribable, IDescribableInBlocks
     {
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType(), HoverMessageList.actionTypePrefix + getType()));
 

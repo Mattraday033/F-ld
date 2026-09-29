@@ -129,7 +129,7 @@ public struct StatsWrapper
 
     public StatsWrapper(PartyMember partyMember)
     {
-        key = "" + partyMember.getName();
+        key = "" + partyMember.uniqueName;
 
         level = partyMember.stats.getLevel();
         currentHealth = partyMember.stats.currentHealth;

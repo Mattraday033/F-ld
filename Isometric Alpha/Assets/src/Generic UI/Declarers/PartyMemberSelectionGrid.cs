@@ -34,7 +34,7 @@ public class PartyMemberSelectionGrid : UIListenerGrid
         //     grid.disableGridRowAndClick(0);
         // } else
         // {
-        //     grid.disableGridRow(ScreenManager.currentPartyMember.getName());
+        //     grid.disableGridRow(ScreenManager.currentPartyMember.uniqueName);
         // }
     }
 

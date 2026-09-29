@@ -188,7 +188,7 @@ public struct Tab
                     return new List<IDescribable>();
                 } else
                 {
-                    return AbilityList.getCompanionAbilities(OverallUIManager.getCurrentPartyMember().getName());
+                    return AbilityList.getCompanionAbilities(OverallUIManager.getCurrentPartyMember().uniqueName);
                 }
             case DescribableList.AllItems:
                     return State.inventory.Values;

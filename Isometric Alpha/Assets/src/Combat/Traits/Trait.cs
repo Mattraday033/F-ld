@@ -490,10 +490,8 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
 
     #region IDescribable methods
 
-    public override string getName()
-    {
-        return traitName;
-    }
+    public override string displayName { get { return traitName; } }
+    public override string uniqueName { get { return traitName; } }
 
     public bool ineligible()
     {
@@ -531,7 +529,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     {
         panel.setObjectBeingDescribed(this);
 
-        DescriptionPanel.setText(panel.nameText, getName());
+        DescriptionPanel.setText(panel.nameText, displayName);
         DescriptionPanel.setText(panel.useDescriptionText, traitDescription);
         DescriptionPanel.setText(panel.timerText, getRoundsLeftForDisplay());
         DescriptionPanel.setText(panel.typeText, getType());
@@ -573,7 +571,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
     {
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getTraitTypeBlock(getType(), HoverMessageList.traitTypePrefix + getType()));
 
@@ -680,17 +678,17 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
             return false;
         }
 
-        return other.getName().Equals(getName());
+        return other.uniqueName.Equals(uniqueName);
     }
 
     public override int GetHashCode()
     {
-        return getName().GetHashCode();
+        return uniqueName.GetHashCode();
     }
 
     public string getApplicationDescription()
     {
-        return "Applies the " + getName() + " Trait to all targets.";
+        return "Applies the " + displayName + " Trait to all targets.";
     }
 
 }

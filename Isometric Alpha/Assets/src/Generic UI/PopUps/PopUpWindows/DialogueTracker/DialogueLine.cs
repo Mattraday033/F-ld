@@ -30,10 +30,9 @@ public class DialogueLine : IDescribable
 		this.contents = contents;
 	}
 
-	public string getName()
-	{
-		return speakerName;
-	}
+	//the constructor has already dropped any index from the speaker's name
+	public string displayName { get { return speakerName; } }
+	public string uniqueName { get { return speakerName; } }
 
     public bool isBoldable()
     {
@@ -101,7 +100,7 @@ public class DialogueLine : IDescribable
 		dialoguePanel = (DialogueDescriptionPanel)panel;
 
 		dialoguePanel.setObjectBeingDescribed(this);
-		DescriptionPanel.setText(dialoguePanel.loreDescriptionText, getName() + " :  " + contents);
+		DescriptionPanel.setText(dialoguePanel.loreDescriptionText, displayName + " :  " + contents);
 
 		dialoguePanel.updateSize();
 	}

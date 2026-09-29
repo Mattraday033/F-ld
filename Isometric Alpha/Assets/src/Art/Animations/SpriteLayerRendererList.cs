@@ -32,6 +32,9 @@ public class SpriteLayerRendererList : MonoBehaviour
     private SpriteRenderer hairRenderer;
     [SerializeField]
     private SpriteRenderer shieldFrontRenderer;
+    //optional, and deliberately never falls back to the body: only prefabs that sit in the terrain have one
+    [SerializeField]
+    private SpriteRenderer terrainRenderer;
     #endregion
 
     private bool instantiated = false;
@@ -49,23 +52,25 @@ public class SpriteLayerRendererList : MonoBehaviour
 
         spriteLayers = new Dictionary<SpriteLayer, SpriteRenderer>()
         {
-            [SpriteLayer.Body] = bodyRenderer, 
+            [SpriteLayer.Body] = bodyRenderer,
 
             [SpriteLayer.Shield_Back] = orBody(shieldBackRenderer),
-            [SpriteLayer.Weapon] = orBody(weaponRenderer),   
-            [SpriteLayer.Cloak] = orBody(cloakRenderer),  
-            [SpriteLayer.Face] = orBody(faceRenderer),  
-            [SpriteLayer.Hair] = orBody(hairRenderer),  
-            [SpriteLayer.Shield_Front] = orBody(shieldFrontRenderer)
+            [SpriteLayer.Weapon] = orBody(weaponRenderer),
+            [SpriteLayer.Cloak] = orBody(cloakRenderer),
+            [SpriteLayer.Face] = orBody(faceRenderer),
+            [SpriteLayer.Hair] = orBody(hairRenderer),
+            [SpriteLayer.Shield_Front] = orBody(shieldFrontRenderer),
+
+            [SpriteLayer.Terrain] = terrainRenderer
         };
 
-        foreach(SpriteRenderer renderer in spriteLayers.Values)
+        foreach(SpriteRenderer renderer in allRenderers)
         {
             renderer.RegisterSpriteChangeCallback(onSpriteChange);
         }
 
 
-        foreach(SpriteRenderer renderer in spriteLayers.Values)
+        foreach(SpriteRenderer renderer in allRenderers)
         {
             registeredBehaviours[renderer] = new Dictionary<Component, List<RegisterBehaviour>>();
         }
@@ -83,11 +88,42 @@ public class SpriteLayerRendererList : MonoBehaviour
         return renderer != null ? renderer : bodyRenderer;
     }
 
+    //null when the prefab has no terrain renderer
     public SpriteRenderer this[SpriteLayer layer]
     {
-        get { 
+        get {
                 return spriteLayers[layer];
             }
+    }
+
+    public bool hasTerrainRenderer { get { return terrainRenderer != null; } }
+
+    //the renderers that make up the character's appearance, which leaves out the terrain renderer
+    private IEnumerable<SpriteRenderer> characterRenderers
+    {
+        get
+        {
+            foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
+            {
+                yield return spriteLayers[layer];
+            }
+        }
+    }
+
+    private IEnumerable<SpriteRenderer> allRenderers
+    {
+        get
+        {
+            foreach(SpriteRenderer renderer in characterRenderers)
+            {
+                yield return renderer;
+            }
+
+            if(terrainRenderer != null)
+            {
+                yield return terrainRenderer;
+            }
+        }
     }
 
     public void setFlipX(bool flip)
@@ -95,7 +131,8 @@ public class SpriteLayerRendererList : MonoBehaviour
         //flipping doesn't fire the sprite change callback, so the collider has to be rebuilt here
         bool bodyFlipChanged = bodyRenderer.flipX != flip;
 
-        foreach(SpriteRenderer renderer in spriteLayers.Values)
+        //the terrain sprite belongs to the map rather than the character, so it keeps its own facing
+        foreach(SpriteRenderer renderer in characterRenderers)
         {
             renderer.flipX = flip;
         }
@@ -106,17 +143,18 @@ public class SpriteLayerRendererList : MonoBehaviour
         }
     }
 
+    //the terrain renderer's visibility is owned by the terrain state, so these leave it alone
     public void setToSingleLayer(SpriteLayer spriteLayer)
     {
-        foreach(KeyValuePair<SpriteLayer, SpriteRenderer> kvp in spriteLayers)
+        foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
         {
-            kvp.Value.enabled = kvp.Key == spriteLayer;
+            spriteLayers[layer].enabled = layer == spriteLayer;
         }
     }
 
     public void enableAllLayers()
     {
-        foreach(SpriteRenderer renderer in spriteLayers.Values)
+        foreach(SpriteRenderer renderer in characterRenderers)
         {
             renderer.enabled = true;
         }
@@ -124,7 +162,7 @@ public class SpriteLayerRendererList : MonoBehaviour
 
     public void ignoreColorReplace()
     {
-        foreach(SpriteRenderer renderer in spriteLayers.Values)
+        foreach(SpriteRenderer renderer in characterRenderers)
         {
             renderer.material.SetFloat(replaceVarName, Constants.falseFloatToBool);
         }
@@ -134,7 +172,7 @@ public class SpriteLayerRendererList : MonoBehaviour
     {
         colorSchema = schema;
 
-        foreach(SpriteLayer layer in EnumUtil.SpriteLayers)
+        foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
         {
             applySchemaToLayer(layer);
         }
@@ -154,7 +192,7 @@ public class SpriteLayerRendererList : MonoBehaviour
     {
         outlineRenderer.enabled = true;
 
-        foreach(SpriteLayer layer in EnumUtil.SpriteLayers)
+        foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
         {
             outlineRenderer.material.SetTexture("_" + layer.ToString(), spriteLayers[layer].sprite.texture);
         }
@@ -187,6 +225,84 @@ public class SpriteLayerRendererList : MonoBehaviour
         return outlineRenderer.material.GetColor(outlineColorVarName);
     }
 
+    #endregion
+
+    #region Terrain
+    //only prefabs with a terrain renderer take part, so the player's own renderer list is never touched by this
+    private void OnEnable()
+    {
+        if(terrainRenderer == null)
+        {
+            return;
+        }
+
+        TerrainVisibilityManager.OnTerrainVisibilityChange.AddListener(applyTerrainState);
+        applyTerrainState(TerrainVisibilityManager.currentTerrainHiddenState);
+    }
+
+    private void OnDisable()
+    {
+        TerrainVisibilityManager.OnTerrainVisibilityChange.RemoveListener(applyTerrainState);
+    }
+
+    public void setTerrainSprite(Sprite sprite)
+    {
+        if(terrainRenderer == null)
+        {
+            return;
+        }
+
+        terrainRenderer.sprite = sprite;
+        applyTerrainState(TerrainVisibilityManager.currentTerrainHiddenState);
+    }
+
+    //the character layers act like terrain tilemaps and the terrain layer like a shown-while-terrain-hidden tilemap,
+    //mirroring what TerrainVisibilityManager does to the map itself.
+    //forceRenderingOff hides the character layers without disturbing which of them setToSingleLayer enabled
+    private void applyTerrainState(TerrainHiddenState terrainState)
+    {
+        if(terrainRenderer == null)
+        {
+            return;
+        }
+
+        if(terrainRenderer.sprite == null)
+        {
+            setCharacterTerrainVisibility(true, SpriteMaskInteraction.None);
+            terrainRenderer.enabled = false;
+            return;
+        }
+
+        switch(terrainState)
+        {
+            case TerrainHiddenState.BehindTerrain:
+                setCharacterTerrainVisibility(true, SpriteMaskInteraction.VisibleOutsideMask);
+
+                terrainRenderer.enabled = true;
+                terrainRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
+                break;
+            case TerrainHiddenState.TerrainHidden:
+                setCharacterTerrainVisibility(false, SpriteMaskInteraction.None);
+
+                terrainRenderer.enabled = true;
+                terrainRenderer.maskInteraction = SpriteMaskInteraction.None;
+                break;
+            default:
+                setCharacterTerrainVisibility(true, SpriteMaskInteraction.None);
+
+                terrainRenderer.enabled = false;
+                break;
+        }
+    }
+
+    private void setCharacterTerrainVisibility(bool visible, SpriteMaskInteraction maskInteraction)
+    {
+        foreach(SpriteRenderer renderer in characterRenderers)
+        {
+            renderer.forceRenderingOff = !visible;
+            renderer.maskInteraction = maskInteraction;
+        }
+    }
     #endregion
 
     private Dictionary<SpriteRenderer, Dictionary<Component, List<RegisterBehaviour>>> registeredBehaviours = new();

@@ -9,9 +9,9 @@ public static class DeathFlagManager
     public readonly static UnityEvent<string> OnDeathFlagCreated = new UnityEvent<string>();
 	public static Dictionary<string, bool> deadNames = new Dictionary<string, bool>();
 
-	public static void addName(string npcName, bool invokeOnDeathFlagCreated = true)
+	public static void addName(string displayName, bool invokeOnDeathFlagCreated = true)
 	{
-        string newKey = npcName.Replace(" ", "");
+        string newKey = displayName.Replace(" ", "");
 
         if(deadNames.ContainsKey(newKey))
         {
@@ -26,9 +26,9 @@ public static class DeathFlagManager
         }
 	}
 	
-	public static bool isDead(string npcName)
+	public static bool isDead(string displayName)
 	{
-		return deadNames.ContainsKey(npcName.Replace(" ", ""));
+		return deadNames.ContainsKey(displayName.Replace(" ", ""));
 	}
 
 	public static void resetAllDeadNpcs()

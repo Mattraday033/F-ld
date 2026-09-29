@@ -26,13 +26,13 @@ public class ActivationListener : MonoBehaviour
 
     public int index;
     public INameSource nameSource;
-    public string npcName
+    public string uniqueName
     {
         get
         {
             if(nameSource != null)
             {
-                return nameSource.getName();
+                return nameSource.uniqueName;
             }
             
             return "";
@@ -56,25 +56,42 @@ public class ActivationListener : MonoBehaviour
     //immediate, because the next area's objects are spawned straight after the old ones are wiped
     private void destroySpawnedGameObject()
     {
+        OnDestroy();
+
         DestroyImmediate(gameObject);
     }
 
     public void listenForActivationByName(ActivationCategory category)
     {
+        if(!channelInfo[ActivationDesignatorType.Name].Contains(category))
+        {
+            channelInfo[ActivationDesignatorType.Name].Add(category);
+        }
+
         EventList.SetActiveByNameChannel.RemoveListener(setActiveByName);
         EventList.SetActiveByNameChannel.AddListener(setActiveByName);
     }
 
     public void listenForActivationByIndex(ActivationCategory category)
     {
+        if(!channelInfo[ActivationDesignatorType.Index].Contains(category))
+        {
+            channelInfo[ActivationDesignatorType.Index].Add(category);
+        }
+
         EventList.SetActiveByIndexChannel.RemoveListener(setActiveByIndex);
         EventList.SetActiveByIndexChannel.AddListener(setActiveByIndex);
     }
 
     private void setActiveByName(ActivationCategory category, string incomingName, bool status)
     {
+        if(ignoreActivationByState())
+        {
+                return;
+        }
+
         if(channelInfo[ActivationDesignatorType.Name].Contains(category) && 
-            npcName.Equals(incomingName))
+            uniqueName.Equals(incomingName))
         {
             gameObject.SetActive(status);
         }
@@ -82,10 +99,38 @@ public class ActivationListener : MonoBehaviour
 
     private void setActiveByIndex(ActivationCategory category, int incomingIndex, bool status)
     {
+        if(ignoreActivationByState())
+        {
+                return;
+        }
+
         if(channelInfo[ActivationDesignatorType.Index].Contains(category) && 
             incomingIndex == index)
         {
             gameObject.SetActive(status);
         }
     }
+
+    private bool ignoreActivationByState()
+    {
+        switch(PlayerOOCStateManager.currentActivity)
+        {
+            case OOCActivity.inFade:
+            case OOCActivity.Loading:
+                return true;
+            default:
+                return false;
+        }
+
+    }
+}
+
+
+public static class ActivationRequirementList
+{
+    public readonly static KeyValuePair<ActivationDesignatorType, ActivationCategory> cunningByName = new(ActivationDesignatorType.Name, ActivationCategory.Cunning);
+    public readonly static KeyValuePair<ActivationDesignatorType, ActivationCategory> cunningByIndex = new(ActivationDesignatorType.Index, ActivationCategory.Cunning);
+
+    public readonly static KeyValuePair<ActivationDesignatorType, ActivationCategory> dialogueByName = new(ActivationDesignatorType.Name, ActivationCategory.Dialogue);
+    public readonly static KeyValuePair<ActivationDesignatorType, ActivationCategory> dialogueByIndex = new(ActivationDesignatorType.Index, ActivationCategory.Dialogue);
 }

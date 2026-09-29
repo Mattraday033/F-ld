@@ -110,7 +110,7 @@ public class VolleyAbility : Ability
 			if(CombatGrid.combatantExistsAtCoords(targetTileCoords[targetCoordsIndex], out Stats targetCombatant) && 
                 targetCombatant.isAlive())
 			{
-				crit = DamageCalculator.isACrit(getCritFormula(), getName());
+				crit = DamageCalculator.isACrit(getCritFormula(), uniqueName);
 				finalDamage = findFinalDamage(targetCombatant, crit);
 			
 				targetCombatant.modifyCurrentHealth(finalDamage, healing: healsTarget());
@@ -174,7 +174,7 @@ public class VolleyAbility : Ability
 		Selector selector = null;
 		Stats actor = getActorStats();
 
-		// Debug.LogError(actor.getName() + " is at position " + actor.position.ToString());
+		// Debug.LogError(actor.uniqueName + " is at position " + actor.position.ToString());
 
 		List<Stats> listOfTargets;
 		

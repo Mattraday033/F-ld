@@ -11,7 +11,7 @@ public class ChargeUpAbility : Ability
     public const string chargingUpDescription = "Target creature gains a Charge Trait. Charge Type Traits enable creatures to use more powerful abilities, and often provide other passive benefits.";
 
 	public ChargeUpAbility(Trait chargeUpTrait, Ability actionWhenCharged) :
-		base(CombatActionSettings.build(actionWhenCharged.getKey(), DescriptionParams.build(actionWhenCharged.getName(), iconName: actionWhenCharged.getIconName(), useDescription: actionWhenCharged.getUseDescription(), loreDescription: actionWhenCharged.getLoreDescription()),
+		base(CombatActionSettings.build(actionWhenCharged.getKey(), DescriptionParams.build(actionWhenCharged.displayName, iconName: actionWhenCharged.getIconName(), useDescription: actionWhenCharged.getUseDescription(), loreDescription: actionWhenCharged.getLoreDescription()),
 																	DamageParams.build(actionWhenCharged.getDamageFormula(), actionWhenCharged.getCritFormula()),
 																	TargetParams.build(SelectorTemplate.Single, actionWhenCharged.selfTargeting),
 																	FrequencyParams.build(actionWhenCharged.getMaximumSlots(), actionWhenCharged.getMaximumCooldown()),
@@ -113,15 +113,19 @@ public class ChargeUpAbility : Ability
 		}
 	}
 
-    public override string getName()
+    //only the displayed name changes while charging, the ability's key stays the same
+    public override string displayName
     {
-        if (isCharged())
+        get
         {
-            return base.getName();
-        }
-        else
-        {
-            return chargingUpName;
+            if (isCharged())
+            {
+                return base.displayName;
+            }
+            else
+            {
+                return chargingUpName;
+            }
         }
     }
     

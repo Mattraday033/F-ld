@@ -64,8 +64,8 @@ public class CharacterScreen : ScreenManager, ICounter
 
     public override void updateCounter()
     {
-        playerNameText.text = currentPartyMember.getName().Replace(PartyManager.playerMarker, "");
-        characterSprite.sprite = PartyMember.getPortrait(currentPartyMember.getName());
+        playerNameText.text = currentPartyMember.displayName;
+        characterSprite.sprite = PartyMember.getPortrait(currentPartyMember.uniqueName);
 
         setAbilityGridHeaders();
     }

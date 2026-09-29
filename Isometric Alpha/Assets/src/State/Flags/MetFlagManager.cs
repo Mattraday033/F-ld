@@ -6,14 +6,14 @@ public static class MetFlagManager
 {
 	public static Dictionary<string, bool> metNames = new Dictionary<string, bool>();
 
-	public static void addName(string npcName)
+	public static void addName(string displayName)
 	{
-		metNames.Add(npcName, true);
+		metNames.Add(displayName, true);
 	}
 	
-	public static bool metBefore(string npcName)
+	public static bool metBefore(string displayName)
 	{
-		return metNames.ContainsKey(npcName);
+		return metNames.ContainsKey(displayName);
 	}
 
 	public static void resetAllMetNpcs()

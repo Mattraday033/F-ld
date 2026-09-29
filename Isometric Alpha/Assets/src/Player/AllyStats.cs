@@ -68,7 +68,7 @@ public class AllyStats : Stats
     {
         combatActionArray = new CombatActionArray(this); 
         equippedItems = new EquippedItems(this);
-        this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(getName());
+        this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(uniqueName);
     }
 
     public AllyStats(string name, int Str, int Dex, int Wis, int Cha) : base(name) 
@@ -87,7 +87,7 @@ public class AllyStats : Stats
         equippedItems = new EquippedItems(this);
 
         this.currentHealth = getTotalHealth();
-        this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(getName());
+        this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(uniqueName);
     }
 
     public AllyStats(StatsWrapper wrapper) : base(wrapper.key)
@@ -105,7 +105,7 @@ public class AllyStats : Stats
 
         combatActionArray = new CombatActionArray(this, SaveBlueprint.extractCombatActionsFromJson(this, wrapper.combatActions));
         equippedItems = new EquippedItems(this, SaveBlueprint.extractEquippedItemsFromJson(wrapper.currentEquipment));
-        this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(getName());
+        this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(uniqueName);
     }
 
     #endregion
@@ -136,7 +136,7 @@ public class AllyStats : Stats
     
     public Sprite getSpriteIcon()
     {
-        return Resources.LoadAll<Sprite>(EnemyTypeFolderPathList.getEnemyTypeFolderPath(getName()) + CharacterAnimationType.Idle_Front.ToString())[0];
+        return Resources.LoadAll<Sprite>(EnemyTypeFolderPathList.getEnemyTypeFolderPath(uniqueName) + CharacterAnimationType.Idle_Front.ToString())[0];
     }
 
     #endregion
@@ -146,7 +146,7 @@ public class AllyStats : Stats
     {
         xp += earnedXP;
 
-        if(canLevelUp() && PartyManager.getPartyMember(getName()).canJoinParty)
+        if(canLevelUp() && PartyManager.getPartyMember(uniqueName).canJoinParty)
         {
             PlayerObject.playLevelUpEffect();
         }
@@ -636,7 +636,7 @@ public class AllyStats : Stats
 
     public override int getZOIStat()
     {
-        switch(getName())
+        switch(uniqueName)
         {
             case NPCNameList.thatch:
 
@@ -733,7 +733,7 @@ public class AllyStats : Stats
                 break;
             default:
                 newCombatActions = new List<CombatAction>();
-                List<CombatAction> companionAbilities = AbilityList.getCompanionAbilities(getName());
+                List<CombatAction> companionAbilities = AbilityList.getCompanionAbilities(uniqueName);
 
                 foreach(CombatAction companionAbility in companionAbilities)
                 {
@@ -937,7 +937,7 @@ public class AllyStats : Stats
 
     public string getNameWithoutPlayerMarker()
     {
-        return getName().Replace(PartyManager.playerMarker, "");
+        return displayName;
     }
 
     public override GameObject getRowType(RowType rowType)

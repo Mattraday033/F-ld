@@ -39,20 +39,29 @@ public abstract class ButtonLogicScript
         }
     }
 
+    //the frame the scripts were last evaluated in, so the final step's OnStepFinished and OnMoveFinished only evaluate once
+    private static int lastEvaluatedFrame = -1;
+
     [RuntimeInitializeOnLoadMethod]
     private static void initializeUnityEvent()
     {
         OnButtonDataRequest = new UnityEvent<ButtonLogicScript>();
+        lastEvaluatedFrame = -1;
 
-        MovementManager.OnMoveFinished.AddListener(evaluateAllScriptsInLocation);        
+        //OnStepFinished evaluates after every step, since OnMoveFinished now only fires once a mover stops.
+        //OnMoveFinished is still needed for the places that invoke it by hand, like a movable object snapping back
+        MovementManager.OnStepFinished.AddListener(evaluateAllScriptsInLocation);
+        MovementManager.OnMoveFinished.AddListener(evaluateAllScriptsInLocation);
     }
 
     public static void evaluateAllScriptsInLocation(int movementIndex)
     {
-        if(movementIndex != Constants.indexZero)
+        if(movementIndex != Constants.indexZero || Time.frameCount == lastEvaluatedFrame)
         {
             return;
         }
+
+        lastEvaluatedFrame = Time.frameCount;
 
         List<ButtonLogicScript> scriptList = ButtonScriptList.getButtonScripts(AreaManager.locationName);
 

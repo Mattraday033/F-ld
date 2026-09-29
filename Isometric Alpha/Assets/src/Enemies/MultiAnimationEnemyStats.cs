@@ -42,7 +42,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
     {
         if(spawnDetails == null)
         {
-            if(getName().Contains(NPCNameList.barricade))
+            if(uniqueName.Contains(NPCNameList.barricade))
             {
                 spawnDetails = barricadeSpawnDetails;
             } else
@@ -61,7 +61,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
         {
             combatSprites[coords] = GameObject.Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
 
-            if(getName().Contains(NPCNameList.barricade))
+            if(uniqueName.Contains(NPCNameList.barricade))
             {
                 combatSprites[coords].transform.localScale = Constants.reverseScaleChange;
             } else
@@ -87,7 +87,7 @@ public class MultiAnimationEnemyStats : LargeEnemyStats
         // {
         //     animationManager.linkedStats = this;
         //     animationManager.healthBarManager = healthBarManager;
-        //     animationManager.setAnimations(getName());
+        //     animationManager.setAnimations(uniqueName);
         // }
 
         combatSprite = combatSprites[spawnDetails.baseStatsPosition];

@@ -60,6 +60,6 @@ public class SaveLoadDecisionPanel : MonoBehaviour, IDecisionPanel
 
 	public string getDescribableRowKey()
 	{
-		return saveBlueprint.getName();
+		return saveBlueprint.uniqueName;
 	}
 }

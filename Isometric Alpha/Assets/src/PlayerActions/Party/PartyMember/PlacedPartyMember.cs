@@ -22,7 +22,7 @@ public class PlacedPartyMember : MonoBehaviour
         set
         {
             _PartyMember = value;
-            // animationManager.setAnimations(_PartyMember.getName());
+            // animationManager.setAnimations(_PartyMember.uniqueName);
             // animationManager.setFacing(State.playerFacing.getFacing());
         }
     }

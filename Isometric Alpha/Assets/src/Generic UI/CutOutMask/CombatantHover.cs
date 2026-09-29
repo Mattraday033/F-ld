@@ -336,14 +336,31 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     #region IRevealable
 
-    public string getName()
+    public string displayName
     {
-        if(linkedStats != null)
+        get
         {
-            return linkedStats.getName();
-        } else
+            if(linkedStats != null)
+            {
+                return linkedStats.displayName;
+            } else
+            {
+                return "";
+            }
+        }
+    }
+
+    public string uniqueName
+    {
+        get
         {
-            return "";
+            if(linkedStats != null)
+            {
+                return linkedStats.uniqueName;
+            } else
+            {
+                return "";
+            }
         }
     }
 

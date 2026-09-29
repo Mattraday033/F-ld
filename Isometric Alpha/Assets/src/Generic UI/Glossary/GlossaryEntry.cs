@@ -13,10 +13,8 @@ public class GlossaryEntry : IJournalSubcategory
 		this.category = category;
 	}
 
-	public string getName()
-	{
-		return title;
-	}
+	public string displayName { get { return title; } }
+	public string uniqueName { get { return title; } }
 
 	public bool ineligible()
 	{
@@ -52,7 +50,7 @@ public class GlossaryEntry : IJournalSubcategory
 	{
 		panel.setObjectBeingDescribed(this);
 
-		DescriptionPanel.setText(panel.nameText, getName());
+		DescriptionPanel.setText(panel.nameText, displayName);
 		DescriptionPanel.setText(panel.typeText, category);
 	}
 
@@ -60,7 +58,7 @@ public class GlossaryEntry : IJournalSubcategory
 	{
 		panel.setObjectBeingDescribed(this);
 
-		DescriptionPanel.setText(panel.nameText, getName());
+		DescriptionPanel.setText(panel.nameText, displayName);
 	}
 
 	public virtual void setUpDecisionPanel(IDecisionPanel descisionPanel)

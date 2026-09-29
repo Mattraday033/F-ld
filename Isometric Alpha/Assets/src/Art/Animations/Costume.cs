@@ -357,7 +357,7 @@ public class Costume: IAppearance
             rendererList.interpretSchema(getColorSchema());
         }
 
-        foreach(SpriteLayer layer in EnumUtil.SpriteLayers)
+        foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
         {
             rendererList[layer].sprite = getSprite(layer, type);
         }

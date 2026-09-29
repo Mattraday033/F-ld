@@ -1,6 +1,6 @@
 /// <summary>
 /// Keys into DialogueList.dialogueList for the dialogues that aren't found by the usual
-/// areaName + npcName combination.
+/// areaName + displayName combination.
 ///
 /// The Resources paths that used to live here are gone: ink stories are now addressed by
 /// DialogueKey, which DialogueKeyGenerator derives from what is actually on disk. Use

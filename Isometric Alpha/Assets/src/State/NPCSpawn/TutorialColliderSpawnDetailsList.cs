@@ -110,6 +110,28 @@ public static class TutorialColliderSpawnDetailsList
     }
 }
 
+public abstract class AxisSpawnInfo
+{
+    public Vector3Int startCell;
+    public int size;
+    public Axis axis;
+
+    public string tutorialTargetHash = "";
+
+    public AxisSpawnInfo(Vector3Int startCell, int size = 1, Axis axis = Axis.DescendingX)
+    {
+        this.startCell = startCell;
+
+        this.size = size;
+        this.axis = axis;
+    }
+
+    public abstract bool shouldSpawn();
+
+    public abstract List<OOCSpawnDetails> getSpawnDetails();
+
+}
+
 public class MultiTutorialColliderSpawnInfo : AxisSpawnInfo
 {
     private string tutorialKey;

@@ -5,7 +5,23 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour, IDialogueParticipant
 {
     private bool ignoreSecretDoors;
-    public string obstacleName;
+
+    private string _UniqueName = "";
+    public string uniqueName
+    {
+        get
+        {
+            return _UniqueName;
+        }
+        set
+        {
+            _UniqueName = value;
+            _NPCName = NameSourceExtensions.toNPCName(value);
+        }
+    }
+
+    private string _NPCName = "";
+    public string displayName { get { return _NPCName; } }
 
     private SpriteLayerRendererList _RendererList;
     public SpriteLayerRendererList rendererList { get { return _RendererList; } }
@@ -28,11 +44,6 @@ public class Obstacle : MonoBehaviour, IDialogueParticipant
 	{
 		destroyListeners();
 	}
-
-    public string getName()
-    {
-        return obstacleName;
-    }
 
     public virtual void setToDown()
     {
@@ -64,7 +75,7 @@ public class Obstacle : MonoBehaviour, IDialogueParticipant
 
     private void checkSpawnParams(string secretDoorFlag)
     {
-        if(!SpawnParamsList.getSpawnParams(AreaManager.locationName, getName()).canSpawn(getName()))
+        if(!SpawnParamsList.getSpawnParams(AreaManager.locationName, uniqueName).canSpawn(uniqueName))
         {
             gameObject.SetActive(false);
         } else

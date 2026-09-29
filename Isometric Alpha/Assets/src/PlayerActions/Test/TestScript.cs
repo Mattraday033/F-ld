@@ -24,13 +24,13 @@ public static class TestScript
         // PartyManager.getPlayerStats().setLevel(1);
         // PartyManager.getPlayerStats().currentHealth = 1;
         // PartyManager.getPlayerStats().strength = 2;
-        // PartyManager.getPlayerStats().dexterity = 2;
-        PartyManager.getPlayerStats().wisdom = 2;
+        PartyManager.getPlayerStats().dexterity = 2;
+        // PartyManager.getPlayerStats().wisdom = 2;
         // PartyManager.getPlayerStats().charisma = 3;
 
         // PartyManager.addXP(1050);
 
-        Purse.addCoins(100);
+        // Purse.addCoins(100);
 
         // Flags.flags["wisdomBarricadePassUsed"] = false;
         // Flags.flags["strengthBarricadePassUsed"] = false;
@@ -39,7 +39,7 @@ public static class TestScript
 
         // PartyManager.getPlayerStats().combatActionArray = new CombatActionArray(PartyManager.getPlayerStats(), Wisdom.getStartingActions(PartyManager.getPlayerStats()));
 
-        PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
+        // PartyManager.getPlayerStats().getActionArray().equipCombatAction(AbilityList.getAbility(PartyManager.getPlayerStats(), AbilityList.godSpellAbilityKey), 0);
 
         // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.rationsIndex, 50));
         // // Inventory.addItem(ItemList.getItem(ItemList.usableItemListIndex, ItemList.bandagesIndex, 5));

@@ -1149,7 +1149,15 @@ public static class TransitionSpawnInfoList
     {
         foreach(KeyValuePair<string, List<TransitionSpawnInfo>> entry in transitionSpawnInfoDict)
         {
-            List<SecretDoorSpawnInfo> secretDoorList = SecretDoorSpawnInfoList.getSecretDoorSpawnDetails(entry.Key);
+            List<SecretDoorSpawnDetails> secretDoorList = new List<SecretDoorSpawnDetails>();
+
+            foreach(OOCSpawnDetails details in OOCSpawnDetailsList.getOOCSpawnDetails(entry.Key))
+            {
+                if(details is SecretDoorSpawnDetails secretDoor)
+                {
+                    secretDoorList.Add(secretDoor);
+                }
+            }
 
             if(secretDoorList.Count == 0)
             {
@@ -1163,7 +1171,7 @@ public static class TransitionSpawnInfoList
         }
     }
 
-    private static void assignIndicatorFlagIfNearSecretDoor(TransitionSpawnInfo transitionInfo, List<SecretDoorSpawnInfo> secretDoorList)
+    private static void assignIndicatorFlagIfNearSecretDoor(TransitionSpawnInfo transitionInfo, List<SecretDoorSpawnDetails> secretDoorList)
     {
         if(transitionInfo.indicatorFlag != null && transitionInfo.indicatorFlag.Length > 0)
         {
@@ -1172,7 +1180,7 @@ public static class TransitionSpawnInfoList
 
         List<Transition> transitions = transitionInfo.getTransitions();
 
-        foreach(SecretDoorSpawnInfo secretDoor in secretDoorList)
+        foreach(SecretDoorSpawnDetails secretDoor in secretDoorList)
         {
             string secretDoorKey = secretDoor.getPrimarySecretDoorKey();
             if(secretDoorKey == null)
@@ -1180,18 +1188,10 @@ public static class TransitionSpawnInfoList
                 continue;
             }
 
-            for(int doorIndex = 0; doorIndex < secretDoor.size; doorIndex++)
-            {
-                Vector3Int doorCell = secretDoor.startCell;
-                if(secretDoor.axis == Axis.DescendingX)
-                {
-                    doorCell.x -= doorIndex;
-                }
-                else if(secretDoor.axis == Axis.DescendingY)
-                {
-                    doorCell.y -= doorIndex;
-                }
+            List<Vector3Int> doorCells = new List<Vector3Int>(secretDoor.extraSpaces) { secretDoor.cellCoords };
 
+            foreach(Vector3Int doorCell in doorCells)
+            {
                 foreach(Transition transition in transitions)
                 {
                     if(Mathf.Abs(transition.cellCoords.x - doorCell.x) <= adjacencyRange

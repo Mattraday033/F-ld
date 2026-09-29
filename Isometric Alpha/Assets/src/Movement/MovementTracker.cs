@@ -26,7 +26,8 @@ public abstract class MovementTracker : MonoBehaviour
 
     public MovementTracker nextInTrain;
 
-    public abstract string getName();
+    public abstract string displayName { get; }
+    public abstract string uniqueName { get; }
 
     protected Vector2 _StartingPosition;
     public Vector2 startingPosition

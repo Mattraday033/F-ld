@@ -16,14 +16,14 @@ public class OverwriteSaveFile : IDecision
 	
 	public string getMessage()
 	{
-		return overwriteMessageStart + save.getName() + overwriteMessageEnd;
+		return overwriteMessageStart + save.displayName + overwriteMessageEnd;
 	}
  
 	public void execute()
 	{
-		SaveHandler.deleteSaveFile(save.getName());
+		SaveHandler.deleteSaveFile(save.uniqueName);
 		
-		SaveHandler.save(save.getName());
+		SaveHandler.save(save.uniqueName);
 		
 		ScreenManager.OnScreenInteriorUpdate.Invoke();
 		

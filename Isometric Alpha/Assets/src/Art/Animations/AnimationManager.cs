@@ -80,12 +80,12 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     //         if(linkedStats != null)
     //         {
-    //             npcName = linkedStats.getName();
+    //             displayName = linkedStats.uniqueName;
     //         }
     //     }
     // }
-    // public string npcName = ""; //name of specific character. i.e. : guard 1, guard 2. Used for differentiating different characters that use the same animations/sprites.
-    // public string animationName = ""; //name of character sprites. i.e.: Spearman, Giant Bat. Sometimes same as npcName.
+    // public string displayName = ""; //name of specific character. i.e. : guard 1, guard 2. Used for differentiating different characters that use the same animations/sprites.
+    // public string animationName = ""; //name of character sprites. i.e.: Spearman, Giant Bat. Sometimes same as displayName.
     // public int heartBeatRow = 0;
 
     // public readonly static UnityEvent<string, CharacterAnimationType> SetIdleByNPCName = new UnityEvent<string, CharacterAnimationType>();
@@ -144,9 +144,9 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //             (CombatStateManager.inCombat && !linkedStats.isDead()));
     // }
 
-    // public void playAnimationByNPCName(string npcName, CharacterAnimationType animationType)
+    // public void playAnimationByNPCName(string displayName, CharacterAnimationType animationType)
     // {
-    //     if(this.npcName.Equals(npcName))
+    //     if(this.displayName.Equals(displayName))
     //     {
     //         switch(animationType)
     //         {
@@ -157,9 +157,9 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //     }
     // }
 
-    // public void showStapledEffect(string npcName, EffectAnimationType effectType)
+    // public void showStapledEffect(string displayName, EffectAnimationType effectType)
     // {
-    //     if(!this.npcName.Equals(npcName))
+    //     if(!this.displayName.Equals(displayName))
     //     {
     //         return;
     //     }
@@ -181,9 +181,9 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //     }
     // }
 
-    // public void createEffectByNPCName(string npcName, EffectAnimationType effectType)
+    // public void createEffectByNPCName(string displayName, EffectAnimationType effectType)
     // {
-    //     if(this.npcName.Equals(npcName))
+    //     if(this.displayName.Equals(displayName))
     //     {
     //         EffectAnimationManager effect = Instantiate(Resources.Load<GameObject>(PrefabNames.effect), transform).GetComponent<EffectAnimationManager>();
 
@@ -196,9 +196,9 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //     }
     // }
 
-    // public void setCurrentIdle(string npcName, CharacterAnimationType animationType)
+    // public void setCurrentIdle(string displayName, CharacterAnimationType animationType)
     // {
-    //     if(this.npcName.Equals(npcName))
+    //     if(this.displayName.Equals(displayName))
     //     {
     //         setCurrentIdle(animationType);            
     //     }
@@ -449,7 +449,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     // {
     //     if(CombatStateManager.inCombat && linkedStats != null)
     //     {
-    //         switch(linkedStats.getName())
+    //         switch(linkedStats.uniqueName)
     //         {
     //             case NPCNameList.captainAdela:
     //                 return true;
@@ -1249,7 +1249,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     // private float getOutlineSize()
     // {
-    //     switch(npcName)
+    //     switch(displayName)
     //     {
     //         case NPCNameList.horse:
     //         case NPCNameList.csalan:

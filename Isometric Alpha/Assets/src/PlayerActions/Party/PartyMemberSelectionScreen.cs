@@ -76,7 +76,7 @@ public class PartyMemberSelectionScreen : PopUpWindow
 	
         foreach (PartyMember partyMember in allPartyMembers)
 		{
-            partyMemberButtons[buttonIndex].setPartyMemberName(partyMember.getName());
+            partyMemberButtons[buttonIndex].setPartyMemberName(partyMember.uniqueName);
 			partyMemberButtons[buttonIndex].partyMemberSelectionScreen = this;
 			
 			if(itemQuantity <= 0 || 
@@ -98,7 +98,7 @@ public class PartyMemberSelectionScreen : PopUpWindow
 		{
             if (hpPanelIndex < allPartyMembers.Count)
 			{
-				partyMemberHPPanels[hpPanelIndex].setPartyMemberName(partyMember.getName());
+				partyMemberHPPanels[hpPanelIndex].setPartyMemberName(partyMember.uniqueName);
 			} else
 			{
 				partyMemberHPPanels[hpPanelIndex].setToBlank();

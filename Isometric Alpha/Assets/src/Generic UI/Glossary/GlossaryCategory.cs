@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IJournalCategory
+public interface IJournalCategory : INameSource
 {
-	public string getName();
-	
 	public List<IDescribable> getSubcategories();
 }
 
@@ -25,10 +23,8 @@ public class GlossaryCategory: IDescribable, IJournalCategory
 		this.subcategories = subcategories;
 	}
 
-	public string getName()
-	{
-		return title;
-	}
+	public string displayName { get { return title; } }
+	public string uniqueName { get { return title; } }
 
 	public bool ineligible()
 	{
@@ -64,14 +60,14 @@ public class GlossaryCategory: IDescribable, IJournalCategory
 	{
 		panel.setObjectBeingDescribed(this);
 
-		DescriptionPanel.setText(panel.nameText, getName());
+		DescriptionPanel.setText(panel.nameText, displayName);
 	}
 
 	public virtual void describeSelfRow(DescriptionPanel panel)
 	{
 		panel.setObjectBeingDescribed(this);
 
-		DescriptionPanel.setText(panel.nameText, getName());
+		DescriptionPanel.setText(panel.nameText, displayName);
 	}
 
 	public void setUpDecisionPanel(IDecisionPanel descisionPanel)

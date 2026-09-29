@@ -51,10 +51,8 @@ public class AllyStatsUpgradeDifference: IDescribable, IDescribableInBlocks
         return "+" + (higher - lower) + "%";
     }
 
-    public string getName()
-    {
-        return lowerLevelStats.getName() + " Ally Stats Difference";
-    }
+    public string displayName { get { return lowerLevelStats.displayName + " Ally Stats Difference"; } }
+    public string uniqueName { get { return lowerLevelStats.uniqueName + " Ally Stats Difference"; } }
 
     #region IDescribable Methods
 

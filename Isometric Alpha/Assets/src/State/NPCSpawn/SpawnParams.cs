@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class SpawnParams
 {
-    public abstract bool canSpawn(string npcName);
+    public abstract bool canSpawn(string displayName);
 }
 
 public class InteractableSpawnParams : SpawnParams
@@ -38,11 +38,11 @@ public class InteractableSpawnParams : SpawnParams
         this.onlySpawnWhileHostile = onlySpawnWhileHostile;
     }
 
-    public override bool canSpawn(string npcName)
+    public override bool canSpawn(string displayName)
     {
-        npcName = DialogueList.scrubNameOfEndNumbers(npcName);
+        displayName = DialogueList.scrubNameOfEndNumbers(displayName);
 
-        if (DeathFlagManager.isDead(npcName))
+        if (DeathFlagManager.isDead(displayName))
         {
             return doNotSpawn;
         }
@@ -57,7 +57,7 @@ public class InteractableSpawnParams : SpawnParams
             return doNotSpawn;
         }
 
-        if (!ignoreInPartyForSpawning() && State.formation.contains(npcName))
+        if (!ignoreInPartyForSpawning() && State.formation.contains(displayName))
         {
             return doNotSpawn;
         }
@@ -72,12 +72,12 @@ public class InteractableSpawnParams : SpawnParams
             return doNotSpawn;
         }
 
-        if(GateAndChestManager.hasBeenOpened(AreaManager.locationName+npcName))
+        if(GateAndChestManager.hasBeenOpened(AreaManager.locationName+displayName))
         {
             return doNotSpawn;
         }
 
-        if(SecretDoorFlags.secretDoorHasBeenDiscovered(AreaManager.locationName+npcName))
+        if(SecretDoorFlags.secretDoorHasBeenDiscovered(AreaManager.locationName+displayName))
         {
             return doNotSpawn;
         }
@@ -93,7 +93,7 @@ public class InteractableSpawnParams : SpawnParams
 
 public class NeverSpawnParams : InteractableSpawnParams
 {
-    public override bool canSpawn(string npcName)
+    public override bool canSpawn(string displayName)
     {
         return false;       
     }
@@ -111,9 +111,9 @@ public class StatBasedSpawnParams : InteractableSpawnParams
         this.statLevelRequirement = statLevelRequirement;
     }
     
-    public override bool canSpawn(string npcName)
+    public override bool canSpawn(string displayName)
     {
-        if(!base.canSpawn(npcName))
+        if(!base.canSpawn(displayName))
         {
             return doNotSpawn;
         }
@@ -230,7 +230,7 @@ public class HiddenTerrainSpawnParams : SpawnParams
         this.secretDoorKeys = secretDoorKeys;
     }
 
-    public override bool canSpawn(string npcName)
+    public override bool canSpawn(string displayName)
     {
         foreach(string key in secretDoorKeys)
         {
@@ -253,7 +253,7 @@ public class HostilitySpawnParams : SpawnParams
         this.locationName = locationName;
     }
 
-    public override bool canSpawn(string npcName)
+    public override bool canSpawn(string displayName)
     {
         return AreaList.getArea(locationName).isHostile();
     }
@@ -264,12 +264,17 @@ public class SecretDoorObstacleSpawnParams : HiddenTerrainSpawnParams
     public SecretDoorObstacleSpawnParams(string secretDoorFlag):
     base(new List<string>(){secretDoorFlag})
     {
-        
+
     }
 
-    public override bool canSpawn(string npcName)
+    public SecretDoorObstacleSpawnParams(List<string> secretDoorFlags):
+    base(secretDoorFlags)
     {
-        return !base.canSpawn(npcName);
+    }
+
+    public override bool canSpawn(string displayName)
+    {
+        return !base.canSpawn(displayName);
     }
 }
 

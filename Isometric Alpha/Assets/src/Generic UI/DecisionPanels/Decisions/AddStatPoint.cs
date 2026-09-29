@@ -8,7 +8,7 @@ public class AddStatPoint : IDecision
 
     public string getMessage()
     {
-        return "Are you sure you want to raise "+targetStats.getName().Replace(PartyManager.playerMarker,"")+"'s " + PrimaryStatIncreaseButton.currentButton.getStatName() + " by 1? This is permanent and costs 1000 Experience Points.";
+        return "Are you sure you want to raise "+targetStats.displayName+"'s " + PrimaryStatIncreaseButton.currentButton.getStatName() + " by 1? This is permanent and costs 1000 Experience Points.";
     }
 
 	public AddStatPoint(Stats targetStats)
@@ -48,7 +48,7 @@ public class AddStatPoint : IDecision
             TutorialSequence.startTutorialSequence(TutorialSequenceList.addingAbilitiesTutorialSequenceKey);
         } 
         else if(!TutorialFlags.getFlag(TutorialSequenceList.companionSpecificAbilitiesTutorialSeenFlag) && 
-                    !targetStats.getName().Contains(PartyManager.playerMarker) && targetStats.getLevel() >= Constants.sizeThree)
+                    !targetStats.uniqueName.Contains(PartyManager.playerMarker) && targetStats.getLevel() >= Constants.sizeThree)
         {
             if(AbilityGridSideTab.getDescribableListType() == DescribableList.CharacterSpecificAbilities)
             {

@@ -66,10 +66,8 @@ public class WinCondition : IDescribable
 
     #region IDescribable Methods
     
-    public virtual string getName()
-    {
-        return "Win Con: " + winConName;
-    }
+    public virtual string displayName { get { return "Win Con: " + winConName; } }
+    public virtual string uniqueName { get { return "Win Con: " + winConName; } }
 
 	public bool ineligible()
     {
@@ -165,10 +163,8 @@ public class WavesWinCondition : WinCondition
         this.wavesRequiredToWin = wavesRequiredToWin;
     }
     
-    public override string getName()
-    {
-        return "Win Con: Survive " + winConName + " Waves";
-    }
+    public override string displayName { get { return "Win Con: Survive " + winConName + " Waves"; } }
+    public override string uniqueName { get { return "Win Con: Survive " + winConName + " Waves"; } }
     
     public override string getWinConDescription()
     {

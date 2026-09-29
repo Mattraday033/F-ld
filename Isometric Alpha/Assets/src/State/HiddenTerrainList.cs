@@ -10,14 +10,24 @@ public static class HiddenTerrainList
     private const string spriteMapFolderPath = "SpriteMaps/";
     private const string hiddenTerrainFolderPath = spriteMapFolderPath + "HiddenTerrain/";
 
-    public static string getHiddenTerrainFolderPath(string locationName, int index)
+    public static string getHiddenTerrainFolderPath(int index)
     {
-        return hiddenTerrainFolderPath + locationName + "/"  + hiddenTerrainDesignator + "-" + index;
-    }
+        if(AreaManager.locationName == null)
+        {
+            return "";
+        }
 
-    public static string getHiddenTerrainFolderPath(string areaName, string section, int index)
-    {
-        return hiddenTerrainFolderPath + areaName + "/"  + hiddenTerrainDesignator + section + "-" + index;
-    }
+        string[] locationNameSections = AreaManager.locationName.Split("-");
 
+        if(locationNameSections.Length <= 1)
+        {
+            return hiddenTerrainFolderPath + AreaManager.locationName + "/"  + hiddenTerrainDesignator + "-" + index;
+        } else
+        {
+            string section = locationNameSections[locationNameSections.Length-1];
+
+            return hiddenTerrainFolderPath + AreaManager.locationName.Substring(0, AreaManager.locationName.Length - (section.Length+1)) + "/"  + hiddenTerrainDesignator + "-" + section + "-" + index;
+        }
+
+    }
 }

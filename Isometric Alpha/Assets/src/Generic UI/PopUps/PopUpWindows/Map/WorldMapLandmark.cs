@@ -42,10 +42,8 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
         polygonCollider2D = gameObject.AddComponent<PolygonCollider2D>();
     }
 
-    public string getName()
-    {
-        return landmarkName;
-    }
+    public string displayName { get { return landmarkName; } }
+    public string uniqueName { get { return zoneKey; } }
 
     public void revealIndicator()
     {

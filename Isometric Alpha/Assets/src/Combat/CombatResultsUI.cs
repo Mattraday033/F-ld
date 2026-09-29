@@ -158,7 +158,7 @@ public class CombatResults : IDescribable, IDescribableInBlocks
             {
                 int regen = Strength.getCurrentRegenerationAmount(ally);
 
-                blocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(ally.getName().Replace(PartyManager.playerMarker, "") + " heals " + regen + " health."));
+                blocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(ally.displayName + " heals " + regen + " health."));
             }
         }
 
@@ -167,10 +167,8 @@ public class CombatResults : IDescribable, IDescribableInBlocks
 
     #region IDescribable
 
-    public string getName()
-    {
-        return "Combat Results";
-    }
+    public string displayName { get { return "Combat Results"; } }
+    public string uniqueName { get { return "Combat Results"; } }
 
 	public bool ineligible()
     {
@@ -239,7 +237,7 @@ public class CombatResults : IDescribable, IDescribableInBlocks
     {
         List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
 
-        blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+        blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
         blocks.AddRange(getRegenerationDescription());
 

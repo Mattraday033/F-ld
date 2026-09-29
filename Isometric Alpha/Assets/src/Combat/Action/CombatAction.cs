@@ -408,7 +408,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         if (targetCombatant != null && getDamageFormula() != null &&
             ((!targetMustBeDead() && targetCombatant.isAlive()) || (targetMustBeDead() && !targetCombatant.isAlive())))
         {
-            bool crit = DamageCalculator.isACrit(getCritFormula(), getName());
+            bool crit = DamageCalculator.isACrit(getCritFormula(), uniqueName);
             int finalDamage = findFinalDamage(targetCombatant, crit);
 
             if (!inPreviewMode)
@@ -442,7 +442,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         if (targetCombatant != null && getDamageFormula() != null &&
             ((!targetMustBeDead() && targetCombatant.isAlive()) || (targetMustBeDead() && !targetCombatant.isAlive())))
         {
-            bool crit = DamageCalculator.isACrit(getCritFormula(), getName());
+            bool crit = DamageCalculator.isACrit(getCritFormula(), uniqueName);
             int finalDamage = findFinalDamage(targetCombatant, crit);
 
             if (finalDamage >= 0)
@@ -476,7 +476,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         if (targetCombatant != null && getDamageFormula() != null &&
             ((!targetMustBeDead() && targetCombatant.isAlive()) || (targetMustBeDead() && !targetCombatant.isAlive())))
         {
-            bool crit = DamageCalculator.isACrit(getCritFormula(), getName());
+            bool crit = DamageCalculator.isACrit(getCritFormula(), uniqueName);
             int finalDamage = findFinalDamage(targetCombatant, crit);
             
             targetCombatant.modifyCurrentHealth(finalDamage, healsTarget());
@@ -1203,16 +1203,16 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         if(CombatStateManager.inCombat && actorStats != null)
         {
-		    return action.getName().Equals(getName()) && actorStats.Equals(action.actorStats);            
+		    return action.uniqueName.Equals(uniqueName) && actorStats.Equals(action.actorStats);
         } else
         {
-		    return action.getName().Equals(getName());           
+		    return action.uniqueName.Equals(uniqueName);
         }
 	}
 
     public override int GetHashCode()
     {
-        return getName().GetHashCode();
+        return uniqueName.GetHashCode();
     }
 
     public virtual void onAddToAbilityMenu() //for updating things like checking for source item quantity
@@ -1505,7 +1505,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     {
         panel.setObjectBeingDescribed(this);
 
-        DescriptionPanel.setText(panel.nameText, getName());
+        DescriptionPanel.setText(panel.nameText, displayName);
 
         DescriptionPanel.setText(panel.damageText, getDamageTotalForDisplay());
         DescriptionPanel.setText(panel.critRatingText, getCritTotalForDisplay());
@@ -1529,7 +1529,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     {
         panel.setObjectBeingDescribed(this);
 
-        DescriptionPanel.setText(panel.nameText, getName());
+        DescriptionPanel.setText(panel.nameText, displayName);
 
         DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(getIconName()));
 
@@ -1607,7 +1607,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType(), HoverMessageList.actionTypePrefix + getType()));
 

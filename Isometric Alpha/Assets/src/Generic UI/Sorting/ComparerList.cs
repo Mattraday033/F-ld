@@ -53,7 +53,7 @@ public class NameComparer : IComparer<ISortable>
 {
     public int Compare(ISortable x, ISortable y)
     {
-        return x.getName().CompareTo(y.getName());
+        return x.displayName.CompareTo(y.displayName);
     }
 }
 
@@ -69,7 +69,7 @@ public class QuantityComparer : IComparer<ISortable>
         }
         else
         {
-            return x.getName().CompareTo(y.getName());
+            return x.displayName.CompareTo(y.displayName);
         }
     }
 }
@@ -86,7 +86,7 @@ public class WorthComparer : IComparer<ISortable>
         }
         else
         {
-            return x.getName().CompareTo(y.getName());
+            return x.displayName.CompareTo(y.displayName);
         }
     }
 }
@@ -110,7 +110,7 @@ public class TypeComparer : IComparer<ISortable>
                 return comparisonInt;
             } else
             {
-                return x.getName().CompareTo(y.getName());
+                return x.displayName.CompareTo(y.displayName);
             }
         }
     }
@@ -128,7 +128,7 @@ public class LevelComparer : IComparer<ISortable>
         }
         else
         {
-            return x.getName().CompareTo(y.getName());
+            return x.displayName.CompareTo(y.displayName);
         }
     }
 }
@@ -145,7 +145,7 @@ public class NumberComparer : IComparer<ISortable> //NumberComparer is set to co
         }
         else
         {
-            return x.getName().CompareTo(y.getName());
+            return x.displayName.CompareTo(y.displayName);
         }
     }
 }
@@ -163,7 +163,7 @@ public class EligibilityComparer : IComparer<IDescribable> //EligibilityComparer
         }
         else
         {
-            return x.getName().CompareTo(y.getName());
+            return x.displayName.CompareTo(y.displayName);
         }
     }
 }

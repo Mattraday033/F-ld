@@ -62,10 +62,8 @@ public class Attack : CombatAction, IJSONConvertable
 		return getMainHandWeapon().getIconName();
 	}
 
-	public override string getName()
-	{
-        return getMainHandWeapon().getKey();
-	}
+	public override string displayName { get { return getMainHandWeapon().displayName; } }
+	public override string uniqueName { get { return getMainHandWeapon().uniqueName; } }
 
 	public override int getSaveType()
 	{
@@ -318,7 +316,7 @@ public class Attack : CombatAction, IJSONConvertable
 
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getActionTypeBlock(getType(), HoverMessageList.actionTypePrefix + getType()));
 

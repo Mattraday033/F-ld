@@ -83,7 +83,7 @@ public static class CombatGrid
 	{
         if(newCombatant == null && combatantsDict.ContainsKey(coords))
         {
-            if(combatantsDict[coords] != null && combatantsDict[coords].getName().Contains(PartyManager.playerMarker))
+            if(combatantsDict[coords] != null && combatantsDict[coords].uniqueName.Contains(PartyManager.playerMarker))
             {
                 return;
             }
@@ -329,7 +329,7 @@ public static class CombatGrid
 		{
             foreach(Trait trait in enemy.traitContainer)
             {
-                if(trait.getName().Equals(typeTrait.getName()))
+                if(trait.uniqueName.Equals(typeTrait.uniqueName))
                 {
    				    enemyTypeCount++;                 
                 }

@@ -35,7 +35,7 @@ public class DamageOverTimeTrait : Trait
 	{
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getTraitTypeBlock(getType(), HoverMessageList.traitTypePrefix + getType()));
 

@@ -17,7 +17,7 @@ public class ZoneOfInfluenceTrait : Trait
 	
     public override string getDescription()
     {
-        switch (traitApplier.getName())
+        switch (traitApplier.uniqueName)
         {
             case NPCNameList.thatch:
                 return "Allies in this Party Member's Zone of Influence gain extra Armor.";
@@ -41,7 +41,7 @@ public class ZoneOfInfluenceTrait : Trait
 
     public override string getIconName()
     {
-        string companionName = getName().Replace(zoiTraitName, "");
+        string companionName = uniqueName.Replace(zoiTraitName, "");
 
         switch(companionName)
         {

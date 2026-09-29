@@ -35,14 +35,31 @@ public class EvolveAbility : Ability
 		}
 	}
 	
-	public override string getName()
+	public override string displayName
 	{
-		if(inAttackMode())
+		get
 		{
-			return actionWhenInAttackMode.getName();
-		} else
+			if(inAttackMode())
+			{
+				return actionWhenInAttackMode.displayName;
+			} else
+			{
+				return base.displayName;
+			}
+		}
+	}
+
+	public override string uniqueName
+	{
+		get
 		{
-			return base.getName();
+			if(inAttackMode())
+			{
+				return actionWhenInAttackMode.uniqueName;
+			} else
+			{
+				return base.uniqueName;
+			}
 		}
 	}
 	

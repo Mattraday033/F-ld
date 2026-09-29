@@ -74,8 +74,8 @@ public class NotificationManager : MonoBehaviour
         {
             IDescribable describable = notificationQueue[index];
 
-            if (AreaManager.getInstance().getAreaDescription().getName().Equals(describable.getName()) ||
-                describable.getName().Contains(SaveHandler.quickSaveName))
+            if (AreaManager.getInstance().getAreaDescription().uniqueName.Equals(describable.uniqueName) ||
+                describable.uniqueName.Contains(SaveHandler.quickSaveName))
             {
                 if ((PlayerOOCStateManager.currentActivity == OOCActivity.walking || PlayerOOCStateManager.currentActivity == OOCActivity.inFade) 
                     && !State.hasLoadedDialogueKey())
@@ -194,19 +194,19 @@ public class Notification : ISortable
 {
     private GenericNotificationType type;
     private string notificationName;
+    private string _NPCName;
     private string notificationDescription;
 
     public Notification(string notificationName, string notificationDescription, GenericNotificationType type = GenericNotificationType.Alert)
     {
         this.type = type;
         this.notificationName = notificationName;
+        this._NPCName = NameSourceExtensions.toNPCName(notificationName);
         this.notificationDescription = notificationDescription;
     }
 
-	public string getName()
-	{
-		return notificationName;
-	}
+	public string displayName { get { return _NPCName; } }
+	public string uniqueName { get { return notificationName; } }
 
     public bool ineligible()
     {
@@ -264,7 +264,7 @@ public class Notification : ISortable
 
         DescriptionPanel.setText(panel.notificationNameText, type.ToString() + "!");
 
-		DescriptionPanel.setText(panel.secondaryNameText, getName());
+		DescriptionPanel.setText(panel.secondaryNameText, displayName);
 		DescriptionPanel.setText(panel.loreDescriptionText, notificationDescription);
 	}
 
@@ -272,7 +272,7 @@ public class Notification : ISortable
 	{
 		panel.setObjectBeingDescribed(this);
 
-		DescriptionPanel.setText(panel.nameText, DialogueList.scrubNameOfEndNumbers(getName()));
+		DescriptionPanel.setText(panel.nameText, displayName);
 		DescriptionPanel.setText(panel.secondaryNameText, notificationDescription);
 	}
 
@@ -300,7 +300,7 @@ public class Notification : ISortable
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock("Update"));
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(DialogueList.scrubNameOfEndNumbers(getName())));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, notificationDescription));
 

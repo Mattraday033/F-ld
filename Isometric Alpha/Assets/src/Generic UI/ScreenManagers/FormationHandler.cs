@@ -44,7 +44,7 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
                     continue;
                 }
 
-                portraitPanels[index].iconPanel.sprite = PartyMember.getPortrait(partyMembers[index].getName());
+                portraitPanels[index].iconPanel.sprite = PartyMember.getPortrait(partyMembers[index].uniqueName);
                 portraitPanels[index].setObjectBeingDescribed(partyMembers[index]);
             }
         }

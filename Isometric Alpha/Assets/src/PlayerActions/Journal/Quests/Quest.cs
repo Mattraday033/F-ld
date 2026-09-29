@@ -140,10 +140,8 @@ public class Quest: IDescribable, IJournalCategory
 
 	//IDescribable Methods
 
-	public string getName()
-	{
-		return title;
-	}
+	public string displayName { get { return title; } }
+	public string uniqueName { get { return title; } }
 
 	public bool ineligible()
 	{
@@ -179,14 +177,14 @@ public class Quest: IDescribable, IJournalCategory
 	{
 		panel.setObjectBeingDescribed(this);
 				
-		DescriptionPanel.setText(panel.nameText, getName());
+		DescriptionPanel.setText(panel.nameText, displayName);
 	}
 	
 	public void describeSelfRow(DescriptionPanel panel)
 	{
 		panel.setObjectBeingDescribed(this);
 				
-		DescriptionPanel.setText(panel.nameText, getName());
+		DescriptionPanel.setText(panel.nameText, displayName);
 	}
 	
 	public void setUpDecisionPanel(IDecisionPanel descisionPanel)

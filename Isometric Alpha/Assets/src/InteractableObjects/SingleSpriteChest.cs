@@ -20,7 +20,7 @@ public class SingleSpriteChest : Container
     //     setMouseHoverPosition();
     // }
 
-    // public override SFXType getChestOpenSFX(ChestType type)
+    // public override SFXType getChestOpenSFX(ContainerType type)
     // {
     //     return SFXType.OnTransition;
     // }

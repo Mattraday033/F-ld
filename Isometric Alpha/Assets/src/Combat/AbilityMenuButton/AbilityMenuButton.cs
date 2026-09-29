@@ -115,7 +115,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         }
         else
         {
-            // Debug.LogError("action is " + action.getName());
+            // Debug.LogError("action is " + action.uniqueName);
         }
 
         loadedCombatAction = action;

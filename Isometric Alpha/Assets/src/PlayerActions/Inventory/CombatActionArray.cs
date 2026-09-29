@@ -120,7 +120,7 @@ public class CombatActionArray : StatBoostSourceCombiner
         int slotIndex = 0;
         foreach (CombatAction action in combatActions)
         {
-            if (action != null && action.getName().Equals(actionName))
+            if (action != null && action.uniqueName.Equals(actionName))
             {
                 unequipCombatAction(slotIndex);
                 return;
@@ -396,7 +396,7 @@ public class CombatActionArray : StatBoostSourceCombiner
     {
         foreach (CombatAction action in combatActions)
         {
-            if (action != null && action.getName().Contains(Stance.stanceNameFragment))
+            if (action != null && action.uniqueName.Contains(Stance.stanceNameFragment))
             {
                 return true;
             }
@@ -449,10 +449,8 @@ public class CombatActionArray : StatBoostSourceCombiner
         return Helpers.sum<CombatAction>(this, t => t.getGreenStacksAtStart()) + actor.getBonusExuberances();
     }
 
-    public override string getName()
-    {
-        return actor.getName() + "'s Combat Action Array";
-    }
+    public override string displayName { get { return actor.displayName + "'s Combat Action Array"; } }
+    public override string uniqueName { get { return actor.uniqueName + "'s Combat Action Array"; } }
 
     public override Stats getStatSource()
     {

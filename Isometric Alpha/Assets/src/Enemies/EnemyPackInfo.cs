@@ -135,7 +135,7 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
 
     public string getPackName()
     {
-        return MonsterNameList.getPackName(FoeTypes[Constants.indexZero].enemyStats.getName());
+        return MonsterNameList.getPackName(FoeTypes[Constants.indexZero].enemyStats.uniqueName);
     }
 
     public virtual void markBossAsKilled()
@@ -150,10 +150,8 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
 
 
     //IDescribableInBlocks methods
-    public string getName()
-    {
-        return "";
-    }
+    public string displayName { get { return ""; } }
+    public string uniqueName { get { return ""; } }
 
     public virtual IEnumerator GetEnumerator()
     {
@@ -187,7 +185,7 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
         {
             string enemyNumber = FoeTypes[enemyIndex].amount.ToString();
 
-            blocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, " x"+enemyNumber + " "+FoeTypes[enemyIndex].enemyStats.getName() + " "));
+            blocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, " x"+enemyNumber + " "+FoeTypes[enemyIndex].enemyStats.displayName + " "));
         }
 
         return blocks;

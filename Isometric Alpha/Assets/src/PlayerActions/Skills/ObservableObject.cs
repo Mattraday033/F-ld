@@ -176,20 +176,24 @@ public class ObservableObject : MonoBehaviour, IRevealable
 {
     public bool observed = false;
     public List<string> secretDoorKeys = new List<string>();
-    public SpriteRenderer spriteRenderer;
-    public SpriteRenderer terrainRenderer;
 
-    private Sprite _TerrainSprite;
+    [SerializeField]
+    private SpriteLayerRendererList _RendererList;
+
+    //SpriteDescription appearances only draw to the body layer, so it holds the secret door's sprite
+    private SpriteRenderer doorRenderer { get { return _RendererList[SpriteLayer.Body]; } }
+
+    //the renderer list shows or hides this with the player's terrain state
     public Sprite terrainSprite
     {
         get
         {
-            return _TerrainSprite;
+            SpriteRenderer terrainRenderer = _RendererList[SpriteLayer.Terrain];
+            return terrainRenderer != null ? terrainRenderer.sprite : null;
         }
         set
         {
-            _TerrainSprite = value;
-            terrainRenderer.sprite = value;
+            _RendererList.setTerrainSprite(value);
         }
     }
 
@@ -212,9 +216,24 @@ public class ObservableObject : MonoBehaviour, IRevealable
 
     public readonly static UnityEvent SetAllSecretDoorsObservable = new UnityEvent();
 
-    public string getName()
+    public string displayName { get { return dialogueTrigger.displayName; } }
+    public string uniqueName { get { return dialogueTrigger.uniqueName; } }
+
+    private void Awake()
     {
-        return dialogueTrigger.getName();
+        if(_RendererList == null)
+        {
+            _RendererList = GetComponent<SpriteLayerRendererList>();
+        }
+    }
+
+    //the DialogueTrigger arrives with the universal spawn behaviours, after this component is added as an aesthetic one
+    private void Start()
+    {
+        if(dialogueTrigger == null)
+        {
+            dialogueTrigger = GetComponent<DialogueTrigger>();
+        }
     }
 
     private void OnEnable()
@@ -233,15 +252,13 @@ public class ObservableObject : MonoBehaviour, IRevealable
     {
         get
         {
-            //Observable objects draw through spriteRenderer/terrainRenderer rather than a layered list
-            return null;
+            return _RendererList;
         }
     }
 
     public void createListeners()
     {
         SecretDoorFlags.OnSecretDoorDiscovery.AddListener(hideSecretDoor);
-        TerrainVisibilityManager.OnTerrainVisibilityChange.AddListener(setTerrainSprite);
         SetAllSecretDoorsObservable.AddListener(setGameObjectObservable);
 
         RevealManager.OnReveal.AddListener(onReveal);
@@ -250,7 +267,6 @@ public class ObservableObject : MonoBehaviour, IRevealable
     public void destroyListeners()
     {
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(hideSecretDoor);
-        TerrainVisibilityManager.OnTerrainVisibilityChange.RemoveListener(setTerrainSprite);
         SetAllSecretDoorsObservable.RemoveListener(setGameObjectObservable);
 
         RevealManager.OnReveal.RemoveListener(onReveal);
@@ -297,44 +313,6 @@ public class ObservableObject : MonoBehaviour, IRevealable
         gameObject.layer = LayerAndTagManager.observableLayer;
     }
 
-    public void setTerrainSprite(TerrainHiddenState terrainState)
-    {
-        if(_TerrainSprite == null)
-        {
-            spriteRenderer.maskInteraction = SpriteMaskInteraction.None;
-            terrainRenderer.enabled = false;
-            TerrainVisibilityManager.OnTerrainVisibilityChange.RemoveListener(setTerrainSprite);
-            return;
-        }
-
-        switch(terrainState)
-        {
-            case TerrainHiddenState.InFrontOfTerrain:
-
-                spriteRenderer.enabled = true;
-                spriteRenderer.maskInteraction = SpriteMaskInteraction.None;
-
-                terrainRenderer.enabled = false;
-                break;
-            case TerrainHiddenState.BehindTerrain:
-
-
-                spriteRenderer.enabled = true;
-                spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
-
-                terrainRenderer.enabled = true;
-                terrainRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
-
-                break;
-            case TerrainHiddenState.TerrainHidden:
-                spriteRenderer.enabled = false;
-
-                terrainRenderer.enabled = true;
-                terrainRenderer.maskInteraction = SpriteMaskInteraction.None;
-                break;
-        }
-    }
-
     public void markAsObserved()
     {
         if (observed)
@@ -345,8 +323,14 @@ public class ObservableObject : MonoBehaviour, IRevealable
         observed = true;
         gameObject.layer = LayerAndTagManager.npcLayer;
 
-        spriteRenderer.color = Color.magenta;
-        terrainRenderer.color = Color.magenta;
+        doorRenderer.color = Color.magenta;
+
+        SpriteRenderer terrainRenderer = _RendererList[SpriteLayer.Terrain];
+
+        if(terrainRenderer != null)
+        {
+            terrainRenderer.color = Color.magenta;
+        }
     }
 
     private static void playAudioClip()

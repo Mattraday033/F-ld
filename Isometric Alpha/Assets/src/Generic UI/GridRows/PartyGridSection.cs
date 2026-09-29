@@ -24,9 +24,9 @@ public class PartyGridSection : GridRow
             if(namePanel != null && nameText != null)
             {
                 namePanel.SetActive(true);
-                nameText.text = descriptionPanel.getObjectBeingDescribed().getName().Replace(PartyManager.playerMarker, "");
+                nameText.text = descriptionPanel.getObjectBeingDescribed().displayName;
 
-                OnPortraitHover.Invoke(descriptionPanel.getObjectBeingDescribed().getName(), true);
+                OnPortraitHover.Invoke(descriptionPanel.getObjectBeingDescribed().uniqueName, true);
             }
         }
     }

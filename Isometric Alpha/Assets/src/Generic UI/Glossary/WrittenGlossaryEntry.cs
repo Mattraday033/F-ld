@@ -41,7 +41,7 @@ public class WrittenGlossaryEntry : GlossaryEntry, IDescribableInBlocks
 	{
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, getDescription()));
 
@@ -74,7 +74,7 @@ public class StatGlossaryEntry: WrittenGlossaryEntry
 	{
 		panel.setObjectBeingDescribed(this);
 
-		DescriptionPanel.setText(panel.nameText, getName());
+		DescriptionPanel.setText(panel.nameText, displayName);
         DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(iconName));
         
         if(panel.iconBackgroundPanel != null)

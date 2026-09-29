@@ -3,22 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-//b4 Claude
-
-public interface IFloorButton
-{
-	
-	public void evaluate();
-	public void declareButton();
-	
-}
-
 public class FloorButton : MonoBehaviour, INameSource
 {
     public string secretDoorFlag;
 
 	public Collider2D collider;
-    public SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private SpriteLayerRendererList _RendererList;
+    public SpriteLayerRendererList rendererList
+    {
+        get
+        {
+            return _RendererList;
+        }
+        set
+        {
+            _RendererList = value;
+        }
+    }
+
+    //the button is a single sprite, so like SpriteDescription appearances it draws to the body layer
+    private SpriteRenderer buttonRenderer { get { return _RendererList[SpriteLayer.Body]; } }
 
     public int index;
 
@@ -30,6 +36,11 @@ public class FloorButton : MonoBehaviour, INameSource
 
     private void Awake()
     {
+        if(_RendererList == null)
+        {
+            _RendererList = GetComponent<SpriteLayerRendererList>();
+        }
+
         Formation.OnFormationChange.AddListener(checkCharismaRequirement);
         SecretDoorFlags.OnSecretDoorDiscovery.AddListener(show);
         
@@ -52,7 +63,7 @@ public class FloorButton : MonoBehaviour, INameSource
 
     private void show(string discoveredSecretDoorFlag)
     {
-        if(this.secretDoorFlag != null && this.secretDoorFlag.Equals(discoveredSecretDoorFlag))
+        if(secretDoorFlag != null && secretDoorFlag.Equals(discoveredSecretDoorFlag))
         {
             gameObject.SetActive(true);
         }
@@ -63,10 +74,10 @@ public class FloorButton : MonoBehaviour, INameSource
         checkCharismaRequirement();
     }
 
-    public string getName()
-    {
-        return NPCNameList.button;
-    }
+    public string displayName { get { return NPCNameList.button; } }
+
+    //the index tells floor buttons apart, the same way it does for ButtonSpawnDetails
+    public string uniqueName { get { return NPCNameList.button + index; } }
 
     private IEnumerator waitThreeFramesThenSetSprite()
     {
@@ -108,7 +119,7 @@ public class FloorButton : MonoBehaviour, INameSource
                 AudioManager.playButtonOnSFX();
             }
 
-            spriteRenderer.sprite = SpriteUtil.loadSpriteFromResources(PrefabNames.buttonDownStoneFolderPath);            
+            buttonRenderer.sprite = SpriteUtil.loadSpriteFromResources(PrefabNames.buttonDownStoneFolderPath);
         } else
         {
             if(withSFX && isPressed() != previousIsPressed)
@@ -116,21 +127,26 @@ public class FloorButton : MonoBehaviour, INameSource
                 AudioManager.playButtonOffSFX();
             }
 
-            spriteRenderer.sprite = SpriteUtil.loadSpriteFromResources(PrefabNames.buttonUpStoneFolderPath);      
+            buttonRenderer.sprite = SpriteUtil.loadSpriteFromResources(PrefabNames.buttonUpStoneFolderPath);
         }
 
         previousIsPressed = isPressed();
     }
 
+    //OnStepFinished keeps the sprite current after every step, since OnMoveFinished now only fires once a mover stops.
+    //OnMoveFinished is still needed for the places that invoke it by hand, like a movable object snapping back.
+    //setSprite only plays a sound when the pressed state changes, so both firing on the final step is harmless
     private void OnEnable()
     {
         ButtonLogicScript.OnButtonDataRequest.AddListener(giveData);
-        MovementManager.OnMoveFinished.AddListener(setSprite);        
+        MovementManager.OnStepFinished.AddListener(setSprite);
+        MovementManager.OnMoveFinished.AddListener(setSprite);
     }
 
     private void OnDisable()
     {
         ButtonLogicScript.OnButtonDataRequest.RemoveListener(giveData);
-        MovementManager.OnMoveFinished.RemoveListener(setSprite); 
+        MovementManager.OnStepFinished.RemoveListener(setSprite);
+        MovementManager.OnMoveFinished.RemoveListener(setSprite);
     }
 }

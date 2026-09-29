@@ -77,7 +77,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
             AllyStats existing = grid[coords];
 
             if (existing != null &&
-            existing.getName().Contains(PartyManager.playerMarker))
+            existing.uniqueName.Contains(PartyManager.playerMarker))
             {
                 return;
             }
@@ -103,7 +103,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
             AllyStats existing = grid[coords];
 
             if (existing != null &&
-            existing.getName().Contains(PartyManager.playerMarker))
+            existing.uniqueName.Contains(PartyManager.playerMarker))
             {
                 return;
             }
@@ -159,7 +159,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
             State.formation.isInParty(partyMember))
         {
             return State.formation.grid.FirstOrDefault(x => x.Value.Equals(partyMember)).Key;
-        } else if(partyMember.getName().Contains(PartyManager.playerMarker))
+        } else if(partyMember.uniqueName.Contains(PartyManager.playerMarker))
         {
             return new GridCoords(AllyStats.defaultStartingRow, AllyStats.defaultStartingCol);
         }
@@ -186,7 +186,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
     public void removePartyMember(string partyMemberName)
     {
-        grid.Remove(State.formation.grid.FirstOrDefault(x => x.Value.getName().Equals(partyMemberName)).Key);
+        grid.Remove(State.formation.grid.FirstOrDefault(x => x.Value.uniqueName.Equals(partyMemberName)).Key);
     }
 
     public void removeCharacter(AllyStats characterToRemove)
@@ -232,7 +232,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
     {
         foreach (AllyStats ally in this)
         {
-            if(ally != null && ally.getName().Equals(name))
+            if(ally != null && ally.uniqueName.Equals(name))
             {
                 return true;
             }
@@ -299,10 +299,8 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         return clone;
     }
 
-    public string getName()
-    {
-        return PartyManager.getPlayerStats().getName() + "'s Formation";
-    }
+    public string displayName { get { return PartyManager.getPlayerStats().displayName + "'s Formation"; } }
+    public string uniqueName { get { return PartyManager.getPlayerStats().uniqueName + "'s Formation"; } }
 
     public delegate int HighestDelegateInt<T>(T t);
 

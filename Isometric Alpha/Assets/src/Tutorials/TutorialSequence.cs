@@ -348,10 +348,8 @@ public struct TutorialSequenceStep : IDescribable
     }
 
     //IDescribable Methods
-    public string getName()
-    {
-        return tutorialMessageKey;
-    }
+    public string displayName { get { return tutorialMessageKey; } }
+    public string uniqueName { get { return tutorialMessageKey; } }
 
     public bool ineligible()
     {

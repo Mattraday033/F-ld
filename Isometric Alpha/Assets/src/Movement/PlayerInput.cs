@@ -216,7 +216,7 @@ public class PlayerInput : MonoBehaviour
 
                 if (npcGameObject.tag.Equals(LayerAndTagManager.partyMemberTag))
                 {
-                    string partyMemberName = npcGameObject.GetComponent<PlacedPartyMember>().partyMember.getName();
+                    string partyMemberName = npcGameObject.GetComponent<PlacedPartyMember>().partyMember.uniqueName;
                     PartyMemberPlacer.removePlacedPartyMember(partyMemberName);
                 }
                 else
@@ -1222,7 +1222,7 @@ public static class PlayerInputList
                 return;
             }
 
-            string partyMemberName = npcGameObject.GetComponent<PlacedPartyMember>().partyMember.getName();
+            string partyMemberName = npcGameObject.GetComponent<PlacedPartyMember>().partyMember.uniqueName;
             PartyMemberPlacer.removePlacedPartyMember(partyMemberName);
         }
         else if (moveableObjectCollider != null)

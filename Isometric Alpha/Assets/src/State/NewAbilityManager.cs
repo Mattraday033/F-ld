@@ -132,7 +132,7 @@ public static class NewAbilityManager
 
         foreach(KeyValuePair<AllyStats, List<Ability>> kvp in newAbilityDict)        
         {
-            newAbilityWrappers.Add(new NewAbilityWrapper(kvp.Key.getName(), kvp.Value));
+            newAbilityWrappers.Add(new NewAbilityWrapper(kvp.Key.uniqueName, kvp.Value));
         }
 
         return newAbilityWrappers.ToArray();

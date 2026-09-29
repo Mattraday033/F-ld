@@ -246,10 +246,8 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable, IAppearanceSou
 
     #region IDescribable (Unimplemented)
 
-    public override string getName()
-    {
-        return owner.getName() + "'s Equipped Items";
-    }
+    public override string displayName { get { return owner.displayName + "'s Equipped Items"; } }
+    public override string uniqueName { get { return owner.uniqueName + "'s Equipped Items"; } }
 
 	public bool ineligible()
     {

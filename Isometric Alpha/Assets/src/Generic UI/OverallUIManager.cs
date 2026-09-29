@@ -273,7 +273,7 @@ public static class OverallUIManager
 
         // if (ScreenManager.currentPartyMember != null)
         // {
-        //     Debug.LogError("ScreenManager.currentPartyMember = " + ScreenManager.currentPartyMember.getName());
+        //     Debug.LogError("ScreenManager.currentPartyMember = " + ScreenManager.currentPartyMember.uniqueName);
         // }
 
         return ScreenManager.currentPartyMember;

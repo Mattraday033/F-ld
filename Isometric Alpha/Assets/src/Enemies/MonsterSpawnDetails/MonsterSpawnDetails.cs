@@ -11,13 +11,13 @@ public class MonsterSpawnDetails : OOCSpawnDetails
     public override Transform parent { get { return AreaManager.getMonsterParent(); } }
     public MonsterMovementType movementType;
 
-    public MonsterSpawnDetails(string npcName, 
+    public MonsterSpawnDetails(string displayName, 
                                 Vector3Int cellCoords, 
                                 Facing facing = Facing.Random, 
                                 MonsterMovementType movementType = MonsterMovementType.Random, 
                                 string tutorialTargetHash = "",
                                 IAppearance appearance = null) :
-    base(npcName, appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash)
+    base(displayName, appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash)
     {
         this.facing =  facing;
         this.movementType = movementType;
@@ -52,8 +52,8 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
 
     public override Transform parent { get { return AreaManager.getMovableObjectParent(); } }
 
-    public MovableObjectSpawnDetails(string npcName, Vector3Int cellCoords, string tutorialTargetHash = "", IAppearance appearance = null) :
-    base(npcName, cellCoords, appearance: appearance, tutorialTargetHash: tutorialTargetHash)
+    public MovableObjectSpawnDetails(string displayName, Vector3Int cellCoords, string tutorialTargetHash = "", IAppearance appearance = null) :
+    base(displayName, cellCoords, appearance: appearance, tutorialTargetHash: tutorialTargetHash)
     {
         this.facing = Facing.Random;
         this.movementType = MonsterMovementType.Random;

@@ -52,16 +52,14 @@ public class MovableObjectMovement : EnemyMovement
         //Empty on purpose
     }
 
-    public override string getName()
-    {
-        return MonsterNameList.movableObject;
-    }
+    public override string displayName { get { return MonsterNameList.movableObject; } }
+    public override string uniqueName { get { return MonsterNameList.movableObject; } }
 
 	public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
 	{
 		List<DescriptionPanelBuildingBlock> blocks = new List<DescriptionPanelBuildingBlock>();
 
-		blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+		blocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
 		return blocks;
 	}

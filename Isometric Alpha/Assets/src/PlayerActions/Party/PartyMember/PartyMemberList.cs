@@ -145,6 +145,6 @@ public static class PartyMemberList
 
     public static bool characterIsPartyMember(string name)
     {
-        return !getResetPartyMember(name).getName().Equals(biffName);
+        return !getResetPartyMember(name).uniqueName.Equals(biffName);
     }
 }

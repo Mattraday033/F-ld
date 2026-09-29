@@ -295,7 +295,9 @@ public enum SpriteLayer
     Cloak,
     Face,
     Hair,
-    Shield_Front
+    Shield_Front,
+    //not part of a character's appearance: drawn inside the player's terrain mask in place of the other layers
+    Terrain
 }
 
 public class ColorReplaceSchema

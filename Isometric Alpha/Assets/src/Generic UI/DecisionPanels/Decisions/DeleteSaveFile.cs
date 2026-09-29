@@ -16,12 +16,12 @@ public class DeleteSaveFile : IDecision
 	
 	public string getMessage()
 	{
-		return deleteMessageStart + save.getName() + deleteMessageEnd;
+		return deleteMessageStart + save.displayName + deleteMessageEnd;
 	}
  
 	public void execute()
 	{
-		SaveHandler.deleteSaveFile(save.getName());
+		SaveHandler.deleteSaveFile(save.uniqueName);
 		
 		ScreenManager.OnScreenInteriorUpdate.Invoke();
 		

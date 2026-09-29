@@ -417,7 +417,7 @@ public class DialogueManager : MonoBehaviour
 		dialogueTrackerButton.withChoices = true;
 	}
 
-    public static GameObject findNPCGameObject(string npcName)
+    public static GameObject findNPCGameObject(string displayName)
     {
         List<Transform> children = new List<Transform>();
         children.AddRange(AreaManager.getNPCParentWithScale().Cast<Transform>().ToList());
@@ -434,8 +434,10 @@ public class DialogueManager : MonoBehaviour
 
             if (npcDialogueTrigger != null)
             {
-                if (npcName.Equals(npcDialogueTrigger.getName()) || 
-                    child.gameObject.name.Replace(OOCSpawnDetails.gameObjectNameSuffix, "").Equals(npcName))
+                //the dialogue's speaker name is still checked, since that is what getName used to return
+                if (displayName.Equals(npcDialogueTrigger.uniqueName) ||
+                    (npcDialogueTrigger.dialogue != null && displayName.Equals(npcDialogueTrigger.dialogue.getName())) ||
+                    child.gameObject.name.Replace(OOCSpawnDetails.gameObjectNameSuffix, "").Equals(displayName))
                 {
                     return child.gameObject;
                 }
@@ -447,7 +449,7 @@ public class DialogueManager : MonoBehaviour
 
     public void findNPCGameObject()
     {
-        dialogue.names[0] = PartyManager.getPlayerStats().getName();
+        dialogue.names[0] = PartyManager.getPlayerStats().uniqueName;
         dialogue.cameraFoci[0] = PlayerMovement.getInstance().gameObject;
 
         for (int nameIndex = 1; nameIndex < dialogue.names.Length; nameIndex++)
@@ -1252,12 +1254,12 @@ public class DialogueManager : MonoBehaviour
                 case "createstapledeffectbyname":
                 case "createeffectonnpcsbyname":
 
-                    string npcName = getArgument(buffer, Constants.indexZero);
+                    string displayName = getArgument(buffer, Constants.indexZero);
                     effectName = getArgument(buffer, Constants.indexOne);
 
                     if(Enum.TryParse(effectName, ignoreCase: true, out EffectAnimationType effectType))
                     {
-                        // AnimationManager.CreateEffectByNPCName.Invoke(npcName, effectType);
+                        // AnimationManager.CreateEffectByNPCName.Invoke(displayName, effectType);
                     }
 
                     continueStory();
@@ -1274,12 +1276,12 @@ public class DialogueManager : MonoBehaviour
 
                 case "showstapledeffectbyname":
 
-                    npcName = getArgument(buffer, Constants.indexZero);
+                    displayName = getArgument(buffer, Constants.indexZero);
                     effectName = getArgument(buffer, Constants.indexOne);
 
                     if(Enum.TryParse(effectName, ignoreCase: true, out effectType))
                     {
-                        // AnimationManager.ShowStapledEffectByNPCName.Invoke(npcName, effectType);
+                        // AnimationManager.ShowStapledEffectByNPCName.Invoke(displayName, effectType);
                     }
 
                     continueStory();
@@ -1288,12 +1290,12 @@ public class DialogueManager : MonoBehaviour
 
                 case "setidleofnpcsbyname":
 
-                    npcName = getArgument(buffer, Constants.indexZero);
+                    displayName = getArgument(buffer, Constants.indexZero);
                     string idleName = getArgument(buffer, Constants.indexOne);
 
                     if(Enum.TryParse(idleName, ignoreCase: true, out CharacterAnimationType idleType))
                     {
-                        // AnimationManager.SetIdleByNPCName.Invoke(npcName, idleType);
+                        // AnimationManager.SetIdleByNPCName.Invoke(displayName, idleType);
                     }
 
                     continueStory();

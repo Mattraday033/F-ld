@@ -23,6 +23,7 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
     }
     public int activationIndex;
 	public string stepName;
+	private string _NPCName;
 	public string journalDescription;
 
 	public string mapZone;
@@ -35,6 +36,7 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
         this.active = false;
 
         this.stepName = wrapper.stepName;
+        this._NPCName = NameSourceExtensions.toNPCName(stepName);
         this.journalDescription = wrapper.journalDescription.Replace(Constants.boldTextStartCaps, Constants.boldTextStart).Replace(Constants.boldTextEndCaps, Constants.boldTextEnd);
         this.mapZone = wrapper.mapZone;
         this.mapLocation = wrapper.mapLocation;
@@ -47,6 +49,7 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
 		this.parentQuest = parentQuest;
 		this.active = active;
 		this.stepName = stepName;
+		this._NPCName = NameSourceExtensions.toNPCName(stepName);
 		this.journalDescription = journalDescription.Replace(Constants.boldTextStartCaps, Constants.boldTextStart).Replace(Constants.boldTextEndCaps, Constants.boldTextEnd);
 
         activationIndex = -1;
@@ -58,10 +61,8 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
 	}
 
 	//IDescribable Methods
-	public string getName()
-	{
-		return stepName;
-	}
+	public string displayName { get { return _NPCName; } }
+	public string uniqueName { get { return stepName; } }
 
 	public bool ineligible()
 	{
@@ -146,26 +147,26 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
 	{
 		panel.setObjectBeingDescribed(this);
 
-		// DescriptionPanel.setText(panel.nameText, parentQuest.getName());
+		// DescriptionPanel.setText(panel.nameText, parentQuest.displayName);
 
 		if (parentQuest.finished)
 		{
 			if (parentQuest.succeeded)
 			{
-				DescriptionPanel.setText(panel.notificationNameText, questCompletedPrefix + parentQuest.getName());
+				DescriptionPanel.setText(panel.notificationNameText, questCompletedPrefix + parentQuest.displayName);
 			}
 			else
 			{
-				DescriptionPanel.setText(panel.notificationNameText, questFailedPrefix + parentQuest.getName());
+				DescriptionPanel.setText(panel.notificationNameText, questFailedPrefix + parentQuest.displayName);
 			}
 
 		}
 		else
 		{
-			DescriptionPanel.setText(panel.notificationNameText, questUpdatedPrefix + parentQuest.getName());
+			DescriptionPanel.setText(panel.notificationNameText, questUpdatedPrefix + parentQuest.displayName);
 		}
 
-		DescriptionPanel.setText(panel.secondaryNameText, DialogueList.scrubNameOfEndNumbers(getName()));
+		DescriptionPanel.setText(panel.secondaryNameText, displayName);
 		DescriptionPanel.setText(panel.loreDescriptionText, getJournalDescriptionForDisplay());
 	}
 
@@ -226,8 +227,8 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
 	{
 		panel.setObjectBeingDescribed(this);
 
-		DescriptionPanel.setText(panel.nameText, DialogueList.scrubNameOfEndNumbers(getName()));
-		DescriptionPanel.setText(panel.secondaryNameText, parentQuest.getName());
+		DescriptionPanel.setText(panel.nameText, displayName);
+		DescriptionPanel.setText(panel.secondaryNameText, parentQuest.displayName);
 	}
 
 	public void setUpDecisionPanel(IDecisionPanel descisionPanel)
@@ -253,8 +254,8 @@ public class QuestStep : IJournalSubcategory, IDescribableInBlocks, ISortable, I
 	{
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(parentQuest.getName()));
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(DialogueList.scrubNameOfEndNumbers(getName())));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(parentQuest.displayName));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, ""));
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Text, getJournalDescriptionForDisplay()));
 

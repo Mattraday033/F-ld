@@ -90,14 +90,14 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
             imageOutline.removeOutline();
 
             if(ScreenManager.currentPartyMember != null && 
-                ScreenManager.currentPartyMember.getName().Equals(descriptionPanel.getObjectBeingDescribed().getName()))
+                ScreenManager.currentPartyMember.uniqueName.Equals(descriptionPanel.getObjectBeingDescribed().uniqueName))
             {
                 imageOutline.createOutline(ColorList.canBeInteractedWith);
             } 
             return;
         }
 
-        if(descriptionPanel.getObjectBeingDescribed().getName().Equals(allyName))
+        if(descriptionPanel.getObjectBeingDescribed().uniqueName.Equals(allyName))
         {
             imageOutline.createOutline(ColorList.canBeInteractedWith);
             startOutlinePulse();

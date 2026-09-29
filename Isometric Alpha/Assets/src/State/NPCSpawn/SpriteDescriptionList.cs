@@ -45,6 +45,15 @@ public static class SpriteDescriptionList
     public readonly static SpriteDescription unseenBarrier = new SpriteDescription(spriteName: PrefabNames.blankTexture);
 
     #endregion
+    #region Secret Doors
+
+    public readonly static SpriteDescription manseWallSecretDoor = new SpriteDescription(spriteName: PrefabNames.manseWallSecretDoor);
+    public readonly static SpriteDescription secretShelfNWSecretDoor = new SpriteDescription(spriteName: PrefabNames.secretShelfNWSecretDoor);
+    public readonly static SpriteDescription mineLvl2WallSecretDoor = new SpriteDescription(spriteName: PrefabNames.mineLvl2WallSecretDoor);
+    public readonly static SpriteDescription wallPatch = new SpriteDescription(spriteName: PrefabNames.wallPatch);
+    public readonly static SpriteDescription wallPatchTall = new SpriteDescription(spriteName: PrefabNames.wallPatchTall);
+
+    #endregion
     #region NPCs
 
     public readonly static SpriteDescription tripleBarrel = new SpriteDescription(spriteName: PrefabNames.tripleBarrel);
@@ -97,6 +106,14 @@ public static class SpriteDescriptionList
 
     public readonly static SpriteDescription note = new SpriteDescription(spriteName: PrefabNames.note, offset: Constants.onTableHeightOffset*2);
     public readonly static SpriteDescription noteOnGround = new SpriteDescription(spriteName: PrefabNames.note, offset: Constants.onGroundHeightOffset);
+
+    #endregion
+    #region Buttons
+
+    //FloorButton swaps between the up and down sprites itself once spawned, so this only sets the starting look.
+    //it shares the player's sorting layer and order, so the negative offset raises it above the cell's centre,
+    //which sorts it behind anyone standing on the button
+    public readonly static SpriteDescription buttonUpStone = new SpriteDescription(spriteName: PrefabNames.buttonUpStoneFolderPath, sortingLayerInfo: SortingLayerManager.firstSortingLayerInfo, offset: Constants.onTableHeightOffset*-3);
 
     #endregion
 }

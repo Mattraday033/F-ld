@@ -755,14 +755,14 @@ public static class AudioClipList
         return audioClips.getAsset(sfxType);
     }
 
-    public static PlaySFXLogic getDialogueIntroSFXLogic(string npcName = "", bool sleeping = false)
+    public static PlaySFXLogic getDialogueIntroSFXLogic(string displayName = "", bool sleeping = false)
     {
         if(sleeping)
         {
             return () => AudioManager.playAudioClipAsSingleton(getAudioClip(SFXType.Snoring), VolumeType.Voice);
         }
 
-        switch(DialogueList.scrubNameOfEndNumbers(npcName))
+        switch(DialogueList.scrubNameOfEndNumbers(displayName))
         {
             case NPCNameList.barrels:
             case NPCNameList.crates:

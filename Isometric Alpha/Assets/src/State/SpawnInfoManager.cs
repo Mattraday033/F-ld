@@ -8,15 +8,27 @@ public static class SpawnInfoManager
 
     public static SaveBlueprint lastSaveBlueprint;
 
+    public static bool wipingSlate;
 
     [RuntimeInitializeOnLoadMethod]
-    private static void initializeSpawnInfoManager()
+    private static void init()
     {
         lastSaveBlueprint = null;
+        wipingSlate = false;
         AreaManager.OnAreaSpawn.AddListener(spawnDetails);
         SecretDoorFlags.OnSecretDoorDiscovery.AddListener(spawnHiddenTerrain);
         LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
     }
+
+    private static void wipeSlate()
+    {
+        wipingSlate = true;
+
+        EventList.DestroyAllSpawnedGameObjects.Invoke();
+
+        wipingSlate = false;
+    }
+
 
     private static void readSaveBlueprint(SaveBlueprint blueprint)
     {
@@ -32,17 +44,6 @@ public static class SpawnInfoManager
         {
             return new Vector3Int(7, 1);
         }
-    }
-
-    public static bool wipingSlate = false;
-
-    private static void wipeSlate()
-    {
-        wipingSlate = true;
-
-        EventList.DestroyAllSpawnedGameObjects.Invoke();
-
-        wipingSlate = false;
     }
 
     public static void spawnDetails()
@@ -102,6 +103,7 @@ public static class SpawnInfoManager
         List<GameObject> spawnedObjects = new List<GameObject>();
 
         GameObject background = GameObject.Instantiate(Resources.Load<GameObject>(AreaManager.locationName), AreaManager.getGridParent());
+        ActivationListenerSpawnBehaviour.addActivationListener(background);
         spawnedObjects.Add(background);
 
         return spawnedObjects;
@@ -112,6 +114,7 @@ public static class SpawnInfoManager
         List<GameObject> spawnedObjects = new List<GameObject>();
 
         Transform player = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.playerPrefab), AreaManager.getPlayerParent()).transform;
+        ActivationListenerSpawnBehaviour.addActivationListener(player.gameObject);
 
         NewAnimationManager animationManager = player.GetComponent<NewAnimationManager>();
 
@@ -146,7 +149,7 @@ public static class SpawnInfoManager
 
             List<GameObject> interactables = details.spawnInteractables();
 
-            if (spawnParams != null && !spawnParams.canSpawn(details.npcName))
+            if (spawnParams != null && !spawnParams.canSpawn(details.displayName))
             {
                 foreach(GameObject interactable in interactables)
                 {
@@ -162,24 +165,23 @@ public static class SpawnInfoManager
 
     private static void spawnHiddenTerrain(string secretDoorFlag)
     {
-        // List<OOCSpawnDetails> oocSpawnDetailsList = OOCSpawnDetailsList.getOOCSpawnDetails(AreaManager.locationName);
+        List<OOCSpawnDetails> oocSpawnDetailsList = OOCSpawnDetailsList.getOOCSpawnDetails(AreaManager.locationName);
 
-        // foreach (OOCSpawnDetails details in oocSpawnDetailsList)
-        // {
-        //     if(!details.spawnsOnSecretDoorActivation())
-        //     {
-        //         continue;
-        //     } 
+        foreach (OOCSpawnDetails details in oocSpawnDetailsList)
+        {
+            if(!details.spawnsOnSecretDoorActivation)
+            {
+                continue;
+            } 
 
-        //     HiddenTerrainSpawnDetails hiddenTerrainDetails = details as HiddenTerrainSpawnDetails;
+            HiddenTerrainSpawnDetails hiddenTerrainDetails = details as HiddenTerrainSpawnDetails;
 
-        //     if (hiddenTerrainDetails.secretDoorKeys.Contains(secretDoorFlag))
-        //     {
-        //         GameObject spawnedObject = spawnInteractable(details);
-        //         allSpawnedObjects.Add(spawnedObject);
-        //         return;
-        //     }
-        // }
+            if (hiddenTerrainDetails.secretDoorKeys.Contains(secretDoorFlag))
+            {
+                details.spawnInteractables();
+                return;
+            }
+        }
     }
 
     // public static GameObject spawnInteractable(OOCSpawnDetails details)
@@ -221,6 +223,7 @@ public static class SpawnInfoManager
     public static TransitionSpace spawnTransitionSpace(Transition transition)
     {
         GameObject transitionGameObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.transitionSpace), AreaManager.getTransitionParent());
+        ActivationListenerSpawnBehaviour.addActivationListener(transitionGameObject);
         TransitionSpace transitionSpace = transitionGameObject.GetComponent<TransitionSpace>();
 
         transitionSpace.setTransition(transition);
@@ -234,7 +237,6 @@ public static class SpawnInfoManager
     {
         // List<AxisSpawnInfo> listOfSpawnInfo = new List<AxisSpawnInfo>();
 
-        // listOfSpawnInfo.AddRange(SecretDoorSpawnInfoList.getSecretDoorSpawnDetails(AreaManager.locationName));
         // listOfSpawnInfo.AddRange(TutorialColliderSpawnDetailsList.getTutorialColliderSpawnDetails(AreaManager.locationName));
 
         List<GameObject> spawnedObjects = new List<GameObject>();

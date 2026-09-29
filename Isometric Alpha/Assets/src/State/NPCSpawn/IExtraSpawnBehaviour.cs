@@ -6,8 +6,28 @@ using UnityEngine.UI;
 
 public interface IExtraSpawnBehaviour
 {
-    public Component addBehaviour(GameObject gameObject);
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements { get; }
 
+    public Component addBehaviour(GameObject gameObject);
+}
+
+public static class IExtraSpawnBehaviourExtensions
+{
+    public static void applyActivationRequirements(this IExtraSpawnBehaviour behaviour, ActivationListener listener)
+    {
+        foreach(KeyValuePair<ActivationDesignatorType, ActivationCategory> kvp in behaviour.activationRequirements)
+        {
+            switch(kvp.Key)
+            {
+                case ActivationDesignatorType.Name:
+                    listener.listenForActivationByName(kvp.Value);
+                    break;
+                case ActivationDesignatorType.Index:
+                    listener.listenForActivationByIndex(kvp.Value);
+                    break;
+            }
+        }
+    }
 }
 
 public class ActivationListenerSpawnBehaviour : IExtraSpawnBehaviour
@@ -16,7 +36,14 @@ public class ActivationListenerSpawnBehaviour : IExtraSpawnBehaviour
     {
     }
 
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+
     public Component addBehaviour(GameObject gameObject)
+    {
+        return gameObject.AddComponent<ActivationListener>();
+    }
+
+    public static Component addActivationListener(GameObject gameObject)
     {
         return gameObject.AddComponent<ActivationListener>();
     }
@@ -35,6 +62,8 @@ public class AnimationManagerSpawnBehaviour : IExtraSpawnBehaviour
         this.facing = facing;
         this.animationType = animationType;
     }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
 
     public Component addBehaviour(GameObject gameObject)
     {
@@ -60,13 +89,13 @@ public class ContainerSpawnBehaviour: IExtraSpawnBehaviour
     private int index;
     private QuestStepActivationScript script;
     private string secretDoorFlag;
-    private ChestType type;
+    private ContainerType type;
     // private string chestName;
 
     public ContainerSpawnBehaviour(int index,
                                     QuestStepActivationScript script = null,
                                     string secretDoorFlag = null,
-                                    ChestType type = ChestType.Chest,
+                                    ContainerType type = ContainerType.Chest,
                                     string chestName = null)
     {
         this.index = index;
@@ -75,6 +104,8 @@ public class ContainerSpawnBehaviour: IExtraSpawnBehaviour
         this.type = type;
         // this.chestName = chestName;
     }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
 
     public Component addBehaviour(GameObject gameObject)
     {
@@ -108,6 +139,8 @@ public class CunningObjectSpawnBehaviour : IExtraSpawnBehaviour
         this.cunningAction = cunningAction;
     }
 
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+
     public Component addBehaviour(GameObject gameObject)
     {
         CunningObject cunningObject = gameObject.AddComponent<CunningObject>();
@@ -118,13 +151,17 @@ public class CunningObjectSpawnBehaviour : IExtraSpawnBehaviour
         cunningObject.cunningAction = cunningAction;
         cunningObject.category = category;
 
+        //matches the saved state CunningObjectAppearance already drew the sprite from
+        cunningObject.evenActivation = TrapAndButtonStateManager.contains(cunningObject.getKey());
+
         return cunningObject;
     }
+
 }
 
 public class DialogueTriggerSpawnBehaviour : IExtraSpawnBehaviour
 {
-    private string npcName;
+    private string uniqueName;
     private SpeakAtStartScript speakAtStartScript;
     private PlaySFXLogic introSFX;
     private bool hasExtraSpaces;
@@ -134,30 +171,70 @@ public class DialogueTriggerSpawnBehaviour : IExtraSpawnBehaviour
     {
         set
         {
-           _DialogueSource = value; 
+           _DialogueSource = value;
         }
     }
 
-    public DialogueTriggerSpawnBehaviour(string npcName, IDialogueSource dialogueSource = null, PlaySFXLogic introSFX = null, bool hasExtraSpaces = false, SpeakAtStartScript speakAtStartScript = null)
+    public DialogueTriggerSpawnBehaviour(string uniqueName, IDialogueSource dialogueSource = null, PlaySFXLogic introSFX = null, bool hasExtraSpaces = false, SpeakAtStartScript speakAtStartScript = null)
     {
-        this.npcName = npcName;
+        this.uniqueName = uniqueName;
         this.speakAtStartScript = speakAtStartScript;
-        this.introSFX = introSFX ?? AudioClipList.getDialogueIntroSFXLogic(npcName);
+        this.introSFX = introSFX ?? AudioClipList.getDialogueIntroSFXLogic(uniqueName);
         this.hasExtraSpaces = hasExtraSpaces;
 
         this.dialogueSource = dialogueSource;
     }
 
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[]
+    {
+        new KeyValuePair<ActivationDesignatorType, ActivationCategory>(ActivationDesignatorType.Name, ActivationCategory.Dialogue)
+    };
+
     public Component addBehaviour(GameObject gameObject)
     {
         DialogueTrigger dialogueTrigger = gameObject.AddComponent<DialogueTrigger>();
 
-        dialogueTrigger.npcName = npcName;
+        dialogueTrigger.uniqueName = uniqueName;
         dialogueTrigger.speakAtStartScript = speakAtStartScript;
         dialogueTrigger.introAudioClipLogic = introSFX;
         dialogueTrigger.dialogueSource = _DialogueSource;
 
         return dialogueTrigger;
+    }
+}
+
+public class FloorButtonSpawnBehaviour : IExtraSpawnBehaviour
+{
+    private int index;
+    private int weight;
+    private int charismaRequirement;
+    private string secretDoorFlag;
+
+    public FloorButtonSpawnBehaviour(int index, int weight, int charismaRequirement, string secretDoorFlag = null)
+    {
+        this.index = index;
+        this.weight = weight;
+        this.charismaRequirement = charismaRequirement;
+        this.secretDoorFlag = secretDoorFlag;
+    }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+
+    public Component addBehaviour(GameObject gameObject)
+    {
+        FloorButton floorButton = gameObject.AddComponent<FloorButton>();
+
+        floorButton.index = index;
+        floorButton.weight = weight;
+        floorButton.charismaRequirement = charismaRequirement;
+        floorButton.secretDoorFlag = secretDoorFlag;
+
+        floorButton.rendererList = gameObject.GetComponent<SpriteLayerRendererList>();
+
+        //the prefab's tile collider covers the button's cell, so anything standing on it presses the button
+        floorButton.collider = gameObject.GetComponent<TilemapCollider2D>();
+
+        return floorButton;
     }
 }
 
@@ -171,6 +248,8 @@ public class GateSpawnBehaviour : IExtraSpawnBehaviour
         this.gateKey = gateKey;
         this.hiddenTerrainFlag = hiddenTerrainFlag;
     }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
 
     public Component addBehaviour(GameObject gameObject)
     {
@@ -189,6 +268,8 @@ public class NPCMouseHoverSpawnBehaviour : IExtraSpawnBehaviour
     public NPCMouseHoverSpawnBehaviour()
     {
     }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
 
     //the hover component is only added next frame, so there is nothing to return yet
     public Component addBehaviour(GameObject gameObject)
@@ -224,22 +305,55 @@ public class NPCMouseHoverSpawnBehaviour : IExtraSpawnBehaviour
 
 }
 
+public class ObservableObjectSpawnBehaviour : IExtraSpawnBehaviour
+{
+    private List<string> secretDoorKeys;
+    private string terrainSpriteName;
+
+    public ObservableObjectSpawnBehaviour(List<string> secretDoorKeys, string terrainSpriteName = null)
+    {
+        this.secretDoorKeys = secretDoorKeys;
+        this.terrainSpriteName = terrainSpriteName;
+    }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+
+    public Component addBehaviour(GameObject gameObject)
+    {
+        ObservableObject observableObject = gameObject.AddComponent<ObservableObject>();
+
+        observableObject.secretDoorKeys = secretDoorKeys;
+
+        if(!string.IsNullOrEmpty(terrainSpriteName))
+        {
+            observableObject.terrainSprite = SpriteUtil.loadSpriteFromResources(terrainSpriteName);
+        }
+
+        return observableObject;
+    }
+}
+
 public class ObstacleSpawnBehaviour : IExtraSpawnBehaviour
 {
-    private string obstacleName;
+    private string uniqueName;
     private bool ignoresSecretDoors;
 
-    public ObstacleSpawnBehaviour(string obstacleName, bool ignoresSecretDoors = true)
+    public ObstacleSpawnBehaviour(string uniqueName, bool ignoresSecretDoors = true, KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements = null)
     {
-        this.obstacleName = obstacleName;
+        this.uniqueName = uniqueName;
         this.ignoresSecretDoors = ignoresSecretDoors;
+
+        this._ActivationRequirements = activationRequirements ?? _ActivationRequirements;
     }
+
+    private KeyValuePair<ActivationDesignatorType, ActivationCategory>[] _ActivationRequirements = new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => _ActivationRequirements;
 
     public Component addBehaviour(GameObject gameObject)
     {
         Obstacle obstacle = addObstacle(gameObject);
 
-        obstacle.obstacleName = obstacleName;
+        obstacle.uniqueName = uniqueName;
 
         //Awake has already hooked the obstacle up to the discovery event, so this unhooks it again
         if(ignoresSecretDoors)
@@ -258,13 +372,25 @@ public class ObstacleSpawnBehaviour : IExtraSpawnBehaviour
 
 public class OverHeadIconManagerSpawnBehaviour : IExtraSpawnBehaviour
 {
-    public OverHeadIconManagerSpawnBehaviour()
+    private bool ignoresSecretDoors;
+
+    //objects that manage their own visibility, like containers hidden behind a secret door, should not be toggled by the icon manager's spawn params check
+    public OverHeadIconManagerSpawnBehaviour(bool ignoresSecretDoors = false)
     {
+        this.ignoresSecretDoors = ignoresSecretDoors;
     }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
 
     public Component addBehaviour(GameObject gameObject)
     {
         OverHeadIconManager iconManager = gameObject.AddComponent<OverHeadIconManager>();
+
+        //Awake has already hooked the manager up to the discovery event, so this unhooks it again
+        if(ignoresSecretDoors)
+        {
+            iconManager.setToIgnoreSecretDoors();
+        }
 
         GameObject formatter = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.overHeadIconFormatter), gameObject.transform);
         formatter.transform.localPosition = Vector3.zero;
@@ -304,18 +430,20 @@ public class OverHeadIconManagerSpawnBehaviour : IExtraSpawnBehaviour
 
 public class PartyMemberDespawnListenerSpawnBehaviour : IExtraSpawnBehaviour
 {
-    private string npcName;
+    private string displayName;
     
-    public PartyMemberDespawnListenerSpawnBehaviour(string npcName)
+    public PartyMemberDespawnListenerSpawnBehaviour(string displayName)
     {
-        this.npcName = npcName;
+        this.displayName = displayName;
     }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
 
     public Component addBehaviour(GameObject gameObject)
     {
         PartyMemberDespawnListener listener = gameObject.AddComponent<PartyMemberDespawnListener>();
 
-        listener.partyMemberName = npcName;
+        listener.partyMemberName = displayName;
 
         return listener;
     }
@@ -329,6 +457,8 @@ public class TutorialTargetSpawnBehaviour : IExtraSpawnBehaviour
     {
         this.tutorialTargetHash = tutorialTargetHash;
     }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
 
     public Component addBehaviour(GameObject gameObject)
     {
@@ -362,6 +492,8 @@ public class TutorialTriggerColliderSpawnBehaviour : IExtraSpawnBehaviour
         this.tutorialKey = tutorialKey;
     }
 
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+
     public Component addBehaviour(GameObject gameObject)
     {
         TutorialTriggerCollider tutorialCollider = gameObject.GetComponent<TutorialTriggerCollider>();
@@ -379,6 +511,8 @@ public class TilemapOffsetSpawnBehaviour : IExtraSpawnBehaviour
     {
         this.offset = offset;
     }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
 
     public Component addBehaviour(GameObject gameObject)
     {

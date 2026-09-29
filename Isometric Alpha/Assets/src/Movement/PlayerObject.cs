@@ -46,7 +46,7 @@ public class PlayerObject : MonoBehaviour
         instance = this;
 
         setAsCameraTarget();
-        // animationManager.setAnimations(PartyManager.getPlayer().getName());
+        // animationManager.setAnimations(PartyManager.getPlayer().uniqueName);
 
         playerMovement.Awake();
         playerMovement.updateFacing();

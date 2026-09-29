@@ -23,10 +23,8 @@ public class TutorialMessage : IDescribable
     }
 
     //IDescribable Methods
-    public string getName()
-    {
-        return name;
-    }
+    public string displayName { get { return name; } }
+    public string uniqueName { get { return name; } }
 
     public bool ineligible()
     {

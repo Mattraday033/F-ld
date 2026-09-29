@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public enum ChestType {Chest, Shelf, MattockRack, AxeRack, ShovelRack, SpearRack, SwordTable, PickaxeTable }
+public enum ContainerType {Chest, Shelf, MattockRack, AxeRack, ShovelRack, SpearRack, SwordTable, PickaxeTable }
 public enum ChestState { Closed, OpenFilled, OpenEmpty }
 
 // public interface INonRevealableNameSource: INameSource
@@ -28,7 +28,7 @@ public enum ChestState { Closed, OpenFilled, OpenEmpty }
 //     }
 // }
 
-public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAppearanceSource
+public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAppearanceSource, INameTagSuppressor
 {
 
     #region Chest Sprite Dictionary
@@ -169,43 +169,43 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
         #endregion
     }
 
-    private static string getCurrentSprite(Facing facing, ChestState chestState, ChestType type)
+    private static string getCurrentSprite(Facing facing, ChestState chestState, ContainerType type)
     {
         switch(type)
         {
-            case ChestType.Shelf:
+            case ContainerType.Shelf:
                 return shelfSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
-            case ChestType.MattockRack:
+            case ContainerType.MattockRack:
                 return mattockRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
-            case ChestType.AxeRack:
+            case ContainerType.AxeRack:
                 return axeRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
-            case ChestType.ShovelRack:
+            case ContainerType.ShovelRack:
                 return shovelRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
-            case ChestType.SpearRack:
+            case ContainerType.SpearRack:
                 return spearRackSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
-            case ChestType.SwordTable:
+            case ContainerType.SwordTable:
                 return swordTableSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
-            case ChestType.PickaxeTable:
+            case ContainerType.PickaxeTable:
                 return pickaxeTableSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
             default:
                 return chestSprites[new KeyValuePair<Facing, ChestState>(facing, chestState)];
         }
     }
 
-    public virtual SFXType getChestOpenSFX(ChestType type)
+    public virtual SFXType getChestOpenSFX(ContainerType type)
     {
         switch(type)
         {
-            case ChestType.Shelf:
+            case ContainerType.Shelf:
                 return SFXType.OnTransition;
-            case ChestType.Chest:
+            case ContainerType.Chest:
                 return SFXType.ChestOpen;
             default:
                 return SFXType.NoSFX;
         }
     }
 
-    private static SFXType getChestTakeSFX(ChestType type)
+    private static SFXType getChestTakeSFX(ContainerType type)
     {
         switch(type)
         {
@@ -218,7 +218,7 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
 
     public PolygonCollider2D mouseHoverCollider;
     public ChestState chestState = ChestState.Closed;
-    public ChestType chestType = ChestType.Chest;
+    public ContainerType chestType = ContainerType.Chest;
 
     public NewAnimationManager animationManager;
 
@@ -241,7 +241,8 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
         get
         {
             return new SpriteDescription(getCurrentSprite(animationManager.characterFacing.currentFacing, chestState, chestType),
-                                            large: false
+                                            large: false,
+                                            withScale: chestType.withScale()
                                         );
         }
     }
@@ -269,13 +270,22 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
     public PlayerInteractionScript[] scripts;
 
 
-    public virtual string getName()
+    private string _UniqueName = "";
+    public string uniqueName { get { return _UniqueName; } }
+
+    private string _NPCName = "";
+    public string displayName { get { return _NPCName; } }
+
+    //matches the uniqueName of the ContainerSpawnDetails that spawned this container
+    private void setNames()
     {
-        return chestType.ToString();
+        _UniqueName = ContainerSpawnDetails.generateName(chestIndex);
+        _NPCName = NameSourceExtensions.splitCamelCase(chestType.ToString());
     }
 
     private void Awake()
     {
+        setNames();
         createListeners();
     }
 
@@ -319,11 +329,12 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
         return ColorList.canBeInteractedWith;
     }
 
+    //Empty on purpose, the OverHeadIconManager beside this container shows its name tag instead
     public void createHoverTag()
     {
-        MouseHoverManager.getMouseHoverBase();
-        MouseHoverManager.createHoverTag(getName());
     }
+
+    public bool suppressNameTag { get { return hasBeenOpened(); } }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -349,7 +360,6 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
         if(!RevealManager.currentlyRevealed)
         {
             rendererList.createOutline(getRevealColor());
-            createHoverTag();
         }
     }
 
@@ -378,8 +388,6 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
         {
             rendererList.removeOutline();
         }
-
-        MouseHoverManager.destroyMouseHoverBase();
     }
 
     private void show(string secretDoorFlag)
@@ -406,7 +414,7 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
         }
     }
 
-    public void populate(int index, ChestType type)
+    public void populate(int index, ContainerType type)
     {
         animationManager = GetComponent<NewAnimationManager>();
         animationManager.appearanceSource = this;
@@ -414,6 +422,7 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
         chestIndex = index;
 
         chestType = type;
+        setNames();
         // setMouseHoverPosition();
 
         if (GateAndChestManager.hasBeenOpened(getChestKey()))

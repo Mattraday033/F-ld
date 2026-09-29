@@ -19,7 +19,7 @@ public static class SummonPackInfoList
 		allSummonPackInfo = new Dictionary<string, AlliedSummonStats[]>();
 		
 		// SummonStats overseerGaspar = new SummonStats(Resources.Load<GameObject>(guardOverseerGameObjectKey), 
-		// 											 guardOverseerGameObjectKey, "Overseer Gáspár", 20, 65, AbilityList.summonsWhipAttackKey, TraitList.predatory.getName());
+		// 											 guardOverseerGameObjectKey, "Overseer Gáspár", 20, 65, AbilityList.summonsWhipAttackKey, TraitList.predatory.uniqueName);
 		
 		// SummonStats guardReka = new SummonStats(Resources.Load<GameObject>(guardsGameObjectKey), 
 		// 										guardsGameObjectKey, "Guard Réka", 20, 40, true);

@@ -23,9 +23,7 @@ public class WorldBookInfo : MonoBehaviour, INameSource
         getBook().use(PartyManager.getPlayerStats(), receivesBook, previousActivity, gameObject);
     }
     
-    public string getName()
-    {
-        return getBook().getName();
-    }
+    public string displayName { get { return getBook().displayName; } }
+    public string uniqueName { get { return getBook().uniqueName; } }
 
 }

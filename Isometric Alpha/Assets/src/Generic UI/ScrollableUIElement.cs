@@ -355,7 +355,7 @@ public class ScrollableUIElement : MonoBehaviour
 
 		if (describable != null && !(describable is null))
 		{
-			return describable.getName();
+			return describable.uniqueName;
 		}
 		else
 		{
@@ -443,7 +443,7 @@ public class ScrollableUIElement : MonoBehaviour
         foreach (GridRow row in listOfRows)
         {
             if (row.descriptionPanel.getObjectBeingDescribed() != null &&
-                String.Equals(row.descriptionPanel.getObjectBeingDescribed().getName(), name, StringComparison.OrdinalIgnoreCase))
+                String.Equals(row.descriptionPanel.getObjectBeingDescribed().uniqueName, name, StringComparison.OrdinalIgnoreCase))
             {
                 row.nameButton.onClick.Invoke();
 
@@ -464,7 +464,7 @@ public class ScrollableUIElement : MonoBehaviour
         foreach (GridRow row in listOfRows)
         {
             if (row.descriptionPanel.getObjectBeingDescribed() != null &&
-                String.Equals(row.descriptionPanel.getObjectBeingDescribed().getName(), name, StringComparison.OrdinalIgnoreCase))
+                String.Equals(row.descriptionPanel.getObjectBeingDescribed().uniqueName, name, StringComparison.OrdinalIgnoreCase))
             {
                 row.nameButton.interactable = false;
 
@@ -524,7 +524,7 @@ public class ScrollableUIElement : MonoBehaviour
 		foreach (GridRow row in listOfRows)
 		{
 			if (row.descriptionPanel.getObjectBeingDescribed() != null &&
-				row.descriptionPanel.getObjectBeingDescribed().getName().Equals(name))
+				row.descriptionPanel.getObjectBeingDescribed().uniqueName.Equals(name))
 			{
 				return true;
 			}

@@ -27,10 +27,10 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 
                 if(_CanJoinParty)
                 {
-                    NewPartyMemberManager.setPartyMemberAsNew(getName());
+                    NewPartyMemberManager.setPartyMemberAsNew(uniqueName);
                 } else
                 {
-                    NewPartyMemberManager.removePartyMember(getName());
+                    NewPartyMemberManager.removePartyMember(uniqueName);
                 }
             }
         }
@@ -43,10 +43,8 @@ public class PartyMember : IDescribable, IDescribableInBlocks
         this.stats = stats;
 	}
 
-	public string getName()
-	{
-		return stats.getName();
-	}
+	public string displayName { get { return stats.displayName; } }
+	public string uniqueName { get { return stats.uniqueName; } }
 
     public bool isInParty()
     {
@@ -198,7 +196,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 
 		// DescriptionPanel.setImageColor(panel.iconPanel, spriteColor);
 
-		DescriptionPanel.setText(panel.nameText, getName().Replace(PartyManager.playerMarker, ""));
+		DescriptionPanel.setText(panel.nameText, displayName);
 		
 		DescriptionPanel.setImage(panel.iconPanel, stats.getSpriteIcon());
 
@@ -208,7 +206,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
     {
         panel.setObjectBeingDescribed(this);
 
-        DescriptionPanel.setText(panel.nameText, getName().Replace(PartyManager.playerMarker, ""));
+        DescriptionPanel.setText(panel.nameText, displayName);
         DescriptionPanel.setText(panel.levelText, stats.getLevel());
 	}
 
@@ -257,7 +255,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
             return false;
         }
 
-        return otherPartyMember.stats.getName().Equals(stats.getName());
+        return otherPartyMember.stats.uniqueName.Equals(stats.uniqueName);
     }
 
 }
@@ -287,10 +285,8 @@ public class CompanionCombatActionDescriptionWrapper : IDescribable, IDescribabl
 		}
 	}
 
-	public string getName()
-	{
-		return companionCombatAction.getName();
-	}
+	public string displayName { get { return companionCombatAction.displayName; } }
+	public string uniqueName { get { return companionCombatAction.uniqueName; } }
 
 	public GameObject getRowType(RowType rowType)
 	{

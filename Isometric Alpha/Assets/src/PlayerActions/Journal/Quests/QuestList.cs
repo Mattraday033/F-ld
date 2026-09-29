@@ -94,7 +94,7 @@ public static class QuestList
 		{
 			Quest quest = convertJsonTextAssetToQuest(textAsset);
 
-			questDict.Add(quest.getName(), quest);
+			questDict.Add(quest.uniqueName, quest);
 		}
     }
 	

@@ -6,16 +6,16 @@ using UnityEngine.Events;
 public class CategoryType : IJournalCategory, IDescribable
 {
     private DescribableList listType;
+    private string _NPCName;
 
     public CategoryType(DescribableList listType)
     {
         this.listType = listType;
+        this._NPCName = NameSourceExtensions.splitCamelCase(listType.ToString());
     }
 
-    public string getName()
-    {
-        return listType.ToString();
-    }
+    public string displayName { get { return _NPCName; } }
+    public string uniqueName { get { return listType.ToString(); } }
 
     public List<IDescribable> getSubcategories()
     {
@@ -56,12 +56,12 @@ public class CategoryType : IJournalCategory, IDescribable
 
 	public void describeSelfFull(DescriptionPanel panel)
     {
-        DescriptionPanel.setText(panel.nameText, getName());
+        DescriptionPanel.setText(panel.nameText, displayName);
     }
 
 	public void describeSelfRow(DescriptionPanel panel)
     {
-        DescriptionPanel.setText(panel.nameText, getName());
+        DescriptionPanel.setText(panel.nameText, displayName);
     }
 
 	public void setUpDecisionPanel(IDecisionPanel descisionPanel)

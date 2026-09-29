@@ -54,32 +54,6 @@ public class NPCMouseHover : MonoBehaviour
         polygonCollider2D.enabled = true;
     }
 
-    void Start()
-    {
-        // setColliderPosition();
-    }
-
-    // private void setColliderPosition()
-    // {
-    //     setColliderPosition(0);
-    // }
-
-    // private void setColliderPosition(int index = 0)
-    // {
-    //     // transform.parent.position = new Vector2(transform.parent.position.x, transform.parent.position.y);
-        
-    //     // Vector3Int currentCell = AreaManager.getMasterGrid().WorldToCell(transform.parent.position);
-
-    //     // transform.position = new Vector3(transform.position.x, transform.position.y, Helpers.calculateColliderZPosition(currentCell));
-
-    //     // if(spriteRenderer == null)
-    //     // {
-    //     //     spriteRenderer = transform.parent.GetComponent<SpriteRenderer>();
-    //     // }
-
-    //     // Helpers.updatePolygonCollider(spriteRenderer, polygonCollider2D);
-    // }
-
     private void OnMouseEnter()
     {
         switch(PlayerOOCStateManager.currentActivity)

@@ -23,7 +23,7 @@ public class TutorialSequenceStepTargetTraitRow : TutorialSequenceStepTargetUIOb
             return TutorialSequenceList.mandatoryTargetTraitIconTargetHash;
         }
 
-		return traitBeingDescribed.getName() + " Trait Icon";
+		return traitBeingDescribed.uniqueName + " Trait Icon";
 	}
 
 }

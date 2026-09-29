@@ -31,7 +31,22 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #region Global Variables
 
-    public string characterName;
+    //the player's characterName carries the player marker, which displayName leaves out
+    private string _CharacterName;
+    public string characterName
+    {
+        get
+        {
+            return _CharacterName;
+        }
+        set
+        {
+            _CharacterName = value;
+            _NPCName = value == null ? null : value.Replace(PartyManager.playerMarker, "");
+        }
+    }
+
+    private string _NPCName;
 
     private List<GridCoords> _Positions = new List<GridCoords>();
 
@@ -219,7 +234,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         // animationManager = list.animationManager;
         // animationManager.linkedStats = this;
         // animationManager.healthBarManager = healthBarManager;
-        // animationManager.setAnimations(getName() + getGenderMarker() + getAnimationSuffixes());
+        // animationManager.setAnimations(uniqueName + getGenderMarker() + getAnimationSuffixes());
 
         tutorialTarget = list.tutorialTarget;
         tutorialTarget.tutorialHash = getTutorialTargetHash();
@@ -364,7 +379,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public string getTutorialTargetHash()
     {
-        if(getName().Equals(PartyManager.getPlayerStats().getName()))
+        if(uniqueName.Equals(PartyManager.getPlayerStats().uniqueName))
         {
             return TutorialSequenceList.playerCombatSpriteTargetHash;
         }
@@ -374,12 +389,12 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             return TutorialSequenceList.mandatoryTargetMonsterTargetHash;
         }
 
-        switch(getName())
+        switch(uniqueName)
         {
             case MonsterNameList.armoredBat:
                 return TutorialSequenceList.traitMonsterTargetHash;
             default:
-                return getName();
+                return uniqueName;
         }
     }
 
@@ -913,7 +928,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             return false;
         }
 
-        switch(targetTrait.getName())
+        switch(targetTrait.uniqueName)
         {
             case TerritorialTargetPriorityTrait.initialName:
                 return hasTrait(TraitList.intimidatingPressence);
@@ -1292,16 +1307,16 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             !(stats.positions.Count <= 0 && positions.Count <= 0))
         {
 
-            return stats.positions.Any(p => positions.Contains(p)) && stats.getName().Equals(getName());
+            return stats.positions.Any(p => positions.Contains(p)) && stats.uniqueName.Equals(uniqueName);
         } else
         {
-            return stats.getName().Equals(getName());
+            return stats.uniqueName.Equals(uniqueName);
         }
     }
 
     public override int GetHashCode()
     {
-        return getName().GetHashCode();
+        return uniqueName.GetHashCode();
     }
 
     public virtual bool removableFromFormation()
@@ -1328,7 +1343,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     private Sprite getHeadSprite()
     {
-        return EnemyTypeFolderPathList.getHeadSprite(getName());
+        return EnemyTypeFolderPathList.getHeadSprite(uniqueName);
     }
 
     public void setHeadSprite(DescriptionPanel panel)
@@ -1386,10 +1401,9 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #region IDescribable
 
-    public virtual string getName()
-    {
-        return characterName;
-    }
+    //not scrubbed of end numbers, since a player's chosen name can legitimately end in one
+    public virtual string displayName { get { return _NPCName; } }
+    public virtual string uniqueName { get { return _CharacterName; } }
 
     public virtual bool ineligible()
     {
@@ -1436,7 +1450,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     {
         panel.setObjectBeingDescribed(this);
 
-        DescriptionPanel.setText(panel.nameText, getName().Replace(PartyManager.playerMarker, ""));
+        DescriptionPanel.setText(panel.nameText, displayName);
         DescriptionPanel.setText(panel.hpText, currentHealth + " / " + getTotalHealth());
         DescriptionPanel.setText(panel.armorRatingText, getTotalArmorRatingForDisplay());
     }
@@ -1475,7 +1489,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName().Replace(PartyManager.playerMarker, "")));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth, getTotalHealth()));
 

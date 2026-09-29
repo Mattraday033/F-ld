@@ -16,12 +16,12 @@ public class BreakableCrowdControlTrait: CrowdControlTrait
 
     public override void onApplication()
     {
-		OnApplyingBreakableCrowdControl.Invoke(getName());
+		OnApplyingBreakableCrowdControl.Invoke(uniqueName);
     }
 
     private void breakCrowdControl(string appliedCrowdControlTraitName)
 	{
-		if(appliedCrowdControlTraitName.Equals(getName()) && getTraitHolder() != null)
+		if(appliedCrowdControlTraitName.Equals(uniqueName) && getTraitHolder() != null)
 		{
 			getTraitHolder().removeTrait(this);
 			OnApplyingBreakableCrowdControl.RemoveListener(breakCrowdControl);

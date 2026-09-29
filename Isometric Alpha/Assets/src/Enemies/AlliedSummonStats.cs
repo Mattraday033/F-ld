@@ -12,7 +12,7 @@ public class AlliedSummonStats : VolleyParticipantStats
     private bool partOfVolley;
 
 	public AlliedSummonStats(EnemyStats enemyStats, bool partOfVolley = true): 
-		base(enemyStats.getName(), enemyStats.getTotalArmorRating(), enemyStats.getTotalHealth(), enemyStats.getCombatAction())
+		base(enemyStats.uniqueName, enemyStats.getTotalArmorRating(), enemyStats.getTotalHealth(), enemyStats.getCombatAction())
     {
         addTraits(enemyStats.traitContainer);
         setFoeTypeToSummoned();

@@ -106,7 +106,7 @@ public class SkillIndicator : MonoBehaviour
             return;
         }
 
-        foreach(SpriteLayer layer in EnumUtil.SpriteLayers)
+        foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
         {
             selectorTwo.rendererList[layer].color = newColor;
         }

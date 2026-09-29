@@ -92,10 +92,8 @@ public class Ability: CombatAction, IJSONConvertable
     }
 
 
-	public override string getName()
-	{
-		return name;
-	}
+	public override string displayName { get { return name; } }
+	public override string uniqueName { get { return key; } }
 	
 	public override string getIconName()
 	{
@@ -342,7 +340,7 @@ public class Ability: CombatAction, IJSONConvertable
 		
 		panel.setObjectBeingDescribed(this);
 		
-        DescriptionPanel.setText(panel.nameText, getName());
+        DescriptionPanel.setText(panel.nameText, displayName);
 
         DescriptionPanel.setText(panel.statText, "" + getRequiredStatLevelForDisplay());
 
@@ -351,7 +349,7 @@ public class Ability: CombatAction, IJSONConvertable
 	
 	public override bool ineligible()
 	{
-		//Debug.LogError("Checking if " + getName() + " is ineligible");
+		//Debug.LogError("Checking if " + uniqueName + " is ineligible");
 
 		if (CombatStateManager.inCombat)
 		{

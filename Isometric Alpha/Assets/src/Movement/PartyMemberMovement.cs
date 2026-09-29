@@ -8,10 +8,8 @@ public class PartyMemberMovement : MovementTracker
 
     public int placeInTrain = -1;
 
-	public override string getName()
-	{
-        return partyMember.getName();
-	}
+	public override string displayName { get { return partyMember.displayName; } }
+	public override string uniqueName { get { return partyMember.uniqueName; } }
 
     public override int getMovementIndex()
     {

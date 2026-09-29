@@ -247,7 +247,7 @@ public class SaveHandler : ScreenManager, IEscapable
             }
 		}
 
-        return oldestAutosave.getName();
+        return oldestAutosave.uniqueName;
 	}
 
     public static void autosave(Transition transition)
@@ -372,7 +372,7 @@ public class SaveHandler : ScreenManager, IEscapable
 		{
 			foreach (KeyValuePair<string, SaveBlueprint> kvp in saveGameList)
 			{
-				if (kvp.Value.getName().Contains(quickSaveName))
+				if (kvp.Value.uniqueName.Contains(quickSaveName))
 				{
 					quickSaveNumber++;
 				}

@@ -91,7 +91,7 @@ public class PartyPositionSpriteGridSquare : PartyPositionGridSquare, IPointerDo
 
     public override void handleButtonPress()
     {
-        if (characterInSquare != null && !characterInSquare.getName().Contains(PartyManager.playerMarker))
+        if (characterInSquare != null && !characterInSquare.uniqueName.Contains(PartyManager.playerMarker))
         {
             partyEditor.removeCharacter(characterInSquare);
         }
@@ -101,7 +101,7 @@ public class PartyPositionSpriteGridSquare : PartyPositionGridSquare, IPointerDo
     {
         if (characterInSquare != null)
         {
-            StartCoroutine(DragAndDropManager.waitForMouseRelease(this, PartyManager.getPartyMember(characterInSquare.getName())));
+            StartCoroutine(DragAndDropManager.waitForMouseRelease(this, PartyManager.getPartyMember(characterInSquare.uniqueName)));
         }
     }
 

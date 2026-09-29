@@ -19,7 +19,10 @@ public class ChoiceDescription : IDescribable
 		this.choiceKey = choiceKey;
 	}
 
-	public string getName()
+	public string displayName { get { return getChoiceName(); } }
+	public string uniqueName { get { return getChoiceName(); } }
+
+	private string getChoiceName()
 	{
 		if (nameContentsSubstringMaxLength < contents.Length)
 		{

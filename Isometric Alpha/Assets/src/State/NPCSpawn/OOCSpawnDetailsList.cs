@@ -10,6 +10,12 @@ public static class OOCSpawnDetailsList
 
     public static List<OOCSpawnDetails> getOOCSpawnDetails(string areaName)
     {
+        //TransitionSpawnInfoList reads this during its own load initialization, which can run before ours
+        if(oocSpawnDetailsDict == null)
+        {
+            initializeSpawnDetailsList();
+        }
+
         if(!oocSpawnDetailsDict.ContainsKey(areaName))
         {
             return new List<OOCSpawnDetails>();
@@ -89,10 +95,10 @@ public static class OOCSpawnDetailsList
                                                                           TutorialSequenceList.secondCunningTutorialSeenFlag));
 
         list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(2, 7), CunningObjectSpriteCategory.Crank, 
-                                                cunningAction: null, script: new KastorCunningTutorialScript(), tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(2, 9), appearance: SpriteDescriptionList.tutorialRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(1, 8), appearance: SpriteDescriptionList.tutorialRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(2, 8), appearance: SpriteDescriptionList.tutorialRubble));
+                                                cunningAction: CunningActionList.deactivateBlockers, script: new KastorCunningTutorialScript(), tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(2, 9), appearance: SpriteDescriptionList.tutorialRubble, activationRequirements: new[] { ActivationRequirementList.cunningByIndex }));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(1, 8), appearance: SpriteDescriptionList.tutorialRubble, activationRequirements: new[] { ActivationRequirementList.cunningByIndex }));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(2, 8), appearance: SpriteDescriptionList.tutorialRubble, activationRequirements: new[] { ActivationRequirementList.cunningByIndex }));
 
         #endregion
         #region Wis Tutorial
@@ -122,23 +128,34 @@ public static class OOCSpawnDetailsList
                                                                           TutorialSequenceList.leadershipTutorialSeenFlag));
         #endregion
 
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(5, 18),
+                                            new SecretDoorInfo(SecretDoorKeyList.wisTutorialSecretDoor),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingY,
+                                            TutorialSequenceList.secretDoorTargetHash));
+
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackFour, list);
         #endregion
         #region 5SlaveShack
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchThree, locationName: LocationNameList.slaveShackFive, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchThree, index: Constants.indexOne));
 
         list.Add(new NPCSpawnDetails(NPCNameList.ervin, new Vector3Int(3, -2), facing: Facing.SouthWest));
-        // list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(1, -3), facing: Facing.NorthEast)); 
+        // list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(1, -3), facing: Facing.NorthEast));
+
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(2, -6),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingX));
 
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackFive, list);
         #endregion
         #region 6SlaveShack
         list = new List<OOCSpawnDetails>();
         
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchOne, locationName: LocationNameList.slaveShackSix, index: Constants.indexOne));
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchTwo, locationName: LocationNameList.slaveShackSix, index: Constants.indexTwo));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchOne, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.southEastCampWallPatchTwo, index: Constants.indexTwo));
         
         list.Add(new NPCSpawnDetails(NPCNameList.thatch, new Vector3Int(-1, 1), facing: Facing.SouthEast, animationType: CharacterAnimationType.Death_Back_Weaponless, sleepingDialogueIntro: true));
         list.Add(new NPCSpawnDetails(NPCNameList.slate, new Vector3Int(9, 1), animationType: CharacterAnimationType.Death_Front_Weaponless));
@@ -237,6 +254,16 @@ public static class OOCSpawnDetailsList
 
         #endregion
 
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(5, 2),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingX));
+
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(8, -6),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingX));
+
         oocSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion
         #region 7SlaveShack
@@ -297,9 +324,9 @@ public static class OOCSpawnDetailsList
         #region GuardHouse Top Floor
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthWest, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-5, -4), Facing.SouthEast, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(-13, -1), Facing.SouthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthWest, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-5, -4), Facing.SouthEast, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(-13, -1), Facing.SouthWest, type: ContainerType.Chest));
 
         list.Add(new LadderSpawnDetails(new Vector3Int(7, -4),
                                         new Ladder(Constants.difficultyTwo, LocationNameList.campManse,
@@ -323,14 +350,14 @@ public static class OOCSpawnDetailsList
         #region GuardHouse SW
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-5, 1), Facing.SouthWest, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(-5,2), Facing.SouthWest, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-6,3), Facing.SouthEast, type: ChestType.ShovelRack, script: new FoundToolBundle()));
-        list.Add(new ContainerSpawnDetails(Constants.indexThree, new Vector3Int(-7,3), Facing.SouthEast, type: ChestType.SpearRack));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-5, 1), Facing.SouthWest, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(-5,2), Facing.SouthWest, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-6,3), Facing.SouthEast, type: ContainerType.ShovelRack, script: new FoundToolBundle()));
+        list.Add(new ContainerSpawnDetails(Constants.indexThree, new Vector3Int(-7,3), Facing.SouthEast, type: ContainerType.SpearRack));
 
         if(Application.isEditor)
         {
-            list.Add(new ContainerSpawnDetails(Constants.indexFour, new Vector3Int(-7, -2), Facing.NorthWest, type: ChestType.Chest));
+            list.Add(new ContainerSpawnDetails(Constants.indexFour, new Vector3Int(-7, -2), Facing.NorthWest, type: ContainerType.Chest));
         }
 
         list.Add(new NPCSpawnDetails(NPCNameList.guard, new Vector3Int(-8, -2)/*, animationName: MonsterNameList.spearman*/, facing: Facing.NorthWest));
@@ -374,20 +401,25 @@ public static class OOCSpawnDetailsList
         list.Add(new RestStopAndShopkeeperSpawnDetails(NPCNameList.kende, new Vector3Int(3, 10), extraSpaces: new Vector3Int[] { new Vector3Int(3, 9) }, facing: Facing.SouthEast, isShopkeeper: true));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.weft, new Vector3Int(4,8), facing: Facing.NorthWest));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(4, 13), Facing.SouthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(4, 13), Facing.SouthWest, type: ContainerType.Chest));
 
         oocSpawnDetailsDict.Add(LocationNameList.messHall, list);
         #endregion
         #region Stables
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.centerCampWallPatchOne, locationName: LocationNameList.stables, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.centerCampWallPatchOne, index: Constants.indexOne));
 
         list.Add(new NPCSpawnDetails(NPCNameList.beam, new Vector3Int(5, 5), facing: Facing.SouthEast));
 
         list.Add(new HorseSpawnDetails(NPCNameList.horse, new Vector3Int(3, -1), Facing.NorthWest));
         list.Add(new HorseSpawnDetails(NPCNameList.horse, new Vector3Int(12, 9), Facing.SouthEast, index: 1));
         list.Add(new HorseSpawnDetails(NPCNameList.horse, new Vector3Int(3, 8), Facing.SouthEast, index: 2));
+
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(9, -4),
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingX));
 
         oocSpawnDetailsDict.Add(LocationNameList.stables, list);
         #endregion
@@ -408,14 +440,19 @@ public static class OOCSpawnDetailsList
         #region Temple
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.centerCampWallPatchTwo, locationName: LocationNameList.temple, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.centerCampWallPatchTwo, index: Constants.indexOne));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(9, 8), Facing.SouthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(9, 8), Facing.SouthEast, type: ContainerType.Chest));
 
         list.Add(new NPCSpawnDetails(NPCNameList.priestRikard, new Vector3Int(6, 6), facing: Facing.NorthWest));
 
         list.Add(new NPCSpawnDetails(NPCNameList.showtouch, new Vector3Int(10, -1), appearance: SpriteDescriptionList.showtouch));
         list.Add(new NPCSpawnDetails(NPCNameList.guard, new Vector3Int(10, 0)/*, animationName: MonsterNameList.disciplinarian*/, facing: Facing.SouthWest));
+
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(11, 4),
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingY));
 
         oocSpawnDetailsDict.Add(LocationNameList.temple, list);
         #endregion
@@ -497,7 +534,7 @@ public static class OOCSpawnDetailsList
 
         #endregion
 
-        list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campNorthEast, Constants.indexZero));
+        list.Add(new HostilityTerrainSpawnDetails(Constants.indexZero));
 
         list.Add(new NPCSpawnDetails(NPCNameList.overseer, new Vector3Int(-11, 6), facing: Facing.SouthEast));
         list.Add(new NPCSpawnDetails(NPCNameList.slave, new Vector3Int(-8, 4)/*, animationName: NPCNameList.slave*/, facing: Facing.NorthEast, index: 13));
@@ -516,7 +553,7 @@ public static class OOCSpawnDetailsList
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, 3), VaultableObject.diffTwoVaultableBarrelsOneTile, appearance: SpriteDescriptionList.vaultableBarrels));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(6, 1), VaultableObject.diffTwoVaultableBarrelsOneTile, appearance: SpriteDescriptionList.vaultableBarrels));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(3, 5), Facing.SouthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(3, 5), Facing.SouthEast, type: ContainerType.Chest));
 
         #region Overseer Fight
         
@@ -627,7 +664,7 @@ public static class OOCSpawnDetailsList
         #region CenterCamp
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campCenter, Constants.indexZero));
+        list.Add(new HostilityTerrainSpawnDetails(Constants.indexZero));
 
         list.Add(new HorseSpawnDetails(NPCNameList.csalan, new Vector3Int(17, 17), Facing.SouthEast));
 
@@ -710,6 +747,20 @@ public static class OOCSpawnDetailsList
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
 
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(8, 12),
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchOne, addHostilityIfOutside: true),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingX,
+                                            terrainSpriteName: PrefabNames.wallPatch,
+                                            tall: true));
+
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(-7, 14),
+                                            new SecretDoorInfo(SecretDoorKeyList.centerCampWallPatchTwo, addHostilityIfOutside: true),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingY,
+                                            terrainSpriteName: PrefabNames.wallPatch,
+                                            tall: true));
+
         oocSpawnDetailsDict.Add(LocationNameList.campCenter, list);
         #endregion
         #region SECamp
@@ -725,7 +776,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.slave, new Vector3Int(-3, 20)/*, animationName: NPCNameList.slave+1*/, facing: Facing.SouthWest, index: 9));
         list.Add(new NPCSpawnDetails(NPCNameList.slave, new Vector3Int(-1, 17)/*, animationName: NPCNameList.slave+2*/, facing: Facing.SouthEast, index: 9));
         
-        list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campSouthEast, Constants.indexZero));
+        list.Add(new HostilityTerrainSpawnDetails(Constants.indexZero));
 
         list.Add(new NPCSpawnDetails(NPCNameList.statue, new Vector3Int(7, 3),
                                     extraSpaces: new Vector3Int[] {
@@ -744,7 +795,7 @@ public static class OOCSpawnDetailsList
         list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(2, 1), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero, appearance: SpriteDescriptionList.destroyableBarricade));
         list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(1, 1), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero, appearance: SpriteDescriptionList.destroyableBarricade));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(19, 14), Facing.SouthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(19, 14), Facing.SouthEast, type: ContainerType.Chest));
 
         #region Dead Bodies (Worm Attack)
         
@@ -875,6 +926,27 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.thatch, new Vector3Int(10, -9), animationType: CharacterAnimationType.Death_Front, facing: Facing.SouthWest, sleepingDialogueIntro: true));
         #endregion
 
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(18, 15),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchThree, addHostilityIfOutside: true),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingX,
+                                            terrainSpriteName: PrefabNames.wallPatch,
+                                            tall: true));
+
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(19, 8),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo, addHostilityIfOutside: true),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingX,
+                                            terrainSpriteName: PrefabNames.wallPatch,
+                                            tall: true));
+
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(20, 4),
+                                            new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchOne, addHostilityIfOutside: true),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingX,
+                                            terrainSpriteName: PrefabNames.wallPatch,
+                                            tall: true));
+
         oocSpawnDetailsDict.Add(LocationNameList.campSouthEast, list);
         #endregion
         #region MineEntranceCamp
@@ -925,7 +997,7 @@ public static class OOCSpawnDetailsList
         #region Camp Manse
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HostilityTerrainSpawnDetails(LocationNameList.campManse, Constants.indexZero));
+        list.Add(new HostilityTerrainSpawnDetails(Constants.indexZero));
 
         list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(6, -19), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero, appearance: SpriteDescriptionList.destroyableBarricade));
         list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(5, -19), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero, appearance: SpriteDescriptionList.destroyableBarricade));
@@ -980,8 +1052,8 @@ public static class OOCSpawnDetailsList
         #region NWCamp
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(2, 11), Facing.SouthEast, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-13,-10), Facing.SouthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(2, 11), Facing.SouthEast, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-13,-10), Facing.SouthEast, type: ContainerType.Chest));
 
         list.Add(new NPCSpawnDetails(NPCNameList.guard, new Vector3Int(-14, 0)/*,  animationName: MonsterNameList.axeman*/, facing: Facing.SouthWest));
 
@@ -1123,7 +1195,18 @@ public static class OOCSpawnDetailsList
                                     new Vector3Int(-1, 2),
                                     Constants.sizeTwo,
                                     Axis.DescendingX,
-                                    TutorialSequenceList.fallenBeamTargetHash));
+                                    TutorialSequenceList.fallenBeamTargetHash,
+                                    layout: GateSpriteLayout.PerCell));
+
+        list.Add(new WallPatchSpawnDetails(new Vector3Int(4, 1),
+                                            new SecretDoorInfo(SecretDoorKeyList.northWestCampWallPatchOne, addHostilityIfOutside: false),
+                                            Constants.sizeThree,
+                                            Axis.DescendingY,
+                                            TutorialSequenceList.secretDoorTargetHash,
+                                            terrainSpriteName: PrefabNames.wallPatch,
+                                            observable: () => Flags.getFlag(FlagNameList.startedTaborObservationTutorial),
+                                            script: new TaborObservationTutorialScript(),
+                                            tall: true));
 
         oocSpawnDetailsDict.Add(LocationNameList.campNorthWest, list);
         #endregion
@@ -1146,7 +1229,8 @@ public static class OOCSpawnDetailsList
                                     new Vector3Int(5, 1),
                                     Constants.sizeThree,
                                     Axis.DescendingY,
-                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash));
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash,
+                                    layout: GateSpriteLayout.PerCell));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl1 + LocationNameList.section1b, list);
 
@@ -1156,9 +1240,9 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), Facing.SouthWest, type: ContainerType.Chest));
     
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-1, 4), Facing.SouthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-1, 4), Facing.SouthEast, type: ContainerType.Chest));
 
         list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
                                     NPCNameList.liftableGate,
@@ -1179,10 +1263,17 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl2FirstSecretDoor, areaName: ZoneKeyList.mineLvl2, sectionName: LocationNameList.section1a, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl2FirstSecretDoor, index: Constants.indexOne));
 
         list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -3), TutorialSequenceList.firstHostilityTutorialSequenceKey,
                                                                           TutorialSequenceList.firstHostilityTutorialSeenFlag));
+
+        list.Add(new SecretDoorSpawnDetails(SpriteDescriptionList.mineLvl2WallSecretDoor,
+                                            NPCNameList.suspiciousWall,
+                                            new Vector3Int(5, 1),
+                                            new SecretDoorInfo(SecretDoorKeyList.mineLvl2FirstSecretDoor, questName: QuestNameList.hiddenAwayQuestTitle, questStepName: QuestNameList.hiddenAwayStepTitleOne, completeQuest: true),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingY));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1a, list);
 
@@ -1197,8 +1288,8 @@ public static class OOCSpawnDetailsList
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(5, 10), VaultableObject.diffTwoSizeTwoVaultableRocks, appearance: SpriteDescriptionList.vaultableRocks));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(11, 3), Facing.SouthWest, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(4, 5), Facing.SouthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(11, 3), Facing.SouthWest, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(4, 5), Facing.SouthEast, type: ContainerType.Chest));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1b, list);
 
@@ -1208,8 +1299,8 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-6, 2), Facing.SouthEast, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-3, 11), Facing.SouthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-6, 2), Facing.SouthEast, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-3, 11), Facing.SouthWest, type: ContainerType.Chest));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section1c, list);
 
@@ -1221,7 +1312,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.controlPanel, new Vector3Int(5, 3), appearance: SpriteDescriptionList.controlPanelFlipped));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(5, 7), Facing.SouthWest, type: ChestType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(5, 7), Facing.SouthWest, type: ContainerType.Shelf));
 
         list.Add(new NPCSpawnDetails(NPCNameList.guardPazman, new Vector3Int(-1, 4), facing: Facing.NorthWest));
 
@@ -1248,28 +1339,28 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(11, 5), appearance: SpriteDescriptionList.emptyPolearmRackFlipped));
         list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(11, 4), appearance: SpriteDescriptionList.emptyPolearmRackFlipped));
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(11, 2), Facing.SouthWest, type: ChestType.ShovelRack, script: new FoundToolBundle()));
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(11, 1), Facing.SouthWest, type: ChestType.ShovelRack, script: new FoundToolBundle()));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(11, 2), Facing.SouthWest, type: ContainerType.ShovelRack, script: new FoundToolBundle()));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(11, 1), Facing.SouthWest, type: ContainerType.ShovelRack, script: new FoundToolBundle()));
         list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(11, -1), appearance: SpriteDescriptionList.emptyPolearmRackFlipped));
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(11, -2), Facing.SouthWest, type: ChestType.ShovelRack, script: new FoundToolBundle()));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(11, -2), Facing.SouthWest, type: ContainerType.ShovelRack, script: new FoundToolBundle()));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(9, 3), Facing.SouthWest, type: ChestType.ShovelRack, script: new FoundToolBundle()));
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(9, 2), Facing.SouthWest, type: ChestType.ShovelRack, script: new FoundToolBundle()));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(9, 3), Facing.SouthWest, type: ContainerType.ShovelRack, script: new FoundToolBundle()));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(9, 2), Facing.SouthWest, type: ContainerType.ShovelRack, script: new FoundToolBundle()));
         list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(9, 1), appearance: SpriteDescriptionList.emptyPolearmRackFlipped));
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(9, -1), Facing.SouthWest, type: ChestType.ShovelRack, script: new FoundToolBundle()));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(9, -1), Facing.SouthWest, type: ContainerType.ShovelRack, script: new FoundToolBundle()));
 
         list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(7, 3), appearance: SpriteDescriptionList.emptyPolearmRackFlipped));
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(7, 2), Facing.SouthWest, type: ChestType.ShovelRack, script: new FoundToolBundle()));
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(7, 0), Facing.SouthWest, type: ChestType.ShovelRack, script: new FoundToolBundle()));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(7, 2), Facing.SouthWest, type: ContainerType.ShovelRack, script: new FoundToolBundle()));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(7, 0), Facing.SouthWest, type: ContainerType.ShovelRack, script: new FoundToolBundle()));
         list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(7, -1), appearance: SpriteDescriptionList.emptyPolearmRackFlipped));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(9, 5), Facing.SouthEast, type: ChestType.PickaxeTable));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(8, 5), Facing.SouthEast, type: ChestType.PickaxeTable));
+        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(9, 5), Facing.SouthEast, type: ContainerType.PickaxeTable));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(8, 5), Facing.SouthEast, type: ContainerType.PickaxeTable));
         list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(7, 5), appearance: SpriteDescriptionList.emptyWeaponTable));
         list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(4, 5), appearance: SpriteDescriptionList.emptyWeaponTable));
         list.Add(new ObstacleSpawnDetails(NPCNameList.table, new Vector3Int(3, 5), appearance: SpriteDescriptionList.emptyWeaponTable));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexThree, new Vector3Int(9, -3), Facing.NorthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexThree, new Vector3Int(9, -3), Facing.NorthWest, type: ContainerType.Chest));
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(7, -5)));
 
@@ -1306,7 +1397,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(9, 8), Constants.indexOne, charismaRequirement: 2));
         list.Add(new ButtonSpawnDetails(new Vector3Int(9, 5), Constants.indexOne, charismaRequirement: 2));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(8, 9), Facing.SouthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(8, 9), Facing.SouthEast, type: ContainerType.Chest));
 
         list.Add(new BookSpawnDetails(NPCNameList.diary, new Vector3Int(0, 13), ItemList.mineGuardsDiaryIndex, appearance: SpriteDescriptionList.note));
 
@@ -1316,7 +1407,8 @@ public static class OOCSpawnDetailsList
                                     new Vector3Int(3, 7),
                                     Constants.sizeTwo,
                                     Axis.DescendingY,
-                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash));
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash,
+                                    layout: GateSpriteLayout.PerCell));
 
         list.Add(new GateSpawnDetails(SpriteDescriptionList.blockRubbleGate,
                                     NPCNameList.awkwardRubble,
@@ -1324,7 +1416,8 @@ public static class OOCSpawnDetailsList
                                     new Vector3Int(10, 7),
                                     Constants.sizeTwo,
                                     Axis.DescendingY,
-                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash));
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash,
+                                    layout: GateSpriteLayout.PerCell));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section3a, list);
 
@@ -1360,7 +1453,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(7, 5), Facing.SouthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(7, 5), Facing.SouthWest, type: ContainerType.Chest));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section4, list);
 
@@ -1422,10 +1515,10 @@ public static class OOCSpawnDetailsList
 
         // list.Add(new LinkedCunningBlockerSpawnDetails(Constants.indexThree, new Vector3Int(11, 11), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, Constants.indexOne));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(8, 10), Facing.SouthWest, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(8, 9), Facing.SouthWest, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(6, 27), Facing.SouthEast, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexThree, new Vector3Int(6, -9), Facing.NorthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(8, 10), Facing.SouthWest, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(8, 9), Facing.SouthWest, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(6, 27), Facing.SouthEast, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexThree, new Vector3Int(6, -9), Facing.NorthWest, type: ContainerType.Chest));
                                 
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section5, list);
@@ -1445,7 +1538,7 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(1, 10), Constants.indexSix)); // b6 in S1
         list.Add(new ButtonSpawnDetails(new Vector3Int(13, 6), Constants.indexSeven)); // b7 in 7a
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(4, 5), Facing.SouthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(4, 5), Facing.SouthWest, type: ContainerType.Chest));
 
         // list.Add(new TemporaryGateSpawnDetails(Constants.indexZero, //A1 - S1
         //                             NPCNameList.ancientPortcullis,
@@ -1587,8 +1680,8 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(5, -4), Facing.SouthWest, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-3, 11), Facing.SouthEast, type: ChestType.Chest, script: new FoundWinch()));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(5, -4), Facing.SouthWest, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-3, 11), Facing.SouthEast, type: ContainerType.Chest, script: new FoundWinch()));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableRocks, new Vector3Int(-1, -3), VaultableObject.diffTwoSizeTwoVaultableRocks, appearance: SpriteDescriptionList.vaultableRocks));
 
@@ -1603,7 +1696,8 @@ public static class OOCSpawnDetailsList
                                     new Vector3Int(-9, -7),
                                     Constants.sizeThree,
                                     Axis.DescendingX,
-                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash));
+                                    tutorialTargetHash: TutorialSequenceList.awkwardRubbleHash,
+                                    layout: GateSpriteLayout.PerCell));
 
         list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
                                     NPCNameList.ancientPortcullis,
@@ -1618,6 +1712,13 @@ public static class OOCSpawnDetailsList
                                     new Vector3Int(-6, -4),
                                     Constants.sizeOne,
                                     Axis.DescendingY));
+
+        list.Add(new SecretDoorSpawnDetails(SpriteDescriptionList.mineLvl2WallSecretDoor,
+                                            NPCNameList.suspiciousWall,
+                                            new Vector3Int(4, 5),
+                                            new SecretDoorInfo(SecretDoorKeyList.mineLvl2SecondSecretDoor),
+                                            Constants.sizeThree,
+                                            Axis.DescendingX));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section7b, list);
 
@@ -1639,7 +1740,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleDoor, areaName: ZoneKeyList.mineLvl3, sectionName:LocationNameList.section1b, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleDoor, index: Constants.indexOne));
 
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.mineLvl3Wall, new Vector3Int(0, -6), secretDoorFlag: SecretDoorKeyList.mineLvl3PuzzleDoor, appearance: SpriteDescriptionList.mineLvl3WallSecretDoor));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.mineLvl3Wall, new Vector3Int(1, -3), secretDoorFlag: SecretDoorKeyList.mineLvl3PuzzleDoor, appearance: SpriteDescriptionList.mineLvl3WallSecretDoor));
@@ -1668,10 +1769,17 @@ public static class OOCSpawnDetailsList
         list.Add(new HiddenButtonSpawnDetails(new Vector3Int(9, -3), SecretDoorKeyList.mineLvl3PuzzleDoor, Constants.indexTwo));
         list.Add(new HiddenButtonSpawnDetails(new Vector3Int(7, 1), SecretDoorKeyList.mineLvl3PuzzleDoor, Constants.indexThree));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleFinished, areaName: ZoneKeyList.mineLvl3, sectionName: LocationNameList.section1b, index: Constants.indexTwo));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3PuzzleFinished, index: Constants.indexTwo));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-5, -7), Facing.NorthWest, type: ChestType.Chest));  
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(13, -11), Facing.SouthWest, type: ChestType.Chest));  
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-5, -7), Facing.NorthWest, type: ContainerType.Chest));  
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(13, -11), Facing.SouthWest, type: ContainerType.Chest));  
+
+        list.Add(new SecretDoorSpawnDetails(SpriteDescriptionList.mineLvl3WallSecretDoor,
+                                            NPCNameList.suspiciousWall,
+                                            new Vector3Int(0, -3),
+                                            new SecretDoorInfo(SecretDoorKeyList.mineLvl3PuzzleDoor),
+                                            Constants.sizeThree,
+                                            Axis.DescendingY));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section1b, list);
 
@@ -1717,8 +1825,8 @@ public static class OOCSpawnDetailsList
 
         // list.Add(new DoubleCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(4, -1), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, deactivatedblockerSpawnDetails));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-1, -1), Facing.SouthEast, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(0, -2), Facing.SouthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-1, -1), Facing.SouthEast, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(0, -2), Facing.SouthWest, type: ContainerType.Chest));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section2a, list);
 
@@ -1776,8 +1884,8 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.overseerGaspar, new Vector3Int(6, 7), facing: Facing.SouthWest));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(6, 6), Facing.SouthWest, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(6, 0), Facing.SouthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(6, 6), Facing.SouthWest, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(6, 0), Facing.SouthEast, type: ContainerType.Chest));
 
         list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
                                     NPCNameList.liftableGate,
@@ -1797,7 +1905,7 @@ public static class OOCSpawnDetailsList
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 4), VaultableObject.diffThreeVaultableGap, appearance: SpriteDescriptionList.stoneVaultableGap));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 2), VaultableObject.diffThreeVaultableGap, appearance: SpriteDescriptionList.stoneVaultableGap));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(8, 9), Facing.SouthWest, type: ChestType.Chest));  
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(8, 9), Facing.SouthWest, type: ContainerType.Chest));  
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl3 + LocationNameList.section4a, list);
 
@@ -1837,7 +1945,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(20, 1), Facing.SouthWest, type: ChestType.Chest));  
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(20, 1), Facing.SouthWest, type: ContainerType.Chest));  
 
         list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
                                     NPCNameList.liftableGate,
@@ -1881,10 +1989,10 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(-6, 9)));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-6, 8)));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-6, 2), Facing.SouthWest, type: ChestType.Chest));  
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-3, 5), Facing.SouthEast, type: ChestType.Chest));  
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-6, 2), Facing.SouthWest, type: ContainerType.Chest));  
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-3, 5), Facing.SouthEast, type: ContainerType.Chest));  
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain, areaName: ZoneKeyList.mineLvl3, sectionName: LocationNameList.section6a, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_6aUnstablePillarHiddenTerrain, index: Constants.indexOne));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(2, 4), VaultableObject.diffThreeVaultableGap, appearance: SpriteDescriptionList.stoneVaultableGap));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(0, 4), VaultableObject.diffThreeVaultableGap, appearance: SpriteDescriptionList.stoneVaultableGap));
@@ -1934,7 +2042,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.unseenBarrier, new Vector3Int(-9, 1), secretDoorFlag: SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain, appearance: SpriteDescriptionList.unseenBarrier));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain, areaName:ZoneKeyList.mineLvl3,  sectionName: LocationNameList.section7, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7UnstablePillarHiddenTerrain, index: Constants.indexOne));
 
         // blockerSpawnDetails = new List<ObstacleSpawnDetails>();
 
@@ -1950,7 +2058,7 @@ public static class OOCSpawnDetailsList
 
         // list.Add(new DoubleCunningBlockerSpawnDetails(Constants.indexZero, new Vector3Int(-12, -5), Facing.SouthWest, Facing.SouthEast, CunningObjectSpriteCategory.Crank, blockerSpawnDetails, deactivatedblockerSpawnDetails));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-5, -6), Facing.SouthWest, type: ChestType.Chest));  
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-5, -6), Facing.SouthWest, type: ContainerType.Chest));  
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -9), VaultableObject.diffThreeVaultableGap, appearance: SpriteDescriptionList.lavaVaultableGapHalfButtonSortingLayer));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableGap, new Vector3Int(-10, -11), VaultableObject.diffThreeVaultableGap, appearance: SpriteDescriptionList.lavaVaultableGapHalfGroundSortingLayer));
@@ -1976,7 +2084,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(-9, 3), facing: Facing.NorthWest));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.guardMarcos, new Vector3Int(-6, 6), facing: Facing.NorthWest, index: 1));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7PocketSealedRubble, areaName:ZoneKeyList.mineLvl3,  sectionName: LocationNameList.section7, index: Constants.indexTwo));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.mineLvl3_7PocketSealedRubble, index: Constants.indexTwo));
 
         list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis3x1,
                                     NPCNameList.ancientPortcullis,
@@ -2074,8 +2182,8 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(1, 3), Facing.SouthEast, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(0, 3), Facing.SouthEast, type: ChestType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(1, 3), Facing.SouthEast, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(0, 3), Facing.SouthEast, type: ContainerType.Shelf));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section1b, list);
 
@@ -2085,8 +2193,8 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(15, -2), Facing.SouthWest, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(12, -2), Facing.NorthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(15, -2), Facing.SouthWest, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(12, -2), Facing.NorthEast, type: ContainerType.Chest));
 
         list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(8, -2), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero, appearance: SpriteDescriptionList.destroyableBarricade));
         list.Add(new VaultableOrDestroyableObjectSpawnDetails(NPCNameList.hastilyBuiltBarricade, new Vector3Int(8, -3), VaultableOrDestroyableObject.diffThreeVaultableBarricadeOneTileIndexZero, appearance: SpriteDescriptionList.destroyableBarricade));
@@ -2119,14 +2227,14 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.manseHiddenGardenFlag, areaName:ZoneKeyList.manseFirstFloor, sectionName: LocationNameList.section2a, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.manseHiddenGardenFlag, index: Constants.indexOne));
 
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(7, 0), ItemList.orderTranscriptIndex, appearance: SpriteDescriptionList.noteOnGround));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(8, 3), Facing.SouthWest, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(8, 2), Facing.SouthWest, type: ChestType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(8, 3), Facing.SouthWest, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(8, 2), Facing.SouthWest, type: ContainerType.Shelf));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(-4, 21), Facing.SouthEast, secretDoorFlag: SecretDoorKeyList.manseHiddenGardenFlag, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(-4, 21), Facing.SouthEast, secretDoorFlag: SecretDoorKeyList.manseHiddenGardenFlag, type: ContainerType.Chest));
 
         list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
                                     NPCNameList.ancientPortcullis,
@@ -2134,6 +2242,13 @@ public static class OOCSpawnDetailsList
                                     new Vector3Int(2, -4),
                                     Constants.sizeTwo,
                                     Axis.DescendingX));
+
+        list.Add(new SecretDoorSpawnDetails(SpriteDescriptionList.manseWallSecretDoor,
+                                            NPCNameList.suspiciousWall,
+                                            new Vector3Int(-1, 10),
+                                            new SecretDoorInfo(SecretDoorKeyList.manseHiddenGardenFlag, difficulty: Constants.difficultyThree),
+                                            Constants.sizeFive,
+                                            Axis.DescendingX));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2a, list);
 
@@ -2162,7 +2277,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(3, 3), ItemList.pitSecondEntranceNoteIndex, appearance: SpriteDescriptionList.noteOnGround));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(3, 0), Facing.SouthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(3, 0), Facing.SouthWest, type: ContainerType.Chest));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section2c, list);
 
@@ -2172,9 +2287,9 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(2, 0), Facing.NorthWest, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(3, -3), Facing.SouthWest, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(-3, -1), Facing.NorthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(2, 0), Facing.NorthWest, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(3, -3), Facing.SouthWest, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(-3, -1), Facing.NorthWest, type: ContainerType.Chest));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.stairsToPit, list);
 
@@ -2186,7 +2301,14 @@ public static class OOCSpawnDetailsList
 
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(6, 0), ItemList.orderTranscriptIndex, appearance: SpriteDescriptionList.note));
 
-        list.Add(new HiddenTerrainSpawnDetails(secretDoorKeys: new List<string>(){SecretDoorKeyList.meetingRoomSecretEntrance, SecretDoorKeyList.officeSecretEntranceFlag}, areaName:ZoneKeyList.manseFirstFloor, sectionName: LocationNameList.section3a, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(secretDoorKeys: new List<string>(){SecretDoorKeyList.meetingRoomSecretEntrance, SecretDoorKeyList.officeSecretEntranceFlag}, index: Constants.indexOne));
+
+        list.Add(new SecretDoorSpawnDetails(SpriteDescriptionList.manseWallSecretDoor,
+                                            NPCNameList.suspiciousWall,
+                                            new Vector3Int(9, -3),
+                                            new SecretDoorInfo(SecretDoorKeyList.meetingRoomSecretEntrance, difficulty: Constants.difficultyThree),
+                                            Constants.sizeThree,
+                                            Axis.DescendingY));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3a, list);
 
@@ -2214,15 +2336,22 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(2, 7), Facing.SouthEast, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(3, 3), Facing.SouthEast, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(8, 3), Facing.SouthWest, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexThree, new Vector3Int(5, 3), Facing.SouthEast, type: ChestType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(2, 7), Facing.SouthEast, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(3, 3), Facing.SouthEast, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(8, 3), Facing.SouthWest, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexThree, new Vector3Int(5, 3), Facing.SouthEast, type: ContainerType.Shelf));
 
-        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.secretBookShelfFlag, areaName: ZoneKeyList.manseFirstFloor, sectionName: LocationNameList.section3c, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(SecretDoorKeyList.secretBookShelfFlag, index: Constants.indexOne));
 
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.halfWall, new Vector3Int(3, -1), secretDoorFlag: SecretDoorKeyList.secretBookShelfFlag, appearance: SpriteDescriptionList.manseHalfWallSecretDoor));
         list.Add(new ObstacleWithSecretDoorFlagSpawnDetails(NPCNameList.halfWall, new Vector3Int(2, -1), secretDoorFlag: SecretDoorKeyList.secretBookShelfFlag, appearance: SpriteDescriptionList.manseHalfWallSecretDoor));
+
+        list.Add(new SecretDoorSpawnDetails(SpriteDescriptionList.secretShelfNWSecretDoor,
+                                            NPCNameList.suspiciousWall,
+                                            new Vector3Int(3, 0),
+                                            new SecretDoorInfo(SecretDoorKeyList.secretBookShelfFlag, difficulty: Constants.difficultyThree, description: "*These bookshelfs look exactly like the others, except for a distinct lack of dust.*"),
+                                            Constants.sizeTwo,
+                                            Axis.DescendingX));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseFirstFloor + LocationNameList.section3c, list);
 
@@ -2242,7 +2371,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(1, 2), Facing.SouthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(1, 2), Facing.SouthEast, type: ContainerType.Chest));
         
         list.Add(new BookSpawnDetails(NPCNameList.diary, new Vector3Int(0, -1), ItemList.pageDiarySecondEntryIndex, appearance: SpriteDescriptionList.note));
 
@@ -2293,8 +2422,8 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-2, -3), Facing.SouthWest, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-2, -2), Facing.SouthWest, type: ChestType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-2, -3), Facing.SouthWest, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-2, -2), Facing.SouthWest, type: ContainerType.Shelf));
         
         list.Add(new BookSpawnDetails(NPCNameList.memo, new Vector3Int(-2, 1), ItemList.brandedMemoIndex, appearance: SpriteDescriptionList.note));
 
@@ -2308,7 +2437,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.chiefTabor, new Vector3Int(3, 0), facing: Facing.SouthWest, speakAtStartScript: new ChiefTaborManseSecondFloorScript()));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(3, -4), Facing.SouthWest, ChestType.Chest, new KeyHalfScript()));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(3, -4), Facing.SouthWest, ContainerType.Chest, new KeyHalfScript()));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.slave, new Vector3Int(-2,-3)/*, NPCNameList.slave*/, Facing.NorthEast, animationType: CharacterAnimationType.Idle_Back));
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.noBrand, new Vector3Int(-1,0)/*, NPCNameList.noBrand*/, Facing.NorthEast, animationType: CharacterAnimationType.Idle_Back));
@@ -2323,7 +2452,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-4, -2), Facing.SouthEast, type: ChestType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-4, -2), Facing.SouthEast, type: ContainerType.Shelf));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section2d, list);
 
@@ -2333,19 +2462,19 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(5, 11), Facing.SouthEast, type: ChestType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(5, 11), Facing.SouthEast, type: ContainerType.Shelf));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(4, 3), Facing.SouthWest, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(4, -1), Facing.SouthWest, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexThree, new Vector3Int(4, -2), Facing.SouthWest, type: ChestType.Shelf));
-        list.Add(new ContainerSpawnDetails(Constants.indexFour, new Vector3Int(4, -3), Facing.SouthWest, type: ChestType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(4, 3), Facing.SouthWest, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(4, -1), Facing.SouthWest, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexThree, new Vector3Int(4, -2), Facing.SouthWest, type: ContainerType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexFour, new Vector3Int(4, -3), Facing.SouthWest, type: ContainerType.Shelf));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, 6), VaultableObject.diffThreeVaultableBarrelsOneTile, appearance: SpriteDescriptionList.vaultableBarrels));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(-1, 6), VaultableObject.diffThreeVaultableBarrelsOneTile, appearance: SpriteDescriptionList.vaultableBarrels));
 
         list.Add(new BookSpawnDetails(NPCNameList.diary, new Vector3Int(4, 5), ItemList.directorsJournalTwoIndex, appearance: SpriteDescriptionList.noteOnGround));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexFive, new Vector3Int(4, 4), Facing.SouthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexFive, new Vector3Int(4, 4), Facing.SouthWest, type: ContainerType.Chest));
 
         list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 5)));
         list.Add(new ButtonSpawnDetails(new Vector3Int(-4, 8)));
@@ -2367,7 +2496,7 @@ public static class OOCSpawnDetailsList
 
         list.Add(new NPCSpawnDetails(NPCNameList.captainAdela, new Vector3Int(-8, 5), facing: Facing.NorthEast));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(1, 1), Facing.SouthEast, type: ChestType.SpearRack));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(1, 1), Facing.SouthEast, type: ContainerType.SpearRack));
 
         list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1,
                                     NPCNameList.liftableGate,
@@ -2385,7 +2514,7 @@ public static class OOCSpawnDetailsList
 
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-1, 0), Facing.SouthEast, type: ChestType.Shelf));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-1, 0), Facing.SouthEast, type: ContainerType.Shelf));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.section3c, list);
 
@@ -2413,8 +2542,8 @@ public static class OOCSpawnDetailsList
         //                                         cunningAction: null));
         // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall, new Vector3Int(-4, -2), PrefabNames.shackWallHalf));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-7, 7), Facing.SouthEast, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-8, -6), Facing.NorthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-7, 7), Facing.SouthEast, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(-8, -6), Facing.NorthEast, type: ContainerType.Chest));
 
         list.Add(new GateSpawnDetails(SpriteDescriptionList.tripleBarrel,
                                     NPCNameList.heavyBarrels,
@@ -2461,7 +2590,7 @@ public static class OOCSpawnDetailsList
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.page, new Vector3Int(2, 2), facing: Facing.SouthEast)); 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(2, -4), facing: Facing.NorthWest)); 
 
-        list.Add(new HiddenTerrainSpawnDetails(secretDoorKeys: new List<string>(){SecretDoorKeyList.meetingRoomSecretEntrance, SecretDoorKeyList.officeSecretEntranceFlag}, areaName: ZoneKeyList.manseSecondFloor, sectionName: LocationNameList.office, index: Constants.indexOne));
+        list.Add(new HiddenTerrainSpawnDetails(secretDoorKeys: new List<string>(){SecretDoorKeyList.meetingRoomSecretEntrance, SecretDoorKeyList.officeSecretEntranceFlag}, index: Constants.indexOne));
 
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(1, 2), VaultableObject.diffTwoVaultableBarrelsOneTile, appearance: SpriteDescriptionList.vaultableBarrels));
         list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(1, 1), VaultableObject.diffTwoVaultableBarrelsOneTile, appearance: SpriteDescriptionList.vaultableBarrels));
@@ -2480,6 +2609,13 @@ public static class OOCSpawnDetailsList
                                     Constants.sizeTwo,
                                     Axis.DescendingY));
 
+        list.Add(new SecretDoorSpawnDetails(SpriteDescriptionList.manseWallSecretDoor,
+                                            NPCNameList.suspiciousWall,
+                                            new Vector3Int(4, 2),
+                                            new SecretDoorInfo(SecretDoorKeyList.officeSecretEntranceFlag, difficulty: Constants.difficultyThree, customDialogueKey: DialogueKey.OfficeSecretDoor),
+                                            Constants.sizeFour,
+                                            Axis.DescendingY));
+
         oocSpawnDetailsDict.Add(ZoneKeyList.manseSecondFloor + LocationNameList.office, list);
 
         #endregion
@@ -2491,7 +2627,7 @@ public static class OOCSpawnDetailsList
         #region Pit-1a
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(3, 2), Facing.SouthWest, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(3, 2), Facing.SouthWest, type: ContainerType.Chest));
         list.Add(new BookSpawnDetails(NPCNameList.orders, new Vector3Int(3, 1), ItemList.pitClosureNoteIndex, appearance: SpriteDescriptionList.noteOnGround));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section1a, list);
@@ -2523,9 +2659,9 @@ public static class OOCSpawnDetailsList
         list.Add(new ButtonSpawnDetails(new Vector3Int(-8, 5)));
         list.Add(new ButtonSpawnDetails(new Vector3Int(16, 2)));
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(5, 19), Facing.SouthEast, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(4, 19), Facing.SouthEast, type: ChestType.Chest));
-        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(3, 19), Facing.SouthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(5, 19), Facing.SouthEast, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexOne, new Vector3Int(4, 19), Facing.SouthEast, type: ContainerType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexTwo, new Vector3Int(3, 19), Facing.SouthEast, type: ContainerType.Chest));
 
         list.Add(new GateSpawnDetails(SpriteDescriptionList.portcullis2x1Flipped,
                                     NPCNameList.ancientPortcullis,
@@ -2541,7 +2677,7 @@ public static class OOCSpawnDetailsList
         #region Pit-2d
         list = new List<OOCSpawnDetails>();
 
-        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-6, 5), Facing.SouthEast, type: ChestType.Chest));
+        list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(-6, 5), Facing.SouthEast, type: ContainerType.Chest));
         list.Add(new BookSpawnDetails(NPCNameList.diary, new Vector3Int(-5, 2), ItemList.directorsJournalFourIndex, appearance: SpriteDescriptionList.noteOnGround));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.pit + LocationNameList.section2d, list);

@@ -122,7 +122,7 @@ public class LargeEnemyStats : EnemyStats
     {
         int heartBeatRow = 0;
 
-        switch(getName())
+        switch(uniqueName)
         {
             case MonsterNameList.hiveHeraldNest:
                 heartBeatRow = 0;

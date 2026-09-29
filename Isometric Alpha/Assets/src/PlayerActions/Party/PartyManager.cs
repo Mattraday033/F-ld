@@ -194,14 +194,14 @@ public static class PartyManager
         {
             PartyMember partyMember = kvp.Value;
 
-            if (partyMember.canJoinParty && story.variablesState[InkVariableNameList.partyFlagPrefix + partyMember.stats.getName()] != null)
+            if (partyMember.canJoinParty && story.variablesState[InkVariableNameList.partyFlagPrefix + partyMember.stats.uniqueName] != null)
             {
-                story.variablesState[InkVariableNameList.partyFlagPrefix + partyMember.stats.getName()] = true;
+                story.variablesState[InkVariableNameList.partyFlagPrefix + partyMember.stats.uniqueName] = true;
             }
 
-            if (partyMember.isInParty() && story.variablesState[InkVariableNameList.formationFlagPrefix + partyMember.stats.getName()] != null)
+            if (partyMember.isInParty() && story.variablesState[InkVariableNameList.formationFlagPrefix + partyMember.stats.uniqueName] != null)
             {
-                story.variablesState[InkVariableNameList.formationFlagPrefix + partyMember.stats.getName()] = true;
+                story.variablesState[InkVariableNameList.formationFlagPrefix + partyMember.stats.uniqueName] = true;
             }
         }
 
@@ -212,7 +212,7 @@ public static class PartyManager
     {
         foreach (PartyMember partyMember in partyMemberDict.Values)
         {
-            if (partyMember.getName().Contains(playerMarker))
+            if (partyMember.uniqueName.Contains(playerMarker))
             {
                 return partyMember;
             }
@@ -225,7 +225,7 @@ public static class PartyManager
     {
         foreach (PartyMember partyMember in partyMemberDict.Values)
         {
-            if (partyMember.getName().Contains(playerMarker))
+            if (partyMember.uniqueName.Contains(playerMarker))
             {
                 return partyMember.stats;
             }
@@ -238,7 +238,7 @@ public static class PartyManager
     {
         foreach (PartyMember partyMember in party)
         {
-            if (partyMember.getName().Contains(playerMarker))
+            if (partyMember.uniqueName.Contains(playerMarker))
             {
                 return partyMember.stats;
             }
@@ -266,7 +266,7 @@ public static class PartyManager
 
         player.canJoinParty = true;
 
-        partyMemberDict.Add(playerStats.getName(), player);
+        partyMemberDict.Add(playerStats.uniqueName, player);
     }
 
     public static void setPartyMemberDict(Dictionary<string, PartyMember> newDict)
@@ -303,8 +303,8 @@ public static class PartyManager
 
         foreach(PartyMember partyMember in partyMemberDict.Values)
         {
-            if( !partyMember.getName().Contains(playerMarker) &&
-                State.formation.contains(partyMember.stats.getName()) &&
+            if( !partyMember.uniqueName.Contains(playerMarker) &&
+                State.formation.contains(partyMember.stats.uniqueName) &&
                 !partyMember.stats.isDead())
             {
                 train.Add(partyMember);
@@ -316,7 +316,7 @@ public static class PartyManager
 
     public static string getPlayerNameForDisplay()
     {
-        return getPlayerStats().getName().Replace(playerMarker,"");
+        return getPlayerStats().displayName;
     }
 
 }

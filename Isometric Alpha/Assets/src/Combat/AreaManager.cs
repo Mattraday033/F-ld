@@ -190,10 +190,8 @@ public class AreaDescription : IDescribable
         this.areaName = areaName;
     }
 
-    public string getName()
-    {
-        return areaName;
-    }
+    public string displayName { get { return areaName; } }
+    public string uniqueName { get { return areaName; } }
 
     public void describeSelfFull(DescriptionPanel panel)
     {

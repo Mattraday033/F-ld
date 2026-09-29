@@ -42,7 +42,7 @@ public class PartyMemberPlacer : MonoBehaviour
         {
             if (partyMember.placed)
             {
-                placeNextPartyMember(partyMember.getName());
+                placeNextPartyMember(partyMember.uniqueName);
             }
         }
 
@@ -129,7 +129,7 @@ public class PartyMemberPlacer : MonoBehaviour
 
         if(placablePartyMembers.Count > placedPartyMembers.Count)
         {
-            return placablePartyMembers[placedPartyMembers.Count].getName();
+            return placablePartyMembers[placedPartyMembers.Count].uniqueName;
         } else
         {
             return null;
@@ -145,7 +145,7 @@ public class PartyMemberPlacer : MonoBehaviour
 		{
 			GameObject currentPartyMember = placedPartyMembers[partyMemberIndex].gameObject;
 
-			if (currentPartyMember.GetComponent<PlacedPartyMember>().partyMember.getName().Equals(targetPartyMemberName))
+			if (currentPartyMember.GetComponent<PlacedPartyMember>().partyMember.uniqueName.Equals(targetPartyMemberName))
 			{
 				GameObject.Destroy(currentPartyMember);
                 placedPartyMembers.RemoveAt(partyMemberIndex);

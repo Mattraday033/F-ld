@@ -257,15 +257,13 @@ public static class EnumUtil
         }
 	}
 
-    public static bool withScaleByChestType(this ChestType type)
+    public static bool withScale(this ContainerType type)
     {
         switch(type)
         {
-            case ChestType.Shelf:
-                // return true;
-                return false;
+            // case ContainerType.Shelf:
+            //     return false;
             default:
-                // return false;
                 return true;
         }
     }
@@ -329,6 +327,8 @@ public static class EnumUtil
     }
 
     public readonly static IEnumerable<SpriteLayer> SpriteLayers = getValues<SpriteLayer>();
+    //every layer that makes up a character's appearance, which leaves out the Terrain layer
+    public readonly static IEnumerable<SpriteLayer> CharacterSpriteLayers = Array.FindAll((SpriteLayer[]) SpriteLayers, layer => layer != SpriteLayer.Terrain);
     public readonly static IEnumerable<ColorReplacementSlot> ColorReplacementSlots = getValues<ColorReplacementSlot>();
 
     public readonly static IEnumerable<WeaponPose> WeaponPoses = getValues<WeaponPose>();

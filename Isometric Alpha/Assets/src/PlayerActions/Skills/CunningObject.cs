@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public enum CunningObjectSpriteCategory { Crank = 0 }
 
-public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, INameSource
+public class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, INameSource
 {
     public const string tagText = "Device";
     public const string nameOnTag = "Cunning Target";
@@ -40,14 +40,28 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
     public void intimidate() { }
 
-    public abstract void setStatus(string key, bool status);
-    
-    public string getName()
+    public void setStatus(string key, bool status)
     {
-        return nameOnTag;
+
+        if (!getKey().Equals(key))
+        {
+            return;
+        }
+
+        evenActivation = status;
+
+        setToCurrentSprite();
     }
 
+    public string displayName { get { return nameOnTag; } }
+    public string uniqueName { get { return getKey(); } }
+
     protected Facing getCurrentFacing()
+    {
+        return getFacing(evenActivation);
+    }
+
+    public static Facing getFacing(bool evenActivation)
     {
         if (!evenActivation)
         {
@@ -61,7 +75,7 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
 
     public void setToCurrentSprite()
     {
-        rendererList[SpriteLayer.Body].sprite = CunningObjectSpriteList.getCurrentSprite(getCurrentFacing(), category);
+        CunningObjectSpriteList.getCurrentSprite(getCurrentFacing(), category).applyAppearance(rendererList);
     }
 
     public int getChargeCost(SkillType skillType)
@@ -172,16 +186,19 @@ public abstract class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, 
         }
     }
 
-    public abstract Vector3 getTargetPosition();
+    public Vector3 getTargetPosition()
+    {
+        return transform.position;
+    }
 }
 
 public static class CunningObjectSpriteList
 {
     private static Dictionary<KeyValuePair<Facing, CunningObjectSpriteCategory>, string> cunningObjectSprites;
 
-    public static Sprite getCurrentSprite(Facing facing, CunningObjectSpriteCategory category)
+    public static SpriteDescription getCurrentSprite(Facing facing, CunningObjectSpriteCategory category)
     {
-        return SpriteUtil.loadSpriteFromResources(cunningObjectSprites[new KeyValuePair<Facing, CunningObjectSpriteCategory>(facing, category)]);
+        return new SpriteDescription(spriteName: cunningObjectSprites[new KeyValuePair<Facing, CunningObjectSpriteCategory>(facing, category)]);
     }
 
     [RuntimeInitializeOnLoadMethod]
@@ -195,6 +212,29 @@ public static class CunningObjectSpriteList
 
         cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.NorthEast, CunningObjectSpriteCategory.Crank), PrefabNames.crankSE);
         cunningObjectSprites.Add(new KeyValuePair<Facing, CunningObjectSpriteCategory>(Facing.SouthEast, CunningObjectSpriteCategory.Crank), PrefabNames.crankSE);
+    }
+}
+
+//spawn details are built once at load, so the sprite is chosen from the saved activation state when it is applied rather than when it is built
+public class CunningObjectAppearance : IAppearance
+{
+    private int index;
+    private CunningObjectSpriteCategory category;
+
+    public bool large { get { return false; } }
+    public bool withScale { get { return true; } }
+
+    public CunningObjectAppearance(int index, CunningObjectSpriteCategory category)
+    {
+        this.index = index;
+        this.category = category;
+    }
+
+    public void applyAppearance(SpriteLayerRendererList rendererList, CharacterAnimationType type = CharacterAnimationType.OOC_Idle_Front, bool updateColors = false)
+    {
+        bool evenActivation = TrapAndButtonStateManager.contains(CunningObject.generateKey(AreaManager.locationName, index));
+
+        CunningObjectSpriteList.getCurrentSprite(CunningObject.getFacing(evenActivation), category).applyAppearance(rendererList, type, updateColors);
     }
 }
 

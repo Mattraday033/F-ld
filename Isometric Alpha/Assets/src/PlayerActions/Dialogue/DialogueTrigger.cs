@@ -4,14 +4,35 @@ using UnityEngine;
 
 public interface INameSource
 {
-    public string getName();
+    //shown to the player, so it never carries indexes or underscores
+    public string displayName { get; }
+
+    //used for dictionary look ups, so it may carry indexes and underscores
+    public string uniqueName { get; }
 }
 
 public static class NameSourceExtensions
 {
+    //strips the index, trailing separators and underscores a uniqueName can carry
+    public static string toNPCName(string uniqueName)
+    {
+        if(string.IsNullOrEmpty(uniqueName))
+        {
+            return Constants.emptyString;
+        }
+
+        return DialogueList.scrubNameOfEndNumbers(uniqueName).TrimEnd('-', '_', ' ').Replace('_', ' ');
+    }
+
+    //turns an enum name such as MattockRack into Mattock Rack
+    public static string splitCamelCase(string camelCase)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(camelCase, "(?<=[a-z])(?=[A-Z])", " ");
+    }
+
     public static bool hasGenericName(this INameSource source)
     {
-        switch(DialogueList.scrubNameOfEndNumbers(source.getName()))
+        switch(source.displayName)
         {
             //inanimate object
             case NPCNameList.chest:
@@ -50,14 +71,45 @@ public interface IDialogueSource
 public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 {
 
-    public string npcName = "";
+    //set by the spawn details, which tell NPCs sharing a name apart by their index
+    private string _UniqueName = "";
+    public string uniqueName
+    {
+        get
+        {
+            return _UniqueName;
+        }
+        set
+        {
+            _UniqueName = value;
+            setNPCName();
+        }
+    }
+
+    private string _NPCName = "";
+    public string displayName { get { return _NPCName; } }
 
     private IDialogueSource _DialogueSource;
     public IDialogueSource dialogueSource
     {
         set
         {
-           _DialogueSource = value; 
+           _DialogueSource = value;
+           setNPCName();
+        }
+    }
+
+    //the dialogue's speaker name wins over the uniqueName when there is one
+    private void setNPCName()
+    {
+        Dialogue currentDialogue = dialogue;
+
+        if(currentDialogue == null)
+        {
+            _NPCName = NameSourceExtensions.toNPCName(_UniqueName);
+        } else
+        {
+            _NPCName = NameSourceExtensions.toNPCName(currentDialogue.getName());
         }
     }
     public Dialogue dialogue { get { 
@@ -128,20 +180,9 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
         animationManager.characterFacing.currentFacing = State.playerFacing.getOpposingFacing();
     }
 
-    public string getName()
-    {
-        if(dialogue == null)
-        {
-            return npcName;
-        } else
-        {
-            return dialogue.getName();
-        }
-    }
-
     private void OnEnable()
     {
-        EventList.SetActiveByNameChannel.Invoke(ActivationCategory.Dialogue, npcName, true);
+        EventList.SetActiveByNameChannel.Invoke(ActivationCategory.Dialogue, uniqueName, true);
 
         if(animationManager == null)
         {
@@ -151,7 +192,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     private void OnDisable()
     {
-        EventList.SetActiveByNameChannel.Invoke(ActivationCategory.Dialogue, npcName, true);
+        EventList.SetActiveByNameChannel.Invoke(ActivationCategory.Dialogue, uniqueName, true);
     }
 
 }

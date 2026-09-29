@@ -101,10 +101,9 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		return false;
 	}
 
-	public override string getName()
-	{
-        return getKey();
-	}
+	//item keys are written to be shown to the player
+	public override string displayName { get { return getKey(); } }
+	public override string uniqueName { get { return getKey(); } }
 
 	public ItemListID getItemListID()
 	{
@@ -554,7 +553,7 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 	{
 		List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(getName()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(getQuantityForDisplay()));
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getWorthBlock(getWorthForDisplay()));

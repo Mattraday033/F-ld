@@ -1432,9 +1432,9 @@ public static class DialogueList
 		
 	}
 
-    public static void addDialogueToList(string areaName, string npcName, Dialogue dialogue)
+    public static void addDialogueToList(string areaName, string displayName, Dialogue dialogue)
 	{
-		addDialogueToList(areaName + npcName, dialogue);
+		addDialogueToList(areaName + displayName, dialogue);
 	}
 
     public static void addDialogueToList(string key, Dialogue dialogue)
@@ -1449,27 +1449,27 @@ public static class DialogueList
                     InkAssetList.getInkJSON(DialogueKey.DefaultPartyMemberDialogue)));
     }
 
-    public static Dialogue getDialogue(string areaName, string npcName)
+    public static Dialogue getDialogue(string areaName, string displayName)
     {
-        if(getDialogueBasedOffNPCName(npcName, out Dialogue nameSpecificDialogue))
+        if(getDialogueBasedOffNPCName(displayName, out Dialogue nameSpecificDialogue))
         {
             return nameSpecificDialogue;
         }
 
-        string key = areaName + npcName;
+        string key = areaName + displayName;
         key = key.Replace(" ", "");
 
         Dialogue dialogue = getDialogue(key);
 
         if(dialogue == null)
         {
-            key = npcName + areaName;
+            key = displayName + areaName;
             key = key.Replace(" ", "");
             dialogue = getDialogue(key);
 
             if(dialogue == null)
             {
-                Debug.LogError("Dialogue does not exist for areaName + npcName combo: " + key);
+                Debug.LogError("Dialogue does not exist for areaName + displayName combo: " + key);
                 return null;
             }
         }
@@ -1477,9 +1477,9 @@ public static class DialogueList
         return dialogue;
     }
 
-    private static bool getDialogueBasedOffNPCName(string npcName, out Dialogue nameSpecificDialogue)
+    private static bool getDialogueBasedOffNPCName(string displayName, out Dialogue nameSpecificDialogue)
     {
-        switch(scrubNameOfEndNumbers(npcName))
+        switch(scrubNameOfEndNumbers(displayName))
         {
             case NPCNameList.awkwardRubble:
                 nameSpecificDialogue = awkwardRubbleDialogue;
