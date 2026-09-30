@@ -47,19 +47,47 @@ public enum BodyType
     RagsTorn_M,
     Rags_F,
     PlainRobe,
-    LovashiArmor
+    LovashiArmor,
+    LovashiPriestRobe
 }
 
 public enum FacialFeatureType
 {
     None,
-    Short_Goatee
+    Short_Goatee,
+    Small_Beard,
+    Long_Beard_Pointed,
+    Long_Beard_Bushy
 }
 
 public enum HairType
 {
     Bald,
-    Short_Ruffled
+    Bald_Bandaged, // Rioter (Shiv)
+    Long_Back, // Kende 
+    Long_Bob, //Quartermaster Emese
+    Long_Headband, // Nandor
+    Long_Neat, //Director
+    Long_Middle_Part, //Dezso
+    Long_Peaked, //Balint
+    Long_Rugged, //Priest
+    Long_Straight, // adela
+    Long_Wild, //laszlo
+    Lovashi_Helmet, //pazman
+    Lovashi_Helmet_Plumed, //lancer
+    Mask_Spider, //Takacs
+    Short, // Carter
+    Short_Bandaged, //marcos wounded
+    Short_Bun, //Virag
+    Short_Bushy, //Imre
+    Short_Combed, // Overseer
+    Short_Messy, // Marcos
+    Short_Pointed, //Reka
+    Short_Ponytail, //Muzsa
+    Short_Peaked, //Thatch
+    Short_Ruffled, // spearman/Javelineer
+    Short_Smooth, //andras
+    Short_Spiked //Protag_M
 }
 
 public enum CloakType
@@ -131,6 +159,7 @@ public class SpriteDescription: IAppearance
         }
     }
     private float offset;
+    private bool lowColliderPriority;
 
     public SpriteDescription(string spriteName = PrefabNames.blankTexture,
                                 bool flipX = false,
@@ -139,9 +168,11 @@ public class SpriteDescription: IAppearance
                                 Color tint = default,
                                 bool useRubbleColor = false,
                                 bool withScale = true,
-                                float offset = 0f
+                                float offset = 0f,
+                                bool lowColliderPriority = false
                                 )
     {
+
         this.spriteName = spriteName;
         this.flipX = flipX;
         this._Large = large;
@@ -160,6 +191,7 @@ public class SpriteDescription: IAppearance
 
         this._WithScale = withScale;
         this.offset = offset;
+        this.lowColliderPriority = lowColliderPriority;
     }
 
     public void applyAppearance(SpriteLayerRendererList rendererList, CharacterAnimationType type = CharacterAnimationType.OOC_Idle_Front, bool updateColors = false)
@@ -178,6 +210,11 @@ public class SpriteDescription: IAppearance
         rendererList.setFlipX(flipX);
 
         sortingLayerInfo.setRendererSortingLayer(rendererList[SpriteLayer.Body]);
+
+        if(lowColliderPriority)
+        {
+            rendererList.decreaseBodyColliderPriority();
+        }
 
         if(offset == 0f)
         {

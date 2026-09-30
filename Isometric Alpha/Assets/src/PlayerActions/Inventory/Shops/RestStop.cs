@@ -32,20 +32,33 @@ public abstract class OverHeadIconComponent : MonoBehaviour, IOverHeadIconSource
 
     private void Awake()
     {
-        iconManager = GetComponent<ComponentList>().overHeadIconManager;
+        //spawn behaviours add the icon manager beside this component; invisible extra spaces have none
+        iconManager = GetComponent<OverHeadIconManager>();
         revealable = GetComponent<IRevealable>();
+    }
 
-        createAllOverheadIcons();
+    //waits for Start so the spawn behaviour can finish setting fields, like the shopkeeper's inventory key, after AddComponent
+    private void Start()
+    {
+        tryCreateAllOverheadIcons();
     }
 
     private void OnEnable()
     {
-        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(createAllOverheadIcons);
+        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(tryCreateAllOverheadIcons);
     }
 
     private void OnDisable()
     {
-        PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(createAllOverheadIcons);
+        PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(tryCreateAllOverheadIcons);
+    }
+
+    private void tryCreateAllOverheadIcons()
+    {
+        if(iconManager != null)
+        {
+            createAllOverheadIcons();
+        }
     }
 
 

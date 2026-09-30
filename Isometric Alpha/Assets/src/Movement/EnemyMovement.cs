@@ -231,9 +231,6 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     private void Awake()
     {
-        // rendererList = new SpriteOutline();
-        // rendererList.setSpriteRenderer(spriteRenderer);
-
         if(getMonsterPackIndex() == CombatStateManager.retreatedFromIndex)
         {
             retreatStun();

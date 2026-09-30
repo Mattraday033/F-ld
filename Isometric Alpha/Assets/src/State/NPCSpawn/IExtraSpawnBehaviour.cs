@@ -32,11 +32,14 @@ public static class IExtraSpawnBehaviourExtensions
 
 public class ActivationListenerSpawnBehaviour : IExtraSpawnBehaviour
 {
-    public ActivationListenerSpawnBehaviour()
+    //for requirements that belong to the spawned object itself rather than to one of its behaviours
+    public ActivationListenerSpawnBehaviour(KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements = null)
     {
+        this._ActivationRequirements = activationRequirements ?? _ActivationRequirements;
     }
 
-    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+    private KeyValuePair<ActivationDesignatorType, ActivationCategory>[] _ActivationRequirements = new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => _ActivationRequirements;
 
     public Component addBehaviour(GameObject gameObject)
     {
@@ -428,24 +431,74 @@ public class OverHeadIconManagerSpawnBehaviour : IExtraSpawnBehaviour
     }
 }
 
-public class PartyMemberDespawnListenerSpawnBehaviour : IExtraSpawnBehaviour
+public class PartyMemberMovementSpawnBehaviour : IExtraSpawnBehaviour
 {
-    private string displayName;
-    
-    public PartyMemberDespawnListenerSpawnBehaviour(string displayName)
+    private PartyMember partyMember;
+    private int placeInTrain;
+
+    public PartyMemberMovementSpawnBehaviour(PartyMember partyMember, int placeInTrain)
     {
-        this.displayName = displayName;
+        this.partyMember = partyMember;
+        this.placeInTrain = placeInTrain;
+    }
+
+    //a follower only belongs in the train while its party member is in the formation
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[]
+    {
+        ActivationRequirementList.leftFormationByName
+    };
+
+    public Component addBehaviour(GameObject gameObject)
+    {
+        PartyMemberMovement partyMemberMovement = gameObject.AddComponent<PartyMemberMovement>();
+
+        partyMemberMovement.partyMember = partyMember;
+        partyMemberMovement.placeInTrain = placeInTrain;
+
+        //the animation manager arrives with the aesthetic behaviours, so its OnEnable ran before this tracker existed to be found
+        NewAnimationManager animationManager = gameObject.GetComponent<NewAnimationManager>();
+
+        if(animationManager != null)
+        {
+            animationManager.movementTracker = partyMemberMovement;
+        }
+
+        return partyMemberMovement;
+    }
+}
+
+public class RestStopSpawnBehaviour : IExtraSpawnBehaviour
+{
+    public RestStopSpawnBehaviour()
+    {
     }
 
     public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
 
     public Component addBehaviour(GameObject gameObject)
     {
-        PartyMemberDespawnListener listener = gameObject.AddComponent<PartyMemberDespawnListener>();
+        return gameObject.AddComponent<RestStop>();
+    }
+}
 
-        listener.partyMemberName = displayName;
+public class ShopkeeperSpawnBehaviour : IExtraSpawnBehaviour
+{
+    private string shopkeeperInventoryKey;
 
-        return listener;
+    public ShopkeeperSpawnBehaviour(string shopkeeperInventoryKey)
+    {
+        this.shopkeeperInventoryKey = shopkeeperInventoryKey;
+    }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+
+    public Component addBehaviour(GameObject gameObject)
+    {
+        Shopkeeper shopkeeper = gameObject.AddComponent<Shopkeeper>();
+
+        shopkeeper.shopkeeperInventoryKey = shopkeeperInventoryKey;
+
+        return shopkeeper;
     }
 }
 

@@ -58,9 +58,7 @@ public static class SpawnInfoManager
 
         spawnAllTransitions();
 
-        // instantiateAllAxisSpawnDetails();
-
-        // PartyMemberTrainManager.createPartyMemberTrain();
+        PartyMemberTrainManager.createPartyMemberTrain();
 
         // performButtonScriptStartingAction();
 

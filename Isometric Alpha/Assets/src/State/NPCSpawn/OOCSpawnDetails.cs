@@ -14,7 +14,8 @@ public class OOCSpawnDetails: IAppearanceSource
     protected bool ignoresSecretDoors;
     protected Dictionary<Type, IExtraSpawnBehaviour> aestheticSpawnBehaviours = new();
     protected Dictionary<Type, IExtraSpawnBehaviour> universalSpawnBehaviours = new();
-    
+    protected ActivationListenerSpawnBehaviour activationListenerSpawnBehaviour = new();
+
     private IAppearance _Appearance;
     public IAppearance appearance { get { return _Appearance; } }
 
@@ -98,12 +99,11 @@ public class OOCSpawnDetails: IAppearanceSource
 
         // setIgnoresSecretDoors(interactable);
 
-        ActivationListenerSpawnBehaviour activationListenerSpawnBehaviour = new ActivationListenerSpawnBehaviour();
-
         foreach(GameObject interactable in allInteractables)
         {
             ActivationListener listener = activationListenerSpawnBehaviour.addBehaviour(interactable) as ActivationListener;
             listener.index = index;
+            activationListenerSpawnBehaviour.applyActivationRequirements(listener);
 
             foreach(IExtraSpawnBehaviour behaviour in universalSpawnBehaviours.Values)
             {
@@ -197,77 +197,6 @@ public class CunningObjectSpawnDetails : OOCSpawnDetails
 
 }
 
-// public class LinkedCunningBlockerSpawnDetails : CunningObjectSpawnDetails
-// {
-
-//     private int linkedIndex;
-
-//     public LinkedCunningBlockerSpawnDetails(int index, 
-//                                             Vector3Int cellCoords, 
-//                                             Facing startFacing, 
-//                                             Facing endFacing, 
-//                                             CunningObjectSpriteCategory category, 
-//                                             List<ObstacleSpawnDetails> allBlockerSpawnDetails, 
-//                                             int linkedIndex,
-//                                             string tutorialTargetHash = null,
-//                                             IAppearance appearance = null) :
-//     base(index, cellCoords, startFacing, category, allBlockerSpawnDetails, endFacing: endFacing, tutorialTargetHash: tutorialTargetHash, appearance: appearance)
-//     {
-//         this.linkedIndex = linkedIndex;
-//     }
-
-//     public override void spawnActions(CunningObject cunningObject)
-//     {
-//         // GameObject gameObject = cunningObject.gameObject;
-
-//         // LinkedCunningBlocker linkedBlocker = gameObject.AddComponent<LinkedCunningBlocker>();
-//         // // linkedBlocker.spriteRenderer = cunningObject.spriteRenderer;
-//         // linkedBlocker.linkedIndex = linkedIndex;
-
-//         // addNameTagGenerator(gameObject, linkedBlocker, cunningTarget: true);
-
-//         // GameObject.Destroy(cunningObject);
-
-//         // base.spawnActions(linkedBlocker);
-//     }
-// }
-
-// public class DoubleCunningBlockerSpawnDetails : CunningObjectSpawnDetails
-// {
-
-//     private List<ObstacleSpawnDetails> deactivatedBlockerSpawnDetails;
-
-//     public DoubleCunningBlockerSpawnDetails(int index, 
-//                                             Vector3Int cellCoords, 
-//                                             Facing startFacing, 
-//                                             Facing endFacing, 
-//                                             CunningObjectSpriteCategory category, 
-//                                             List<ObstacleSpawnDetails> activatedBlockerSpawnDetails, 
-//                                             List<ObstacleSpawnDetails> deactivatedBlockerSpawnDetails,
-//                                             IAppearance appearance = null) :
-//     base(index, cellCoords, startFacing, category, activatedBlockerSpawnDetails, endFacing: endFacing, appearance: appearance)
-//     {
-//         this.deactivatedBlockerSpawnDetails = deactivatedBlockerSpawnDetails;
-//     }
-
-//     public override void spawnActions(CunningObject cunningObject)
-//     {
-//         // GameObject gameObject = cunningObject.gameObject;
-
-//         // DoubleCunningBlocker doubleBlocker = gameObject.AddComponent<DoubleCunningBlocker>();
-//         // // doubleBlocker.spriteRenderer = cunningObject.spriteRenderer;
-
-//         // addNameTagGenerator(gameObject, doubleBlocker, cunningTarget: true);
-
-//         // GameObject.Destroy(cunningObject);
-
-//         // base.spawnActions(doubleBlocker);
-
-//         // buildBlockers(doubleBlocker, deactivatedBlockerSpawnDetails);
-//     }
-// }
-
-
 public class ObstacleSpawnDetails : OOCSpawnDetails
 {
     protected override int layer { get { return LayerAndTagManager.objectLayer; } }
@@ -304,8 +233,6 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
         universalSpawnBehaviours[typeof(ObstacleSpawnBehaviour)] = new ObstacleSpawnBehaviour(uniqueName, ignoresSecretDoors, this.activationRequirements);
     }
 
-    //CunningObject.cunning broadcasts evenActivation and then stores its flipped value,
-    //so a stored true means the last broadcast set this obstacle inactive
     private bool deactivatedByCunningObject()
     {
         if(Array.IndexOf(activationRequirements, ActivationRequirementList.cunningByIndex) < 0)
@@ -315,16 +242,6 @@ public class ObstacleSpawnDetails : OOCSpawnDetails
 
         return TrapAndButtonStateManager.contains(CunningObject.generateKey(AreaManager.locationName, index));
     }
-
-    // protected override void setIgnoresSecretDoors(GameObject interactable)
-    // {
-    //     Obstacle obstacle = interactable.GetComponent<Obstacle>();
-
-    //     if(obstacle != null && ignoresSecretDoors)
-    //     {
-    //         obstacle.setToIgnoreSecretDoors();
-    //     }
-    // }
 
 }
 
@@ -366,16 +283,17 @@ public class NPCSpawnDetails : OOCSpawnDetails, IDialogueSource
 
         if(PartyMemberList.characterIsPartyMember(displayName))
         {
-            universalSpawnBehaviours[typeof(PartyMemberDespawnListenerSpawnBehaviour)] = new PartyMemberDespawnListenerSpawnBehaviour(displayName);
+            //the NPC stands aside once the party member it plays is following the player instead
+            activationListenerSpawnBehaviour = new ActivationListenerSpawnBehaviour(new KeyValuePair<ActivationDesignatorType, ActivationCategory>[]
+            {
+                ActivationRequirementList.joinedFormationByName
+            });
         }
     }
 }
 
 public class RestStopAndShopkeeperSpawnDetails : NPCSpawnDetails
 {
-
-    private bool isShopkeeper = false;
-    private bool isRestStop = false;
 
     public RestStopAndShopkeeperSpawnDetails(string displayName,
                                              Vector3Int cellCoords,
@@ -389,27 +307,16 @@ public class RestStopAndShopkeeperSpawnDetails : NPCSpawnDetails
                                              int index = 0) :
     base(displayName, cellCoords, facing: facing, extraSpaces: extraSpaces, ignoresSecretDoors: ignoresSecretDoors, appearance: appearance, colliderOffset: colliderOffset, index: index)
     {
-        this.isShopkeeper = isShopkeeper;
-        this.isRestStop = isRestStop;
+        if(isShopkeeper)
+        {
+            universalSpawnBehaviours[typeof(ShopkeeperSpawnBehaviour)] = new ShopkeeperSpawnBehaviour(displayName);
+        }
+
+        if(isRestStop)
+        {
+            universalSpawnBehaviours[typeof(RestStopSpawnBehaviour)] = new RestStopSpawnBehaviour();
+        }
     }
-
-    // public override void spawnActions(GameObject npc)
-    // {
-    //     base.spawnActions(npc);
-
-    //     if(isShopkeeper)
-    //     {
-    //         Shopkeeper shopkeeper = npc.AddComponent<Shopkeeper>();
-
-    //         shopkeeper.shopkeeperInventoryKey = displayName;
-    //     }
-
-    //     if(isRestStop)
-    //     {
-    //         npc.AddComponent<RestStop>();
-    //     }
-
-    // }
 }
 
 public enum Axis { DescendingX = 0, DescendingY = 1}
@@ -1414,6 +1321,38 @@ public class TutorialColliderSpawnDetails : OOCSpawnDetails
         this.seenFlagName = seenFlagName;
         this.startSpawningFlagList = startSpawningFlagList ?? new StartSpawningAllTrueFlagList();
         this.monsterDefeatKeyIndex = -1;
+    }
+}
+
+//a party member following the player, spawned on the player's cell and facing the way the player faces
+public class PartyMemberTrainSpawnDetails : OOCSpawnDetails
+{
+    protected override int layer { get { return LayerAndTagManager.trainLayer; } }
+
+    public override Transform parent { get { return AreaManager.getPlayerParent(); } }
+
+    public override string uniqueName { get { return partyMember.uniqueName; } }
+
+    //followers are created by PartyMemberTrainManager rather than an area's spawn list, so their NPC spawn params do not apply
+    public override SpawnParams spawnParams { get { return new InteractableSpawnParams(); } }
+
+    public readonly PartyMember partyMember;
+    public readonly int placeInTrain;
+
+    public PartyMemberTrainSpawnDetails(PartyMember partyMember, int placeInTrain) :
+    base(partyMember.displayName,
+         appearance: partyMember.stats.appearance,
+         cellCoords: PlayerMovement.getInstance().getCell(),
+         facing: State.playerFacing.getFacing(),
+         ignoresSecretDoors: true)
+    {
+        this.partyMember = partyMember;
+        this.placeInTrain = placeInTrain;
+
+        //the stats are the appearance source, so a change of equipment shows on the follower
+        aestheticSpawnBehaviours[typeof(AnimationManagerSpawnBehaviour)] = new AnimationManagerSpawnBehaviour(partyMember.stats, facing);
+
+        universalSpawnBehaviours[typeof(PartyMemberMovementSpawnBehaviour)] = new PartyMemberMovementSpawnBehaviour(partyMember, placeInTrain);
     }
 }
 

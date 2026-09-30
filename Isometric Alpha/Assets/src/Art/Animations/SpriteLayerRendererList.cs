@@ -152,6 +152,18 @@ public class SpriteLayerRendererList : MonoBehaviour
         }
     }
 
+    //pushing the body back on z lets the colliders of anything overlapping it win the mouse hover
+    public void decreaseBodyColliderPriority()
+    {
+        Vector3 localPosition = bodyRenderer.transform.localPosition;
+
+        localPosition.z = lowBodyColliderPriorityZ;
+
+        bodyRenderer.transform.localPosition = localPosition;
+    }
+
+    private const float lowBodyColliderPriorityZ = 1f;
+
     public void enableAllLayers()
     {
         foreach(SpriteRenderer renderer in characterRenderers)

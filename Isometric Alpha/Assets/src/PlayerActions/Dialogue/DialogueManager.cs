@@ -478,7 +478,7 @@ public class DialogueManager : MonoBehaviour
         int intParameter = 0;
         string parameter = "";
         string[] args = new string[0];
-        // AnimationManager targetAnimationManager = null;
+        NewAnimationManager targetAnimationManager = null;
 
         if (currentStory.canContinue)
         {
@@ -1068,30 +1068,30 @@ public class DialogueManager : MonoBehaviour
                     camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
                     string npcFacingArgs = getArgument(buffer, Constants.indexOne);
 
-                    // targetAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+                    targetAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<NewAnimationManager>();
 
-                    // if(targetAnimationManager != null)
-                    // {
-                    //     switch (npcFacingArgs.ToLower().Replace(" ",""))
-                    //     {
-                    //         case "ne":
-                    //         case "northeast":
-                    //             targetAnimationManager.setFacing(Facing.NorthEast);
-                    //             break;
-                    //         case "nw":
-                    //         case "northwest":
-                    //             targetAnimationManager.setFacing(Facing.NorthWest);
-                    //             break;
-                    //         case "se":
-                    //         case "southeast":
-                    //             targetAnimationManager.setFacing(Facing.SouthEast);
-                    //             break;
-                    //         case "sw":
-                    //         case "southwest":
-                    //             targetAnimationManager.setFacing(Facing.SouthWest);
-                    //             break;
-                    //     }
-                    // }
+                    if(targetAnimationManager != null)
+                    {
+                        switch (npcFacingArgs.ToLower().Replace(" ",""))
+                        {
+                            case "ne":
+                            case "northeast":
+                                targetAnimationManager.characterFacing.currentFacing = Facing.NorthEast;
+                                break;
+                            case "nw":
+                            case "northwest":
+                                targetAnimationManager.characterFacing.currentFacing = Facing.NorthWest;
+                                break;
+                            case "se":
+                            case "southeast":
+                                targetAnimationManager.characterFacing.currentFacing = Facing.SouthEast;
+                                break;
+                            case "sw":
+                            case "southwest":
+                                targetAnimationManager.characterFacing.currentFacing = Facing.SouthWest;
+                                break;
+                        }
+                    }
 
                     continueStory();
 

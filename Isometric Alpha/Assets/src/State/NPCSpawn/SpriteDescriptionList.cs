@@ -59,8 +59,8 @@ public static class SpriteDescriptionList
     public readonly static SpriteDescription tripleBarrel = new SpriteDescription(spriteName: PrefabNames.tripleBarrel);
     public readonly static SpriteDescription showtouch = new SpriteDescription(spriteName: PrefabNames.showtouch);
     public readonly static SpriteDescription leafPile = new SpriteDescription(spriteName: PrefabNames.leafPile);
-    public readonly static SpriteDescription directorStatue = new SpriteDescription(spriteName: PrefabNames.directorStatuePath, offset: -.1f);
-    public readonly static SpriteDescription brokenDirectorStatue = new SpriteDescription(spriteName: PrefabNames.brokenDirectorStatuePath, offset: -.1f);
+    public readonly static SpriteDescription directorStatue = new SpriteDescription(spriteName: PrefabNames.directorStatuePath, offset: -.1f, lowColliderPriority: true);
+    public readonly static SpriteDescription brokenDirectorStatue = new SpriteDescription(spriteName: PrefabNames.brokenDirectorStatuePath, offset: -.1f, lowColliderPriority: true);
     public readonly static SpriteDescription controlPanelFlipped = new SpriteDescription(spriteName: PrefabNames.controlPanel, flipX: Constants.flipX, offset: Constants.onTableHeightOffset*2);
     public readonly static SpriteDescription lowStalagmite = new SpriteDescription(spriteName: PrefabNames.lowStalagmite);
 

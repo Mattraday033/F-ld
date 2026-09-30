@@ -192,7 +192,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     private void OnDisable()
     {
-        EventList.SetActiveByNameChannel.Invoke(ActivationCategory.Dialogue, uniqueName, true);
+        EventList.SetActiveByNameChannel.Invoke(ActivationCategory.Dialogue, uniqueName, false);
     }
 
 }
