@@ -64,7 +64,7 @@ public static class OverallUIManager
 
     public static void changeScreen(ScreenType newScreenType)
     {
-        if (newScreenType == lastScreenType && PlayerOOCStateManager.currentActivity == OOCActivity.inUI)
+        if (newScreenType == lastScreenType && PlayerStateManager.currentActivity == CurrentActivity.InUI)
         {
             return;
         }

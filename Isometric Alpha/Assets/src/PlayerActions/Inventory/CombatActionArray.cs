@@ -152,15 +152,15 @@ public class CombatActionArray : StatBoostSourceCombiner
             // EquippedItems.OnEquipmentChange.Invoke();
         }
 
-        if(!PlayerOOCStateManager.inMainMenu() && !LoadSaveFile.midLoad && 
-            PlayerOOCStateManager.currentActivity == OOCActivity.inUI)
+        if(!PlayerStateManager.inMainMenu() && !LoadSaveFile.midLoad && 
+            PlayerStateManager.currentActivity == CurrentActivity.InUI)
         {
             combatActions[slotIndex].playUnequipSFX();
         }
 
         combatActions[slotIndex] = null;
 
-        if(!LoadSaveFile.midLoad && PlayerOOCStateManager.currentActivity == OOCActivity.inUI)
+        if(!LoadSaveFile.midLoad && PlayerStateManager.currentActivity == CurrentActivity.InUI)
         {
             MouseHoverManager.OnHoverPanelCreation.Invoke();
             OnCombatActionArrayChange.Invoke();
@@ -272,14 +272,14 @@ public class CombatActionArray : StatBoostSourceCombiner
 
         if(!LoadSaveFile.midLoad)
         {
-            if(!PlayerOOCStateManager.inMainMenu() &&
-                PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
+            if(!PlayerStateManager.inMainMenu() &&
+                PlayerStateManager.currentActivity == CurrentActivity.InUI && 
                 OverallUIManager.lastScreenType != ScreenType.SaveAndLoad)
             {
                 newCombatAction.playEquipSFX();
             }
 
-            if(!skipUIUpdate && PlayerOOCStateManager.currentActivity == OOCActivity.inUI)
+            if(!skipUIUpdate && PlayerStateManager.currentActivity == CurrentActivity.InUI)
             {
                 MouseHoverManager.OnHoverPanelCreation.Invoke();
                 OnCombatActionArrayChange.Invoke();

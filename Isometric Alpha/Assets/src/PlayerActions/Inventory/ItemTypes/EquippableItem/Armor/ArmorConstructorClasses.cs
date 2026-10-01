@@ -104,7 +104,7 @@ public class Shield : Armor
         DescriptionPanel.setText(panel.amountText, getQuantity());
         DescriptionPanel.setText(panel.worthText, getWorthForDisplay());
 
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
+        if(PlayerStateManager.currentActivity == CurrentActivity.InUI && 
             AbilityGridSideTab.getDescribableListType() == DescribableList.AllItems)
         {
             DescriptionPanel.disableText(panel.damageText);

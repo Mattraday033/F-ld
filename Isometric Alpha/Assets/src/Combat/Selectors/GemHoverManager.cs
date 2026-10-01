@@ -65,7 +65,7 @@ public static class GemHoverManager
             return desired;
         }
 
-        bool choosingLocation = CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation;
+        bool choosingLocation = PlayerStateManager.currentActivity == CurrentActivity.ChoosingLocation;
 
         foreach(Selector selector in visibleSelectors)
         {

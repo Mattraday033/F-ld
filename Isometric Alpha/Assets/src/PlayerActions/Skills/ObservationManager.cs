@@ -18,14 +18,14 @@ public class ObservationManager : SkillManager
     {
         SkillManager.destroyAllSkillGrids();
         getInstance().createSkillArea();
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.observing);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Observing);
         OnSkillUse.Invoke();
     }
 
     public static void leaveObservationMode()
     {
         getInstance().destroySkillArea();
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         OnSkillUse.Invoke();
     }
 

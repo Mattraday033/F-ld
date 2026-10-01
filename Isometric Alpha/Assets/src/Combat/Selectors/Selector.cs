@@ -224,7 +224,7 @@ public class Selector : ICloneable
                 continue;
             }
 
-			GameObject combatSprite = stats.combatSprite;
+			GameObject combatSprite = stats.getCombatSprite();
 
 			if (GameObjectUtil.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
 			{
@@ -235,16 +235,25 @@ public class Selector : ICloneable
             }
 		}
 
-        foreach(Stats target in targetsQueuedToMove)
-        {
-            CombatantHover hover = target.repositionClone.combatSprite.GetComponent<CombatantHover>();
-
-            hover.createOutlineAndStartFade();
-        }
+        highlightRepositionClones(targetsQueuedToMove);
 
         return false;
 	}
-	
+
+    //a target queued to move is drawn by its reposition clone's placeholder, which is what gets highlighted
+    private static void highlightRepositionClones(List<Stats> targetsQueuedToMove)
+    {
+        foreach(Stats target in targetsQueuedToMove)
+        {
+            Combatant placeholder = target.repositionClone.getCombatant();
+
+            if(placeholder != null && placeholder.hover != null)
+            {
+                placeholder.hover.createOutlineAndStartFade();
+            }
+        }
+    }
+
 	public bool hasAtLeastOneLivingTarget(string[] tagCriteria)
 	{
 		List<Stats> allTargets = getAllTargets();
@@ -257,7 +266,7 @@ public class Selector : ICloneable
 				continue;
 			}
 
-			GameObject combatSprite = stats.combatSprite;
+			GameObject combatSprite = stats.getCombatSprite();
 
 			if (GameObjectUtil.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
 			{
@@ -268,12 +277,7 @@ public class Selector : ICloneable
             }
 		}
 
-        foreach(Stats target in targetsQueuedToMove)
-        {
-            CombatantHover hover = target.repositionClone.combatSprite.GetComponent<CombatantHover>();
-
-            hover.createOutlineAndStartFade();
-        }
+        highlightRepositionClones(targetsQueuedToMove);
 
 		return false;
 	}
@@ -346,7 +350,7 @@ public class Selector : ICloneable
 
         foreach (Stats target in allActionTargets)
         {
-			if(target.healthBarManager == healthBar)
+			if(target.getHealthBarManager() == healthBar)
             {
                 healthBarOccurances++;
             }
@@ -366,7 +370,7 @@ public class Selector : ICloneable
         Color color = Color.white;
 
         if(CombatStateManager.inCombat && 
-            CombatStateManager.currentActivity == CurrentActivity.Tutorial &&
+            PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence &&
             template != SelectorTemplate.PlayerCursor)
         {
             switch(TutorialSequenceStep.getCurrentTutorialSelectorState())
@@ -391,7 +395,7 @@ public class Selector : ICloneable
                 color = Color.white;
             } else
             {
-                switch(CombatStateManager.currentActivity)
+                switch(PlayerStateManager.currentActivity)
                 {
                     case CurrentActivity.ChoosingAbility:
                     case CurrentActivity.ChoosingLocation:

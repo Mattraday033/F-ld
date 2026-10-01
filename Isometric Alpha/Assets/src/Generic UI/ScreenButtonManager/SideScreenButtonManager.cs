@@ -19,7 +19,7 @@ public class SideScreenButtonManager : MonoBehaviour
 
         OverallUIManager.changeScreen(screenType);
         
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InUI);
 	}
 
 	public static SideScreenButtonManager getInstance()

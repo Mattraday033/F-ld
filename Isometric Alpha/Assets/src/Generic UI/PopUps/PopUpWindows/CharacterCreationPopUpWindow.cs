@@ -312,7 +312,7 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         startingFlags[Flags.getStatTutorialFlag(player.stats)] = true;
         cleanSaveBlueprint.currentFlags = JsonConvert.SerializeObject(startingFlags, Formatting.Indented);
 
-        LoadSaveFile loadSaveFile = new LoadSaveFile(cleanSaveBlueprint, OOCActivity.inDialogue, showMonologueFirst: true);
+        LoadSaveFile loadSaveFile = new LoadSaveFile(cleanSaveBlueprint, CurrentActivity.InDialogue, showMonologueFirst: true);
         loadSaveFile.execute();
     }
 

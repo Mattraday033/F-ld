@@ -323,18 +323,15 @@ public static class PrefabNames
 
     public const string combatFolder = "Combat/";
 
-    public const string enemySprite = combatFolder + "Enemy Sprite";
-
     // public const string enemyWithAnimations = charactersFolder + "Single_Tile_Enemy";
 
     public const string healthBar = combatFolder + "Health Bar";
 
-    public const string allyCombatSpriteName = combatFolder + "AllySprite";
+    //instantiated as a child of each party member's Combatant; lives in Assets/Prefabs/UI/Resources
+    public const string abilityMenu = "Ability Menu Manager";
 
     public const string projectile = combatFolder + "Projectile";
     public const string effect = combatFolder + "Effect";
-
-    public const string placeHolderObject = combatFolder + "RepositionPlaceholder";
 
     #endregion
 

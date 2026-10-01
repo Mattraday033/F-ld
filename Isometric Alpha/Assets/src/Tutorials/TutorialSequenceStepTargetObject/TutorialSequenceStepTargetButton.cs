@@ -81,7 +81,7 @@ public class TutorialSequenceStepTargetButton : TutorialSequenceStepTargetUIObje
 
         if(skip)
         {
-            PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
+            PlayerStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
         }
 	}
 
@@ -92,6 +92,6 @@ public class TutorialSequenceStepTargetButton : TutorialSequenceStepTargetUIObje
 		advanceSequenceOnButtonPress = false;
 		currentButton = null;
         
-        PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
+        PlayerStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
 	}
 }

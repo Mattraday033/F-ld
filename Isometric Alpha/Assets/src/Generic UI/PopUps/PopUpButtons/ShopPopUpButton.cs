@@ -13,7 +13,7 @@ public class ShopPopUpButton : PopUpButton
 
     public void spawnPopUp(Shopkeeper currentShopkeeper)
     {
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inShopUI);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InShopUI);
 
         spawnPopUp();
 
@@ -34,7 +34,7 @@ public class ShopPopUpButton : PopUpButton
     {
         base.destroyPopUp();
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
     }
 
     public override GameObject getCurrentPopUpGameObject()

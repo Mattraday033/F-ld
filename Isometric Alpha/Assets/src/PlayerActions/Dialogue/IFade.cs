@@ -115,15 +115,15 @@ public class FadeToBlackTransition : FullScreenTransition
 
     public override IEnumerator getCoroutineTemplate()
     {
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking ||
-            PlayerOOCStateManager.currentActivity == OOCActivity.inMap )
+        if(PlayerStateManager.currentActivity == CurrentActivity.Walking ||
+            PlayerStateManager.currentActivity == CurrentActivity.InMap )
         {
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inFade);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.InFade);
         }
 
 		FadeToBlackManager.OnFadeToBlack.Invoke();
 
-        if(PlayerOOCStateManager.inMainMenu())
+        if(PlayerStateManager.inMainMenu())
         {
             fadeTime = slowFadeInSpeed;
         }
@@ -150,7 +150,7 @@ public class FadeToBlackTransition : FullScreenTransition
 
         DialogueManager.setCameraToDefaultSpeed();
 
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inDialogue || skipFadeIn)
+        if(PlayerStateManager.currentActivity == CurrentActivity.InDialogue || skipFadeIn)
         {
             yield break;
         }
@@ -172,9 +172,9 @@ public class FadeToBlackTransition : FullScreenTransition
 
 public class FadeBackInTransition : FullScreenTransition
 {
-    private OOCActivity exitActivity;
+    private CurrentActivity exitActivity;
 
-    public FadeBackInTransition(float fadeTimeMultiplier = 1f, OOCActivity exitActivity = OOCActivity.walking)
+    public FadeBackInTransition(float fadeTimeMultiplier = 1f, CurrentActivity exitActivity = CurrentActivity.Walking)
     {
         fadeTime *= fadeTimeMultiplier;
         this.exitActivity = exitActivity;
@@ -199,7 +199,7 @@ public class FadeBackInTransition : FullScreenTransition
         yield return null;
         yield return null; //2 frames of instant camera speed
 
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inDialogue)
+        if(PlayerStateManager.currentActivity == CurrentActivity.InDialogue)
         {
             DialogueManager.setCameraToDialogueSpeed();
         } else
@@ -229,14 +229,14 @@ public class FadeBackInTransition : FullScreenTransition
 		
         setToClear();
         
-        if(!PlayerOOCStateManager.inMainMenu())
+        if(!PlayerStateManager.inMainMenu())
         {
             FadeToBlackManager.OnFadeBackInFinished.Invoke();
         }
 
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inFade)
+        if(PlayerStateManager.currentActivity == CurrentActivity.InFade)
         {
-            PlayerOOCStateManager.setCurrentActivity(exitActivity);
+            PlayerStateManager.setCurrentActivity(exitActivity);
         }
 	}
 }
@@ -249,7 +249,7 @@ public abstract class CircleTransition : ScreenFade
     protected float currentScale = 0f;
 
     protected Transform parent;
-    protected OOCActivity endingState;
+    protected CurrentActivity endingState;
 
     protected abstract float getStartingScale();
     protected abstract float getEndingScale();
@@ -289,7 +289,7 @@ public abstract class CircleTransition : ScreenFade
             yield return null;
         }while(!isFinished());
 
-        PlayerOOCStateManager.setCurrentActivity(endingState);
+        PlayerStateManager.setCurrentActivity(endingState);
 
         if(CombatStateManager.inCombat && circleTransitionObject != null)
         {
@@ -301,7 +301,7 @@ public abstract class CircleTransition : ScreenFade
 public class CircleTransitionEnlarge : CircleTransition
 {
 
-    public CircleTransitionEnlarge(Transform parent, OOCActivity endingState)
+    public CircleTransitionEnlarge(Transform parent, CurrentActivity endingState)
     {
         this.parent = parent;
         this.endingState = endingState;
@@ -325,7 +325,7 @@ public class CircleTransitionEnlarge : CircleTransition
 public class CircleTransitionReduce : CircleTransition
 {
 
-    public CircleTransitionReduce(Transform parent, OOCActivity endingState)
+    public CircleTransitionReduce(Transform parent, CurrentActivity endingState)
     {
         this.parent = parent;
         this.endingState = endingState;

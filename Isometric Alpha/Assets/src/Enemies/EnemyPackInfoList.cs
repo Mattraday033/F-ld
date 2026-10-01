@@ -74,12 +74,12 @@ public static class EnemyPackInfoList
                                                                                                 },
                                                                                                 DropTableList.slaveMineDTKey, 
                                                                                                 xpDrop: 100,
-                                                                                                spawnDetailsList: new List<SpawnDetails>()
+                                                                                                spawnDetailsList: new List<CombatantSpawnDetails>()
                                                                                                     {
-                                                                                                        SpawnDetails.bottomRight2x2,
-                                                                                                        SpawnDetails.topLeft2x2,
-                                                                                                        SpawnDetails.topRight2x2,
-                                                                                                        SpawnDetails.bottomLeft2x2
+                                                                                                        CombatantSpawnDetails.bottomRight2x2,
+                                                                                                        CombatantSpawnDetails.topLeft2x2,
+                                                                                                        CombatantSpawnDetails.topRight2x2,
+                                                                                                        CombatantSpawnDetails.bottomLeft2x2
                                                                                                     });
 
     #endregion
@@ -146,13 +146,13 @@ public static class EnemyPackInfoList
                                                                                                         guaranteedDrops: new ItemListID[]  {new ItemListID(ItemList.keyItemListIndex, ItemList.directorsOfficeKeyBackIndex)},
                                                                                                         script: new KeyHalfScript(), 
                                                                                                         xpDrop: 150,
-                                                                                                        spawnDetailsList: new List<SpawnDetails>()
+                                                                                                        spawnDetailsList: new List<CombatantSpawnDetails>()
                                                                                                         {
-                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(1,1), new GridCoords(1,2) }),
-                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(0,0) }),
-                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(0,3) }),
-                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(3,0) }),
-                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(3,3) })
+                                                                                                            new CombatantSpawnDetails(new GridCoords[]{ new GridCoords(1,1), new GridCoords(1,2) }),
+                                                                                                            new CombatantSpawnDetails(new GridCoords[]{ new GridCoords(0,0) }),
+                                                                                                            new CombatantSpawnDetails(new GridCoords[]{ new GridCoords(0,3) }),
+                                                                                                            new CombatantSpawnDetails(new GridCoords[]{ new GridCoords(3,0) }),
+                                                                                                            new CombatantSpawnDetails(new GridCoords[]{ new GridCoords(3,3) })
                                                                                                         });
 
     public readonly static BossPackInfo directorWithBarricades = new BossPackInfo(new CreatureAmount[] { 
@@ -181,12 +181,12 @@ public static class EnemyPackInfoList
                                                                                                         DropTableList.lovashiGuardsDTKey,
                                                                                                         FlagNameList.foughtHorsesInManse, 
                                                                                                         xpDrop: 100,
-                                                                                                        spawnDetailsList: new List<SpawnDetails>()
+                                                                                                        spawnDetailsList: new List<CombatantSpawnDetails>()
                                                                                                         {
-                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(1,2), new GridCoords(0,2) }),
-                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(1,0), new GridCoords(0,0) }),
-                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(1,1), new GridCoords(0,1) }),
-                                                                                                            new SpawnDetails(new GridCoords[]{ new GridCoords(1,3), new GridCoords(0,3) })
+                                                                                                            new CombatantSpawnDetails(new GridCoords[]{ new GridCoords(1,2), new GridCoords(0,2) }),
+                                                                                                            new CombatantSpawnDetails(new GridCoords[]{ new GridCoords(1,0), new GridCoords(0,0) }),
+                                                                                                            new CombatantSpawnDetails(new GridCoords[]{ new GridCoords(1,1), new GridCoords(0,1) }),
+                                                                                                            new CombatantSpawnDetails(new GridCoords[]{ new GridCoords(1,3), new GridCoords(0,3) })
                                                                                                         });
 
     #endregion
@@ -571,9 +571,9 @@ public static class EnemyPackInfoList
                                                                                                                     EnemyAmountList.twoHiveHeralds
                                                                                                                  },
                                                                                                                  DropTableList.slaveMineDTKey,
-                                                                                                                 spawnDetailsList: new List<SpawnDetails>()
+                                                                                                                 spawnDetailsList: new List<CombatantSpawnDetails>()
                                                                                                                  {
-                                                                                                                    SpawnDetails.middle2x2
+                                                                                                                    CombatantSpawnDetails.middle2x2
                                                                                                                  }, xpDrop: 100,
                                                                                                                  guaranteedDrops: new ItemListID[]
                                                                                                                  {
@@ -606,9 +606,9 @@ public static class EnemyPackInfoList
                                                                                                     EnemyAmountList.threeWorms
                                                                                                     },
                                                                                                     DropTableList.slaveMineDTKey,
-                                                                                                    spawnDetailsList: new List<SpawnDetails>()
+                                                                                                    spawnDetailsList: new List<CombatantSpawnDetails>()
                                                                                                     {
-                                                                                                        SpawnDetails.middle2x2
+                                                                                                        CombatantSpawnDetails.middle2x2
                                                                                                     });
 
     private readonly static EnemyPackInfo twoMartyWormsOneToxicWormOneHiveHeraldOneArmoredWorm = new EnemyPackInfo(new CreatureAmount[] {
@@ -626,9 +626,9 @@ public static class EnemyPackInfoList
                                                                                                     EnemyAmountList.oneHiveHerald
                                                                                                     },
                                                                                                     DropTableList.slaveMineDTKey,
-                                                                                                    spawnDetailsList: new List<SpawnDetails>()
+                                                                                                    spawnDetailsList: new List<CombatantSpawnDetails>()
                                                                                                     {
-                                                                                                        SpawnDetails.middle2x2
+                                                                                                        CombatantSpawnDetails.middle2x2
                                                                                                     });
 
     private readonly static EnemyPackInfo twoArmoredWormsFourHiveHeralds = new EnemyPackInfo(new CreatureAmount[] {
@@ -645,9 +645,9 @@ public static class EnemyPackInfoList
                                                                                                     EnemyAmountList.threeHiveHeralds
                                                                                                     },
                                                                                                     DropTableList.lovashiGuardsDTKey,
-                                                                                                    spawnDetailsList: new List<SpawnDetails>()
+                                                                                                    spawnDetailsList: new List<CombatantSpawnDetails>()
                                                                                                     {
-                                                                                                        SpawnDetails.middle2x2
+                                                                                                        CombatantSpawnDetails.middle2x2
                                                                                                     });
 
     private readonly static EnemyPackInfo oneGuardianWormTwoHiveHeraldsThreeToxicWorms = new EnemyPackInfo(new CreatureAmount[] {

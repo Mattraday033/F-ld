@@ -45,9 +45,14 @@ public class Ticker : MonoBehaviour
 	{
 		foreach(Stats ally in allAllies)
 		{
-			AbilityMenuButton[] abilityButtons = ally.getAbilityMenuManager().abilityButtons;
-			
-			foreach(AbilityMenuButton button in abilityButtons)
+			AbilityMenuManager abilityMenuManager = ally.getAbilityMenuManager();
+
+			if(abilityMenuManager == null)
+			{
+				continue;
+			}
+
+			foreach(AbilityMenuButton button in abilityMenuManager.abilityButtons)
 			{
 				if(button.loadedCombatAction != null)
 				{

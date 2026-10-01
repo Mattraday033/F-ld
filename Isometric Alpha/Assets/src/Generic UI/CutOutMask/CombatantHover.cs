@@ -103,9 +103,11 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     private void setHealthBarHovered(bool isHovered)
     {
-        if(linkedStats != null && linkedStats.healthBarManager != null)
+        HealthBarManager healthBarManager = linkedStats.getHealthBarManager();
+
+        if(healthBarManager != null)
         {
-            linkedStats.healthBarManager.setHovered(isHovered);
+            healthBarManager.setHovered(isHovered);
         }
     }
 
@@ -115,7 +117,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
         if(TutorialSequence.blockMouseHovers() ||
             AbilityMenuButton.hoveringOverAbilityMenuButton || 
-            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+            PlayerStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
             return;
         }
@@ -148,7 +150,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
         revealPriorityHeld = false;
 
         if(TutorialSequence.blockMouseHovers() || 
-            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+            PlayerStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
             return;
         }
@@ -198,7 +200,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
     {
         if(TutorialSequence.blockMouseHovers() || 
             CombatStateManager.whoseTurn != WhoseTurn.Player || 
-            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu || 
+            PlayerStateManager.currentActivity == CurrentActivity.InEscapeMenu || 
             !hasTargetStats(out Stats target))
         {
             return;
@@ -255,14 +257,24 @@ public class CombatantHover : CombatMouseHover, IRevealable
             StopHighlightFadeMandatoryTarget.Invoke(target);
         }
 
+        HealthBarManager healthBarManager = target.getHealthBarManager();
+
         if(toggleReveal && (!target.isDead() || revealPriorityHeld))
         {
             target.setOutline();
-            target.healthBarManager.show();
+
+            if(healthBarManager != null)
+            {
+                healthBarManager.show();
+            }
         } else
         {
             target.removeOutline();
-            target.healthBarManager.hide();
+
+            if(healthBarManager != null)
+            {
+                healthBarManager.hide();
+            }
         }
     }
 
@@ -320,7 +332,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
         if(revealPriorityHeld || linkedStats.isInsideCoordinates(combatAction.getSelector().getAllSelectorCoords()))
         {
-            DamagePreviewManager.addDamagePreview(linkedStats, linkedStats.healthBarManager, combatAction);
+            DamagePreviewManager.addDamagePreview(linkedStats, linkedStats.getHealthBarManager(), combatAction);
         }
     }
 

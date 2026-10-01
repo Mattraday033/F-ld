@@ -57,7 +57,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public void handleCombatMouseClick()
     {
-        if(CombatStateManager.currentActivity == CurrentActivity.Tutorial)
+        if(PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence)
         {
             abilityMenuManager.setCurrentlySelectedAbilityIndex(index);
 

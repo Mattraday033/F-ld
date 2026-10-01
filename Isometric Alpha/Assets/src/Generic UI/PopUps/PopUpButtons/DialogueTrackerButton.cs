@@ -30,7 +30,7 @@ public class DialogueTrackerButton : PopUpButton
 
 		DialogueTrackerWindow currentWindow = (DialogueTrackerWindow) getPopUpWindow();
 		
-		PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.InDialogue);
 	}
 
 	public override void spawnPopUp()
@@ -44,7 +44,7 @@ public class DialogueTrackerButton : PopUpButton
 			type = PopUpType.DialogueTrackerWithoutChoices;
 		}
         
-		PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialoguePopUp);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.InDialoguePopUp);
 		
 		base.spawnPopUp();
 		

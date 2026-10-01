@@ -99,8 +99,8 @@ public static class Flags
 		return JsonConvert.SerializeObject(flags, Formatting.Indented);
 	}
 
-	//New game mode is no longer a flag: it is OOCActivity.MainMenu, asked through
-	//PlayerOOCStateManager.inMainMenu() and left by moving to another activity.
+	//New game mode is no longer a flag: it is CurrentActivity.MainMenu, asked through
+	//PlayerStateManager.inMainMenu() and left by moving to another activity.
 
 	public static void stopPartyTrainSpawning()
 	{

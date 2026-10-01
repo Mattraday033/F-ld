@@ -52,7 +52,7 @@ public class BinaryPanelPopUpButton : PopUpButton
 	public void executeDecisionWithoutPopUp()
 	{
         if((CombatStateManager.inCombat && CombatStateManager.whoseTurn == WhoseTurn.Lost) || 
-            PlayerOOCStateManager.inMainMenu() || 
+            PlayerStateManager.inMainMenu() || 
             SceneManager.GetActiveScene().name.Equals(SceneNameList.endOfDemo))
         {
             getDecisionType().execute();

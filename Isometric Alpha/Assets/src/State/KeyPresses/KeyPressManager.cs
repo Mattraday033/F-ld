@@ -86,23 +86,23 @@ public static class KeyPressManager
             return KeyBindingList.movementKeyPressed();
         }
 
-        switch (PlayerOOCStateManager.currentActivity)
+        switch (PlayerStateManager.currentActivity)
         {
-            case OOCActivity.walking:
-            case OOCActivity.inDialogue:
+            case CurrentActivity.Walking:
+            case CurrentActivity.InDialogue:
                 return Input.GetKey(KeyBindingList.revealKey.getCurrentKeyCode()) || Input.GetKey(KeyBindingList.hideTerrainKey.getCurrentKeyCode());
-            case OOCActivity.inUI:
-            case OOCActivity.inMap:
-            case OOCActivity.cunning:
-            case OOCActivity.observing:
-            case OOCActivity.intimidating:
-            case OOCActivity.inChestUI:
-            case OOCActivity.inBookUI:
-            case OOCActivity.inShopUI:
-            case OOCActivity.inDialoguePopUp:
-            case OOCActivity.inLevelUpPopUp:
-            case OOCActivity.inTutorialPopUp:
-            case OOCActivity.inTutorialSequence:
+            case CurrentActivity.InUI:
+            case CurrentActivity.InMap:
+            case CurrentActivity.Cunning:
+            case CurrentActivity.Observing:
+            case CurrentActivity.Intimidating:
+            case CurrentActivity.InChestUI:
+            case CurrentActivity.InBookUI:
+            case CurrentActivity.InShopUI:
+            case CurrentActivity.InDialoguePopUp:
+            case CurrentActivity.InLevelUpPopUp:
+            case CurrentActivity.InTutorialPopUp:
+            case CurrentActivity.InTutorialSequence:
                 return false;
 
             default:

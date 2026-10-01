@@ -12,7 +12,7 @@ public class CreditScreenManager : MonoBehaviour
 
     private void Awake()
     {
-        if(!PlayerOOCStateManager.inMainMenu() && thankYouMessage != null)
+        if(!PlayerStateManager.inMainMenu() && thankYouMessage != null)
         {
             thankYouMessage.SetActive(true);
             StartCoroutine(playCreditsMusic());

@@ -46,7 +46,7 @@ public static class EscapeStack
                 removeAllNullObjectsFromStack();
             }
 
-            if(PlayerOOCStateManager.inMainMenu())
+            if(PlayerStateManager.inMainMenu())
             {
                 removeTopObjectFromStack();
             }

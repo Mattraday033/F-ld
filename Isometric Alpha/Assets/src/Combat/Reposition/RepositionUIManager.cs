@@ -41,7 +41,7 @@ public class RepositionUIManager : MonoBehaviour, INeedsUpdateOnStateChange
 	
 	public void updateOnStateChange()
 	{	
-		if(CombatStateManager.currentActivity != CurrentActivity.ChoosingActor || 
+		if(PlayerStateManager.currentActivity != CurrentActivity.ChoosingActor || 
 		   PlayerCombatActionManager.playerCombatActionQueue.Count > 0 || 
 		   repositionManager.getRepositionsRemaining() <= 0)
 		{
@@ -51,7 +51,7 @@ public class RepositionUIManager : MonoBehaviour, INeedsUpdateOnStateChange
 			repositionButton.interactable = activate;
 		}
 		
-		if(CombatStateManager.currentActivity != CurrentActivity.ChoosingActor)
+		if(PlayerStateManager.currentActivity != CurrentActivity.ChoosingActor)
 		{
 			moveUnitButton.interactable = deactivate;
 		} else

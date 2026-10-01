@@ -54,7 +54,7 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
             return;
         }
 
-        if(InspectNode.inspecting || CombatStateManager.currentActivity == CurrentActivity.Tutorial)
+        if(InspectNode.inspecting || PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence)
         {
             backgroundImage.color = ColorList.grey25;
             interiorImage.enabled = true;

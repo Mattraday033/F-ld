@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class FlagNameList
 {
-        //newGameFlagName is gone: new game mode is OOCActivity.MainMenu now, read through
-        //PlayerOOCStateManager.inMainMenu().
+        //newGameFlagName is gone: new game mode is CurrentActivity.MainMenu now, read through
+        //PlayerStateManager.inMainMenu().
         public const string skipFirstDialogue = "skipFirstDialogue"; //Set to true if you want to skip the dialogue with brush and co at the beginning. Only used for testing		
         public const string finishedFirstDialogue = "finishedFirstDialogue"; //if the player finished the first dialogue with brush/géza normally
 

@@ -7,7 +7,7 @@ public class JournalPrompt : MonoBehaviour
 {
     private void Awake()
     {
-        if(CombatStateManager.inCombat || PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+        if(CombatStateManager.inCombat || PlayerStateManager.currentActivity != CurrentActivity.Walking)
         {
             gameObject.SetActive(false);
         }

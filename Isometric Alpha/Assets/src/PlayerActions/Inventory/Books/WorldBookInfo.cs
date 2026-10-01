@@ -15,10 +15,10 @@ public class WorldBookInfo : MonoBehaviour, INameSource
     
     public void setUpBookManager(bool receivesBook)
     {
-        setUpBookManager(receivesBook, OOCActivity.inUI);
+        setUpBookManager(receivesBook, CurrentActivity.InUI);
     }
 
-    public void setUpBookManager(bool receivesBook, OOCActivity previousActivity)
+    public void setUpBookManager(bool receivesBook, CurrentActivity previousActivity)
     {
         getBook().use(PartyManager.getPlayerStats(), receivesBook, previousActivity, gameObject);
     }

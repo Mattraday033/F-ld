@@ -64,7 +64,7 @@ public class BookItem : UsableItem
         this.bookPopUpButton = new BookPopUpButton();
     }
 
-    public void use(Stats target, bool giveCopyOfBook, OOCActivity previousActivity, GameObject bookGameObject)
+    public void use(Stats target, bool giveCopyOfBook, CurrentActivity previousActivity, GameObject bookGameObject)
     {
         setQuestStepOnRead();
         
@@ -79,12 +79,12 @@ public class BookItem : UsableItem
 
         setQuestStepOnRead();
 
-		if(PlayerOOCStateManager.currentActivity != OOCActivity.inUI)
+		if(PlayerStateManager.currentActivity != CurrentActivity.InUI)
 		{
-			Debug.LogError("PlayerOOCStateManager.currentActivity not inUI as expected. PlayerOOCStateManager.currentActivity = " + PlayerOOCStateManager.currentActivity.ToString());
+			Debug.LogError("PlayerStateManager.currentActivity not InUI as expected. PlayerStateManager.currentActivity = " + PlayerStateManager.currentActivity.ToString());
 		}
 
-        bookPopUpButton.spawnPopUp(this, false, OOCActivity.inUI, null);
+        bookPopUpButton.spawnPopUp(this, false, CurrentActivity.InUI, null);
     }
 	
 	public override bool infiniteUses()
@@ -212,7 +212,7 @@ public class DialogueBookItem : BookItem
 
     public override void use(Stats target)
 	{
-        bookPopUpButton.spawnPopUp(this, false, OOCActivity.walking, null);
+        bookPopUpButton.spawnPopUp(this, false, CurrentActivity.Walking, null);
     }
 
 	//IDescribable methods

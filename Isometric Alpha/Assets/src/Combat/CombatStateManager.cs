@@ -22,20 +22,6 @@ public enum WhoseTurn   {
                             TickDown = 6
                         }
 
-public enum CurrentActivity {
-                                Waiting = 1,
-                                ChoosingActor = 2,
-                                ChoosingAbility = 3, 
-                                ChoosingLocation = 4, 
-                                ChoosingTertiary = 5, 
-                                Repositioning = 6, 
-                                Tutorial = 7, 
-                                Retreating = 8, 
-                                InEscapeMenu = 9,
-                                Finished = 10,
-                                ResolveActionWarning = 11
-                            }
-
 public interface INeedsUpdateOnStateChange
 {
 	public void updateOnStateChange();
@@ -110,7 +96,6 @@ public class CombatStateManager : MonoBehaviour
 
 	public static SurpriseState whoIsSurprised;
 	public static WhoseTurn whoseTurn;
-	public static CurrentActivity currentActivity { get; private set; }
 
     public static string currentDefeatKey = "";
 
@@ -132,7 +117,6 @@ public class CombatStateManager : MonoBehaviour
     private static void initializeCombatStateManager()
     {
         instance = null;
-        currentActivity = CurrentActivity.ChoosingActor;
         resolvingTurnDuringTutorial = false;
         locationBeforeCombat = null;
         whoseTurn = WhoseTurn.Start;
@@ -208,11 +192,11 @@ public class CombatStateManager : MonoBehaviour
 		{
 			case SurpriseState.EnemySurprised:
 				updateTurnState(WhoseTurn.Player);
-				setCurrentActivity(CurrentActivity.ChoosingActor);
+				PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 				break;
 			case SurpriseState.NoOneSurprised:
 				updateTurnState(WhoseTurn.Player);
-				setCurrentActivity(CurrentActivity.ChoosingActor);
+				PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 				combatActionManager.decideAndShowEnemyCombatActions();
 				combatActionManager.decideAndShowSummonedCombatActions();
 				break;
@@ -229,7 +213,7 @@ public class CombatStateManager : MonoBehaviour
 
         OnNewTurn.AddListener(checkWinConditionOnNewTurn);
 
-		CombatUI.setCurrentActivityText(currentActivity);
+		CombatUI.setCurrentActivityText(PlayerStateManager.currentActivity);
         OnNewTurn.Invoke();
 
 		// CombatHoverManager.instantiateCombatHovers();
@@ -254,6 +238,11 @@ public class CombatStateManager : MonoBehaviour
     private static void announceCombatIsStarted()
     {
         inCombat = true;
+
+        //ChoosingActor is what combat reads until Start sets the first real activity, and leaving Walking here
+        //also switches the overworld's input set off for the fight
+        PlayerStateManager.setActivityWithoutEvents(CurrentActivity.ChoosingActor);
+
         OnCombatStart.Invoke();
     }
 
@@ -286,7 +275,12 @@ public class CombatStateManager : MonoBehaviour
 		yield return null;
 		yield return null;
 
-		GameObjectUtil.updateGameObjectPosition(PartyManager.getPlayerStats().combatSprite);
+		GameObject playerCombatSprite = PartyManager.getPlayerStats().getCombatSprite();
+
+		if(playerCombatSprite != null)
+		{
+			GameObjectUtil.updateGameObjectPosition(playerCombatSprite);
+		}
 
 		SelectorManager.displayCurrentHoverUI();
 	}
@@ -304,8 +298,8 @@ public class CombatStateManager : MonoBehaviour
 	public bool shouldMoveToFinished()
 	{
 		if (CombatActionManager.finishedChoosingPartyMemberCombatActions() &&
-            currentActivity != CurrentActivity.Waiting &&
-            currentActivity != CurrentActivity.Finished)
+            PlayerStateManager.currentActivity != CurrentActivity.Waiting &&
+            PlayerStateManager.currentActivity != CurrentActivity.Finished)
 		{
 			return true;
 		}
@@ -341,7 +335,7 @@ public class CombatStateManager : MonoBehaviour
 		}
 		else
 		{
-			setCurrentActivity(CurrentActivity.ChoosingActor);
+			PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 			updateTurnState(WhoseTurn.Player);
 		}
 	}
@@ -429,16 +423,16 @@ public class CombatStateManager : MonoBehaviour
 
 	public static void resolveTurn(bool skipNoActionCheck = false)
 	{
-		if (currentActivity == CurrentActivity.Tutorial)
+		if (PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence)
 		{
 			resolvingTurnDuringTutorial = true;
 		} else if(!skipNoActionCheck && 
                 !PlayerCombatActionManager.playerHasActionsInQueue() && 
-                currentActivity != CurrentActivity.ResolveActionWarning && 
+                PlayerStateManager.currentActivity != CurrentActivity.ResolveActionWarning && 
                 whoseTurn != WhoseTurn.Start)
         {
             spawnResolveTurnWarning();
-            if(currentActivity == CurrentActivity.ResolveActionWarning)
+            if(PlayerStateManager.currentActivity == CurrentActivity.ResolveActionWarning)
             {
                 return;
             }
@@ -447,7 +441,7 @@ public class CombatStateManager : MonoBehaviour
 		updateTurnState(WhoseTurn.Resolving);
 		CombatActionManager.lockInCombatActionOrder();
 		SelectorManager.deactivateCombatantInfoUIHoverPanel();
-		setCurrentActivity(CurrentActivity.Waiting);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.Waiting);
         instance.StartCoroutine(waitBeforeFirstResolve());
 	}
 
@@ -456,7 +450,7 @@ public class CombatStateManager : MonoBehaviour
         if(instance != null)
         {
             instance.binaryPanelPopUpButton.spawnPopUp(new ResolveTurnWithNoActions());
-            setCurrentActivity(CurrentActivity.ResolveActionWarning);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.ResolveActionWarning);
         }
     }
 
@@ -491,13 +485,13 @@ public class CombatStateManager : MonoBehaviour
 
         if (resolvingTurnDuringTutorial)
         {
-            setCurrentActivity(CurrentActivity.Tutorial);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.InTutorialSequence);
             resolvingTurnDuringTutorial = false;
             TutorialSequence.spawnCurrentTutorialPopUp();
         }
         else
         {
-            setCurrentActivity(CurrentActivity.ChoosingActor);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
         }
 
         OnNewTurn.Invoke();
@@ -505,7 +499,7 @@ public class CombatStateManager : MonoBehaviour
 
 	public static bool canResolveTurn()
 	{
-		if (currentActivity == CurrentActivity.ChoosingActor || currentActivity == CurrentActivity.Finished)
+		if (PlayerStateManager.currentActivity == CurrentActivity.ChoosingActor || PlayerStateManager.currentActivity == CurrentActivity.Finished)
 		{
 			return true;
 		}
@@ -515,15 +509,11 @@ public class CombatStateManager : MonoBehaviour
 		}
 	}
 
-	public static void setCurrentActivity(CurrentActivity newActivity)
+	//The combat half of PlayerStateManager.setCurrentActivity, which owns the activity itself. These fire before
+	//the new activity is assigned, so a listener still reads the activity being left.
+	public static void fireActivityChangeFromEvents(CurrentActivity oldActivity, CurrentActivity newActivity)
 	{
-        if (whoseTurn == WhoseTurn.Won || 
-            whoseTurn == WhoseTurn.Lost)
-        {
-            return;
-        }
-
-        switch (currentActivity)
+        switch (oldActivity)
         {
             case CurrentActivity.Waiting:
                 break;
@@ -537,7 +527,7 @@ public class CombatStateManager : MonoBehaviour
             case CurrentActivity.ChoosingTertiary:
                 OnActivityChangeFromChoosingTertiary.Invoke(newActivity);
                 break;
-            case CurrentActivity.Tutorial:
+            case CurrentActivity.InTutorialSequence:
                 OnActivityChangeFromTutorial.Invoke();
                 break;
             case CurrentActivity.Retreating:
@@ -551,12 +541,14 @@ public class CombatStateManager : MonoBehaviour
                 OnActivityChangeFromResolveTurnWarning.Invoke();
                 break;
             default:
-                Debug.LogError("Unknown CurrentActivity State: " + currentActivity.ToString());
+                Debug.LogError("Unknown CurrentActivity State: " + oldActivity.ToString());
                 break;
         }
+	}
 
-		currentActivity = newActivity;
-
+	//These fire after the new activity is assigned.
+	public static void fireActivityChangeToEvents(CurrentActivity newActivity)
+	{
         switch(newActivity)
         {
             case CurrentActivity.Waiting:
@@ -574,7 +566,7 @@ public class CombatStateManager : MonoBehaviour
             case CurrentActivity.ChoosingTertiary:
                 OnActivityChangeToChoosingTertiary.Invoke();
                 break;
-            case CurrentActivity.Tutorial:
+            case CurrentActivity.InTutorialSequence:
                 OnActivityChangeToTutorial.Invoke();
                 break;
             case CurrentActivity.Retreating:
@@ -599,13 +591,13 @@ public class CombatStateManager : MonoBehaviour
 			DamagePreviewManager.wipeAllDamagePreviews();
 		}
 
-		// Debug.LogError("CombatStateManager.currentActivity = " + CombatStateManager.currentActivity.ToString());
+		// Debug.LogError("PlayerStateManager.currentActivity = " + PlayerStateManager.currentActivity.ToString());
 
 		CombatUI.checkAndSetResolveTurnButtonInteractability();
 
 		RetreatUIManager.setRetreatButtonInteractibility();
 
-		if (currentActivity == CurrentActivity.ChoosingActor)
+		if (newActivity == CurrentActivity.ChoosingActor)
 		{
 			SelectorManager.createPressEPrompt();
 			CurrentActionHoverPanelManager.removeCurrentPrimaryDescribable();	
@@ -616,7 +608,7 @@ public class CombatStateManager : MonoBehaviour
 		}
 
 		getInstance().updateAllObjectsAfterStateChange();
-		CombatUI.setCurrentActivityText(currentActivity);
+		CombatUI.setCurrentActivityText(newActivity);
         SelectorManager.declareSelectors();
         OnCurrentActivityChange.Invoke();
 	}
@@ -661,6 +653,9 @@ public class CombatStateManager : MonoBehaviour
 
 	public static void resetCombat()
 	{
+        //every save load runs this too, overworld ones included, and those must keep their own activity
+        bool wasInCombat = inCombat;
+
 		resetAllQueuedSummonLocations();
 
 		CombatActionManager.lockedInCombatActionQueue = new List<CombatAction>();
@@ -684,9 +679,8 @@ public class CombatStateManager : MonoBehaviour
 
 		PartyManager.resetAllPartyMemberCooldowns();
 
-        currentActivity = CurrentActivity.ChoosingActor;
         whoseTurn = WhoseTurn.Start;
-        
+
 		CombatAnimationManager.flushAnimations();
 
 		State.enteredCombatFromDialogue = false;
@@ -699,6 +693,13 @@ public class CombatStateManager : MonoBehaviour
 
 		StepCountScriptManager.reset();
         inCombat = false;
+
+        //Walking is what the overworld expects to come back to, as it was left before the fight. This skips the
+        //overworld's events, whose listeners would run against a scene that is still the combat one.
+        if (wasInCombat)
+        {
+            PlayerStateManager.setActivityWithoutEvents(CurrentActivity.Walking);
+        }
 
         if (State.enemyPackInfo != null)
         {
@@ -801,7 +802,7 @@ public class CombatStateManager : MonoBehaviour
 	{
 		yield return null;
 
-		if (currentActivity == CurrentActivity.Tutorial)
+		if (PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence)
 		{
 			yield break;
 		}
@@ -818,25 +819,25 @@ public class CombatStateManager : MonoBehaviour
 		updateTurnState(WhoseTurn.Resolving);
 		CombatActionManager.lockInCombatActionOrder();
 		SelectorManager.deactivateCombatantInfoUIHoverPanel();
-		setCurrentActivity(CurrentActivity.Waiting);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.Waiting);
 		CombatActionManager.getInstance().resolveACombatAction();
 	}
 
 	public static bool snappingToTargetDuringReposition()
 	{
-		return (currentActivity != CurrentActivity.Repositioning && currentActivity != CurrentActivity.ChoosingTertiary) ||
-               (currentActivity == CurrentActivity.Repositioning && RepositionManager.currentRepositionActivity == CurrentRepositionActivity.ChoosingRepositionTarget);
+		return (PlayerStateManager.currentActivity != CurrentActivity.Repositioning && PlayerStateManager.currentActivity != CurrentActivity.ChoosingTertiary) ||
+               (PlayerStateManager.currentActivity == CurrentActivity.Repositioning && RepositionManager.currentRepositionActivity == CurrentRepositionActivity.ChoosingRepositionTarget);
 	}
 
 	public static bool choosingRepositionTarget()
 	{
-		return currentActivity == CurrentActivity.Repositioning && 
+		return PlayerStateManager.currentActivity == CurrentActivity.Repositioning && 
                 RepositionManager.currentRepositionActivity == CurrentRepositionActivity.ChoosingRepositionTarget;
 	}
 
 	public static bool findingEmptySpaceForReposition()
 	{
-		return currentActivity == CurrentActivity.Repositioning && 
+		return PlayerStateManager.currentActivity == CurrentActivity.Repositioning && 
                 RepositionManager.currentRepositionActivity == CurrentRepositionActivity.ChoosingNewLocation;
 	}
 
@@ -871,7 +872,7 @@ public class CombatStateManager : MonoBehaviour
 
     public static bool stateAllowsDamagePreviews()
     {
-        return currentActivity == CurrentActivity.ChoosingLocation || currentActivity == CurrentActivity.ChoosingTertiary;
+        return PlayerStateManager.currentActivity == CurrentActivity.ChoosingLocation || PlayerStateManager.currentActivity == CurrentActivity.ChoosingTertiary;
     }
 
     public static Transform getCreatureParent()
@@ -886,6 +887,9 @@ public class CombatStateManager : MonoBehaviour
 
     private static float nonFastForwardTimeScale = normalTimeScale;
 
+    //set by PlayerInputList's fast forward action while its key is held
+    public static bool fastForwardKeyHeld = false;
+
     public static void setTimeScale()
     {
         switch(whoseTurn)
@@ -897,8 +901,7 @@ public class CombatStateManager : MonoBehaviour
                 Time.timeScale = normalTimeScale;
                 break;
             case WhoseTurn.Resolving:
-                if(currentActivity == CurrentActivity.Waiting && 
-                    Input.GetKey(KeyBindingList.combatFastForwardAnimationKey.getCurrentKeyCode()))
+                if(PlayerStateManager.currentActivity == CurrentActivity.Waiting && fastForwardKeyHeld)
                 {
                     Time.timeScale = fastForwardTimeScale;
                 } else

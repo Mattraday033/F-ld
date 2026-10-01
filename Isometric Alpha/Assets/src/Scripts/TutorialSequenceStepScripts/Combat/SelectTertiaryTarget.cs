@@ -17,6 +17,6 @@ public class SelectTertiaryTarget : TutorialSequenceStepScript
 
         SelectorManager.getInstance().finishChoosingTertiary(loadedCombatAction);
 
-        CombatStateManager.setCurrentActivity(CurrentActivity.Tutorial);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InTutorialSequence);
     }
 }

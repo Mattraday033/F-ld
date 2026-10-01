@@ -16,12 +16,6 @@ public class PartyMemberMovement : MovementTracker, INameSource
         return -1;
     }
 
-    public override bool isMoving()
-    {
-        return (PlayerMovement.getInstance().isMoving() || KeyBindingList.movementKeyPressed()) && 
-                canMoveInTrain() && !PlayerMovement.getInstance().directionMod.Equals(Vector3Int.zero);
-    }
-
     public override bool canMoveInTrain()
     {
         return placeInTrain > 0 && (PartyMemberTrainManager.stepCounter >= placeInTrain);

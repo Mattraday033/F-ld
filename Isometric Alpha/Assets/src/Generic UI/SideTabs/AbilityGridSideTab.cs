@@ -116,9 +116,9 @@ public class AbilityGridSideTab : MonoBehaviour
 
     public static ITabParent getCurrentDictKey()
     {
-        switch(PlayerOOCStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
-            case OOCActivity.inShopUI:
+            case CurrentActivity.InShopUI:
                 return ShopPopUpWindow.getInstance();
             default:
                 return OverallUIManager.currentScreenManager;

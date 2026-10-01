@@ -100,13 +100,13 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
     {
         base.addListeners();
 
-        PlayerOOCStateManager.OnStateChangeFromInUI.AddListener(MouseHoverManager.destroyMouseHoverBase);
+        PlayerStateManager.OnStateChangeFromInUI.AddListener(MouseHoverManager.destroyMouseHoverBase);
     }
     public override void removeListeners()
     {
         base.removeListeners();
         
-        PlayerOOCStateManager.OnStateChangeFromInUI.RemoveListener(MouseHoverManager.destroyMouseHoverBase);
+        PlayerStateManager.OnStateChangeFromInUI.RemoveListener(MouseHoverManager.destroyMouseHoverBase);
     }
 
     public override void updateCounter()

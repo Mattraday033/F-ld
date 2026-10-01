@@ -48,7 +48,7 @@ public class ScreenButtonManager : MonoBehaviour
 			throw new IOException("Duplicate instances of ScreenButtonManager exist");
 		}
 		
-		if(PlayerOOCStateManager.inMainMenu() || CombatStateManager.inCombat)
+		if(PlayerStateManager.inMainMenu() || CombatStateManager.inCombat)
 		{
 			gameObject.SetActive(false);
 		} else

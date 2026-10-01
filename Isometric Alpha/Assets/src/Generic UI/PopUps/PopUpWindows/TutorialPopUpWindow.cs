@@ -100,6 +100,6 @@ public class TutorialPopUpWindow : PageReaderPopUpWindow
     {
         base.closeButtonPress();
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
 	}
 }

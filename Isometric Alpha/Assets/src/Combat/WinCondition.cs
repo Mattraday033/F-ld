@@ -271,7 +271,9 @@ public class EndOfCombatCutSceneScript
 
         foreach (Stats ally in allies)
         {
-            if (ally.combatSprite == null || ally.positions.Count == 0)
+            GameObject combatSprite = ally.getCombatSprite();
+
+            if (combatSprite == null || ally.positions.Count == 0)
             {
                 continue;
             }
@@ -283,7 +285,7 @@ public class EndOfCombatCutSceneScript
             Vector3 rowDownOffset = CombatGrid.getPositionAt(currentCoords.row + 15, currentCoords.col)
                                   - CombatGrid.getPositionAt(currentCoords.row, currentCoords.col);
 
-            Transform spriteTransform = ally.combatSprite.transform;
+            Transform spriteTransform = combatSprite.transform;
 
             spriteTransforms.Add(spriteTransform);
             startPositions.Add(spriteTransform.position);

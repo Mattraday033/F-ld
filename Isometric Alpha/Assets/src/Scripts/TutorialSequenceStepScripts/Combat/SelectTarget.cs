@@ -24,7 +24,7 @@ public class SelectTarget : TutorialSequenceStepScript
 
         currentAbilityManager.disableAbilityButtonCanvas();
 
-        CombatStateManager.setCurrentActivity(CurrentActivity.Tutorial);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InTutorialSequence);
 
         if (loadedCombatAction.requiresTertiaryCoords())
         {

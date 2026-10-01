@@ -124,14 +124,14 @@ public class IntimidateManager : CunningManager
     {
         SkillManager.destroyAllSkillGrids();
         IntimidateManager.getInstance().createSkillArea();
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.intimidating);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Intimidating);
         PlayerObject.setButtonPromptVisibility();
     }
 
     public static void leaveIntimidateMode()
     {
         IntimidateManager.getInstance().destroySkillArea();
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         PlayerObject.setButtonPromptVisibility();
     }
 

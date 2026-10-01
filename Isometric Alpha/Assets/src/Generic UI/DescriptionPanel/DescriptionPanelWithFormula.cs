@@ -87,9 +87,9 @@ public class DescriptionPanelWithFormula : DescriptionPanel
             invulnerabilityText == null)
         {
             return;
-        } else if((PlayerOOCStateManager.currentActivity == OOCActivity.inUI && 
+        } else if((PlayerStateManager.currentActivity == CurrentActivity.InUI && 
             AbilityGridSideTab.getDescribableListType() == DescribableList.AllItems) || 
-            (PlayerOOCStateManager.currentActivity == OOCActivity.inShopUI && 
+            (PlayerStateManager.currentActivity == CurrentActivity.InShopUI && 
             AbilityGridSideTab.getDescribableListType() == DescribableList.ShopKeeperAllItems))
         {
             damageText.gameObject.SetActive(false);

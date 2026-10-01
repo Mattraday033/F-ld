@@ -673,7 +673,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
             formatter.applyFormat(row);
         }
 
-        if (PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence)
+        if (PlayerStateManager.inOOCTutorialSequence())
         {
             TutorialSequenceStepTargetUIObject tutorialObject = row.gameObject.AddComponent<TutorialSequenceStepTargetUIObject>();
 

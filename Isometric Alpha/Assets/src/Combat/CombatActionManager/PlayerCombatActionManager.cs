@@ -72,7 +72,7 @@ public class PlayerCombatActionManager : MonoBehaviour
 		
 		if(combatStateManager.shouldMoveToFinished())
 		{
-			CombatStateManager.setCurrentActivity(CurrentActivity.Finished);
+			PlayerStateManager.setCurrentActivity(CurrentActivity.Finished);
 		}
 	}
 
@@ -110,9 +110,9 @@ public class PlayerCombatActionManager : MonoBehaviour
 
             currentActionQueue.RemoveAt(currentActionQueue.Count - 1);
 
-            if (CombatStateManager.currentActivity == CurrentActivity.Finished)
+            if (PlayerStateManager.currentActivity == CurrentActivity.Finished)
             {
-                CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+                PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
             }
 
             CombatUI.populateCombatActionPanels();

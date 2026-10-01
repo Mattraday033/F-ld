@@ -9,13 +9,13 @@ public class SkipMapTutorialScript : SkipTutorialScript
         if (MapPopUpWindow.getInstance() != null)
         {
             TutorialSequence.endCurrentTutorialSequence();
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inMap);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.InMap);
         }
         else
         {
             PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
             TutorialSequence.endCurrentTutorialSequence();
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         }
     }
 }

@@ -144,10 +144,10 @@ public class ActivationListener : MonoBehaviour
 
     private bool ignoreActivationByState()
     {
-        switch(PlayerOOCStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
-            case OOCActivity.inFade:
-            case OOCActivity.Loading:
+            case CurrentActivity.InFade:
+            case CurrentActivity.Loading:
                 return true;
             default:
                 return false;

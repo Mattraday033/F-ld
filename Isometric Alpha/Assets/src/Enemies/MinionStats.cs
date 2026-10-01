@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class MinionStats : VolleyParticipantStats
 {
-    public MinionStats(string key, int armor, int tHP, CombatAction combatAction, Trait[] traits, bool gendered = false, string[] animationSuffixes = null, Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary = null) :
-    base(key, armor, tHP, combatAction, traits, gendered: gendered, animationSuffixes: animationSuffixes, animationAudioClipDictionary: animationAudioClipDictionary)
+    public MinionStats(string key, int armor, int tHP, CombatAction combatAction, Trait[] traits, bool gendered = false, Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary = null) :
+    base(key, armor, tHP, combatAction, traits, gendered: gendered, animationAudioClipDictionary: animationAudioClipDictionary)
     {
         addTraits(traits);
         setFoeTypeToMinion();

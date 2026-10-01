@@ -61,6 +61,12 @@ public struct GridCoords
 		return new Vector3Int(col, row, 0);
 	}
 
+	//the inverse of toVector3Int, which lets combat cells travel through code that expects Vector3Int cells
+	public static GridCoords fromVector3Int(Vector3Int cell)
+	{
+		return new GridCoords(cell.y, cell.x);
+	}
+
 	public override bool Equals(object obj)
 	{
         GridCoords coords = getDefaultCoords();

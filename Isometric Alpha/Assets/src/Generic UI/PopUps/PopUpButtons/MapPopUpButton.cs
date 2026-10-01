@@ -17,7 +17,7 @@ public class MapPopUpButton : PopUpButton
 
         MapPopUpWindow.getInstance().populate(zoneKey);
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inMap);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InMap);
     }
 
     public override void spawnPopUp()
@@ -29,7 +29,7 @@ public class MapPopUpButton : PopUpButton
     {
         base.destroyPopUp();
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
     }
     public override GameObject getCurrentPopUpGameObject()
     {

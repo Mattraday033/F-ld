@@ -22,10 +22,18 @@ public class StatsRepositionObject : MonoBehaviour
 	
 	public void setSprite()
 	{
-		SpriteRenderer combatantSpriteRenderer = Resources.Load<GameObject>(combatantToReposition.combatSpriteName).GetComponent<SpriteRenderer>();
-		
-		spriteRenderer.sprite = combatantSpriteRenderer.sprite;
-		spriteRenderer.color = combatantSpriteRenderer.color;
+		Combatant combatant = combatantToReposition.getCombatant();
+
+		if(combatant == null)
+		{
+			return;
+		}
+
+		//the combatant is drawn in layers, so the body stands in for it on this single renderer
+		SpriteRenderer combatantBodyRenderer = combatant.rendererList[SpriteLayer.Body];
+
+		spriteRenderer.sprite = combatantBodyRenderer.sprite;
+		spriteRenderer.color = combatantBodyRenderer.color;
 	}
 	
 	public GameObject getGameObject()

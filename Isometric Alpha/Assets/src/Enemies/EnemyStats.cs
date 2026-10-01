@@ -26,7 +26,8 @@ public class EnemyStats : Stats
     public bool gendered;
     protected string genderMarker;
 
-    public string[] animationSuffixes;
+    //an enemy takes at most one layout from its pack's spawn layouts, see CombatantSpawnDetails.forSpawn
+    public bool obtainedSpawnLayout = false;
 
     private CombatAction combatAction;
 
@@ -39,8 +40,7 @@ public class EnemyStats : Stats
                         int tHP, 
                         CombatAction combatAction = null, 
                         Trait[] traits = null, 
-                        bool gendered = false, 
-                        string[] animationSuffixes = null, 
+                        bool gendered = false,
                         Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary = null) :
     base(key)
     {
@@ -66,11 +66,6 @@ public class EnemyStats : Stats
             }
         }
 
-        if(animationSuffixes != null)
-        {
-            this.animationSuffixes = animationSuffixes;
-        }
-
         this.animationAudioClipDictionary = animationAudioClipDictionary;
     }
 
@@ -86,28 +81,6 @@ public class EnemyStats : Stats
         }
     }
 
-    public override GameObject instantiateCombatSprite(List<GridCoords> coords)
-    {
-        SpawnDetails spawnDetails = obtainSpawnDetails();
-
-        if(spawnDetails != null)
-        {
-            coords = new List<GridCoords>(spawnDetails.allSpawnPositions);
-        }
-
-        combatSprite = base.instantiateCombatSprite(coords);
-
-        combatSprite.transform.localScale = new Vector3(1f, 1f, 1f);
-
-        GameObjectUtil.updateGameObjectPosition(combatSprite);
-
-        return combatSprite;
-    }
-    
-    public override string getCombatSpriteName()
-    {
-        return PrefabNames.enemySprite;
-    }
     public override Color getOutlineColor()
     {
         return ColorList.attacksOnSight;
@@ -282,16 +255,6 @@ public class EnemyStats : Stats
         }
     }
 
-    public override string getAnimationSuffixes()
-    {
-        if(animationSuffixes == null || animationSuffixes.Length <= 0)
-        {
-            return base.getAnimationSuffixes();
-        }
-
-        return animationSuffixes.OrderBy(a => Guid.NewGuid()).ToList()[0];
-    }
-
     public override List<GridCoords> findLocationToSpawn()
     {
         if(isFrontline())
@@ -305,19 +268,6 @@ public class EnemyStats : Stats
         }
 
         return new List<GridCoords>() { CombatGrid.findRandomOpenSpaceInEnemyZone() };
-    }
-
-    #endregion
-
-    #region ICloneable
-
-    public override Stats clone()
-    {
-        EnemyStats cloneStats = base.clone() as EnemyStats;
-
-        cloneStats.animationSuffixes = animationSuffixes;
-
-        return cloneStats;
     }
 
     #endregion

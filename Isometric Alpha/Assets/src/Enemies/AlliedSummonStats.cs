@@ -16,7 +16,6 @@ public class AlliedSummonStats : VolleyParticipantStats
     {
         addTraits(enemyStats.traitContainer);
         setFoeTypeToSummoned();
-        animationSuffixes = enemyStats.animationSuffixes;
         gendered = enemyStats.gendered;
         
         this.partOfVolley = partOfVolley;
@@ -59,10 +58,9 @@ public class AlliedSummonStats : VolleyParticipantStats
 		return partOfVolley;
 	}
 
+    //tagged as an NPC by CombatantSpawnDetails, which is how allied summons are told apart from party members
     public override void spawningActions()
     {
         Dexterity.addExitStrategy(this);
-
-        combatSprite.tag = LayerAndTagManager.npcTag;
     }
 }

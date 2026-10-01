@@ -153,7 +153,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
             return;
         }
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InDialogue);
         
         setFacing();
 

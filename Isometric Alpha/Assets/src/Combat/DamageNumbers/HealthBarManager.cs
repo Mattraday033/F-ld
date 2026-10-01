@@ -270,21 +270,23 @@ public class HealthBarManager : MonoBehaviour
         GameObjectUtil.updateGameObjectPosition(gameObject);
     }
 
-    public static void createHealthBar(Stats stats, Transform parent)
+    public static HealthBarManager createHealthBar(Stats stats, Transform parent)
     {
         GameObject healthBar = Instantiate(Resources.Load<GameObject>(PrefabNames.healthBar), parent);
         RectTransform rect = healthBar.GetComponent<RectTransform>();
 
-        stats.healthBarManager = healthBar.GetComponent<HealthBarManager>();
-        stats.healthBarManager.linkedStats = stats;
+        HealthBarManager healthBarManager = healthBar.GetComponent<HealthBarManager>();
+        healthBarManager.linkedStats = stats;
         // rect.position = Helpers.getAveragePosition(stats.getAllWorldPositions());
         rect.localScale = new Vector3(.14f, .14f);
         rect.anchoredPosition = Vector3.zero; // e.g. (0, -0.05, 0)
 
         if(CombatStateManager.inCombat && !GameplaySettingsList.healthBarsAlwaysVisible.settingOptions[Constants.onSettingIndex].set)
         {
-            stats.healthBarManager.hide();
+            healthBarManager.hide();
         }
+
+        return healthBarManager;
     }
 
 }

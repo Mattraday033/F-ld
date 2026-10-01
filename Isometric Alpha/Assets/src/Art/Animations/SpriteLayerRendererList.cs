@@ -166,9 +166,37 @@ public class SpriteLayerRendererList : MonoBehaviour
 
     public void enableAllLayers()
     {
+        setAllLayersEnabled(true);
+    }
+
+    public void disableAllLayers()
+    {
+        setAllLayersEnabled(false);
+    }
+
+    private void setAllLayersEnabled(bool enabled)
+    {
         foreach(SpriteRenderer renderer in characterRenderers)
         {
-            renderer.enabled = true;
+            renderer.enabled = enabled;
+        }
+    }
+
+    public void setBodyColliderEnabled(bool enabled)
+    {
+        if(bodyCollider != null)
+        {
+            bodyCollider.enabled = enabled;
+        }
+    }
+
+    public void setAlpha(float alpha)
+    {
+        foreach(SpriteRenderer renderer in characterRenderers)
+        {
+            Color color = renderer.color;
+            color.a = alpha;
+            renderer.color = color;
         }
     }
 

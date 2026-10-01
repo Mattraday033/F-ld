@@ -24,12 +24,12 @@ public class LevelUpPopUpButton : PopUpButton
     {
         base.destroyPopUp();
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InUI);
     }
 
     private IEnumerator waitToPopUp()
     {
-        while(CombatStateManager.inCombat || PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+        while(CombatStateManager.inCombat || PlayerStateManager.currentActivity != CurrentActivity.Walking)
         {
             yield return null;
         }
@@ -42,7 +42,7 @@ public class LevelUpPopUpButton : PopUpButton
 
         getPopUpWindow().setProgenitor(this);
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inLevelUpPopUp);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InLevelUpPopUp);
 
         waitingLevelUpPopUp = null;
     }

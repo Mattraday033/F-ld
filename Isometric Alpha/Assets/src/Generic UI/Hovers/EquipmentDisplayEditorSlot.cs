@@ -351,8 +351,8 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
     public override void OnPointerEnter(PointerEventData eventData)
     {
         if (((hoverText != null && hoverText.Length > 0) || isFilled()) && 
-            (PlayerOOCStateManager.currentActivity == OOCActivity.inUI || 
-            PlayerOOCStateManager.currentActivity == OOCActivity.inShopUI) &&
+            (PlayerStateManager.currentActivity == CurrentActivity.InUI || 
+            PlayerStateManager.currentActivity == CurrentActivity.InShopUI) &&
              !InspectNode.inspecting)
         {
             MouseHoverManager.startCoroutine(this, MouseHoverManager.waitToHandleDescriptionPanel(this, MouseHoverManager.shouldSpawnHoverIcon));

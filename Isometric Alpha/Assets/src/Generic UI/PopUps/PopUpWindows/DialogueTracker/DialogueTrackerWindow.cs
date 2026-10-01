@@ -29,7 +29,7 @@ public class DialogueTrackerWindow : PopUpWindow, IEscapable
 	{
 		instance = this;
 
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inDialoguePopUp)
+        if(PlayerStateManager.currentActivity == CurrentActivity.InDialoguePopUp)
         {
             TutorialSequenceStepTargetUIObject.createCutOutMask(transform);
         }
@@ -116,7 +116,7 @@ public class DialogueTrackerWindow : PopUpWindow, IEscapable
 	{
 		base.closeButtonPress();
 
-		PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
     }
 
     private void boldFirstLine(List<DialogueLine> dialogueList)

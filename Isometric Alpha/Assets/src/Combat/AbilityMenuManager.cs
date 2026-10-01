@@ -98,129 +98,29 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         }
     }
 
-    void Update() //here for Key Input
+    //The wheel's key presses are CustomInputActions now, live in ChoosingAbility (PlayerInputList.enableChoosingAbilityInputActions).
+    //What's left is closing the wheel once combat moves on to a state that doesn't show it.
+    void Update()
     {
-        if (displayOnly || InspectNode.inspecting)
+        if (displayOnly || InspectNode.inspecting || !CombatStateManager.inCombat)
         {
             return;
         }
 
-        KeyPressManager.updateKeyBools();
-
-        if (CombatStateManager.inCombat)
+        switch (PlayerStateManager.currentActivity)
         {
-            if (CombatStateManager.currentActivity == CurrentActivity.Retreating)
-            {
+            case CurrentActivity.Retreating:
+            case CurrentActivity.ChoosingAbility:
+            case CurrentActivity.InTutorialSequence:
+            case CurrentActivity.InEscapeMenu:
                 return;
-            }
-            else if (CombatStateManager.currentActivity == CurrentActivity.ChoosingAbility)
-            {
-                if (KeyPressManager.handlingPrimaryKeyPress)
-                {
-                    return;
-                }
-
-                if (Input.anyKeyDown)
-                {
-                    if (Input.GetKey(KeyBindingList.combatDeselectKey.getCurrentKeyCode()))
-                    {
-                        abilityButtons[currentlySelectedAbilityIndex].disableCombatActionSelectorPreview();
-
-                        return;
-                    }
-
-                    if (noButtonsSelectable)
-                    {
-                        return;
-                    }
-
-                    if (Input.GetKey(KeyCode.Alpha1))
-                    {
-                        chooseAbility(NorthCircleIndex);
-                        KeyPressManager.handlingPrimaryKeyPress = true;
-                        return;
-                    }
-
-                    if (Input.GetKey(KeyCode.Alpha2))
-                    {
-                        chooseAbility(NorthEastCircleIndex);
-                        KeyPressManager.handlingPrimaryKeyPress = true;
-                        return;
-                    }
-
-                    if (Input.GetKey(KeyCode.Alpha3))
-                    {
-                        chooseAbility(EastCircleIndex);
-                        KeyPressManager.handlingPrimaryKeyPress = true;
-                        return;
-                    }
-
-                    if (Input.GetKey(KeyCode.Alpha4))
-                    {
-                        chooseAbility(SouthEastCircleIndex);
-                        KeyPressManager.handlingPrimaryKeyPress = true;
-                        return;
-                    }
-
-                    if (Input.GetKey(KeyCode.Alpha5))
-                    {
-                        chooseAbility(SouthCircleIndex);
-                        KeyPressManager.handlingPrimaryKeyPress = true;
-                        return;
-                    }
-
-                    if (Input.GetKey(KeyCode.Alpha6))
-                    {
-                        chooseAbility(SouthWestCircleIndex);
-                        KeyPressManager.handlingPrimaryKeyPress = true;
-                        return;
-                    }
-
-                    if (Input.GetKey(KeyCode.Alpha7))
-                    {
-                        chooseAbility(WestCircleIndex);
-                        KeyPressManager.handlingPrimaryKeyPress = true;
-                        return;
-                    }
-
-                    if (Input.GetKey(KeyCode.Alpha8))
-                    {
-                        chooseAbility(NorthWestCircleIndex);
-                        KeyPressManager.handlingPrimaryKeyPress = true;
-                        return;
-                    }
-
-                    if (Input.GetKey(KeyBindingList.moveCounterClockwiseKey.getCurrentKeyCode()))
-                    {
-                        moveSelectedButtonCounterClockwise();
-                        KeyPressManager.handlingPrimaryKeyPress = true;
-                        return;
-                    }
-
-                    if (Input.GetKey(KeyBindingList.moveClockwiseKey.getCurrentKeyCode()))
-                    {
-                        moveSelectedButtonClockwise();
-                        KeyPressManager.handlingPrimaryKeyPress = true;
-                        return;
-                    }
-
-                    if (KeyBindingList.continueUIKeyIsPressed())
-                    {
-                        selectAction();
-
-                        KeyPressManager.handlingPrimaryKeyPress = true;
-
-                        return;
-                    }
-                }
-            }
-            else if (CombatStateManager.currentActivity != CurrentActivity.Tutorial && 
-                    CombatStateManager.currentActivity != CurrentActivity.InEscapeMenu)
-            {
+            default:
                 disableAbilityButtonCanvas();
-            }
+                return;
         }
     }
+
+    public bool hasSelectableButtons { get { return !noButtonsSelectable; } }
 
     public void selectAction()
     {
@@ -236,7 +136,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
         AudioManager.playChooseActorAbilityLocationSFX();
 
-        CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingLocation);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingLocation);
     }
 
     private void checkForPaymentTutorial()
@@ -382,9 +282,9 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
                 AudioManager.playChooseActorAbilityLocationSFX();
             }
 
-            if (CombatStateManager.currentActivity != CurrentActivity.ChoosingAbility &&
-                CombatStateManager.currentActivity != CurrentActivity.ChoosingLocation &&
-                CombatStateManager.currentActivity != CurrentActivity.ChoosingTertiary)
+            if (PlayerStateManager.currentActivity != CurrentActivity.ChoosingAbility &&
+                PlayerStateManager.currentActivity != CurrentActivity.ChoosingLocation &&
+                PlayerStateManager.currentActivity != CurrentActivity.ChoosingTertiary)
             {
                 CurrentActionHoverPanelManager.removeCurrentPrimaryDescribable();
             }
@@ -753,7 +653,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
     public static Selector getSelectorToShowWhileChoosingAbility()
     {
-        if(CombatStateManager.currentActivity == CurrentActivity.ChoosingAbility &&
+        if(PlayerStateManager.currentActivity == CurrentActivity.ChoosingAbility &&
             instance != null && 
             instance.descriptionPanelSlot != null && 
             instance.descriptionPanelSlot.getCurrentDescribables() != null)

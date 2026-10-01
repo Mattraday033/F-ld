@@ -9,7 +9,7 @@ public class BookPopUpWindow : PopUpWindow
 {
     public DescriptionPanel descriptionPanel;
 
-    private OOCActivity previousActivity;
+    private CurrentActivity previousActivity;
     private bool giveCopyOfBook;
     private GameObject bookGameObject;
     public ScrollableUIElement contentsGrid;
@@ -52,7 +52,7 @@ public class BookPopUpWindow : PopUpWindow
         canvasGroup.alpha = Constants.sizeOne;
     }
 
-    public void setPreviousActivity(OOCActivity previousActivity)
+    public void setPreviousActivity(CurrentActivity previousActivity)
     {
         this.previousActivity = previousActivity;
     }
@@ -89,7 +89,7 @@ public class BookPopUpWindow : PopUpWindow
 
         pickUpBookOnUIClose();
 
-        PlayerOOCStateManager.setCurrentActivity(previousActivity);
+        PlayerStateManager.setCurrentActivity(previousActivity);
     }
 
     public void pickUpBookOnUIClose()

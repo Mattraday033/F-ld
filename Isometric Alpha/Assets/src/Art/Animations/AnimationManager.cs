@@ -140,7 +140,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     // public virtual bool spriteSetByHeartBeat()
     // {
     //     return !currentIdle.ToString().Contains("Death") && !CombatAnimationManager.trackerBeingTracked(this) && 
-    //             ((!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation() && PlayerOOCStateManager.currentActivity != OOCActivity.Defeat) || 
+    //             ((!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation() && PlayerStateManager.currentActivity != CurrentActivity.Defeat) || 
     //             (CombatStateManager.inCombat && !linkedStats.isDead()));
     // }
 
@@ -265,7 +265,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //     ShowStapledEffectByNPCName.RemoveListener(showStapledEffect);
 
     //     RemoveAllShadowOutlines.RemoveListener(removeShadowOutline);
-    //     PlayerOOCStateManager.OnStateChangeFromInDialogue.RemoveListener(removeShadowOutline);
+    //     PlayerStateManager.OnStateChangeFromInDialogue.RemoveListener(removeShadowOutline);
     // }
 
     // private void disablePolygonCollider()
@@ -392,7 +392,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //     ShowStapledEffectByNPCName.AddListener(showStapledEffect);
 
     //     RemoveAllShadowOutlines.AddListener(removeShadowOutline);
-    //     PlayerOOCStateManager.OnStateChangeFromInDialogue.AddListener(removeShadowOutline);
+    //     PlayerStateManager.OnStateChangeFromInDialogue.AddListener(removeShadowOutline);
 
     //     setToDefaultIdle();
     // }

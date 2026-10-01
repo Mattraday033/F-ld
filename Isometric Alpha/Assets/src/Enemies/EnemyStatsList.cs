@@ -146,8 +146,7 @@ new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, Abil
                                                                                 TraitList.indomitable
                                                                             },
                                                                             AbilityList.getAbility(null, AbilityList.shoreUpKey),
-                                                                            animationAudioClipDictionary: AnimationSFXDictionaryList.femaleHumanAudioDictionary,
-                                                                            useAverageSpritePosition: true));
+                                                                            animationAudioClipDictionary: AnimationSFXDictionaryList.femaleHumanAudioDictionary));
 
         enemyStatsDict.Add(NPCNameList.barricade, new MultiAnimationEnemyStats(NPCNameList.barricade,
                                                                                 Constants.twentyFiveArmor,
@@ -458,11 +457,6 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                         new Trait[] { 
                                                                                         TraitList.minion,
                                                                                         TraitList.chaotic
-                                                                                    },
-                                                    animationSuffixes: new string[] {
-                                                                                        MonsterNameList.pickMarker,
-                                                                                        MonsterNameList.shivMarker,
-                                                                                        MonsterNameList.shovelMarker
                                                                                     },
                                                                                     animationAudioClipDictionary: AnimationSFXDictionaryList.maleHumanAudioDictionary));
         #endregion

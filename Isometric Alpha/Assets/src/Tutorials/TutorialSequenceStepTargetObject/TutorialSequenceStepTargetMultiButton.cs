@@ -79,7 +79,7 @@ public class TutorialSequenceStepTargetMultiButton : TutorialSequenceStepTargetU
 
         if(skip)
         {
-            PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
+            PlayerStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
         }
 	}
 
@@ -94,7 +94,7 @@ public class TutorialSequenceStepTargetMultiButton : TutorialSequenceStepTargetU
 			button.interactable = true;
 		}
 
-        PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
+        PlayerStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
 	}
 
 	public Button getFilledButton()

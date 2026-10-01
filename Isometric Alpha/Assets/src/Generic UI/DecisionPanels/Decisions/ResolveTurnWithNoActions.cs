@@ -23,7 +23,7 @@ public class ResolveTurnWithNoActions : IDecision
  
 	public void backOut()
     {
-        CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
     }
 
     public static void executeCurrentDecision()

@@ -77,7 +77,7 @@ public class NotificationManager : MonoBehaviour
             if (AreaManager.getInstance().getAreaDescription().uniqueName.Equals(describable.uniqueName) ||
                 describable.uniqueName.Contains(SaveHandler.quickSaveName))
             {
-                if ((PlayerOOCStateManager.currentActivity == OOCActivity.walking || PlayerOOCStateManager.currentActivity == OOCActivity.inFade) 
+                if ((PlayerStateManager.currentActivity == CurrentActivity.Walking || PlayerStateManager.currentActivity == CurrentActivity.InFade) 
                     && !State.hasLoadedDialogueKey())
                 {
                     instance.StartCoroutine(instance.spawnNotification(describable));
@@ -88,7 +88,7 @@ public class NotificationManager : MonoBehaviour
             }
         }
 
-        if (notificationQueue.Count > 0 && ((PlayerOOCStateManager.currentActivity == OOCActivity.walking || PlayerOOCStateManager.currentActivity == OOCActivity.inUI) && !State.hasLoadedDialogueKey()))
+        if (notificationQueue.Count > 0 && ((PlayerStateManager.currentActivity == CurrentActivity.Walking || PlayerStateManager.currentActivity == CurrentActivity.InUI) && !State.hasLoadedDialogueKey()))
         {
             notificationPopUpButton.spawnPopUp();
         }
@@ -160,8 +160,8 @@ public class NotificationManager : MonoBehaviour
     [RuntimeInitializeOnLoadMethod]
     private static void initializeNotificationManager()
     {
-        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(startSpawningNotifications);
-        PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(startSpawningNotifications);
+        PlayerStateManager.OnStateChangeToWalking.AddListener(startSpawningNotifications);
+        PlayerStateManager.OnLeavingTutorialSequenceState.AddListener(startSpawningNotifications);
         ManualNotificationSpawn.AddListener(startSpawningNotifications);
         AreaManager.OnAreaSpawn.AddListener(spawnNotificationsOnAreaChange);
 

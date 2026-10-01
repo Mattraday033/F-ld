@@ -82,7 +82,7 @@ public class Retreat : IDecision
 
             EscapeStack.handleEscapePress();
 
-            CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor); 
+            PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor); 
 
             CombatStateManager.resolveTurn(skipNoActionCheck: true);
         }
@@ -104,6 +104,6 @@ public class Retreat : IDecision
 
 	public void backOut()
 	{
-        CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
     }
 }

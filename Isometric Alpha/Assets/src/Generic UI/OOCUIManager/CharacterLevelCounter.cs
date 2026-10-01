@@ -12,7 +12,7 @@ public class CharacterLevelCounter : MonoBehaviour
 
     public void setCounter()
     {
-        if (PlayerOOCStateManager.inMainMenu())
+        if (PlayerStateManager.inMainMenu())
         {
             return;
         }
@@ -21,11 +21,11 @@ public class CharacterLevelCounter : MonoBehaviour
         {
             gameObject.SetActive(true);
             
-            switch(PlayerOOCStateManager.currentActivity)
+            switch(PlayerStateManager.currentActivity)
             {
-                case OOCActivity.walking:
-                case OOCActivity.inFade:
-                case OOCActivity.Loading:
+                case CurrentActivity.Walking:
+                case CurrentActivity.InFade:
+                case CurrentActivity.Loading:
                     playerLevelUpTutorialSequenceCheck();
                     return;
             }

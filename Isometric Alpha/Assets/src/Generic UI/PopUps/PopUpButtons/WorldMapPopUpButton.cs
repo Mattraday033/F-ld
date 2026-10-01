@@ -21,7 +21,7 @@ public class WorldMapPopUpButton : PopUpButton
 
         base.spawnPopUp();
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inWorldMap);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InWorldMap);
 
         WorldMapPopUpWindow worldMapPopUpWindow = getPopUpWindow() as WorldMapPopUpWindow;
 
@@ -32,7 +32,7 @@ public class WorldMapPopUpButton : PopUpButton
     {
         base.destroyPopUp();
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
     }
 
     public override GameObject getCurrentPopUpGameObject()

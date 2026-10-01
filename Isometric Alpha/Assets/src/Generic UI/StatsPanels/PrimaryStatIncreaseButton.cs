@@ -18,7 +18,7 @@ public class PrimaryStatIncreaseButton : BinaryPanelPopUpButton, IPointerEnterHa
 
     private void Awake()
     {
-        if (PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence)
+        if (PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence)
         {
             button.enabled = false;
             TutorialSequence.OnEnableButtons.AddListener(enableButton);

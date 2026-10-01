@@ -141,7 +141,7 @@ public class TraitHoverMouseListener : GridRow, IPointerEnterHandler, IPointerEx
         CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(enableHoverCollider);
         // InspectNode.OnInspect.AddListener(disableDestroyHoverOnPanelCreation);
 
-        if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        if(PlayerStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
             disableHoverCollider();
         }

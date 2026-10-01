@@ -20,6 +20,11 @@ public static class GameObjectUtil
 
     public static bool tagMatchesCriteria(GameObject combatSprite, string[] tagCriteria)
     {
+        if(combatSprite == null)
+        {
+            return false;
+        }
+
         foreach (string tag in tagCriteria)
         {
             if (combatSprite.gameObject.tag.Equals(tag))

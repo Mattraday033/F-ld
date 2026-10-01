@@ -55,8 +55,6 @@ public class AllyStats : Stats
         }
     }
 
-    public AbilityMenuManager lastCombatAbilityMenuManager;
-
     public CombatActionArray combatActionArray;
     public EquippedItems equippedItems;
 
@@ -111,19 +109,6 @@ public class AllyStats : Stats
     #endregion
 
     #region Sprite and GameObject
-
-    public override string getCombatSpriteName()
-    {
-        return PrefabNames.allyCombatSpriteName;
-    }
-
-    public override void setUpComponents(ComponentList list)
-    {
-        base.setUpComponents(list);
-
-        lastCombatAbilityMenuManager = list.abilityMenuManager;
-        lastCombatAbilityMenuManager.actionArraySource = this;
-    }
 
     public override void spawningActions()
     {
@@ -686,11 +671,6 @@ public class AllyStats : Stats
     public override int getBonusAbilityDamage()
     {
         return combatActionArray.calculateBonusAbilityDamage();
-    }
-
-    public override AbilityMenuManager getAbilityMenuManager()
-    {
-        return lastCombatAbilityMenuManager;
     }
 
     public override CombatActionArray getActionArray()

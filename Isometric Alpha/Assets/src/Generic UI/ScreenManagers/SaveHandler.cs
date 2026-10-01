@@ -59,7 +59,7 @@ public class SaveHandler : ScreenManager, IEscapable
 
 		instance = this;
 
-		if(PlayerOOCStateManager.inMainMenu())
+		if(PlayerStateManager.inMainMenu())
         {
             OverallUIManager.setCurrentScreenType(this);
         }
@@ -75,7 +75,7 @@ public class SaveHandler : ScreenManager, IEscapable
             }
 		}
 
-        saveButton.gameObject.SetActive(!PlayerOOCStateManager.inMainMenu() && !CombatStateManager.inCombat);
+        saveButton.gameObject.SetActive(!PlayerStateManager.inMainMenu() && !CombatStateManager.inCombat);
 
         base.Awake();
 
@@ -85,17 +85,6 @@ public class SaveHandler : ScreenManager, IEscapable
     protected override void Start()
     {
         //Empty On Purpose
-    }
-
-	void Update()
-	{
-		KeyPressManager.updateKeyBools();
-
-		if (Input.GetKey(KeyBindingList.acceptInputKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
-		{
-			KeyPressManager.handlingPrimaryKeyPress = true;
-			saveButtonPress();
-		}
     }
 
 	public static bool saveNameFieldIsSelected()
@@ -115,7 +104,7 @@ public class SaveHandler : ScreenManager, IEscapable
 
 	public static bool cannotSaveInCurrentState()
 	{
-		return PlayerOOCStateManager.inMainMenu() || CombatStateManager.inCombat;
+		return PlayerStateManager.inMainMenu() || CombatStateManager.inCombat;
 	}
 
     public void removeInvalidFileNameCharacter()
@@ -200,7 +189,7 @@ public class SaveHandler : ScreenManager, IEscapable
 	{
 		if(saveNameField.text.Length <= 0 || 
 			saveNameField.text.Length > saveNameCharacterLimit || 
-            PlayerOOCStateManager.inMainMenu())
+            PlayerStateManager.inMainMenu())
 		{
 			return;
 		}
@@ -212,6 +201,16 @@ public class SaveHandler : ScreenManager, IEscapable
         {
             save(saveNameField.text); 
         }
+	}
+
+    public static void acceptInputFieldContents()
+	{
+        if(instance == null)
+        {
+            return;
+        }
+
+        instance.saveButtonPress();
 	}
 
 	private static string determineCurrentAutosaveName()
@@ -548,7 +547,7 @@ public class SaveHandler : ScreenManager, IEscapable
 
     public void handleEscapePress()
 	{
-		if (PlayerOOCStateManager.inMainMenu() && OverallUIManager.UIParentPanel && gameObject)
+		if (PlayerStateManager.inMainMenu() && OverallUIManager.UIParentPanel && gameObject)
 		{
             AudioManager.playChangeScreenSFX();
             OverallUIManager.UIParentPanel.SetActive(false);
@@ -598,7 +597,7 @@ public class SaveHandler : ScreenManager, IEscapable
 
     private void OnDisable()
     {
-        if(PlayerOOCStateManager.inMainMenu() && redCloseButton != null)
+        if(PlayerStateManager.inMainMenu() && redCloseButton != null)
         {
             redCloseButton.SetActive(false);
         }

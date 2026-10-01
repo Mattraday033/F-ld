@@ -24,7 +24,7 @@ public class CunningManager : SkillManager
         cunningsRemaining = -1;
 
         LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
-        PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(enableAllHoverColliders);
+        PlayerStateManager.OnStateChangeFromSkill.AddListener(enableAllHoverColliders);
     }
 
     public override ContactFilter2D getCollisionFilter()
@@ -99,14 +99,14 @@ public class CunningManager : SkillManager
     {
         destroyAllSkillGrids();
         getInstance().createSkillArea();
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.cunning);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Cunning);
         EnemyMovement.ToggleHoverColliders.Invoke(false);
     }
 
     public static void leaveCunningMode()
     {
         getInstance().destroySkillArea();
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
     }
 
     public override void createSkillArea()

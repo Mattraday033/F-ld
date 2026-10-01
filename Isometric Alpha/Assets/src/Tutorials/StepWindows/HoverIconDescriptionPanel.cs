@@ -47,10 +47,10 @@ public class HoverIconDescriptionPanel : TutorialSequenceStepWindow
         }else if (alwaysTop || boxAlwaysOnTop)
         {
             direction = ArrowDirection.Top;
-        } else if(PlayerOOCStateManager.inMainMenu())
+        } else if(PlayerStateManager.inMainMenu())
         {
             direction = ArrowDirection.Bottom;
-        } else if(PlayerOOCStateManager.currentActivity == OOCActivity.inShopUI)
+        } else if(PlayerStateManager.currentActivity == CurrentActivity.InShopUI)
         {
             direction = ArrowDirection.Right;
         } else

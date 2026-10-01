@@ -10,7 +10,7 @@ public class PlayerAbilityGridRow : GridRow, IPointerDownHandler, IDragAndDropSo
 
     // private void Awake()
     // {
-    //     if (PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence)
+    //     if (PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence)
     //     {
     //         buttons[0].enabled = false;
     //         TutorialSequence.OnEnableButtons.AddListener(enableButton);

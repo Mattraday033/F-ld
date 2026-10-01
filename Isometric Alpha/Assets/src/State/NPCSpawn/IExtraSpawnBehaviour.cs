@@ -87,6 +87,66 @@ public class AnimationManagerSpawnBehaviour : IExtraSpawnBehaviour
     }
 }
 
+public class AbilityMenuSpawnBehaviour : IExtraSpawnBehaviour
+{
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+
+    //the Combatant links the menu to its Stats once it's initialized
+    public Component addBehaviour(GameObject gameObject)
+    {
+        GameObject abilityMenuPrefab = Resources.Load<GameObject>(PrefabNames.abilityMenu);
+
+        if(abilityMenuPrefab == null)
+        {
+            Debug.LogError("No prefab named " + PrefabNames.abilityMenu + " in a Resources folder, so " + gameObject.name + " has no ability menu");
+            return null;
+        }
+
+        GameObject abilityMenu = GameObject.Instantiate(abilityMenuPrefab, gameObject.transform);
+
+        return abilityMenu.GetComponentInChildren<AbilityMenuManager>(true);
+    }
+}
+
+public class CombatantSpawnBehaviour : IExtraSpawnBehaviour
+{
+    private CombatantSpawnDetails spawnDetails;
+
+    public CombatantSpawnBehaviour(CombatantSpawnDetails spawnDetails)
+    {
+        this.spawnDetails = spawnDetails;
+    }
+
+    //combatants don't listen for activation yet; a requirement added here would apply to every GameObject of the combatant
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+
+    public Component addBehaviour(GameObject gameObject)
+    {
+        Combatant combatant = gameObject.AddComponent<Combatant>();
+
+        GridCoords cell = spawnDetails.getCell(gameObject);
+
+        combatant.initialize(spawnDetails.stats, cell, spawnDetails.isPrimaryCell(cell), spawnDetails.isPlaceholder);
+
+        return combatant;
+    }
+}
+
+public class CombatantHoverSpawnBehaviour : IExtraSpawnBehaviour
+{
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+
+    //the hover reacts to OnMouseEnter, so it has to share a GameObject with the body's collider
+    public Component addBehaviour(GameObject gameObject)
+    {
+        SpriteLayerRendererList rendererList = gameObject.GetComponent<SpriteLayerRendererList>();
+
+        GameObject hoverObject = rendererList != null && rendererList.bodyCollider != null ? rendererList.bodyCollider.gameObject : gameObject;
+
+        return hoverObject.AddComponent<CombatantHover>();
+    }
+}
+
 public class ContainerSpawnBehaviour: IExtraSpawnBehaviour
 {
     private int index;

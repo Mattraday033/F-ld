@@ -206,6 +206,84 @@ public class NewAnimationManager : MonoBehaviour
         rendererList.setFlipX(characterFacing.flipSprite());
     }
 
+    #region Combat
+    //shells for the combat animations Stats used to drive through the old AnimationManager;
+    //each TODO names the commented-out AnimationManager.cs method its body should be ported from
+
+    public void playSpawnAnimation()
+    {
+        //TODO: port AnimationManager.playSpawnAnimation
+    }
+
+    public void playAttackAnimation()
+    {
+        //TODO: port AnimationManager.playAttackAnimation
+    }
+
+    public void playAttackIntoFrontIdleAnimation()
+    {
+        //TODO: port AnimationManager.playAttackIntoFrontIdleAnimation
+    }
+
+    public void playAttackIntoSecondaryIdleAnimation()
+    {
+        //TODO: port AnimationManager.playAttackIntoSecondaryIdleAnimation
+    }
+
+    public void playSpecialAttackAnimation()
+    {
+        //TODO: port AnimationManager.playSpecialAttackAnimation
+    }
+
+    public void playWoundedAnimation()
+    {
+        //TODO: port AnimationManager.playWoundedAnimation
+    }
+
+    public void playDeathAnimation()
+    {
+        //TODO: port AnimationManager.playDeathAnimation
+    }
+
+    public void setToDefaultIdle()
+    {
+        //TODO: port AnimationManager.setToDefaultIdle
+    }
+
+    //front is true for combatants on the enemy side, who face the camera
+    public void setToDeadIdle(bool front)
+    {
+        //TODO: port AnimationManager.setCurrentIdle(Death_Front/Death_Back)
+    }
+
+    public void setIdleAnimationOnTraitApplication(Trait trait)
+    {
+        //TODO: port Trait.setIdleAnimationOnApplication(AnimationManager)
+    }
+
+    public void setIdleAnimationOnTraitRemoval(Trait trait)
+    {
+        //TODO: port Trait.setIdleAnimationOnRemoval(AnimationManager)
+    }
+
+    public void setHeartBeatRow(int heartBeatRow)
+    {
+        //TODO: port AnimationManager.heartBeatRow
+    }
+
+    public void playAnimationSFX(CharacterAnimationType animationType)
+    {
+        //TODO: port the AnimationManager clip events that called Stats.playAnimationSFX
+    }
+
+    public float getAnimationLength(CharacterAnimationType animationType)
+    {
+        //TODO: port AnimationManager.getAnimationLength
+        return 0f;
+    }
+
+    #endregion
+
     private void OnEnable()
     {
         if(movementTracker == null)

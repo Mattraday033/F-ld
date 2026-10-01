@@ -343,13 +343,13 @@ public class KeyBindingDisplay : MonoBehaviour
 
     private void Awake()
     {
-        if(PlayerOOCStateManager.inMainMenu() && !LoadSaveFile.midLoad)
+        if(PlayerStateManager.inMainMenu() && !LoadSaveFile.midLoad)
         {
             gameObject.SetActive(false);
             return;
         }
 
-        PlayerOOCStateManager.OnStateChange.AddListener(setKeyBindingDisplay);
+        PlayerStateManager.OnStateChange.AddListener(setKeyBindingDisplay);
         CombatStateManager.OnCurrentActivityChange.AddListener(setKeyBindingDisplay);
         CombatInputManager.OnHideKeyBindingsList.AddListener(onHideKeyBindingsButtonPress);
 
@@ -360,7 +360,7 @@ public class KeyBindingDisplay : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerOOCStateManager.OnStateChange.RemoveListener(setKeyBindingDisplay);
+        PlayerStateManager.OnStateChange.RemoveListener(setKeyBindingDisplay);
         CombatStateManager.OnCurrentActivityChange.RemoveListener(setKeyBindingDisplay);
         CombatInputManager.OnHideKeyBindingsList.RemoveListener(onHideKeyBindingsButtonPress);
         CombatUIModule.OnHideCombatUI.RemoveListener(hideUI);
@@ -374,7 +374,7 @@ public class KeyBindingDisplay : MonoBehaviour
     private void setKeyBindingDisplay()
     {
         if(keyBindingsHidden() || 
-            (CombatStateManager.inCombat && CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu))
+            (CombatStateManager.inCombat && PlayerStateManager.currentActivity == CurrentActivity.InEscapeMenu))
         {
             return;
         }
@@ -394,7 +394,7 @@ public class KeyBindingDisplay : MonoBehaviour
 
     private void setKeyBindingsDisplayInCombat()
     {
-        switch(CombatStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
             case CurrentActivity.ChoosingActor:
                 displayText.text += movementKeyBinding;
@@ -454,9 +454,9 @@ public class KeyBindingDisplay : MonoBehaviour
 
     private void setKeyBindingsDisplayOOC()
     {
-        switch(PlayerOOCStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
-            case OOCActivity.walking:
+            case CurrentActivity.Walking:
                 displayText.text += selectKeyBinding;
                 addSpace();
                 displayText.text += backOutOfActionKeyBinding;
@@ -478,13 +478,13 @@ public class KeyBindingDisplay : MonoBehaviour
                 displayText.text += highlightKeyBinding;
                 addSpace();
                 break;
-            case OOCActivity.inDialogue:
+            case CurrentActivity.InDialogue:
                 displayText.text += continueKeyBinding;
                 addSpace();
                 displayText.text += dialogueChoicesKeyBinding;
                 addSpace();
                 break;
-            case OOCActivity.inUI:
+            case CurrentActivity.InUI:
                 displayText.text += characterScreenKeyBinding;
                 addSpace();
                 displayText.text += inventoryScreenKeyBinding;
@@ -498,19 +498,19 @@ public class KeyBindingDisplay : MonoBehaviour
                 displayText.text += exitKeyBinding;
                 addSpace();
                 break;
-            case OOCActivity.inMap:
+            case CurrentActivity.InMap:
                 displayText.text += worldMapKeyBinding;
                 addSpace();
                 displayText.text += leaveMapKeyBinding;
                 addSpace();
                 break;
-            case OOCActivity.intimidating:
+            case CurrentActivity.Intimidating:
                 displayText.text += useActivatedSkillKeyBinding;
                 addSpace();
                 displayText.text += leaveSkillKeyBinding;
                 addSpace();
                 break;
-            case OOCActivity.cunning:
+            case CurrentActivity.Cunning:
                 displayText.text += useActivatedSkillKeyBinding;
                 addSpace();
                 displayText.text += moveSkillTargetKeyBinding;
@@ -518,33 +518,33 @@ public class KeyBindingDisplay : MonoBehaviour
                 displayText.text += leaveSkillKeyBinding;
                 addSpace();
                 break;
-            case OOCActivity.observing:
+            case CurrentActivity.Observing:
                 displayText.text += leaveSkillKeyBinding;
                 addSpace();
                 break;
-            case OOCActivity.inChestUI:
+            case CurrentActivity.InChestUI:
                 displayText.text += continueKeyBinding;
                 addSpace();
                 break;
-            case OOCActivity.inBookUI:
+            case CurrentActivity.InBookUI:
                 displayText.text += exitKeyBinding;
                 addSpace();
                 break;
-            case OOCActivity.inShopUI:
+            case CurrentActivity.InShopUI:
                 displayText.text += exitKeyBinding;
                 addSpace();
                 break;
-            case OOCActivity.inDialoguePopUp:
+            case CurrentActivity.InDialoguePopUp:
                 displayText.text += exitKeyBinding;
                 addSpace();
                 break;
-            case OOCActivity.inLevelUpPopUp:
+            case CurrentActivity.InLevelUpPopUp:
                 break;
-            case OOCActivity.inTutorialPopUp:
+            case CurrentActivity.InTutorialPopUp:
                 break;
-            case OOCActivity.inTutorialSequence:
+            case CurrentActivity.InTutorialSequence:
                 break;
-            case OOCActivity.inWorldMap:
+            case CurrentActivity.InWorldMap:
                 displayText.text += mapKeyBinding;
                 addSpace();
                 displayText.text += leaveWorldMapKeyBinding;

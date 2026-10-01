@@ -159,7 +159,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
                 frontSpriteRenderer.color = currentColor;
 
                 if(CombatStateManager.inCombat && 
-                    CombatStateManager.currentActivity == CurrentActivity.ChoosingTertiary && 
+                    PlayerStateManager.currentActivity == CurrentActivity.ChoosingTertiary && 
                     (currentColor.Equals(Color.yellow) || currentColor.a < 1f))
                 {
                     arrowSpriteRenderer.color = currentColor;
@@ -205,7 +205,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     public void OnMouseEnter()
     {
         if(AbilityMenuButton.hoveringOverAbilityMenuButton || 
-            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+            PlayerStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
             return;
         }
@@ -216,7 +216,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         {
             revealPriorityHeld = true;
 
-            target.healthBarManager.setHovered(true);
+            setHealthBarHovered(target, true);
 
             CombatActionOrderRow.HighlightRow.Invoke(target, true);
         }
@@ -227,7 +227,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     public void OnMouseExit() 
     {
         if(AbilityMenuButton.hoveringOverAbilityMenuButton || 
-            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+            PlayerStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
             return;
         }
@@ -238,7 +238,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         {
             revealPriorityHeld = false;
 
-            target.healthBarManager.setHovered(false);
+            setHealthBarHovered(target, false);
 
             CombatActionOrderRow.HighlightRow.Invoke(target, false);
         }
@@ -246,9 +246,19 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         SelectorManager.declareSelectors();
     }
 
+    private void setHealthBarHovered(Stats target, bool isHovered)
+    {
+        HealthBarManager healthBarManager = target.getHealthBarManager();
+
+        if(healthBarManager != null)
+        {
+            healthBarManager.setHovered(isHovered);
+        }
+    }
+
     public void OnMouseOver() 
     {
-        if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        if(PlayerStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
             return;
         } else if(AbilityMenuButton.hoveringOverAbilityMenuButton)
@@ -270,12 +280,12 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
             return;
         }
 
-        switch(CombatStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
             case CurrentActivity.ChoosingActor:
             case CurrentActivity.ChoosingLocation:
             case CurrentActivity.ChoosingTertiary:
-            case CurrentActivity.Tutorial:
+            case CurrentActivity.InTutorialSequence:
                 waitingOnMouseUp = true;
                 return;
         }
@@ -288,12 +298,12 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
             return;
         }
 
-        switch(CombatStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
             case CurrentActivity.ChoosingActor:
             case CurrentActivity.ChoosingLocation:
             case CurrentActivity.ChoosingTertiary:
-            case CurrentActivity.Tutorial:
+            case CurrentActivity.InTutorialSequence:
                 ReleaseAllMouseUpWaits.Invoke();
                 return;
         }

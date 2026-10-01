@@ -68,17 +68,12 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         get;
     }
 
-    public Color previousColor = Color.clear;
-
     public bool inPreviewMode = false;
     public bool inOnDeathEffect = false;
 
-    public GameObject combatSprite;
     public Stats repositionClone;
     //used to track if Reposition Ability
     //is already moving creature
-
-    public string combatSpriteName;
 
     public int currentHealth;
 
@@ -100,22 +95,35 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #endregion
 
-    #region Sprite and GameObject
+    #region Combatant
 
-    private ComponentList _ComponentList;
-    
-    [SerializeField]
-    private SpriteLayerRendererList _RendererList;
-    public SpriteLayerRendererList rendererList
+    //the GameObject side lives on the Combatant, which sets these when it's spawned and listens to the events below.
+    //combatant is the one carrying the health bar; combatants holds one per GameObject, so several for a MultiAnimationEnemyStats
+    [NonSerialized]
+    public Combatant combatant;
+    [NonSerialized]
+    public List<Combatant> combatants = new List<Combatant>();
+
+    public event Action OnPositionsChanged;
+    public event Action OnHealthBarUpdate;
+    //true when the combatant can't be brought back, so its GameObjects are removed along with it
+    public event Action<bool> OnDeath;
+    public event Action OnRevive;
+    public event Action<Trait> OnTraitAdded;
+    public event Action<Trait> OnTraitRemoved;
+
+    //clones share no GameObject with the Stats they came from, so the Combatant never hears from them
+    private void detachCombatant()
     {
-        get
-        {
-            return rendererList;
-        }
-        set
-        {
-            _RendererList = value;
-        }
+        combatant = null;
+        combatants = new List<Combatant>();
+
+        OnPositionsChanged = null;
+        OnHealthBarUpdate = null;
+        OnDeath = null;
+        OnRevive = null;
+        OnTraitAdded = null;
+        OnTraitRemoved = null;
     }
 
     public virtual Color getOutlineColor()
@@ -123,37 +131,24 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         return ColorList.canBeInteractedWith;
     }
 
-    public void setPreviousColor(Color newColor)
-    {
-        if (previousColor.Equals(Color.clear) && !newColor.Equals(Color.clear))
-        {
-            previousColor = Helpers.cloneColor(newColor);
-        }
-    }
-
     public virtual void setToDeadSprite()
     {
-        if (CombatStateManager.whoseTurn != WhoseTurn.TickDown && 
-            CombatStateManager.whoseTurn != WhoseTurn.Resolving && 
+        if (CombatStateManager.whoseTurn != WhoseTurn.TickDown &&
+            CombatStateManager.whoseTurn != WhoseTurn.Resolving &&
             CombatStateManager.whoseTurn != WhoseTurn.Start )
         {
             return;
         }
 
-        if (notResurrectable() && !hasUnusedDeathEffect())
+        bool removedFromCombat = notResurrectable() && !hasUnusedDeathEffect();
+
+        if (removedFromCombat)
         {
-            destroyCombatSprite();
             removeFromGrid();
-        } else
-        {
-            healthBarManager.hide();
         }
-        
-        // if(CombatStateManager.whoseTurn == WhoseTurn.Start)
-        // {
-        //     animationManager.setCurrentIdle(CharacterAnimationType.Death);
-        // }
-        
+
+        OnDeath?.Invoke(removedFromCombat);
+
         if(CombatStateManager.whoseTurn != WhoseTurn.Start)
         {
             prepareOnDeathEffects();
@@ -162,9 +157,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public virtual void bringBackFromDeath()
     {
-        healthBarManager.show();
-        // animationManager.setToDefaultIdle();
-        // animationManager.playSpawnAnimation();
+        OnRevive?.Invoke();
     }
 
     public virtual GridCoords getPositionToHit(Selector selector, int skips)
@@ -188,145 +181,14 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         return overlapping[skips];
     }
 
-    public virtual string getCombatSpriteName()
-    {
-        return combatSpriteName;
-    }
-
-    public virtual GameObject instantiateCombatSprite(List<GridCoords> initialPositions)
-    {
-        combatSprite = GameObject.Instantiate(Resources.Load<GameObject>(getCombatSpriteName()), CombatStateManager.getCreatureParent());
-
-        positions = initialPositions.Select(p => p.clone()).ToList();
-
-        setUpComponents(combatSprite.GetComponent<ComponentList>());
-
-        moveTo(positions);
-
-        return combatSprite;
-    }
-
-    protected SpawnDetails obtainSpawnDetails()
-    {
-        SpawnDetails spawnDetails = null;
-
-        if(!obtainedSpawnDetails)
-        {
-            spawnDetails = State.enemyPackInfo.getNextSpawnDetails();
-        }
-
-        obtainedSpawnDetails = true;
-
-        return spawnDetails;
-    }
-
-    protected bool obtainedSpawnDetails = false;
-
-    public virtual void setUpComponents(ComponentList list)
-    {
-        HealthBarManager.createHealthBar(this, list.healthBarParent);
-        updateHealthBar();
-
-        list.combatantHover.linkedStats = this;
-
-        rendererList = list.rendererList;
-
-        // animationManager = list.animationManager;
-        // animationManager.linkedStats = this;
-        // animationManager.healthBarManager = healthBarManager;
-        // animationManager.setAnimations(uniqueName + getGenderMarker() + getAnimationSuffixes());
-
-        tutorialTarget = list.tutorialTarget;
-        tutorialTarget.tutorialHash = getTutorialTargetHash();
-
-        if(isDead())
-        {
-            setToDeadIdle();
-        }
-        // else
-        // {
-        //     foreach(Trait trait in traitContainer)
-        //     {
-        //         trait.setIdleAnimationOnApplication(animationManager);
-        //     }
-        // }
-    }
-
-    private void setToDeadIdle()
-    {
-        if(positions.Count <= 0)
-        {
-            return;
-        }
-
-        // if(CombatGrid.positionIsOnAlliedSide(positions[0]))
-        // {
-        //     animationManager.setCurrentIdle(CharacterAnimationType.Death_Back);
-        // } else if(CombatGrid.positionIsOnEnemySide(positions[0]))
-        // {
-        //     animationManager.setCurrentIdle(CharacterAnimationType.Death_Front);
-        // }
-    }
-
     public virtual void spawningActions()
     {
         //Empty on Purpose
     }
 
-    public virtual AbilityMenuManager getAbilityMenuManager()
-    {
-        return null;
-    }
-
-    public virtual void setOutline()
-    {
-        rendererList.createOutline(getOutlineColor());
-    }
-
-    public virtual void setOutline(byte alpha)
-    {
-        Color32 color = getOutlineColor();
-
-        color.a = alpha;
-
-        rendererList.createOutline(color);
-    }
-
-    public virtual void removeOutline()
-    {
-        if(isDead() && notResurrectable())
-        {
-            return;
-        }
-        
-        rendererList.removeOutline();
-    }
-
     public virtual bool multiSpaceEnemy()
     {
         return false;
-    }
-
-    public virtual void destroyCombatSprite()
-    {
-        GameObject.Destroy(combatSprite);
-    }
-
-    public void playSpawnAnimation()
-    {
-        // animationManager.playSpawnAnimation();
-    }
-
-    public List<Vector3> getAllWorldPositions()
-    {
-        List<Vector3> worldPositions = new List<Vector3>();
-
-        foreach(GridCoords coords in positions)
-        {
-            worldPositions.Add(CombatGrid.getPositionAt(coords));
-        }
-
-        return worldPositions;
     }
 
     public void instateEnvironmentalCombatAction()
@@ -374,8 +236,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     #endregion
 
     #region Tutorial
-    
-    public TutorialSequenceStepTargetObject  tutorialTarget;
 
     public string getTutorialTargetHash()
     {
@@ -400,76 +260,12 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #endregion
 
-    #region HealthBarManager
+    #region HealthBar
 
-    private HealthBarManager _HealthBarManager;
-    public HealthBarManager healthBarManager
-    {
-        get
-        {
-            return _HealthBarManager;
-        }
-        set
-        {
-            _HealthBarManager = value;
-            _HealthBarManager.linkedStats = this;
-        }
-    }
-
+    //the health bar belongs to the Combatant, which redraws it from these Stats
     public void updateHealthBar()
     {
-        if (healthBarManager == null || healthBarManager is null)
-        {
-            return;
-        }
-
-        healthBarManager.setLinkedStats(this);
-        healthBarManager.setTotalHealth(getTotalHealth());
-        healthBarManager.setMissingHealth(getMissingHealth());
-        healthBarManager.resetPreviewHealth();
-    }
-
-    #endregion
-
-    #region AnimationManager
-    // public AnimationManager animationManager;
-
-    public virtual void playAnimationOnDamage()
-    {
-        if (isDead())
-        {
-            // animationManager.playDeathAnimation();
-            healthBarManager.hide();
-        }
-        // else
-        // {
-        //     animationManager.playWoundedAnimation();
-        // }
-    }
-
-    public void playAttackAnimation()
-    {
-        // if(animationManager == null)
-        // {
-        //     return;
-        // }
-
-        // animationManager.playAttackAnimation();
-    }
-
-    public void playAttackIntoFrontIdleAnimation()
-    {
-        // animationManager.playAttackIntoFrontIdleAnimation();
-    }
-
-    public void playAttackIntoSecondaryIdleAnimation()
-    {
-        // animationManager.playAttackIntoSecondaryIdleAnimation();
-    }
-
-    public void playSpecialAttackAnimation()
-    {
-        // animationManager.playSpecialAttackAnimation();
+        OnHealthBarUpdate?.Invoke();
     }
 
     #endregion
@@ -491,17 +287,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     public int getMissingHealth()
     {
         return getTotalHealth() - currentHealth;
-    }
-
-    public bool hasHealthBarWithPreview()
-    {
-        if (healthBarManager == null)
-        {
-            return false;
-        }
-
-        return healthBarManager.getMissingHealth() == getMissingHealth() &&
-                healthBarManager.getTotalHealth() == getTotalHealth();
     }
 
     public void fullHeal()
@@ -720,26 +505,9 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
         if (moveSprite && positions.Count > 0)
         {
-            updateSpritePosition();
+            OnPositionsChanged?.Invoke();
         }
     }
-
-	public virtual void updateSpritePosition()
-	{
-        int coordsSum = 0;
-        GridCoords lowestYPosCoords = positions[0];
-
-        foreach(GridCoords position in positions)
-        {
-            if(position.sum() > coordsSum)
-            {
-                coordsSum = position.sum();
-                lowestYPosCoords = position;
-            }
-        }
-
-		combatSprite.transform.position = CombatGrid.getPositionAt(lowestYPosCoords);
-	}
 
     public abstract int getTotalArmorRating();
     public virtual int getTotalArmorShred()
@@ -1040,10 +808,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         newTrait.onApplication();
         newTrait.setTraitHolder(this);
 
-        // if (CombatStateManager.inCombat)
-        // {
-        //     newTrait.setIdleAnimationOnApplication(animationManager);
-        // }
+        OnTraitAdded?.Invoke(newTrait);
 
         if(!newTrait.isHiddenTrait())
         {
@@ -1113,11 +878,8 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     {
         if(traitContainer.removeTrait(traitToRemove))
         {
-            // if(!isDead())
-            // {
-            //     traitToRemove.setIdleAnimationOnRemoval(animationManager);
-            // }
-            
+            OnTraitRemoved?.Invoke(traitToRemove);
+
             Trait.OnTraitRemoval.Invoke(traitToRemove);
         }
     }
@@ -1271,20 +1033,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         return positions.Count > Constants.sizeOne;
     }
 
-    public void disablePolygonCollider()
-    {
-        // if(animationManager != null && animationManager.polygonCollider2D != null)
-        // {
-        //     animationManager.polygonCollider2D.enabled = false;
-        // }
-    }
-
     public virtual string getGenderMarker()
-    {
-        return "";
-    }
-
-    public virtual string getAnimationSuffixes()
     {
         return "";
     }
@@ -1382,6 +1131,8 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
         clone.repositionClone = null;
         clone.positions = positions.Select(p => p.clone()).ToList();
+
+        clone.detachCombatant();
 
         clone.traitContainer = traitContainer.clone(clone);
 

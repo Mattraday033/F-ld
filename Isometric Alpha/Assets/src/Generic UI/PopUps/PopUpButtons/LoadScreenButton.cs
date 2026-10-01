@@ -46,14 +46,14 @@ public class LoadScreenButton : PopUpButton
             AudioManager.playChangeScreenSFX();
         }
 
-        if(!CombatStateManager.inCombat && PlayerOOCStateManager.currentActivity != OOCActivity.Defeat)
+        if(!CombatStateManager.inCombat && PlayerStateManager.currentActivity != CurrentActivity.Defeat)
         {
 		    OverallUIManager.UIParentPanel.SetActive(true); 
         }
 
         // Transform parent;
 
-        // if(CombatStateManager.inCombat || PlayerOOCStateManager.inMainMenu())
+        // if(CombatStateManager.inCombat || PlayerStateManager.inMainMenu())
         // {
         //     GameObject outline = Instantiate(Resources.Load<GameObject>(PrefabNames.screenOutline), PopUpScreenBlockerManager.getPopUpParent(PopUpType.LoadOnlyScreen));
         //     parent = outline.transform;

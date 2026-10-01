@@ -282,7 +282,7 @@ public class AudioManager : MonoBehaviour
         instance = this;
         instance.musicSource.volume = getVolumeByType(VolumeType.Music);
 
-        if(PlayerOOCStateManager.inMainMenu())
+        if(PlayerStateManager.inMainMenu())
         {
             addMusicFade();
             setCurrentMusic(SFXType.CampOverworld);

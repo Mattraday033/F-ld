@@ -54,7 +54,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	
 	void Update() //here for Key Input
 	{
-		if(CombatStateManager.currentActivity == CurrentActivity.Repositioning)
+		if(PlayerStateManager.currentActivity == CurrentActivity.Repositioning)
 		{
 			KeyPressManager.updateKeyBools();
 			
@@ -113,7 +113,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	
 	public void startSingleAllyReposition()
 	{
-		// CombatStateManager.setCurrentActivity(CurrentActivity.Repositioning);
+		// PlayerStateManager.setCurrentActivity(CurrentActivity.Repositioning);
 		// currentRepositionType = CurrentRepositionType.SingleAlly;
 		// currentRepositionActivity = CurrentRepositionActivity.ChoosingRepositionTarget;
 		
@@ -124,7 +124,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	
 	public void startAllyFormationReposition()
 	{
-		CombatStateManager.setCurrentActivity(CurrentActivity.Repositioning);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.Repositioning);
 		currentRepositionType = CurrentRepositionType.AllyFormation;
 		currentRepositionActivity = CurrentRepositionActivity.ChoosingNewLocation;
 		
@@ -140,7 +140,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	
 	public void startEnemyFormationReposition()
 	{
-		CombatStateManager.setCurrentActivity(CurrentActivity.Repositioning);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.Repositioning);
 		currentRepositionType = CurrentRepositionType.EnemyFormation;
 		currentRepositionActivity = CurrentRepositionActivity.ChoosingNewLocation;
 		
@@ -148,7 +148,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	
 	public void updateOnStateChange()
 	{
-		if(CombatStateManager.currentActivity != CurrentActivity.Repositioning)
+		if(PlayerStateManager.currentActivity != CurrentActivity.Repositioning)
 		{
 			currentRepositionType = CurrentRepositionType.NotRepositioning;
 			currentRepositionActivity = CurrentRepositionActivity.NotRepositioning;
@@ -236,18 +236,20 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	{
 		foreach(Stats combatant in combatants)
 		{
-            if(combatant == null || combatant.combatSprite == null)
+            GameObject combatSprite = combatant.getCombatSprite();
+
+            if(combatSprite == null)
             {
                 continue;
             }
 
-			combatant.combatSprite.SetActive(activateSprites);
+			combatSprite.SetActive(activateSprites);
 		}
 	}
 	
 	private void resetCurrentActivity()
 	{
-		CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 	}
 	
 	private void resetRepositioningTypeAndActivity()
@@ -267,7 +269,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 		currentSetOfCombatantsToReposition = new List<Stats>();
 		
 		repositionUIManager.hideConfirmRepositionButton();
-		CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 	}
 	
 	public static void selectSingleAllyToMove(GridCoords coordsOfAlly)
@@ -300,7 +302,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	
 		decrementRepositionsRemaining();
 	
-		CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 	}
 	
 	public static RepositionManager getInstance()

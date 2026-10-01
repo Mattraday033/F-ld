@@ -593,12 +593,11 @@ public class TutorialSequence
 
     public static List<TutorialSequence> tutorialSequenceQueue = new List<TutorialSequence>();
 
-    public OOCActivity activityToReturnTo = OOCActivity.walking;
-    public CurrentActivity combatActivityToReturnTo = CurrentActivity.ChoosingActor;
+    //a combat activity for a combat tutorial, an overworld one otherwise
+    public CurrentActivity activityToReturnTo = CurrentActivity.Walking;
 
     public SkipTutorialScript skipScript;
 
-    public bool skipCurrentActivityChange;
     public bool preventMouseHovers = false;
 
     private bool started;
@@ -610,22 +609,17 @@ public class TutorialSequence
 
     public TutorialSequenceStep[] tutorialSequenceSteps;
 
-    public TutorialSequence(OOCActivity activityToReturnTo, bool skipCurrentActivityChange, string tutorialSeenFlag, TutorialSequenceStep[] tutorialSequenceSteps)
+    public TutorialSequence(CurrentActivity activityToReturnTo, string tutorialSeenFlag, TutorialSequenceStep[] tutorialSequenceSteps)
     {
         this.tutorialSeenFlagName = tutorialSeenFlag;
-        this.skipCurrentActivityChange = skipCurrentActivityChange;
         this.activityToReturnTo = activityToReturnTo;
         this.tutorialSequenceSteps = tutorialSequenceSteps;
         previousStep = -1;
     }
 
-    public TutorialSequence(CurrentActivity combatActivityToReturnTo, bool skipCurrentActivityChange, string tutorialSeenFlag, List<TutorialSequenceStep> tutorialSequenceSteps)
+    public TutorialSequence(CurrentActivity activityToReturnTo, string tutorialSeenFlag, List<TutorialSequenceStep> tutorialSequenceSteps) :
+    this(activityToReturnTo, tutorialSeenFlag, tutorialSequenceSteps.ToArray())
     {
-        this.tutorialSeenFlagName = tutorialSeenFlag;
-        this.skipCurrentActivityChange = skipCurrentActivityChange;
-        this.combatActivityToReturnTo = combatActivityToReturnTo;
-        this.tutorialSequenceSteps = tutorialSequenceSteps.ToArray();
-        previousStep = -1;
     }
 
 	public override bool Equals(object o)
@@ -682,11 +676,12 @@ public class TutorialSequence
 
     public void startSequence()
     {
-        setStateToInTutorialSequence();
-
         started = true;
         previousStep = -1;
         currentStepIndex = 0;
+
+        //after the reset, so the tutorial key set this state change enables binds step 0's key
+        setStateToInTutorialSequence();
 
         if (endOfSequenceEvent != null && !eventEndsSequenceOnlyOnFinalStep)
         {
@@ -815,16 +810,23 @@ public class TutorialSequence
         currentTutorialSequence.endSequence();
     }
 
+    //A sequence can end on the other side of the combat boundary from where it started, such as a combat tutorial
+    //still running when the fight ends. Its activity would then be refused and leave the player stuck in
+    //InTutorialSequence, so that side's home activity is used instead.
     private void returnToActivity()
     {
-        if (CombatStateManager.inCombat)
+        CurrentActivity activity = activityToReturnTo;
+
+        if (CombatStateManager.inCombat && !activity.isValidInCombat())
         {
-            CombatStateManager.setCurrentActivity(combatActivityToReturnTo);
+            activity = CurrentActivity.ChoosingActor;
         }
-        else
+        else if (!CombatStateManager.inCombat && activity.isCombatActivity())
         {
-            PlayerOOCStateManager.setCurrentActivity(activityToReturnTo, bypassTutorialSequenceCheck);
+            activity = CurrentActivity.Walking;
         }
+
+        PlayerStateManager.setCurrentActivity(activity, bypassTutorialSequenceCheck);
     }
 
     public void spawnTutorialPopUp()
@@ -839,6 +841,10 @@ public class TutorialSequence
             endSequence();
             return;
         }
+
+        //per step, and for a queued sequence, whose start does not change the activity and so never reaches
+        //updateEnabledInputActions
+        PlayerInputList.refreshTutorialSequenceInputActions();
 
         if (inFinalStep())
         {
@@ -994,17 +1000,6 @@ public class TutorialSequence
         return currentTutorialSequence != null;
     }
 
-   public static bool canDestroyTutorialMessageWindows()
-    {
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence 
-            || !currentlyInTutorialSequence())
-        {
-            return true;
-        }
-
-        return !currentTutorialSequence.getCurrentTutorialSequenceStep().createPopUpScreenBlocker;
-    }
-
     public static bool shouldAdvanceCurrentTutorialSequence()
     {
         return currentTutorialSequence.nextStepKeyCodeIsPressed();
@@ -1032,14 +1027,7 @@ public class TutorialSequence
 
     private static void setStateToInTutorialSequence()
     {
-        if (CombatStateManager.inCombat)
-        {
-            CombatStateManager.setCurrentActivity(CurrentActivity.Tutorial);
-        }
-        else
-        {
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inTutorialSequence);
-        }
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InTutorialSequence);
     }
 
     public static bool shouldSkipTutorialSequence(TutorialSequence tutorialSequence)
@@ -1143,14 +1131,15 @@ public class TutorialSequence
 
     public static bool blockMouseHovers()
     {
-        return (PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence || CombatStateManager.currentActivity == CurrentActivity.Tutorial)
-                 && currentTutorialSequence != null && currentTutorialSequence.preventMouseHovers;
+        return PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence &&
+                currentTutorialSequence != null && currentTutorialSequence.preventMouseHovers;
     }
 
     //whether the current step lets a click on a combat hover tile move the selector and advance the sequence
     public static bool currentStepAllowsCombatTileClicks()
     {
-        return CombatStateManager.currentActivity == CurrentActivity.Tutorial &&
+        return CombatStateManager.inCombat &&
+                PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence &&
                 currentTutorialSequence != null &&
                 !blockMouseHovers() &&
                 currentTutorialSequence.getCurrentTutorialSequenceStep().allowsCombatTileClicks;

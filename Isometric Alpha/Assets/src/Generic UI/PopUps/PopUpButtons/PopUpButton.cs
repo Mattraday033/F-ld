@@ -84,7 +84,7 @@ public abstract class PopUpButton : MonoBehaviour
 
 		if(shouldReturnToWalkingMode())
 		{
-			PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+			PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
 		}
 	}
 	
@@ -92,8 +92,8 @@ public abstract class PopUpButton : MonoBehaviour
 	{ 
         return OverallUIManager.currentScreenManager == null && OverallUIManager.currentScreenManager is null && 
             EscapeStack.getEscapableObjectsCount() == 0 && !TutorialSequence.currentlyInTutorialSequence() && 
-            PlayerOOCStateManager.currentActivity != OOCActivity.Defeat && 
-            PlayerOOCStateManager.currentActivity != OOCActivity.MainMenu;
+            PlayerStateManager.currentActivity != CurrentActivity.Defeat && 
+            PlayerStateManager.currentActivity != CurrentActivity.MainMenu;
 	}
 	
 	public static string getPopUpPrefabName(PopUpType type)

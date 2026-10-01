@@ -32,7 +32,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
     private static void initializeOOCUIManager()
     {
         instance = null;
-        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(updateOOCUI);
+        PlayerStateManager.OnStateChangeToWalking.AddListener(updateOOCUI);
     }
 
     public static void updateCharacterLevelUpCounter()
@@ -72,7 +72,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public void updateUI()
     {
-        if (PlayerOOCStateManager.inMainMenu() || CombatStateManager.inCombat || gameObject == null)
+        if (PlayerStateManager.inMainMenu() || CombatStateManager.inCombat || gameObject == null)
         {
             disableOOCUI();
             return;
@@ -132,7 +132,7 @@ public class OOCUIManager : MonoBehaviour, IQuestListSource, ICounter
 
     public void enableOOCUI()
     {
-        if(oocUIParent == null || oocUIParent is null || PlayerOOCStateManager.currentActivity == OOCActivity.Defeat)
+        if(oocUIParent == null || oocUIParent is null || PlayerStateManager.currentActivity == CurrentActivity.Defeat)
         {
             return;
         }

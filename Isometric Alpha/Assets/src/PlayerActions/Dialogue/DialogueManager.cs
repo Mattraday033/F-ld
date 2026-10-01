@@ -217,7 +217,7 @@ public class DialogueManager : MonoBehaviour
 			Start();
 		}
 
-		PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.InDialogue);
 
         setCameraToDialogueSpeed();
 		oocUIManager.disableOOCUI();
@@ -275,7 +275,7 @@ public class DialogueManager : MonoBehaviour
             }
 
 		    continueStory();
-		    PlayerOOCStateManager.OnStateChangeToWalking.AddListener(onStateChangeToWalkingEvent);
+		    PlayerStateManager.OnStateChangeToWalking.AddListener(onStateChangeToWalkingEvent);
 
             AudioManager.duckMusicForDialogue();
         }
@@ -303,9 +303,9 @@ public class DialogueManager : MonoBehaviour
 
         //A dialogue that runs to its end means a game is under way, so the start menu state is left here the
         //way clearing the newGame flag used to leave it.
-        if (PlayerOOCStateManager.inMainMenu())
+        if (PlayerStateManager.inMainMenu())
         {
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         }
 
 		if (returnToRevealAfterDialogue)
@@ -319,9 +319,9 @@ public class DialogueManager : MonoBehaviour
 		dialogueTrackerWindow = null;
 		currentConversation = new Conversation();
 
-		if (PlayerOOCStateManager.currentActivity == OOCActivity.inDialogue)
+		if (PlayerStateManager.currentActivity == CurrentActivity.InDialogue)
 		{
-			PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+			PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
 		}
 
         AudioManager.unduckMusicAfterDialogue();
@@ -330,7 +330,7 @@ public class DialogueManager : MonoBehaviour
 	public void onStateChangeToWalkingEvent()
 	{
 		EscapeStack.escapeAll();
-		PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(onStateChangeToWalkingEvent);
+		PlayerStateManager.OnStateChangeToWalking.RemoveListener(onStateChangeToWalkingEvent);
 	}
 
 	private ChoiceDescription getDefaultChoice()
@@ -1682,7 +1682,7 @@ public class DialogueManager : MonoBehaviour
 
                     NotificationManager.purgeNotifications();
                     
-                    PlayerOOCStateManager.setCurrentActivity(OOCActivity.Defeat);
+                    PlayerStateManager.setCurrentActivity(CurrentActivity.Defeat);
                     
                     continueStory();
                     
@@ -1904,7 +1904,7 @@ public class DialogueManager : MonoBehaviour
                         StopCoroutine(tutorialWaitCoroutine);
                     }
 
-                    tutorialWaitCoroutine = startTutorialAtDialogueEnd(tutorialKey, OOCActivity.walking);
+                    tutorialWaitCoroutine = startTutorialAtDialogueEnd(tutorialKey, CurrentActivity.Walking);
                     StartCoroutine(tutorialWaitCoroutine);
 
                     NotificationManager.skipNextNotificationSpawn();
@@ -1921,7 +1921,7 @@ public class DialogueManager : MonoBehaviour
                         StopCoroutine(tutorialWaitCoroutine);
                     }
 
-                    tutorialWaitCoroutine = startTutorialAtDialogueEnd(tutorialKey, OOCActivity.inUI);
+                    tutorialWaitCoroutine = startTutorialAtDialogueEnd(tutorialKey, CurrentActivity.InUI);
                     StartCoroutine(tutorialWaitCoroutine);
 
                     NotificationManager.skipNextNotificationSpawn();
@@ -2201,12 +2201,12 @@ public class DialogueManager : MonoBehaviour
         }
 	}
 
-	private IEnumerator startTutorialAtDialogueEnd(string tutorialSequenceKey, OOCActivity stateToWaitFor)
+	private IEnumerator startTutorialAtDialogueEnd(string tutorialSequenceKey, CurrentActivity stateToWaitFor)
 	{
 
-		while (PlayerOOCStateManager.currentActivity != stateToWaitFor)
+		while (PlayerStateManager.currentActivity != stateToWaitFor)
 		{
-			if (PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence)
+			if (PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence)
 			{
 				yield break;
 			}
@@ -2218,10 +2218,10 @@ public class DialogueManager : MonoBehaviour
 
 		if (!TutorialSequence.currentlyInTutorialSequence() && TutorialSequence.startTutorialSequence(tutorialSequenceKey))
 		{
-			PlayerOOCStateManager.setCurrentActivity(OOCActivity.inTutorialSequence);
+			PlayerStateManager.setCurrentActivity(CurrentActivity.InTutorialSequence);
 		} else
         {
-            PlayerOOCStateManager.OnLeavingTutorialSequenceState.Invoke();
+            PlayerStateManager.OnLeavingTutorialSequenceState.Invoke();
         }
 	}
 
@@ -2263,13 +2263,13 @@ public class DialogueManager : MonoBehaviour
 
 		FadeToBlackManager.startCombatTransition(playerTransform);
 
-		while(PlayerOOCStateManager.currentActivity != OOCActivity.preCombat)
+		while(PlayerStateManager.currentActivity != CurrentActivity.PreCombat)
 		{
 			yield return null;
 		}
 
 		setCameraToDefaultSpeed();
-		PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
 		SceneChange.changeSceneToCombat();
 	}
 
@@ -2311,7 +2311,7 @@ public class DialogueManager : MonoBehaviour
 			yield return null;
 		}
 
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking)
+        if(PlayerStateManager.currentActivity == CurrentActivity.Walking)
         {
             yield break;
         }

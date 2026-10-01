@@ -21,12 +21,6 @@ public class PlayerMovement : MovementTracker
 	public override string displayName { get { return PartyManager.getPlayerStats().displayName; } }
 	public override string uniqueName { get { return PartyManager.getPlayerStats().uniqueName; } }
 
-    public override void cancelMovement()
-    {
-        directionMod = Vector3Int.zero;
-        endingPosition = startingPosition;
-    }
-
     public static int getPlayerMovementIndex()
     {
         return getInstance().getMovementIndex();

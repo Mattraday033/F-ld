@@ -56,7 +56,7 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
 
     public ItemListID[] guaranteedDrops;
 
-    public List<SpawnDetails> spawnDetailsList;
+    public List<CombatantSpawnDetails> spawnDetailsList;
     private int currentSpawnDetailsIndex = 0;
 
     public int numberOfDrops = 1; //number of rolls on their drop table
@@ -70,7 +70,7 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
                             string dropTableName,
                             ItemListID[] guaranteedDrops = null,
                             string tutorialSequenceKey = "", 
-                            List<SpawnDetails> spawnDetailsList = null, 
+                            List<CombatantSpawnDetails> spawnDetailsList = null, 
                             bool alwaysSurprised = false, 
                             WinCondition winCon = null,
                             List<BeforeCombatAction> beforeCombatActions = null,
@@ -196,7 +196,7 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
         return false;
     }
 
-    public SpawnDetails getNextSpawnDetails()
+    public CombatantSpawnDetails getNextSpawnDetails()
     {
         if(spawnDetailsList == null || spawnDetailsList.Count == 0 || currentSpawnDetailsIndex >= spawnDetailsList.Count)
         {
@@ -208,7 +208,7 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
             currentSpawnDetailsIndex = 0;
         }
 
-        SpawnDetails spawnDetails = spawnDetailsList[currentSpawnDetailsIndex];
+        CombatantSpawnDetails spawnDetails = spawnDetailsList[currentSpawnDetailsIndex];
 
         currentSpawnDetailsIndex++;
 
@@ -235,7 +235,7 @@ public class BossPackInfo : EnemyPackInfo
                         ItemListID[] guaranteedDrops = null, 
                         QuestStepActivationScript script = null, 
                         int xpDrop = 0, 
-                        List<SpawnDetails> spawnDetailsList = null):
+                        List<CombatantSpawnDetails> spawnDetailsList = null):
     base(FoeTypes, dropTableName, guaranteedDrops, spawnDetailsList: spawnDetailsList)
     {
         this.FoeTypes = FoeTypes;

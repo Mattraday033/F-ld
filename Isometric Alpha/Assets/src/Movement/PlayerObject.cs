@@ -54,9 +54,11 @@ public class PlayerObject : MonoBehaviour
         
         TerrainVisibilityManager.initializeOnTransition();
 
+        //OnMoveFinished only fires once the player stops, so the prompt would lag behind while a direction is held
+        MovementManager.OnStepFinished.AddListener(setButtonPromptVisibility);
         MovementManager.OnMoveFinished.AddListener(setButtonPromptVisibility);
         FadeToBlackManager.OnFadeBackInFinished.AddListener(setButtonPromptVisibility);
-        PlayerOOCStateManager.OnStateChange.AddListener(setButtonPromptVisibility);
+        PlayerStateManager.OnStateChange.AddListener(setButtonPromptVisibility);
         EnemyMovement.ToggleHoverColliders.AddListener(toggleHover);
     }
 
@@ -74,7 +76,7 @@ public class PlayerObject : MonoBehaviour
     {
         yield return null;
 
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.inDialogue)
+        if(PlayerStateManager.currentActivity != CurrentActivity.InDialogue)
         {
             DialogueManager.setCameraToDefaultSpeed();  
         }
@@ -82,9 +84,10 @@ public class PlayerObject : MonoBehaviour
 
     private void OnDestroy()
     {
+        MovementManager.OnStepFinished.RemoveListener(setButtonPromptVisibility);
         MovementManager.OnMoveFinished.RemoveListener(setButtonPromptVisibility);
         FadeToBlackManager.OnFadeBackInFinished.RemoveListener(setButtonPromptVisibility);
-        PlayerOOCStateManager.OnStateChange.RemoveListener(setButtonPromptVisibility);
+        PlayerStateManager.OnStateChange.RemoveListener(setButtonPromptVisibility);
         EnemyMovement.ToggleHoverColliders.RemoveListener(toggleHover);
     }
 
@@ -158,7 +161,7 @@ public class PlayerObject : MonoBehaviour
                 return true;
             }
 
-            if (PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence && Helpers.hasCollision(getInstance().transitionCollider, LayerAndTagManager.tutorialLayerMask))
+            if (PlayerStateManager.currentActivity != CurrentActivity.InTutorialSequence && Helpers.hasCollision(getInstance().transitionCollider, LayerAndTagManager.tutorialLayerMask))
             {
                 Collider2D tutorialCollider = Helpers.getCollision(getInstance().transitionCollider, LayerAndTagManager.tutorialLayerMask);
 
@@ -226,9 +229,9 @@ public class PlayerObject : MonoBehaviour
             return;
         }
 
-        if (PlayerOOCStateManager.currentActivity == OOCActivity.walking || 
-            PlayerOOCStateManager.currentActivity == OOCActivity.cunning || 
-            PlayerOOCStateManager.currentActivity == OOCActivity.intimidating)
+        if (PlayerStateManager.currentActivity == CurrentActivity.Walking || 
+            PlayerStateManager.currentActivity == CurrentActivity.Cunning || 
+            PlayerStateManager.currentActivity == CurrentActivity.Intimidating)
         {
             string promptMessage = player.getPromptMessage();
 
@@ -280,9 +283,9 @@ public class PlayerObject : MonoBehaviour
 
     private string getPromptMessage()
     {
-        switch(PlayerOOCStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
-            case OOCActivity.walking:
+            case CurrentActivity.Walking:
                 if (PlayerMovement.canInteract())
                 {
                     return KeyBindingList.interactKey.ToString() + ": Interact";
@@ -307,7 +310,7 @@ public class PlayerObject : MonoBehaviour
                     }
                 }
                 break;
-            case OOCActivity.cunning:
+            case CurrentActivity.Cunning:
                 if (CunningManager.getInstance().canUseSkill())
                 {
                     return KeyBindingList.interactKey.ToString() + ": Cunning";
@@ -321,7 +324,7 @@ public class PlayerObject : MonoBehaviour
                             KeyBindingList.moveSouthKey.ToString() + "/" + 
                             KeyBindingList.moveEastKey.ToString() + ": Move";
                 }
-            case OOCActivity.intimidating:
+            case CurrentActivity.Intimidating:
                 if (IntimidateManager.getInstance().canUseSkill())
                 {
                     return KeyBindingList.interactKey.ToString() + ": Intimidate";
@@ -372,7 +375,7 @@ public class PlayerObject : MonoBehaviour
         do
         {
             yield return null;
-        } while(PlayerOOCStateManager.currentActivity == OOCActivity.inFade);
+        } while(PlayerStateManager.currentActivity == CurrentActivity.InFade);
 
         AudioManager.playLvlUpSFX();
 

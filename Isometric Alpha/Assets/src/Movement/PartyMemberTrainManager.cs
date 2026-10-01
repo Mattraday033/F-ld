@@ -11,12 +11,13 @@ public static class PartyMemberTrainManager
     private static void initializePartyMemberTrainManager()
     {
         TransitionManager.AfterTransition.AddListener(createPartyMemberTrain);
-        MovementManager.OnMoveFinished.AddListener(incrementStepCounter);
-        MovementManager.OnMoveFinished.AddListener(hideOverlappingPartyMembersOnMoveEnded);
-        MovementManager.BeforeMoveStarted.AddListener(showPartyMemberTrain);
+        //OnMoveFinished only fires once the player stops, so holding a direction would keep later followers frozen and hidden
+        MovementManager.OnStepFinished.AddListener(incrementStepCounter);
+        //every follower's destination is only known once moveNextInTrain has run, which happens after BeforeMoveStarted
+        MovementManager.AfterMoveStarted.AddListener(showPartyMemberTrain);
 
-        PlayerOOCStateManager.OnStateChangeToInDialogue.AddListener(createPartyMemberTrain);
-        PlayerOOCStateManager.OnStateChangeFromInDialogue.AddListener(destroyPartyMemberTrainIfAreaIsHostile);
+        PlayerStateManager.OnStateChangeToInDialogue.AddListener(createPartyMemberTrain);
+        PlayerStateManager.OnStateChangeFromInDialogue.AddListener(destroyPartyMemberTrainIfAreaIsHostile);
 
         PartyMemberPlacer.OnPartyMemberPlaced.AddListener(createPartyMemberTrain);
         PartyMemberPlacer.OnPartyMemberRemoved.AddListener(createPartyMemberTrain);
@@ -130,11 +131,22 @@ public static class PartyMemberTrainManager
         }
 	}
 	
+	//mirrors hideOverlappingPartyMembers using where everyone is heading, so a step that leaves a follower on top of
+	//the player or another follower, like bumping into a wall, does not reveal it
 	public static void showPartyMemberTrain()
 	{
+        Vector3Int playerEndingCell = MovementTracker.getEndingCell(PlayerMovement.getInstance());
+
         foreach(PartyMemberMovement partyMemberMovement in partyMemberTrain)
         {
             if(stepCounter < partyMemberMovement.placeInTrain)
+            {
+                continue;
+            }
+
+            Vector3Int endingCell = MovementTracker.getEndingCell(partyMemberMovement);
+
+            if(endingCell.Equals(playerEndingCell) || endsUnderHigherPriorityPartyMember(partyMemberMovement, endingCell))
             {
                 continue;
             }
@@ -143,36 +155,41 @@ public static class PartyMemberTrainManager
         }
 	}
 
-	public static void hideOverlappingPartyMembers()
+	private static bool endsUnderHigherPriorityPartyMember(PartyMemberMovement partyMemberMovement, Vector3Int endingCell)
 	{
-        // foreach(PartyMemberMovement partyMemberMovement in partyMemberTrain)
-        // {
-        //     Vector3Int cell = partyMemberMovement.getCell();
-
-        //     if(cell.Equals(PlayerMovement.getInstance().getCell()))
-        //     {
-        //         partyMemberMovement.hideSprite();
-        //         continue;
-        //     }
-
-        //     foreach(PartyMemberMovement otherPartyMember in partyMemberTrain)
-        //     {
-        //         if(cell.Equals(otherPartyMember.getCell()) && !otherPartyMember.partyMember.Equals(partyMemberMovement.partyMember))
-        //         {
-        //             MovementTracker.determineLowestTrainPriority(partyMemberMovement, otherPartyMember).hideSprite();
-        //             break;
-        //         }
-        //     }
-        // }
-	}
-
-    public static void hideOverlappingPartyMembersOnMoveEnded(int index)
-    {
-        if(index != MovementManager.playerSpriteIndex)
+        foreach(PartyMemberMovement otherPartyMember in partyMemberTrain)
         {
-            return;
+            if(endingCell.Equals(MovementTracker.getEndingCell(otherPartyMember)) &&
+                !otherPartyMember.partyMember.Equals(partyMemberMovement.partyMember) &&
+                MovementTracker.determineLowestTrainPriority(partyMemberMovement, otherPartyMember) == partyMemberMovement)
+            {
+                return true;
+            }
         }
 
-        hideOverlappingPartyMembers();
-    }
+        return false;
+	}
+
+	public static void hideOverlappingPartyMembers()
+	{
+        foreach(PartyMemberMovement partyMemberMovement in partyMemberTrain)
+        {
+            Vector3Int cell = partyMemberMovement.getCell();
+
+            if(cell.Equals(PlayerMovement.getInstance().getCell()))
+            {
+                partyMemberMovement.hideSprite();
+                continue;
+            }
+
+            foreach(PartyMemberMovement otherPartyMember in partyMemberTrain)
+            {
+                if(cell.Equals(otherPartyMember.getCell()) && !otherPartyMember.partyMember.Equals(partyMemberMovement.partyMember))
+                {
+                    MovementTracker.determineLowestTrainPriority(partyMemberMovement, otherPartyMember).hideSprite();
+                    break;
+                }
+            }
+        }
+	}
 }

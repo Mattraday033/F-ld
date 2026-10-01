@@ -37,9 +37,9 @@ public class CombatEscapeMenuPopUpButton : PopUpButton
 	{
         base.spawnPopUp();
 
-        previousActivity = CombatStateManager.currentActivity;
+        previousActivity = PlayerStateManager.currentActivity;
 
-        CombatStateManager.setCurrentActivity(CurrentActivity.InEscapeMenu);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InEscapeMenu);
 
         CombatHoverTileManager.GetHoverSelector.RemoveAllListeners();
         
@@ -50,7 +50,7 @@ public class CombatEscapeMenuPopUpButton : PopUpButton
     {
         base.destroyPopUp();
 
-        CombatStateManager.setCurrentActivity(previousActivity);
+        PlayerStateManager.setCurrentActivity(previousActivity);
     }
 
     public override GameObject getCurrentPopUpGameObject()

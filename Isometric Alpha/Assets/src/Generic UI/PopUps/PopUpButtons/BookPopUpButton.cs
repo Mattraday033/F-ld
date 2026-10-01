@@ -7,7 +7,7 @@ public class BookPopUpButton : PopUpButton
 {
     private BookItem book;
     private bool giveCopyOfBook;
-    private OOCActivity previousActivity;
+    private CurrentActivity previousActivity;
     private GameObject bookGameObject;
 
     public BookPopUpButton() :
@@ -25,7 +25,7 @@ public class BookPopUpButton : PopUpButton
         this.book = (BookItem)ItemList.getItem(bookID);
     }
 
-    public void spawnPopUp(BookItem book, bool giveCopyOfBook, OOCActivity previousActivity, GameObject bookGameObject)
+    public void spawnPopUp(BookItem book, bool giveCopyOfBook, CurrentActivity previousActivity, GameObject bookGameObject)
     {
         setBook(book);
 
@@ -59,7 +59,7 @@ public class BookPopUpButton : PopUpButton
         bookPopUpWindow.setBookGameObject(bookGameObject);
 
         bookPopUpWindow.populate();
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inBookUI);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InBookUI);
     }
 
     public override GameObject getCurrentPopUpGameObject()

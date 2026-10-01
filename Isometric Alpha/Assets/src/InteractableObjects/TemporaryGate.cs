@@ -62,7 +62,7 @@ public class TemporaryGate : Gate
         //     overHeadIconManager.onReveal(false);
         // }
 
-        // if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
+        // if(PlayerStateManager.currentActivity != CurrentActivity.InFade)
         // {
         //     AudioManager.playGateOpenShortSFX();
         // }
@@ -78,7 +78,7 @@ public class TemporaryGate : Gate
         //     overHeadIconManager.onReveal(RevealManager.currentlyRevealed);
         // }
 
-        // if(PlayerOOCStateManager.currentActivity != OOCActivity.inFade)
+        // if(PlayerStateManager.currentActivity != CurrentActivity.InFade)
         // {
         //     AudioManager.playGateOpenShortSFX();
         // }

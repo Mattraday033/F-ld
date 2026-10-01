@@ -45,12 +45,12 @@ public abstract class OverHeadIconComponent : MonoBehaviour, IOverHeadIconSource
 
     private void OnEnable()
     {
-        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(tryCreateAllOverheadIcons);
+        PlayerStateManager.OnStateChangeToWalking.AddListener(tryCreateAllOverheadIcons);
     }
 
     private void OnDisable()
     {
-        PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(tryCreateAllOverheadIcons);
+        PlayerStateManager.OnStateChangeToWalking.RemoveListener(tryCreateAllOverheadIcons);
     }
 
     private void tryCreateAllOverheadIcons()

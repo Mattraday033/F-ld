@@ -38,7 +38,7 @@ public class ShopPopUpWindow : PopUpWindow, ITabParent
         currentShopMode = ShopMode.Sell;
         currentDescribableList = DescribableList.Unnecessary;
         instance = null;
-        PlayerOOCStateManager.OnStateChangeFromInShopUI.AddListener(onLeavingShopUI);
+        PlayerStateManager.OnStateChangeFromInShopUI.AddListener(onLeavingShopUI);
     }
 
     private void Awake()

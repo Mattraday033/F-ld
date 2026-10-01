@@ -106,7 +106,7 @@ public class EnemyCombatActionManager : MonoBehaviour
 
                 foreach (GridCoords enemyCoords in enemy.positions)
                 {
-                    DamageNumberPopup.create(enemyCoords, linkDamage, enemy.combatSprite.transform.position, DamageNumberPopup.getDirectionByTargetCoords(enemyCoords),
+                    DamageNumberPopup.create(enemyCoords, linkDamage, enemy.getCombatSprite().transform.position, DamageNumberPopup.getDirectionByTargetCoords(enemyCoords),
                                             CombatAnimationManager.getInstance().damageNumberCanvas, false, false);
                 }
 				enemy.modifyCurrentHealth(linkDamage);

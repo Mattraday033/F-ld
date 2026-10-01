@@ -29,20 +29,20 @@ public class SkillButtonManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerOOCStateManager.OnStateChangeToSkill.AddListener(highlightSkillOutline);
-        PlayerOOCStateManager.OnStateChangeToSkill.AddListener(disableButtons);
-        PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(unhighlightSkillOutline);
-        PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(enableButtons);
+        PlayerStateManager.OnStateChangeToSkill.AddListener(highlightSkillOutline);
+        PlayerStateManager.OnStateChangeToSkill.AddListener(disableButtons);
+        PlayerStateManager.OnStateChangeFromSkill.AddListener(unhighlightSkillOutline);
+        PlayerStateManager.OnStateChangeFromSkill.AddListener(enableButtons);
 
         Formation.OnFormationChange.AddListener(setToNextSkill);
     }
 
     private void OnDisable()
     {
-        PlayerOOCStateManager.OnStateChangeToSkill.RemoveListener(highlightSkillOutline);
-        PlayerOOCStateManager.OnStateChangeToSkill.RemoveListener(disableButtons);
-        PlayerOOCStateManager.OnStateChangeFromSkill.RemoveListener(unhighlightSkillOutline);
-        PlayerOOCStateManager.OnStateChangeFromSkill.RemoveListener(enableButtons);
+        PlayerStateManager.OnStateChangeToSkill.RemoveListener(highlightSkillOutline);
+        PlayerStateManager.OnStateChangeToSkill.RemoveListener(disableButtons);
+        PlayerStateManager.OnStateChangeFromSkill.RemoveListener(unhighlightSkillOutline);
+        PlayerStateManager.OnStateChangeFromSkill.RemoveListener(enableButtons);
         
         Formation.OnFormationChange.RemoveListener(setToNextSkill);
     }
@@ -219,7 +219,7 @@ public class SkillButtonManager : MonoBehaviour
             return;
         }
 
-        if (PlayerOOCStateManager.currentActivity != OOCActivity.intimidating)
+        if (PlayerStateManager.currentActivity != CurrentActivity.Intimidating)
         {
             IntimidateManager.enterIntimidateMode();
             AudioManager.playChooseActorAbilityLocationSFX();
@@ -239,7 +239,7 @@ public class SkillButtonManager : MonoBehaviour
         }
 
 
-        if (PlayerOOCStateManager.currentActivity != OOCActivity.cunning)
+        if (PlayerStateManager.currentActivity != CurrentActivity.Cunning)
         {
             CunningManager.enterCunningMode(); 
             AudioManager.playChooseActorAbilityLocationSFX();
@@ -258,7 +258,7 @@ public class SkillButtonManager : MonoBehaviour
             return;
         }
 
-        if (PlayerOOCStateManager.currentActivity != OOCActivity.observing)
+        if (PlayerStateManager.currentActivity != CurrentActivity.Observing)
         {
             ObservationManager.enterObservationMode();  
             AudioManager.playChooseActorAbilityLocationSFX();          

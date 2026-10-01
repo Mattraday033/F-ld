@@ -31,9 +31,9 @@ public class InspectNode : MonoBehaviour
     {
         instance = null;
         _Inspecting = false;
-        PlayerOOCStateManager.OnStateChangeFromInUI.AddListener(endInspectingOnStateChange);
-        PlayerOOCStateManager.OnStateChangeFromInChestUI.AddListener(endInspectingOnStateChange);
-        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(endInspectingOnStateChange);
+        PlayerStateManager.OnStateChangeFromInUI.AddListener(endInspectingOnStateChange);
+        PlayerStateManager.OnStateChangeFromInChestUI.AddListener(endInspectingOnStateChange);
+        PlayerStateManager.OnStateChangeToWalking.AddListener(endInspectingOnStateChange);
     }
 
     [SerializeField]
@@ -76,7 +76,7 @@ public class InspectNode : MonoBehaviour
     //PlayerInput.Update returns early while inspecting, but the CustomInputActions are event driven rather
     //than polled, so they would keep firing underneath the inspect node - one Space would dismiss the node
     //and close the chest behind it. Same pattern as KeybindingButton.listenForKeyPress: pull the whole set
-    //and let PlayerOOCStateManager put back whatever the current activity calls for.
+    //and let PlayerStateManager put back whatever the current activity calls for.
     //Combat is left alone - no OOC action is enabled there, and CombatInputManager.Update already gates
     //itself on InspectNode.inspecting.
     private void setToInspectingMode()
@@ -99,7 +99,7 @@ public class InspectNode : MonoBehaviour
 
         if (!CombatStateManager.inCombat)
         {
-            PlayerOOCStateManager.updateEnabledInputActions();
+            PlayerStateManager.updateEnabledInputActions();
         }
 
         MouseHoverManager.OnHoverPanelCreation.Invoke();

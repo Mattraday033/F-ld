@@ -31,8 +31,8 @@ public class NPCMouseHover : MonoBehaviour
         // MovementManager.OnMoveFinished.AddListener(setColliderPosition);
         // TransitionManager.AfterTransition.AddListener(setColliderPosition);
 
-        PlayerOOCStateManager.OnStateChangeToSkill.AddListener(disableHover);
-        PlayerOOCStateManager.OnStateChangeFromSkill.AddListener(enableHover);
+        PlayerStateManager.OnStateChangeToSkill.AddListener(disableHover);
+        PlayerStateManager.OnStateChangeFromSkill.AddListener(enableHover);
     }
 
     public void destroyListeners()
@@ -40,8 +40,8 @@ public class NPCMouseHover : MonoBehaviour
         // MovementManager.OnMoveFinished.RemoveListener(setColliderPosition);
         // TransitionManager.AfterTransition.RemoveListener(setColliderPosition);
 
-        PlayerOOCStateManager.OnStateChangeToSkill.RemoveListener(disableHover);
-        PlayerOOCStateManager.OnStateChangeFromSkill.RemoveListener(enableHover);
+        PlayerStateManager.OnStateChangeToSkill.RemoveListener(disableHover);
+        PlayerStateManager.OnStateChangeFromSkill.RemoveListener(enableHover);
     }
 
     private void disableHover()
@@ -56,13 +56,13 @@ public class NPCMouseHover : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        switch(PlayerOOCStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
-            case OOCActivity.walking:
-            case OOCActivity.cunning:
-            case OOCActivity.observing:
-            case OOCActivity.intimidating:
-            case OOCActivity.inChestUI:
+            case CurrentActivity.Walking:
+            case CurrentActivity.Cunning:
+            case CurrentActivity.Observing:
+            case CurrentActivity.Intimidating:
+            case CurrentActivity.InChestUI:
             
                 foreach(IRevealable revealable in revealables)
                 {
@@ -82,7 +82,7 @@ public class NPCMouseHover : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inTutorialSequence)
+        if(PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence)
         {
             return;            
         }

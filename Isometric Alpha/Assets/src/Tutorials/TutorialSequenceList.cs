@@ -158,7 +158,6 @@ public static class TutorialSequenceList
 
     #endregion
 
-    private const bool doNoSkipCurrentActivityChange = false;
 
     private static Dictionary<string, TutorialSequence> tutorialSequenceDictionary;
 
@@ -252,8 +251,7 @@ public static class TutorialSequenceList
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker, 
                                                                 scriptAtEnd: new MovePlayerSouthEastScript());
 
-        TutorialSequence firstHostilityTutorialSequence = new TutorialSequence(OOCActivity.walking, 
-                                                                              doNoSkipCurrentActivityChange, 
+        TutorialSequence firstHostilityTutorialSequence = new TutorialSequence(CurrentActivity.Walking, 
                                                                               firstHostilityTutorialSeenFlag, 
                                                                               new TutorialSequenceStep[] { 
                                                                                                             stepOne, 
@@ -281,7 +279,7 @@ public static class TutorialSequenceList
                                                                 skipHighlight: skipHighlight,
                                                                 skipUnhighlight: skipUnhighlight);
 
-        TutorialSequence secondHostilityTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondHostilityTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo});
+        TutorialSequence secondHostilityTutorialSequence = new TutorialSequence(CurrentActivity.Walking, secondHostilityTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo});
 
         secondHostilityTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(secondHostilityTutorialSequenceKey, secondHostilityTutorialSequence);
@@ -299,7 +297,7 @@ public static class TutorialSequenceList
                                                                 scriptAtStart: new FaceNorthEastScript(),
                                                                 scriptAtEnd: new PlayerInteractScript());
 
-        TutorialSequence interactableObjectTutorialSequence = new TutorialSequence(OOCActivity.inDialogue, doNoSkipCurrentActivityChange, interactableObjectTutorialSeenFlag, new TutorialSequenceStep[] { stepOne });
+        TutorialSequence interactableObjectTutorialSequence = new TutorialSequence(CurrentActivity.InDialogue, interactableObjectTutorialSeenFlag, new TutorialSequenceStep[] { stepOne });
 
         interactableObjectTutorialSequence.setSkipScript(new SkipInteractionTutorialScript());
         tutorialSequenceDictionary.Add(interactableRubbleTutorialSequenceKey, interactableObjectTutorialSequence);
@@ -317,7 +315,7 @@ public static class TutorialSequenceList
                                                                 scriptAtStart: new FaceNorthEastScript(),
                                                                 scriptAtEnd: new PlayerInteractScript());
 
-        TutorialSequence vaultableObjectTutorialSequence = new TutorialSequence(OOCActivity.inDialogue, doNoSkipCurrentActivityChange, interactableObjectTutorialSeenFlag, new TutorialSequenceStep[] { stepOne });
+        TutorialSequence vaultableObjectTutorialSequence = new TutorialSequence(CurrentActivity.InDialogue, interactableObjectTutorialSeenFlag, new TutorialSequenceStep[] { stepOne });
 
         vaultableObjectTutorialSequence.setSkipScript(new SkipInteractionTutorialScript());
         tutorialSequenceDictionary.Add(vaultableObjectTutorialSequenceKey, vaultableObjectTutorialSequence);
@@ -356,7 +354,7 @@ public static class TutorialSequenceList
                                                                  createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                                  scriptAtEnd: new MovePlayerNorthWestScript());
 
-        TutorialSequence intimidateTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, intimidateTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour });
+        TutorialSequence intimidateTutorialSequence = new TutorialSequence(CurrentActivity.Walking, intimidateTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour });
 
         intimidateTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(intimidateTutorialSequenceKey, intimidateTutorialSequence);
@@ -397,7 +395,7 @@ public static class TutorialSequenceList
                                                                  createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                                  scriptAtEnd: new MovePlayerNorthWestScript());
 
-        TutorialSequence firstCunningTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, cunningTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour });
+        TutorialSequence firstCunningTutorialSequence = new TutorialSequence(CurrentActivity.Walking, cunningTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour });
 
         firstCunningTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(firstCunningTutorialSequenceKey, firstCunningTutorialSequence);
@@ -427,7 +425,7 @@ public static class TutorialSequenceList
                                                                   KeyBindingList.interactKey,
                                                                   scriptAtEnd: new ActivateCunningScript());
 
-        TutorialSequence secondCunningTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondCunningTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree });
+        TutorialSequence secondCunningTutorialSequence = new TutorialSequence(CurrentActivity.Walking, secondCunningTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree });
 
         secondCunningTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(secondCunningTutorialSequenceKey, secondCunningTutorialSequence);
@@ -447,7 +445,7 @@ public static class TutorialSequenceList
                                                                 skipHighlight: highlight,
                                                                 skipUnhighlight: unhighlight);
 
-        TutorialSequence thirdCunningTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, thirdCunningTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo });
+        TutorialSequence thirdCunningTutorialSequence = new TutorialSequence(CurrentActivity.Walking, thirdCunningTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo });
 
         thirdCunningTutorialSequence.endOfSequenceEvent = SkillManager.OnSkillUse;
 
@@ -504,8 +502,7 @@ public static class TutorialSequenceList
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                                 scriptAtEnd: new PlayerInteractScript());
 
-        TutorialSequence observationTutorialSequence = new TutorialSequence(OOCActivity.inDialogue,
-                                                                             doNoSkipCurrentActivityChange, 
+        TutorialSequence observationTutorialSequence = new TutorialSequence(CurrentActivity.InDialogue,
                                                                              observationTutorialSeenFlag, 
                                                                              new TutorialSequenceStep[] { 
                                                                                                             stepOne, 
@@ -535,7 +532,7 @@ public static class TutorialSequenceList
                                                                 skipUnhighlight: skipUnhighlight,
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker);
 
-        TutorialSequence secondObservationTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondObservationTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo });
+        TutorialSequence secondObservationTutorialSequence = new TutorialSequence(CurrentActivity.Walking, secondObservationTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo });
 
         secondObservationTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(secondObservationTutorialSequenceKey, secondObservationTutorialSequence);
@@ -588,7 +585,7 @@ public static class TutorialSequenceList
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                                 scriptAtEnd: new MovePlayerNorthEastScript());
 
-        TutorialSequence leadershipTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, leadershipTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepThree, stepFour, stepFive, stepSix });
+        TutorialSequence leadershipTutorialSequence = new TutorialSequence(CurrentActivity.Walking, leadershipTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepThree, stepFour, stepFive, stepSix });
 
         leadershipTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(leadershipTutorialSequenceKey, leadershipTutorialSequence);
@@ -609,7 +606,7 @@ public static class TutorialSequenceList
                                                                 skipUnhighlight: unhighlight,
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker);
 
-        TutorialSequence secondLeadershipTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, secondLeadershipTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo });
+        TutorialSequence secondLeadershipTutorialSequence = new TutorialSequence(CurrentActivity.Walking, secondLeadershipTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo });
 
         secondLeadershipTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(secondLeadershipTutorialSequenceKey, secondLeadershipTutorialSequence);
@@ -653,7 +650,7 @@ public static class TutorialSequenceList
                                                                     skipUnhighlight: skipUnhighlight,
                                                                     createPopUpScreenBlocker: createPopUpScreenBlocker);
 
-        TutorialSequence questCounterTutorialSequence = new TutorialSequence(OOCActivity.inMap, doNoSkipCurrentActivityChange, questCounterTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour, stepFive});
+        TutorialSequence questCounterTutorialSequence = new TutorialSequence(CurrentActivity.InMap, questCounterTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree, stepFour, stepFive});
 
         questCounterTutorialSequence.setSkipScript(new SkipMapTutorialScript());
         tutorialSequenceDictionary.Add(questCounterTutorialSequenceKey, questCounterTutorialSequence);
@@ -684,7 +681,7 @@ public static class TutorialSequenceList
                                                                 createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                                 scriptAtEnd: new HideTerrain());
 
-        TutorialSequence hiddenObjectsTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, hiddenObjectsTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree });
+        TutorialSequence hiddenObjectsTutorialSequence = new TutorialSequence(CurrentActivity.Walking, hiddenObjectsTutorialSeenFlag, new TutorialSequenceStep[] { stepOne, stepTwo, stepThree });
 
         hiddenObjectsTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(hiddenObjectsTutorialSequenceKey, hiddenObjectsTutorialSequence);
@@ -706,7 +703,7 @@ public static class TutorialSequenceList
                                                                                useButtonPress: true,
                                                                                scriptAtStart: new EnableButtonsScript());
 
-        TutorialSequence playerLevelUpTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, playerLevelUpTutorialSeenFlag, new TutorialSequenceStep[] { playerLevelUpStepOne, playerLevelUpStepTwo, playerLevelUpStepThree });
+        TutorialSequence playerLevelUpTutorialSequence = new TutorialSequence(CurrentActivity.InUI, playerLevelUpTutorialSeenFlag, new TutorialSequenceStep[] { playerLevelUpStepOne, playerLevelUpStepTwo, playerLevelUpStepThree });
 
         playerLevelUpTutorialSequence.endOfSequenceEvent = PrimaryStatIncreaseButton.PrimaryStatsIncreaseButtonPressed;
 
@@ -720,7 +717,7 @@ public static class TutorialSequenceList
                                                                              companionAbilityButtonTargetHash,
                                                                              ArrowDirection.Right);
 
-        TutorialSequence companionSpecificAbilitiesTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, companionSpecificAbilitiesTutorialSeenFlag, new TutorialSequenceStep[] { 
+        TutorialSequence companionSpecificAbilitiesTutorialSequence = new TutorialSequence(CurrentActivity.InUI, companionSpecificAbilitiesTutorialSeenFlag, new TutorialSequenceStep[] { 
                                                                                                                                                                                             companionSpecificAbilitiesStepOne
                                                                                                                                                                                         });
 
@@ -753,7 +750,7 @@ public static class TutorialSequenceList
                                                                                createPopUpScreenBlocker: createPopUpScreenBlocker,
                                                                                scriptAtEnd: new UnhighlightTargetScript());
 
-        TutorialSequence movableObjectTutorialSequence = new TutorialSequence(OOCActivity.walking, doNoSkipCurrentActivityChange, movableObjectTutorialSeenFlag, new TutorialSequenceStep[] { movableObjectStepOne, movableObjectStepTwo, movableObjectStepThree });
+        TutorialSequence movableObjectTutorialSequence = new TutorialSequence(CurrentActivity.Walking, movableObjectTutorialSeenFlag, new TutorialSequenceStep[] { movableObjectStepOne, movableObjectStepTwo, movableObjectStepThree });
 
         movableObjectTutorialSequence.setSkipScript(new SkipTutorialScript());
         tutorialSequenceDictionary.Add(movableObjectTutorialSequenceKey, movableObjectTutorialSequence);
@@ -782,7 +779,7 @@ public static class TutorialSequenceList
                                                                      useButtonPress: true);
         itemStepFour.dragWeaponContinueMessage = true;
 
-        TutorialSequence itemTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, equippableItemTutorialSeenFlag, new TutorialSequenceStep[] { itemStepOne, itemStepTwo, itemStepThree, itemStepFour });
+        TutorialSequence itemTutorialSequence = new TutorialSequence(CurrentActivity.InUI, equippableItemTutorialSeenFlag, new TutorialSequenceStep[] { itemStepOne, itemStepTwo, itemStepThree, itemStepFour });
 
         itemTutorialSequence.endOfSequenceEvent = CombatActionArray.OnCombatActionArrayChange;
 
@@ -817,7 +814,7 @@ public static class TutorialSequenceList
                                                                                 skipHighlight: true,
                                                                                 skipUnhighlight: true);
 
-        TutorialSequence formationTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, formationTutorialSeenFlag, new TutorialSequenceStep[] { formationStepOne, formationStepTwo, formationStepThree,
+        TutorialSequence formationTutorialSequence = new TutorialSequence(CurrentActivity.InUI, formationTutorialSeenFlag, new TutorialSequenceStep[] { formationStepOne, formationStepTwo, formationStepThree,
                                                                                                                                                                                              formationStepFour, formationStepFive });
 
         formationTutorialSequence.endOfSequenceEvent = Formation.OnFormationChange;
@@ -843,7 +840,7 @@ public static class TutorialSequenceList
                                                                                 scriptAtStart: new EnableButtonsScript());
         addingAbilitiesStepFour.dragActionContinueMessage = true;
 
-        TutorialSequence addingAbilitiesTutorialSequence = new TutorialSequence(OOCActivity.inUI, doNoSkipCurrentActivityChange, addingAbilitiesTutorialSeenFlag, new TutorialSequenceStep[] { addingAbilitiesStepThree,
+        TutorialSequence addingAbilitiesTutorialSequence = new TutorialSequence(CurrentActivity.InUI, addingAbilitiesTutorialSeenFlag, new TutorialSequenceStep[] { addingAbilitiesStepThree,
                                                                                                                                                                                                  addingAbilitiesStepFour });
 
         addingAbilitiesTutorialSequence.endOfSequenceEvent = CombatActionArray.OnCombatActionArrayChange;
@@ -879,7 +876,7 @@ public static class TutorialSequenceList
         traitTutorialSteps.Add(traitTutorialStepThree);
 
 
-        TutorialSequence traitTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, traitTutorialSeenFlag, traitTutorialSteps);
+        TutorialSequence traitTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, traitTutorialSeenFlag, traitTutorialSteps);
         traitTutorialSequence.preventMouseHovers = true;
 
         traitTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
@@ -915,7 +912,7 @@ public static class TutorialSequenceList
         mandatoryTargetTutorialSteps.Add(mandatoryTargetTutorialStepThree);
 
 
-        TutorialSequence mandatoryTargetTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, mandatoryTargetTutorialSeenFlag, mandatoryTargetTutorialSteps);
+        TutorialSequence mandatoryTargetTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, mandatoryTargetTutorialSeenFlag, mandatoryTargetTutorialSteps);
         mandatoryTargetTutorialSequence.preventMouseHovers = true;
 
         mandatoryTargetTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
@@ -1002,7 +999,7 @@ public static class TutorialSequenceList
 
         combatTutorialSteps = getFinalCombatTutorialSteps(combatTutorialSteps);
 
-        TutorialSequence combatTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, combatTutorialSeenFlag, combatTutorialSteps);
+        TutorialSequence combatTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, combatTutorialSeenFlag, combatTutorialSteps);
 
         combatTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
 
@@ -1030,7 +1027,7 @@ public static class TutorialSequenceList
 
         combatTutorialSteps = getFinalCombatTutorialSteps(combatTutorialSteps);
 
-        TutorialSequence combatTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, combatTutorialSeenFlag, combatTutorialSteps);
+        TutorialSequence combatTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, combatTutorialSeenFlag, combatTutorialSteps);
 
         combatTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
 
@@ -1080,7 +1077,7 @@ public static class TutorialSequenceList
                                                                              createPopUpScreenBlocker: createPopUpScreenBlocker);
         exuberanceCostTutorialSteps.Add(exuberanceCostTutorialStepFour);
 
-        TutorialSequence exuberanceCostTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingAbility, doNoSkipCurrentActivityChange, exuberanceCostTutorialSequenceKey, exuberanceCostTutorialSteps);
+        TutorialSequence exuberanceCostTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingAbility, exuberanceCostTutorialSequenceKey, exuberanceCostTutorialSteps);
         exuberanceCostTutorialSequence.preventMouseHovers = true;
 
         exuberanceCostTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
@@ -1114,7 +1111,7 @@ public static class TutorialSequenceList
                                                                              ArrowDirection.Bottom);
         traitCostTutorialSteps.Add(traitCostTutorialStepFour);
 
-        TutorialSequence traitCostTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingAbility, doNoSkipCurrentActivityChange, traitCostTutorialSequenceKey, traitCostTutorialSteps);
+        TutorialSequence traitCostTutorialSequence = new TutorialSequence(CurrentActivity.ChoosingAbility, traitCostTutorialSequenceKey, traitCostTutorialSteps);
         traitCostTutorialSequence.preventMouseHovers = true;
 
         traitCostTutorialSequence.setSkipScript(new SkipCombatTutorialScript());
@@ -1136,7 +1133,7 @@ public static class TutorialSequenceList
                                                                              ArrowDirection.BottomRight);
         winConUITutorialSteps.Add(winConUITutorialStepTwo);
 
-        TutorialSequence winConUITutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, doNoSkipCurrentActivityChange, winConUITutorialSeenFlag, winConUITutorialSteps);
+        TutorialSequence winConUITutorialSequence = new TutorialSequence(CurrentActivity.ChoosingActor, winConUITutorialSeenFlag, winConUITutorialSteps);
         // winConUITutorialSequence.preventMouseHovers = true;
 
         winConUITutorialSequence.setSkipScript(new SkipCombatTutorialScript());

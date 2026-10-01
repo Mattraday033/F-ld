@@ -72,7 +72,7 @@ public class FadeToBlackManager : MonoBehaviour
         if(CombatStateManager.inCombat && !LoadSaveFile.midLoad)
         {
             instance = this;
-            createFade(new CircleTransitionReduce(mainCamera.transform, OOCActivity.walking));
+            createFade(new CircleTransitionReduce(mainCamera.transform, CurrentActivity.Walking));
         } else
         {
             startOnSceneLoadOOCFade();
@@ -81,13 +81,13 @@ public class FadeToBlackManager : MonoBehaviour
 
     public void startOnSceneLoadOOCFade()
     {
-        StartCoroutine(waitTwoFramesThenStartFadeBackIn(new FadeBackInTransition(exitActivity: PlayerOOCStateManager.currentActivity)));
+        StartCoroutine(waitTwoFramesThenStartFadeBackIn(new FadeBackInTransition(exitActivity: PlayerStateManager.currentActivity)));
 
         //The start menu is its own activity now, so being in walking is already enough to say a game is
         //running - the old check needed the newGame flag because the menu also sat in walking.
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking)
+        if(PlayerStateManager.currentActivity == CurrentActivity.Walking)
         {
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inFade);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.InFade);
         }
 
         setToMaxOpacity();
@@ -169,7 +169,7 @@ public class FadeToBlackManager : MonoBehaviour
             return;
         }
 
-        createFade(new CircleTransitionEnlarge(monsterTransform, OOCActivity.preCombat));
+        createFade(new CircleTransitionEnlarge(monsterTransform, CurrentActivity.PreCombat));
     }
 
     public static void createFade(ScreenFade fade)

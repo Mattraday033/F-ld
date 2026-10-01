@@ -98,7 +98,7 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 	public virtual void destroyListeners()
 	{
 		TutorialSequence.TutorialSequenceTargetFinder.RemoveListener(assignToTutorialSequence);
-        PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
+        PlayerStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
         TutorialSequence.OnTutorialTargetVisibilityCheck.RemoveListener(isVisible);
 	}
 
@@ -180,7 +180,7 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 
         // spriteOutline.createOutline(ColorList.tutorialDefault);
         
-        PlayerOOCStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
+        PlayerStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
 	}
 	
     public void unhighlight()
@@ -206,7 +206,7 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 
         // spriteOutline.removeOutline();
 
-        PlayerOOCStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
+        PlayerStateManager.OnLeavingTutorialSequenceState.RemoveListener(unhighlight);
 	}
 
     public void isVisible(TutorialWindowTargetVisibility visibility)

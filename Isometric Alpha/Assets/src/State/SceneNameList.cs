@@ -44,12 +44,12 @@ public static class SceneChange
 
     private static IEnumerator waitForFadeFinish()
     {
-        while(PlayerOOCStateManager.currentActivity != OOCActivity.preCombat)
+        while(PlayerStateManager.currentActivity != CurrentActivity.PreCombat)
         {
             yield return null;
         }
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         changeSceneToCombat();
     }
 
@@ -86,15 +86,15 @@ public static class SceneChange
     {
         //Every route back to the start menu comes through here, so this is where the game re-enters the state
         //the newGame flag used to stand for. The bypass is needed because setCurrentActivity otherwise refuses
-        //to leave inTutorialSequence for anything but walking.
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.MainMenu, tutorialSequenceCheckBypass: true);
+        //to leave InTutorialSequence for anything but walking.
+        PlayerStateManager.setCurrentActivity(CurrentActivity.MainMenu, tutorialSequenceCheckBypass: true);
 
         SceneManager.LoadScene(SceneNameList.startMenu);
     }
 
     public static void addOOCUIScene()
     {
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.Defeat)
+        if(PlayerStateManager.currentActivity == CurrentActivity.Defeat)
         {
             return;
         }

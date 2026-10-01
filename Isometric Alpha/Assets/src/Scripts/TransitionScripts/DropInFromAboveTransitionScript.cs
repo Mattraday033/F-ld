@@ -12,13 +12,13 @@ public class DropInFromAboveTransitionScript : PlayerInteractionScript
 
     public override void runScript(GameObject target = null)
     {
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inAnimation);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InAnimation);
 
         PlayerObject player = PlayerObject.getInstance();
 
         if (player == null)
         {
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
             return;
         }
 
@@ -37,7 +37,7 @@ public class DropInFromAboveTransitionScript : PlayerInteractionScript
             fadeManager.mainCM == null ||
             fadeManager.mainCamera == null)
         {
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
             yield break;
         }
 
@@ -86,7 +86,7 @@ public class DropInFromAboveTransitionScript : PlayerInteractionScript
 
         //Re-couple the camera to the player and hand control back.
         mainCM.Follow = playerTransform;
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         PlayerObject.setSpriteSortingLayer(SortingLayerManager.firstSortingLayerInfo);
     }
 

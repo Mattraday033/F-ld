@@ -67,7 +67,7 @@ public class LoadingBarProgressTracker : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.Loading);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Loading);
     }
 
     private void Start()
@@ -77,10 +77,10 @@ public class LoadingBarProgressTracker : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.inDialogue && 
-           PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence)
+        if(PlayerStateManager.currentActivity != CurrentActivity.InDialogue && 
+           PlayerStateManager.currentActivity != CurrentActivity.InTutorialSequence)
         {
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         }
 
         HeartBeatManager.MediumHeartBeat.RemoveListener(animateProtagRunSprite);

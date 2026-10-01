@@ -37,7 +37,7 @@ public abstract class CombatMouseHover : MonoBehaviour
     public void OnMouseDown()
     {
         if(AbilityMenuButton.hoveringOverAbilityMenuButton || 
-            CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu || 
+            PlayerStateManager.currentActivity == CurrentActivity.InEscapeMenu || 
             CutOutMaskInternalBlockerManager.isBlocking())
         {
             return;
@@ -45,7 +45,7 @@ public abstract class CombatMouseHover : MonoBehaviour
 
         if (CombatStateManager.whoseTurn == WhoseTurn.Player)
         {
-            switch (CombatStateManager.currentActivity)
+            switch (PlayerStateManager.currentActivity)
             {
                 case CurrentActivity.ChoosingActor:
 
@@ -78,7 +78,7 @@ public abstract class CombatMouseHover : MonoBehaviour
                         SelectorManager.handleChoosingTertiary();
                     }
                     break;
-                case CurrentActivity.Tutorial:
+                case CurrentActivity.InTutorialSequence:
 
                     if (handleTutorialClick())
                     {
@@ -126,7 +126,7 @@ public abstract class CombatMouseHover : MonoBehaviour
     {
         if(hasTargetStats(out Stats target))
         {
-            return target.combatSprite;
+            return target.getCombatSprite();
         } else
         {
             return null;

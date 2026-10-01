@@ -22,7 +22,7 @@ public class PartyMemberSelectionGrid : UIListenerGrid
 
     public override void updateCounter()
     {
-        if(PlayerOOCStateManager.inMainMenu())
+        if(PlayerStateManager.inMainMenu())
         {
             return;
         }

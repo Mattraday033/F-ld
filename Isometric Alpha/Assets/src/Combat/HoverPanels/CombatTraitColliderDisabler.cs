@@ -11,7 +11,7 @@ public class CombatTraitColliderDisabler : MonoBehaviour, IPointerEnterHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        switch(CombatStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
             case CurrentActivity.ChoosingActor:
             case CurrentActivity.ChoosingAbility:
@@ -27,7 +27,7 @@ public class CombatTraitColliderDisabler : MonoBehaviour, IPointerEnterHandler, 
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        switch(CombatStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
             case CurrentActivity.ChoosingActor:
             case CurrentActivity.ChoosingAbility:

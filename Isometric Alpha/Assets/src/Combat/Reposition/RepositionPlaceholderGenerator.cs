@@ -6,34 +6,16 @@ public static class RepositionPlaceholderGenerator
 {
 	public const float placeHolderSpriteOpaqueness = .4f;
 
+	//a see-through copy of the combatant, built from its Stats the same way the combatant itself was
 	public static GameObject generatePlaceholderObject(Stats combatantToBeMoved, GridCoords placeHolderPosition)
 	{
-		GameObject placeHolderObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.placeHolderObject));
-		
-		SpriteRenderer placeHolderSprite = placeHolderObject.GetComponent<SpriteRenderer>();
-		SpriteRenderer combatantToBeMovedSprite = combatantToBeMoved.combatSprite.GetComponent<SpriteRenderer>();
-		
-		placeHolderSprite.sprite = combatantToBeMovedSprite.sprite;
-		placeHolderSprite.flipX = combatantToBeMovedSprite.flipX;
-		placeHolderSprite.flipY = combatantToBeMovedSprite.flipY;
-		Color placeHolderColor = combatantToBeMovedSprite.color;
-		placeHolderColor.a = placeHolderSpriteOpaqueness;
-		placeHolderSprite.color = placeHolderColor;
-		
-		placeHolderObject.transform.position = CombatGrid.getPositionAt(placeHolderPosition);
-		placeHolderObject.transform.localScale = combatantToBeMoved.combatSprite.transform.localScale;
-		GameObjectUtil.updateGameObjectPosition(placeHolderObject);
-		
-        CombatantHover hover = placeHolderObject.AddComponent<CombatantHover>();
+		CombatantSpawnDetails spawnDetails = new CombatantSpawnDetails(combatantToBeMoved,
+																		new List<GridCoords> { placeHolderPosition },
+																		placeholder: true);
 
-        hover.linkedStats = combatantToBeMoved;
-        // placeHolderObject.AddComponent<PolygonCollider2D>();
+		List<Combatant> placeholders = spawnDetails.spawnCombatant();
 
-        // SpriteOutline spriteOutline = new SpriteOutline();
-        // spriteOutline.setSpriteRenderer(placeHolderSprite);
-        // combatantToBeMoved.outline = spriteOutline;
-
-		return placeHolderObject;
+		return placeholders.Count > 0 ? placeholders[0].gameObject : null;
 	}
 
 }

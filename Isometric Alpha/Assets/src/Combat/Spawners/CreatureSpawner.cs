@@ -71,7 +71,14 @@ public static class CreatureSpawner
 			}
 		}
 
-        stats.instantiateCombatSprite(spawnCoords);
+        CombatantSpawnDetails spawnDetails = CombatantSpawnDetails.forSpawn(stats, spawnCoords);
+
+        if(spawnDetails == null)
+        {
+            return;
+        }
+
+        spawnDetails.spawnCombatant();
 
         if(CombatStateManager.whoseTurn == WhoseTurn.Start)
         {

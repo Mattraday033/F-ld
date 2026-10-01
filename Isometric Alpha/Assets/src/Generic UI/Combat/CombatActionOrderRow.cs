@@ -87,8 +87,8 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 
 		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
 
-		if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
-			CombatStateManager.currentActivity == CurrentActivity.Retreating ||
+		if (PlayerStateManager.currentActivity == CurrentActivity.Waiting ||
+			PlayerStateManager.currentActivity == CurrentActivity.Retreating ||
             actionBeingDescribed == null)
 		{
 			return;
@@ -118,8 +118,8 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
     {
 		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
 
-        if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
-			CombatStateManager.currentActivity == CurrentActivity.Retreating ||
+        if (PlayerStateManager.currentActivity == CurrentActivity.Waiting ||
+			PlayerStateManager.currentActivity == CurrentActivity.Retreating ||
             actionBeingDescribed == null || 
             !actionBeingDescribed.hasAssignedActor(out Stats actor))
         {

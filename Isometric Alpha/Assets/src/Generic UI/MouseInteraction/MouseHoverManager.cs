@@ -244,7 +244,7 @@ public static class MouseHoverManager
     [RuntimeInitializeOnLoadMethod]
     private static void initializeMouseHoverManager()
     {
-        PlayerOOCStateManager.OnStateChange.AddListener(destroyHoverIcon);
+        PlayerStateManager.OnStateChange.AddListener(destroyHoverIcon);
 
         mouseHoverBase = null;
         coroutineParent = null;

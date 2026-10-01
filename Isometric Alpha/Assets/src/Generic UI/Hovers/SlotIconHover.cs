@@ -254,14 +254,14 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             case IconList.observationIconName:
             case IconList.leadershipIconName:
 
-                switch(PlayerOOCStateManager.currentActivity)
+                switch(PlayerStateManager.currentActivity)
                 {
-                    case OOCActivity.walking:
-                    case OOCActivity.inChestUI:
-                    case OOCActivity.cunning:
-                    case OOCActivity.intimidating:
-                    case OOCActivity.observing:
-                    case OOCActivity.inFade:
+                    case CurrentActivity.Walking:
+                    case CurrentActivity.InChestUI:
+                    case CurrentActivity.Cunning:
+                    case CurrentActivity.Intimidating:
+                    case CurrentActivity.Observing:
+                    case CurrentActivity.InFade:
                         return hoverMessageKey  + " ["+KeyBindingList.skillKey.ToString()+"]" ;
                     default:
                         return hoverMessageKey;
@@ -728,7 +728,7 @@ public static class HoverMessageList
             case goldKey:
                 return goldIconMessage;
             case IconList.worthIconName:
-                if (!CombatStateManager.inCombat && PlayerOOCStateManager.currentActivity == OOCActivity.inUI && OverallUIManager.lastScreenType == ScreenType.Character)
+                if (!CombatStateManager.inCombat && PlayerStateManager.currentActivity == CurrentActivity.InUI && OverallUIManager.lastScreenType == ScreenType.Character)
                 {
                     return goldIconMessage;
                 }

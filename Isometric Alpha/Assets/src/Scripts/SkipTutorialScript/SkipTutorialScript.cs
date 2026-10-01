@@ -13,7 +13,7 @@ public class SkipTutorialScript
         RevealManager.resetReveals();
 
         TutorialSequence.endCurrentTutorialSequence();
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
     }
 }
@@ -30,7 +30,7 @@ public class SkipInteractionTutorialScript : SkipTutorialScript
 
         TutorialSequence.endCurrentTutorialSequence();
         DialogueManager.getInstance().endDialogue();
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
     }
 }
@@ -42,14 +42,14 @@ public class SkipUpgradingPartyMemberTutorialScript : SkipTutorialScript
         if (OverallUIManager.currentScreenManager != null)
         {
             TutorialSequence.endCurrentTutorialSequence();
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.InUI);
 
             PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
         }
         else
         {
             TutorialSequence.endCurrentTutorialSequence();
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
 
             PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
         }
@@ -63,12 +63,12 @@ public class SkipAddingAbilitiesTutorialScript : SkipTutorialScript
         if (OverallUIManager.currentScreenManager != null)
         {
             TutorialSequence.endCurrentTutorialSequence();
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.InUI);
         }
         else
         {
             TutorialSequence.endCurrentTutorialSequence();
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         }
     }
 }
@@ -80,12 +80,12 @@ public class SkipEquippingItemsTutorialScript : SkipTutorialScript
         if (OverallUIManager.currentScreenManager != null)
         {
             TutorialSequence.endCurrentTutorialSequence();
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.InUI);
         }
         else
         {
             TutorialSequence.endCurrentTutorialSequence();
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         }
     }
 }
@@ -97,12 +97,12 @@ public class SkipFormationTutorialScript : SkipTutorialScript
         if (OverallUIManager.currentScreenManager != null)
         {
             TutorialSequence.endCurrentTutorialSequence();
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.inUI);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.InUI);
         }
         else
         {
             TutorialSequence.endCurrentTutorialSequence();
-            PlayerOOCStateManager.setCurrentActivity(OOCActivity.walking);
+            PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
         }
     }
 }

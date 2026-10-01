@@ -343,13 +343,13 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
             return;
         }
 
-        switch(PlayerOOCStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
-            case OOCActivity.walking:
-            case OOCActivity.inChestUI:
-            case OOCActivity.cunning:
-            case OOCActivity.intimidating:
-            case OOCActivity.observing:
+            case CurrentActivity.Walking:
+            case CurrentActivity.InChestUI:
+            case CurrentActivity.Cunning:
+            case CurrentActivity.Intimidating:
+            case CurrentActivity.Observing:
                 break;
             default:
                 return;
@@ -372,13 +372,13 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
 
         PlayerObject.restoreButtonPrompt();
 
-        switch(PlayerOOCStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
-            case OOCActivity.walking:
-            case OOCActivity.inChestUI:
-            case OOCActivity.cunning:
-            case OOCActivity.intimidating:
-            case OOCActivity.observing:
+            case CurrentActivity.Walking:
+            case CurrentActivity.InChestUI:
+            case CurrentActivity.Cunning:
+            case CurrentActivity.Intimidating:
+            case CurrentActivity.Observing:
                 break;
             default:
                 return;
@@ -465,8 +465,8 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
 
         PlayerInteractionScript.runAllScripts(scripts);
 
-        PlayerOOCStateManager.OnStateChangeFromInChestUI.AddListener(destroyUI);
-        PlayerOOCStateManager.OnStateChangeFromInChestUI.AddListener(setSpriteToOpenEmpty);
+        PlayerStateManager.OnStateChangeFromInChestUI.AddListener(destroyUI);
+        PlayerStateManager.OnStateChangeFromInChestUI.AddListener(setSpriteToOpenEmpty);
 
         if(script != null)
         {
@@ -510,8 +510,8 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
     {
         chestState = ChestState.OpenEmpty;
         setToCurrentSprite();
-        PlayerOOCStateManager.OnStateChangeFromInChestUI.RemoveListener(destroyUI);
-        PlayerOOCStateManager.OnStateChangeFromInChestUI.RemoveListener(setSpriteToOpenEmpty);
+        PlayerStateManager.OnStateChangeFromInChestUI.RemoveListener(destroyUI);
+        PlayerStateManager.OnStateChangeFromInChestUI.RemoveListener(setSpriteToOpenEmpty);
 
         if(!ignoreSFX)
         {

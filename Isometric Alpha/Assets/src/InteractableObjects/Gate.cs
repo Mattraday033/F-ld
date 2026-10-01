@@ -44,7 +44,7 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
     {
         if (GateAndChestManager.hasBeenOpened(getGateKey()))
         {
-            if(PlayerOOCStateManager.currentActivity == OOCActivity.inFade)
+            if(PlayerStateManager.currentActivity == CurrentActivity.InFade)
             {
                 playSFX = false;
                 
@@ -99,15 +99,26 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 
 	//IRevealable interface methods
 
+	//An extra space of a multi-cell gate is the blank Extra Space prefab, which has no SpriteLayerRendererList
+	//and so nothing to outline. It still listens for OnGateKeyAdd, which is what turns its collider off when
+	//the gate opens.
 	public virtual void createListeners()
 	{
-        RevealManager.OnReveal.AddListener(onReveal);
+        if(rendererList != null)
+        {
+            RevealManager.OnReveal.AddListener(onReveal);
+        }
+
         GateAndChestManager.OnGateKeyAdd.AddListener(checkGateStatus);
 	}
 
 	public virtual void destroyListeners()
 	{
-		RevealManager.OnReveal.RemoveListener(onReveal);
+        if(rendererList != null)
+        {
+		    RevealManager.OnReveal.RemoveListener(onReveal);
+        }
+
         GateAndChestManager.OnGateKeyAdd.RemoveListener(checkGateStatus);
 	}
 
@@ -135,13 +146,13 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-        switch(PlayerOOCStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
-            case OOCActivity.walking:
-            case OOCActivity.inChestUI:
-            case OOCActivity.cunning:
-            case OOCActivity.intimidating:
-            case OOCActivity.observing:
+            case CurrentActivity.Walking:
+            case CurrentActivity.InChestUI:
+            case CurrentActivity.Cunning:
+            case CurrentActivity.Intimidating:
+            case CurrentActivity.Observing:
                 break;
             default:
                 return;
@@ -160,13 +171,13 @@ public class Gate : MonoBehaviour, IRevealable, INameSource
 	{
         PlayerObject.restoreButtonPrompt();
 
-        switch(PlayerOOCStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
-            case OOCActivity.walking:
-            case OOCActivity.inChestUI:
-            case OOCActivity.cunning:
-            case OOCActivity.intimidating:
-            case OOCActivity.observing:
+            case CurrentActivity.Walking:
+            case CurrentActivity.InChestUI:
+            case CurrentActivity.Cunning:
+            case CurrentActivity.Intimidating:
+            case CurrentActivity.Observing:
                 break;
             default:
                 return;

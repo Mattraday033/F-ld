@@ -40,7 +40,7 @@ public class SkillIndicator : MonoBehaviour
         backSelectorTwo.animationData = AnimationDataList.backSelector2;
         backSelectorTwo.startAnimation();
 
-        mouseHoverCollider.enabled = PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence;
+        mouseHoverCollider.enabled = PlayerStateManager.currentActivity != CurrentActivity.InTutorialSequence;
     }
 
     private void OnEnable()

@@ -1078,6 +1078,13 @@ public class SecretDoorSpawnDetails : AxisSpawnDetails
         //and re-applying the appearance on that turn wipes the observed tint
         aestheticSpawnBehaviours.Remove(typeof(AnimationManagerSpawnBehaviour));
 
+        //secret doors get no mouse hover
+        aestheticSpawnBehaviours.Remove(typeof(NPCMouseHoverSpawnBehaviour));
+
+        //the icon manager outlines on every reveal key press, which would give the door away before it is observed;
+        //ObservableObject handles both the observed outline and hiding the door once it is discovered
+        aestheticSpawnBehaviours.Remove(typeof(OverHeadIconManagerSpawnBehaviour));
+
         aestheticSpawnBehaviours[typeof(ObservableObjectSpawnBehaviour)] = new ObservableObjectSpawnBehaviour(secretDoorInfo.secretDoorKeys, terrainSpriteName);
     }
 

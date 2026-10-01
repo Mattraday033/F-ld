@@ -117,7 +117,7 @@ public class BetweenAreaFade : MusicFade
 
     public override IEnumerator getCoroutineTemplate()
     {
-        if(PlayerOOCStateManager.inMainMenu())
+        if(PlayerStateManager.inMainMenu())
         {
             fadeOut = false;
             setToMute();

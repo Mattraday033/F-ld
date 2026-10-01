@@ -44,7 +44,7 @@ public class MouseHoverBlockerDebugger : MonoBehaviour
 
         report.AppendLine("===== MOUSE HOVER BLOCKER REPORT =====");
         report.AppendLine($"frame={Time.frameCount} mouseScreen={mousePosition}");
-        appendSafe(report, "activity", () => PlayerOOCStateManager.currentActivity.ToString());
+        appendSafe(report, "activity", () => PlayerStateManager.currentActivity.ToString());
         appendSafe(report, "location", () => AreaManager.locationName);
         report.AppendLine($"loadedScenes=[{string.Join(", ", getLoadedSceneNames())}] activeScene={SceneManager.GetActiveScene().name}");
         report.AppendLine($"Physics2D.queriesHitTriggers={Physics2D.queriesHitTriggers} Physics2D.queriesStartInColliders={Physics2D.queriesStartInColliders} Physics.queriesHitTriggers={Physics.queriesHitTriggers}");

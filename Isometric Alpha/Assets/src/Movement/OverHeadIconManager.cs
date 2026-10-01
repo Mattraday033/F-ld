@@ -56,8 +56,8 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
 
     private void OnEnable()
     {
-        PlayerOOCStateManager.OnStateChangeToInDialogue.AddListener(disableCanvas);
-        PlayerOOCStateManager.OnStateChangeFromInDialogue.AddListener(enableCanvas);
+        PlayerStateManager.OnStateChangeToInDialogue.AddListener(disableCanvas);
+        PlayerStateManager.OnStateChangeFromInDialogue.AddListener(enableCanvas);
 
         if(rendererList != null)
         {
@@ -67,8 +67,8 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
 
     private void OnDisable()
     {
-        PlayerOOCStateManager.OnStateChangeToInDialogue.RemoveListener(disableCanvas);
-        PlayerOOCStateManager.OnStateChangeFromInDialogue.RemoveListener(enableCanvas);
+        PlayerStateManager.OnStateChangeToInDialogue.RemoveListener(disableCanvas);
+        PlayerStateManager.OnStateChangeFromInDialogue.RemoveListener(enableCanvas);
 
         if(rendererList != null)
         {
@@ -126,11 +126,11 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
     {
         RevealManager.OnReveal.AddListener(onReveal);
 
-        PlayerOOCStateManager.OnStateChangeFromWalking.AddListener(displayNameTagBasedOnStateChange);
-        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(displayNameTagBasedOnStateChange);
+        PlayerStateManager.OnStateChangeFromWalking.AddListener(displayNameTagBasedOnStateChange);
+        PlayerStateManager.OnStateChangeToWalking.AddListener(displayNameTagBasedOnStateChange);
 
-        PlayerOOCStateManager.OnStateChangeFromWalking.AddListener(this.revealBasedOnStateChange);
-        PlayerOOCStateManager.OnStateChangeToWalking.AddListener(this.revealBasedOnStateChange);
+        PlayerStateManager.OnStateChangeFromWalking.AddListener(this.revealBasedOnStateChange);
+        PlayerStateManager.OnStateChangeToWalking.AddListener(this.revealBasedOnStateChange);
 
         if(!ignoreSecretDoors)
         {
@@ -143,11 +143,11 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
         RevealManager.OnReveal.RemoveListener(onReveal);
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(checkSpawnParams);
 
-        PlayerOOCStateManager.OnStateChangeFromWalking.RemoveListener(displayNameTagBasedOnStateChange);
-        PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(displayNameTagBasedOnStateChange);
+        PlayerStateManager.OnStateChangeFromWalking.RemoveListener(displayNameTagBasedOnStateChange);
+        PlayerStateManager.OnStateChangeToWalking.RemoveListener(displayNameTagBasedOnStateChange);
 
-        PlayerOOCStateManager.OnStateChangeFromWalking.RemoveListener(this.revealBasedOnStateChange);
-        PlayerOOCStateManager.OnStateChangeToWalking.RemoveListener(this.revealBasedOnStateChange);
+        PlayerStateManager.OnStateChangeFromWalking.RemoveListener(this.revealBasedOnStateChange);
+        PlayerStateManager.OnStateChangeToWalking.RemoveListener(this.revealBasedOnStateChange);
     }
 
     public void onReveal(bool toggleReveal)
@@ -328,7 +328,7 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
 
         nameTag.nameText.text = displayName;
 
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.inWorldMap)
+        if(PlayerStateManager.currentActivity == CurrentActivity.InWorldMap)
         {
             Canvas nameTagCanvas = nameTag.GetComponent<Canvas>();
 
@@ -354,7 +354,7 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
 
     public void displayNameTagBasedOnStateChange()
     {
-        if(PlayerOOCStateManager.currentActivity == OOCActivity.walking &&
+        if(PlayerStateManager.currentActivity == CurrentActivity.Walking &&
             RevealManager.currentlyRevealed &&
             !this.hasGenericName() &&
             !nameTagSuppressed())

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting;
-using UnityEngine.EventSystems;
 
 public enum StartingMenuState { OnMainMenu = 1, Loading = 2, CharacterCreation = 3 }
 
@@ -35,38 +34,8 @@ public class StartingMenuManager : MonoBehaviour
         instance = this;
     }
 
-    void Update() //here for Key Input
-	{
-		KeyPressManager.updateKeyBools();
-
-        if (SaveHandler.getInstance() != null) 
-        {
-            if (!SaveHandler.saveNameFieldIsSelected() && KeyBindingList.settingsScreenOrBackKeyPressed() && !KeyPressManager.handlingPrimaryKeyPress)
-            {
-                KeyPressManager.handlingPrimaryKeyPress = true;
-
-                handleESCPress();
-                return;
-            } 
-            else if(SaveHandler.saveNameFieldIsSelected() && Input.GetKey(KeyBindingList.settingsScreenKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
-            {
-                KeyPressManager.handlingPrimaryKeyPress = true;
-
-                EventSystem.current.SetSelectedGameObject(null);
-                handleESCPress();
-                return;
-            }
-        } 
-
-        if (CharacterCreationPopUpWindow.getInstanceCC() != null && KeyBindingList.settingsScreenOrBackKeyPressed() && !KeyPressManager.handlingPrimaryKeyPress && !CharacterCreationPopUpWindow.inNameInputField())
-		{
-            KeyPressManager.handlingPrimaryKeyPress = true;
-
-			handleESCPress();
-            return;
-		}
-	}
-
+	//Key input lives in PlayerInputList's MainMenu set (mainMenuOpenSettings and mainMenuBackOut), which calls
+	//handleESCPress through closeStartingMenuScreen.
 	public void handleESCPress()
 	{
         EscapeStack.escapeAll();

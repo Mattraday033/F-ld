@@ -33,11 +33,11 @@ public class LoadSaveFile: IDecision
     public readonly static UnityEvent OnLoadResetData = new UnityEvent();
     public readonly static UnityEvent<SaveBlueprint> OnLoadReadBlueprint = new UnityEvent<SaveBlueprint>();
 
-    public OOCActivity exitActivity;
+    public CurrentActivity exitActivity;
     public SaveBlueprint saveBlueprint;
     public bool showMonologueFirst;
 
-    public LoadSaveFile(SaveBlueprint saveBlueprint, OOCActivity exitActivity = OOCActivity.walking, bool showMonologueFirst = false)
+    public LoadSaveFile(SaveBlueprint saveBlueprint, CurrentActivity exitActivity = CurrentActivity.Walking, bool showMonologueFirst = false)
     {
         this.saveBlueprint = saveBlueprint;
 
@@ -82,9 +82,9 @@ public class LoadSaveFile: IDecision
 
         FadeToBlackManager.setToMaxOpacity();
 
-        if(PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence)
+        if(PlayerStateManager.currentActivity != CurrentActivity.InTutorialSequence)
         {
-            PlayerOOCStateManager.setCurrentActivity(exitActivity);
+            PlayerStateManager.setCurrentActivity(exitActivity);
         }
 
         SceneChange.removeLoadingScreen();

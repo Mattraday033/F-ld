@@ -58,7 +58,7 @@ public class KeyBindingSettingsManager : MonoBehaviour
         //this the actions KeybindingButton.listenForKeyPress disabled would stay disabled for good.
         if (wasListening)
         {
-            PlayerOOCStateManager.updateEnabledInputActions();
+            PlayerStateManager.updateEnabledInputActions();
         }
     }
 
@@ -218,7 +218,7 @@ public class KeyBindingSettingsManager : MonoBehaviour
         EnableAllKeyBindButtons.Invoke();
 
         //Puts back the actions KeybindingButton.listenForKeyPress disabled.
-        PlayerOOCStateManager.updateEnabledInputActions();
+        PlayerStateManager.updateEnabledInputActions();
     }
 
     public void endListening()
@@ -250,7 +250,7 @@ public class KeyBindingSettingsManager : MonoBehaviour
         EnableAllKeyBindButtons.Invoke();
 
         //Puts back the actions KeybindingButton.listenForKeyPress disabled.
-        PlayerOOCStateManager.updateEnabledInputActions();
+        PlayerStateManager.updateEnabledInputActions();
     }
 
     public void spawnReturnToDefaultsPopUp()

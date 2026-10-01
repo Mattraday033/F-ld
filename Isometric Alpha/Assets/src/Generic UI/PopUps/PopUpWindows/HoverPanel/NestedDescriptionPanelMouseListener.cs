@@ -44,8 +44,8 @@ public class NestedDescriptionPanelMouseListener : MonoBehaviour, IPointerEnterH
 	
 	public void OnPointerEnter(PointerEventData eventData)
     {
-        if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
-			CombatStateManager.currentActivity == CurrentActivity.Retreating)
+        if (PlayerStateManager.currentActivity == CurrentActivity.Waiting ||
+			PlayerStateManager.currentActivity == CurrentActivity.Retreating)
         {
             return;
         }
@@ -55,8 +55,8 @@ public class NestedDescriptionPanelMouseListener : MonoBehaviour, IPointerEnterH
  
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (CombatStateManager.currentActivity == CurrentActivity.Waiting ||
-			CombatStateManager.currentActivity == CurrentActivity.Retreating || 
+        if (PlayerStateManager.currentActivity == CurrentActivity.Waiting ||
+			PlayerStateManager.currentActivity == CurrentActivity.Retreating || 
             InspectNode.inspecting)
         {
             return;

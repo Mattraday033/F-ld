@@ -14,7 +14,7 @@ public class CameraDetails : MonoBehaviour
 
     void Start()
     {
-        if(PlayerMovement.getInstance() != null && PlayerOOCStateManager.currentActivity != OOCActivity.inDialogue)
+        if(PlayerMovement.getInstance() != null && PlayerStateManager.currentActivity != CurrentActivity.InDialogue)
 		{
 			mainCM.Follow = PlayerMovement.getInstance().gameObject.transform;
 		}

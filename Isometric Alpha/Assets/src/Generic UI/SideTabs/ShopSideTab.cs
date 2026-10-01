@@ -18,7 +18,7 @@ public class ShopSideTab : AbilityGridSideTab
     private void setVisibility(bool visible)
     {
         if(listToChoose == DescribableList.Junk && 
-            PlayerOOCStateManager.currentActivity == OOCActivity.inShopUI && 
+            PlayerStateManager.currentActivity == CurrentActivity.InShopUI && 
             ShopPopUpWindow.currentShopMode != ShopMode.Sell)
         {
             gameObject.SetActive(false); 

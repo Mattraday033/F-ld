@@ -175,12 +175,12 @@ public class ThiefsBodyScript : QuestStepActivationScript
         yield return null;
         yield return null;
 
-        while (PlayerOOCStateManager.currentActivity != OOCActivity.walking)
+        while (PlayerStateManager.currentActivity != CurrentActivity.Walking)
         {
             yield return null;
         }
 
-        PlayerOOCStateManager.setCurrentActivity(OOCActivity.inDialogue);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.InDialogue);
         DialogueManager.getInstance().startDialogue(DialogueList.getDialogue(LocationNameList.bodyPile, NPCNameList.body + 1));
     }
 }

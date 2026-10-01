@@ -140,7 +140,7 @@ public class SelectorManager : MonoBehaviour
         currentSelector.setToColor();
 
         currentAbilityManager.enableAbilityButtonCanvas();
-        CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingAbility);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingAbility);
 
         DamagePreviewManager.wipeAllDamagePreviews();
 
@@ -164,7 +164,7 @@ public class SelectorManager : MonoBehaviour
             currentSelector.setToLocation(loadedCombatAction.getTargetCoords());
         }
         
-        CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingLocation);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingLocation);
 
         displayCurrentHoverUI();
     }
@@ -172,21 +172,21 @@ public class SelectorManager : MonoBehaviour
 	public static void deselectAlly()
 	{
 		currentAbilityManager.disableAbilityButtonCanvas();
-		CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 
 		resetCurrentSelector();
 	}
 
 	public static void displayCurrentHoverUI()
 	{
-        if(CombatStateManager.currentActivity == CurrentActivity.InEscapeMenu)
+        if(PlayerStateManager.currentActivity == CurrentActivity.InEscapeMenu)
         {
             return;
         }
 
 		if (!currentSelector.singleTile() ||
 			(!TutorialFlags.getFlag(TutorialSequenceList.combatTutorialSeenFlag) &&
-			CombatStateManager.currentActivity != CurrentActivity.Tutorial))
+			PlayerStateManager.currentActivity != CurrentActivity.InTutorialSequence))
 		{
 			instance.hoverPanelPopUpButton.destroyPopUp();
 			return;
@@ -211,13 +211,13 @@ public class SelectorManager : MonoBehaviour
 			return;
 		}
 
-		GameObject sprite = target.combatSprite;
+		Combatant combatant = target.getCombatant();
 
-		if (currentSelector.singleTile() && GameObjectUtil.tagMatchesCriteria(sprite, selectableAllyTagCriteria))
+		if (combatant != null && currentSelector.singleTile() && GameObjectUtil.tagMatchesCriteria(combatant.gameObject, selectableAllyTagCriteria))
 		{
-			if (CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
+			if (PlayerStateManager.currentActivity == CurrentActivity.ChoosingActor)
 			{
-				instance.pressEPrompt = Instantiate(Resources.Load<GameObject>(PrefabNames.combatSelectPrompt), sprite.transform.GetChild(sprite.transform.childCount - 1));
+				instance.pressEPrompt = Instantiate(Resources.Load<GameObject>(PrefabNames.combatSelectPrompt), combatant.promptParent);
 			}
 		}
 
@@ -366,7 +366,7 @@ public class SelectorManager : MonoBehaviour
 				SelectorFactory.playerCursor.setToLocation(loadedActorStats.positions[0]);
 			}
 
-			CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+			PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 			DamagePreviewManager.wipeAllDamagePreviews();
 
 			displayCurrentHoverUI();
@@ -392,7 +392,7 @@ public class SelectorManager : MonoBehaviour
 
 			currentSelector.setToColor();
 
-			CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingTertiary);
+			PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingTertiary);
 		}
 	}
 
@@ -433,7 +433,7 @@ public class SelectorManager : MonoBehaviour
 			}
 		}
 
-		CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 	}
 
 	public void finishChoosingTertiary(CombatAction loadedCombatAction)
@@ -451,7 +451,7 @@ public class SelectorManager : MonoBehaviour
 
         AudioManager.playChooseActorAbilityLocationSFX();
 
-		CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+		PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 
 		DamagePreviewManager.wipeAllDamagePreviews();
 	}
@@ -464,13 +464,13 @@ public class SelectorManager : MonoBehaviour
 			return;
 		}
 
-		currentAbilityManager = currentTarget.combatSprite.GetComponent<AbilityMenuManager>();
+		currentAbilityManager = currentTarget.getAbilityMenuManager();
 
-		if (!currentAbilityManager.enabled)
+		if (currentAbilityManager != null && !currentAbilityManager.enabled)
 		{
 			currentAbilityManager.enableAbilityButtonCanvas();
 
-			CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingAbility);
+			PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingAbility);
 		}
 	}
 
@@ -482,9 +482,9 @@ public class SelectorManager : MonoBehaviour
 	public static void moveCurrentSelector(int heartBeatRow)
 	{
 
-        switch(CombatStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
-            case CurrentActivity.Tutorial:
+            case CurrentActivity.InTutorialSequence:
             
                 if(!TutorialSequence.currentTutorialSequence.getCurrentTutorialSequenceStep().allowsMovementKeys)
                 {
@@ -576,7 +576,7 @@ public class SelectorManager : MonoBehaviour
 
             declareSelectors();
 
-            if(CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
+            if(PlayerStateManager.currentActivity == CurrentActivity.ChoosingActor)
             {
                 createPressEPrompt();
             }
@@ -631,7 +631,7 @@ public class SelectorManager : MonoBehaviour
 
         visibleSelectors.Add(SelectorFactory.playerCursor);
 
-        switch(CombatStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
             case CurrentActivity.ChoosingAbility:
             case CurrentActivity.ChoosingLocation:
@@ -734,7 +734,7 @@ public class SelectorManager : MonoBehaviour
 
     public static bool canJumpBetweenAllyEnemySections()
     {
-        switch(CombatStateManager.currentActivity)
+        switch(PlayerStateManager.currentActivity)
         {
             case CurrentActivity.ChoosingActor:
                 return true;
@@ -755,7 +755,7 @@ public class SelectorManager : MonoBehaviour
     {
         DamagePreviewManager.wipeAllDamagePreviews();
 
-        if (CombatStateManager.currentActivity == CurrentActivity.ChoosingLocation && AbilityMenuManager.getInstance() != null)
+        if (PlayerStateManager.currentActivity == CurrentActivity.ChoosingLocation && AbilityMenuManager.getInstance() != null)
         {
             DamagePreviewManager.UpdateDamagePreviews.Invoke(AbilityMenuManager.getInstance().getCurrentlySelectedAction());
 
@@ -784,7 +784,7 @@ public class SelectorManager : MonoBehaviour
 		}
 
 		if (currentSelector.upperBounds > 0 && currentSelector.onAllySide() &&
-			CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
+			PlayerStateManager.currentActivity == CurrentActivity.ChoosingActor)
 		{
 			return true;
 		}
@@ -805,7 +805,7 @@ public class SelectorManager : MonoBehaviour
 		}
 
 		if (currentSelector.lowerBounds < CombatGrid.rowLowerBounds && currentSelector.onEnemySide() &&
-			CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
+			PlayerStateManager.currentActivity == CurrentActivity.ChoosingActor)
 		{
 			return true;
 		}
@@ -944,13 +944,13 @@ public static class SelectionInfo
 	public static bool selectionIsAlly(GridCoords coords)
 	{
 		return CombatGrid.combatantExistsAtCoords(coords, out Stats target) && 
-                GameObjectUtil.tagMatchesCriteria(target.combatSprite, SelectorManager.allyTagCriteria);
+                GameObjectUtil.tagMatchesCriteria(target.getCombatSprite(), SelectorManager.allyTagCriteria);
 	}
 
 	public static bool selectionIsPartyMember(GridCoords coords)
 	{
 		return CombatGrid.combatantExistsAtCoords(coords, out Stats target) &&
-                target.combatSprite.tag.Equals(LayerAndTagManager.playerTag);
+                GameObjectUtil.tagMatchesCriteria(target.getCombatSprite(), new string[] { LayerAndTagManager.playerTag });
 	}
 
 	public static bool selectedAllyCanAct(GridCoords coords)

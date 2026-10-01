@@ -114,7 +114,7 @@ public class GridRow : MonoBehaviour,
 
     public virtual bool canSeeHover()
     {
-        return hoverEnabled && PlayerOOCStateManager.currentActivity != OOCActivity.inTutorialSequence;
+        return hoverEnabled && !PlayerStateManager.inOOCTutorialSequence();
     }
 
     public virtual void OnPointerEnter(PointerEventData eventData)

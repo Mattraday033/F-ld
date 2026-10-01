@@ -123,7 +123,7 @@ public abstract class MovementTracker : MonoBehaviour
 
     public virtual void determineDirection()
     {
-        endingPosition = AreaManager.getMasterGrid().GetCellCenterWorld(MovementTracker.getCurrentCell(this) + _DirectionMod);
+        endingPosition = AreaManager.getMasterGrid().GetCellCenterWorld(getCurrentCell(this) + _DirectionMod);
     }
 
     public abstract int getMovementIndex();
@@ -172,24 +172,20 @@ public abstract class MovementTracker : MonoBehaviour
             return;
         }
 
-        if (directionMod.Equals(MovementManager.distance1TileNorthEastGrid))
+        switch(directionMod)
         {
-            characterFacing.currentFacing = Facing.NorthEast;
-
-        }
-        else if (directionMod.Equals(MovementManager.distance1TileSouthEastGrid))
-        {
-            characterFacing.currentFacing = Facing.SouthEast;
-
-        }
-        else if (directionMod.Equals(MovementManager.distance1TileSouthWestGrid))
-        {
-            characterFacing.currentFacing = Facing.SouthWest;
-
-        }
-        else if (directionMod.Equals(MovementManager.distance1TileNorthWestGrid))
-        {
-            characterFacing.currentFacing = Facing.NorthWest;
+            case var d when d == MovementManager.distance1TileNorthEastGrid:
+                characterFacing.currentFacing = Facing.NorthEast;
+                break;
+            case var d when d == MovementManager.distance1TileSouthEastGrid:
+                characterFacing.currentFacing = Facing.SouthEast;
+                break;
+            case var d when d == MovementManager.distance1TileSouthWestGrid:
+                characterFacing.currentFacing = Facing.SouthWest;
+                break;
+            case var d when d == MovementManager.distance1TileNorthWestGrid:
+                characterFacing.currentFacing = Facing.NorthWest;
+                break;
         }
     }
 
@@ -238,14 +234,12 @@ public abstract class MovementTracker : MonoBehaviour
 
     public void hideSprite()
     {
-        // getAnimationManager().spriteRenderer.enabled = false;
-        // getAnimationManager().disableExtras();
+        animationManager.rendererList.disableAllLayers();
     }
 
     public void showSprite()
     {
-        // getAnimationManager().spriteRenderer.enabled = true;
-        // getAnimationManager().enableExtras();
+        animationManager.rendererList.enableAllLayers();
     }
 
     public static MovementTracker determineLowestTrainPriority(MovementTracker movementOne, MovementTracker movementTwo)

@@ -40,7 +40,7 @@ public class RetreatUIManager : SlotIconHover
 
     void Update()
     {
-        if (CombatStateManager.currentActivity == CurrentActivity.Retreating)
+        if (PlayerStateManager.currentActivity == CurrentActivity.Retreating)
         {
             KeyPressManager.updateKeyBools();
 
@@ -48,7 +48,7 @@ public class RetreatUIManager : SlotIconHover
             {
                 EscapeStack.handleEscapePress();
 
-                CombatStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+                PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
 
                 KeyPressManager.handlingPrimaryKeyPress = true;
             }
@@ -57,7 +57,7 @@ public class RetreatUIManager : SlotIconHover
 
     public void setCurrentActivityToRetreating()
     {
-        CombatStateManager.setCurrentActivity(CurrentActivity.Retreating);
+        PlayerStateManager.setCurrentActivity(CurrentActivity.Retreating);
     }
 
     private void setRetreatChanceDisplay()
@@ -91,7 +91,7 @@ public class RetreatUIManager : SlotIconHover
             return;
         }
 
-        if (CombatStateManager.currentActivity == CurrentActivity.ChoosingActor)
+        if (PlayerStateManager.currentActivity == CurrentActivity.ChoosingActor)
         {
             getInstance().retreatButton.interactable = true;
         }
