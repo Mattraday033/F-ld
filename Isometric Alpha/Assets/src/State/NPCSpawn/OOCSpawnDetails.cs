@@ -30,6 +30,8 @@ public class OOCSpawnDetails: IAppearanceSource
 
     public virtual string prefabName { get { return PrefabNames.creaturePrefab; } }
 
+    public virtual Vector3 localScale { get { return Vector3.one; } }
+
     public virtual Transform parent { 
                                         get { 
                                                 if(appearance.withScale) 
@@ -164,6 +166,7 @@ public class OOCSpawnDetails: IAppearanceSource
     {
         GameObject blank = GameObject.Instantiate(Resources.Load<GameObject>(prefabToLoad), parent);
         setGameObjectName(blank, extra);
+        blank.transform.localScale = localScale;
 
         setBlankPrefabPosition(cell, blank.transform);
         GameObjectUtil.updateGameObjectPosition(blank);
@@ -1330,6 +1333,8 @@ public class PartyMemberTrainSpawnDetails : OOCSpawnDetails
     protected override int layer { get { return LayerAndTagManager.trainLayer; } }
 
     public override Transform parent { get { return AreaManager.getPlayerParent(); } }
+
+    public override Vector3 localScale { get { return Constants.scaleChange; } }
 
     public override string uniqueName { get { return partyMember.uniqueName; } }
 

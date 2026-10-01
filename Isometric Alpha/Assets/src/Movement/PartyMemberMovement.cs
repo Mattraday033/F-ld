@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//an INameSource so the ActivationListener beside it knows which party member's formation changes to watch for
 public class PartyMemberMovement : MovementTracker, INameSource
 {
     public PartyMember partyMember;

@@ -222,11 +222,11 @@ public abstract class MovementTracker : MonoBehaviour
             return;
         }
         
-        if(Helpers.checkPositionForColliders(PlayerMovement.getColliderWorldPosition(), LayerAndTagManager.blocksMoveableObjectLayerMask))
-        {
-            // nextInTrain.updateAnimationDirection();
-            return;
-        } 
+        // if(Helpers.checkPositionForColliders(PlayerMovement.getColliderWorldPosition(), LayerAndTagManager.blocksMoveableObjectLayerMask))
+        // {
+        //     nextInTrain.updateAnimationDirection();
+        //     return;
+        // } 
 
         nextInTrain.directionMod = previousDirectionMod;
         nextInTrain.startingPosition = nextInTrain.transform.position;

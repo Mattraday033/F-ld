@@ -32,7 +32,10 @@ public static class PartyMemberTrainManager
         stepCounter = 1;
         destroyPartyMemberTrain();
 
-        if(AreaManager.locationName == null || AreaManager.locationName.Length == 0 || AreaList.currentAreaIsHostile() || AreaManager.getPlayerParent() == null || cannotCreateTrainInArea())
+        if(string.IsNullOrEmpty(AreaManager.locationName) || 
+            AreaList.currentAreaIsHostile() || 
+            AreaManager.getPlayerParent() == null ||
+            cannotCreateTrainInArea())
         {
             return;
         }
@@ -49,16 +52,9 @@ public static class PartyMemberTrainManager
                 continue;
             }
 
-            PartyMemberMovement partyMemberMovement = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.partyMemberFollower), AreaManager.getPlayerParent()).GetComponent<PartyMemberMovement>();
-            
-            partyMemberMovement.partyMember = partyMember;
-            partyMemberMovement.placeInTrain = index+1;
-            
-            // partyMemberMovement.getAnimationManager().setAnimations(partyMemberMovement.uniqueName);
-
-            // partyMemberMovement.getAnimationManager().setFacing(State.playerFacing.getFacing());
-
-            partyMemberMovement.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(PlayerMovement.getInstance().getCell());
+            //the spawn details add the PartyMemberMovement through PartyMemberMovementSpawnBehaviour and place it on the player's cell
+            GameObject follower = new PartyMemberTrainSpawnDetails(partyMember, index+1).spawnInteractables()[0];
+            PartyMemberMovement partyMemberMovement = follower.GetComponent<PartyMemberMovement>();
 
             partyMemberTrain.Add(partyMemberMovement);
 

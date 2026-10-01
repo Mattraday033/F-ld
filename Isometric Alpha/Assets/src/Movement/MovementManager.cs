@@ -132,7 +132,7 @@ public class MovementManager : MonoBehaviour
 
                 if (movement.getMovementIndex() == playerSpriteIndex)
                 {
-                    // movement.moveNextInTrain();
+                    movement.moveNextInTrain();
                 }
             }
         }

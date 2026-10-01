@@ -92,7 +92,9 @@ public enum HairType
 
 public enum CloakType
 {
-    None
+    None,
+    Long_Lovashi_Cloak,
+    Short_Lovashi_Cloak
 }
 
 public interface IAppearance
