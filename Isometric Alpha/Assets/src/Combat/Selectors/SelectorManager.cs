@@ -200,6 +200,16 @@ public class SelectorManager : MonoBehaviour
         instance.hoverPanelPopUpButton.destroyPopUp();
     }
 
+    public static void prewarmHoverUI()
+    {
+        if(instance == null)
+        {
+            return;
+        }
+
+        instance.hoverPanelPopUpButton.prewarm();
+    }
+
 	public static void createPressEPrompt()
 	{
 		destroyPressEPrompt();
@@ -458,17 +468,20 @@ public class SelectorManager : MonoBehaviour
 
 	public static void handleAllySelection()
 	{
-		if (!SelectionInfo.selectedAllyCanAct(currentSelector.getCoords()) || 
-            !CombatGrid.combatantExistsAtCoords(currentSelector.getCoords(), out Stats currentTarget))
+		//the shared menu is never null, so enemies and reposition placeholders have to be turned away here
+		if (!SelectionInfo.selectedAllyCanAct(currentSelector.getCoords()) ||
+            !CombatGrid.combatantExistsAtCoords(currentSelector.getCoords(), out Stats currentTarget) ||
+            !(currentTarget is AllyStats) ||
+            currentTarget.isRepositionClone())
 		{
 			return;
 		}
 
-		currentAbilityManager = currentTarget.getAbilityMenuManager();
+		currentAbilityManager = AbilityMenuManager.getShared();
 
 		if (currentAbilityManager != null && !currentAbilityManager.enabled)
 		{
-			currentAbilityManager.enableAbilityButtonCanvas();
+			currentAbilityManager.showFor(currentTarget);
 
 			PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingAbility);
 		}

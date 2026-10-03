@@ -1670,9 +1670,11 @@ public class DialogueManager : MonoBehaviour
 
                     GameObject effectGO = Instantiate(Resources.Load<GameObject>(PrefabNames.effect), PlayerObject.getInstanceTransform());
 
-                    // EffectAnimationManager effect = effectGO.GetComponent<EffectAnimationManager>();
+                    EffectAnimationManager effect = effectGO.GetComponent<EffectAnimationManager>();
 
-                    // effect.setAnimations(EffectAnimationType.BlastingJelly);
+                    effect.effectType = EffectAnimationType.BlastingJelly;
+                    effect.animationData = AnimationDataList.blastingJelly;
+                    effect.startAnimation();
                     
                     PlayerObject.playDeathAnimation();
 
@@ -1702,10 +1704,16 @@ public class DialogueManager : MonoBehaviour
 
                     effectGO.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(targetCellCoords);
 
-                    // effect = effectGO.GetComponent<EffectAnimationManager>();
-                    // effect.loops = loopEffect;
+                    effect = effectGO.GetComponent<EffectAnimationManager>();
+                    effect.loops = loopEffect;
 
-                    // effect.setAnimations(effectName);
+                    if(Enum.TryParse(effectName, ignoreCase: true, out effectType))
+                    {
+                        effect.effectType = effectType;
+                    }
+
+                    effect.animationData = AnimationDataList.getAnimationData(effectName);
+                    effect.startAnimation();
                     
                     continueStory();
                     

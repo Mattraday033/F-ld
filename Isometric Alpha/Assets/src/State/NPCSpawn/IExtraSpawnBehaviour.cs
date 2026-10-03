@@ -87,27 +87,6 @@ public class AnimationManagerSpawnBehaviour : IExtraSpawnBehaviour
     }
 }
 
-public class AbilityMenuSpawnBehaviour : IExtraSpawnBehaviour
-{
-    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
-
-    //the Combatant links the menu to its Stats once it's initialized
-    public Component addBehaviour(GameObject gameObject)
-    {
-        GameObject abilityMenuPrefab = Resources.Load<GameObject>(PrefabNames.abilityMenu);
-
-        if(abilityMenuPrefab == null)
-        {
-            Debug.LogError("No prefab named " + PrefabNames.abilityMenu + " in a Resources folder, so " + gameObject.name + " has no ability menu");
-            return null;
-        }
-
-        GameObject abilityMenu = GameObject.Instantiate(abilityMenuPrefab, gameObject.transform);
-
-        return abilityMenu.GetComponentInChildren<AbilityMenuManager>(true);
-    }
-}
-
 public class CombatantSpawnBehaviour : IExtraSpawnBehaviour
 {
     private CombatantSpawnDetails spawnDetails;

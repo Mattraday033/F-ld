@@ -168,29 +168,29 @@ public class Ability: CombatAction, IJSONConvertable
         return CombatAnimationType.Effect;
     }
 
-    public override string getEffectAnimationType()
+    public override EffectAnimationType getEffectAnimationType()
     {
         if(effectAnimationType != EffectAnimationType.Default)
         {
-            return effectAnimationType.ToString();
+            return effectAnimationType;
         }
 
         if(healsTarget())
         {
-            return EffectAnimationType.Healing.ToString();
+            return EffectAnimationType.Healing;
         }
 
         if(getAppliedTrait() != null && getAppliedTrait().isDebuff())
         {
-            return EffectAnimationType.Negative.ToString();
+            return EffectAnimationType.Negative;
         }
 
         if(getAppliedTrait() != null && getAppliedTrait().isBuff())
         {
-            return EffectAnimationType.Positive.ToString();
+            return EffectAnimationType.Positive;
         }
 
-        return EffectAnimationType.Slash.ToString();
+        return EffectAnimationType.Slash;
     }
 
 	public override string getDamageFormula()
@@ -315,25 +315,6 @@ public class Ability: CombatAction, IJSONConvertable
 
     //IDescribable Methods
 
-    public override GameObject getRowType(RowType rowType)
-	{
-		string rowTypeName = "";
-		
-		switch(rowType)
-		{
-			case RowType.Standard:
-				rowTypeName = PrefabNames.actionRow;
-				break;
-			case RowType.AbilityEditor:
-				rowTypeName = PrefabNames.actionEditorRow;
-				break;
-			default:
-				return base.getRowType(rowType);
-		}
-		
-		return Resources.Load<GameObject>(rowTypeName);
-	}
-	
 	public override void describeSelfRow(DescriptionPanel panel)
 	{
 		base.describeSelfRow(panel);

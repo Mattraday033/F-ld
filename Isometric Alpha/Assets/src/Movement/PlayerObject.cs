@@ -379,18 +379,26 @@ public class PlayerObject : MonoBehaviour
 
         AudioManager.playLvlUpSFX();
 
-        // EffectAnimationManager frontEffect = EffectAnimationManager.instantiatePrefab(instance.transform);
-        // frontEffect.transform.position = instance.transform.position;
-        // frontEffect.setAnimations(EffectAnimationType.FrontLvlUp);
+        EffectAnimationManager frontEffect = createLevelUpEffect(EffectAnimationType.FrontLvlUp, AnimationDataList.frontLvlUp);
+        EffectAnimationManager backEffect = createLevelUpEffect(EffectAnimationType.BackLvlUp, AnimationDataList.backLvlUp);
 
-        // EffectAnimationManager backEffect = EffectAnimationManager.instantiatePrefab(instance.transform);
-        // backEffect.transform.position = instance.transform.position;
-        // backEffect.setAnimations(EffectAnimationType.BackLvlUp);
+        //each effect destroys itself when its animation finishes
+        while (frontEffect != null || backEffect != null)
+        {
+            yield return null;
+        }
+    }
 
-        // while (frontEffect != null || backEffect != null)
-        // {
-        //     yield return null;
-        // }
+    private static EffectAnimationManager createLevelUpEffect(EffectAnimationType effectType, AnimationData animationData)
+    {
+        EffectAnimationManager effect = Instantiate(Resources.Load<GameObject>(PrefabNames.effect), instance.transform).GetComponent<EffectAnimationManager>();
+        effect.transform.position = instance.transform.position;
+
+        effect.effectType = effectType;
+        effect.animationData = animationData;
+        effect.startAnimation();
+
+        return effect;
     }
 
     public static void playDeathAnimation()

@@ -19,6 +19,11 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
 
     public float numberOfTilesPerRow = 4f;
 
+    //the last refill skipped while the stat rows were hidden, applied once they're shown
+    private IDescribableInBlocks pendingBlockOrigin;
+    private BlockFormat pendingFormat;
+    private List<DescriptionPanelBuildingBlock> pendingBlocks;
+
     protected virtual void Awake()
     {
         filter = new BuilderFilterWhiteList(new List<DescriptionPanelBuildingBlockType>() { DescriptionPanelBuildingBlockType.PrimaryStat, DescriptionPanelBuildingBlockType.SecondaryStat });
@@ -39,9 +44,23 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
         OnFormulaSwap.RemoveListener(revealExtraDescriptionPanels);
     }
 
-    public override void buildDescriptionPanel(IDescribableInBlocks blockOrigin, BlockFormat format)
+    public override void buildDescriptionPanel(IDescribableInBlocks blockOrigin, BlockFormat format, List<DescriptionPanelBuildingBlock> buildingBlocks)
     {
-        base.buildDescriptionPanel(blockOrigin, format);
+        //in combat the stat rows stay hidden until formulas are shown, so refilling them before then is wasted work
+        if (reuseRows && CombatStateManager.inCombat && !OverallUIManager.showFormula && rowsMatch(getBlocksPassingFilter(buildingBlocks)))
+        {
+            this.blockOrigin = blockOrigin;
+
+            pendingBlockOrigin = blockOrigin;
+            pendingFormat = format;
+            pendingBlocks = buildingBlocks;
+        }
+        else
+        {
+            clearPendingRefill();
+
+            base.buildDescriptionPanel(blockOrigin, format, buildingBlocks);
+        }
 
         int parentTransformsToShow = 0;
 
@@ -57,13 +76,21 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
                 }
             }
 
-            if(parentTransformsToShow > 0 && moreInfoNode != null)
+            //set either way, since a refilled builder may be going from a combatant with stat rows to one without
+            if(moreInfoNode != null)
             {
-                moreInfoNode.SetActive(true);
+                moreInfoNode.SetActive(parentTransformsToShow > 0);
             }
 
             revealExtraDescriptionPanels();
         }
+    }
+
+    private void clearPendingRefill()
+    {
+        pendingBlockOrigin = null;
+        pendingFormat = null;
+        pendingBlocks = null;
     }
 
     public override Transform getParent(DescriptionPanelBuildingBlock block)
@@ -92,6 +119,18 @@ public class StatsDescriptionPanelBuilder : DescriptionPanelBuilder
 
     private void revealExtraDescriptionPanels()
     {
+        //an inactive builder belongs to a layout the panel isn't showing, so its pending refill would be stale by the time it's used
+        if(OverallUIManager.showFormula && pendingBlocks != null && gameObject.activeInHierarchy)
+        {
+            IDescribableInBlocks blockOrigin = pendingBlockOrigin;
+            BlockFormat format = pendingFormat;
+            List<DescriptionPanelBuildingBlock> buildingBlocks = pendingBlocks;
+
+            clearPendingRefill();
+
+            base.buildDescriptionPanel(blockOrigin, format, buildingBlocks);
+        }
+
         foreach(Transform parentTransform in parents)
         {
             if(parentTransform != null && parentTransform.childCount > 0)

@@ -7,14 +7,12 @@ public class SelectCurrentActor : TutorialSequenceStepScript
 {
     public override void runScript(GameObject target = null)
     {
-        if(CombatGrid.combatantExistsAtCoords(SelectorManager.currentSelector.getCoords(), out Stats combatant))
+        if(!CombatGrid.combatantExistsAtCoords(SelectorManager.currentSelector.getCoords(), out Stats combatant))
         {
             return;
         }
 
-        AbilityMenuManager currentAbilityManager = combatant.getAbilityMenuManager();
-
-        currentAbilityManager.enableAbilityButtonCanvas();
+        AbilityMenuManager.getShared().showFor(combatant);
     }
 
     public static bool hasActorTarget()

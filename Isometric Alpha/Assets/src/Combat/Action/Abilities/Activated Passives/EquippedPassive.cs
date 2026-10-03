@@ -68,45 +68,6 @@ public class EquippedPassive : Ability
         return true;
     }
 
-    public override GameObject getDescriptionPanelFull(PanelType panelType)
-    {
-        string panelTypeName = "";
-
-        switch (panelType)
-        {
-            case PanelType.CombatHover:
-                panelTypeName = PrefabNames.harmlessCombatActionHoverDescriptionPanel;
-                break;
-            case PanelType.AbilityEditor:
-            case PanelType.Standard:
-                panelTypeName = PrefabNames.noDamageCombatActionDescPanelFull;
-                break;
-            case PanelType.GlossaryDescription:
-                panelTypeName = PrefabNames.perkDescriptionPanelFull;
-                break;
-            default:
-                return base.getDescriptionPanelFull(panelType);
-        }
-
-        return DescriptionPanel.getDescriptionPanel(panelTypeName);
-    }
-
-	public override GameObject getRowType(RowType rowType)
-	{
-		string rowTypeName = "";
-
-		switch (rowType)
-		{
-			case RowType.LevelUp:
-				rowTypeName = PrefabNames.noDamageCombatActionDescPanelRow;
-				break;
-			default:
-				return base.getRowType(rowType);
-		}
-
-		return DescriptionPanel.getDescriptionPanel(rowTypeName);
-	}
-
 	public override string getUseDescription()
     {
         if(getAppliedTrait() == null)

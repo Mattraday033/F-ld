@@ -14,7 +14,10 @@ public class Formula
 	public const char plusChar = '+';
 	public const char minusChar = '-';
 
-    public Dictionary<PrimaryStat, int> formulaDict = new Dictionary<PrimaryStat, int>();
+    private Dictionary<PrimaryStat, int> formulaDict = new Dictionary<PrimaryStat, int>();
+
+    //true when a section couldn't be read and an error was logged
+    public bool hadParseError { get; private set; }
 
     public Formula(string formula)
     {
@@ -79,6 +82,7 @@ public class Formula
                 } catch(Exception e)
                 {
                     Debug.LogError("Exception found: " + section);
+                    hadParseError = true;
                 }
                 
             } else if(section.Length == 1 || (section.Split(plusChar).Length > 1 && 
@@ -364,6 +368,12 @@ public static class DamageCalculator
     }
     private static Stats currentStatSource;
 
+    //each table is a pure function of its key, so nothing in them ever goes out of date
+    private static readonly Dictionary<string, Formula> parsedFormulaCache = new Dictionary<string, Formula>();
+    private static readonly Dictionary<(string, string), string> combinedFormulaCache = new Dictionary<(string, string), string>();
+    private static readonly Dictionary<(string, int), string> multipliedFormulaCache = new Dictionary<(string, int), string>();
+    private static readonly Dictionary<string, string> invertedFormulaCache = new Dictionary<string, string>();
+
     static DamageCalculator()
     {
 
@@ -371,12 +381,45 @@ public static class DamageCalculator
 
 	public static string combineFormulas(string f1, string f2)
 	{
-        Formula formula = new Formula(f1);
-        
-        formula.combine(new Formula(f2));
+        if(combinedFormulaCache.TryGetValue((f1, f2), out string cachedFormula))
+        {
+            return cachedFormula;
+        }
 
-		return formula.getFormula();
+        Formula formula = new Formula(f1);
+        Formula other = new Formula(f2);
+
+        formula.combine(other);
+
+        string combinedFormula = formula.getFormula();
+
+        if(!formula.hadParseError && !other.hadParseError)
+        {
+            combinedFormulaCache[(f1, f2)] = combinedFormula;
+        }
+
+        return combinedFormula;
 	}
+
+    //Formulas handed out here are shared, so only read from them: combine() and multiplyFormula() change the Formula they're called on
+    private static Formula getParsedFormula(string formula)
+    {
+        //a null formula skips the lookup so it throws the same NullReferenceException it always has
+        if(formula != null && parsedFormulaCache.TryGetValue(formula, out Formula cachedFormula))
+        {
+            return cachedFormula;
+        }
+
+        Formula parsedFormula = new Formula(formula);
+
+        //a formula that logged a parse error isn't kept, so it logs again every time it's asked for
+        if(!parsedFormula.hadParseError)
+        {
+            parsedFormulaCache[formula] = parsedFormula;
+        }
+
+        return parsedFormula;
+    }
 
     private static int calculateFormula(string damageFormula)
     {
@@ -385,14 +428,14 @@ public static class DamageCalculator
 
     public static int calculateFormula(string damageFormula, Stats statSource)
     {
-        Formula formula = new Formula(damageFormula);
+        Formula formula = getParsedFormula(damageFormula);
 
         return formula.calculateFormula(statSource);
     }
 	
 	public static int calculateBonusDamage(string damageFormula)
     {
-        Formula formula = new Formula(damageFormula);
+        Formula formula = getParsedFormula(damageFormula);
 
         return formula.calculateBonusDamage();
 	}
@@ -488,16 +531,41 @@ public static class DamageCalculator
 	
     public static string invertFormula(string f1)
     {
-        Formula formula = new Formula(f1);
+        //a null formula skips the lookup, as it does in getParsedFormula()
+        if(f1 != null && invertedFormulaCache.TryGetValue(f1, out string cachedFormula))
+        {
+            return cachedFormula;
+        }
 
-        return formula.getFormulaInverted();
+        Formula formula = getParsedFormula(f1);
+
+        string invertedFormula = formula.getFormulaInverted();
+
+        if(!formula.hadParseError)
+        {
+            invertedFormulaCache[f1] = invertedFormula;
+        }
+
+        return invertedFormula;
     }
 
     public static string multiplyFormula(string f1, int multiplier)
     {
+        if(multipliedFormulaCache.TryGetValue((f1, multiplier), out string cachedFormula))
+        {
+            return cachedFormula;
+        }
+
         Formula formula = new Formula(f1);
 
-        return formula.multiplyFormula(multiplier);
+        string multipliedFormula = formula.multiplyFormula(multiplier);
+
+        if(!formula.hadParseError)
+        {
+            multipliedFormulaCache[(f1, multiplier)] = multipliedFormula;
+        }
+
+        return multipliedFormula;
     }
 
 	/* idea for universal findFinalDamage, may not use

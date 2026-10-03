@@ -4,8 +4,8 @@ using UnityEngine;
 
 public static class GemHoverManager
 {
-    // private static readonly Dictionary<GridCoords, EffectAnimationManager> activeGems =
-    //     new Dictionary<GridCoords, EffectAnimationManager>();
+    private static readonly Dictionary<GridCoords, EffectAnimationManager> activeGems =
+        new Dictionary<GridCoords, EffectAnimationManager>();
 
     // Tiles whose gem is scheduled to be destroyed a frame from now. Re-wanting a tile removes it
     // here, which the pending coroutine detects and bails on - so the gem survives without a flicker.
@@ -17,7 +17,7 @@ public static class GemHoverManager
     [RuntimeInitializeOnLoadMethod]
     private static void init()
     {
-        // activeGems.Clear();
+        activeGems.Clear();
         pendingDestroys.Clear();
 
         SelectorManager.SelectorMoved.AddListener(reconcileGems);
@@ -30,13 +30,13 @@ public static class GemHoverManager
 
         // Remove gems no longer wanted. Collect keys first to avoid mutating while iterating.
         List<GridCoords> toRemove = new List<GridCoords>();
-        // foreach(GridCoords tile in activeGems.Keys)
-        // {
-        //     if(!desired.Contains(tile))
-        //     {
-        //         toRemove.Add(tile);
-        //     }
-        // }
+        foreach(GridCoords tile in activeGems.Keys)
+        {
+            if(!desired.Contains(tile))
+            {
+                toRemove.Add(tile);
+            }
+        }
 
         foreach(GridCoords tile in toRemove)
         {
@@ -49,10 +49,10 @@ public static class GemHoverManager
             // A tile wanted again cancels any pending destruction, keeping its existing gem alive.
             pendingDestroys.Remove(tile);
 
-            // if(!activeGems.ContainsKey(tile))
-            // {
-            //     activeGems[tile] = spawnGem(tile);
-            // }
+            if(!activeGems.ContainsKey(tile))
+            {
+                activeGems[tile] = spawnGem(tile);
+            }
         }
     }
 
@@ -94,25 +94,22 @@ public static class GemHoverManager
         return desired;
     }
 
-    // private static EffectAnimationManager spawnGem(GridCoords tile)
-    // {
-    //     // EffectAnimationManager gem = EffectAnimationManager.instantiatePrefab();
+    private static EffectAnimationManager spawnGem(GridCoords tile)
+    {
+        // Loops forever, never self-deletes. No DamagePacket, so it never makes a damage pop up, and the gem's
+        // AnimationData has no SFX.
+        EffectAnimationManager gem = EffectAnimationManager.createEffect(tile, EffectAnimationType.Gem, AnimationDataList.gem, loops: true);
 
-    //     // gem.loops = true;       // re-plays forever, never self-deletes
-    //     // gem.damage = 0;         // skips spawnDamageNumbers() (guarded by damage > 0)
-    //     // gem.playSFX = false;    // persistent hover indicator - never plays SFX
+        // Force every gem onto the same sorting layer.
+        if(gem.rendererList != null)
+        {
+            gem.rendererList[SpriteLayer.Body].sortingLayerName = LayerAndTagManager.fourthSortingLayerName;
+        }
 
-    //     // gem.setAnimations(EffectAnimationType.Gem);
+        gem.transform.position = gemPosition(tile);
 
-    //     // // Force every gem onto the same sorting layer.
-    //     // gem.spriteRenderer.sortingLayerName = LayerAndTagManager.fourthSortingLayerName;
-
-    //     // gem.transform.position = gemPosition(tile);
-
-    //     // return gem;
-
-    //     return null;
-    // }
+        return gem;
+    }
 
     private static Vector3 gemPosition(GridCoords tile)
     {
@@ -157,18 +154,17 @@ public static class GemHoverManager
 
     private static void destroyGemNow(GridCoords tile)
     {
-        // if(!activeGems.TryGetValue(tile, out EffectAnimationManager gem))
-        // {
-        //     return;
-        // }
+        if(!activeGems.TryGetValue(tile, out EffectAnimationManager gem))
+        {
+            return;
+        }
 
-        // activeGems.Remove(tile);
+        activeGems.Remove(tile);
 
-        // if(gem != null)
-        // {
-        //     // Plain destroy - do NOT call removeAnimation(), which triggers win/loss + dead-combatant checks.
-        //     Object.DestroyImmediate(gem.gameObject);
-        // }
+        if(gem != null)
+        {
+            Object.DestroyImmediate(gem.gameObject);
+        }
     }
 
     private static void clearAllGems()
@@ -176,14 +172,14 @@ public static class GemHoverManager
         // Drop any pending destroys so their coroutines bail instead of touching torn-down state.
         pendingDestroys.Clear();
 
-        // foreach(EffectAnimationManager gem in activeGems.Values)
-        // {
-        //     if(gem != null)
-        //     {
-        //         Object.DestroyImmediate(gem.gameObject);
-        //     }
-        // }
+        foreach(EffectAnimationManager gem in activeGems.Values)
+        {
+            if(gem != null)
+            {
+                Object.DestroyImmediate(gem.gameObject);
+            }
+        }
 
-        // activeGems.Clear();
+        activeGems.Clear();
     }
 }

@@ -118,9 +118,6 @@ public abstract class PopUpButton : MonoBehaviour
 			case PopUpType.HoverPanel:
 				return PrefabNames.hoverPanelPopUpWindow;
 
-			case PopUpType.LevelUp:
-				return PrefabNames.levelUpPopUpWindow;
-
             case PopUpType.CharacterCreation:
                 return PrefabNames.characterCreationPopUpWindow;
 
@@ -133,9 +130,6 @@ public abstract class PopUpButton : MonoBehaviour
             case PopUpType.GameOver:
                 return PrefabNames.gameOverPopUpWindow;
 
-            case PopUpType.Tutorial:
-                return PrefabNames.tutorialPopUpWindow;
-			
             case PopUpType.Notification:
                 return PrefabNames.notificationPopUpWindow;
 				

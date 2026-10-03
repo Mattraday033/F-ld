@@ -48,14 +48,14 @@ public class TraitApplicationItem : CombatItem, IJSONConvertable
         return base.getAmountToHeal();
     }
 
-	public override string getEffectAnimationType()
+	public override EffectAnimationType getEffectAnimationType()
 	{
         if(traitToApply.isBuff())
         {
-		    return EffectAnimationType.Positive.ToString(); 
+		    return EffectAnimationType.Positive;
         } else
         {
-		    return EffectAnimationType.Negative.ToString();
+		    return EffectAnimationType.Negative;
         }
 	}
 

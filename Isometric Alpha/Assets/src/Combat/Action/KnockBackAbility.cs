@@ -136,9 +136,9 @@ public class KnockBackAbility : RepositionEnemyAbility
         }
     }
 
-    public override string getEffectAnimationType()
+    public override EffectAnimationType getEffectAnimationType()
     {
-        return EffectAnimationType.Blunt.ToString();
+        return EffectAnimationType.Blunt;
     }
 
 }

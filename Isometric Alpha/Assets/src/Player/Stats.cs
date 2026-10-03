@@ -303,7 +303,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     {
         int totalHealth = getTotalHealth();
 
-        if (!inPreviewMode && changeInHealth >= getTotalHealth() && !healing && isMaster())
+        if (!inPreviewMode && changeInHealth >= totalHealth && !healing && isMaster())
         {
             PredationProc.Invoke();
         }
@@ -517,12 +517,14 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public string getTotalArmorRatingForDisplay()
     {
-        if(getTotalArmorRating() - getTotalArmorShred() < 0)
+        int armorAfterShred = getTotalArmorRating() - getTotalArmorShred();
+
+        if(armorAfterShred < 0)
         {
             return Constants.zeroRating + "%";
         } else
         {
-            return (getTotalArmorRating() - getTotalArmorShred()).ToString() + "%";
+            return armorAfterShred.ToString() + "%";
         }
     }
 
@@ -771,7 +773,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     }
 
 
-    public abstract string getVolleyAnimationType();
+    public abstract EffectAnimationType getVolleyAnimationType();
     #endregion
     #endregion
 
@@ -1173,18 +1175,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public virtual GameObject getDescriptionPanelFull(PanelType type)
     {
-        string panelName = "";
-
-        switch (type)
-        {
-            case PanelType.PartyScreenStats:
-                panelName = PrefabNames.partyMemberStatsScreenDescPanel;
-                break;
-            default:
-                panelName = PrefabNames.statsDescriptionPanel;
-                break;
-        }
-        return Resources.Load<GameObject>(panelName);
+        return null;
     }
 
     public virtual GameObject getDecisionPanel()
@@ -1244,9 +1235,11 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth, getTotalHealth()));
 
-        if(getTotalArmorShred() > 0)
+        int totalArmorShred = getTotalArmorShred();
+
+        if(totalArmorShred > 0)
         {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay(), getTotalArmorRating() + " - " + getTotalArmorShred()));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay(), getTotalArmorRating() + " - " + totalArmorShred));
         } else
         {
             buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));

@@ -380,9 +380,9 @@ public class OpeningMonologueManager : MonoBehaviour
 
     private const string openingTextFirstPageCentered =  "the shrieks of comrades\n\n" + 
                                         "ringing clash of bronze on bronze\n\n" +
-                                        "hooves thundering near\n\n\n";
+                                        "hooves thundering near\n";
 
-    private const string openingTextFirstPageLeftAligned = "These sounds your ancestors knew well, having fought the Lovashi for decades.\n\nBut, for you, those times are over.";
+    private const string openingTextFirstPageLeftAligned = "\n\nThese sounds your ancestors knew well, having fought the Lovashi for decades.\n\nBut, for you, those times are over.";
 
 
     private const string openingTextSecondPage = "The <nobr>cousin-kingdoms</nobr> that still resist are distant now: far-flung embers of a conflict your kin no longer have the will to wage.\n\n" + 

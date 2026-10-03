@@ -276,7 +276,11 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         descriptionPanelComponent = null;
 
-        descriptionPanelGameObjects.Add(descriptionPanelGameObject);
+        //a prebuilt builder is the same object every time, and hideDescriptionPanel never clears the list for it
+        if (!descriptionPanelGameObjects.Contains(descriptionPanelGameObject))
+        {
+            descriptionPanelGameObjects.Add(descriptionPanelGameObject);
+        }
     }
 
     private void buildDescriptionPanel(IDescribable currentDescribable, PanelType panelType)
@@ -322,7 +326,12 @@ public class DescriptionPanelSlot : MonoBehaviour
     {
         if (prebuiltBuilder != null)
         {
-            prebuiltBuilder.destroyRows();
+            //a reusing builder refills its rows in place when it can, and destroys them itself when it can't
+            if (!prebuiltBuilder.reuseRows)
+            {
+                prebuiltBuilder.destroyRows();
+            }
+
             return;
         }
 

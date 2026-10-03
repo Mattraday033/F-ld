@@ -273,9 +273,9 @@ public class IntimidateManager : CunningManager
         }
     }
     
-    public override string getEffectType()
+    public override EffectAnimationType getEffectType()
     {
-        return EffectAnimationType.Intimidate.ToString();
+        return EffectAnimationType.Intimidate;
     }
 
     public static void destroyIntimdiateSkillArea()

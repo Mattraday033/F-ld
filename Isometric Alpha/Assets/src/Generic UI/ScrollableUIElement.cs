@@ -63,6 +63,19 @@ public class ScrollableUIElement : MonoBehaviour
 
 	public List<GridRow> listOfRows = new List<GridRow>();
 
+	//set on displays that are kept alive and refilled, like the combat hover panel's traits. A refill re-describes the rows it
+	//already has and hides the ones it doesn't need, instead of destroying and instantiating them. Off everywhere else
+	public bool reuseRows = false;
+
+	//rows a refill hid rather than destroyed, kept for the next refill
+	private List<GridRow> spareRows = new List<GridRow>();
+
+	//the prefab each reusable row was made from, so a refill only hands a row to a describable that would get the same one
+	private Dictionary<GridRow, GameObject> rowPrefabs = new Dictionary<GridRow, GameObject>();
+
+	//setToIneligible can't be undone, so these rows are destroyed instead of reused
+	private HashSet<GridRow> ineligibleRows = new HashSet<GridRow>();
+
 	public GameObject[] objectsDisabledWithSlider;
 
 	private void Awake()
@@ -148,25 +161,33 @@ public class ScrollableUIElement : MonoBehaviour
 			listOfDescribables = sortListOfPanels(listOfDescribables);
 		}
 
-		if (deleteOldPanels)
+		if (deleteOldPanels && reuseRows)
 		{
-			deleteAllPanels();
+			//the toggles below re-run OnDisable/OnEnable on every row, which a refill exists to avoid
+			refillPanels(listOfDescribables);
 		}
-
-		int rowIndex = 0;
-		foreach (IDescribable describable in listOfDescribables)
+		else
 		{
+			if (deleteOldPanels)
+			{
+				deleteAllPanels();
+			}
 
-			listOfRows.Add(populatePanel(describable, rowIndex));
+			int rowIndex = 0;
+			foreach (IDescribable describable in listOfDescribables)
+			{
 
-			rowIndex++;
-		}
+				listOfRows.Add(populatePanel(describable, rowIndex));
 
-		if (scrollContainer != null && !(scrollContainer is null) &&
-			scrollableArea != null && !(scrollableArea is null))
-		{
-			GameObjectUtil.updateGameObjectPosition(scrollContainer);
-			GameObjectUtil.updateGameObjectPosition(scrollableArea);
+				rowIndex++;
+			}
+
+			if (scrollContainer != null && !(scrollContainer is null) &&
+				scrollableArea != null && !(scrollableArea is null))
+			{
+				GameObjectUtil.updateGameObjectPosition(scrollContainer);
+				GameObjectUtil.updateGameObjectPosition(scrollableArea);
+			}
 		}
 
 		// if (performDisableScrollBarCheck)
@@ -517,6 +538,121 @@ public class ScrollableUIElement : MonoBehaviour
 		}
 
 		listOfRows = new List<GridRow>();
+
+		foreach (GridRow row in spareRows)
+		{
+			if (row != null)
+			{
+				row.onDestruction();
+				Destroy(row.gameObject);
+			}
+		}
+
+		spareRows = new List<GridRow>();
+		rowPrefabs.Clear();
+		ineligibleRows.Clear();
+	}
+
+	//describes the list using the rows already here where it can, hiding leftovers and instantiating only when it runs out
+	private void refillPanels(List<IDescribable> listOfDescribables)
+	{
+		//rows in sibling order, so taking them front to back keeps the displayed order matching the list
+		List<GridRow> availableRows = new List<GridRow>(listOfRows);
+		availableRows.AddRange(spareRows);
+		availableRows.RemoveAll(row => row == null);
+		availableRows.Sort((first, second) => first.transform.GetSiblingIndex().CompareTo(second.transform.GetSiblingIndex()));
+
+		listOfRows = new List<GridRow>();
+		spareRows = new List<GridRow>();
+
+		int rowIndex = 0;
+		foreach (IDescribable describable in listOfDescribables)
+		{
+			bool reusable = describable != null && !(describable is null) && !useBlockDescriptionsInRows && !describable.ineligible();
+
+			GameObject rowPrefab = reusable ? describable.getRowType(rowType) : null;
+
+			GridRow row = reusable ? takeReusableRow(availableRows, describable, rowPrefab) : null;
+
+			if (row == null)
+			{
+				row = populatePanel(describable, rowIndex);
+
+				if (reusable)
+				{
+					rowPrefabs[row] = rowPrefab;
+				}
+			}
+
+			if (describable != null && !(describable is null) && describable.ineligible())
+			{
+				ineligibleRows.Add(row);
+			}
+
+			listOfRows.Add(row);
+
+			rowIndex++;
+		}
+
+		//a row taken out of sibling order (one with a different prefab was skipped) is moved so the display still follows the list
+		for (int index = 1; index < listOfRows.Count; index++)
+		{
+			if (listOfRows[index].transform.GetSiblingIndex() < listOfRows[index - 1].transform.GetSiblingIndex())
+			{
+				foreach (GridRow row in listOfRows)
+				{
+					row.transform.SetAsLastSibling();
+				}
+
+				break;
+			}
+		}
+
+		foreach (GridRow leftoverRow in availableRows)
+		{
+			if (!rowPrefabs.ContainsKey(leftoverRow) || ineligibleRows.Contains(leftoverRow))
+			{
+				rowPrefabs.Remove(leftoverRow);
+				ineligibleRows.Remove(leftoverRow);
+				leftoverRow.onDestruction();
+				Destroy(leftoverRow.gameObject);
+				continue;
+			}
+
+			leftoverRow.gameObject.SetActive(false);
+			spareRows.Add(leftoverRow);
+		}
+	}
+
+	//the first available row made from the prefab this describable would get, re-described for it. Null when there's none
+	private GridRow takeReusableRow(List<GridRow> availableRows, IDescribable describable, GameObject rowPrefab)
+	{
+		for (int index = 0; index < availableRows.Count; index++)
+		{
+			GridRow row = availableRows[index];
+
+			if (ineligibleRows.Contains(row) || !rowPrefabs.TryGetValue(row, out GameObject builtFrom) || builtFrom != rowPrefab)
+			{
+				continue;
+			}
+
+			availableRows.RemoveAt(index);
+
+			if (describeAsFullPanel)
+			{
+				describable.describeSelfFull(row.descriptionPanel);
+			}
+			else
+			{
+				describable.describeSelfRow(row.descriptionPanel);
+			}
+
+			row.gameObject.SetActive(true);
+
+			return row;
+		}
+
+		return null;
 	}
 
 	public bool contains(string name)

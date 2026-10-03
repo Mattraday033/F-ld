@@ -22,9 +22,9 @@ public class RestorationItem : CombatItem, IJSONConvertable
         this.traitTypeToRemove = traitTypeToRemove;
     }
 
-	public override string getEffectAnimationType()
+	public override EffectAnimationType getEffectAnimationType()
 	{
-		return EffectAnimationType.Healing.ToString();
+		return EffectAnimationType.Healing;
 	}
 
     public string getTraitTypeToRemove()

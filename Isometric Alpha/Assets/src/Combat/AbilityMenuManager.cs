@@ -54,7 +54,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
     //[SerializeField]
     public bool displayOnly;
-    public GameObject abilityButtonCanvas;
+    public GameObject buttonParent;
     public AbilityMenuButton[] abilityButtons;
 
     private bool noButtonsSelectable = false;
@@ -66,9 +66,18 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
     private static AbilityMenuManager instance;
 
+    //the one combat menu, moved onto whichever ally is choosing an ability. It's the menu with an AbilityMenuFollower
+    private static AbilityMenuManager shared;
+    private AbilityMenuFollower follower;
+
     public static AbilityMenuManager getInstance()
     {
         return instance;
+    }
+
+    public static AbilityMenuManager getShared()
+    {
+        return shared;
     }
 
     public virtual void Awake()
@@ -84,9 +93,24 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
             OnAbilityWheelUpdate.AddListener(updateAbilityButtonImages);
         }
 
-        if (CombatStateManager.inCombat)
+        follower = GetComponent<AbilityMenuFollower>();
+
+        if (follower != null)
         {
-            descriptionPanelSlot = CurrentActionHoverPanelManager.getInstance();
+            if (shared != null)
+            {
+                Debug.LogError("Duplicate shared instances of AbilityMenuManager exist erroneously");
+            }
+
+            shared = this;
+
+            //starts hidden and disabled, so the first ally selection's !enabled check opens it
+            if (buttonParent != null)
+            {
+                buttonParent.SetActive(false);
+            }
+
+            enabled = false;
         }
     }
 
@@ -96,28 +120,24 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         {
             OnAbilityWheelUpdate.RemoveListener(updateAbilityButtonImages);
         }
+
+        //enabled is toggled every time the menu is shown, so the listeners added in OnEnable are removed here
+        removeListeners();
     }
 
-    //The wheel's key presses are CustomInputActions now, live in ChoosingAbility (PlayerInputList.enableChoosingAbilityInputActions).
-    //What's left is closing the wheel once combat moves on to a state that doesn't show it.
-    void Update()
+    //fills the shared menu with the actor's actions, moves it over the actor's combatant and reveals it
+    public void showFor(Stats actor)
     {
-        if (displayOnly || InspectNode.inspecting || !CombatStateManager.inCombat)
+        actionArraySource = actor;
+
+        Combatant combatant = actor.getCombatant();
+
+        if (follower != null && combatant != null)
         {
-            return;
+            follower.setTarget(combatant.transform);
         }
 
-        switch (PlayerStateManager.currentActivity)
-        {
-            case CurrentActivity.Retreating:
-            case CurrentActivity.ChoosingAbility:
-            case CurrentActivity.InTutorialSequence:
-            case CurrentActivity.InEscapeMenu:
-                return;
-            default:
-                disableAbilityButtonCanvas();
-                return;
-        }
+        enableAbilityButtonCanvas();
     }
 
     public bool hasSelectableButtons { get { return !noButtonsSelectable; } }
@@ -231,11 +251,24 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     public void enableAbilityButtonCanvas()
     {
         instance = this;
+
+        //resolved here rather than in Awake, since the panel manager shares the Combat UI scene and may wake later
+        if (descriptionPanelSlot == null && CombatStateManager.inCombat)
+        {
+            descriptionPanelSlot = CurrentActionHoverPanelManager.getInstance();
+        }
+
         updateAbilityButtonImages();
 
-        if (abilityButtonCanvas != null)
+        //placed before it's revealed, so it never shows a frame over the previous combatant
+        if (follower != null)
         {
-            abilityButtonCanvas.SetActive(true);
+            follower.moveToTarget();
+        }
+
+        if (buttonParent != null)
+        {
+            buttonParent.SetActive(true);
         }
 
         AudioManager.playChooseActorAbilityLocationSFX();
@@ -268,9 +301,9 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
         // Debug.LogError("disabling Ability Button Canvas");
 
-        if (abilityButtonCanvas != null)
+        if (buttonParent != null)
         {
-            abilityButtonCanvas.SetActive(false);
+            buttonParent.SetActive(false);
         }
 
         enabled = false;
@@ -674,13 +707,13 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         if(enabled)
         {
             CombatStateManager.OnActivityChangeFromInEscapeMenu.AddListener(showMenuAfterEscape);
-            abilityButtonCanvas.SetActive(false);
+            buttonParent.SetActive(false);
         }
     }
 
     private void showMenuAfterEscape()
     {
-        abilityButtonCanvas.SetActive(true);
+        buttonParent.SetActive(true);
         CombatStateManager.OnActivityChangeFromInEscapeMenu.RemoveListener(showMenuAfterEscape);
     }
 
@@ -722,6 +755,37 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     private void OnDestroy()
     {
         removeListeners();
+
+        if (shared == this)
+        {
+            shared = null;
+        }
+    }
+
+    //closes the wheel once combat moves on to an activity that doesn't show it
+    private void hideIfActivityDoesNotShowMenu()
+    {
+        if (displayOnly)
+        {
+            return;
+        }
+
+        switch (PlayerStateManager.currentActivity)
+        {
+            case CurrentActivity.Retreating:
+            case CurrentActivity.ChoosingAbility:
+            case CurrentActivity.InTutorialSequence:
+            case CurrentActivity.InEscapeMenu:
+                return;
+            default:
+                disableAbilityButtonCanvas();
+                return;
+        }
+    }
+
+    private void hideOnCombatUIHidden()
+    {
+        disableAbilityButtonCanvas();
     }
 
     public void addListeners()
@@ -736,6 +800,8 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         if(CombatStateManager.inCombat)
         {
             CombatStateManager.OnActivityChangeToInEscapeMenu.AddListener(hideMenuDuringEscape);
+            CombatStateManager.OnCurrentActivityChange.AddListener(hideIfActivityDoesNotShowMenu);
+            CombatUIModule.OnHideCombatUI.AddListener(hideOnCombatUIHidden);
         }
     }
     public void removeListeners()
@@ -747,10 +813,10 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
             unityEvent.RemoveListener(updateCounter);
         }
 
-        if(CombatStateManager.inCombat)
-        {
-            CombatStateManager.OnActivityChangeToInEscapeMenu.RemoveListener(hideMenuDuringEscape);
-        }
+        //removed whether or not combat is still running, since inCombat may have changed since they were added
+        CombatStateManager.OnActivityChangeToInEscapeMenu.RemoveListener(hideMenuDuringEscape);
+        CombatStateManager.OnCurrentActivityChange.RemoveListener(hideIfActivityDoesNotShowMenu);
+        CombatUIModule.OnHideCombatUI.RemoveListener(hideOnCombatUIHidden);
     }
 
     public void updateCounter()

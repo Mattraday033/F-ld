@@ -96,60 +96,9 @@ public class Weapon : EquippableItem, IJSONConvertable
 		return new Attack(stats, this);
 	}
 
-	public override string getEffectAnimationType()
+	public override EffectAnimationType getEffectAnimationType()
 	{
-		return effectAnimationType.ToString();
-	}
-
-	public override GameObject getRowType(RowType rowType)
-	{
-		string rowTypeName = "";
-
-		switch (rowType)
-		{
-			case RowType.CompanionAbilities:
-				rowTypeName = PrefabNames.companionAbilityRow;
-				break;
-			case RowType.AbilityEditor:
-				rowTypeName = PrefabNames.actionEditorRow;
-				break;
-			default:
-				return base.getRowType(rowType);
-
-		}
-
-        return Resources.Load<GameObject>(rowTypeName);
-	}
-
-	public override GameObject getDescriptionPanelFull(PanelType panelType)
-	{
-		string panelTypeName = "";
-
-		switch (panelType)
-		{
-			case PanelType.Combat:
-			case PanelType.CombatHover:
-
-				panelTypeName = PrefabNames.offhandHoverDescriptionPanel;
-				break;
-
-			case PanelType.Standard:
-
-				if (getSlotID() == mainHandSlotIndex)
-				{
-					panelTypeName = PrefabNames.weaponDescPanelFull;
-				}
-				else
-				{
-					panelTypeName = PrefabNames.offHandWeaponDescPanelFull;
-				}
-
-				break;
-			default:
-				throw new IOException("Unknown PanelType: " + panelType);
-		}
-
-		return DescriptionPanel.getDescriptionPanel(panelTypeName);
+		return effectAnimationType;
 	}
 
 	public override void describeSelfFull(DescriptionPanel panel)

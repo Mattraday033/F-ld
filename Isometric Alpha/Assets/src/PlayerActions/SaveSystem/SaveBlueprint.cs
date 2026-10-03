@@ -487,24 +487,18 @@ public class SaveBlueprint : IDescribable, ISortable, IDescribableInBlocks, ICom
 
 	public GameObject getDescriptionPanelFull()
 	{
-		return Resources.Load<GameObject>(PrefabNames.saveLoadPanelFull);
+		return null;
 	}
 
 	public GameObject getDescriptionPanelFull(PanelType type)
 	{
-		string descriptionPanelType;
-
 		switch (type)
 		{
 			case PanelType.Notification:
-				descriptionPanelType = PrefabNames.areaNameDescriptionPanel;
-				break;
+				return Resources.Load<GameObject>(PrefabNames.areaNameDescriptionPanel);
 			default:
-				descriptionPanelType = PrefabNames.saveLoadPanelFull;
-				break;
+				return null;
 		}
-
-		return Resources.Load<GameObject>(descriptionPanelType);
 	}
 
 	public GameObject getDecisionPanel()

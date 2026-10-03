@@ -90,27 +90,27 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
         return base.getParent(block);
     }
 
-    public override DescriptionPanelRow buildRow(DescriptionPanelBuildingBlock block)
+    //a full parent only takes the (in)vulnerability row. Adding the row would take the parent past maxChildren, hence >=
+    protected override bool shouldSkipBlock(DescriptionPanelBuildingBlock block, Transform blockParent)
     {
-        DescriptionPanelRow row = base.buildRow(block);
-
-        if (row == null)
+        if(maxChildren <= 0 || blockParent.childCount < maxChildren)
         {
-            return null;
+            return false;
         }
 
-        if(maxChildren > 0 && row.transform.parent.childCount > maxChildren)
-        {
-            if(block.getIcon() == null || 
-                (CombatStateManager.inCombat && !block.getIcon().name.Equals(IconList.vulnerableIconName)) || 
-                (!CombatStateManager.inCombat && !block.getIcon().name.Equals(IconList.invulnerableIconName)))
-            {
-                Destroy(row.gameObject);
-                return null;
-            }
-        }
+        Sprite icon = block.getIcon();
 
-        if (setNamePivot && block.type == DescriptionPanelBuildingBlockType.Name)
+        return icon == null ||
+                (CombatStateManager.inCombat && !icon.name.Equals(IconList.vulnerableIconName)) ||
+                (!CombatStateManager.inCombat && !icon.name.Equals(IconList.invulnerableIconName));
+    }
+
+    protected override void applyBlockToRow(DescriptionPanelRow row, DescriptionPanelBuildingBlock block, bool newRow)
+    {
+        base.applyBlockToRow(row, block, newRow);
+
+        //the pivot only needs setting once, and setting it toggles the row to settle its position
+        if (newRow && setNamePivot && block.type == DescriptionPanelBuildingBlockType.Name)
         {
             setPivotY(row.gameObject, namePivotY);
         }
@@ -124,7 +124,8 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
             DescriptionPanel.setTextAutoSize(row.descriptionText, true);
         }
 
-        if(block.type == DescriptionPanelBuildingBlockType.Name && (blockOrigin as Stats != null || blockOrigin as PartyMember != null))
+        //none of this changes between fills, and re-setting the margin would make the text regenerate
+        if(newRow && block.type == DescriptionPanelBuildingBlockType.Name && (blockOrigin as Stats != null || blockOrigin as PartyMember != null))
         {
             DescriptionPanel.setTextFontSize(row.descriptionText, nameFontSize);
             row.transform.SetAsLastSibling();
@@ -138,8 +139,6 @@ public class CombatDescriptionPanelBuilder : DescriptionPanelBuilder
         {
             moreInfoNode.SetActive(true);
         }
-
-        return row;
     }
 
     private void setPivotY(GameObject rowObject, float newPivot)

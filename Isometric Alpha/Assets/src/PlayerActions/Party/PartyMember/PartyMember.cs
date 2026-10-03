@@ -140,15 +140,6 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 
 		switch (rowType)
 		{
-			case RowType.Standard:
-			case RowType.StatRequirements:
-			case RowType.CompanionAbilities:
-			case RowType.AbilityEditor:
-				rowTypeName = PrefabNames.partyMemberRow;
-				break;
-			case RowType.FormationEditor:
-				rowTypeName = PrefabNames.formationEditorRow;
-				break;
 			case RowType.PartyScreen:
 				rowTypeName = PrefabNames.partyMemberSpriteRow;
 				break;
@@ -166,18 +157,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 
 	public GameObject getDescriptionPanelFull(PanelType type)
 	{
-		string panelName = "";
-
-		switch (type)
-		{
-			case PanelType.PartyScreenMain:
-				panelName = PrefabNames.partyScreenMainDescPanel;
-				break;
-			default:
-				panelName = PrefabNames.partyMemberDescriptionPanel;
-				break;
-		}
-		return Resources.Load<GameObject>(panelName);
+		return null;
 	}
 
 	public GameObject getDecisionPanel()
@@ -300,7 +280,7 @@ public class CompanionCombatActionDescriptionWrapper : IDescribable, IDescribabl
 
 	public GameObject getDescriptionPanelFull(PanelType type)
 	{
-		return Resources.Load<GameObject>(PrefabNames.companionCombatActionDescriptionPanels);
+		return null;
 	}
 
 	public GameObject getDecisionPanel()

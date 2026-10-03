@@ -23,14 +23,15 @@ public class TraitDescriptionPanel : DescriptionPanel
             return;
         }
 
-        if(traitBeingDescribed.preventsCombatAction())
+        //set both ways, since a reused row may have shown a trait that had these
+        if(stunnedIcon != null)
         {
-            stunnedIcon.SetActive(true);
+            stunnedIcon.SetActive(traitBeingDescribed.preventsCombatAction());
         }
 
-        if(traitBeingDescribed.isMandatoryTarget())
+        if(mandatoryTargetIcon != null)
         {
-            mandatoryTargetIcon.SetActive(true);
+            mandatoryTargetIcon.SetActive(traitBeingDescribed.isMandatoryTarget());
         }
 	}
 }

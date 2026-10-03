@@ -386,12 +386,14 @@ public class AllyStats : Stats
 
     public override bool rollAgainstWoundResistance()
     {
-        if(getWoundResistance() >= Constants.autoSuccess)
+        double woundResistance = getWoundResistance();
+
+        if(woundResistance >= Constants.autoSuccess)
         {
             return true;
         }
 
-        return UnityEngine.Random.Range(0f, 1f) <= getWoundResistance();
+        return UnityEngine.Random.Range(0f, 1f) <= woundResistance;
     }
 
     #endregion
@@ -514,12 +516,14 @@ public class AllyStats : Stats
 
     public override bool rollAgainstMentalResistance()
     {
-        if(getWoundResistance() >= Constants.autoSuccess)
+        double woundResistance = getWoundResistance();
+
+        if(woundResistance >= Constants.autoSuccess)
         {
             return true;
         }
 
-        return UnityEngine.Random.Range(0f, 1f) <= getWoundResistance();
+        return UnityEngine.Random.Range(0f, 1f) <= woundResistance;
     }
 
 
@@ -688,9 +692,9 @@ public class AllyStats : Stats
         combatActionArray.resetAllCooldowns();
 	}
 
-    public override string getVolleyAnimationType()
+    public override EffectAnimationType getVolleyAnimationType()
     {
-        return EffectAnimationType.Pierce.ToString();
+        return EffectAnimationType.Pierce;
     }
 
     private void setAbilitiesAsNew(PrimaryStat primaryStat)

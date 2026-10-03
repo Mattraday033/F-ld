@@ -310,9 +310,16 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
         foreach (AllyStats ally in grid.Values)
         {
-            if (ally != null && getStat(ally) > highest)
+            if (ally == null)
             {
-                highest = getStat(ally);
+                continue;
+            }
+
+            int stat = getStat(ally);
+
+            if (stat > highest)
+            {
+                highest = stat;
             }
         }
 

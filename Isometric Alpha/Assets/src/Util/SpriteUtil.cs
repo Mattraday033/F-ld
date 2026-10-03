@@ -11,6 +11,15 @@ public static class SpriteUtil
     private readonly static Dictionary<Sprite, Sprite> outlineCache = new Dictionary<Sprite, Sprite>();
     private static readonly Dictionary<Sprite, Vector2> opaqueTopCentreCache = new Dictionary<Sprite, Vector2>();
 
+    //keyed by the name asked for, so a refilled description panel finds its icons without a Resources lookup each time
+    private static readonly Dictionary<string, Sprite> loadedSpriteCache = new Dictionary<string, Sprite>();
+
+    [RuntimeInitializeOnLoadMethod]
+    private static void clearLoadedSpriteCache()
+    {
+        loadedSpriteCache.Clear();
+    }
+
     public static Sprite loadSpriteFromResources(string spriteName)
     {
         if(spriteName == null)
@@ -18,6 +27,24 @@ public static class SpriteUtil
             return null;
         }
 
+        //a cached sprite that Unity has since unloaded compares equal to null, so it's loaded again
+        if(loadedSpriteCache.TryGetValue(spriteName, out Sprite cachedSprite) && cachedSprite != null)
+        {
+            return cachedSprite;
+        }
+
+        Sprite loadedSprite = loadUncachedSpriteFromResources(spriteName);
+
+        if(loadedSprite != null)
+        {
+            loadedSpriteCache[spriteName] = loadedSprite;
+        }
+
+        return loadedSprite;
+    }
+
+    private static Sprite loadUncachedSpriteFromResources(string spriteName)
+    {
         switch(spriteName)
         {
             case HoverMessageList.actionTypePrefix + AbilityList.abilityActionTypeName:

@@ -161,11 +161,11 @@ public class EnemyStats : Stats
         return lowPriorityAttacker;
     }
 
-    public override string getVolleyAnimationType()
+    public override EffectAnimationType getVolleyAnimationType()
     {
         if(getCombatAction() == null)
         {
-            return EffectAnimationType.Pierce.ToString();
+            return EffectAnimationType.Pierce;
         }
 
         return getCombatAction().getEffectAnimationType();

@@ -5,9 +5,36 @@ using UnityEngine;
 
 public interface IAnimationTracker
 {
-    public GameObject getGameObject();
-    public void removeAnimation();
+    public GameObject gameObject { get; }
+    //implementers take a key from CombatAnimationManager.getCurrentKey the first time it's read
+    public int key { get; }
+    public bool singleFire { get; }
+}
 
+public static class AnimationTrackerExtensions
+{
+    public static void removeAnimation(this IAnimationTracker tracker)
+    {
+        CombatAnimationManager.removeAnimation(tracker.key);
+
+        // if(spriteSetByHeartBeat())
+        // {
+        //     enableExtras();
+        // }
+
+        if(tracker.singleFire)
+        {
+            tracker.gameObject.SetActive(false);
+            GameObject.Destroy(tracker.gameObject);
+        }
+
+        if(!CombatStateManager.inCombat)
+        {
+            return;
+        }
+
+        CombatAnimationManager.checkAllAnimationsFinished();
+    }
 }
 
 public class CombatAnimationManager : MonoBehaviour
@@ -53,7 +80,7 @@ public class CombatAnimationManager : MonoBehaviour
     {
         foreach (KeyValuePair<int, IAnimationTracker> kvp in currentAnimations)
         {
-            Destroy(kvp.Value.getGameObject());
+            Destroy(kvp.Value.gameObject);
         }
 
         currentAnimations = new Dictionary<int, IAnimationTracker>();
@@ -118,7 +145,7 @@ public class CombatAnimationManager : MonoBehaviour
         }
     }
 
-    public static void loadInstantEffect(string animationType, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead,  ScriptOnLanding landingScript, GridCoords actorCoords)
+    public static void loadInstantEffect(EffectAnimationType animationType, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead,  ScriptOnLanding landingScript, GridCoords actorCoords)
     {
 
         loadInstantEffect(animationType, targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
@@ -129,7 +156,7 @@ public class CombatAnimationManager : MonoBehaviour
         }
     }
 
-    public static void loadInstantEffect(string animationType, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead, bool ignoreMissingTargets = true)
+    public static void loadInstantEffect(EffectAnimationType animationType, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead, bool ignoreMissingTargets = true)
     {
         if(CombatGrid.combatantIsRepositionClone(targetCoords))
         {
@@ -143,21 +170,20 @@ public class CombatAnimationManager : MonoBehaviour
             return;
         }
 
-        // EffectAnimationManager currentEffect = EffectAnimationManager.instantiatePrefab();
+        AnimationData animationData = AnimationDataList.getAnimationData(animationType);
 
-        // currentEffect.damage = damageNumber;
-        // currentEffect.crit = crit;
-        // currentEffect.healsTarget = healsTarget;
+        if(animationData == null)
+        {
+            return;
+        }
 
-        // currentEffect.targetCoords = targetCoords;
+        EffectAnimationManager currentEffect = EffectAnimationManager.createEffect(targetCoords, animationType, animationData,
+                                                    damagePacket: new DamagePacket(damageNumber, crit, healsTarget));
 
-        // currentEffect.transform.position = CombatGrid.getEffectPositionAt(targetCoords);
-
+        //EffectAnimationManager isn't an IAnimationTracker and has no key, so the effect can't be tracked yet
         // AnimationClip clip = Resources.Load<AnimationClip>(PrefabNames.abilityEffectFolderPath + animationType);
         // float effectDuration = clip != null ? clip.length : 2f;
         // trackAnimation(currentEffect.key, currentEffect, effectDuration);
-
-        // currentEffect.setAnimations(animationType);
     }
 
     public static Projectile loadProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
@@ -172,11 +198,7 @@ public class CombatAnimationManager : MonoBehaviour
             return null;
         }
 
-        int key = getCurrentKey();
-
         Projectile currentProjectile = Projectile.instantiatePrefab();
-
-        currentProjectile.key = key;
 
         currentProjectile.scriptOnLanding = script;
 
@@ -189,7 +211,7 @@ public class CombatAnimationManager : MonoBehaviour
 
         currentProjectile.maxTime = defaultMaxTime;
 
-        trackAnimation(key, currentProjectile, currentProjectile.maxTime * 4);
+        trackAnimation(currentProjectile.key, currentProjectile, currentProjectile.maxTime * 4);
 
         if (CombatGrid.positionsAreOnSameSide(actorCoords, targetCoords))
         {

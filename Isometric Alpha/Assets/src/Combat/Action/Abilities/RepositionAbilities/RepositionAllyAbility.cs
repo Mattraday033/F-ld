@@ -52,9 +52,9 @@ public class RepositionAllyAbility : RepositionAbility, IJSONConvertable
 		return true;
 	}
 
-    public override string getEffectAnimationType()
+    public override EffectAnimationType getEffectAnimationType()
     {
-        return EffectAnimationType.Positive.ToString();
+        return EffectAnimationType.Positive;
     }
 
     public override void createEffectAnimation(GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)

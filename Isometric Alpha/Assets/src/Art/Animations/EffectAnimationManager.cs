@@ -95,7 +95,7 @@ public class AnimationData
 
                 if(index == Constants.indexOne)
                 {
-
+                    effectAnimationManager.createDamagePopUp();
                 }
 
                 if(index >= timingInSeconds.Length && !loopAnimation)
@@ -118,12 +118,27 @@ public class AnimationData
     }
 }
 
-public class EffectAnimationManager : MonoBehaviour
+public class EffectAnimationManager : MonoBehaviour, IAnimationTracker
 {
-
     public readonly static UnityEvent<EffectAnimationType> DestroyAllEffectsOfType = new UnityEvent<EffectAnimationType>();
     
     public EffectAnimationType effectType;
+
+    private int _Key = -1;
+    public int key
+    {
+        get
+        {
+            if(_Key < 0)
+            {
+                _Key = CombatAnimationManager.getCurrentKey();
+            }
+
+            return _Key;
+        }
+    }
+
+    public bool singleFire { get { return true; } }
 
     public GridCoords targetCoords = default;
 
@@ -159,6 +174,7 @@ public class EffectAnimationManager : MonoBehaviour
     }
 
     public static EffectAnimationManager createEffect(GridCoords coords,
+                                                        EffectAnimationType effectType,
                                                         AnimationData animationData,
                                                         bool loops = false,
                                                         DamagePacket? damagePacket = null)
@@ -166,6 +182,7 @@ public class EffectAnimationManager : MonoBehaviour
         GameObject creature = Instantiate(Resources.Load<GameObject>(PrefabNames.creaturePrefab), CombatGrid.getPositionAt(coords), Quaternion.identity);
 
         EffectAnimationManager effect = creature.AddComponent<EffectAnimationManager>();
+        effect.effectType = effectType;
         effect.targetCoords = coords;
         effect.animationData = animationData;
         effect.loops = loops;
@@ -175,9 +192,30 @@ public class EffectAnimationManager : MonoBehaviour
             effect.damagePacket = damagePacket.Value;
         }
 
+        effect.determineOutline();
+
         effect.StartCoroutine(animationData.animationCoroutine(effect.rendererList, effect, loops));
 
         return effect;
+    }
+
+    private void determineOutline()
+    {
+        switch(effectType)
+        {
+            case EffectAnimationType.BatSwarm:
+            case EffectAnimationType.FrontSelector:
+            case EffectAnimationType.BackSelector:
+            case EffectAnimationType.FrontSelector2:
+            case EffectAnimationType.BackSelector2:
+            case EffectAnimationType.Bubbles:
+            case EffectAnimationType.Splash:
+            case EffectAnimationType.Confused: 
+                return;
+            default:
+                rendererList[SpriteLayer.Body].material = Resources.Load<Material>(PrefabNames.outlineMaterial);
+                return;
+        }
     }
 
     public void startAnimation()
@@ -197,7 +235,7 @@ public class EffectAnimationManager : MonoBehaviour
                 CombatAnimationManager.getInstance().damageNumberCanvas, damagePacket.Value.crit, damagePacket.Value.healsTarget);
         }
     }
-
+    
     // private ClipTransition createClipTransitionThenDelete(AnimationClip clip)
     // {
     //     ClipTransition clipTransition = new ClipTransition();
@@ -230,13 +268,6 @@ public class EffectAnimationManager : MonoBehaviour
     // public bool spriteSetByHeartBeat()
     // {
     //     return false;
-    // }
-
-    // public void removeAnimation()
-    // {
-    //     DestroyImmediate(gameObject);
-
-    //     base.removeAnimation();
     // }
 
     // private void destroyEffectOfType(EffectAnimationType effectType)

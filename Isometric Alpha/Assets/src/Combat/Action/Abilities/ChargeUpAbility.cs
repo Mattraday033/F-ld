@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChargeUpAbility : Ability
 {
-    public string currentEffectType = null;
+    public EffectAnimationType? currentEffectType = null;
 	public CombatAction actionWhenCharged { get; private set; }
 	public Trait chargeUpTrait { get; private set; }
 	public const string chargingUpName = "Charging Up";
@@ -134,13 +134,13 @@ public class ChargeUpAbility : Ability
         return CombatAnimationType.Effect;
     }
 
-    public override string getEffectAnimationType()
+    public override EffectAnimationType getEffectAnimationType()
     {
         if(currentEffectType == null)
         {
             if(!isCharged())
             {
-                currentEffectType = EffectAnimationType.Positive.ToString();
+                currentEffectType = EffectAnimationType.Positive;
             } else
             {
                 currentEffectType = actionWhenCharged.getEffectAnimationType();
@@ -150,7 +150,7 @@ public class ChargeUpAbility : Ability
             CombatStateManager.OnCombatEnd.AddListener(removeCurrentEffectType);
         }
 
-        return currentEffectType;
+        return currentEffectType.Value;
     }
 
     private void removeCurrentEffectType()

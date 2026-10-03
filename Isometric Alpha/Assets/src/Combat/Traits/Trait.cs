@@ -542,6 +542,9 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
         panel.setObjectBeingDescribed(this);
 
         DescriptionPanel.setImage(panel.iconPanel, getIconSprite());
+
+        //a reused row may have shown a stackable trait's count. StackableTrait sets its own after this
+        DescriptionPanel.setText(panel.amountText, "");
     }
 
     public void setUpDecisionPanel(IDecisionPanel descisionPanel)

@@ -75,18 +75,7 @@ public class SkillDescription : IDescribable, IDescribableInBlocks
 
     public virtual GameObject getRowType(RowType rowType)
     {
-        string rowTypeName = "";
-
-        switch (rowType)
-        {
-            case RowType.LevelUp:
-                rowTypeName = PrefabNames.skillLevelUpDescriptionPanels;
-                break;
-            default:
-                throw new IOException("Incompatible RowType: " + rowType);
-        }
-
-        return Resources.Load<GameObject>(rowTypeName);
+        throw new IOException("Incompatible RowType: " + rowType);
     }
 
     public GameObject getDescriptionPanelFull()

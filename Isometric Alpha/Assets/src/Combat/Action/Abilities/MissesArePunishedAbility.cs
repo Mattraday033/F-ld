@@ -61,11 +61,11 @@ public class MissesArePunishedAbility : Ability
         return false;
     }
 
-    public override string getEffectAnimationType()
+    public override EffectAnimationType getEffectAnimationType()
     {
         if(!hasTargets())
         {
-            return missEffectType.ToString();
+            return missEffectType;
         } else
         {
             return base.getEffectAnimationType();

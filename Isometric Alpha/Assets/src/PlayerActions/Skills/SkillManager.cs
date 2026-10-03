@@ -182,17 +182,24 @@ public abstract class SkillManager
 
     public void createEffect(Vector3 targetWorldPos)
     {
-        // EffectAnimationManager effect = EffectAnimationManager.instantiatePrefab();
-        // Transform effectTransform = effect.transform;
-        // effectTransform.position = targetWorldPos;
+        AnimationData animationData = AnimationDataList.getAnimationData(getEffectType());
 
-        // effect.waitBeforeSFX = false;
-        // effect.setAnimations(getEffectType());
+        if(animationData == null)
+        {
+            return;
+        }
+
+        //EffectAnimationManager.createEffect places by combat GridCoords, so out of combat the effect prefab is placed directly
+        EffectAnimationManager effect = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.effect)).GetComponent<EffectAnimationManager>();
+        effect.transform.position = targetWorldPos;
+
+        effect.animationData = animationData;
+        effect.startAnimation();
     }
 
-    public virtual string getEffectType()
+    public virtual EffectAnimationType getEffectType()
     {
-        return EffectAnimationType.SmokeBomb.ToString();
+        return EffectAnimationType.SmokeBomb;
     }
 
 }

@@ -203,12 +203,19 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public override string getDamageTotalForDisplay()
     {
-        if (cannotDealDamage || getDamageFormulaTotal() <= 0)
+        if (cannotDealDamage)
         {
             return harmlessMessage;
         }
 
-        return "" + getDamageFormulaTotal();
+        int damageFormulaTotal = getDamageFormulaTotal();
+
+        if (damageFormulaTotal <= 0)
+        {
+            return harmlessMessage;
+        }
+
+        return "" + damageFormulaTotal;
     }
 
     public override string getDamageFormulaForDisplay()
@@ -241,10 +248,9 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         string finalCritFormula = gatherAllNonActionFormulas(a => a.getCritFormula());
         //DamageCalculator.combineFormulas(getCritFormula(), );
 
-        int critChance = DamageCalculator.calculateFormula(finalCritFormula, getStatSource());
-
+        //the crit chance only matters to a preview, so it's only worked out for one
         if (cannotDealDamage || 
-            (inPreviewMode && critChance < DamageCalculator.critAutoSuccessThreshold))
+            (inPreviewMode && DamageCalculator.calculateFormula(finalCritFormula, getStatSource()) < DamageCalculator.critAutoSuccessThreshold))
 		{
 			return Constants.zeroRating;
 		} 
@@ -259,12 +265,14 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public override string getCritTotalForDisplay()
     {
-        if (getCritFormulaTotal() <= 0)
+        int critFormulaTotal = getCritFormulaTotal();
+
+        if (critFormulaTotal <= 0)
         {
             return cannotCritMessage;
         }
 
-        return getCritFormulaTotal() + "%";
+        return critFormulaTotal + "%";
     }
 
     public override string getCritFormulaForDisplay()
@@ -371,9 +379,9 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         }
     }
 
-    public virtual string getEffectAnimationType()
+    public virtual EffectAnimationType getEffectAnimationType()
     {
-        return EffectAnimationType.Slash.ToString();
+        return EffectAnimationType.Slash;
     }
 
     #region Projectiles and Effects
@@ -1444,17 +1452,8 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
             case RowType.StatRequirements:
                 rowTypeName = PrefabNames.playerAbilityRow;
                 break;
-            case RowType.CompanionAbilities:
-                rowTypeName = PrefabNames.companionAbilityRow;
-                break;
-            case RowType.AbilityEditor:
-                rowTypeName = PrefabNames.actionEditorRow;
-                break;
             case RowType.CombatActionOrder:
                 rowTypeName = PrefabNames.combatCombatActionOrderRow;
-                break;
-            case RowType.LevelUp:
-                rowTypeName = PrefabNames.actionLevelUpDescriptionPanels;
                 break;
             default:
                 throw new IOException("Incompatible RowType: " + rowType);
@@ -1476,17 +1475,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         {
             case PanelType.Builder:
                 panelTypeName = PrefabNames.descriptionPanelBuilder;
-                break;
-            case PanelType.Combat:
-            case PanelType.CombatHover:
-                panelTypeName = PrefabNames.actionHoverDescriptionPanel;
-                break;
-            case PanelType.Standard:
-            case PanelType.AbilityEditor:
-                panelTypeName = PrefabNames.actionDescPanelFull;
-                break;
-            case PanelType.GlossaryDescription:
-                panelTypeName = PrefabNames.perkDescriptionPanelFull;
                 break;
             default:
                 throw new IOException("Unknown PanelType: " + panelType);

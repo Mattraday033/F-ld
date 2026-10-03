@@ -507,7 +507,22 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
     private List<DescriptionPanelRow> rows = new List<DescriptionPanelRow>();
 
+    //what each entry of rows was built from, discarded (null) rows included, so a refill can tell whether the rows still fit
+    private List<RowSignature> rowSignatures = new List<RowSignature>();
+
+    private struct RowSignature
+    {
+        public DescriptionPanelBuildingBlockType type;
+        public Transform parent;
+        public string textIconName;
+        public bool hasRow;
+    }
+
     public DescriptionPanelBuilder nextBuilder;
+
+    //set on builders that are kept alive and refilled, like the combat hover panel's. They update their existing rows in place
+    //instead of rebuilding them, and skip the global canvas flush. Off everywhere else, so other panels rebuild as before
+    public bool reuseRows = false;
 
     public bool inspectNodesAllowed = true;
 
@@ -518,7 +533,13 @@ public class DescriptionPanelBuilder : MonoBehaviour
         buildDescriptionPanel(blockOrigin, null);
     }
 
-    public virtual void buildDescriptionPanel(IDescribableInBlocks blockOrigin, BlockFormat format)
+    public void buildDescriptionPanel(IDescribableInBlocks blockOrigin, BlockFormat format)
+    {
+        buildDescriptionPanel(blockOrigin, format, blockOrigin.getDescriptionBuildingBlocks());
+    }
+
+    //takes the blocks so a chain of builders shares one list, rather than each asking the origin to work out every stat again
+    public virtual void buildDescriptionPanel(IDescribableInBlocks blockOrigin, BlockFormat format, List<DescriptionPanelBuildingBlock> buildingBlocks)
     {
         this.blockOrigin = blockOrigin;
 
@@ -533,20 +554,33 @@ public class DescriptionPanelBuilder : MonoBehaviour
             formatter.setFormat(BlockFormat.getBlockFormat(BlockFormatType.CombatHover));
         }
 
-        addToAdditionalBuilders(blockOrigin, format);
+        addToAdditionalBuilders(blockOrigin, format, buildingBlocks);
 
-        destroyRows();
+        List<DescriptionPanelBuildingBlock> blocksToShow = getBlocksPassingFilter(buildingBlocks);
 
-        List<DescriptionPanelBuildingBlock> buildingBlocks = blockOrigin.getDescriptionBuildingBlocks();
+        bool refillingRows = reuseRows && rowsMatch(blocksToShow);
 
-        foreach (DescriptionPanelBuildingBlock block in buildingBlocks)
+        if (refillingRows)
         {
-            if (filter != null && !filter.blockPassesFilter(block))
+            for (int index = 0; index < blocksToShow.Count; index++)
             {
-                continue;
+                if (rows[index] != null)
+                {
+                    applyBlockToRow(rows[index], blocksToShow[index], false);
+                }
             }
+        }
+        else
+        {
+            destroyRows();
 
-            rows.Add(buildRow(block));
+            foreach (DescriptionPanelBuildingBlock block in blocksToShow)
+            {
+                DescriptionPanelRow row = buildRow(block);
+
+                rows.Add(row);
+                rowSignatures.Add(getRowSignature(block, row != null));
+            }
         }
 
         if(statGridLayout != null && rowParent.childCount >= maxRowCount)
@@ -572,7 +606,71 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
         rebuildLayouts();
 
-        StartCoroutine(waitAndUpdateGameObjectPosition());
+        //the toggle settles a freshly built layout. Rows refilled in place keep the layout they already have
+        if (!refillingRows)
+        {
+            StartCoroutine(waitAndUpdateGameObjectPosition());
+        }
+    }
+
+    protected List<DescriptionPanelBuildingBlock> getBlocksPassingFilter(List<DescriptionPanelBuildingBlock> buildingBlocks)
+    {
+        if (filter == null)
+        {
+            return buildingBlocks;
+        }
+
+        List<DescriptionPanelBuildingBlock> blocksPassingFilter = new List<DescriptionPanelBuildingBlock>();
+
+        foreach (DescriptionPanelBuildingBlock block in buildingBlocks)
+        {
+            if (filter.blockPassesFilter(block))
+            {
+                blocksPassingFilter.Add(block);
+            }
+        }
+
+        return blocksPassingFilter;
+    }
+
+    //true when the current rows were built from blocks laid out the same way, so they can be refilled instead of rebuilt
+    protected bool rowsMatch(List<DescriptionPanelBuildingBlock> blocksToShow)
+    {
+        if (rows.Count == 0 || rows.Count != blocksToShow.Count || rowSignatures.Count != blocksToShow.Count)
+        {
+            return false;
+        }
+
+        for (int index = 0; index < blocksToShow.Count; index++)
+        {
+            RowSignature builtFrom = rowSignatures[index];
+            RowSignature wanted = getRowSignature(blocksToShow[index], builtFrom.hasRow);
+
+            //a row destroyed from outside since it was built can't be refilled
+            bool rowStillExists = rows[index] != null;
+
+            if (builtFrom.type != wanted.type ||
+                builtFrom.parent != wanted.parent ||
+                builtFrom.textIconName != wanted.textIconName ||
+                builtFrom.hasRow != rowStillExists)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    //Text blocks share a type, so their icon is what tells them apart, and it decides whether a full parent keeps them
+    private RowSignature getRowSignature(DescriptionPanelBuildingBlock block, bool hasRow)
+    {
+        return new RowSignature()
+        {
+            type = block.type,
+            parent = getParent(block),
+            textIconName = block.type == DescriptionPanelBuildingBlockType.Text ? block.iconName : null,
+            hasRow = hasRow
+        };
     }
 
     private void setFitterToPreferredSize()
@@ -608,6 +706,13 @@ public class DescriptionPanelBuilder : MonoBehaviour
             return null;
         }
 
+        //checked before instantiating, rather than building a row only to destroy it
+        if (shouldSkipBlock(block, blockParent))
+        {
+            blockParent.gameObject.SetActive(true);
+            return null;
+        }
+
         DescriptionPanelRow row = Instantiate(getDescriptionPanelRowGameObject(block.type), blockParent).GetComponent<DescriptionPanelRow>();
 
         blockParent.gameObject.SetActive(true);
@@ -619,6 +724,20 @@ public class DescriptionPanelBuilder : MonoBehaviour
         //         break;
         // }
 
+        applyBlockToRow(row, block, true);
+
+        return row;
+    }
+
+    //a block the builder has no room for, given where it would go
+    protected virtual bool shouldSkipBlock(DescriptionPanelBuildingBlock block, Transform blockParent)
+    {
+        return false;
+    }
+
+    //fills a row with a block's content. Shared by fresh rows and rows refilled in place, so both always show the same thing
+    protected virtual void applyBlockToRow(DescriptionPanelRow row, DescriptionPanelBuildingBlock block, bool newRow)
+    {
         if (block.iconName != null)
         {
             row.setIcon(block.getIcon());
@@ -658,12 +777,17 @@ public class DescriptionPanelBuilder : MonoBehaviour
         {
             row.setStatTotalAndFormula(block.text, block.formula);
         }
+        else if (row.hasFormula)
+        {
+            row.clearFormula();
+        }
 
         if (block.type == DescriptionPanelBuildingBlockType.DescriptionText)
         {
             row.GetComponent<HorizontalOrVerticalLayoutGroup>().padding.top = descriptionTextTopPaddingAmount;
-        } else if(block.type == DescriptionPanelBuildingBlockType.Name)
+        } else if(newRow && block.type == DescriptionPanelBuildingBlockType.Name)
         {
+            //a refilled row is already where it was put
             row.transform.SetAsFirstSibling();
 
         }
@@ -673,7 +797,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
             formatter.applyFormat(row);
         }
 
-        if (PlayerStateManager.inOOCTutorialSequence())
+        if (newRow && PlayerStateManager.inOOCTutorialSequence())
         {
             TutorialSequenceStepTargetUIObject tutorialObject = row.gameObject.AddComponent<TutorialSequenceStepTargetUIObject>();
 
@@ -683,8 +807,6 @@ public class DescriptionPanelBuilder : MonoBehaviour
         }
 
         row.setBlockType(block.type);
-
-        return row;
     }
 
     public void destroyRows()
@@ -700,6 +822,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
         }
 
         rows = new List<DescriptionPanelRow>();
+        rowSignatures = new List<RowSignature>();
     }
 
     private bool hasFormatToFollow()
@@ -718,14 +841,15 @@ public class DescriptionPanelBuilder : MonoBehaviour
         }
     }
 
-    private void addToAdditionalBuilders(IDescribableInBlocks blockOrigin, BlockFormat format)
+    private void addToAdditionalBuilders(IDescribableInBlocks blockOrigin, BlockFormat format, List<DescriptionPanelBuildingBlock> buildingBlocks)
     {
         if (nextBuilder == null)
         {
             return;
         }
 
-        nextBuilder.buildDescriptionPanel(blockOrigin, format);
+        nextBuilder.reuseRows = reuseRows;
+        nextBuilder.buildDescriptionPanel(blockOrigin, format, buildingBlocks);
     }
 
     public virtual void activateInspectNode()
@@ -791,7 +915,11 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
     public void rebuildLayouts()
     {
-        Canvas.ForceUpdateCanvases();
+        //a global flush rebuilds every canvas in the scene, so builders that are refilled often leave it to the normal pre-render pass
+        if (!reuseRows)
+        {
+            Canvas.ForceUpdateCanvases();
+        }
 
         foreach (RectTransform rectTranform in rectTransforms)
         {

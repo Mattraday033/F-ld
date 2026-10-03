@@ -520,6 +520,70 @@ public static class AnimationDataList
         new float[] { 10f/60f, 10f/60f, 10f/60f, 9f/60f, 11f/60f, 10f/60f, 10f/60f, 10f/60f,
                       10f/60f, 10f/60f, 10f/60f, 10f/60f, 1f/60f });
 
+    //null for a name that isn't an EffectAnimationType, or a type with no animation
+    public static AnimationData getAnimationData(string effectName)
+    {
+        if(effectName == null || !Enum.TryParse(effectName, ignoreCase: true, out EffectAnimationType effectType))
+        {
+            return null;
+        }
+
+        return getAnimationData(effectType);
+    }
+
+    public static AnimationData getAnimationData(EffectAnimationType effectType)
+    {
+        switch(effectType)
+        {
+            case EffectAnimationType.Slash:
+                return slash;
+            case EffectAnimationType.Blunt:
+                return blunt;
+            case EffectAnimationType.Pierce:
+                return pierce;
+            case EffectAnimationType.Positive:
+                return positive;
+            case EffectAnimationType.Negative:
+                return negative;
+            case EffectAnimationType.Healing:
+                return healing;
+            case EffectAnimationType.BatSwarm:
+                return batSwarm;
+            case EffectAnimationType.Acid:
+                return acid;
+            case EffectAnimationType.SmokeBomb:
+                return smokeBomb;
+            case EffectAnimationType.Intimidate:
+                return intimidate;
+            case EffectAnimationType.BlastingJelly:
+                return blastingJelly;
+            case EffectAnimationType.FrontLvlUp:
+                return frontLvlUp;
+            case EffectAnimationType.BackLvlUp:
+                return backLvlUp;
+            case EffectAnimationType.TransitionIndicator:
+                return transitionIndicator;
+            case EffectAnimationType.Gem:
+                return gem;
+            case EffectAnimationType.FrontSelector:
+                return frontSelector;
+            case EffectAnimationType.BackSelector:
+                return backSelector;
+            case EffectAnimationType.FrontSelector2:
+                return frontSelector2;
+            case EffectAnimationType.BackSelector2:
+                return backSelector2;
+            case EffectAnimationType.Bubbles:
+                return bubbles;
+            case EffectAnimationType.Splash:
+                return splash;
+            case EffectAnimationType.Confused:
+                return confused;
+            default:
+                return null;
+        }
+    }
+
     private static Sprite getSprite(string sheetPath, string spriteName)
     {
         foreach(Sprite sprite in Resources.LoadAll<Sprite>(sheetPath))

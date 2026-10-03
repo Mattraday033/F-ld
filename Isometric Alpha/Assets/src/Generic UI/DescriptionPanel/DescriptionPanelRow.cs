@@ -74,9 +74,25 @@ public class DescriptionPanelRow : MonoBehaviour
         this.statTotal = statTotal;
         this.statFormula = statFormula;
 
+        //rows can be refilled in place, so any listener from a previous fill is removed rather than stacked
+        DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(swapStatText);
         DescriptionPanelBuilder.OnFormulaSwap.AddListener(swapStatText);
         hasListener = true;
         hasFormula = true;
+    }
+
+    //for a row being refilled in place with a block that has no formula
+    public void clearFormula()
+    {
+        if (hasListener)
+        {
+            DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(swapStatText);
+            hasListener = false;
+        }
+
+        statTotal = null;
+        statFormula = null;
+        hasFormula = false;
     }
 
     private void swapStatText()

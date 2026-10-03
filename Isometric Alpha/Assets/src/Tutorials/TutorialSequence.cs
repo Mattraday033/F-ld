@@ -369,11 +369,6 @@ public struct TutorialSequenceStep : IDescribable
     public GameObject getDescriptionPanelFull(PanelType panelType)
 
     {
-        if (panelType == PanelType.TutorialUITargetUltraWide)
-        {
-            return DescriptionPanel.getDescriptionPanel(PrefabNames.tutorialSequencePopUpDescriptionPanelUltraWide);
-        }
-
         return DescriptionPanel.getDescriptionPanel(PrefabNames.tutorialSequencePopUpDescriptionPanel);
     }
 

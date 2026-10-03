@@ -4,7 +4,21 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IAnimationTracker
 {
-    public int key;
+    private int _Key = -1;
+    public int key
+    {
+        get
+        {
+            if(_Key < 0)
+            {
+                _Key = CombatAnimationManager.getCurrentKey();
+            }
+
+            return _Key;
+        }
+    }
+
+    public bool singleFire { get { return true; } }
 
     public ScriptOnLanding scriptOnLanding;
     public Animator animator;
@@ -54,7 +68,7 @@ public class Projectile : MonoBehaviour, IAnimationTracker
         }
         else
         {
-            removeAnimation();
+            this.removeAnimation();
             return;
         }
 
@@ -93,7 +107,7 @@ public class Projectile : MonoBehaviour, IAnimationTracker
 
         if (animator.GetBool("finished"))
         {
-            removeAnimation();
+            this.removeAnimation();
         }
     }
 
@@ -162,19 +176,6 @@ public class Projectile : MonoBehaviour, IAnimationTracker
         return Instantiate(Resources.Load<GameObject>(PrefabNames.projectile)).GetComponent<Projectile>();
     }
 
-    public void removeAnimation()
-    {
-        CombatAnimationManager.removeAnimation(key);
-
-        DestroyImmediate(gameObject);
-
-        CombatAnimationManager.checkAllAnimationsFinished();
-    }
-
-    public GameObject getGameObject()
-    {
-        return gameObject;
-    }
 }
 
 public abstract class ScriptOnLanding

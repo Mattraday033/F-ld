@@ -43,9 +43,9 @@ public class HealingItem: UsableItem, IJSONConvertable
 	}
 	
 
-	public override string getEffectAnimationType()
+	public override EffectAnimationType getEffectAnimationType()
 	{
-		return EffectAnimationType.Healing.ToString();
+		return EffectAnimationType.Healing;
 	}
 
 	public override bool usableOutOfCombat()

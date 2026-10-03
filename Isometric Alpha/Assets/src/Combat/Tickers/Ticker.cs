@@ -43,20 +43,22 @@ public class Ticker : MonoBehaviour
 	
 	public void tickDownAllCooldowns(List<Stats> allAllies)
 	{
+		//ticks each ally's own actions, since the one shared ability menu only holds the last actor's.
+		//Only the activatable slots are ticked, matching the actions the menu can show
 		foreach(Stats ally in allAllies)
 		{
-			AbilityMenuManager abilityMenuManager = ally.getAbilityMenuManager();
-
-			if(abilityMenuManager == null)
+			if(!(ally is AllyStats))
 			{
 				continue;
 			}
 
-			foreach(AbilityMenuButton button in abilityMenuManager.abilityButtons)
+			CombatAction[] actions = ally.getActionArray().getActions();
+
+			for(int index = 0; index < actions.Length && index < CombatActionArray.numberOfActivatablePlayerCombatActions; index++)
 			{
-				if(button.loadedCombatAction != null)
+				if(actions[index] != null)
 				{
-					button.loadedCombatAction.tickDown();
+					actions[index].tickDown();
 				}
 			}
 		}

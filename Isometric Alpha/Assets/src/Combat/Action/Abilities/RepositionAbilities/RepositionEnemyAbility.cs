@@ -53,8 +53,8 @@ public class RepositionEnemyAbility : RepositionAbility
 		return true;
 	}
 
-    public override string getEffectAnimationType()
+    public override EffectAnimationType getEffectAnimationType()
     {
-        return EffectAnimationType.Negative.ToString();
+        return EffectAnimationType.Negative;
     }
 }

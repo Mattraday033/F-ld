@@ -472,6 +472,11 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public DescriptionPanelSlot getDescriptionPanelSlot()
     {
+        if(AbilityMenuManager.getInstance() == null)
+        {
+            return null;
+        }
+
         return AbilityMenuManager.getInstance().descriptionPanelSlot;
     }
 

@@ -141,7 +141,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		}
 	}
 
-    public override string getEffectAnimationType()
+    public override EffectAnimationType getEffectAnimationType()
     {
         return sourceItem.getEffectAnimationType();
     }
@@ -209,23 +209,6 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		string itemJson = sourceItem.convertToJson();
 
 		return sourceItem.convertToJson().Substring(0, itemJson.Length - 1) + ",\"CombatActionSaveType\":\"" + getSaveType() + "\"}";
-	}
-
-	public override GameObject getDescriptionPanelFull(PanelType panelType)
-	{
-		string panelTypeName = "";
-
-		switch (panelType)
-		{
-			case PanelType.Standard:
-			case PanelType.AbilityEditor:
-				panelTypeName = PrefabNames.itemCombatActionDescPanelFull;
-				break;
-			default:
-				return base.getDescriptionPanelFull(panelType);
-		}
-
-		return DescriptionPanel.getDescriptionPanel(panelTypeName);
 	}
 
 	public override void describeSelfFull(DescriptionPanel panel)

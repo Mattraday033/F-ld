@@ -35,9 +35,9 @@ public class PurgeAbility : Ability
         }
     }
 
-    public override string getEffectAnimationType()
+    public override EffectAnimationType getEffectAnimationType()
     {
-        return EffectAnimationType.Negative.ToString();
+        return EffectAnimationType.Negative;
     }
 
 }

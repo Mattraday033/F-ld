@@ -132,31 +132,6 @@ public abstract class UsableItem : Item, IJSONConvertable
         return new ItemCombatAction(stats, this);
     }
 
-    public override GameObject getDescriptionPanelFull(PanelType panelType)
-    {
-        string panelTypeName = "";
-
-        switch (panelType)
-        {
-            case PanelType.Standard:
-
-                if (usableInCombat())
-                {
-                    panelTypeName = PrefabNames.combatUsableUseItemDescPanelFull;
-                }
-                else
-                {
-                    panelTypeName = PrefabNames.useItemDescPanelFull;
-                }
-
-                break;
-            default:
-                throw new IOException("Unknown PanelType: " + panelType);
-        }
-
-        return DescriptionPanel.getDescriptionPanel(panelTypeName);
-    }
-
     public override void describeSelfFull(DescriptionPanel panel)
     {
         base.describeSelfFull(panel);

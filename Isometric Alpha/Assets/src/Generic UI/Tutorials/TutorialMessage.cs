@@ -43,14 +43,7 @@ public class TutorialMessage : IDescribable
 
     public GameObject getDescriptionPanelFull(PanelType type)
     {
-        if (imageKey != null && !imageKey.Equals(""))
-        {
-            return Resources.Load<GameObject>(PrefabNames.tutorialMessageWithImage);
-        }
-        else
-        {
-            return Resources.Load<GameObject>(PrefabNames.tutorialMessageWithoutImage);
-        }
+        return null;
     }
 
     public GameObject getDecisionPanel()

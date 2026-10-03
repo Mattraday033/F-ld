@@ -61,12 +61,6 @@ public class CombatantSpawnDetails : OOCSpawnDetails
 
         //the stats are the appearance source, so a change of equipment shows on the combatant
         aestheticSpawnBehaviours[typeof(AnimationManagerSpawnBehaviour)] = new AnimationManagerSpawnBehaviour(stats, facing, getIdleType(positions));
-        aestheticSpawnBehaviours[typeof(CombatantHoverSpawnBehaviour)] = new CombatantHoverSpawnBehaviour();
-
-        if(stats is AllyStats && !placeholder)
-        {
-            aestheticSpawnBehaviours[typeof(AbilityMenuSpawnBehaviour)] = new AbilityMenuSpawnBehaviour();
-        }
 
         //universal, since only universal behaviours can be the ActivationListener's name source
         universalSpawnBehaviours[typeof(CombatantSpawnBehaviour)] = new CombatantSpawnBehaviour(this);

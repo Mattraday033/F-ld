@@ -25,7 +25,6 @@ public class Combatant : MonoBehaviour, INameSource
 
     //added by the aesthetic spawn behaviours, which run before this is initialized
     public CombatantHover hover { get; private set; }
-    public AbilityMenuManager abilityMenuManager { get; private set; }
 
     private bool listening;
 
@@ -48,7 +47,6 @@ public class Combatant : MonoBehaviour, INameSource
         rendererList = GetComponent<SpriteLayerRendererList>();
         animationManager = GetComponent<NewAnimationManager>();
         hover = GetComponentInChildren<CombatantHover>(true);
-        abilityMenuManager = GetComponentInChildren<AbilityMenuManager>(true);
         promptParent = createChild(promptParentName).transform;
 
         if(animationManager != null)
@@ -59,11 +57,6 @@ public class Combatant : MonoBehaviour, INameSource
         if(hover != null)
         {
             hover.linkedStats = stats;
-        }
-
-        if(abilityMenuManager != null)
-        {
-            abilityMenuManager.actionArraySource = stats;
         }
 
         if(isPlaceholder)
@@ -432,18 +425,6 @@ public static class CombatantStatsExtensions
         }
 
         return combatant.animationManager;
-    }
-
-    public static AbilityMenuManager getAbilityMenuManager(this Stats stats)
-    {
-        Combatant combatant = stats.getCombatant();
-
-        if(combatant == null || combatant.abilityMenuManager == null)
-        {
-            return null;
-        }
-
-        return combatant.abilityMenuManager;
     }
 
     public static void setOutline(this Stats stats)

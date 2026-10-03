@@ -44,7 +44,7 @@ public class GroundEffect
             DamageNumberPopup.create(position, damageDealt, CombatGrid.getPositionAt(position), DamageNumberPopup.getDirectionByTargetCoords(position),
                                     GroundEffectManager.getInstance().damageNumberCanvas, isNotACrit, doesNotHealTarget);
             
-            target.modifyCurrentHealth(DamageCalculator.calculateFormula(damageFormula, DamageCalculator.noStatsSource));
+            target.modifyCurrentHealth(damageDealt);
         }
     }
 

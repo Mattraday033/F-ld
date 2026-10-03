@@ -218,6 +218,8 @@ public class CombatStateManager : MonoBehaviour
 
 		// CombatHoverManager.instantiateCombatHovers();
 
+        StartCoroutine(prewarmHoverUIOnceItsParentExists());
+
 		if (getCombatTutorialKey() != null)
 		{
 			if (getCombatTutorialKey().Equals(TutorialSequenceList.combatTutorialSeenFlag))
@@ -268,6 +270,26 @@ public class CombatStateManager : MonoBehaviour
 	{
 		return instance;
 	}
+
+    private const int framesToWaitForHoverUIParent = 10;
+
+    //the hover panel's parent belongs to the Combat UI scene, which can finish loading a frame or two after this one. Until
+    //it does, the declared parent may still be the overworld's, which the panel must not be built under
+    private IEnumerator prewarmHoverUIOnceItsParentExists()
+    {
+        for(int frame = 0; frame < framesToWaitForHoverUIParent; frame++)
+        {
+            Transform popUpParent = PopUpScreenBlockerManager.getPopUpParent();
+
+            if(popUpParent != null && popUpParent.GetComponent<CombatHoverParentDeclarer>() != null)
+            {
+                SelectorManager.prewarmHoverUI();
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
 
 	private IEnumerator waitOneFrameThenSpawnHoverUI()
 	{
@@ -472,7 +494,8 @@ public class CombatStateManager : MonoBehaviour
     {
         updateTurnState(WhoseTurn.Player);
 
-        if(whoseTurn == WhoseTurn.TickDown)
+        //the tick down can end the combat, in which case there's no new turn to start
+        if(whoseTurn == WhoseTurn.TickDown || whoseTurn == WhoseTurn.Won || whoseTurn == WhoseTurn.Lost)
         {
             return;
         }
@@ -632,6 +655,11 @@ public class CombatStateManager : MonoBehaviour
 
 	private void checkWinConditionOnNewTurn()
 	{
+        if(whoseTurn == WhoseTurn.Won || whoseTurn == WhoseTurn.Lost)
+        {
+            return;
+        }
+
 		if (currentWinCon != null && currentWinCon.playerHasWon())
 		{
 			setToWonState();
@@ -640,6 +668,12 @@ public class CombatStateManager : MonoBehaviour
 
 	public void setToWonState()
 	{
+        //the win behaviour spawns the results pop up, so it must only run once
+        if(whoseTurn == WhoseTurn.Won)
+        {
+            return;
+        }
+
 		CombatUI.populateCombatActionPanels();
 		updateTurnState(WhoseTurn.Won);
 
@@ -774,8 +808,8 @@ public class CombatStateManager : MonoBehaviour
 
 	public static bool isPlayerSurpriseRound()
 	{
-		if (turnNumber <= PartyStats.getPartySurpriseRounds() &&
-			whoIsSurprised == SurpriseState.EnemySurprised)
+		if (whoIsSurprised == SurpriseState.EnemySurprised &&
+			turnNumber <= PartyStats.getPartySurpriseRounds())
 		{
 			return true;
 		}

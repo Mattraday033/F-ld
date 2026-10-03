@@ -122,38 +122,6 @@ public abstract class Armor : EquippableItem, IJSONConvertable
         return ((getTier() + 1)*slotMod).ToString();
     }
 
-	public override GameObject getDescriptionPanelFull(PanelType panelType)
-	{
-		string panelTypeName = "";
-
-		switch (panelType)
-		{
-			case PanelType.Standard:
-				panelTypeName = PrefabNames.armorDescPanelFull;
-				break;
-			default:
-				throw new IOException("Unknown PanelType: " + panelType);
-		}
-
-		return DescriptionPanel.getDescriptionPanel(panelTypeName);
-	}
-
-	public override GameObject getRowType(RowType rowType)
-	{
-		string rowTypeName = "";
-
-		switch (rowType)
-		{
-			case RowType.AbilityEditor:
-				rowTypeName = PrefabNames.actionEditorRow;
-				break;
-			default:
-				return base.getRowType(rowType);
-		}
-
-		return Resources.Load<GameObject>(rowTypeName);
-	}
-
 	public override void describeSelfFull(DescriptionPanel panel)
 	{
 		base.describeSelfFull(panel);

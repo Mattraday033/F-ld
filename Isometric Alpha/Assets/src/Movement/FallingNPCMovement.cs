@@ -53,11 +53,20 @@ public class FallingNPCMovement : MonoBehaviour
             return;
         }
 
-        // EffectAnimationManager effect = EffectAnimationManager.instantiatePrefab();
+        AnimationData animationData = AnimationDataList.getAnimationData(effectType);
 
-        // effect.transform.position = endingPosition;
-        // effect.waitBeforeSFX = false;
-        // effect.setAnimations(effectType);
+        if(animationData == null)
+        {
+            return;
+        }
+
+        //EffectAnimationManager.createEffect places by combat GridCoords, so out of combat the effect prefab is placed directly
+        EffectAnimationManager effect = Instantiate(Resources.Load<GameObject>(PrefabNames.effect)).GetComponent<EffectAnimationManager>();
+        effect.transform.position = endingPosition;
+
+        effect.effectType = effectType;
+        effect.animationData = animationData;
+        effect.startAnimation();
     }
 
 }

@@ -188,7 +188,7 @@ public class Attack : CombatAction, IJSONConvertable
         item.equipTarget = actor;
     }
 
-    public override string getEffectAnimationType()
+    public override EffectAnimationType getEffectAnimationType()
     {
         return getSourceItem().getEffectAnimationType();
     }
@@ -236,34 +236,15 @@ public class Attack : CombatAction, IJSONConvertable
 
 	public override GameObject getDescriptionPanelFull(PanelType panelType)
 	{
-		string panelTypeName = "";
-
 		switch (panelType)
 		{
 			case PanelType.Standard:
 
 				return getSourceItem().getDescriptionPanelFull();
 
-			case PanelType.AbilityEditor:
-
-				if (getMainHandWeapon().getIsTwoHanded())
-				{
-					return base.getDescriptionPanelFull(panelType);
-				}
-				else
-				{
-					panelTypeName = PrefabNames.dualWieldCombatActionDescPanelFull;
-				}
-
-				break;
 			default:
 				return base.getDescriptionPanelFull(panelType);
 		}
-
-        Debug.LogError("rowTypeName = " + panelTypeName);
-
-
-        return DescriptionPanel.getDescriptionPanel(panelTypeName);
 	}
 
 	public override bool withinFilter(string[] filterParameters)

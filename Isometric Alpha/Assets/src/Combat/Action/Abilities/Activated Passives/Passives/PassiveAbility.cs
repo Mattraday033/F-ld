@@ -44,44 +44,6 @@ public class PassiveAbility : EquippedPassive //passives are (currently) mostly 
         return true;
     }   
 
-    public override GameObject getDescriptionPanelFull(PanelType panelType)
-    {
-        string panelTypeName = "";
-
-        switch (panelType)
-        {
-            case PanelType.GlossaryDescription:
-            case PanelType.AbilityEditor:
-            case PanelType.Standard:
-                panelTypeName = PrefabNames.passivePerkDescriptionPanel;
-                break;
-            default:
-                return base.getDescriptionPanelFull(panelType);
-        }
-
-        return DescriptionPanel.getDescriptionPanel(panelTypeName);
-    }
-
-    private GameObject getMultiStackDescriptionPanelFull(PanelType panelType)
-    {
-        string panelTypeName = "";
-
-        switch (panelType)
-        {
-            case PanelType.GlossaryDescription:
-                panelTypeName = PrefabNames.multiStackPassivePerkDescriptionPanel;
-                break;
-            case PanelType.AbilityEditor:
-            case PanelType.Standard:
-                panelTypeName = PrefabNames.multiStackableNoDamageActionDescriptionPanels;
-                break;
-            default:
-                return base.getDescriptionPanelFull(panelType);
-        }
-
-        return DescriptionPanel.getDescriptionPanel(panelTypeName);
-    }
-
     public override void addSlotsTextToRow(DescriptionPanel panel)
     {
         DescriptionPanel.setText(panel.slotsUsedText, "Passive");

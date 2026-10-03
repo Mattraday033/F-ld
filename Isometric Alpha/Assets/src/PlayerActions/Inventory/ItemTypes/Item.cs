@@ -289,9 +289,9 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		return false;
 	}
 
-	public virtual string getEffectAnimationType()
+	public virtual EffectAnimationType getEffectAnimationType()
 	{
-		return EffectAnimationType.Slash.ToString();
+		return EffectAnimationType.Slash;
 	}
 
 	//used when calculating worth via some formula, such as in the case of finding worth of armor via it's armorRating
@@ -429,9 +429,6 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
             case RowType.StatRequirements:
 				rowTypeName = PrefabNames.playerAbilityRow;
 				break;
-			case RowType.AbilityEditor:
-				rowTypeName = PrefabNames.actionEditorRow;
-				break;
 			case RowType.Shop:
 				rowTypeName = PrefabNames.shopRow;
 				break;
@@ -455,18 +452,7 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 
 	public virtual GameObject getDescriptionPanelFull(PanelType panelType)
 	{
-		string panelTypeName = "";
-
-		switch (panelType)
-		{
-			case PanelType.Standard:
-				panelTypeName = PrefabNames.treasureEssentialDescPanelFull;
-				break;
-			default:
-				throw new IOException("Unknown PanelType: " + panelType);
-		}
-
-		return DescriptionPanel.getDescriptionPanel(panelTypeName);
+		throw new IOException("Unknown PanelType: " + panelType);
 	}
 
     public virtual void describeSelfFull(DescriptionPanel panel)
