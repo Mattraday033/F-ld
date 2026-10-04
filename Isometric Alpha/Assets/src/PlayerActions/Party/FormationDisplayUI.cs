@@ -11,8 +11,16 @@ public class FormationDisplayUI : MonoBehaviour, ICounter
 	
     #region ICounter
 
+    //the screen this display sits in, if it sits in one. The ones built into pop-ups and description rows have none
+    private ScreenManager owningScreen;
+
+    //what addListeners subscribed to, kept so removeListeners takes off the same ones whichever screen is current by then
+    private List<UnityEvent> subscribedEvents = new List<UnityEvent>();
+
     private void Awake()
     {
+        owningScreen = GetComponentInParent<ScreenManager>(true);
+
         addListeners();
         OnFormationDisplayUICreation.Invoke();
 
@@ -29,6 +37,12 @@ public class FormationDisplayUI : MonoBehaviour, ICounter
 
     private void destroy()
     {
+        //a row clicked or another display made while this one's screen is hidden has nothing to do with it
+        if (ScreenManager.isHidden(owningScreen))
+        {
+            return;
+        }
+
         Destroy(gameObject);
     }
 
@@ -39,18 +53,16 @@ public class FormationDisplayUI : MonoBehaviour, ICounter
 
     public void addListeners()
     {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
+        subscribedEvents = getUpdateEvents();
 
-        foreach (UnityEvent unityEvent in listOfEvents)
+        foreach (UnityEvent unityEvent in subscribedEvents)
         {
             unityEvent.AddListener(updateCounter);
         }
     }
     public void removeListeners()
     {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
-
-        foreach(UnityEvent unityEvent in listOfEvents)
+        foreach(UnityEvent unityEvent in subscribedEvents)
         {
             unityEvent.RemoveListener(updateCounter);
         }
@@ -58,6 +70,11 @@ public class FormationDisplayUI : MonoBehaviour, ICounter
 
     public virtual void updateCounter()
     {
+        if (ScreenManager.isHidden(owningScreen))
+        {
+            return;
+        }
+
         populate(State.formation);
     }
 

@@ -81,8 +81,33 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
     }
 
+    //for a map tile that is filled in again for another location, and has to start from how the prefab shows its counter
+    public bool isShown()
+    {
+        return getVisibilityGameObject().activeSelf;
+    }
+
+    public void setShown(bool shown)
+    {
+        getVisibilityGameObject().SetActive(shown);
+    }
+
+    //true between highlightStar and unhighlightStar
+    private bool starHighlighted = false;
+
+    //for a counter that is hidden or reused while its star is lit, when the pointer leaving would normally have put it out
+    public void clearStarHighlight()
+    {
+        if (starHighlighted)
+        {
+            unhighlightStar();
+        }
+    }
+
     public void highlightStar()
     {
+        starHighlighted = true;
+
         starOutlineImage.color = Color.blue;
         starInteriorImage.color = Color.yellow;
 
@@ -97,6 +122,8 @@ public class QuestCounter : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     public void unhighlightStar()
     {
+        starHighlighted = false;
+
         starOutlineImage.color = ColorList.grey25;
         starInteriorImage.color = ColorList.questCounterCyan;
         

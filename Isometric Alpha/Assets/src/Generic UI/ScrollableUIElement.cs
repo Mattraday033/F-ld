@@ -93,6 +93,12 @@ public class ScrollableUIElement : MonoBehaviour
         ContinueAllScrolling.AddListener(continueScrolling);
 	}
 
+    private void OnDisable()
+    {
+        //a coroutine stops when its object is switched off, and updateScrollComponent would never have reached the line that clears this
+        updateScrollComp = null;
+    }
+
     private void OnDestroy()
     {
         HaltAllScrolling.RemoveListener(haltScrolling);
@@ -155,6 +161,8 @@ public class ScrollableUIElement : MonoBehaviour
 	private void populatePanels(List<IDescribable> listOfDescribables, bool deleteOldPanels)
 	{
 		// Debug.LogError("populating Panels");
+
+		ScreenManager.reportWorkWhileHidden(this, "filled its grid");
 
 		if (sortPanels)
 		{

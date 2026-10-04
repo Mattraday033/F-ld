@@ -49,6 +49,38 @@ public class SettingsManager : ScreenManager, IEscapable
         }
     }
 
+    private void OnEnable()
+    {
+        //only the copy that is on screen answers as the settings screen, so the one combat makes and the prebuilt one never argue over it
+        instance = this;
+    }
+
+    private void OnDisable()
+    {
+        if(instance == this)
+        {
+            instance = null;
+        }
+    }
+
+    protected override void onPrebuilt()
+    {
+        //each panel builds its contents the first time it is switched on, so all three are switched on once here, behind the loading screen
+        gameplayPanel.SetActive(true);
+        keybindsPanel.SetActive(true);
+        audioPanel.SetActive(true);
+
+        setToState((int) state);
+    }
+
+    protected override void prepareToShow()
+    {
+        setToState((int) state);
+
+        //puts each keybind label back in step with its key, in case the copy combat makes changed one, and rechecks for unassigned keys
+        KeyBindingSettingsManager.EnableAllKeyBindButtons.Invoke();
+    }
+
     public static void setToState(int state)
     {
         SettingsManager.state = (SettingsManagerState) state;
@@ -119,6 +151,12 @@ public class SettingsManager : ScreenManager, IEscapable
     }
     public void handleEscapePress()
     {
+        //the prebuilt copy never goes on the escape stack and is put away by OverallUIManager. This is for the copy combat makes
+        if(isPrebuilt)
+        {
+            return;
+        }
+
         EscapeStack.removeTopObjectFromStack();
         Destroy(gameObject);
     }

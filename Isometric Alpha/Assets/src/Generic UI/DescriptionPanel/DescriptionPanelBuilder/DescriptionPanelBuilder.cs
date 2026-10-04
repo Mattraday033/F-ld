@@ -541,6 +541,8 @@ public class DescriptionPanelBuilder : MonoBehaviour
     //takes the blocks so a chain of builders shares one list, rather than each asking the origin to work out every stat again
     public virtual void buildDescriptionPanel(IDescribableInBlocks blockOrigin, BlockFormat format, List<DescriptionPanelBuildingBlock> buildingBlocks)
     {
+        ScreenManager.reportWorkWhileHidden(this, "built its rows");
+
         this.blockOrigin = blockOrigin;
 
         if (format != null && formatter != null)

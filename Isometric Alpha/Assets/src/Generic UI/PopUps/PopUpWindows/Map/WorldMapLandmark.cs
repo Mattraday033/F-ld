@@ -17,6 +17,9 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
 
     private int previousSortPriority = 1;
 
+    //the sorting order the landmark was given. Hovering raises it, and this is what it goes back to
+    private int baseSortPriority = 1;
+
     public RectTransform rectTransform;
     public SpriteRenderer spriteRenderer;
     public PolygonCollider2D polygonCollider2D;
@@ -35,8 +38,10 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
         this.zoneKey = spawnDetails.zoneKey;
         this.landmarkName = spawnDetails.landmarkName;
 
+        baseSortPriority = spawnDetails.getSortPriority();
+
         spriteRenderer.sprite = spawnDetails.getSprite();
-        spriteRenderer.sortingOrder = spawnDetails.getSortPriority();
+        spriteRenderer.sortingOrder = baseSortPriority;
         spriteRenderer.maskInteraction = SpriteMaskInteraction.VisibleInsideMask;
 
         polygonCollider2D = gameObject.AddComponent<PolygonCollider2D>();
@@ -49,6 +54,21 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
     {
         PartyManager.getPlayerStats().setHeadSprite(playerIndicatorSprite);
         playerIndicator.SetActive(true);
+    }
+
+    public void hideIndicator()
+    {
+        playerIndicator.SetActive(false);
+    }
+
+    //for a landmark on the prebuilt world map, which can be hidden while the pointer is on it and then never gets OnMouseExit
+    public void clearHover()
+    {
+        rectTransform.localScale = Vector3.one;
+        spriteRenderer.sortingOrder = baseSortPriority;
+        spriteRenderer.color = Color.white;
+
+        overHeadIconManager.destroyNameTag();
     }
 
     private void setLandmarkToLarge()

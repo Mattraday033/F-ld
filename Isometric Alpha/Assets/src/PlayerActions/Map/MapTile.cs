@@ -36,6 +36,119 @@ public class MapTile : MonoBehaviour, IQuestListSource
     public GameObject restPointIcon;
     public GameObject shopIcon;
 
+    #region Reset
+
+    //How the prefab has each of these, read once. readInFormat only ever turns things on, so a tile that is filled in again
+    //for another location is put back to these first
+    private bool defaultsCaptured = false;
+
+    private Sprite _DefaultFloorSprite;
+    private Color _DefaultFloorColor;
+
+    private bool _DefaultMapIconActive;
+    private Sprite _DefaultMapIconSprite;
+    private Color _DefaultMapIconColor;
+    private Vector3 _DefaultMapIconScale;
+
+    private bool _DefaultNorthWestSouthEastMarkerActive;
+    private bool _DefaultNorthEastSouthWestMarkerActive;
+    private bool _DefaultPlayerIndicatorActive;
+    private bool _DefaultRestPointIconActive;
+    private bool _DefaultShopIconActive;
+    private bool _DefaultFastTravelIconActive;
+    private bool _DefaultQuestCounterShown;
+
+    private bool _DefaultInteriorCounterActive;
+    private bool[] _DefaultInteriorCountersActive;
+
+    private void Awake()
+    {
+        captureDefaults();
+    }
+
+    private void captureDefaults()
+    {
+        if (defaultsCaptured)
+        {
+            return;
+        }
+
+        defaultsCaptured = true;
+
+        _DefaultFloorSprite = floorImage.sprite;
+        _DefaultFloorColor = floorImage.color;
+
+        _DefaultMapIconActive = mapIcon.gameObject.activeSelf;
+        _DefaultMapIconSprite = mapIcon.sprite;
+        _DefaultMapIconColor = mapIcon.color;
+        _DefaultMapIconScale = mapIcon.rectTransform.localScale;
+
+        _DefaultNorthWestSouthEastMarkerActive = northWestSouthEastMarker.gameObject.activeSelf;
+        _DefaultNorthEastSouthWestMarkerActive = northEastSouthWestMarker.gameObject.activeSelf;
+        _DefaultPlayerIndicatorActive = playerIndicator.gameObject.activeSelf;
+        _DefaultRestPointIconActive = restPointIcon.activeSelf;
+        _DefaultShopIconActive = shopIcon.activeSelf;
+
+        if (fastTravelIcon != null)
+        {
+            _DefaultFastTravelIconActive = fastTravelIcon.gameObject.activeSelf;
+        }
+
+        _DefaultQuestCounterShown = questCounter.isShown();
+
+        _DefaultInteriorCounterActive = interiorCounter.gameObject.activeSelf;
+        _DefaultInteriorCountersActive = new bool[interiorCounter.interiorCounters.Length];
+
+        for (int index = 0; index < interiorCounter.interiorCounters.Length; index++)
+        {
+            _DefaultInteriorCountersActive[index] = interiorCounter.interiorCounters[index].gameObject.activeSelf;
+        }
+    }
+
+    //leaves the tile as a newly instantiated one would be, ready for readInFormat
+    public void resetToBlank()
+    {
+        //a tile made while its window was switched off hasn't had Awake yet
+        captureDefaults();
+
+        //"" rather than null, because setPlayerIndicatorVisibility compares it without checking
+        locationName = "";
+        mapObject = null;
+        locationLabel.text = "";
+
+        floorImage.sprite = _DefaultFloorSprite;
+        floorImage.color = _DefaultFloorColor;
+
+        mapIcon.gameObject.SetActive(_DefaultMapIconActive);
+        mapIcon.sprite = _DefaultMapIconSprite;
+        mapIcon.color = _DefaultMapIconColor;
+        mapIcon.rectTransform.localScale = _DefaultMapIconScale;
+
+        northWestSouthEastMarker.gameObject.SetActive(_DefaultNorthWestSouthEastMarkerActive);
+        northEastSouthWestMarker.gameObject.SetActive(_DefaultNorthEastSouthWestMarkerActive);
+        playerIndicator.gameObject.SetActive(_DefaultPlayerIndicatorActive);
+        restPointIcon.SetActive(_DefaultRestPointIconActive);
+        shopIcon.SetActive(_DefaultShopIconActive);
+
+        if (fastTravelIcon != null)
+        {
+            fastTravelIcon.gameObject.SetActive(_DefaultFastTravelIconActive);
+        }
+
+        //an undiscovered tile never sets its interior counter, so it shows whatever the prefab has
+        interiorCounter.gameObject.SetActive(_DefaultInteriorCounterActive);
+
+        for (int index = 0; index < interiorCounter.interiorCounters.Length; index++)
+        {
+            interiorCounter.interiorCounters[index].gameObject.SetActive(_DefaultInteriorCountersActive[index]);
+        }
+
+        questCounter.clearStarHighlight();
+        questCounter.setShown(_DefaultQuestCounterShown);
+    }
+
+    #endregion
+
     public void readInFormat(MapTileFormat mapTileFormat)
     {
         setSceneAndLocationName(mapTileFormat.locationName);

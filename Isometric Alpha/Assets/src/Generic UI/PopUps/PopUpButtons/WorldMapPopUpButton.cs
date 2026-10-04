@@ -19,7 +19,28 @@ public class WorldMapPopUpButton : PopUpButton
             MapPopUpWindow.getInstance().popupProgenitor.destroyPopUp();
         }
 
-        base.spawnPopUp();
+        WorldMapPopUpWindow prebuiltWindow = PrebuiltScreenManager.getWorldMapWindow();
+
+        if(prebuiltWindow == null)
+        {
+            //no prebuilt window, so one is instantiated the way it always was
+            base.spawnPopUp();
+        }
+        else
+        {
+            //the steps PopUpButton.spawnPopUp takes, with the prebuilt window shown where a new one was instantiated
+            PopUpScreenBlockerManager.spawnPopUpScreenBlocker();
+
+            prebuiltWindow.show(PopUpScreenBlockerManager.getPopUpParent());
+
+            setPopUpWindow(prebuiltWindow);
+
+            prebuiltWindow.setProgenitor(this);
+
+            EscapeStack.addEscapableObject(prebuiltWindow);
+
+            AudioManager.playChangeScreenSFX();
+        }
 
         PlayerStateManager.setCurrentActivity(CurrentActivity.InWorldMap);
 
@@ -30,7 +51,21 @@ public class WorldMapPopUpButton : PopUpButton
 
     public override void destroyPopUp()
     {
-        base.destroyPopUp();
+        WorldMapPopUpWindow window = WorldMapPopUpWindow.getInstance();
+
+        if(window != null && window.isPrebuilt)
+        {
+            //what PopUpButton.destroyPopUp does, with the window put away where it used to be destroyed
+            PrebuiltScreenManager.hideWorldMapWindow();
+
+            EscapeStack.removeTopObjectFromStack();
+
+            PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
+        }
+        else
+        {
+            base.destroyPopUp();
+        }
 
         PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
     }

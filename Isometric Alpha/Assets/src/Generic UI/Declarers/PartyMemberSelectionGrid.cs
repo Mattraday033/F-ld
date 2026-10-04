@@ -15,7 +15,7 @@ public class PartyMemberSelectionGrid : UIListenerGrid
     
     public override void removeListeners()
     {
-        base.addListeners();
+        base.removeListeners();
 
         ScreenManager.OnScreenDeclaration.RemoveListener(setVisibility);
     }

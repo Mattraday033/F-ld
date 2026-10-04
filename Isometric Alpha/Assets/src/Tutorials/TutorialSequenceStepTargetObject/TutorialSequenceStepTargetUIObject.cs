@@ -30,6 +30,9 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 
 	private RectTransform cutOutMask;
 
+	//true between a highlight that tinted the image and the unhighlight that puts its colour back
+	private bool tinted = false;
+
 	private void Awake()
 	{
 		if (image == null)
@@ -107,6 +110,23 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
         }
         
         PlayerStateManager.OnLeavingTutorialSequenceState.AddListener(unhighlight);
+
+		tinted = true;
+	}
+
+	//for a target that is being hidden rather than destroyed. Switching it off takes away the listener that would have
+	//undone the highlight later, so it is undone now
+	public void clearHighlight()
+	{
+		if (tinted)
+		{
+			unhighlight(false);
+		}
+		else if (cutOutMask != null)
+		{
+			//only the cut-out was made, so there is no colour to put back
+			unhighlight(true);
+		}
 	}
 
 	public override void unhighlight(bool skip)
@@ -120,6 +140,8 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 		{
 			return;
 		}
+
+		tinted = false;
 
 		if (image != null)
 		{

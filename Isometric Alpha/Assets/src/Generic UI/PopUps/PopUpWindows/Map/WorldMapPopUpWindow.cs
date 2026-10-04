@@ -44,10 +44,84 @@ public class WorldMapPopUpWindow : PopUpWindow, IEscapable
     {
         string zoneKey = MapObjectList.getCurrentZoneKey();
 
+        //the prebuilt window is shown again after the player has moved, and an indicator is otherwise only ever switched on
+        foreach(WorldMapLandmark landmark in landmarkDict.Values)
+        {
+            landmark.hideIndicator();
+        }
+
         landmarkDict[zoneKey].revealIndicator();
 
         // set world map to be above current landmark button
     }
+
+    #region Prebuilt window
+
+    //set on the copy PrebuiltScreenManager makes, which is shown and hidden. Any other copy is made and destroyed as before
+    public bool isPrebuilt { get; private set; } = false;
+
+    //the zoom, map scale and scroll position the prefab opens on, which the prebuilt window is put back to each time it is shown
+    private ZoomLevel _StartingZoomLevel;
+    private Vector3 _StartingGridScale;
+    private RectTransform scrollContent;
+    private Vector2 _StartingScrollPosition;
+
+    //only the copy that is on screen answers as the world map, so "there is an instance" keeps meaning "the world map is open"
+    public bool isShowing
+    {
+        get
+        {
+            return instance == this;
+        }
+    }
+
+    public void markAsPrebuilt()
+    {
+        isPrebuilt = true;
+    }
+
+    //does for the prebuilt window what instantiating one does: on screen, answering as the world map, opened where the prefab opens
+    public void show(Transform parent)
+    {
+        transform.SetParent(parent, false);
+
+        //the screen blocker is spawned just before this, and the window has to be drawn over it
+        transform.SetAsLastSibling();
+
+        currentZoomLevel = _StartingZoomLevel;
+        worldMapGridTransform.localScale = _StartingGridScale;
+
+        if(scrollContent != null)
+        {
+            scrollContent.anchoredPosition = _StartingScrollPosition;
+        }
+
+        setZoomButtonInteractability();
+
+        gameObject.SetActive(true);
+
+        instance = this;
+        NotificationManager.OnDeleteAllNotifications.Invoke();
+    }
+
+    //leaves the prebuilt window the way destroying it left things, ready to be shown again
+    public void hide(Transform holder)
+    {
+        foreach(WorldMapLandmark landmark in landmarkDict.Values)
+        {
+            landmark.clearHover();
+        }
+
+        if(instance == this)
+        {
+            instance = null;
+        }
+
+        gameObject.SetActive(false);
+        transform.SetParent(holder, false);
+    }
+
+    #endregion
 
 	private void Awake()
 	{
@@ -58,6 +132,17 @@ public class WorldMapPopUpWindow : PopUpWindow, IEscapable
 
 		instance = this;
 		NotificationManager.OnDeleteAllNotifications.Invoke();
+
+        _StartingZoomLevel = currentZoomLevel;
+        _StartingGridScale = worldMapGridTransform.localScale;
+
+        ScrollRect scrollArea = GetComponentInChildren<ScrollRect>(true);
+
+        if(scrollArea != null && scrollArea.content != null)
+        {
+            scrollContent = scrollArea.content;
+            _StartingScrollPosition = scrollContent.anchoredPosition;
+        }
 
         zoomInButton.lockInRestingPosition();
         zoomOutButton.lockInRestingPosition();

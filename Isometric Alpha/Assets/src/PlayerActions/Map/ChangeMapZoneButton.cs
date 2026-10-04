@@ -52,6 +52,9 @@ public class ChangeMapZoneButton : MonoBehaviour, IQuestListSource
         if (getNumberOfQuests() > 0)
 		{
 		    gameObject.SetActive(true);
+
+            //the branch below switches the counter off, and the same button is used again for the next zone shown
+            questCounter.gameObject.SetActive(true);
             questCounter.updateQuestCounter();
 		} else
         {

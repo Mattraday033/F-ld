@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using TMPro;
+using Unity.Profiling;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
@@ -242,8 +243,162 @@ public abstract class ScreenManager : MonoBehaviour, ITabParent
 
     protected virtual void Start()
     {        
+        //a prebuilt screen gets this from show, and its Start can come a frame after it was first shown
+        if (isPrebuilt)
+        {
+            return;
+        }
+
         OnScreenInteriorUpdate.Invoke();
     }
+
+    #region Prebuilt screens
+
+    private static readonly ProfilerMarker showMarker = new ProfilerMarker("ScreenManager.show");
+
+    //set on the copies PrebuiltScreenManager makes. Those are shown and hidden, where every other copy is made and destroyed
+    public bool isPrebuilt { get; private set; } = false;
+
+    //where each scroll area sat when the screen was made, which is where one that had just been instantiated would sit
+    private Dictionary<RectTransform, Vector2> scrollStartPositions = new Dictionary<RectTransform, Vector2>();
+
+    //a prebuilt screen that has been hidden is still alive, so "it exists" no longer means "it is on screen"
+    public bool isShowing
+    {
+        get
+        {
+            return gameObject.activeInHierarchy;
+        }
+    }
+
+    //for the pieces inside a screen. Something with no screen above it, like the shop or the party strip, is never hidden this way
+    public static bool isHidden(ScreenManager owner)
+    {
+        return owner != null && !owner.isShowing;
+    }
+
+    //Editor only. A piece of a hidden screen doing real work means one of its listeners wasn't told the screen was hidden
+    [System.Diagnostics.Conditional("UNITY_EDITOR")]
+    public static void reportWorkWhileHidden(Component piece, string work)
+    {
+        ScreenManager owner = piece.GetComponentInParent<ScreenManager>(true);
+
+        if (isHidden(owner))
+        {
+            Debug.LogError(piece.name + " " + work + " while its screen, " + owner.name + ", was hidden");
+        }
+    }
+
+    public void markAsPrebuilt()
+    {
+        isPrebuilt = true;
+
+        onPrebuilt();
+
+        foreach (ScrollRect scrollRect in GetComponentsInChildren<ScrollRect>(true))
+        {
+            if (scrollRect.content != null)
+            {
+                scrollStartPositions[scrollRect.content] = scrollRect.content.anchoredPosition;
+            }
+        }
+    }
+
+    //for anything a screen only builds the first time part of it is switched on
+    protected virtual void onPrebuilt()
+    {
+        //Empty on purpose
+    }
+
+    //does for a prebuilt screen what Awake and Start do for one that was just instantiated
+    public void show(Transform parent)
+    {
+        using (showMarker.Auto())
+        {
+            transform.SetParent(parent, false);
+
+            //before the screen is switched on, because pieces inside read it as they enable
+            OverallUIManager.currentScreenManager = this;
+
+            //a screen that was just made had no remembered tab, so it opened on its default
+            AbilityGridSideTab.forgetTab(this);
+
+            foreach (KeyValuePair<RectTransform, Vector2> scrollStartPosition in scrollStartPositions)
+            {
+                if (scrollStartPosition.Key != null)
+                {
+                    scrollStartPosition.Key.anchoredPosition = scrollStartPosition.Value;
+                }
+            }
+
+            OnScreenDeclaration.Invoke(this);
+
+            gameObject.SetActive(true);
+
+            prepareToShow();
+
+            OnScreenInteriorUpdate.Invoke();
+        }
+    }
+
+    //whatever a screen's own Awake set up that has to be set up again each time it is shown
+    protected virtual void prepareToShow()
+    {
+        //Empty on purpose
+    }
+
+    //puts a prebuilt screen away, leaving things the way destroying it used to
+    public void hide(Transform holder)
+    {
+        //first, while the screen can still hear a drag being dropped and put back what was being dragged
+        MouseHoverManager.destroyMouseHoverBase();
+
+        MouseHoverManager.destroyHoverIconInside(transform);
+
+        cleanUpToHide();
+
+        park(holder);
+
+        if (OverallUIManager.currentScreenManager == this)
+        {
+            OverallUIManager.removeCurrentScreenType();
+        }
+    }
+
+    //whatever destroying the screen used to take with it that hiding leaves behind
+    protected virtual void cleanUpToHide()
+    {
+        //a tutorial step pointing at something in here would otherwise leave it tinted, with its cut-out, for the next time it is shown
+        foreach (TutorialSequenceStepTargetUIObject tutorialTarget in GetComponentsInChildren<TutorialSequenceStepTargetUIObject>(true))
+        {
+            tutorialTarget.clearHighlight();
+        }
+
+        //rows and built descriptions listen to things themselves, and a screen that was just made has none of either yet.
+        //Each grid is filled again, and each slot described again, by the update that showing the screen fires
+        foreach (UIListenerGrid listenerGrid in GetComponentsInChildren<UIListenerGrid>(true))
+        {
+            if (listenerGrid.grid != null)
+            {
+                listenerGrid.grid.deleteAllPanels();
+            }
+        }
+
+        foreach (DescriptionPanelSlot slot in GetComponentsInChildren<DescriptionPanelSlot>(true))
+        {
+            slot.clearAllDescribables();
+        }
+    }
+
+    //to the holder with none of the tidying, which hide has already done by the time it calls this
+    private void park(Transform holder)
+    {
+        gameObject.SetActive(false);
+
+        transform.SetParent(holder, false);
+    }
+
+    #endregion
 
     public virtual bool enableSpriteRowDragAndDrop()
     {
@@ -264,7 +419,7 @@ public abstract class ScreenManager : MonoBehaviour, ITabParent
 
         foreach (UnityEvent unityEvent in listOfEvents)
         {
-            unityEvent.AddListener(updateCounter);
+            unityEvent.AddListener(updateCounterIfShowing);
         }
     }
     public virtual void removeListeners()
@@ -273,8 +428,19 @@ public abstract class ScreenManager : MonoBehaviour, ITabParent
 
         foreach (UnityEvent unityEvent in listOfEvents)
         {
-            unityEvent.RemoveListener(updateCounter);
+            unityEvent.RemoveListener(updateCounterIfShowing);
         }
+    }
+
+    //a hidden screen is brought up to date when it is next shown, so it lets the events in between go by
+    private void updateCounterIfShowing()
+    {
+        if (!isShowing)
+        {
+            return;
+        }
+
+        updateCounter();
     }
 
     public abstract KeyCode getExitKeyCode();

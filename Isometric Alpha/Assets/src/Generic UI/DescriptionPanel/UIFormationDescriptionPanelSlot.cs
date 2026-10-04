@@ -10,6 +10,11 @@ public class UIFormationDescriptionPanelSlot : UIDescriptionPanelSlot
 {
     public override void updateCounter()
     {
+        if (hiddenWithItsScreen())
+        {
+            return;
+        }
+
         if(OverallUIManager.currentScreenManager != null)
         {
             setPrimaryDescribable(State.formation);

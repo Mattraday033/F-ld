@@ -85,15 +85,23 @@ public class FormationHandler : ScreenManager, IPartyEditor, ICounter
 
     //ICounter Methods
 
-    private void OnEnable()
-    {
-        addListeners();
-    }
+    //the listeners are added once, by ScreenManager.Awake. Adding them again each time the screen was switched on doubled them
 
     private void OnDestroy()
     {
         removeListeners();
         MouseHoverManager.destroyMouseHoverBase();
+    }
+
+    protected override void cleanUpToHide()
+    {
+        base.cleanUpToHide();
+
+        //a portrait that was being hovered never hears the pointer leave once it is switched off, so what its hover turned on is turned off here
+        foreach (PartyGridSection section in GetComponentsInChildren<PartyGridSection>(true))
+        {
+            section.clearHover();
+        }
     }
 
     public override void addListeners()

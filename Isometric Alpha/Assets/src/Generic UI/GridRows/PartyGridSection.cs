@@ -41,6 +41,12 @@ public class PartyGridSection : GridRow
             formationHandler.primaryStatSlot.setPrimaryDescribable(State.formation);
         }
 
+        clearHover();
+    }
+
+    //also called when the party screen is hidden, since a portrait that is switched off mid-hover never gets OnPointerExit
+    public void clearHover()
+    {
         if(namePanel != null && nameText != null)
         {
             namePanel.SetActive(false);

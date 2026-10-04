@@ -122,9 +122,31 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
 		this.tutorialHash = tutorialHash;
 	}
 
+	//the map window this target sits in, if it sits in one, looked for the first time it matters
+	private MapPopUpWindow owningMapWindow;
+	private bool lookedForOwningMapWindow = false;
+
+	//The prebuilt map window can be hidden by its canvas alone, which leaves everything in it switched on.
+	//So for a target inside it, being switched on isn't enough to count as on screen
+	protected bool onScreen()
+	{
+		if (!gameObject.activeInHierarchy)
+		{
+			return false;
+		}
+
+		if (!lookedForOwningMapWindow)
+		{
+			owningMapWindow = GetComponentInParent<MapPopUpWindow>(true);
+			lookedForOwningMapWindow = true;
+		}
+
+		return owningMapWindow == null || !owningMapWindow.isPrebuilt || owningMapWindow.isShowing;
+	}
+
 	public virtual void assignToTutorialSequence(TutorialSequenceStep tutorialSequenceStep)
 	{
-        if(!gameObject.activeInHierarchy)
+        if(!onScreen())
         {
             return;
         }
@@ -216,7 +238,7 @@ public class TutorialSequenceStepTargetObject : MonoBehaviour, ITutorialSequence
             return;
         }
 
-        visibility.visible = visibility.tutorialHash.Equals(tutorialHash) && gameObject.activeInHierarchy;
+        visibility.visible = visibility.tutorialHash.Equals(tutorialHash) && onScreen();
     }
 
 

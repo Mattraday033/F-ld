@@ -87,6 +87,34 @@ public class SaveHandler : ScreenManager, IEscapable
         //Empty On Purpose
     }
 
+    private void OnEnable()
+    {
+        //only the copy that is on screen answers as the save screen, so one that has been hidden gives the name up in OnDisable
+        instance = this;
+    }
+
+    //the things Awake sets on a copy that was just made, set again for the prebuilt copy each time it is shown
+    protected override void prepareToShow()
+    {
+        saveButton.gameObject.SetActive(!PlayerStateManager.inMainMenu() && !CombatStateManager.inCombat);
+
+        currentSaveFile = null;
+        saveNameField.text = "";
+
+        setSaveButtonInteractibility();
+    }
+
+    protected override void cleanUpToHide()
+    {
+        base.cleanUpToHide();
+
+        //the screen keys check for a selected name field before they open anything, and a hidden one would still count as selected
+        if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == saveNameField.gameObject)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
+    }
+
 	public static bool saveNameFieldIsSelected()
 	{
         bool isSelected = EventSystem.current != null && getInstance() != null &&
@@ -600,6 +628,11 @@ public class SaveHandler : ScreenManager, IEscapable
         if(PlayerStateManager.inMainMenu() && redCloseButton != null)
         {
             redCloseButton.SetActive(false);
+        }
+
+        if(instance == this)
+        {
+            instance = null;
         }
     }
 

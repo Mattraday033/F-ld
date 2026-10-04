@@ -30,6 +30,9 @@ public static class SceneChange
     {
         CombatStateManager.setReturnCell(MovementManager.getPlayerCell());
 
+        //the overworld's UI is about to be unloaded, and a prebuilt screen left showing under it would go with it
+        PrebuiltScreenManager.parkAll();
+
         SceneManager.LoadScene(SceneNameList.combat);
         SceneManager.LoadScene(SceneNameList.combatUI, LoadSceneMode.Additive);
     }
@@ -55,16 +58,22 @@ public static class SceneChange
 
     public static void changeSceneToEndOfDemo()
     {
+        PrebuiltScreenManager.discardAll();
+
         SceneManager.LoadScene(SceneNameList.endOfDemo);
     }
 
     public static void changeSceneToOpeningMonologue()
     {
+        PrebuiltScreenManager.discardAll();
+
         SceneManager.LoadScene(SceneNameList.openingMonologue);
     }
 
     public static void changeSceneToOverworld()
     {
+        PrebuiltScreenManager.parkAll();
+
         SceneManager.LoadScene(SceneNameList.overworld);
 
         addOOCUIScene();
@@ -72,6 +81,9 @@ public static class SceneChange
 
     public static void changeSceneToOverworldWithLoadingScreen()
     {
+        //a load starts a different game, so the screens built for this one go now. The loading screen builds the new ones
+        PrebuiltScreenManager.discardAll();
+
         changeSceneToOverworld();
 
         SceneManager.LoadScene(SceneNameList.loadingScreen, LoadSceneMode.Additive);
@@ -88,6 +100,8 @@ public static class SceneChange
         //the newGame flag used to stand for. The bypass is needed because setCurrentActivity otherwise refuses
         //to leave InTutorialSequence for anything but walking.
         PlayerStateManager.setCurrentActivity(CurrentActivity.MainMenu, tutorialSequenceCheckBypass: true);
+
+        PrebuiltScreenManager.discardAll();
 
         SceneManager.LoadScene(SceneNameList.startMenu);
     }
