@@ -160,99 +160,17 @@ public static class OOCSpawnDetailsList
         list.Add(new NPCSpawnDetails(NPCNameList.thatch, new Vector3Int(-1, 1), facing: Facing.SouthEast, animationType: CharacterAnimationType.Death_Back_Weaponless, sleepingDialogueIntro: true));
         list.Add(new NPCSpawnDetails(NPCNameList.slate, new Vector3Int(9, 1), animationType: CharacterAnimationType.Death_Front_Weaponless));
         list.Add(new NPCSpawnDetails(NPCNameList.guardVazul, new Vector3Int(9, 0), facing: Facing.NorthWest));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble, new Vector3Int(-1, -3), appearance: SpriteDescriptionList.tutorialRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.thatchsRubble, new Vector3Int(-1, -3), appearance: SpriteDescriptionList.tutorialRubble));
 
         list.Add(new NonDialogueNPCSpawnDetails(NPCNameList.thatch, new Vector3Int(6, -2), facing: Facing.NorthEast, index: 1));
 
-        list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -3), TutorialSequenceList.firstHostilityTutorialSequenceKey,
-                                                                          TutorialSequenceList.firstHostilityTutorialSeenFlag));
+        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -3), TutorialSequenceList.firstHostilityTutorialSequenceKey,
+        //                                                                   TutorialSequenceList.firstHostilityTutorialSeenFlag));
 
-        #region Str Tutorial
-
-
-        list.Add(new GateSpawnDetails(SpriteDescriptionList.blockRubbleGate,
-                                    NPCNameList.liftableRubble,
-                                    Constants.indexZero,
-                                    new Vector3Int(6, -1),
-                                    Constants.sizeTwo,
-                                    Axis.DescendingY,
-                                    TutorialSequenceList.interactableRubbleTargetHash));
-
-        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.STRDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
-        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.STRDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
-
-        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.intimidateTutorialSequenceKey,
-        //                                                                   TutorialSequenceList.intimidateTutorialSeenFlag,
-        //                  new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseStrengthAtStart }, useTutorialFlags: true)));
-
-
-        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -2), TutorialSequenceList.interactableRubbleTutorialSequenceKey,
-        //                                                                   TutorialSequenceList.interactableObjectTutorialSeenFlag,
-        //                 new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseStrengthAtStart,
-        //                                                                   TutorialSequenceList.intimidateTutorialSeenFlag}, useTutorialFlags: true),
-        //                                                                   Constants.indexOne));
-        #endregion
-        #region Dex Tutorial
-
-        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.vaultableObjectTutorialSequenceKey,
-        //                                                                   TutorialSequenceList.interactableObjectTutorialSeenFlag,
-        //                         new StartSpawningAllTrueFlagList(new string[] {  FlagNameList.choseDexterityAtStart,
-        //                                                                   TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
-        //                                                                   Constants.indexZero));
-
-        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -3), TutorialSequenceList.firstCunningTutorialSequenceKey,
-        //                                                                   TutorialSequenceList.cunningTutorialSeenFlag,
-        //                         new StartSpawningAllTrueFlagList(new string[] { FlagNameList.choseDexterityAtStart }, useTutorialFlags: true)));
-
-        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(5, -2), TutorialSequenceList.secondCunningTutorialSequenceKey,
-        //                                                                   TutorialSequenceList.secondCunningTutorialSeenFlag,
-        //                         new StartSpawningAllTrueFlagList(new string[] { TutorialSequenceList.cunningTutorialSeenFlag }, useTutorialFlags: true),
-        //                                                                   Constants.indexOne));
-
-        // list.Add(new CunningObjectSpawnDetails(Constants.indexZero, new Vector3Int(6, -1), CunningObjectSpriteCategory.Crank,
-        //                                         cunningAction: null, tutorialTargetHash: TutorialSequenceList.tutorialCunningObjectTargetHash));
-        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(6, -2), PrefabNames.shackWallHalf));
-
-        // list.Add(new VaultableObjectSpawnDetails(NPCNameList.vaultableBarrels, new Vector3Int(0, -4), VaultableObject.diffTwoVaultableBarrelsOneTile, tutorialTargetHash: TutorialSequenceList.vaultableBarrelsTargetHash));
-
-        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(3, -3), PrefabNames.shackWallHalf));
-        // list.Add(new ObstacleSpawnDetails(NPCNameList.halfWall + Constants.DEXDesignator, new Vector3Int(4, -3), PrefabNames.shackWallHalf));
-
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(0, -6), appearance: SpriteDescriptionList.southDescendingRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(1, -6), appearance: SpriteDescriptionList.blockRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(0, -5), appearance: SpriteDescriptionList.northWestDescendingRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.DEXDesignator, new Vector3Int(1, -5), appearance: SpriteDescriptionList.northWestDescendingRubble));
-        #endregion
-        #region Wis Tutorial
-
-        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(-1, -4), TutorialSequenceList.observationTutorialSequenceKey,
-        //                                                                   TutorialSequenceList.observationTutorialSeenFlag,
-        //                 new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseWisdomAtStart,
-        //                                                                   TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
-        //                                                                   Constants.indexZero));
-        #endregion
-        #region Cha Tutorial
-        // list.Add(new ButtonSpawnDetails(new Vector3Int(3, -3), tutorialTargetHash: TutorialSequenceList.tutorialButtonOneTargetHash));
-        // list.Add(new ButtonSpawnDetails(new Vector3Int(5, -3), tutorialTargetHash: TutorialSequenceList.tutorialButtonTwoTargetHash));
-
-        // list.Add(new TutorialColliderSpawnDetails(new Vector3Int(3, -4), TutorialSequenceList.leadershipTutorialSequenceKey,
-        //                                                                   TutorialSequenceList.leadershipTutorialSeenFlag,
-        //                 new StartSpawningAllTrueFlagList(new string[] {   FlagNameList.choseCharismaAtStart,
-        //                                                                   TutorialSequenceList.firstHostilityTutorialSeenFlag}, useTutorialFlags: true),
-        //                                                                   Constants.indexZero));
-
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(0, -6), appearance: SpriteDescriptionList.southDescendingRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(1, -6), appearance: SpriteDescriptionList.blockRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(0, -5), appearance: SpriteDescriptionList.northWestDescendingRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(1, -5), appearance: SpriteDescriptionList.northWestDescendingRubble));
-
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(3, -5), appearance: SpriteDescriptionList.southWestDescendingRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(5, -5), appearance: SpriteDescriptionList.blockRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(4, -5), appearance: SpriteDescriptionList.blockRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(5, -4), appearance: SpriteDescriptionList.northWestDescendingRubble));
-        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble + Constants.CHADesignator, new Vector3Int(4, -4), appearance: SpriteDescriptionList.northWestDescendingRubble));
-
-        #endregion
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble, new Vector3Int(0, -6), appearance: SpriteDescriptionList.southDescendingRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble, new Vector3Int(1, -6), appearance: SpriteDescriptionList.blockRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble, new Vector3Int(0, -5), appearance: SpriteDescriptionList.northWestDescendingRubble));
+        list.Add(new RubbleObstacleSpawnDetails(NPCNameList.rubble, new Vector3Int(1, -5), appearance: SpriteDescriptionList.northWestDescendingRubble));
 
         list.Add(new WallPatchSpawnDetails(new Vector3Int(5, 2),
                                             new SecretDoorInfo(SecretDoorKeyList.southEastCampWallPatchTwo),

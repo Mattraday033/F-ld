@@ -155,7 +155,7 @@ public static class DialogueList
         #region Slave Shack 6
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.thatch,
-                            new Dialogue(new string[] { NPCNameList.thatch, NPCNameList.rubble },
+                            new Dialogue(new string[] { NPCNameList.thatch, NPCNameList.thatchsRubble },
                             InkAssetList.getInkJSON(DialogueKey.Thatch)));
 
         addDialogueToList(LocationNameList.slaveShackSix, NPCNameList.slate,

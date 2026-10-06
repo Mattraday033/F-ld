@@ -115,6 +115,7 @@ public static class NPCNameList
     public const string memo = "Memo";
     public const string orders = "Orders";
     public const string rubble = "Rubble";
+    public const string thatchsRubble = thatch + "'s " + rubble;
     public const string bed = "Bed";
     public const string chest = "Chest";
     public const string shelf = "Shelf";

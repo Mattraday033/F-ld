@@ -389,7 +389,7 @@ public class OpeningMonologueManager : MonoBehaviour
                                         "The Folk of the Craft, heirs to what was once a proud culture, are all but a conquered people.\n\n" + 
                                         "Forced to live in squalor in their own lands, most of the Craft Folk now serve as serfs to their new Lords, the Counts of the Lovashi Confederation.";
 
-    private const string openingTextThirdPage =  "The rest shelter beneath the last banners that still dare combat their oppressors: those of the Masons, Smiths, and Jewelers.\n\n" + 
+    private const string openingTextThirdPage =  "The rest shelter beneath the banners that still combat their oppressors: those of the Masons, Smiths, and Jewelers.\n\n" + 
                                         "Far away, and a generation ago, these last Craft Kingdoms rallied and won a great victory, putting the Rider Lords to route.\n\n" + 
                                         "Ever since, the Confederation has maintained an uneasy truce with the remnants of the free Craft Folk, and have turned their attentions inwards.";
     private const string openingTextFourthPage = "The current era is one choked with purges and crushed revolts, as the Lovashi make ready to resume their march.\n\n" + 

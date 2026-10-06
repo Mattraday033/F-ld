@@ -990,7 +990,9 @@ public static class PlayerInputList
     //
     //InTutorialSequence is the exception to fixed keys: every step names its own nextStepKey, so that set is
     //rebound per step (refreshTutorialSequenceInputActions) and alternates between two actions for the reason
-    //above - the action whose press advanced the step is only disabled, never rebound or re-enabled mid-press.
+    //above. The refresh can run more than once in a press (an ending script that sets the activity, or a
+    //sequence starting), which lands it back on the action whose press advanced the step - that is safe only
+    //because rebind swaps in a fresh InputAction rather than re-enabling or disposing the one mid-press.
 
     #region Walking
 
@@ -1049,6 +1051,8 @@ public static class PlayerInputList
         OverallUIManager.changeScreen(OverallUIManager.lastScreenType);
 
         PlayerStateManager.setCurrentActivity(CurrentActivity.InUI);
+
+        ScreenOpenProbe.step("setCurrentActivity");
     }
 
     public static readonly CustomInputAction walkingOpenCharacter = new CustomInputAction(KeyBindingList.characterScreenKey.getCurrentKeyCode(),
@@ -2524,8 +2528,11 @@ public class CustomInputAction
         input.started -= onStarted;
         input.canceled -= onCanceled;
         input.performed -= onPerformed;
+
+        //no Dispose: rebind can be reached from inside this action's own started callback (a tutorial step
+        //advancing), and disposing there frees state the Input System is still reading. Disable is safe
+        //mid-callback, and the old action's state frees itself once nothing references it.
         input.Disable();
-        input.Dispose();
 
         input = buildInputAction(keyCode);
 

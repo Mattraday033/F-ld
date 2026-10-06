@@ -46,7 +46,7 @@ public class MouseHoverBase : MonoBehaviour
 
     private void destroyHover()
     {
-        DestroyImmediate(gameObject);
+        Destroy(gameObject);
     }
 
 }

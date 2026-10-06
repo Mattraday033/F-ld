@@ -50,7 +50,7 @@ public class PageReaderPopUpWindow : PopUpWindow
     {
         if (currentPageObject != null && !(currentPageObject is null))
         {
-            DestroyImmediate(currentPageObject);
+            Destroy(currentPageObject);
         }
     }
 

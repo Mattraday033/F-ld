@@ -15,6 +15,11 @@ public class UIFormationDescriptionPanelSlot : UIDescriptionPanelSlot
             return;
         }
 
+        if (putOffWhileItsScreenIsShown())
+        {
+            return;
+        }
+
         if(OverallUIManager.currentScreenManager != null)
         {
             setPrimaryDescribable(State.formation);

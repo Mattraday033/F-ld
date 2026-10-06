@@ -163,7 +163,7 @@ public static class GemHoverManager
 
         if(gem != null)
         {
-            Object.DestroyImmediate(gem.gameObject);
+            Object.Destroy(gem.gameObject);
         }
     }
 
@@ -176,7 +176,7 @@ public static class GemHoverManager
         {
             if(gem != null)
             {
-                Object.DestroyImmediate(gem.gameObject);
+                Object.Destroy(gem.gameObject);
             }
         }
 

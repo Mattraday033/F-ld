@@ -65,6 +65,12 @@ public class UIListenerGrid : MonoBehaviour, ICounter
             return;
         }
 
+        //while its screen is being shown, the fill waits for the tab and the party member to be settled, and is done once
+        if (ScreenUpdateBatch.putOff(owningScreen, updateCounter))
+        {
+            return;
+        }
+
         grid.populatePanels(getDescribableList());
     }
 

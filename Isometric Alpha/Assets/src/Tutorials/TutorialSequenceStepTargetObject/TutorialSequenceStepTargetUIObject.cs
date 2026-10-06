@@ -133,7 +133,7 @@ public class TutorialSequenceStepTargetUIObject : TutorialSequenceStepTargetObje
 	{
 		if (cutOutMask != null)
 		{
-			GameObject.DestroyImmediate(cutOutMask.gameObject);
+			GameObject.Destroy(cutOutMask.gameObject);
 		}
 
 		if (skip)

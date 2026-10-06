@@ -14,15 +14,21 @@ public class WorldMapPopUpButton : PopUpButton
 
     public override void spawnPopUp()
     {
+        ScreenOpenProbe.begin(MapPopUpWindow.getInstance() == null ? "World Map" : "Map to World Map");
+
         if(MapPopUpWindow.getInstance() != null)
         {
             MapPopUpWindow.getInstance().popupProgenitor.destroyPopUp();
+
+            ScreenOpenProbe.step("hide Map");
         }
 
         WorldMapPopUpWindow prebuiltWindow = PrebuiltScreenManager.getWorldMapWindow();
 
         if(prebuiltWindow == null)
         {
+            ScreenOpenProbe.note("not prebuilt");
+
             //no prebuilt window, so one is instantiated the way it always was
             base.spawnPopUp();
         }
@@ -42,11 +48,17 @@ public class WorldMapPopUpButton : PopUpButton
             AudioManager.playChangeScreenSFX();
         }
 
+        ScreenOpenProbe.step("show");
+
         PlayerStateManager.setCurrentActivity(CurrentActivity.InWorldMap);
+
+        ScreenOpenProbe.step("setCurrentActivity");
 
         WorldMapPopUpWindow worldMapPopUpWindow = getPopUpWindow() as WorldMapPopUpWindow;
 
         worldMapPopUpWindow.populate();
+
+        ScreenOpenProbe.step("populate");
     }
 
     public override void destroyPopUp()

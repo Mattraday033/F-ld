@@ -257,24 +257,32 @@ public class CombatantHover : CombatMouseHover, IRevealable
             StopHighlightFadeMandatoryTarget.Invoke(target);
         }
 
-        HealthBarManager healthBarManager = target.getHealthBarManager();
-
         if(toggleReveal && (!target.isDead() || revealPriorityHeld))
         {
             target.setOutline();
-
-            if(healthBarManager != null)
-            {
-                healthBarManager.show();
-            }
         } else
         {
             target.removeOutline();
+        }
 
-            if(healthBarManager != null)
-            {
-                healthBarManager.hide();
-            }
+        revealHealthBar(target, toggleReveal);
+    }
+
+    private void revealHealthBar(Stats target, bool toggleReveal)
+    {
+        HealthBarManager healthBarManager = target.getHealthBarManager();
+
+        if(healthBarManager == null)
+        {
+            return;
+        }
+
+        if(toggleReveal && (!target.isDead() || revealPriorityHeld))
+        {
+            healthBarManager.show();
+        } else
+        {
+            healthBarManager.hide();
         }
     }
 
@@ -295,16 +303,18 @@ public class CombatantHover : CombatMouseHover, IRevealable
         }
     }
 
-    private void updateOutlineFromSelectors(List<Selector> selectors)
+    //the outline is set by the CombatHoverTile the creature stands on, which leaves only the health bar to update here.
+    //The selectors are still kept, since leaving the sprite with the mouse checks them
+    private void updateHealthBarFromSelectors(List<Selector> selectors)
     {
         this.selectors = selectors;
 
-        if(revealPriorityHeld || linkedStats.isRepositionClone())
+        if(revealPriorityHeld || linkedStats.isRepositionClone() || !hasTargetStats(out Stats target))
         {
             return;
         }
 
-        onReveal(insideSelectors());
+        revealHealthBar(target, insideSelectors());
     }
 
     private bool insideSelectors()
@@ -401,7 +411,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
         CombatActionOrderRow.HoldRevealPriority.AddListener(holdRevealPriority);
         CombatActionOrderRow.ReleaseRevealPriority.AddListener(releaseRevealPriority);
 
-        SelectorManager.SelectorMoved.AddListener(updateOutlineFromSelectors);
+        SelectorManager.SelectorMoved.AddListener(updateHealthBarFromSelectors);
         DamagePreviewManager.UpdateDamagePreviews.AddListener(addDamagePreview);
         HoverPanelPopUpButton.HoverPriorityRequest.AddListener(answerCurrentCombatantPriorityRequest);
         CombatResultsUI.OnCombatResultsUICreation.AddListener(disableCollider);
@@ -414,7 +424,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
         CombatActionOrderRow.HoldRevealPriority.RemoveListener(holdRevealPriority);
         CombatActionOrderRow.ReleaseRevealPriority.RemoveListener(releaseRevealPriority);
 
-        SelectorManager.SelectorMoved.RemoveListener(updateOutlineFromSelectors);
+        SelectorManager.SelectorMoved.RemoveListener(updateHealthBarFromSelectors);
         DamagePreviewManager.UpdateDamagePreviews.RemoveListener(addDamagePreview);
         HoverPanelPopUpButton.HoverPriorityRequest.RemoveListener(answerCurrentCombatantPriorityRequest);
         CombatResultsUI.OnCombatResultsUICreation.RemoveListener(disableCollider);

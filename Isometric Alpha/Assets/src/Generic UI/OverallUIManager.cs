@@ -69,6 +69,8 @@ public static class OverallUIManager
             return;
         }
 
+        ScreenOpenProbe.begin(currentScreenManager == null ? newScreenType.ToString() : lastScreenType + " to " + newScreenType);
+
         AudioManager.playChangeScreenSFX();
 
         MouseHoverManager.destroyMouseHoverBase();
@@ -85,10 +87,14 @@ public static class OverallUIManager
         //no prebuilt copy of this screen, so it is made the way it always was
         if (currentScreenManager == null)
         {
+            ScreenOpenProbe.note("not prebuilt");
+
             currentScreenManager = GameObject.Instantiate(Resources.Load<GameObject>(getScreenPrefabName(newScreenType)), screenBackground).GetComponent<ScreenManager>();
         }
 
         ScreenButtonManager.setCurrentScreenButton(newScreenType);
+
+        ScreenOpenProbe.step("changeScreen");
         // currentScreenManager.setToScreenState(getScreenState(newScreenType));
     }
 
@@ -156,7 +162,7 @@ public static class OverallUIManager
             }
             else
             {
-                GameObject.DestroyImmediate(currentScreenManager.gameObject);
+                GameObject.Destroy(currentScreenManager.gameObject);
             }
 
             currentScreenManager = null;

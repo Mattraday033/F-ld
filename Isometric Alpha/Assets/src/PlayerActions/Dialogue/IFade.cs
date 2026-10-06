@@ -293,7 +293,7 @@ public abstract class CircleTransition : ScreenFade
 
         if(CombatStateManager.inCombat && circleTransitionObject != null)
         {
-            GameObject.DestroyImmediate(circleTransitionObject.gameObject);
+            GameObject.Destroy(circleTransitionObject.gameObject);
         }
     }
 }

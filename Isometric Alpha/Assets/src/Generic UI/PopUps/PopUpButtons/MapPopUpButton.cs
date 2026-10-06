@@ -13,10 +13,14 @@ public class MapPopUpButton : PopUpButton
 
     public void spawnPopUp(string zoneKey)
     {
+        ScreenOpenProbe.begin("Map");
+
         MapPopUpWindow prebuiltWindow = PrebuiltScreenManager.getMapWindow();
 
         if (prebuiltWindow == null)
         {
+            ScreenOpenProbe.note("not prebuilt");
+
             //no prebuilt window, so one is instantiated the way it always was
             base.spawnPopUp();
 
@@ -43,7 +47,11 @@ public class MapPopUpButton : PopUpButton
             }
         }
 
+        ScreenOpenProbe.step("show and populate");
+
         PlayerStateManager.setCurrentActivity(CurrentActivity.InMap);
+
+        ScreenOpenProbe.step("setCurrentActivity");
     }
 
     public override void spawnPopUp()

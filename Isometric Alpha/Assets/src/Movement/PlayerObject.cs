@@ -39,6 +39,20 @@ public class PlayerObject : MonoBehaviour
         hasCustomPromptMessage = false;
         instance = null;
         playLevelUpOnSceneStart = false;
+
+        //Subscribed once here rather than in Awake/OnDestroy: the handler is static, so an old player's OnDestroy
+        //running after the next area's player has spawned would remove the new player's subscriptions as well.
+        //Removed first so that a play session without a domain reload does not stack a second set.
+        MovementManager.OnStepFinished.RemoveListener(setButtonPromptVisibility);
+        MovementManager.OnMoveFinished.RemoveListener(setButtonPromptVisibility);
+        FadeToBlackManager.OnFadeBackInFinished.RemoveListener(setButtonPromptVisibility);
+        PlayerStateManager.OnStateChange.RemoveListener(setButtonPromptVisibility);
+
+        //OnMoveFinished only fires once the player stops, so the prompt would lag behind while a direction is held
+        MovementManager.OnStepFinished.AddListener(setButtonPromptVisibility);
+        MovementManager.OnMoveFinished.AddListener(setButtonPromptVisibility);
+        FadeToBlackManager.OnFadeBackInFinished.AddListener(setButtonPromptVisibility);
+        PlayerStateManager.OnStateChange.AddListener(setButtonPromptVisibility);
     }
 
     private void Awake()
@@ -54,11 +68,6 @@ public class PlayerObject : MonoBehaviour
         
         TerrainVisibilityManager.initializeOnTransition();
 
-        //OnMoveFinished only fires once the player stops, so the prompt would lag behind while a direction is held
-        MovementManager.OnStepFinished.AddListener(setButtonPromptVisibility);
-        MovementManager.OnMoveFinished.AddListener(setButtonPromptVisibility);
-        FadeToBlackManager.OnFadeBackInFinished.AddListener(setButtonPromptVisibility);
-        PlayerStateManager.OnStateChange.AddListener(setButtonPromptVisibility);
         EnemyMovement.ToggleHoverColliders.AddListener(toggleHover);
     }
 
@@ -84,10 +93,6 @@ public class PlayerObject : MonoBehaviour
 
     private void OnDestroy()
     {
-        MovementManager.OnStepFinished.RemoveListener(setButtonPromptVisibility);
-        MovementManager.OnMoveFinished.RemoveListener(setButtonPromptVisibility);
-        FadeToBlackManager.OnFadeBackInFinished.RemoveListener(setButtonPromptVisibility);
-        PlayerStateManager.OnStateChange.RemoveListener(setButtonPromptVisibility);
         EnemyMovement.ToggleHoverColliders.RemoveListener(toggleHover);
     }
 

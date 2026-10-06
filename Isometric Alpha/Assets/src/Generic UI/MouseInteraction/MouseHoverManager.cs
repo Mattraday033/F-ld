@@ -110,7 +110,7 @@ public static class MouseHoverManager
     {
         if (mouseHoverBase != null)
         {
-            GameObject.DestroyImmediate(mouseHoverBase);
+            GameObject.Destroy(mouseHoverBase);
         }
     }
 
@@ -235,7 +235,7 @@ public static class MouseHoverManager
 
         if (hoverDescriptionPanelObject != null)
         {
-            GameObject.DestroyImmediate(hoverDescriptionPanelObject);
+            GameObject.Destroy(hoverDescriptionPanelObject);
         }
 
         hoverDescriptionPanelSlot = null;
@@ -246,7 +246,7 @@ public static class MouseHoverManager
     {
         if (hoverDescriptionPanelObject != null && hoverDescriptionPanelObject.transform.IsChildOf(container))
         {
-            GameObject.DestroyImmediate(hoverDescriptionPanelObject);
+            GameObject.Destroy(hoverDescriptionPanelObject);
 
             hoverDescriptionPanelSlot = null;
         }

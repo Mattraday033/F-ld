@@ -95,6 +95,12 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
+            //an entry left empty in the inspector
+            if (slot == null)
+            {
+                continue;
+            }
+
             slot.setPrimaryDescribable(primaryDescribable);
         }
     }
@@ -124,6 +130,11 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
+            if (slot == null)
+            {
+                continue;
+            }
+
             slot.setPrimaryDescribable(primaryDescribables);
         }
     }
@@ -155,6 +166,11 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
+            if (slot == null)
+            {
+                continue;
+            }
+
             slot.setTempDescribable(tempDescribable);
         }
     }
@@ -187,6 +203,11 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
+            if (slot == null)
+            {
+                continue;
+            }
+
             slot.revertToPrimaryDescribable();
         }
     }
@@ -204,6 +225,11 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
+            if (slot == null)
+            {
+                continue;
+            }
+
             slot.removePrimaryDescribable();
         }
     }
@@ -233,6 +259,11 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
+            if (slot == null)
+            {
+                continue;
+            }
+
             slot.clearAllDescribables();
         }
     }

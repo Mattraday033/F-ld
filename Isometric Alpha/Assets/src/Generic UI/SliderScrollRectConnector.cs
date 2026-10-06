@@ -50,11 +50,31 @@ public class SliderScrollRectConnector : MonoBehaviour
             return;
         }
 
-        StartCoroutine(waitThenCheckVisibility());
+        //one check at the end of the frame answers every event that asked for one during it
+        if(pendingVisibilityCheck != null)
+        {
+            return;
+        }
+
+        pendingVisibilityCheck = StartCoroutine(waitThenCheckVisibility());
     }
+
+    private Coroutine pendingVisibilityCheck;
+
+    private void OnDisable()
+    {
+        //switching the object off stops the coroutine without it reaching its end
+        pendingVisibilityCheck = null;
+    }
+
     private IEnumerator waitThenCheckVisibility()
-    {	
+    {
         yield return new WaitForEndOfFrame();
+
+        pendingVisibilityCheck = null;
+
+        ScreenOpenProbe.countSliderCheck();
+
         Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(scrollRect.content);
 

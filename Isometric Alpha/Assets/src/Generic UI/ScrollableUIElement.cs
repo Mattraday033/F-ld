@@ -173,9 +173,13 @@ public class ScrollableUIElement : MonoBehaviour
 		{
 			//the toggles below re-run OnDisable/OnEnable on every row, which a refill exists to avoid
 			refillPanels(listOfDescribables);
+
+			ScreenOpenProbe.countGridFill(0);
 		}
 		else
 		{
+			ScreenOpenProbe.countGridFill(listOfDescribables.Count);
+
 			if (deleteOldPanels)
 			{
 				deleteAllPanels();

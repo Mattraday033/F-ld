@@ -34,6 +34,12 @@ public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
         return ScreenManager.isHidden(owningScreen);
     }
 
+    //while its screen is being shown, the description waits for the party member to be settled, and is built once
+    protected bool putOffWhileItsScreenIsShown()
+    {
+        return ScreenUpdateBatch.putOff(owningScreen, updateCounter);
+    }
+
     public void addListeners()
     {
         subscribedEvents = getUpdateEvents();
@@ -64,6 +70,11 @@ public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
     public virtual void updateCounter()
     {
         if (hiddenWithItsScreen())
+        {
+            return;
+        }
+
+        if (putOffWhileItsScreenIsShown())
         {
             return;
         }

@@ -935,7 +935,8 @@ public static class TutorialSequenceList
         combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 1,
                                                          playerCombatSpriteTargetHash,
                                                          ArrowDirection.Top,
-                                                         createPopUpScreenBlocker: createPopUpScreenBlocker));
+                                                         createPopUpScreenBlocker: createPopUpScreenBlocker,
+                                                         skipUnhighlight: skipUnhighlight));
         combatTutorialSteps.Add(new TutorialSequenceStep(TutorialMessageList.combatTutorialMessagePrefix + 2,
                                                          allyZoneTargetHash,
                                                          ArrowDirection.Right,

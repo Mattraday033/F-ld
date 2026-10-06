@@ -331,14 +331,20 @@ public abstract class ScreenManager : MonoBehaviour, ITabParent
                 }
             }
 
-            OnScreenDeclaration.Invoke(this);
-
-            gameObject.SetActive(true);
-
-            prepareToShow();
-
-            OnScreenInteriorUpdate.Invoke();
+            //the pieces inside refresh once, after all of this has gone out, rather than once for each event it sets off
+            ScreenUpdateBatch.run(this, announceShow);
         }
+    }
+
+    private void announceShow()
+    {
+        OnScreenDeclaration.Invoke(this);
+
+        gameObject.SetActive(true);
+
+        prepareToShow();
+
+        OnScreenInteriorUpdate.Invoke();
     }
 
     //whatever a screen's own Awake set up that has to be set up again each time it is shown
@@ -388,6 +394,22 @@ public abstract class ScreenManager : MonoBehaviour, ITabParent
         {
             slot.clearAllDescribables();
         }
+
+        reportGridsLeftFilled();
+    }
+
+    //Editor only. The grids emptied above are the ones showing the screen fills again. A grid filled some other way keeps its rows
+    //while the screen is hidden, and this names it so it can be decided whether that grid should be emptied too
+    [System.Diagnostics.Conditional("UNITY_EDITOR")]
+    private void reportGridsLeftFilled()
+    {
+        foreach (ScrollableUIElement grid in GetComponentsInChildren<ScrollableUIElement>(true))
+        {
+            if (grid.populated())
+            {
+                Debug.Log("[PrebuiltScreens] " + grid.name + " kept its rows while its screen, " + name + ", was hidden");
+            }
+        }
     }
 
     //to the holder with none of the tidying, which hide has already done by the time it calls this
@@ -436,6 +458,11 @@ public abstract class ScreenManager : MonoBehaviour, ITabParent
     private void updateCounterIfShowing()
     {
         if (!isShowing)
+        {
+            return;
+        }
+
+        if (ScreenUpdateBatch.putOff(this, updateCounterIfShowing))
         {
             return;
         }

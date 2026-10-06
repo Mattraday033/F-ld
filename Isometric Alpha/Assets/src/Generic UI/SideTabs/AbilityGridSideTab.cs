@@ -103,7 +103,8 @@ public class AbilityGridSideTab : MonoBehaviour
             setToClosed();
         }
 
-        if(currentTabDict[getCurrentDictKey()] == listToChoose)
+        //no tab has been chosen for this screen until the default one's click above has gone through
+        if(currentTabDict.TryGetValue(getCurrentDictKey(), out DescribableList chosenList) && chosenList == listToChoose)
         {
             closedButton.interactable = false;
         }

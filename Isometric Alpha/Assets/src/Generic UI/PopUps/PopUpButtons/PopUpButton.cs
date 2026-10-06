@@ -72,7 +72,7 @@ public abstract class PopUpButton : MonoBehaviour
 	{
 		if (getCurrentPopUpGameObject() != null && !(getCurrentPopUpGameObject() is null))
 		{
-			DestroyImmediate(getCurrentPopUpGameObject());
+			Destroy(getCurrentPopUpGameObject());
 			EscapeStack.removeTopObjectFromStack();
 		}
 		else

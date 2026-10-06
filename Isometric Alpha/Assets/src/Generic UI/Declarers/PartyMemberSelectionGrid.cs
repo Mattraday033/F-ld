@@ -27,6 +27,13 @@ public class PartyMemberSelectionGrid : UIListenerGrid
             return;
         }
 
+        //switched off by setVisibility for a screen with no use for the strip. The next screen that wants it switches it on before its update goes out.
+        //A fill here would also fetch the party list, which a journal that is showing takes as its own list and titles itself after
+        if (!gameObject.activeSelf)
+        {
+            return;
+        }
+
         base.updateCounter();
 
         // if(ScreenManager.currentPartyMember == null)

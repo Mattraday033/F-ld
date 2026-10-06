@@ -485,7 +485,7 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
 
     public void destroyUI()
     {
-        DestroyImmediate(chestItemDescriptionPanel.gameObject);
+        Destroy(chestItemDescriptionPanel.gameObject);
         PopUpScreenBlockerManager.destroyPopUpScreenBlocker();
     }
 

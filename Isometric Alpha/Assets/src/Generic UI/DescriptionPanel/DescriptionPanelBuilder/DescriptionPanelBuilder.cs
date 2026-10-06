@@ -562,6 +562,8 @@ public class DescriptionPanelBuilder : MonoBehaviour
 
         bool refillingRows = reuseRows && rowsMatch(blocksToShow);
 
+        ScreenOpenProbe.countDescriptionBuild(refillingRows ? 0 : blocksToShow.Count);
+
         if (refillingRows)
         {
             for (int index = 0; index < blocksToShow.Count; index++)
@@ -820,7 +822,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
                 continue;
             }
 
-            DestroyImmediate(row.gameObject);
+            Destroy(row.gameObject);
         }
 
         rows = new List<DescriptionPanelRow>();
@@ -920,6 +922,8 @@ public class DescriptionPanelBuilder : MonoBehaviour
         //a global flush rebuilds every canvas in the scene, so builders that are refilled often leave it to the normal pre-render pass
         if (!reuseRows)
         {
+            ScreenOpenProbe.countForcedCanvasRebuild();
+
             Canvas.ForceUpdateCanvases();
         }
 

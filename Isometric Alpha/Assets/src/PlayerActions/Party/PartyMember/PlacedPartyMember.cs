@@ -79,7 +79,7 @@ public class PlacedPartyMember : MonoBehaviour
 
     private void destroySelf()
     {
-        DestroyImmediate(gameObject);
+        Destroy(gameObject);
         SkillManager.OnSkillUse.Invoke();
     }
 

@@ -178,6 +178,10 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         {
             return _RendererList;
         }
+        set
+        {
+            _RendererList = value;
+        }
     }
 
     public OverHeadIconManager iconManager;
@@ -222,6 +226,15 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
 	public CharacterFacing enemyFacing = new CharacterFacing();
 
+    //movable objects have no animation manager to hold their facing
+    public override CharacterFacing characterFacing
+    {
+        get
+        {
+            return base.characterFacing ?? enemyFacing;
+        }
+    }
+
     public Collider2D attachedCollider2D;
 
 	private const int moveThreshold = 7;
@@ -231,13 +244,17 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
     private void Awake()
     {
+        RevealAllNonDefeatedEnemies.AddListener(revealIfNotDefeated);
+    }
+
+    //called by the spawn behaviour rather than Awake, which runs before the pack index and icon manager are set
+    public void applyRetreatStun()
+    {
         if(getMonsterPackIndex() == CombatStateManager.retreatedFromIndex)
         {
             retreatStun();
             SkillManager.OnSkillUse.Invoke();
         }
-
-        RevealAllNonDefeatedEnemies.AddListener(revealIfNotDefeated);
     }
 
     protected override void OnDestroy()
@@ -624,7 +641,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
 
         // MovementManager.replaceMovementTracker(newMonster.GetComponent<MovementTracker>());
         
-        // DestroyImmediate(gameObject);
+        // Destroy(gameObject);
 	}
 
     public bool canBePutBackToStartingPosition()
@@ -752,13 +769,6 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         }
 
         characterFacing.currentFacing = statsWrapper.facing;
-    }
-
-    public void initializeAnimationManager()
-    {
-        EnemyPackInfo enemyPackInfo = getEnemyPackInfo();
-
-        // animationManager.setAnimations(enemyPackInfo.FoeTypes[0].enemyStats.uniqueName);
     }
 
     //IRevealable interface methods
@@ -951,6 +961,13 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     
     public void isVisible(TutorialWindowTargetVisibility visibility)
     {
+        //another target has already answered yes - this tracker's own hash is unset when the hash lives on a
+        //TutorialSequenceStepTargetSprite child, so answering anyway would overwrite that with false
+        if(visibility.visible)
+        {
+            return;
+        }
+
         visibility.visible = visibility.tutorialHash.Equals(tutorialHash) && gameObject.activeInHierarchy;
     }
 }

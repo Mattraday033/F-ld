@@ -75,6 +75,12 @@ public class FormationDisplayUI : MonoBehaviour, ICounter
             return;
         }
 
+        //while its screen is being shown, this waits for the events that showing it sets off, and is done once
+        if (ScreenUpdateBatch.putOff(owningScreen, updateCounter))
+        {
+            return;
+        }
+
         populate(State.formation);
     }
 

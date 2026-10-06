@@ -127,14 +127,99 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     private void OnEnable()
     {
         SelectorManager.SelectorMoved.AddListener(determineVisbility);
+        SelectorManager.SelectorMoved.AddListener(updateOutlineFromSelectors);
+        CombatActionOrderRow.HoldRevealPriority.AddListener(holdOutline);
+        CombatActionOrderRow.ReleaseRevealPriority.AddListener(releaseOutline);
         HoverPanelPopUpButton.HoverPriorityRequest.AddListener(answerCurrentCombatantPriorityRequest);
     }
 
     private void OnDisable()
     {
         SelectorManager.SelectorMoved.RemoveListener(determineVisbility);
+        SelectorManager.SelectorMoved.RemoveListener(updateOutlineFromSelectors);
+        CombatActionOrderRow.HoldRevealPriority.RemoveListener(holdOutline);
+        CombatActionOrderRow.ReleaseRevealPriority.RemoveListener(releaseOutline);
         HoverPanelPopUpButton.HoverPriorityRequest.RemoveListener(answerCurrentCombatantPriorityRequest);
     }
+
+    #region Combatant Outline
+
+    //the actor an action order row is keeping outlined, whose outline the selectors must leave alone
+    private Stats outlineHeldFor;
+
+    private void holdOutline(Stats stats)
+    {
+        if(stats != null && hasTargetStats(out Stats target) && target.Equals(stats))
+        {
+            outlineHeldFor = stats;
+        }
+    }
+
+    private void releaseOutline(Stats stats)
+    {
+        if(stats != null && stats.Equals(outlineHeldFor))
+        {
+            outlineHeldFor = null;
+        }
+    }
+
+    //outlines the creature standing on this tile while it's inside a visible selector, a job its CombatantHover used to do.
+    //Every tile under a creature reaches the same answer, since the whole creature is checked rather than this one tile
+    private void updateOutlineFromSelectors(List<Selector> visibleSelectors)
+    {
+        if(!hasTargetStats(out Stats target) || target.isRepositionClone() || outlineIsHeld(target))
+        {
+            return;
+        }
+
+        //a mandatory target's fading highlight would otherwise go on to overwrite the outline set here
+        CombatantHover.StopHighlightFadeMandatoryTarget.Invoke(target);
+
+        if(!target.isDead() && insideSelectors(target, visibleSelectors))
+        {
+            target.setOutline();
+        } else
+        {
+            target.removeOutline();
+        }
+    }
+
+    //held by an action order row, or by the mouse sitting on one of the creature's sprites
+    private bool outlineIsHeld(Stats target)
+    {
+        if(outlineHeldFor != null && target.Equals(outlineHeldFor))
+        {
+            return true;
+        }
+
+        foreach(Combatant combatant in target.combatants)
+        {
+            if(combatant != null && combatant.hover != null && combatant.hover.revealPriorityHeld)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool insideSelectors(Stats target, List<Selector> visibleSelectors)
+    {
+        foreach(Selector selector in visibleSelectors)
+        {
+            GridCoords[] gridCoords = selector.getAllSelectorCoords();
+
+            if(target.isInsideCoordinates(gridCoords) ||
+                (target.queuedToMove() && target.repositionClone.isInsideCoordinates(gridCoords)))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    #endregion
 
     #region
     

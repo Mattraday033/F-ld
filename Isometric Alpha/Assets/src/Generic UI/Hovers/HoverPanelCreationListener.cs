@@ -19,7 +19,7 @@ public class HoverPanelCreationListener : MonoBehaviour
 
     private void destroyHover()
     {
-        DestroyImmediate(gameObject);
+        Destroy(gameObject);
     }
 
     private void disableDestroyHoverOnPanelCreation()

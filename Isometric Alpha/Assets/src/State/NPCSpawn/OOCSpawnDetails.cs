@@ -1113,7 +1113,7 @@ public class SecretDoorSpawnDetails : AxisSpawnDetails
     // {
     //     if(secretDoorInfo.hasBeenDiscovered())
     //     {
-    //         GameObject.DestroyImmediate(secretDoor);
+    //         GameObject.Destroy(secretDoor);
     //     }
 
     //     base.spawnActions(secretDoor);

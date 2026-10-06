@@ -254,7 +254,7 @@ public class HealthBarManager : MonoBehaviour
     // {
     //     if(!gameObject.activeInHierarchy && (linkedStats == null || linkedStats.isLarge()))
     //     {
-    //         DestroyImmediate(gameObject);
+    //         Destroy(gameObject);
     //     }
     // }
 

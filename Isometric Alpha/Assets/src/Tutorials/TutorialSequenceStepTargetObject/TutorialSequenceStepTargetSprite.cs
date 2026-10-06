@@ -15,8 +15,6 @@ public class TutorialSequenceStepTargetSprite : TutorialSequenceStepTargetObject
             return;
         }
 
-        previousColor = rendererList.getOutlineColor();
-
         rendererList.createOutline(ColorList.tutorialDefault);
     }
 	

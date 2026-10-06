@@ -107,8 +107,49 @@ public static class PrebuiltScreenManager
         }
         finally
         {
+            reportBuild();
+
             buildFinished = true;
         }
+    }
+
+    //Editor and development builds only. A screen that throws while it is built is left out without stopping anything else,
+    //and from then on is quietly instantiated each time it is opened, so this is where that gets said
+    [System.Diagnostics.Conditional("UNITY_EDITOR"), System.Diagnostics.Conditional("DEVELOPMENT_BUILD")]
+    private static void reportBuild()
+    {
+        List<string> results = new List<string>();
+        bool anyLeftOut = false;
+
+        foreach (ScreenType screenType in buildOrder)
+        {
+            bool built = screens.TryGetValue(screenType, out ScreenManager screen) && screen != null;
+
+            results.Add(describeBuild(screenType.ToString(), built));
+
+            anyLeftOut = anyLeftOut || !built;
+        }
+
+        results.Add(describeBuild("Map", mapWindow != null));
+        results.Add(describeBuild("World Map", worldMapWindow != null));
+
+        anyLeftOut = anyLeftOut || mapWindow == null || worldMapWindow == null;
+
+        string report = "[PrebuiltScreens] " + string.Join(", ", results);
+
+        if (anyLeftOut)
+        {
+            Debug.LogWarning(report);
+        }
+        else
+        {
+            Debug.Log(report);
+        }
+    }
+
+    private static string describeBuild(string name, bool built)
+    {
+        return name + (built ? " prebuilt" : " NOT prebuilt");
     }
 
     //built under the live pop-up parent rather than the holder, so that anything read from the canvas in Awake is real,

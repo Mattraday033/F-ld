@@ -26,7 +26,7 @@ public class BinaryDescisionPanel: PopUpWindow
     {
         if (instance != null)
         {
-            DestroyImmediate(instance.gameObject);
+            Destroy(instance.gameObject);
         }
 
         TutorialSequenceStepTargetUIObject.createCutOutMask(transform);

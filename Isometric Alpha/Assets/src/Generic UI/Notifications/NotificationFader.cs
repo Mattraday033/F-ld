@@ -91,7 +91,7 @@ public class NotificationFader : MonoBehaviour, IPointerEnterHandler, IPointerEx
         NotificationManager.OnDeleteAllNotifications.RemoveListener(destroyGameObjectAndRemoveListener);
 
         NotificationManager.skipWaitForNextNotificationSpawn();
-        DestroyImmediate(gameObject);
+        Destroy(gameObject);
     }
 
     private void incrementImageOpacity(Image image)

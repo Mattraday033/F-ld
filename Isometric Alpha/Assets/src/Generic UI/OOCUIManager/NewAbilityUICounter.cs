@@ -34,7 +34,7 @@ public class NewAbilityUICounter : MonoBehaviour
         ScreenManager.OnScreenInteriorUpdate.RemoveListener(determineVisibility);
         NewAbilityManager.AbilityMarkedAsNew.RemoveListener(determineVisibility);
         NewAbilityManager.AbilityNoLongerNew.RemoveListener(determineVisibility);
-        GridRow.OnDescribableToDisplay.AddListener(determineVisibility);
+        PartySpriteGridRow.OnPartyMemberSelected.RemoveListener(determineVisibility);
         PlayerAbilityGridRowDescriptionPanel.AbilityNoLongerNew.RemoveListener(determineVisibility);
     }
 
