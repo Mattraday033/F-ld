@@ -128,8 +128,8 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     {
         SelectorManager.SelectorMoved.AddListener(determineVisbility);
         SelectorManager.SelectorMoved.AddListener(updateOutlineFromSelectors);
-        CombatActionOrderRow.HoldRevealPriority.AddListener(holdOutline);
-        CombatActionOrderRow.ReleaseRevealPriority.AddListener(releaseOutline);
+        CombatActionOrderRow.HoldActorOutlines.AddListener(holdOutline);
+        CombatActionOrderRow.ReleaseActorOutlines.AddListener(releaseOutline);
         HoverPanelPopUpButton.HoverPriorityRequest.AddListener(answerCurrentCombatantPriorityRequest);
     }
 
@@ -137,27 +137,25 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     {
         SelectorManager.SelectorMoved.RemoveListener(determineVisbility);
         SelectorManager.SelectorMoved.RemoveListener(updateOutlineFromSelectors);
-        CombatActionOrderRow.HoldRevealPriority.RemoveListener(holdOutline);
-        CombatActionOrderRow.ReleaseRevealPriority.RemoveListener(releaseOutline);
+        CombatActionOrderRow.HoldActorOutlines.RemoveListener(holdOutline);
+        CombatActionOrderRow.ReleaseActorOutlines.RemoveListener(releaseOutline);
         HoverPanelPopUpButton.HoverPriorityRequest.RemoveListener(answerCurrentCombatantPriorityRequest);
     }
 
     #region Combatant Outline
 
-    //the actor an action order row is keeping outlined, whose outline the selectors must leave alone
-    private Stats outlineHeldFor;
+    //the action an action order row is keeping outlined, whose actors' outlines the selectors must leave alone.
+    //Every tile keeps it, since an action like a volley has an actor on several of them
+    private CombatAction outlineHeldFor;
 
-    private void holdOutline(Stats stats)
+    private void holdOutline(CombatAction action)
     {
-        if(stats != null && hasTargetStats(out Stats target) && target.Equals(stats))
-        {
-            outlineHeldFor = stats;
-        }
+        outlineHeldFor = action;
     }
 
-    private void releaseOutline(Stats stats)
+    private void releaseOutline(CombatAction action)
     {
-        if(stats != null && stats.Equals(outlineHeldFor))
+        if(ReferenceEquals(action, outlineHeldFor))
         {
             outlineHeldFor = null;
         }
@@ -187,7 +185,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     //held by an action order row, or by the mouse sitting on one of the creature's sprites
     private bool outlineIsHeld(Stats target)
     {
-        if(outlineHeldFor != null && target.Equals(outlineHeldFor))
+        if(outlineHeldFor != null && outlineHeldFor.actorIsPartOfAction(target))
         {
             return true;
         }

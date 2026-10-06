@@ -99,7 +99,7 @@ public class SkillIndicator : MonoBehaviour
         spriteRenderer.color = new Color(color.r, color.g, color.b, ColorList.hoverSelectorAlpha);
     }
 
-    private void setSelectorTwoColor(EffectAnimationManager selectorTwo, Color newColor)
+    public void setSelectorTwoColor(EffectAnimationManager selectorTwo, Color newColor)
     {
         if(selectorTwo.rendererList == null)
         {
@@ -110,6 +110,17 @@ public class SkillIndicator : MonoBehaviour
         {
             selectorTwo.rendererList[layer].color = newColor;
         }
+    }
+
+    //setSelectorTwoColor gives every layer the same color, so the body layer speaks for all of them
+    public Color getSelectorTwoColor(EffectAnimationManager selectorTwo)
+    {
+        if(selectorTwo.rendererList == null)
+        {
+            return Color.clear;
+        }
+
+        return selectorTwo.rendererList[SpriteLayer.Body].color;
     }
 
     private Color getColorWithTransparency()

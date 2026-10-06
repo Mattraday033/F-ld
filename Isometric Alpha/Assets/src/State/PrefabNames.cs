@@ -227,8 +227,6 @@ public static class PrefabNames
 
     #region Interactable Game Objects
     public const string interactablesFolder = "Interactables/";
-    public const string placedPartyMember = interactablesFolder + "PlacedPartyMember";
-    public const string partyMemberFollower = interactablesFolder + "PartyMemberFollower";
     public const string transitionSpace = interactablesFolder + "Transition Space";
     public const string tutorialCollider = interactablesFolder + "Tutorial Collider";
 

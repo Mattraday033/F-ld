@@ -7,10 +7,18 @@ public class MovePlayerScript : TutorialSequenceStepScript
 
     protected IEnumerator movePlayer(TutorialSequenceStepScript facingScript, Vector3Int directionMod)
     {
+        Vector3Int startingCell = PlayerMovement.getInstance().getCell();
+
         do
         {
             yield return null;
         }while(PlayerMovement.getInstance().isMoving());
+
+        //the key that ended the step is often a movement key still held down, which walks the player on its own
+        if(!PlayerMovement.getInstance().getCell().Equals(startingCell))
+        {
+            yield break;
+        }
 
         if(facingScript != null)
         {

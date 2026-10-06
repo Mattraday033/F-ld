@@ -87,6 +87,8 @@ public abstract class SkillManager
     {
         if(tile.hadPreviousCollision())
         {
+            tile.setColor(getTileTargetColor());
+            tile.setToTargetFoundSelector();
             return;
         }
 

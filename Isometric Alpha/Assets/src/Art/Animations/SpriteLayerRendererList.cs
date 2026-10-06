@@ -7,13 +7,28 @@ public class SpriteLayerRendererList : MonoBehaviour
 {
     private const string replaceVarName = "_Replace";    
 
-    private const string blackBorderSizeXVarName = "_BlackBorderSizeX";
-    private const string blackBorderSizeYVarName = "_BlackBorderSizeY";
-    private const string colorOutlineSizeXVarName = "_ColorOutlineSizeX";
-    private const string colorOutlineSizeYVarName = "_ColorOutlineSizeY";
+    private static readonly int blackBorderSizeXID = Shader.PropertyToID("_BlackBorderSizeX");
+    private static readonly int blackBorderSizeYID = Shader.PropertyToID("_BlackBorderSizeY");
+    private static readonly int colorOutlineSizeXID = Shader.PropertyToID("_ColorOutlineSizeX");
+    private static readonly int colorOutlineSizeYID = Shader.PropertyToID("_ColorOutlineSizeY");
 
-    private const string blackBorderColorVarName = "_BlackBorderColor";
-    private const string outlineColorVarName = "_OutlineColor";
+    private static readonly int blackBorderColorID = Shader.PropertyToID("_BlackBorderColor");
+    private static readonly int outlineColorID = Shader.PropertyToID("_OutlineColor");
+
+    //the outline shader has one texture slot per character layer, named after the layer
+    private static readonly Dictionary<SpriteLayer, int> layerTextureIDs = getLayerTextureIDs();
+
+    private static Dictionary<SpriteLayer, int> getLayerTextureIDs()
+    {
+        Dictionary<SpriteLayer, int> textureIDs = new Dictionary<SpriteLayer, int>();
+
+        foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
+        {
+            textureIDs[layer] = Shader.PropertyToID("_" + layer.ToString());
+        }
+
+        return textureIDs;
+    }
 
     #region SpriteRenderers
     [SerializeField]
@@ -80,6 +95,24 @@ public class SpriteLayerRendererList : MonoBehaviour
             registerBehaviour(SpriteLayer.Body, this, () => RendererUtil.updatePolygonCollider(bodyRenderer, bodyCollider));
         }
 
+        if(outlineRenderer != null)
+        {
+            //the prefab's outline renderer starts enabled, which would run the outline shader for nothing until the first removeOutline
+            outlineRenderer.enabled = false;
+
+            foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
+            {
+                SpriteRenderer renderer = spriteLayers[layer];
+
+                if(!outlineTextureIDs.ContainsKey(renderer))
+                {
+                    outlineTextureIDs[renderer] = new List<int>();
+                }
+
+                outlineTextureIDs[renderer].Add(layerTextureIDs[layer]);
+            }
+        }
+
         instantiated = true;
     }
 
@@ -135,6 +168,11 @@ public class SpriteLayerRendererList : MonoBehaviour
         foreach(SpriteRenderer renderer in characterRenderers)
         {
             renderer.flipX = flip;
+        }
+
+        if(outlineRenderer != null)
+        {
+            outlineRenderer.flipX = flip;
         }
 
         if(bodyFlipChanged && bodyCollider != null)
@@ -228,41 +266,126 @@ public class SpriteLayerRendererList : MonoBehaviour
 
 
     #region Outline
+    //which of the outline shader's texture slots each renderer fills. A renderer standing in for missing layers fills several
+    private readonly Dictionary<SpriteRenderer, List<int>> outlineTextureIDs = new();
+
+    //fetched on the first createOutline, so a character that's never outlined doesn't get its own material instance
+    private Material outlineMaterial;
+    private Color outlineColor;
+    private float outlineSizeMod;
+
+    //true while the outline is showing, which is when each sprite change has to be copied onto it
+    private bool outlineActive = false;
+    //false once a sprite changes while the outline is hidden, so the next createOutline knows to copy every layer again
+    private bool outlineSynced = false;
+
     public void createOutline(Color color, float sizeMod = 4f)
     {
-        outlineRenderer.enabled = true;
-
-        foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
+        if(outlineRenderer == null || bodyRenderer.sprite == null)
         {
-            outlineRenderer.material.SetTexture("_" + layer.ToString(), spriteLayers[layer].sprite.texture);
+            return;
         }
 
-        outlineRenderer.material.SetColor(outlineColorVarName, color);
+        if(outlineMaterial == null)
+        {
+            outlineMaterial = outlineRenderer.material;
+        }
 
-        outlineRenderer.sprite = SpriteUtil.createBlankSpriteFromTemplate(spriteLayers[SpriteLayer.Body].sprite);
-        outlineRenderer.flipX = spriteLayers[SpriteLayer.Body].flipX;
-        outlineRenderer.sortingLayerID = spriteLayers[SpriteLayer.Body].sortingLayerID;
-        outlineRenderer.sortingOrder = spriteLayers[SpriteLayer.Body].sortingOrder;
+        if(!outlineSynced || sizeMod != outlineSizeMod)
+        {
+            outlineSizeMod = sizeMod;
 
-        float sizeX = sizeMod/spriteLayers[SpriteLayer.Body].sprite.texture.width;
-        float sizeY = sizeMod/spriteLayers[SpriteLayer.Body].sprite.texture.height;
+            matchOutlineToBodySprite();
 
-        outlineRenderer.material.SetFloat(blackBorderSizeXVarName, sizeX/4f);
-        outlineRenderer.material.SetFloat(blackBorderSizeYVarName, sizeY/4f);
-        outlineRenderer.material.SetFloat(colorOutlineSizeXVarName, sizeX);
-        outlineRenderer.material.SetFloat(colorOutlineSizeYVarName, sizeY);
+            foreach(KeyValuePair<SpriteRenderer, List<int>> kvp in outlineTextureIDs)
+            {
+                setOutlineTextures(kvp.Key, kvp.Value);
+            }
 
-        outlineRenderer.material.SetColor(blackBorderColorVarName, Color.black);
+            outlineMaterial.SetColor(blackBorderColorID, Color.black);
+
+            outlineSynced = true;
+        }
+
+        outlineColor = color;
+        outlineMaterial.SetColor(outlineColorID, color);
+
+        //neither of these fires the sprite change callback when changed directly on the body, so they're copied on every call
+        outlineRenderer.flipX = bodyRenderer.flipX;
+        outlineRenderer.sortingLayerID = bodyRenderer.sortingLayerID;
+        outlineRenderer.sortingOrder = bodyRenderer.sortingOrder;
+
+        outlineRenderer.enabled = true;
+        outlineActive = true;
     }
 
     public void removeOutline()
     {
+        if(outlineRenderer == null)
+        {
+            return;
+        }
+
         outlineRenderer.enabled = false;
+        outlineActive = false;
     }
 
     public Color getOutlineColor()
     {
-        return outlineRenderer.material.GetColor(outlineColorVarName);
+        return outlineColor;
+    }
+
+    //copies one renderer's new sprite onto the outline. Runs inside the sprite change callback, ahead of the
+    //registered behaviours, so it must never throw
+    private void syncOutlineLayer(SpriteRenderer renderer)
+    {
+        //the terrain renderer isn't part of the outline
+        if(!outlineTextureIDs.TryGetValue(renderer, out List<int> textureIDs))
+        {
+            return;
+        }
+
+        if(renderer == bodyRenderer)
+        {
+            matchOutlineToBodySprite();
+        }
+
+        setOutlineTextures(renderer, textureIDs);
+    }
+
+    //the outline's own sprite is blank, and only lends the body frame's rect for every layer's texture to be sampled at
+    private void matchOutlineToBodySprite()
+    {
+        Sprite bodySprite = bodyRenderer.sprite;
+
+        if(bodySprite == null)
+        {
+            return;
+        }
+
+        outlineRenderer.sprite = SpriteUtil.createBlankSpriteFromTemplate(bodySprite);
+
+        //the sizes are in UV space, so they change whenever the body moves to a texture of a different size
+        float sizeX = outlineSizeMod/bodySprite.texture.width;
+        float sizeY = outlineSizeMod/bodySprite.texture.height;
+
+        outlineMaterial.SetFloat(blackBorderSizeXID, sizeX/4f);
+        outlineMaterial.SetFloat(blackBorderSizeYID, sizeY/4f);
+        outlineMaterial.SetFloat(colorOutlineSizeXID, sizeX);
+        outlineMaterial.SetFloat(colorOutlineSizeYID, sizeY);
+    }
+
+    private void setOutlineTextures(SpriteRenderer renderer, List<int> textureIDs)
+    {
+        Sprite sprite = renderer.sprite;
+
+        //a layer left without a sprite adds nothing to the outline, so the outline's own blank texture stands in for it
+        Texture texture = sprite != null ? sprite.texture : outlineRenderer.sprite.texture;
+
+        foreach(int textureID in textureIDs)
+        {
+            outlineMaterial.SetTexture(textureID, texture);
+        }
     }
 
     #endregion
@@ -377,6 +500,14 @@ public class SpriteLayerRendererList : MonoBehaviour
 
     private void onSpriteChange(SpriteRenderer renderer)
     {
+        if(outlineActive)
+        {
+            syncOutlineLayer(renderer);
+        } else
+        {
+            outlineSynced = false;
+        }
+
         foreach(List<RegisterBehaviour> behaviours in registeredBehaviours[renderer].Values)
         {
             foreach(RegisterBehaviour behaviour in behaviours)

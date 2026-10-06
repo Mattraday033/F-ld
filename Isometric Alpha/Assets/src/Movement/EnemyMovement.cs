@@ -304,6 +304,12 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         _EndingPosition = AreaManager.getMasterGrid().GetCellCenterWorld(getCurrentCell(this) + _DirectionMod);
     }
 
+    //a step the enemy sits out, or one that was cancelled, leaves the direction at zero
+    public override bool isChangingCells()
+    {
+        return isMoving() && !_DirectionMod.Equals(Vector3Int.zero);
+    }
+
     #endregion
 
     public MovementManager getMovementManager()

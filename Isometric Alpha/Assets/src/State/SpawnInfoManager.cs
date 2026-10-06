@@ -58,6 +58,9 @@ public static class SpawnInfoManager
 
         spawnAllTransitions();
 
+        //needs the player to be standing in the area, and has to come before the train so it can leave the placed party members out
+        PartyMemberPlacer.restorePlacedPartyMembers();
+
         PartyMemberTrainManager.createPartyMemberTrain();
 
         // performButtonScriptStartingAction();
@@ -68,7 +71,6 @@ public static class SpawnInfoManager
 
         if(lastSaveBlueprint != null)
         {
-            // PartyMemberPlacer.placeAllPartyMembers();
             lastSaveBlueprint = null;
         } else if(TrapAndButtonStateManager.trapKeyCount() <= 0)
         {

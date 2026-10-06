@@ -1169,7 +1169,7 @@ fadeBackIn(60)
 
 The two of you appear capable enough as a team, and I am thankful to you both for helping me save Dibber. His faculties haven't returned to him yet, but I know he would express his gratitude to you if he could.
 
-    +The way you spoke before betrays experience as a healer. I'm curious how that came to be.
+    +The way you spoke before betrays experience as a healer.
         ->kastorBackstory_Entrance(->2f)
     +He is most welcome.
         ->2f
@@ -1628,7 +1628,7 @@ Was there anything else you needed?
 }
     +Not yet.
         ->3b
-    +The way you spoke before betrays experience as a healer. I'm curious how that came to be.
+    +The way you spoke before betrays experience as a healer.
         ->kastorBackstory_Entrance(->3ab)
     +Why is your hut so much bigger than Brush and Géza's?
         ->keepDialogueB4HutSizeExplanation(->3a)

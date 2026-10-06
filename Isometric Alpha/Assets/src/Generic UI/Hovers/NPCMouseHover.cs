@@ -49,7 +49,7 @@ public class NPCMouseHover : MonoBehaviour
         polygonCollider2D.enabled = false;
     }
 
-    private void enableHover()
+    protected virtual void enableHover()
     {
         polygonCollider2D.enabled = true;
     }

@@ -399,10 +399,15 @@ public class NPCMouseHoverSpawnBehaviour : IExtraSpawnBehaviour
             yield break;
         }
 
-        NPCMouseHover mouseHover = rendererList.bodyCollider.gameObject.AddComponent<NPCMouseHover>();
+        NPCMouseHover mouseHover = addMouseHover(gameObject, rendererList.bodyCollider.gameObject);
 
         mouseHover.rendererList = rendererList;
         mouseHover.revealables = gameObject.GetComponents<IRevealable>();
+    }
+
+    protected virtual NPCMouseHover addMouseHover(GameObject gameObject, GameObject bodyColliderObject)
+    {
+        return bodyColliderObject.AddComponent<NPCMouseHover>();
     }
 
 }
@@ -563,6 +568,41 @@ public class PartyMemberMovementSpawnBehaviour : IExtraSpawnBehaviour
         }
 
         return partyMemberMovement;
+    }
+}
+
+public class PlacedPartyMemberMouseHoverSpawnBehaviour : NPCMouseHoverSpawnBehaviour
+{
+    //the hover has to know when its party member is hidden, so it does not bring the body collider back under the player
+    protected override NPCMouseHover addMouseHover(GameObject gameObject, GameObject bodyColliderObject)
+    {
+        PlacedPartyMemberMouseHover mouseHover = bodyColliderObject.AddComponent<PlacedPartyMemberMouseHover>();
+
+        mouseHover.placedPartyMember = gameObject.GetComponent<PlacedPartyMember>();
+
+        return mouseHover;
+    }
+}
+
+public class PlacedPartyMemberSpawnBehaviour : IExtraSpawnBehaviour
+{
+    private PartyMember partyMember;
+
+    public PlacedPartyMemberSpawnBehaviour(PartyMember partyMember)
+    {
+        this.partyMember = partyMember;
+    }
+
+    //has to stay empty: the placed party member shares its name with its NPC, whose dialogue would otherwise switch it on and off
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+
+    public Component addBehaviour(GameObject gameObject)
+    {
+        PlacedPartyMember placedPartyMember = gameObject.AddComponent<PlacedPartyMember>();
+
+        placedPartyMember.partyMember = partyMember;
+
+        return placedPartyMember;
     }
 }
 

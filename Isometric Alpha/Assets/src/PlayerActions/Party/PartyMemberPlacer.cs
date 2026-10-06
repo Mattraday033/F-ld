@@ -31,9 +31,10 @@ public class PartyMemberPlacer : MonoBehaviour
         instance = this;
     }
 
-	public static void placeAllPartyMembers()
+    //puts back the party members still flagged as placed once an area has spawned, as after loading a save or returning from combat.
+    //silent, because nothing was placed by the player: the area spawn builds the train and the UI straight afterwards
+	public static void restorePlacedPartyMembers()
     {
-        DestroyAllFollowers.Invoke();
 		placedPartyMembers = new List<PlacedPartyMember>();
 
 		List<PartyMember> allPartyMembers = PartyManager.getAllPartyMembers();
@@ -42,11 +43,9 @@ public class PartyMemberPlacer : MonoBehaviour
         {
             if (partyMember.placed)
             {
-                placeNextPartyMember(partyMember.uniqueName);
+                spawnPlacedPartyMember(partyMember, AreaManager.getMasterGrid().WorldToCell(partyMember.placedPosition));
             }
         }
-
-        OnPartyMemberPlaced.Invoke();
 	}
 
 	public static PartyMemberPlacer getInstance()
@@ -68,33 +67,23 @@ public class PartyMemberPlacer : MonoBehaviour
 			return;
 		}
 
-        GameObject placedPartyMemberObject = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.placedPartyMember), AreaManager.getNPCParentWithoutScale());
+        //always the player's cell: a placed flag left over from before is no reason to send a new placement to its old position
+        spawnPlacedPartyMember(PartyManager.getPartyMember(nameOfPartyMember), SkillManager.getPlayerCoords());
 
-        // OOCSpawnDetails.addTutorialTargetComponent(placedPartyMemberObject, TutorialSequenceList.placedCharacterTargetHash);
-
-        if (PartyManager.getPartyMember(nameOfPartyMember).placed)
-        {
-            placedPartyMemberObject.transform.position = PartyManager.getPartyMember(nameOfPartyMember).placedPosition;
-            GameObjectUtil.updateGameObjectPosition(placedPartyMemberObject);
-        }
-        else
-        {
-            placedPartyMemberObject.transform.position = AreaManager.getMasterGrid().GetCellCenterWorld(SkillManager.getPlayerCoords());
-            GameObjectUtil.updateGameObjectPosition(placedPartyMemberObject);
-
-            PartyManager.getPartyMember(nameOfPartyMember).placed = true;
-            PartyManager.getPartyMember(nameOfPartyMember).placedPosition = placedPartyMemberObject.transform.position;
-        }        
-
-        PlacedPartyMember placedPartyMember = placedPartyMemberObject.GetComponent<PlacedPartyMember>();
-
-        placedPartyMember.partyMember = PartyManager.getPartyMember(nameOfPartyMember);
-
-        placedPartyMembers.Add(placedPartyMember);
-        
         SkillManager.OnSkillUse.Invoke();
         OnPartyMemberPlaced.Invoke();
 	}
+
+    //the spawned GameObject must not be toggled off and on afterwards, as that stops the coroutines its spawn behaviours are still waiting on
+    private static void spawnPlacedPartyMember(PartyMember partyMember, Vector3Int cell)
+    {
+        GameObject placedPartyMemberObject = new PlacedPartyMemberSpawnDetails(partyMember, cell).spawnInteractables()[0];
+
+        partyMember.placed = true;
+        partyMember.placedPosition = placedPartyMemberObject.transform.position;
+
+        placedPartyMembers.Add(placedPartyMemberObject.GetComponent<PlacedPartyMember>());
+    }
 
     public static bool hasBeenPlaced(PartyMember partyMember)
     {
@@ -160,7 +149,6 @@ public class PartyMemberPlacer : MonoBehaviour
     private static void addListener()
     {
         TransitionManager.BeforeTransition.AddListener(removeAllPlacedPartyMembers);
-        TransitionManager.AfterTransition.AddListener(placeAllPartyMembers);
     }
 
     public static void removeAllPlacedPartyMembers()

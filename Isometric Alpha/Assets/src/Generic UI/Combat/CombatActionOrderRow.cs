@@ -14,6 +14,10 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
     public readonly static UnityEvent<Stats> HoldRevealPriority = new UnityEvent<Stats>();
     public readonly static UnityEvent<Stats> ReleaseRevealPriority = new UnityEvent<Stats>();
 
+    //covers every actor of the action, where the reveal priority only goes to the assigned one
+    public readonly static UnityEvent<CombatAction> HoldActorOutlines = new UnityEvent<CombatAction>();
+    public readonly static UnityEvent<CombatAction> ReleaseActorOutlines = new UnityEvent<CombatAction>();
+
     public readonly static UnityEvent OnPointerEnterCombatActionOrderRow = new UnityEvent();
     public readonly static UnityEvent OnPointerExitCombatActionOrderRow = new UnityEvent();
 
@@ -106,6 +110,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
         }
 
         HoldRevealPriority.Invoke(actor);
+        HoldActorOutlines.Invoke(actionBeingDescribed);
 
         CombatHoverTileManager.GetHoverSelector.AddListener(getHoverSelector);
         SelectorManager.declareSelectors();
@@ -173,7 +178,9 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
 		rowBackground.color = Color.white;
 		
 		CombatAction actionBeingDescribed = getCombatActionBeingDescribed();
-		
+
+        ReleaseActorOutlines.Invoke(actionBeingDescribed);
+
 		actionBeingDescribed.removeHighlightFromActorSprites();
 
         CombatHoverTileManager.GetHoverSelector.RemoveListener(getHoverSelector);

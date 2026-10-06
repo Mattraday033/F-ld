@@ -185,6 +185,8 @@ public class CunningObjectSpawnDetails : OOCSpawnDetails
     //the index identifies the cunning object itself, not a variant of its name
     public override string uniqueName { get { return displayName; } }
 
+    protected override int layer { get { return LayerAndTagManager.cunningableObjectLayer; } }
+
     public CunningObjectSpawnDetails(int index,
                                         Vector3Int cellCoords,
                                         CunningObjectSpriteCategory category,
@@ -1365,6 +1367,38 @@ public class PartyMemberTrainSpawnDetails : OOCSpawnDetails
         aestheticSpawnBehaviours[typeof(AnimationManagerSpawnBehaviour)] = new AnimationManagerSpawnBehaviour(partyMember.stats, facing);
 
         universalSpawnBehaviours[typeof(PartyMemberMovementSpawnBehaviour)] = new PartyMemberMovementSpawnBehaviour(partyMember, placeInTrain);
+    }
+}
+
+//a party member left standing on a cell by the Leadership skill, facing the way the player faces
+public class PlacedPartyMemberSpawnDetails : OOCSpawnDetails
+{
+    //the party member tag keeps it from being talked to like the NPC it shares a layer with
+    protected override string tag { get { return LayerAndTagManager.partyMemberTag; } }
+    protected override int layer { get { return LayerAndTagManager.npcLayer; } }
+
+    public override string uniqueName { get { return partyMember.uniqueName; } }
+
+    //placed party members are created by PartyMemberPlacer rather than an area's spawn list, so their NPC spawn params do not apply
+    public override SpawnParams spawnParams { get { return new InteractableSpawnParams(); } }
+
+    public readonly PartyMember partyMember;
+
+    public PlacedPartyMemberSpawnDetails(PartyMember partyMember, Vector3Int cellCoords) :
+    base(partyMember.displayName,
+         appearance: partyMember.stats.appearance,
+         cellCoords: cellCoords,
+         facing: State.playerFacing.getFacing(),
+         tutorialTargetHash: TutorialSequenceList.placedCharacterTargetHash)
+    {
+        this.partyMember = partyMember;
+
+        aestheticSpawnBehaviours[typeof(AnimationManagerSpawnBehaviour)] = new AnimationManagerSpawnBehaviour(partyMember.stats, facing);
+        aestheticSpawnBehaviours[typeof(NPCMouseHoverSpawnBehaviour)] = new PlacedPartyMemberMouseHoverSpawnBehaviour();
+        //the spawn params under this name belong to the party member's NPC, so the icon manager must not check them
+        aestheticSpawnBehaviours[typeof(OverHeadIconManagerSpawnBehaviour)] = new OverHeadIconManagerSpawnBehaviour(ignoresSecretDoors: true);
+
+        universalSpawnBehaviours[typeof(PlacedPartyMemberSpawnBehaviour)] = new PlacedPartyMemberSpawnBehaviour(partyMember);
     }
 }
 

@@ -103,6 +103,12 @@ public abstract class MovementTracker : MonoBehaviour
         return isMoving();
     }
 
+    //every tracker is given a move coroutine on each step, even one that leaves it standing where it is
+    public virtual bool isChangingCells()
+    {
+        return isMoving();
+    }
+
     public virtual bool movableObject
     {
         get => false;

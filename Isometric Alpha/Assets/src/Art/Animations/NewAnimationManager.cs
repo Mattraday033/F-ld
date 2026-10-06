@@ -151,7 +151,7 @@ public class NewAnimationManager : MonoBehaviour
 
     public void handleMovementAnimation()
     {
-        if(movementTracker != null && movementTracker.isMoving())
+        if(movementTracker != null && movementTracker.isChangingCells())
         {
             switch(characterFacing.getFacing())
             {
