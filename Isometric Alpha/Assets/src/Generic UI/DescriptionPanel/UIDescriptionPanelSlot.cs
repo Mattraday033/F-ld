@@ -10,8 +10,16 @@ public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
     [SerializeField]
     private bool listeningForGridRows = false;
 
+    //the screen this slot sits in, if it sits in one
+    private ScreenManager owningScreen;
+
+    //what addListeners subscribed to, kept so removeListeners takes off the same ones whichever screen is current by then
+    private List<UnityEvent> subscribedEvents = new List<UnityEvent>();
+
     protected virtual void Awake()
     {
+        owningScreen = GetComponentInParent<ScreenManager>(true);
+
         addListeners();
     }
 
@@ -20,11 +28,23 @@ public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
         removeListeners();
     }
 
+    //a slot on a hidden screen is filled when its screen is next shown
+    protected bool hiddenWithItsScreen()
+    {
+        return ScreenManager.isHidden(owningScreen);
+    }
+
+    //while its screen is being shown, the description waits for the party member to be settled, and is built once
+    protected bool putOffWhileItsScreenIsShown()
+    {
+        return ScreenUpdateBatch.putOff(owningScreen, updateCounter);
+    }
+
     public void addListeners()
     {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
+        subscribedEvents = getUpdateEvents();
 
-        foreach (UnityEvent unityEvent in listOfEvents)
+        foreach (UnityEvent unityEvent in subscribedEvents)
         {
             unityEvent.AddListener(updateCounter);
         }
@@ -36,9 +56,7 @@ public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
     }
     public void removeListeners()
     {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
-
-        foreach(UnityEvent unityEvent in listOfEvents)
+        foreach(UnityEvent unityEvent in subscribedEvents)
         {
             unityEvent.RemoveListener(updateCounter);
         }
@@ -51,6 +69,16 @@ public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
 
     public virtual void updateCounter()
     {
+        if (hiddenWithItsScreen())
+        {
+            return;
+        }
+
+        if (putOffWhileItsScreenIsShown())
+        {
+            return;
+        }
+
         if(OverallUIManager.currentScreenManager != null && !listeningForGridRows)
         {
             setPrimaryDescribable(ScreenManager.currentPartyMember);
@@ -59,6 +87,11 @@ public class UIDescriptionPanelSlot : DescriptionPanelSlot, ICounter
 
     public virtual void updateCounter(IDescribable describable)
     {
+        if (hiddenWithItsScreen())
+        {
+            return;
+        }
+
         if(describable == null)
         {
             removePrimaryDescribable();

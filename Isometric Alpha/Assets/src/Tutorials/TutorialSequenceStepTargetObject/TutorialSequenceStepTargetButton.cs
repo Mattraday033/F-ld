@@ -56,6 +56,12 @@ public class TutorialSequenceStepTargetButton : TutorialSequenceStepTargetUIObje
 
 	public override void assignToTutorialSequence(TutorialSequenceStep tutorialSequenceStep)
 	{
+		//a button inside the prebuilt map window is still listening while the map is hidden
+		if (!onScreen())
+		{
+			return;
+		}
+
 		if (tutorialSequenceStep.isTutorialTarget(getTutorialHash()))
 		{
 			if (EscapeStack.getEscapableObjectsCount() <= 0)

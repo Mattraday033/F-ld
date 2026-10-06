@@ -8,7 +8,12 @@ using UnityEngine.Events;
 public class SubcategoryDescriptionSlot : UIDescriptionPanelSlot
 {
     public override void updateCounter(IDescribable describable)
-    {   
+    {
+        if (hiddenWithItsScreen())
+        {
+            return;
+        }
+
         if(describable as IJournalSubcategory == null)
         {
             return;

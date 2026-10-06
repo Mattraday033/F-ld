@@ -101,8 +101,7 @@ public class OverHeadIcon : SlotIconHover
 
                     if(!iconManager.hasIcon(OverHeadIconType.Shopkeeper))
                     {
-                        DestroyImmediate(gameObject);
-                        iconManager.removeAllDestroyedIcons();
+                        iconManager.destroyIcon(type);
                     } else
                     {
                         roundCounter.enabled = false;

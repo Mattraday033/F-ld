@@ -237,7 +237,7 @@ public class SelectorManager : MonoBehaviour
 	{
 		if (instance != null && instance.pressEPrompt != null)
 		{
-			DestroyImmediate(instance.pressEPrompt);
+			Destroy(instance.pressEPrompt);
 			instance.pressEPrompt = null;
 		}
 	}

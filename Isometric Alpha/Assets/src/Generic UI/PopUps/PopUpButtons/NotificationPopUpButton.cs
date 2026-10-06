@@ -61,7 +61,7 @@ public class NotificationPopUpButton : PopUpButton
     {
         if (getCurrentPopUpGameObject() != null && !(getCurrentPopUpGameObject() is null))
         {
-            DestroyImmediate(getCurrentPopUpGameObject());
+            Destroy(getCurrentPopUpGameObject());
         }
 
         NotificationManager.purgeNotifications();

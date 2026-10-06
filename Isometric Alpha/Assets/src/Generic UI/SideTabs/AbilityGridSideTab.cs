@@ -20,8 +20,13 @@ public class AbilityGridSideTab : MonoBehaviour
 
     public readonly static UnityEvent OnSideTabChosen = new UnityEvent();
 
+    //the screen this tab sits in, if it sits in one. The shop's tabs have none
+    private ScreenManager owningScreen;
+
     private void Awake()
     {
+        owningScreen = GetComponentInParent<ScreenManager>(true);
+
         setToClosed();
 
         OnSideTabChosen.AddListener(setToClosed);
@@ -65,6 +70,12 @@ public class AbilityGridSideTab : MonoBehaviour
 
     public virtual void setToClosed()
     {
+        //a tab on a hidden screen is set up again when its screen is next shown
+        if (ScreenManager.isHidden(owningScreen))
+        {
+            return;
+        }
+
         closedButton.interactable = true;
 
         if (openTabPanel == null || openTabPanel is null)
@@ -77,6 +88,12 @@ public class AbilityGridSideTab : MonoBehaviour
 
     public virtual void setToDefaultState()
     {
+        //the screen that is showing is the one the tab dictionary is being asked about, so a tab on a hidden screen has no say
+        if (ScreenManager.isHidden(owningScreen))
+        {
+            return;
+        }
+
         if((currentTabDict.ContainsKey(getCurrentDictKey()) && listToChoose == currentTabDict[getCurrentDictKey()]) || 
             (!currentTabDict.ContainsKey(getCurrentDictKey()) && getCurrentDictKey().getDefaultDescribableList() == listToChoose))
         {
@@ -86,7 +103,8 @@ public class AbilityGridSideTab : MonoBehaviour
             setToClosed();
         }
 
-        if(currentTabDict[getCurrentDictKey()] == listToChoose)
+        //no tab has been chosen for this screen until the default one's click above has gone through
+        if(currentTabDict.TryGetValue(getCurrentDictKey(), out DescribableList chosenList) && chosenList == listToChoose)
         {
             closedButton.interactable = false;
         }
@@ -105,6 +123,12 @@ public class AbilityGridSideTab : MonoBehaviour
 
         LoadSaveFile.OnLoadResetData.RemoveListener(init);
         LoadSaveFile.OnLoadResetData.AddListener(init);
+    }
+
+    //a screen that is shown again opens on its default tab, as one that was just made does
+    public static void forgetTab(ITabParent tabParent)
+    {
+        currentTabDict.Remove(tabParent);
     }
 
     public static void setCurrentTabDict(ITabParent tabParent, DescribableList newList)

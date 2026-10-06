@@ -15,7 +15,7 @@ public class PartyMemberSelectionGrid : UIListenerGrid
     
     public override void removeListeners()
     {
-        base.addListeners();
+        base.removeListeners();
 
         ScreenManager.OnScreenDeclaration.RemoveListener(setVisibility);
     }
@@ -23,6 +23,13 @@ public class PartyMemberSelectionGrid : UIListenerGrid
     public override void updateCounter()
     {
         if(PlayerStateManager.inMainMenu())
+        {
+            return;
+        }
+
+        //switched off by setVisibility for a screen with no use for the strip. The next screen that wants it switches it on before its update goes out.
+        //A fill here would also fetch the party list, which a journal that is showing takes as its own list and titles itself after
+        if (!gameObject.activeSelf)
         {
             return;
         }

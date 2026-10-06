@@ -23,6 +23,12 @@ public class WeaponCounter : MonoBehaviour, ICounter
         addListeners();
     }
 
+    //OnEnable adds them every time, so without this a counter that is switched off and on again would be listening twice
+    private void OnDisable()
+    {
+        removeListeners();
+    }
+
     private void OnDestroy()
     {
         removeListeners();

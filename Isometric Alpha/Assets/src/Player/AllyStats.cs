@@ -121,7 +121,7 @@ public class AllyStats : Stats
     
     public Sprite getSpriteIcon()
     {
-        return Resources.LoadAll<Sprite>(EnemyTypeFolderPathList.getEnemyTypeFolderPath(uniqueName) + CharacterAnimationType.Idle_Front.ToString())[0];
+        return SpriteUtil.loadFirstSpriteOfSheetFromResources(EnemyTypeFolderPathList.getEnemyTypeFolderPath(uniqueName) + CharacterAnimationType.Idle_Front.ToString());
     }
 
     #endregion

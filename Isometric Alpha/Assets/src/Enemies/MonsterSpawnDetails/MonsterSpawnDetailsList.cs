@@ -16,7 +16,7 @@ public static class MonsterSpawnDetailsList
 
         if(conditionalList != null)
         {
-            return conditionalList;
+            return assignPackIndices(conditionalList);
         }
 
         if (!monsterSpawnDetailsDict.ContainsKey(key))
@@ -24,7 +24,18 @@ public static class MonsterSpawnDetailsList
             return new List<MonsterSpawnDetails>();
         }
 
-        return monsterSpawnDetailsDict[key];
+        return assignPackIndices(monsterSpawnDetailsDict[key]);
+    }
+
+    //a monster's pack index is its place in the area's list, which is also how its EnemyPackInfo and defeat key are found
+    private static List<MonsterSpawnDetails> assignPackIndices(List<MonsterSpawnDetails> list)
+    {
+        for(int index = 0; index < list.Count; index++)
+        {
+            list[index].index = index;
+        }
+
+        return list;
     }
 
     public static List<MonsterSpawnDetails> getConditionalMonsterSpawnList(string locationName)

@@ -62,7 +62,7 @@ public static class SpawnInfoManager
 
         // performButtonScriptStartingAction();
 
-        // spawnAllMonsters();
+        spawnAllMonsters();
 
         // TrapAndButtonStateManager.setTrapsAndButtons();
 
@@ -259,59 +259,41 @@ public static class SpawnInfoManager
 
     public static void spawnAllMonsters()
     {
-        // if(!AreaList.currentAreaIsHostile())
-        // {
-        //     return;
-        // }
+        if(!AreaList.currentAreaIsHostile())
+        {
+            return;
+        }
 
-        // List<MonsterSpawnDetails> monsterDetailsList = MonsterSpawnDetailsList.getMonsterSpawnDetails();
+        List<MonsterSpawnDetails> monsterDetailsList = MonsterSpawnDetailsList.getMonsterSpawnDetails();
 
-        // int index = 0;
-        // foreach (MonsterSpawnDetails details in monsterDetailsList)
-        // {
-        //     spawnMonster(details, index);
-
-        //     index++;
-        // }
+        foreach (MonsterSpawnDetails details in monsterDetailsList)
+        {
+            spawnMonster(details);
+        }
     }
 
-    // public static Transform spawnMonster(MonsterSpawnDetails details, int index)
-    // {
-    //     GameObject monsterGameObject = GameObject.Instantiate(Resources.Load<GameObject>(details.prefabName), details.parent);
-    //     EnemyMovement monsterMovement = monsterGameObject.GetComponent<EnemyMovement>();
+    //the details carry the monster's pack index, and their spawn behaviours add and set up its EnemyMovement
+    public static Transform spawnMonster(MonsterSpawnDetails details)
+    {
+        GameObject monsterGameObject = details.spawnInteractables()[0];
+        EnemyMovement monsterMovement = monsterGameObject.GetComponent<EnemyMovement>();
 
-    //     monsterMovement.setMonsterPackIndex(index);
+        string key = MonsterDefeatKeysList.generateMonsterDefeatKey(monsterMovement.getMonsterPackIndex());
 
-    //     details.spawnActions(monsterGameObject);
+        if (!details.spawnParams.canSpawn(key))
+        {
+            monsterMovement.setToDefeatedMode();
+        }
 
-    //     InteractableSpawnParams spawnParams = SpawnParamsList.getMonsterSpawnParams(AreaManager.locationName, index.ToString());
+        if (lastSaveBlueprint != null)
+        {
+            if (lastSaveBlueprint.monsterLocations.Length > details.index)
+            {
+                monsterMovement.setFromWrapper(lastSaveBlueprint.monsterLocations[details.index]);
+            }
+        }
 
-    //     string key = MonsterDefeatKeysList.generateMonsterDefeatKey(monsterMovement.getMonsterPackIndex());
-
-    //     if (!spawnParams.canSpawn(key))
-    //     {
-    //         monsterMovement.setToDefeatedMode();
-    //     } 
-
-    //     details.spawnActions(monsterMovement);
-
-    //     if (lastSaveBlueprint != null)
-    //     {
-    //         if (lastSaveBlueprint.monsterLocations.Length > index)
-    //         {
-    //             monsterMovement.setFromWrapper(lastSaveBlueprint.monsterLocations[index]);
-    //         }
-    //     }
-    //     else
-    //     {   
-    //         Vector3 newPos = AreaManager.getMasterGrid().GetCellCenterWorld(details.cellCoords);
-    //         newPos.z = Helpers.calculateColliderZPosition(details.cellCoords);
-    //         monsterGameObject.transform.position = newPos;
-    //     }
-
-    //     addGameObject(monsterGameObject);
-
-    //     return monsterGameObject.transform;
-    // }
+        return monsterGameObject.transform;
+    }
 
 }

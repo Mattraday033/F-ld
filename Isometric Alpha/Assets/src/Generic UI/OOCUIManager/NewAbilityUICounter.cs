@@ -13,8 +13,13 @@ public class NewAbilityUICounter : MonoBehaviour
     public NewAbilityUIScope scope = NewAbilityUIScope.Any;
     public PrimaryStat primaryStat = PrimaryStat.None;
 
+    //the screen this counter sits in, if it sits in one. The one on the overworld HUD has none
+    private ScreenManager owningScreen;
+
     private void Awake()
     {
+        owningScreen = GetComponentInParent<ScreenManager>(true);
+
         ScreenManager.OnScreenInteriorUpdate.AddListener(determineVisibility);
         NewAbilityManager.AbilityMarkedAsNew.AddListener(determineVisibility);
         NewAbilityManager.AbilityNoLongerNew.AddListener(determineVisibility);
@@ -29,7 +34,7 @@ public class NewAbilityUICounter : MonoBehaviour
         ScreenManager.OnScreenInteriorUpdate.RemoveListener(determineVisibility);
         NewAbilityManager.AbilityMarkedAsNew.RemoveListener(determineVisibility);
         NewAbilityManager.AbilityNoLongerNew.RemoveListener(determineVisibility);
-        GridRow.OnDescribableToDisplay.AddListener(determineVisibility);
+        PartySpriteGridRow.OnPartyMemberSelected.RemoveListener(determineVisibility);
         PlayerAbilityGridRowDescriptionPanel.AbilityNoLongerNew.RemoveListener(determineVisibility);
     }
 
@@ -40,6 +45,12 @@ public class NewAbilityUICounter : MonoBehaviour
 
     public void determineVisibility(object obj)
     {
+        //a counter on a hidden screen is worked out again when its screen is next shown
+        if (ScreenManager.isHidden(owningScreen))
+        {
+            return;
+        }
+
         if(scope == NewAbilityUIScope.Any)
         {
             gameObject.SetActive(NewAbilityManager.anAbilityIsMarkedAsNew());

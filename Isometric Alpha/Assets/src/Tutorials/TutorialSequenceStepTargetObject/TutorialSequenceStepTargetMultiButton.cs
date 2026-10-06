@@ -48,6 +48,12 @@ public class TutorialSequenceStepTargetMultiButton : TutorialSequenceStepTargetU
 
 	public override void assignToTutorialSequence(TutorialSequenceStep tutorialSequenceStep)
 	{
+		//a button inside the prebuilt map window is still listening while the map is hidden
+		if (!onScreen())
+		{
+			return;
+		}
+
 		if (tutorialSequenceStep.isTutorialTarget(getTutorialHash()))
 		{
 			PopUpScreenBlockerManager.destroyPopUpScreenBlocker();

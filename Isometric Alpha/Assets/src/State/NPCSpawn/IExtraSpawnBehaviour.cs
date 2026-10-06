@@ -245,6 +245,66 @@ public class DialogueTriggerSpawnBehaviour : IExtraSpawnBehaviour
     }
 }
 
+public class EnemyMovementSpawnBehaviour : IExtraSpawnBehaviour
+{
+    private MonsterSpawnDetails spawnDetails;
+
+    //the details are read when the monster spawns, as its pack index is only known once its place in the area's list is
+    public EnemyMovementSpawnBehaviour(MonsterSpawnDetails spawnDetails)
+    {
+        this.spawnDetails = spawnDetails;
+    }
+
+    public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
+
+    public Component addBehaviour(GameObject gameObject)
+    {
+        EnemyMovement enemyMovement = addMovement(gameObject);
+
+        //the movement index and the pack lookups both come from the pack index, so it has to be in place first
+        enemyMovement.setMonsterPackIndex(spawnDetails.index);
+
+        enemyMovement.rendererList = gameObject.GetComponent<SpriteLayerRendererList>();
+        enemyMovement.iconManager = gameObject.GetComponent<OverHeadIconManager>();
+        enemyMovement.attachedCollider2D = gameObject.GetComponent<TilemapCollider2D>();
+
+        enemyMovement.movementType = spawnDetails.movementType;
+
+        //the animation manager arrives with the aesthetic behaviours, so its OnEnable ran before this tracker existed to be found
+        NewAnimationManager animationManager = gameObject.GetComponent<NewAnimationManager>();
+
+        if(animationManager != null)
+        {
+            enemyMovement.animationManager = animationManager;
+            animationManager.movementTracker = enemyMovement;
+        }
+
+        MovementManager.addMovementTracker(enemyMovement);
+
+        enemyMovement.applyRetreatStun();
+
+        return enemyMovement;
+    }
+
+    protected virtual EnemyMovement addMovement(GameObject gameObject)
+    {
+        return gameObject.AddComponent<EnemyMovement>();
+    }
+}
+
+public class MovableObjectMovementSpawnBehaviour : EnemyMovementSpawnBehaviour
+{
+    public MovableObjectMovementSpawnBehaviour(MonsterSpawnDetails spawnDetails) :
+    base(spawnDetails)
+    {
+    }
+
+    protected override EnemyMovement addMovement(GameObject gameObject)
+    {
+        return gameObject.AddComponent<MovableObjectMovement>();
+    }
+}
+
 public class FloorButtonSpawnBehaviour : IExtraSpawnBehaviour
 {
     private int index;
@@ -570,6 +630,7 @@ public class TutorialTargetSpawnBehaviour : IExtraSpawnBehaviour
         TutorialSequenceStepTargetSprite targetSprite = targetRect.AddComponent<TutorialSequenceStepTargetSprite>();
         targetSprite.tutorialHash = tutorialTargetHash;
         targetSprite.rendererList = gameObject.GetComponent<SpriteLayerRendererList>();
+        targetSprite.disableArrow = true;
 
         return targetSprite;
     }
@@ -623,7 +684,7 @@ public class TilemapOffsetSpawnBehaviour : IExtraSpawnBehaviour
     // {
     //     if (shouldNotSpawn())
     //     {
-    //         GameObject.DestroyImmediate(tutorialColliderGameObject);
+    //         GameObject.Destroy(tutorialColliderGameObject);
     //         return;
     //     }
 

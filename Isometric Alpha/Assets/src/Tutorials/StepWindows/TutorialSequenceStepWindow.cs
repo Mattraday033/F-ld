@@ -19,7 +19,7 @@ public class TutorialSequenceStepWindow : DescriptionPanel
     {
         if (instance != null)
         {
-            GameObject.DestroyImmediate(instance.gameObject);
+            GameObject.Destroy(instance.gameObject);
         }
 
         instance = this;
@@ -285,7 +285,7 @@ public class TutorialSequenceStepWindow : DescriptionPanel
             tutorialSequenceTarget.unhighlight(tutorialSequenceStep.skipUnhighlight); 
         }
 
-        GameObject.DestroyImmediate(gameObject);
+        GameObject.Destroy(gameObject);
     }
 
 }

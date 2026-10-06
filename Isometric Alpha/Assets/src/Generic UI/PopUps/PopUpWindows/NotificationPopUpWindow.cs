@@ -19,7 +19,7 @@ public class NotificationPopUpWindow : PageReaderPopUpWindow
     {
         if (instance != null)
         {
-            DestroyImmediate(instance.gameObject);
+            Destroy(instance.gameObject);
         }
 
         instance = this;

@@ -144,14 +144,14 @@ public class BackgroundManager : MonoBehaviour
     {
         foreach(List<Tilemap> listOfTilemaps in tilemapPrefabs)
         {
-            DestroyImmediate(listOfTilemaps[0].transform.parent.gameObject);
+            Destroy(listOfTilemaps[0].transform.parent.gameObject);
         }
 
         tilemapPrefabs = new List<List<Tilemap>>();
 
         if(backgroundTilemaps.Count > 0)
         {
-            DestroyImmediate(backgroundTilemaps[0].transform.parent.gameObject);
+            Destroy(backgroundTilemaps[0].transform.parent.gameObject);
 
             backgroundTilemaps = new List<Tilemap>();
         }

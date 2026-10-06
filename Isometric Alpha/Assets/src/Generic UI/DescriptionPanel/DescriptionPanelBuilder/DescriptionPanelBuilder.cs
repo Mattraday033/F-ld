@@ -541,6 +541,8 @@ public class DescriptionPanelBuilder : MonoBehaviour
     //takes the blocks so a chain of builders shares one list, rather than each asking the origin to work out every stat again
     public virtual void buildDescriptionPanel(IDescribableInBlocks blockOrigin, BlockFormat format, List<DescriptionPanelBuildingBlock> buildingBlocks)
     {
+        ScreenManager.reportWorkWhileHidden(this, "built its rows");
+
         this.blockOrigin = blockOrigin;
 
         if (format != null && formatter != null)
@@ -559,6 +561,8 @@ public class DescriptionPanelBuilder : MonoBehaviour
         List<DescriptionPanelBuildingBlock> blocksToShow = getBlocksPassingFilter(buildingBlocks);
 
         bool refillingRows = reuseRows && rowsMatch(blocksToShow);
+
+        ScreenOpenProbe.countDescriptionBuild(refillingRows ? 0 : blocksToShow.Count);
 
         if (refillingRows)
         {
@@ -818,7 +822,7 @@ public class DescriptionPanelBuilder : MonoBehaviour
                 continue;
             }
 
-            DestroyImmediate(row.gameObject);
+            Destroy(row.gameObject);
         }
 
         rows = new List<DescriptionPanelRow>();
@@ -918,6 +922,8 @@ public class DescriptionPanelBuilder : MonoBehaviour
         //a global flush rebuilds every canvas in the scene, so builders that are refilled often leave it to the normal pre-render pass
         if (!reuseRows)
         {
+            ScreenOpenProbe.countForcedCanvasRebuild();
+
             Canvas.ForceUpdateCanvases();
         }
 

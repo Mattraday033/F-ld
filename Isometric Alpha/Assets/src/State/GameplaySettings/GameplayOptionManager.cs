@@ -48,6 +48,12 @@ public class GameplayOptionManager : MonoBehaviour
     private void OnEnable()
     {
         ManualGameplayOptionUpdate.AddListener(updateDisplay);
+
+        //a change made while this was switched off, from another copy of the settings screen, is picked up here
+        if(option != null)
+        {
+            updateDisplay();
+        }
     }
 
     private void OnDisable()

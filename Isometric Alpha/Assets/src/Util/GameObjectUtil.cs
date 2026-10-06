@@ -8,12 +8,16 @@ public static class GameObjectUtil
 {
     public static void updateGameObjectPosition(GameObject gObj)
     {
+        ScreenOpenProbe.countOffOnToggle();
+
         gObj.SetActive(false);
         gObj.SetActive(true);
     }
 
     public static void updateGameObjectPosition(Transform transform)
     {
+        ScreenOpenProbe.countOffOnToggle();
+
         transform.gameObject.SetActive(false);
         transform.gameObject.SetActive(true);
     }

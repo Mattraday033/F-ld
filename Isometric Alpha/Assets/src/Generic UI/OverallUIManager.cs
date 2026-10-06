@@ -57,7 +57,7 @@ public static class OverallUIManager
 
     public static void leaveUI()
     {
-        destroyCurrentScreenType();
+        closeCurrentScreen();
 
         UIParentPanel.SetActive(false);
     }
@@ -69,6 +69,8 @@ public static class OverallUIManager
             return;
         }
 
+        ScreenOpenProbe.begin(currentScreenManager == null ? newScreenType.ToString() : lastScreenType + " to " + newScreenType);
+
         AudioManager.playChangeScreenSFX();
 
         MouseHoverManager.destroyMouseHoverBase();
@@ -76,36 +78,45 @@ public static class OverallUIManager
         UIParentPanel.SetActive(true);
 
         savePreviousPartyMember();
-        destroyCurrentScreenType();
+        closeCurrentScreen();
 
         lastScreenType = newScreenType;
 
-        switch (newScreenType)
+        currentScreenManager = PrebuiltScreenManager.show(newScreenType, screenBackground);
+
+        //no prebuilt copy of this screen, so it is made the way it always was
+        if (currentScreenManager == null)
         {
-            case ScreenType.Character:
-                currentScreenManager = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.characterScreen), screenBackground).GetComponent<ScreenManager>();
-                break;
-            case ScreenType.Inventory:
-                currentScreenManager = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.inventoryScreen), screenBackground).GetComponent<ScreenManager>();
-                break;
-            case ScreenType.Party:
-                currentScreenManager = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.partyScreen), screenBackground).GetComponent<ScreenManager>();
-                break;
-            case ScreenType.Journal:
-                currentScreenManager = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.journalScreen), screenBackground).GetComponent<ScreenManager>();
-                break;
-            case ScreenType.SaveAndLoad:
-                currentScreenManager = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.saveScreen), screenBackground).GetComponent<ScreenManager>();
-                break;
-            case ScreenType.Settings:
-                currentScreenManager = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.settingsScreen), screenBackground).GetComponent<ScreenManager>();
-                break;
-            default:
-                throw new IOException("Unexpected Screen Value: " + newScreenType.ToString());
+            ScreenOpenProbe.note("not prebuilt");
+
+            currentScreenManager = GameObject.Instantiate(Resources.Load<GameObject>(getScreenPrefabName(newScreenType)), screenBackground).GetComponent<ScreenManager>();
         }
 
         ScreenButtonManager.setCurrentScreenButton(newScreenType);
+
+        ScreenOpenProbe.step("changeScreen");
         // currentScreenManager.setToScreenState(getScreenState(newScreenType));
+    }
+
+    public static string getScreenPrefabName(ScreenType screenType)
+    {
+        switch (screenType)
+        {
+            case ScreenType.Character:
+                return PrefabNames.characterScreen;
+            case ScreenType.Inventory:
+                return PrefabNames.inventoryScreen;
+            case ScreenType.Party:
+                return PrefabNames.partyScreen;
+            case ScreenType.Journal:
+                return PrefabNames.journalScreen;
+            case ScreenType.SaveAndLoad:
+                return PrefabNames.saveScreen;
+            case ScreenType.Settings:
+                return PrefabNames.settingsScreen;
+            default:
+                throw new IOException("Unexpected Screen Value: " + screenType.ToString());
+        }
     }
 
     public static KeyCode getCurrentScreenExitKey()
@@ -140,11 +151,20 @@ public static class OverallUIManager
         }
     }
 
-    private static void destroyCurrentScreenType()
+    //a prebuilt screen is put away to be shown again. Any other copy is destroyed, as every screen used to be
+    private static void closeCurrentScreen()
     {
         if (currentScreenManager != null)
         {
-            GameObject.DestroyImmediate(currentScreenManager.gameObject);
+            if (currentScreenManager.isPrebuilt)
+            {
+                PrebuiltScreenManager.hide(currentScreenManager);
+            }
+            else
+            {
+                GameObject.Destroy(currentScreenManager.gameObject);
+            }
+
             currentScreenManager = null;
         }
     }

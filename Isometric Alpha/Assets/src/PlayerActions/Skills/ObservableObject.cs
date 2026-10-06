@@ -363,7 +363,7 @@ public class ObservableObject : MonoBehaviour, IRevealable
             }
 
             playAudioClip();
-            GameObject.DestroyImmediate(gameObject);
+            GameObject.Destroy(gameObject);
         }
     }
 

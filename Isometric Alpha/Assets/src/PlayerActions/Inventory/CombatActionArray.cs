@@ -160,7 +160,9 @@ public class CombatActionArray : StatBoostSourceCombiner
 
         combatActions[slotIndex] = null;
 
-        if(!LoadSaveFile.midLoad && PlayerStateManager.currentActivity == CurrentActivity.InUI)
+        if(!LoadSaveFile.midLoad &&
+            (PlayerStateManager.currentActivity == CurrentActivity.InUI || 
+                PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence))
         {
             MouseHoverManager.OnHoverPanelCreation.Invoke();
             OnCombatActionArrayChange.Invoke();
@@ -279,7 +281,9 @@ public class CombatActionArray : StatBoostSourceCombiner
                 newCombatAction.playEquipSFX();
             }
 
-            if(!skipUIUpdate && PlayerStateManager.currentActivity == CurrentActivity.InUI)
+            if(!skipUIUpdate &&             
+                (PlayerStateManager.currentActivity == CurrentActivity.InUI || 
+                PlayerStateManager.currentActivity == CurrentActivity.InTutorialSequence))
             {
                 MouseHoverManager.OnHoverPanelCreation.Invoke();
                 OnCombatActionArrayChange.Invoke();

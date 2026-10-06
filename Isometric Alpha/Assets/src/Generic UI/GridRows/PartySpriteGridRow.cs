@@ -34,6 +34,13 @@ public class PartySpriteGridRow : GridRow, IPointerDownHandler, IDragAndDropSour
         OnPartyMemberSelected.AddListener(removeOutlineOnPartyMemberSelection);
     }
 
+    //filling a grid switches its rows off and on again, and each time back on would otherwise add the same two listeners again
+    private void OnDisable()
+    {
+        PartyGridSection.OnPortraitHover.RemoveListener(handlePortraitHover);
+        OnPartyMemberSelected.RemoveListener(removeOutlineOnPartyMemberSelection);
+    }
+
     private void OnDestroy()
     {
         PartyGridSection.OnPortraitHover.RemoveListener(handlePortraitHover);

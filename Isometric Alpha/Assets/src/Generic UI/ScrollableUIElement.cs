@@ -93,6 +93,12 @@ public class ScrollableUIElement : MonoBehaviour
         ContinueAllScrolling.AddListener(continueScrolling);
 	}
 
+    private void OnDisable()
+    {
+        //a coroutine stops when its object is switched off, and updateScrollComponent would never have reached the line that clears this
+        updateScrollComp = null;
+    }
+
     private void OnDestroy()
     {
         HaltAllScrolling.RemoveListener(haltScrolling);
@@ -156,6 +162,8 @@ public class ScrollableUIElement : MonoBehaviour
 	{
 		// Debug.LogError("populating Panels");
 
+		ScreenManager.reportWorkWhileHidden(this, "filled its grid");
+
 		if (sortPanels)
 		{
 			listOfDescribables = sortListOfPanels(listOfDescribables);
@@ -165,9 +173,13 @@ public class ScrollableUIElement : MonoBehaviour
 		{
 			//the toggles below re-run OnDisable/OnEnable on every row, which a refill exists to avoid
 			refillPanels(listOfDescribables);
+
+			ScreenOpenProbe.countGridFill(0);
 		}
 		else
 		{
+			ScreenOpenProbe.countGridFill(listOfDescribables.Count);
+
 			if (deleteOldPanels)
 			{
 				deleteAllPanels();

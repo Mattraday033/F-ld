@@ -61,7 +61,7 @@ public class ActivationListener : MonoBehaviour
     {
         OnDestroy();
 
-        DestroyImmediate(gameObject);
+        Destroy(gameObject);
     }
 
     public void listenForActivationByName(ActivationCategory category)

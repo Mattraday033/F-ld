@@ -9,41 +9,36 @@ public class MonsterSpawnDetails : OOCSpawnDetails
     public const bool followsPlayer = true;
 
     public override Transform parent { get { return AreaManager.getMonsterParent(); } }
+    protected override string tag { get { return LayerAndTagManager.enemyTag; } }
+    protected override int layer { get { return LayerAndTagManager.enemyLayer; } }
+
+    //monsters are keyed by their pack index, which MonsterSpawnDetailsList assigns from their place in the area's list
+    public override SpawnParams spawnParams { get { return SpawnParamsList.getMonsterSpawnParams(AreaManager.locationName, index.ToString()); } }
+
     public MonsterMovementType movementType;
 
-    public MonsterSpawnDetails(string displayName, 
-                                Vector3Int cellCoords, 
-                                Facing facing = Facing.Random, 
-                                MonsterMovementType movementType = MonsterMovementType.Random, 
+    public MonsterSpawnDetails(string displayName,
+                                Vector3Int cellCoords,
+                                Facing facing = Facing.Random,
+                                MonsterMovementType movementType = MonsterMovementType.Random,
                                 string tutorialTargetHash = "",
                                 IAppearance appearance = null) :
-    base(displayName, appearance: appearance, cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash)
+    base(displayName, appearance: appearance, cellCoords: cellCoords, facing: facing, tutorialTargetHash: tutorialTargetHash)
     {
-        this.facing =  facing;
         this.movementType = movementType;
 
         if(tutorialTargetHash.Length > 0)
         {
             this.movementType = MonsterMovementType.Stationary;
         }
-    }
 
-    // public override string getPrefabName()
-    // {
-    //     return PrefabNames.oocMonster;
-    // }
+        aestheticSpawnBehaviours[typeof(AnimationManagerSpawnBehaviour)] = new AnimationManagerSpawnBehaviour(this, facing);
+        aestheticSpawnBehaviours[typeof(NPCMouseHoverSpawnBehaviour)] = new NPCMouseHoverSpawnBehaviour();
 
-    public virtual void spawnActions(EnemyMovement enemyMovement)
-    {
-        // if (hasTutorialTargetHash())
-        // {
-        //     addTutorialTargetComponent(enemyMovement, tutorialTargetHash);
-        // }
+        //the icon manager's spawn params check looks the monster up as an NPC, which would bring a defeated monster back when a secret door is found
+        aestheticSpawnBehaviours[typeof(OverHeadIconManagerSpawnBehaviour)] = new OverHeadIconManagerSpawnBehaviour(ignoresSecretDoors: true);
 
-        MovementManager.addMovementTracker(enemyMovement);
-        enemyMovement.initializeAnimationManager();
-        enemyMovement.characterFacing.currentFacing = facing;
-        enemyMovement.movementType = movementType;
+        universalSpawnBehaviours[typeof(EnemyMovementSpawnBehaviour)] = new EnemyMovementSpawnBehaviour(this);
     }
 }
 
@@ -51,28 +46,22 @@ public class MovableObjectSpawnDetails: MonsterSpawnDetails
 {
 
     public override Transform parent { get { return AreaManager.getMovableObjectParent(); } }
+    protected override string tag { get { return LayerAndTagManager.untaggedTag; } }
+    protected override int layer { get { return LayerAndTagManager.movableObjectLayer; } }
 
     public MovableObjectSpawnDetails(string displayName, Vector3Int cellCoords, string tutorialTargetHash = "", IAppearance appearance = null) :
     base(displayName, cellCoords, appearance: appearance, tutorialTargetHash: tutorialTargetHash)
     {
         this.facing = Facing.Random;
         this.movementType = MonsterMovementType.Random;
-    }
 
-    // public override string getPrefabName()
-    // {
-    //     return PrefabNames.movableObject;
-    // }
+        //a movable object is a static sprite: an animation manager would flip it to match the direction it was pushed in
+        aestheticSpawnBehaviours.Remove(typeof(AnimationManagerSpawnBehaviour));
 
-    public override void spawnActions(EnemyMovement enemyMovement)
-    {
-        // if (hasTutorialTargetHash())
-        // {
-        //     addTutorialTargetComponent(enemyMovement, tutorialTargetHash);
-        // }
+        //movable objects get no mouse hover or overhead icons
+        aestheticSpawnBehaviours.Remove(typeof(NPCMouseHoverSpawnBehaviour));
+        aestheticSpawnBehaviours.Remove(typeof(OverHeadIconManagerSpawnBehaviour));
 
-        // MovementManager.addMovementTracker(enemyMovement);
-
-        // enemyMovement.getSpriteRenderer().sprite = SpriteUtil.loadSpriteFromResources(getSpriteName());
+        universalSpawnBehaviours[typeof(EnemyMovementSpawnBehaviour)] = new MovableObjectMovementSpawnBehaviour(this);
     }
 }

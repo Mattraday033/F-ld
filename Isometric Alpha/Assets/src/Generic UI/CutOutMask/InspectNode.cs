@@ -115,6 +115,9 @@ public class InspectNode : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+
+            //Awake only runs once, and the inspect key can be rebound while a screen that is kept between uses is hidden
+            keybindText.text = "[" + KeyBindingList.inspectKey.ToString() + "]";
         } else
         {
             gameObject.SetActive(false);

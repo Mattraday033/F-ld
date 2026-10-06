@@ -19,6 +19,11 @@ public class SubcategoryGrid : UIListenerGrid
 
     public override void updateCounter(IDescribable describable)
     {
+        if (hiddenWithItsScreen())
+        {
+            return;
+        }
+
         if(describable as IJournalCategory != null)
         {
             grid.populatePanels((describable as IJournalCategory).getSubcategories());

@@ -162,12 +162,15 @@ public class LoadingBarProgressTracker : MonoBehaviour
         OOCUIManager.getInstance().enableOOCUI();
         OOCUIManager.updateOOCUI();
 
+        //built here, behind the loading screen, rather than the first time each screen is opened. endWait holds the prompt until it is done
+        StartCoroutine(PrebuiltScreenManager.build());
+
         StartCoroutine(endWait());
     }
 
     private IEnumerator endWait()
     {
-        while(elapsedTime < continueMessageWait)
+        while(elapsedTime < continueMessageWait || !PrebuiltScreenManager.buildFinished)
         {
             yield return null;
             elapsedTime += Time.deltaTime;

@@ -110,7 +110,7 @@ public static class MouseHoverManager
     {
         if (mouseHoverBase != null)
         {
-            GameObject.DestroyImmediate(mouseHoverBase);
+            GameObject.Destroy(mouseHoverBase);
         }
     }
 
@@ -235,10 +235,21 @@ public static class MouseHoverManager
 
         if (hoverDescriptionPanelObject != null)
         {
-            GameObject.DestroyImmediate(hoverDescriptionPanelObject);
+            GameObject.Destroy(hoverDescriptionPanelObject);
         }
 
         hoverDescriptionPanelSlot = null;
+    }
+
+    //for something that is being hidden rather than destroyed. A hover panel it was showing used to be destroyed with it
+    public static void destroyHoverIconInside(Transform container)
+    {
+        if (hoverDescriptionPanelObject != null && hoverDescriptionPanelObject.transform.IsChildOf(container))
+        {
+            GameObject.Destroy(hoverDescriptionPanelObject);
+
+            hoverDescriptionPanelSlot = null;
+        }
     }
 
     [RuntimeInitializeOnLoadMethod]

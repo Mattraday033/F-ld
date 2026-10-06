@@ -9,10 +9,24 @@ public class UIListenerGrid : MonoBehaviour, ICounter
     private DescribableList describableListType;
     public ScrollableUIElement grid;
 
+    //the screen this grid sits in, if it sits in one. The shop's grid and the party strip have none
+    private ScreenManager owningScreen;
+
+    //what addListeners subscribed to, kept so removeListeners takes off the same ones whichever screen is current by then
+    private List<UnityEvent> subscribedEvents = new List<UnityEvent>();
+
     private void Awake()
 	{
+        owningScreen = GetComponentInParent<ScreenManager>(true);
+
         addListeners();
 	}
+
+    //a grid on a hidden screen is filled when its screen is next shown
+    protected bool hiddenWithItsScreen()
+    {
+        return ScreenManager.isHidden(owningScreen);
+    }
 	
     private void OnEnable()
     {
@@ -26,20 +40,18 @@ public class UIListenerGrid : MonoBehaviour, ICounter
 
     public virtual void addListeners()
     {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
+        subscribedEvents = getUpdateEvents();
 
-        foreach (UnityEvent unityEvent in listOfEvents)
+        foreach (UnityEvent unityEvent in subscribedEvents)
         {
             unityEvent.AddListener(updateCounter);
         }
 
     }
-    
+
     public virtual void removeListeners()
     {
-        List<UnityEvent> listOfEvents = getUpdateEvents();
-
-        foreach (UnityEvent unityEvent in listOfEvents)
+        foreach (UnityEvent unityEvent in subscribedEvents)
         {
             unityEvent.RemoveListener(updateCounter);
         }
@@ -48,6 +60,17 @@ public class UIListenerGrid : MonoBehaviour, ICounter
 
     public virtual void updateCounter()
     {
+        if (hiddenWithItsScreen())
+        {
+            return;
+        }
+
+        //while its screen is being shown, the fill waits for the tab and the party member to be settled, and is done once
+        if (ScreenUpdateBatch.putOff(owningScreen, updateCounter))
+        {
+            return;
+        }
+
         grid.populatePanels(getDescribableList());
     }
 

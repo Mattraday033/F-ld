@@ -95,6 +95,12 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
+            //an entry left empty in the inspector
+            if (slot == null)
+            {
+                continue;
+            }
+
             slot.setPrimaryDescribable(primaryDescribable);
         }
     }
@@ -124,6 +130,11 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
+            if (slot == null)
+            {
+                continue;
+            }
+
             slot.setPrimaryDescribable(primaryDescribables);
         }
     }
@@ -155,6 +166,11 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
+            if (slot == null)
+            {
+                continue;
+            }
+
             slot.setTempDescribable(tempDescribable);
         }
     }
@@ -187,6 +203,11 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
+            if (slot == null)
+            {
+                continue;
+            }
+
             slot.revertToPrimaryDescribable();
         }
     }
@@ -204,7 +225,46 @@ public class DescriptionPanelSlot : MonoBehaviour
 
         foreach (DescriptionPanelSlot slot in additionalSlots)
         {
+            if (slot == null)
+            {
+                continue;
+            }
+
             slot.removePrimaryDescribable();
+        }
+    }
+
+    //puts the slot back the way a new one starts: nothing described, temporary or otherwise, and nothing built
+    public void clearAllDescribables()
+    {
+        primaryDescribables = null;
+        tempDescribables = null;
+
+        hideDescriptionPanel();
+
+        //hideDescriptionPanel leaves the decision panel standing when the slot has a prebuilt builder
+        MonoBehaviour decisionPanelObject = decisionPanel as MonoBehaviour;
+
+        if (decisionPanelObject != null)
+        {
+            Destroy(decisionPanelObject.gameObject);
+        }
+
+        decisionPanel = null;
+
+        if (additionalSlots == null)
+        {
+            return;
+        }
+
+        foreach (DescriptionPanelSlot slot in additionalSlots)
+        {
+            if (slot == null)
+            {
+                continue;
+            }
+
+            slot.clearAllDescribables();
         }
     }
 
@@ -218,6 +278,8 @@ public class DescriptionPanelSlot : MonoBehaviour
 
     private void revealDescriptionPanelSet()
     {
+        ScreenManager.reportWorkWhileHidden(this, "built its description");
+
         hideDescriptionPanel();
         List<IDescribable> currentDescribables = getCurrentDescribables();
 

@@ -13,16 +13,7 @@ public class InventoryScreen : ScreenManager, ICounter
     public Image characterSprite;
 
     //ICounter methods
-    private void OnEnable()
-    {
-        // updateCounter();
-        addListeners();
-    }
-
-    private void OnDisable()
-    {
-        removeListeners();
-    }
+    //the listeners are added once, by ScreenManager.Awake
 
     private void OnDestroy()
     {

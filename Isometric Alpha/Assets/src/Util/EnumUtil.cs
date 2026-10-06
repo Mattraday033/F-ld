@@ -289,6 +289,13 @@ public static class EnumUtil
                 return CharacterAnimationType.Attack_Normal_Back;
 
 
+            case CharacterAnimationType.Death_Front_Weaponless:
+                return CharacterAnimationType.Death_Front;
+
+            case CharacterAnimationType.Death_Back_Weaponless:
+                return CharacterAnimationType.Death_Back;
+
+
             case CharacterAnimationType.Death_Front:
             case CharacterAnimationType.Wounded_Front:
             case CharacterAnimationType.Secondary_Idle_Front:

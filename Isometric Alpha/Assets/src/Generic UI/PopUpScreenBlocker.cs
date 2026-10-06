@@ -17,6 +17,6 @@ public class PopUpScreenBlocker : MonoBehaviour
     
     private void destroySelf()
     {
-        DestroyImmediate(gameObject);
+        Destroy(gameObject);
     }
 }

@@ -388,7 +388,8 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
                 overHeadNameTag.labelNPC(nameOfNPC);
                 overHeadNameTag.transform.SetAsFirstSibling();
 
-                if(iconParent.childCount > 1)
+                //counts the other icons rather than iconParent's children, which still include a name tag destroyed earlier this frame
+                if(icons.Count > 0)
                 {
                     overHeadNameTag.orientTransformSide();
                 } else
@@ -453,7 +454,10 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
     {
         if(icons.ContainsKey(iconType))
         {
-            DestroyImmediate(icons[iconType]);
+            Destroy(icons[iconType]);
+
+            //Destroy waits for the end of the frame, so the entry is not null yet and has to be removed by key
+            icons.Remove(iconType);
             removeAllDestroyedIcons();
         }
     }

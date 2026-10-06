@@ -14,10 +14,31 @@ public static class SpriteUtil
     //keyed by the name asked for, so a refilled description panel finds its icons without a Resources lookup each time
     private static readonly Dictionary<string, Sprite> loadedSpriteCache = new Dictionary<string, Sprite>();
 
+    //keyed by the path of a sheet cut into several sprites, for when the first of them is the one wanted
+    private static readonly Dictionary<string, Sprite> firstSpriteOfSheetCache = new Dictionary<string, Sprite>();
+
     [RuntimeInitializeOnLoadMethod]
     private static void clearLoadedSpriteCache()
     {
         loadedSpriteCache.Clear();
+        firstSpriteOfSheetCache.Clear();
+    }
+
+    public static Sprite loadFirstSpriteOfSheetFromResources(string sheetPath)
+    {
+        //a cached sprite that Unity has since unloaded compares equal to null, so it's loaded again
+        if(firstSpriteOfSheetCache.TryGetValue(sheetPath, out Sprite cachedSprite) && cachedSprite != null)
+        {
+            return cachedSprite;
+        }
+
+        ScreenOpenProbe.countSpriteLoad();
+
+        Sprite firstSprite = Resources.LoadAll<Sprite>(sheetPath)[0];
+
+        firstSpriteOfSheetCache[sheetPath] = firstSprite;
+
+        return firstSprite;
     }
 
     public static Sprite loadSpriteFromResources(string spriteName)

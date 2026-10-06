@@ -1079,6 +1079,7 @@ fadeToBlack(true, false)
 
 movePlayerPos(9,14)
 setFacing(NE)
+setNPCFacing({kastorIndex},SW)
 activate({thatchIndex})
 
 fadeBackIn(60)

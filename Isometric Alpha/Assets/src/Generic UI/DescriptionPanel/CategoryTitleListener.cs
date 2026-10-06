@@ -104,17 +104,31 @@ public class CategoryTitleListener : UIDescriptionPanelSlot
 
     private void OnDestroy()
     {
+        //this OnDestroy is the one Unity calls, so the base's listeners are taken off from here as well
+        removeListeners();
+
         Tab.OnListRetrieved.RemoveListener(updateCounter);
     }
 
 
     public void updateCounter(DescribableList listType)
     {
+        //every list fetched anywhere in the game comes through here, so a hidden journal would otherwise retitle itself after each one
+        if (hiddenWithItsScreen())
+        {
+            return;
+        }
+
         setPrimaryDescribable(new CategoryType(listType));
     }
 
     public override void updateCounter(IDescribable describable)
     {
+        if (hiddenWithItsScreen())
+        {
+            return;
+        }
+
         IJournalCategory category = describable as IJournalCategory;
 
         if(category == null || !listenForSubcategory)
