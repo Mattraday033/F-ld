@@ -71,6 +71,17 @@
         }
     }
 
+    // samples a texture through its own tiling and offset, and draws nothing where that lands outside the texture.
+    // the layer textures are clamped, so without the cut off a small canvas would smear its edge pixels across the frame
+    void SampleCanvas_float(UnityTexture2D tex, float2 uv, out float4 result, out float alpha)
+    {
+        float2 canvasUV = uv * tex.scaleTranslate.xy + tex.scaleTranslate.zw;
+        float2 inside = step(0.0, canvasUV) * step(canvasUV, 1.0);
+
+        result = SAMPLE_TEXTURE2D(tex.tex, tex.samplerstate, canvasUV) * (inside.x * inside.y);
+        alpha = result.w;
+    }
+
 #endif
 
 

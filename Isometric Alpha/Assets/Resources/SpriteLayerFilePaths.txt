@@ -9,6 +9,7 @@ Sprites/SpriteLayers/Body/LovashiArmor/TwoHandedStab/Normal_Attack_Front
 Sprites/SpriteLayers/Face/Short_Goatee/OOC_Idle_Front
 Sprites/SpriteLayers/Face/Short_Goatee/TwoHandedStab/Normal_Attack_Front
 Sprites/SpriteLayers/Hair/Short_Ruffled/Attack_Front_Two_Handed_Stab
-Sprites/SpriteLayers/Hair/Short_Ruffled/OOC_Idle_Front
+Sprites/SpriteLayers/Hair/Short_Ruffled/Normal
+Sprites/SpriteLayers/Hair/Short_Ruffled/Old
 Sprites/SpriteLayers/Weapon/SpearSimple/Attack_Normal_Front
 Sprites/SpriteLayers/Weapon/SpearSimple/Idle_Front

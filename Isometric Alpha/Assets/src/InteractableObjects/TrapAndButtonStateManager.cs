@@ -31,6 +31,15 @@ public class TrapAndButtonStateManager : MonoBehaviour
         OnSetTraps.Invoke(key, status);
     }
 
+    //a default never overrides a state the player has already set, and nothing is told as the area hasn't spawned yet
+    public static void setDefault(string key, bool status)
+    {
+        if (!allActivatedTrapKeys.ContainsKey(key))
+        {
+            allActivatedTrapKeys[key] = status;
+        }
+    }
+
     [RuntimeInitializeOnLoadMethod]
     public static void resetTrapKeys()
     {

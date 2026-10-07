@@ -54,6 +54,9 @@ public static class SpawnInfoManager
 
         spawnPlayer();
 
+        //cunning objects and spikes read their state as they spawn, so the defaults have to be in place first
+        setDefaultTrapStates();
+
         spawnAllInteractables();
 
         spawnAllTransitions();
@@ -69,13 +72,7 @@ public static class SpawnInfoManager
 
         // TrapAndButtonStateManager.setTrapsAndButtons();
 
-        if(lastSaveBlueprint != null)
-        {
-            lastSaveBlueprint = null;
-        } else if(TrapAndButtonStateManager.trapKeyCount() <= 0)
-        {
-            // setDefaultTrapStates();
-        }
+        lastSaveBlueprint = null;
     }
 
     private static void setDefaultTrapStates()
@@ -84,7 +81,7 @@ public static class SpawnInfoManager
 
         foreach(KeyValuePair<string, bool> kvp in defaultTrapStates)
         {
-            TrapAndButtonStateManager.setKey(kvp.Key, kvp.Value);
+            TrapAndButtonStateManager.setDefault(kvp.Key, kvp.Value);
         }
     }
 

@@ -309,27 +309,62 @@ public class Costume: IAppearance
         }
     }
 
-    public Sprite[] getSprites(SpriteLayer layer, CharacterAnimationType animationType)
+    private SpritePath getSpritePath(SpriteLayer layer, CharacterAnimationType animationType)
     {
-        SpritePath spritePath = SpritePath.NoSprite;
-
         switch(layer)
         {
             case SpriteLayer.Body:
-                spritePath = getSpritePath(layer, bodyType, animationType, getWeaponPose(animationType));
-                break;
+                return getSpritePath(layer, bodyType, animationType, getWeaponPose(animationType));
             case SpriteLayer.Weapon:
-                spritePath = getSpritePath(layer, weaponAppearanceType, animationType);
-                break;
+                return getSpritePath(layer, weaponAppearanceType, animationType);
             case SpriteLayer.Face:
-                spritePath = getSpritePath(layer, facialFeatureType, animationType, getWeaponPose(animationType));
-                break;
+                return getSpritePath(layer, facialFeatureType, animationType, getWeaponPose(animationType));
             case SpriteLayer.Hair:
-                spritePath = getSpritePath(layer, hairType, animationType, getWeaponPose(animationType));
-                break;
+                return getHairSpritePath(animationType);
+            default:
+                return SpritePath.NoSprite;
+        }
+    }
+
+    //the canvas a hair type wears for any front facing animation it has no sprite of its own for
+    private static readonly Dictionary<HairType, SpritePath> frontHairCanvases = new Dictionary<HairType, SpritePath>()
+    {
+        [HairType.Short_Ruffled] = SpritePath.Hair_Short_Ruffled_Normal
+    };
+
+    private SpritePath getHairSpritePath(CharacterAnimationType animationType)
+    {
+        SpritePath spritePath = getSpritePath(SpriteLayer.Hair, hairType, animationType, getWeaponPose(animationType));
+
+        if(spritePath == SpritePath.NoSprite &&
+            facesFront(animationType) &&
+            frontHairCanvases.TryGetValue(hairType, out SpritePath canvasPath))
+        {
+            return canvasPath;
         }
 
-        return SpriteList.getSprites(spritePath);
+        return spritePath;
+    }
+
+    //every front facing animation falls back to OOC_Idle_Front in the end
+    private static bool facesFront(CharacterAnimationType animationType)
+    {
+        while(animationType != CharacterAnimationType.None)
+        {
+            if(animationType == CharacterAnimationType.OOC_Idle_Front)
+            {
+                return true;
+            }
+
+            animationType = animationType.nextAnimationType();
+        }
+
+        return false;
+    }
+
+    public Sprite[] getSprites(SpriteLayer layer, CharacterAnimationType animationType)
+    {
+        return SpriteList.getSprites(getSpritePath(layer, animationType));
     }
 
     public Sprite getSprite(SpriteLayer layer, CharacterAnimationType animationType)
@@ -343,7 +378,7 @@ public class Costume: IAppearance
                             bodyType: BodyType.LovashiArmor,
                             weaponAppearanceType: WeaponAppearanceType.SpearSimple,
                             // facialFeatureType: FacialFeatureType.Short_Goatee,
-                            // hairType: HairType.Short_Ruffled,
+                            hairType: HairType.Short_Ruffled,
                             cloakType: CloakType.None
                             );
     }
@@ -396,9 +431,15 @@ public class Costume: IAppearance
             rendererList.interpretSchema(getColorSchema());
         }
 
+        SpritePath bodyPath = getSpritePath(SpriteLayer.Body, type);
+
         foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
         {
-            rendererList[layer].sprite = getSprite(layer, type);
+            SpritePath layerPath = getSpritePath(layer, type);
+
+            rendererList.setLayerSprite(layer,
+                                        SpriteList.getSprite(layerPath),
+                                        CanvasPositionList.getPlacement(layer, bodyPath, layerPath, Constants.indexZero));
         }
     }
 

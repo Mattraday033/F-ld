@@ -54,12 +54,17 @@ public class AnimationData
     private SFXType? sfx;
     private int sfxIndex;
 
-    public AnimationData(Dictionary<SpriteLayer, Sprite[]> sprites, float[] timingInSeconds, SFXType? sfx = null, int sfxIndex = 0)
+    //one placement per frame for each layer drawn on a small canvas. Layers left out fill the body frame
+    private Dictionary<SpriteLayer, CanvasPlacement[]> placements;
+
+    public AnimationData(Dictionary<SpriteLayer, Sprite[]> sprites, float[] timingInSeconds, SFXType? sfx = null, int sfxIndex = 0,
+                            Dictionary<SpriteLayer, CanvasPlacement[]> placements = null)
     {
         this.sprites = sprites;
         this.timingInSeconds = timingInSeconds;
         this.sfx = sfx;
         this.sfxIndex = sfxIndex;
+        this.placements = placements;
     }
 
     public IEnumerator animationCoroutine(SpriteLayerRendererList rendererList, EffectAnimationManager effectAnimationManager, bool loopAnimation = false)
@@ -80,7 +85,13 @@ public class AnimationData
             {
                 foreach(KeyValuePair<SpriteLayer, Sprite[]> kvp in sprites)
                 {
-                    rendererList[kvp.Key].sprite = kvp.Value[index];
+                    if(placements != null && placements.TryGetValue(kvp.Key, out CanvasPlacement[] layerPlacements))
+                    {
+                        rendererList.setLayerSprite(kvp.Key, kvp.Value[index], layerPlacements[index]);
+                    } else
+                    {
+                        rendererList[kvp.Key].sprite = kvp.Value[index];
+                    }
                 }
             }
 

@@ -135,9 +135,34 @@ public class AudioManager : MonoBehaviour
             }
 
             _SFXVolumePlayerSetting = value;
+            setAmbienceSourceVolume(ambienceVolumePlayerSetting);
         }
     }
     public const float sfxMufflePercent = .7f;
+
+    public static float ambienceVolumePlayerSetting
+    {
+        get => sfxVolumePlayerSetting * ambienceMufflePercent;
+    }
+    public const float ambienceMufflePercent = .6f;
+
+    public static void setAmbienceSourceVolume(float volumePercent)
+    {
+        if(instance == null || instance.ambienceSource == null)
+        {
+            return;
+        }
+
+        if(volumePercent < 0)
+        {
+            volumePercent = 0f;
+        } else if(volumePercent > 1f)
+        {
+            volumePercent = 1f;
+        }
+
+        instance.ambienceSource.volume = volumePercent;
+    }
 
     public static float _VoiceVolumePlayerSetting;
     public static float voiceVolumePlayerSetting
@@ -533,7 +558,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        instance.ambienceSource.volume = sfxVolumePlayerSetting * .6f;
+        setAmbienceSourceVolume(ambienceVolumePlayerSetting);
         instance.ambienceSource.clip = AudioClipList.getAudioClip(currentAmbience);
         instance.ambienceSource.Play();
     }

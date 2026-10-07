@@ -4,8 +4,9 @@ using UnityEngine;
 
 public static class Constants
 {
-    public readonly static Vector3 scaleChange = new Vector3(0.987758756f,1.15740716f);
-    public readonly static Vector3 reverseScaleChange = new Vector3(1.012393f,0.864000201f);
+    //z stays 1 so the sprite layers keep the local z offsets that order them
+    public readonly static Vector3 scaleChange = new Vector3(0.987758756f,1.15740716f,1f);
+    public readonly static Vector3 reverseScaleChange = new Vector3(1.012393f,0.864000201f,1f);
 
 	public const string jsonFileExtension = ".json";
     public const string jsonFileExtensionWithoutPeriod = "json";

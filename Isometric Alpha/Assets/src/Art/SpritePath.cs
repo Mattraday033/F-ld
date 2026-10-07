@@ -17,7 +17,8 @@ public enum SpritePath
     Face_Short_Goatee_OOC_Idle_Front, // Sprites/SpriteLayers/Face/Short_Goatee/OOC_Idle_Front
     Face_Short_Goatee_TwoHandedStab_Normal_Attack_Front, // Sprites/SpriteLayers/Face/Short_Goatee/TwoHandedStab/Normal_Attack_Front
     Hair_Short_Ruffled_Attack_Front_Two_Handed_Stab, // Sprites/SpriteLayers/Hair/Short_Ruffled/Attack_Front_Two_Handed_Stab
-    Hair_Short_Ruffled_OOC_Idle_Front, // Sprites/SpriteLayers/Hair/Short_Ruffled/OOC_Idle_Front
+    Hair_Short_Ruffled_Normal, // Sprites/SpriteLayers/Hair/Short_Ruffled/Normal
+    Hair_Short_Ruffled_Old, // Sprites/SpriteLayers/Hair/Short_Ruffled/Old
     Weapon_SpearSimple_Attack_Normal_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/Attack_Normal_Front
     Weapon_SpearSimple_Idle_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/Idle_Front
 }

@@ -60,7 +60,7 @@ public class Obstacle : MonoBehaviour, IDialogueParticipant
         ignoreSecretDoors = true;
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(checkSpawnParams);   
     } 
-    public void createListeners()
+    public virtual void createListeners()
 	{
         if(!ignoreSecretDoors)
         {
@@ -68,7 +68,7 @@ public class Obstacle : MonoBehaviour, IDialogueParticipant
         }
 	}
 
-	public void destroyListeners()
+	public virtual void destroyListeners()
 	{
 		SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(checkSpawnParams);
 	}

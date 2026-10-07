@@ -169,16 +169,19 @@ public class CunningObjectSpawnBehaviour : IExtraSpawnBehaviour
     private CunningAction cunningAction;
     private CunningObjectSpriteCategory category;
     private QuestStepActivationScript script;
+    private int linkedIndex;
 
     public CunningObjectSpawnBehaviour(int index,
                                         CunningAction cunningAction,
                                         CunningObjectSpriteCategory category,
-                                        QuestStepActivationScript script = null)
+                                        QuestStepActivationScript script = null,
+                                        int linkedIndex = CunningObject.noLinkedIndex)
     {
         this.index = index;
         this.category = category;
         this.script = script;
         this.cunningAction = cunningAction;
+        this.linkedIndex = linkedIndex;
     }
 
     public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
@@ -192,6 +195,7 @@ public class CunningObjectSpawnBehaviour : IExtraSpawnBehaviour
         cunningObject.script = script;
         cunningObject.cunningAction = cunningAction;
         cunningObject.category = category;
+        cunningObject.linkedIndex = linkedIndex;
 
         //matches the saved state CunningObjectAppearance already drew the sprite from
         cunningObject.evenActivation = TrapAndButtonStateManager.contains(cunningObject.getKey());
@@ -474,6 +478,29 @@ public class ObstacleSpawnBehaviour : IExtraSpawnBehaviour
     protected virtual Obstacle addObstacle(GameObject gameObject)
     {
         return gameObject.AddComponent<Obstacle>();
+    }
+}
+
+public class SpikeSpawnBehaviour : ObstacleSpawnBehaviour
+{
+    private int crankIndex;
+    private bool raisedWhenCranked;
+
+    public SpikeSpawnBehaviour(string uniqueName, int crankIndex, bool raisedWhenCranked = false) :
+    base(uniqueName)
+    {
+        this.crankIndex = crankIndex;
+        this.raisedWhenCranked = raisedWhenCranked;
+    }
+
+    //the key is built as the spike spawns, as the area it belongs to isn't known when the spawn details are built
+    protected override Obstacle addObstacle(GameObject gameObject)
+    {
+        Spike spike = gameObject.AddComponent<Spike>();
+
+        spike.linkToCrank(CunningObject.generateKey(AreaManager.locationName, crankIndex), raisedWhenCranked);
+
+        return spike;
     }
 }
 

@@ -192,12 +192,13 @@ public class CunningObjectSpawnDetails : OOCSpawnDetails
                                         CunningObjectSpriteCategory category,
                                         CunningAction cunningAction,
                                         QuestStepActivationScript script = null,
-                                        string tutorialTargetHash = null) :
+                                        string tutorialTargetHash = null,
+                                        int linkedIndex = CunningObject.noLinkedIndex) :
     base(category.ToString(), appearance: new CunningObjectAppearance(index, category), cellCoords: cellCoords, tutorialTargetHash: tutorialTargetHash, index: index)
     {
         aestheticSpawnBehaviours[typeof(NPCMouseHoverSpawnBehaviour)] = new NPCMouseHoverSpawnBehaviour();
 
-        universalSpawnBehaviours[typeof(CunningObjectSpawnBehaviour)] = new CunningObjectSpawnBehaviour(index, cunningAction, category, script);
+        universalSpawnBehaviours[typeof(CunningObjectSpawnBehaviour)] = new CunningObjectSpawnBehaviour(index, cunningAction, category, script, linkedIndex);
     }
 
 }
@@ -861,15 +862,25 @@ public class Wave : ObstacleWithSecretDoorFlagSpawnDetails
     }
 }
 
+//the index is the index of the cunning object that raises and lowers the spike
 public class SpikeSpawnDetails : ObstacleSpawnDetails
 {
+    public readonly bool raisedWhenCranked;
 
     public SpikeSpawnDetails(Vector3Int cellCoords,
                             IAppearance appearance = null,
                             int index = 0,
-                            KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements = null) :
-    base(NPCNameList.spike, cellCoords, appearance: appearance, index: index, activationRequirements: activationRequirements)
+                            bool raisedWhenCranked = false) :
+    base(NPCNameList.spike, cellCoords, appearance: appearance, index: index)
     {
+        this.raisedWhenCranked = raisedWhenCranked;
+
+        universalSpawnBehaviours[typeof(ObstacleSpawnBehaviour)] = new SpikeSpawnBehaviour(uniqueName, index, raisedWhenCranked);
+    }
+
+    public bool isRaised()
+    {
+        return Spike.isRaised(TrapAndButtonStateManager.contains(CunningObject.generateKey(AreaManager.locationName, index)), raisedWhenCranked);
     }
 
     // public override string getPrefabName()

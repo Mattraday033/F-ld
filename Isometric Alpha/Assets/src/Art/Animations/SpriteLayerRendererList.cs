@@ -15,6 +15,8 @@ public class SpriteLayerRendererList : MonoBehaviour
     private static readonly int blackBorderColorID = Shader.PropertyToID("_BlackBorderColor");
     private static readonly int outlineColorID = Shader.PropertyToID("_OutlineColor");
 
+    private static readonly int mainTextureID = Shader.PropertyToID("_MainTex");
+
     //the outline shader has one texture slot per character layer, named after the layer
     private static readonly Dictionary<SpriteLayer, int> layerTextureIDs = getLayerTextureIDs();
 
@@ -264,6 +266,60 @@ public class SpriteLayerRendererList : MonoBehaviour
         }
     }
 
+    #region Canvas
+    //where each renderer's sprite sits on the body frame. A renderer that was never placed isn't in here, and fills the frame
+    private readonly Dictionary<SpriteRenderer, CanvasPlacement> placements = new();
+
+    private CanvasPlacement getPlacement(SpriteRenderer renderer)
+    {
+        return placements.TryGetValue(renderer, out CanvasPlacement placement) ? placement : CanvasPlacement.identity;
+    }
+
+    //sets a layer's sprite along with where it sits on the body frame, for layers that may be drawn on a small canvas
+    public void setLayerSprite(SpriteLayer layer, Sprite sprite, CanvasPlacement placement)
+    {
+        SpriteRenderer renderer = spriteLayers[layer];
+
+        //a layer standing in on the body renderer is drawn as the body, which always fills its own frame
+        if(renderer == bodyRenderer)
+        {
+            renderer.sprite = sprite;
+            return;
+        }
+
+        bool spriteChanged = renderer.sprite != sprite;
+        bool placementChanged = !placement.Equals(getPlacement(renderer));
+
+        //animations set their sprites on every rendered frame, so most calls change nothing
+        if(!spriteChanged && !placementChanged)
+        {
+            return;
+        }
+
+        //a layer that only ever fills the frame never gets here, so it isn't given its own material for nothing
+        if(placementChanged)
+        {
+            placements[renderer] = placement;
+
+            renderer.transform.localScale = placement.scale;
+
+            Material material = renderer.material;
+
+            material.SetTextureScale(mainTextureID, placement.layerTiling);
+            material.SetTextureOffset(mainTextureID, placement.layerOffset);
+        }
+
+        if(spriteChanged)
+        {
+            renderer.sprite = sprite;
+        } else
+        {
+            //moving the same sprite doesn't fire the sprite change callback, so the outline is told here
+            updateOutlineLayer(renderer);
+        }
+    }
+    #endregion
+
 
     #region Outline
     //which of the outline shader's texture slots each renderer fills. A renderer standing in for missing layers fills several
@@ -335,6 +391,17 @@ public class SpriteLayerRendererList : MonoBehaviour
         return outlineColor;
     }
 
+    private void updateOutlineLayer(SpriteRenderer renderer)
+    {
+        if(outlineActive)
+        {
+            syncOutlineLayer(renderer);
+        } else
+        {
+            outlineSynced = false;
+        }
+    }
+
     //copies one renderer's new sprite onto the outline. Runs inside the sprite change callback, ahead of the
     //registered behaviours, so it must never throw
     private void syncOutlineLayer(SpriteRenderer renderer)
@@ -382,9 +449,14 @@ public class SpriteLayerRendererList : MonoBehaviour
         //a layer left without a sprite adds nothing to the outline, so the outline's own blank texture stands in for it
         Texture texture = sprite != null ? sprite.texture : outlineRenderer.sprite.texture;
 
+        //the blank texture is the size of the body's, so it's sampled the way a layer that fills the frame is
+        CanvasPlacement placement = sprite != null ? getPlacement(renderer) : CanvasPlacement.identity;
+
         foreach(int textureID in textureIDs)
         {
             outlineMaterial.SetTexture(textureID, texture);
+            outlineMaterial.SetTextureScale(textureID, placement.outlineTiling);
+            outlineMaterial.SetTextureOffset(textureID, placement.outlineOffset);
         }
     }
 
@@ -500,13 +572,7 @@ public class SpriteLayerRendererList : MonoBehaviour
 
     private void onSpriteChange(SpriteRenderer renderer)
     {
-        if(outlineActive)
-        {
-            syncOutlineLayer(renderer);
-        } else
-        {
-            outlineSynced = false;
-        }
+        updateOutlineLayer(renderer);
 
         foreach(List<RegisterBehaviour> behaviours in registeredBehaviours[renderer].Values)
         {

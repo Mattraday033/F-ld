@@ -10,8 +10,12 @@ public class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, INameSour
 {
     public const string tagText = "Device";
     public const string nameOnTag = "Cunning Target";
+    public const int noLinkedIndex = -1;
 
     public int index;
+
+    //the index of another cunning object in the area that is flipped whenever this one is used
+    public int linkedIndex = noLinkedIndex;
     public bool evenActivation = false;
     [SerializeField]
     private SpriteLayerRendererList _RendererList;
@@ -89,10 +93,40 @@ public class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, INameSour
         switch(skillType)
         {
             case SkillType.Cunning:
-                return true;
+                return !spikesWouldRiseUnderPlayer();
             default:
                 return false;
         }
+    }
+
+    //using a cunning object flips its spikes and its linked object's spikes, so every lowered one of them is about to come up
+    private bool spikesWouldRiseUnderPlayer()
+    {
+        Transform player = PlayerObject.getInstanceTransform();
+
+        if(player == null)
+        {
+            return false;
+        }
+
+        Vector3Int playerCell = AreaManager.getMasterGrid().WorldToCell(player.position);
+
+        foreach(OOCSpawnDetails details in OOCSpawnDetailsList.getOOCSpawnDetails(AreaManager.locationName))
+        {
+            SpikeSpawnDetails spike = details as SpikeSpawnDetails;
+
+            if(spike == null || (spike.index != index && spike.index != linkedIndex))
+            {
+                continue;
+            }
+
+            if(spike.cellCoords.x == playerCell.x && spike.cellCoords.y == playerCell.y && !spike.isRaised())
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void cunning()
@@ -109,6 +143,14 @@ public class CunningObject : MonoBehaviour, ISkillTarget, IRevealable, INameSour
 
         evenActivation = !evenActivation;
         TrapAndButtonStateManager.setKey(getKey(), evenActivation);
+
+        //the linked object and its spikes follow their key, the same way this one's do
+        if(linkedIndex != noLinkedIndex)
+        {
+            string linkedKey = generateKey(AreaManager.locationName, linkedIndex);
+
+            TrapAndButtonStateManager.setKey(linkedKey, !TrapAndButtonStateManager.contains(linkedKey));
+        }
     }
 
     public string getKey()

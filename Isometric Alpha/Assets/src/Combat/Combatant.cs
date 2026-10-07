@@ -49,6 +49,9 @@ public class Combatant : MonoBehaviour, INameSource
         hover = GetComponentInChildren<CombatantHover>(true);
         promptParent = createChild(promptParentName).transform;
 
+        //combat hovers belong to the CombatHoverTiles, and the body's collider would take them from the tiles behind this combatant
+        rendererList.setBodyColliderEnabled(false);
+
         if(animationManager != null)
         {
             rendererList.setFlipX(animationManager.characterFacing.flipSprite());

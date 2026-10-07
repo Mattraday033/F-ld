@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ColorReplace
-  m_Shader: {fileID: -6465566751694194690, guid: cf6c939cd4c6c304b985ecc8877268a5,
+  m_Shader: {fileID: -6465566751694194690, guid: 8e9148dfec315624e9830ed95edd3112,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
