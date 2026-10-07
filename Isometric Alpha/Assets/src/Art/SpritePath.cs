@@ -6,18 +6,18 @@
 public enum SpritePath
 {
     NoSprite, // reserved: no asset
-    Body_LovashiArmor_NoWeapon_Idle_Front, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Idle_Front
     Body_LovashiArmor_NoWeapon_OOC_Idle_Back, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Back
     Body_LovashiArmor_NoWeapon_OOC_Idle_Front, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Front
     Body_LovashiArmor_NoWeapon_Run_Back_Left, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Back_Left
     Body_LovashiArmor_NoWeapon_Run_Back_Right, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Back_Right
     Body_LovashiArmor_NoWeapon_Run_Front_Left, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Front_Left
     Body_LovashiArmor_NoWeapon_Run_Front_Right, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Front_Right
-    Body_LovashiArmor_TwoHandedStab_Attack_Front, // Sprites/SpriteLayers/Body/LovashiArmor/TwoHandedStab/Attack_Front
-    Face_Short_Goatee_Attack_Front_Two_Handed_Stab, // Sprites/SpriteLayers/Face/Short_Goatee/Attack_Front_Two_Handed_Stab
+    Body_LovashiArmor_TwoHandedStab_Idle_Front, // Sprites/SpriteLayers/Body/LovashiArmor/TwoHandedStab/Idle_Front
+    Body_LovashiArmor_TwoHandedStab_Normal_Attack_Front, // Sprites/SpriteLayers/Body/LovashiArmor/TwoHandedStab/Normal_Attack_Front
     Face_Short_Goatee_OOC_Idle_Front, // Sprites/SpriteLayers/Face/Short_Goatee/OOC_Idle_Front
+    Face_Short_Goatee_TwoHandedStab_Normal_Attack_Front, // Sprites/SpriteLayers/Face/Short_Goatee/TwoHandedStab/Normal_Attack_Front
     Hair_Short_Ruffled_Attack_Front_Two_Handed_Stab, // Sprites/SpriteLayers/Hair/Short_Ruffled/Attack_Front_Two_Handed_Stab
     Hair_Short_Ruffled_OOC_Idle_Front, // Sprites/SpriteLayers/Hair/Short_Ruffled/OOC_Idle_Front
-    Weapon_SpearSimple_Attack_Front_Normal, // Sprites/SpriteLayers/Weapon/SpearSimple/Attack_Front_Normal
+    Weapon_SpearSimple_Attack_Normal_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/Attack_Normal_Front
     Weapon_SpearSimple_Idle_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/Idle_Front
 }

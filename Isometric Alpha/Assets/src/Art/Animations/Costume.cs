@@ -300,13 +300,13 @@ public class Costume: IAppearance
 
     private WeaponPose getWeaponPose(CharacterAnimationType animationType)
     {
-        // if(weaponAnimationInfo.ContainsKey(animationType))
-        // {
-        //     return weaponAnimationInfo[animationType];
-        // } else
-        // {
+        if(weaponAnimationInfo.ContainsKey(animationType))
+        {
+            return weaponAnimationInfo[animationType];
+        } else
+        {
             return WeaponPose.NoWeapon;
-        // }
+        }
     }
 
     public Sprite[] getSprites(SpriteLayer layer, CharacterAnimationType animationType)
@@ -414,10 +414,13 @@ public static class WeaponAnimationInfoFactory
             case WeaponAppearanceType.SpearGreat:
                 return new Dictionary<CharacterAnimationType, WeaponPose>()
                 {
-                    [CharacterAnimationType.Idle_Back] = WeaponPose.Polearm,
-                    [CharacterAnimationType.Idle_Front] = WeaponPose.Polearm,
-                    [CharacterAnimationType.OOC_Idle_Back] = WeaponPose.Polearm,
-                    [CharacterAnimationType.OOC_Idle_Front] = WeaponPose.Polearm,
+                    [CharacterAnimationType.OOC_Idle_Back] = WeaponPose.NoWeapon,
+                    // [CharacterAnimationType.Idle_Back] = WeaponPose.TwoHandedStab,
+                    [CharacterAnimationType.Idle_Front] = WeaponPose.TwoHandedStab,
+                    [CharacterAnimationType.OOC_Idle_Back] = WeaponPose.NoWeapon,
+                    [CharacterAnimationType.OOC_Idle_Front] = WeaponPose.NoWeapon,
+                    // [CharacterAnimationType.OOC_Idle_Back] = WeaponPose.Polearm,
+                    // [CharacterAnimationType.OOC_Idle_Front] = WeaponPose.Polearm,
                     [CharacterAnimationType.Attack_Normal_Back] = WeaponPose.TwoHandedStab,
                     [CharacterAnimationType.Attack_Normal_Front] = WeaponPose.TwoHandedStab
                 };
