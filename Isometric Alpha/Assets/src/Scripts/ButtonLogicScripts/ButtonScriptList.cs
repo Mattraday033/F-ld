@@ -112,8 +112,6 @@ public static class ButtonScriptList
         int[] gatesAttachedToButtonIndexSix = new int[] { Constants.indexEight };
         int[] gatesAttachedToButtonIndexSeven = new int[] { Constants.indexEight, Constants.indexTen};
 
-        int[] gatesOpenAtStart = new int[] {  Constants.indexZero, Constants.indexTwo, Constants.indexFive};
-
         Dictionary<int, int[]> gatesPerButton = new Dictionary<int, int[]>();
 
         gatesPerButton.Add(Constants.indexZero, gatesAttachedToButtonIndexZero); 
@@ -125,7 +123,7 @@ public static class ButtonScriptList
         gatesPerButton.Add(Constants.indexSix, gatesAttachedToButtonIndexSix); 
         gatesPerButton.Add(Constants.indexSeven, gatesAttachedToButtonIndexSeven); 
 
-        list.Add(new OnOffButtonLogicScript(NPCNameList.ancientPortcullis, gatesPerButton, gatesOpenAtStart));
+        list.Add(new OnOffButtonLogicScript(NPCNameList.ancientPortcullis, gatesPerButton));
 
         scriptDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section6, list);
 

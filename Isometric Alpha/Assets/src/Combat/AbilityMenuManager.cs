@@ -695,7 +695,11 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
             if(action != null)
             {
-                return action.getSelector().clone();
+                Selector previewSelector = action.getSelector().clone();
+
+                previewSelector.hoverSelector = true;
+
+                return previewSelector;
             }
         } 
      

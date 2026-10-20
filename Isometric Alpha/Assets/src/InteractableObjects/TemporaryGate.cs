@@ -1,87 +1,117 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
-public class TemporaryGate : Gate
+public class TemporaryGate : Gate, INameTagSuppressor
 {
     private OverHeadIconManager overHeadIconManager;
-    private Collider2D colliderTileMap;
+    private Collider2D movementBlockingCollider;
+
+    private bool _Open;
+    public bool open { get { return _Open; } }
+
+    //an open gate is only waiting to close again, so it shows no name tag or outline in the meantime
+    public bool suppressNameTag { get { return _Open; } }
+
+    //matches getGateKey, as a temporary gate's uniqueName always carries its index
+    public static string generateKey(string locationName, string gateName, int index)
+    {
+        return locationName + gateName + index;
+    }
 
     protected override void Awake()
     {
         base.Awake();
 
-        colliderTileMap = GetComponent<Collider2D>();
+        //the tilemap collider on the root blocks movement, and is what the player finds the gate by when interacting
+        movementBlockingCollider = GetComponent<TilemapCollider2D>();
         overHeadIconManager = GetComponent<OverHeadIconManager>();
     }
 
+    //setKey calls in as the gate spawns, so this puts it where the saved state says it belongs without a sound
     public override void checkGateStatus()
     {
-        if (TrapAndButtonStateManager.contains(getGateKey()))
-        {
-            hideSelf();
-        } else
-        {
-            showSelf();
-        }
+        setOpen(TrapAndButtonStateManager.contains(getGateKey()));
     }
 
     public override void createListeners()
     {
-        RevealManager.OnReveal.AddListener(onReveal);
+        if(rendererList != null)
+        {
+            RevealManager.OnReveal.AddListener(revealUnlessOpen);
+        }
+
         TrapAndButtonStateManager.OnSetTraps.AddListener(setStatus);
     }
 
     public override void destroyListeners()
     {
-        RevealManager.OnReveal.RemoveListener(onReveal);
+        if(rendererList != null)
+        {
+            RevealManager.OnReveal.RemoveListener(revealUnlessOpen);
+        }
+
         TrapAndButtonStateManager.OnSetTraps.RemoveListener(setStatus);
     }
 
-    private void setStatus(string key, bool hide)
+    private void revealUnlessOpen(bool toggleReveal)
     {
-        if(key.Equals(getGateKey()))
+        onReveal(toggleReveal && !_Open);
+    }
+
+    private void setStatus(string key, bool status)
+    {
+        if(!key.Equals(getGateKey()))
         {
-            if(hide)
-            {
-                hideSelf();
-            } else
-            {
-                showSelf();
-            }
+            return;
+        }
+
+        bool wasOpen = _Open;
+
+        setOpen(status);
+
+        if(wasOpen != _Open)
+        {
+            AudioManager.playGateOpenShortSFX();
         }
     }
 
-    private void hideSelf()
+    //the gate stays active while open so it keeps listening for the button that closes it again
+    private void setOpen(bool open)
     {
-        // colliderTileMap.enabled = false;
-        // spriteRenderer.color = Color.clear;
+        if(_Open == open)
+        {
+            return;
+        }
 
-        // if(overHeadIconManager != null)
-        // {
-        //     overHeadIconManager.onReveal(false);
-        // }
+        _Open = open;
 
-        // if(PlayerStateManager.currentActivity != CurrentActivity.InFade)
-        // {
-        //     AudioManager.playGateOpenShortSFX();
-        // }
-    }
+        if(movementBlockingCollider != null)
+        {
+            movementBlockingCollider.enabled = !open;
+        }
 
-    private void showSelf() 
-    {
-        // colliderTileMap.enabled = true;
-        // spriteRenderer.color = Color.white;
+        //an extra space of a multi-cell gate is the blank Extra Space prefab, which only has the collider to toggle
+        if(rendererList == null)
+        {
+            return;
+        }
 
-        // if(overHeadIconManager != null)
-        // {
-        //     overHeadIconManager.onReveal(RevealManager.currentlyRevealed);
-        // }
+        rendererList[SpriteLayer.Body].enabled = !open;
 
-        // if(PlayerStateManager.currentActivity != CurrentActivity.InFade)
-        // {
-        //     AudioManager.playGateOpenShortSFX();
-        // }
+        if(open)
+        {
+            rendererList.removeOutline();
+        }
+
+        //left on, the body collider would take the mouse hover from whatever sits behind the doorway
+        rendererList.setBodyColliderEnabled(!open);
+
+        if(overHeadIconManager != null)
+        {
+            overHeadIconManager.onReveal(!open && RevealManager.currentlyRevealed);
+        }
     }
 
 }

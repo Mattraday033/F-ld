@@ -256,7 +256,7 @@ public class EndOfCombatCutSceneScript
         {
             foreach (GridCoords allyCoords in ally.positions)
             {
-                CombatAnimationManager.loadInstantEffect(EffectAnimationType.Blunt, allyCoords, false, 0, false, true);
+                AnimationTracker.loadInstantEffect(EffectAnimationType.Blunt, allyCoords, false, 0, false, true);
             }
         }
     }

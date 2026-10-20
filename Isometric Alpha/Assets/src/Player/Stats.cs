@@ -843,7 +843,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
                                              traitApplicationDamage,
                                          CombatGrid.getPositionAt(coords),
                                          DamageNumberPopup.getDirectionByTargetCoords(coords),
-                                         CombatAnimationManager.getInstance().damageNumberCanvas,
+                                         AnimationTracker.getInstance().damageNumberCanvas,
                                          isNotACrit,
                                          doesNotHealTarget,
                                          traitApplicationDamageFrameDelay);

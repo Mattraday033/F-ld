@@ -18,7 +18,7 @@ public class Combatant : MonoBehaviour, INameSource
     public bool isPrimary { get; private set; }
     public bool isPlaceholder { get; private set; }
 
-    public NewAnimationManager animationManager { get; private set; }
+    public CreatureAnimationManager animationManager { get; private set; }
     public SpriteLayerRendererList rendererList { get; private set; }
     public HealthBarManager healthBarManager { get; private set; }
     public Transform promptParent { get; private set; }
@@ -45,7 +45,7 @@ public class Combatant : MonoBehaviour, INameSource
         this.isPlaceholder = isPlaceholder;
 
         rendererList = GetComponent<SpriteLayerRendererList>();
-        animationManager = GetComponent<NewAnimationManager>();
+        animationManager = GetComponent<CreatureAnimationManager>();
         hover = GetComponentInChildren<CombatantHover>(true);
         promptParent = createChild(promptParentName).transform;
 
@@ -140,6 +140,8 @@ public class Combatant : MonoBehaviour, INameSource
         stats.OnTraitAdded += onTraitAdded;
         stats.OnTraitRemoved += onTraitRemoved;
 
+        DamagePreviewManager.UpdateDamagePreviews.AddListener(addDamagePreview);
+
         listening = true;
     }
 
@@ -156,6 +158,8 @@ public class Combatant : MonoBehaviour, INameSource
         stats.OnRevive -= onRevive;
         stats.OnTraitAdded -= onTraitAdded;
         stats.OnTraitRemoved -= onTraitRemoved;
+
+        DamagePreviewManager.UpdateDamagePreviews.RemoveListener(addDamagePreview);
 
         listening = false;
     }
@@ -202,6 +206,20 @@ public class Combatant : MonoBehaviour, INameSource
         healthBarManager.resetPreviewHealth();
     }
 
+    //the CombatantHover that used to answer this is no longer spawned, so the primary previews the damage on its own health bar
+    private void addDamagePreview(CombatAction combatAction)
+    {
+        if(healthBarManager == null || combatAction == null || combatAction.getSelector() == null)
+        {
+            return;
+        }
+
+        if(stats.isInsideCoordinates(combatAction.getSelector().getAllSelectorCoords()))
+        {
+            DamagePreviewManager.addDamagePreview(stats, healthBarManager, combatAction);
+        }
+    }
+
     //removedFromCombat is true when the combatant can't be brought back, so its GameObjects go with it
     private void onDeath(bool removedFromCombat)
     {
@@ -226,7 +244,7 @@ public class Combatant : MonoBehaviour, INameSource
             healthBarManager.show();
         }
 
-        foreach(NewAnimationManager manager in allAnimationManagers)
+        foreach(CreatureAnimationManager manager in allAnimationManagers)
         {
             manager.setToDefaultIdle();
             manager.playSpawnAnimation();
@@ -240,7 +258,7 @@ public class Combatant : MonoBehaviour, INameSource
             return;
         }
 
-        foreach(NewAnimationManager manager in allAnimationManagers)
+        foreach(CreatureAnimationManager manager in allAnimationManagers)
         {
             manager.setIdleAnimationOnTraitApplication(trait);
         }
@@ -253,7 +271,7 @@ public class Combatant : MonoBehaviour, INameSource
             return;
         }
 
-        foreach(NewAnimationManager manager in allAnimationManagers)
+        foreach(CreatureAnimationManager manager in allAnimationManagers)
         {
             manager.setIdleAnimationOnTraitRemoval(trait);
         }
@@ -277,7 +295,7 @@ public class Combatant : MonoBehaviour, INameSource
         }
     }
 
-    private IEnumerable<NewAnimationManager> allAnimationManagers
+    private IEnumerable<CreatureAnimationManager> allAnimationManagers
     {
         get
         {
@@ -309,7 +327,7 @@ public class Combatant : MonoBehaviour, INameSource
     {
         foreach(Combatant combatant in allCombatants)
         {
-            combatant.rendererList.createOutline(color);
+            combatant.rendererList.createOutline(color, Constants.combatantOutlineSize);
         }
     }
 
@@ -343,13 +361,13 @@ public class Combatant : MonoBehaviour, INameSource
                 healthBarManager.hide();
             }
 
-            foreach(NewAnimationManager manager in allAnimationManagers)
+            foreach(CreatureAnimationManager manager in allAnimationManagers)
             {
                 manager.playDeathAnimation();
             }
         } else
         {
-            foreach(NewAnimationManager manager in allAnimationManagers)
+            foreach(CreatureAnimationManager manager in allAnimationManagers)
             {
                 manager.playWoundedAnimation();
             }
@@ -363,7 +381,7 @@ public class Combatant : MonoBehaviour, INameSource
             return;
         }
 
-        foreach(NewAnimationManager manager in allAnimationManagers)
+        foreach(CreatureAnimationManager manager in allAnimationManagers)
         {
             manager.setToDeadIdle(CombatGrid.positionIsOnEnemySide(stats.positions[0]));
         }
@@ -418,7 +436,7 @@ public static class CombatantStatsExtensions
         return combatant.healthBarManager;
     }
 
-    public static NewAnimationManager getAnimationManager(this Stats stats)
+    public static CreatureAnimationManager getAnimationManager(this Stats stats)
     {
         Combatant combatant = stats.getCombatant();
 
@@ -482,7 +500,7 @@ public static class CombatantStatsExtensions
 
     public static void playSpawnAnimation(this Stats stats)
     {
-        NewAnimationManager animationManager = stats.getAnimationManager();
+        CreatureAnimationManager animationManager = stats.getAnimationManager();
 
         if(animationManager != null)
         {
@@ -492,7 +510,7 @@ public static class CombatantStatsExtensions
 
     public static void playAttackAnimation(this Stats stats)
     {
-        NewAnimationManager animationManager = stats.getAnimationManager();
+        CreatureAnimationManager animationManager = stats.getAnimationManager();
 
         if(animationManager != null)
         {
@@ -502,7 +520,7 @@ public static class CombatantStatsExtensions
 
     public static void playAttackIntoFrontIdleAnimation(this Stats stats)
     {
-        NewAnimationManager animationManager = stats.getAnimationManager();
+        CreatureAnimationManager animationManager = stats.getAnimationManager();
 
         if(animationManager != null)
         {
@@ -512,7 +530,7 @@ public static class CombatantStatsExtensions
 
     public static void playAttackIntoSecondaryIdleAnimation(this Stats stats)
     {
-        NewAnimationManager animationManager = stats.getAnimationManager();
+        CreatureAnimationManager animationManager = stats.getAnimationManager();
 
         if(animationManager != null)
         {
@@ -522,7 +540,7 @@ public static class CombatantStatsExtensions
 
     public static void playSpecialAttackAnimation(this Stats stats)
     {
-        NewAnimationManager animationManager = stats.getAnimationManager();
+        CreatureAnimationManager animationManager = stats.getAnimationManager();
 
         if(animationManager != null)
         {

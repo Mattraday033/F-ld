@@ -193,6 +193,7 @@ public static class Constants
 
     public const float shadow256x256OutlineSize = 8f;
     public const float shadow512x512OutlineSize = 4f;
+    public const float combatantOutlineSize = 2f;
 
     #endregion
 

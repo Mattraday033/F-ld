@@ -715,7 +715,7 @@ public class CombatStateManager : MonoBehaviour
 
         whoseTurn = WhoseTurn.Start;
 
-		CombatAnimationManager.flushAnimations();
+		AnimationTracker.flushAnimations();
 
 		State.enteredCombatFromDialogue = false;
 		State.allyPackInfo = null;

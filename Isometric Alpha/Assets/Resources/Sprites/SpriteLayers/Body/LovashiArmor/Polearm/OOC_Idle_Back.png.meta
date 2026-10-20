@@ -1,25 +1,19 @@
 fileFormatVersion: 2
-guid: 7d79e1d0a6960e645907894e1b0d40a9
+guid: 7d1595ee434e3724c8a63226af0365e5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6223383625539836274
-    second: Normal_Attack_Front_0
+      213: -5549512374458186981
+    second: OOC_Idle_Back_0
   - first:
-      213: 5410536641933733462
-    second: Normal_Attack_Front_1
+      213: -9096240930502350990
+    second: OOC_Idle_Back_1
   - first:
-      213: -7397288647323713461
-    second: Normal_Attack_Front_2
+      213: -1388222741185560755
+    second: OOC_Idle_Back_2
   - first:
-      213: -3790309409693302951
-    second: Normal_Attack_Front_3
-  - first:
-      213: -1098450503007227781
-    second: Normal_Attack_Front_4
-  - first:
-      213: -2883645536806457445
-    second: Normal_Attack_Front_5
+      213: 5802419329599263093
+    second: OOC_Idle_Back_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -61,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 0
   alignment: 9
@@ -115,133 +109,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Normal_Attack_Front_0
+      name: OOC_Idle_Back_0
       rect:
         serializedVersion: 2
-        x: 58
-        y: 11
-        width: 43
-        height: 113
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 164
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 279d84d3f66ed5650800000000000000
-      internalID: 6223383625539836274
+      spriteID: b1309c3e5eb2cf2b0800000000000000
+      internalID: -5549512374458186981
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Normal_Attack_Front_1
+      name: OOC_Idle_Back_1
       rect:
         serializedVersion: 2
-        x: 224
-        y: 11
-        width: 41
-        height: 113
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 164
+        y: 0
+        width: 164
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 65ee1bad866161b40800000000000000
-      internalID: 5410536641933733462
+      spriteID: 277e9025119a3c180800000000000000
+      internalID: -9096240930502350990
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Normal_Attack_Front_2
+      name: OOC_Idle_Back_2
       rect:
         serializedVersion: 2
-        x: 385
-        y: 12
-        width: 41
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 328
+        y: 0
+        width: 164
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b408d33fa2d875990800000000000000
-      internalID: -7397288647323713461
+      spriteID: d4ff382a5ca0cbce0800000000000000
+      internalID: -1388222741185560755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Normal_Attack_Front_3
+      name: OOC_Idle_Back_3
       rect:
         serializedVersion: 2
-        x: 524
-        y: 5
-        width: 54
-        height: 106
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 492
+        y: 0
+        width: 164
+        height: 164
+      alignment: 9
+      pivot: {x: 0.5, y: 0.25}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95ff86e7cad166bc0800000000000000
-      internalID: -3790309409693302951
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Normal_Attack_Front_4
-      rect:
-        serializedVersion: 2
-        x: 713
-        y: 12
-        width: 41
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b70b7ec561581c0f0800000000000000
-      internalID: -1098450503007227781
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Normal_Attack_Front_5
-      rect:
-        serializedVersion: 2
-        x: 880
-        y: 11
-        width: 41
-        height: 113
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b9fa28899ab3bf7d0800000000000000
-      internalID: -2883645536806457445
+      spriteID: 571df9243a5568050800000000000000
+      internalID: 5802419329599263093
       vertices: []
       indices: 
       edges: []
@@ -259,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      OOC_Idle_Back_0: -5549512374458186981
+      OOC_Idle_Back_1: -9096240930502350990
+      OOC_Idle_Back_2: -1388222741185560755
+      OOC_Idle_Back_3: 5802419329599263093
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

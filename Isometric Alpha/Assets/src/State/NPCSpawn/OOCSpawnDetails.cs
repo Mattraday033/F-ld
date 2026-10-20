@@ -404,6 +404,35 @@ public class GateSpawnDetails : AxisSpawnDetails
     }
 }
 
+//a gate that the buttons of an OnOffButtonLogicScript open and close again, so its state is kept with the traps instead of the opened gates
+public class TemporaryGateSpawnDetails : GateSpawnDetails
+{
+    //the buttons find their gates by index, so even the first gate carries its index in its key
+    public override string uniqueName { get { return displayName + index; } }
+
+    //the temporary gates in an area all share the dialogue registered under their displayName
+    public override Dialogue dialogue
+    {
+        get
+        {
+            return DialogueList.getDialogue(AreaManager.locationName, displayName);
+        }
+    }
+
+    public TemporaryGateSpawnDetails(IAppearance appearance,
+                                    string displayName,
+                                    int index = 0,
+                                    Vector3Int cellCoords = default,
+                                    int size = 1,
+                                    Axis axis = Axis.DescendingX) :
+    base(appearance, displayName, index, cellCoords, size, axis)
+    {
+        aestheticSpawnBehaviours[typeof(NPCMouseHoverSpawnBehaviour)] = new TemporaryGateMouseHoverSpawnBehaviour();
+
+        universalSpawnBehaviours[typeof(GateSpawnBehaviour)] = new TemporaryGateSpawnBehaviour(uniqueName);
+    }
+}
+
 public class LadderSpawnDetails : NPCSpawnDetails
 {
     public const float offsetY = .1f;
@@ -1450,35 +1479,6 @@ public class PlacedPartyMemberSpawnDetails : OOCSpawnDetails
 //     }
 // }
 
-// public class TemporaryGateSpawnDetails : GateSpawnDetails
-// {
-//     public TemporaryGateSpawnDetails(string displayName, Vector3Int cellCoords, string currentArea, Axis axis, Dictionary<string, int> statDifficulties, IAppearance appearance = null) :
-//     base(displayName, cellCoords, currentArea, true, axis, statDifficulties, appearance: appearance,
-//          gateSpawnBehaviour: new TemporaryGateSpawnBehaviour(displayName, statDifficulties))
-//     {
-
-//     }
-
-//     public override Dialogue getDialogue(string areaName)
-//     {
-//         return DialogueList.getDialogue(DialogueList.scrubNameOfEndNumbers(displayName), areaName);
-//     }
-
-// }
-
-// public class TemporaryGateSpawnBehaviour : GateSpawnBehaviour
-// {
-//     public TemporaryGateSpawnBehaviour(string gateKey, string tutorialTargetHash, Dictionary<string, int> statDifficulties) :
-//     base(gateKey, tutorialTargetHash, statDifficulties)
-//     {
-//     }
-
-//     protected override Gate addGate(GameObject gateGameObject)
-//     {
-//         return gateGameObject.AddComponent<TemporaryGate>();
-//     }
-// }
-
 // public class GateWithHiddenTerrainSpawnDetails : GateSpawnDetails
 // {
 //     public GateWithHiddenTerrainSpawnDetails(string displayName, Vector3Int cellCoords, string currentArea, string spriteName, string tutorialTargetHash, Dictionary<string, int> statDifficulties, string hiddenTerrainFlag, IAppearance appearance = null) :
@@ -1518,27 +1518,6 @@ public class PlacedPartyMemberSpawnDetails : OOCSpawnDetails
 /// <summary>
 ///  Moved GateSpawnInfo Child Classes to here safe keeping
 /// </summary>
-
-// public class TemporaryGateSpawnInfo : GateSpawnInfo
-// {
-
-//     public TemporaryGateSpawnInfo(int gateIndex, string displayName, string currentArea, Vector3Int startCell, int size, Axis axis) :
-//     base(gateIndex, displayName, currentArea, startCell, PrefabNames.portcullis1x1Path, size, axis)
-//     {
-//     }
-
-//     protected override string getGateName()
-//     {
-//         return displayName + gateIndex;
-//     }
-
-//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
-//     {
-//         return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, //skewed(),
-//          axis, statDifficulties);
-//     }
-
-// }
 
 // public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo
 // {
@@ -1610,27 +1589,6 @@ public class PlacedPartyMemberSpawnDetails : OOCSpawnDetails
 //         return new GateWithKeySpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), //skewed(),  
 //         indexHasSprite(spriteName, index), axis, gateKeyDetails);
 //     }
-// }
-
-// public class TemporaryGateSpawnInfo : GateSpawnInfo
-// {
-
-//     public TemporaryGateSpawnInfo(int gateIndex, string displayName, string currentArea, Vector3Int startCell, int size, Axis axis) :
-//     base(gateIndex, displayName, currentArea, startCell, PrefabNames.portcullis1x1Path, size, axis)
-//     {
-//     }
-
-//     protected override string getGateName()
-//     {
-//         return displayName + gateIndex;
-//     }
-
-//     public override GateSpawnDetails createSpawnDetails(Vector3Int currentCell, int index)
-//     {
-//         return new TemporaryGateSpawnDetails(getGateName(), currentCell, currentArea, getSpriteName(axis, index), tutorialTargetHash, //skewed(),
-//          axis, statDifficulties);
-//     }
-
 // }
 
 // public class GateWithHiddenTerrainSpawnInfo : GateSpawnInfo

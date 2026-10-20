@@ -366,7 +366,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
                                              getTickDownDamage(),
                                              CombatGrid.getPositionAt(holderCoords),
                                              DamageNumberPopup.getDirectionByTargetCoords(holderCoords),
-                                             CombatAnimationManager.getInstance().damageNumberCanvas,
+                                             AnimationTracker.getInstance().damageNumberCanvas,
                                              false,
                                              false,
                                              traitTickDownDamageFrameDelay);

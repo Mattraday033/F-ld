@@ -584,6 +584,17 @@ public static class AnimationDataList
         }
     }
 
+    public static float[] getAttackAnimationTimings(WeaponPose weaponPose)
+    {
+        switch(weaponPose)
+        {
+            case WeaponPose.TwoHandedStab:
+                return new float[] { 8f/60f, 8f/60f, 14f/60f, 14f/60f, 8f/60f, 8f/60f, 1f/60f };
+            default:
+                return new float[0];
+        }
+    }
+
     private static Sprite getSprite(string sheetPath, string spriteName)
     {
         foreach(Sprite sprite in Resources.LoadAll<Sprite>(sheetPath))

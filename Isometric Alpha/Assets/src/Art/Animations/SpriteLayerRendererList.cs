@@ -186,9 +186,23 @@ public class SpriteLayerRendererList : MonoBehaviour
     //the terrain renderer's visibility is owned by the terrain state, so these leave it alone
     public void setToSingleLayer(SpriteLayer spriteLayer)
     {
+        SpriteRenderer singleRenderer = spriteLayers[spriteLayer];
+
         foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
         {
-            spriteLayers[layer].enabled = layer == spriteLayer;
+            SpriteRenderer renderer = spriteLayers[layer];
+
+            //compared by renderer, as a missing layer stands in on the body's
+            if(renderer == singleRenderer)
+            {
+                renderer.enabled = true;
+                continue;
+            }
+
+            renderer.enabled = false;
+
+            //a disabled layer still hands its sprite to the outline, so whatever an earlier appearance left on it is dropped
+            renderer.sprite = null;
         }
     }
 

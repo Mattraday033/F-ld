@@ -1,3 +1,5 @@
+#nullable enable annotations
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -277,6 +279,11 @@ public class CunningObjectAppearance : IAppearance
         bool evenActivation = TrapAndButtonStateManager.contains(CunningObject.generateKey(AreaManager.locationName, index));
 
         CunningObjectSpriteList.getCurrentSprite(CunningObject.getFacing(evenActivation), category).applyAppearance(rendererList, type, updateColors);
+    }
+
+    public AnimationData? getAnimationData(CharacterAnimationType animationType)
+    {
+        return null;
     }
 }
 

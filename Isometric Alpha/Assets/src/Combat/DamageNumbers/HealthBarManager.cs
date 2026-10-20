@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 
 public class HealthBarManager : MonoBehaviour
 {
-    
     public GameObject masterSymbol;
     public GameObject minionSymbol;
     public GameObject mandatoryTargetSymbol;
@@ -23,10 +23,7 @@ public class HealthBarManager : MonoBehaviour
 	
     public Stats linkedStats;
 
-    // Whether game logic wants this bar shown (set by show()/hide()). The bar is only
-    // actually revealed while eligible AND (its owner is hovered OR the show-formula/Alt key is held
-    // OR the health-bars-always-visible setting is on).
-    private bool eligible;
+    private bool linkedStatsIsAlive => linkedStats != null && linkedStats.isAlive();
     private bool hovered;
 
     private void Awake()
@@ -40,9 +37,10 @@ public class HealthBarManager : MonoBehaviour
         Trait.OnTraitRemoval.AddListener(updateHealthBarColor);
         // LargeEnemyStats.OnLargeEnemySpawn.AddListener(cleanUpHiddenHealthBars);
         DescriptionPanelBuilder.OnFormulaSwap.AddListener(updateCreatureTypeSymbols);
-        DescriptionPanelBuilder.OnFormulaSwap.AddListener(applyConcealment);
+        DescriptionPanelBuilder.OnFormulaSwap.AddListener(show);
         CombatUIModule.OnHideCombatUI.AddListener(hide);
-        GameplaySettingsList.OnHealthBarVisibilitySettingChange.AddListener(applyConcealment);
+        GameplaySettingsList.OnHealthBarVisibilitySettingChange.AddListener(show);
+        SelectorManager.SelectorMoved.AddListener(determineVisibility);
 
         if(CombatStateManager.whoseTurn == WhoseTurn.Won ||
                     CombatStateManager.whoseTurn == WhoseTurn.Lost)
@@ -62,49 +60,38 @@ public class HealthBarManager : MonoBehaviour
         Trait.OnTraitRemoval.RemoveListener(updateHealthBarColor);
         // LargeEnemyStats.OnLargeEnemySpawn.RemoveListener(cleanUpHiddenHealthBars);
         DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(updateCreatureTypeSymbols);
-        DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(applyConcealment);
+        DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(show);
+        SelectorManager.SelectorMoved.RemoveListener(determineVisibility);
         CombatUIModule.OnHideCombatUI.RemoveListener(hide);
-        GameplaySettingsList.OnHealthBarVisibilitySettingChange.RemoveListener(applyConcealment);
+        GameplaySettingsList.OnHealthBarVisibilitySettingChange.RemoveListener(show);
     }
 
     // Called by CombatantHover when the mouse enters/leaves this bar's owner.
     public void setHovered(bool isHovered)
     {
         hovered = isHovered;
-        applyConcealment();
+        show();
     }
 
     private bool healthBarsAlwaysVisibleSettingOn()
     {
+        Debug.LogError("set = " + GameplaySettingsList.healthBarsAlwaysVisible.settingOptions[Constants.onSettingIndex].set);
         return GameplaySettingsList.healthBarsAlwaysVisible.settingOptions[Constants.onSettingIndex].set;
-    }
-
-    // Reveal the bar only when it is eligible and either the always-visible setting is on,
-    // its owner is hovered, or the Alt/show-formula key is held.
-    private void applyConcealment()
-    {
-        gameObject.SetActive(OverallUIManager.showFormula || 
-                            (eligible && 
-                             CombatStateManager.whoseTurn != WhoseTurn.Resolving &&            
-                                         (
-                                            healthBarsAlwaysVisibleSettingOn() || 
-                                            hovered || 
-                                            (SelectorManager.currentSelector != null && SelectorManager.currentSelector.containsTarget(linkedStats))
-                                         )));
     }
 
     private void updateCreatureTypeSymbols()
     {
-        if(OverallUIManager.showFormula && linkedStats != null)
+        // OverallUIManager.showFormula &&
+        if(linkedStats != null)
         {
             masterSymbol.SetActive(linkedStats.isMaster());
             minionSymbol.SetActive(linkedStats.isMinion());
         }
-        else
-        {
-            masterSymbol.SetActive(false);
-            minionSymbol.SetActive(false);
-        }
+        // else
+        // {
+        //     masterSymbol.SetActive(false);
+        //     minionSymbol.SetActive(false);
+        // }
     }
 
     public void updateHealthBarColor(Trait trait)
@@ -151,25 +138,53 @@ public class HealthBarManager : MonoBehaviour
         show();
     }
 
-    public void hide()
-    {
-        eligible = false;
-        gameObject.SetActive(false);
-    }
-
-    public void show()
+    private void determineVisibility(List<Selector> declaredSelectors)
     {
         if(linkedStats == null || linkedStats.isDead() ||
             CombatStateManager.whoseTurn == WhoseTurn.Won ||
-                    CombatStateManager.whoseTurn == WhoseTurn.Lost)
+                    CombatStateManager.whoseTurn == WhoseTurn.Lost || 
+                    CombatStateManager.whoseTurn == WhoseTurn.Resolving)
         {
             hide();
             return;
         }
 
-        eligible = true;
-        updateHealthBarColor(null);
-        applyConcealment();
+        if(healthBarsAlwaysVisibleSettingOn())
+        {
+            show();
+            return;
+        }
+
+        foreach(Selector selector in declaredSelectors)
+        {
+            if(selector.containsTarget(linkedStats) && 
+                (
+                healthBarsAlwaysVisibleSettingOn() || 
+                hovered || 
+                (SelectorManager.currentSelector != null && SelectorManager.currentSelector.containsTarget(linkedStats))
+                ))
+            {
+                show();
+                return;
+            }
+        }
+
+        hide();
+    }
+
+    public void hide()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void show()
+    {
+        if(linkedStatsIsAlive)
+        {
+            updateCreatureTypeSymbols();
+            updateHealthBarColor(null);
+            gameObject.SetActive(true);
+        }
     }
 
     public void setTotalHealth(int totalHealth)
@@ -280,6 +295,7 @@ public class HealthBarManager : MonoBehaviour
         // rect.position = Helpers.getAveragePosition(stats.getAllWorldPositions());
         rect.localScale = new Vector3(.14f, .14f);
         rect.anchoredPosition = Vector3.zero; // e.g. (0, -0.05, 0)
+        rect.localPosition = new(0f,0.225f,0f);
 
         if(CombatStateManager.inCombat && !GameplaySettingsList.healthBarsAlwaysVisible.settingOptions[Constants.onSettingIndex].set)
         {

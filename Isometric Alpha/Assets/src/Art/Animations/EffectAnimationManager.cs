@@ -46,6 +46,30 @@ public struct DamagePacket
     }
 }
 
+//what AnimationData.animationCoroutine needs from the object it animates, and what AnimationTracker needs to track it
+public interface IAnimationManager
+{
+    public GameObject gameObject { get; }
+
+    //implementers take a key from AnimationTracker.getCurrentKey the first time it's read
+    public int key { get; }
+
+    //a single fire animation's object is destroyed once it's removed from AnimationTracker
+    public bool singleFire { get; }
+
+    //null for an object that isn't drawn with sprite layers
+    public SpriteLayerRendererList rendererList
+    {
+        get;
+    }
+
+    //called once the first frame has finished showing
+    public void onFirstFrameFinished();
+
+    //called when a non-looping animation ends, or when there is nothing to draw on
+    public void onAnimationFinished();
+}
+
 public class AnimationData
 {
     private Dictionary<SpriteLayer, Sprite[]> sprites;
@@ -67,11 +91,13 @@ public class AnimationData
         this.placements = placements;
     }
 
-    public IEnumerator animationCoroutine(SpriteLayerRendererList rendererList, EffectAnimationManager effectAnimationManager, bool loopAnimation = false)
+    public IEnumerator animationCoroutine(IAnimationManager animationManager, bool loopAnimation = false)
     {
+        SpriteLayerRendererList rendererList = animationManager.rendererList;
+
         if(rendererList == null)
         {
-            GameObject.Destroy(effectAnimationManager.gameObject);
+            animationManager.onAnimationFinished();
             yield break;
         }
 
@@ -85,12 +111,13 @@ public class AnimationData
             {
                 foreach(KeyValuePair<SpriteLayer, Sprite[]> kvp in sprites)
                 {
+                    //a layer with fewer frames than the timings (e.g. a single-frame fallback) holds its last frame
                     if(placements != null && placements.TryGetValue(kvp.Key, out CanvasPlacement[] layerPlacements))
                     {
-                        rendererList.setLayerSprite(kvp.Key, kvp.Value[index], layerPlacements[index]);
+                        rendererList.setLayerSprite(kvp.Key, kvp.Value[Math.Min(index, kvp.Value.Length - 1)], layerPlacements[Math.Min(index, layerPlacements.Length - 1)]);
                     } else
                     {
-                        rendererList[kvp.Key].sprite = kvp.Value[index];
+                        rendererList[kvp.Key].sprite = kvp.Value[Math.Min(index, kvp.Value.Length - 1)];
                     }
                 }
             }
@@ -106,12 +133,12 @@ public class AnimationData
 
                 if(index == Constants.indexOne)
                 {
-                    effectAnimationManager.createDamagePopUp();
+                    animationManager.onFirstFrameFinished();
                 }
 
                 if(index >= timingInSeconds.Length && !loopAnimation)
                 {
-                    GameObject.Destroy(effectAnimationManager.gameObject);
+                    animationManager.onAnimationFinished();
                     yield break;
                 } else if(index >= timingInSeconds.Length)
                 {
@@ -129,7 +156,7 @@ public class AnimationData
     }
 }
 
-public class EffectAnimationManager : MonoBehaviour, IAnimationTracker
+public class EffectAnimationManager : MonoBehaviour, IAnimationManager
 {
     public readonly static UnityEvent<EffectAnimationType> DestroyAllEffectsOfType = new UnityEvent<EffectAnimationType>();
     
@@ -142,7 +169,7 @@ public class EffectAnimationManager : MonoBehaviour, IAnimationTracker
         {
             if(_Key < 0)
             {
-                _Key = CombatAnimationManager.getCurrentKey();
+                _Key = AnimationTracker.getCurrentKey();
             }
 
             return _Key;
@@ -168,6 +195,14 @@ public class EffectAnimationManager : MonoBehaviour, IAnimationTracker
     }
 
     public SpriteLayerRendererList rendererList;
+
+    SpriteLayerRendererList IAnimationManager.rendererList
+    {
+        get
+        {
+            return rendererList;
+        }
+    }
 
     private bool initiated = false;
 
@@ -205,7 +240,7 @@ public class EffectAnimationManager : MonoBehaviour, IAnimationTracker
 
         effect.determineOutline();
 
-        effect.StartCoroutine(animationData.animationCoroutine(effect.rendererList, effect, loops));
+        effect.StartCoroutine(animationData.animationCoroutine(effect, loops));
 
         return effect;
     }
@@ -234,8 +269,27 @@ public class EffectAnimationManager : MonoBehaviour, IAnimationTracker
         if(_AnimationData != null && !started)
         {
             started = true;
-            StartCoroutine(_AnimationData.animationCoroutine(rendererList, this, loopAnimation: loops));
+            StartCoroutine(_AnimationData.animationCoroutine(this, loopAnimation: loops));
         }
+    }
+
+    public void onFirstFrameFinished()
+    {
+        createDamagePopUp();
+    }
+
+    public void onAnimationFinished()
+    {
+        //effects aren't tracked yet (see AnimationTracker.loadInstantEffect), and removing an untracked one
+        //would rerun the end-of-turn checks after the tracked animations already ran them
+        if(AnimationTracker.trackerBeingTracked(this))
+        {
+            //destroys this object too, since an effect is singleFire
+            this.removeAnimation();
+            return;
+        }
+
+        Destroy(gameObject);
     }
 
     public void createDamagePopUp()
@@ -243,7 +297,7 @@ public class EffectAnimationManager : MonoBehaviour, IAnimationTracker
         if(damagePacket.HasValue && damagePacket.Value.damage > 0)
         {
             DamageNumberPopup.create(targetCoords, damagePacket.Value.damage, transform.position, DamageNumberPopup.getDirectionByTargetCoords(targetCoords),
-                CombatAnimationManager.getInstance().damageNumberCanvas, damagePacket.Value.crit, damagePacket.Value.healsTarget);
+                AnimationTracker.getInstance().damageNumberCanvas, damagePacket.Value.crit, damagePacket.Value.healsTarget);
         }
     }
     

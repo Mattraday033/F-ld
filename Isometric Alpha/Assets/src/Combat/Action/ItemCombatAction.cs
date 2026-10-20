@@ -119,7 +119,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
                 {
                     foreach (GridCoords targetCoords in targetCombatant.positions)
                     {
-                        CombatAnimationManager.loadInstantEffect(getEffectAnimationType(), targetCoords, false, findFinalDamage(targetCombatant, false), healsTarget(), false, null, getActorCoords());
+                        AnimationTracker.loadInstantEffect(getEffectAnimationType(), targetCoords, false, findFinalDamage(targetCombatant, false), healsTarget(), false, null, getActorCoords());
                     }
                 }
 			}

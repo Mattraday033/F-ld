@@ -401,13 +401,13 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         switch (getCombatAnimationType())
         {
             case CombatAnimationType.None:
-                CombatAnimationManager.loadInvisibleProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+                AnimationTracker.loadInvisibleProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
                 break;
             case CombatAnimationType.Projectile:
-                CombatAnimationManager.loadProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, getLandingScript());
+                AnimationTracker.loadProjectile(getActorCoords(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, getLandingScript());
                 break;
             case CombatAnimationType.Effect:
-                CombatAnimationManager.loadInstantEffect(getEffectAnimationType(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, getLandingScript(), getActorCoords());
+                AnimationTracker.loadInstantEffect(getEffectAnimationType(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, getLandingScript(), getActorCoords());
                 break;
         }
     }
@@ -943,7 +943,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         {
             foreach (GridCoords targetCoords in target.positions)
             {
-                DamageNumberPopup.createResistPopUp(targetCoords, CombatGrid.getPositionAt(targetCoords), CombatAnimationManager.getInstance().damageNumberCanvas);
+                DamageNumberPopup.createResistPopUp(targetCoords, CombatGrid.getPositionAt(targetCoords), AnimationTracker.getInstance().damageNumberCanvas);
             }
             return;
         }

@@ -17,7 +17,14 @@ public static class OverallUIManager
         set
         {
             _ShowFormula = value;
-            DescriptionPanelBuilder.OnFormulaSwap.Invoke();
+
+            if(showFormula)
+            {
+                DescriptionPanelBuilder.OnFormulaSwap.Invoke();
+            } else
+            {
+                SelectorManager.declareSelectors();
+            }
         }
     }
 

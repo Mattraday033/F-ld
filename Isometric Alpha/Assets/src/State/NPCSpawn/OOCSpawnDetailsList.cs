@@ -1454,96 +1454,96 @@ public static class OOCSpawnDetailsList
 
         list.Add(new ContainerSpawnDetails(Constants.indexZero, new Vector3Int(4, 5), Facing.SouthWest, type: ContainerType.Chest));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexZero, //A1 - S1
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(2, 9),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingY));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1, //A1 - S1
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexZero,
+                                    new Vector3Int(2, 9),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexOne, //B1 - S2
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(2, 5),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingY));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1, //B1 - S2
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexOne,
+                                    new Vector3Int(2, 5),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexTwo, //C1 - S3
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(2, 1),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingY));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1, //C1 - S3
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexTwo,
+                                    new Vector3Int(2, 1),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexThree, //A1 - B1
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(4, 7),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingX));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1Flipped, //A1 - B1
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexThree,
+                                    new Vector3Int(4, 7),
+                                    Constants.sizeOne,
+                                    Axis.DescendingX));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexFour, //B1 - C1
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(4, 3),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingX));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1Flipped, //B1 - C1
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexFour,
+                                    new Vector3Int(4, 3),
+                                    Constants.sizeOne,
+                                    Axis.DescendingX));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexFive, //A1 - A2
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(6, 9),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingY));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1, //A1 - A2
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexFive,
+                                    new Vector3Int(6, 9),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexSix, //B1 - B2
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(6, 5),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingY));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1, //B1 - B2
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexSix,
+                                    new Vector3Int(6, 5),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexSeven, //C1 - C2
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(6, 1),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingY));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1, //C1 - C2
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexSeven,
+                                    new Vector3Int(6, 1),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexEight, //A2 - B2
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(8, 7),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingX));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1Flipped, //A2 - B2
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexEight,
+                                    new Vector3Int(8, 7),
+                                    Constants.sizeOne,
+                                    Axis.DescendingX));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexNine, //B2 - C2
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(8, 3),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingX));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1Flipped, //B2 - C2
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexNine,
+                                    new Vector3Int(8, 3),
+                                    Constants.sizeOne,
+                                    Axis.DescendingX));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexTen, //B2 - 7A
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(10, 5),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingY));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1, //B2 - 7A
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexTen,
+                                    new Vector3Int(10, 5),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexEleven, //C2 - C3
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(10, 1),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingY));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1, //C2 - C3
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexEleven,
+                                    new Vector3Int(10, 1),
+                                    Constants.sizeOne,
+                                    Axis.DescendingY));
 
-        // list.Add(new TemporaryGateSpawnDetails(Constants.indexTwelve, //C3 - 7a
-        //                             NPCNameList.ancientPortcullis,
-        //                             ZoneKeyList.mineLvl2 + LocationNameList.section6,
-        //                             new Vector3Int(12, 3),
-        //                             Constants.sizeOne,
-        //                             Axis.DescendingX));
+        list.Add(new TemporaryGateSpawnDetails(SpriteDescriptionList.portcullis1x1Flipped, //C3 - 7a
+                                    NPCNameList.ancientPortcullis,
+                                    Constants.indexTwelve,
+                                    new Vector3Int(12, 3),
+                                    Constants.sizeOne,
+                                    Axis.DescendingX));
 
         oocSpawnDetailsDict.Add(ZoneKeyList.mineLvl2 + LocationNameList.section6, list);
 

@@ -27,13 +27,13 @@ public class RepositionAbility : Ability, IJSONConvertable
             return;
         }
 
-        CombatAnimationManager.getInstance().StartCoroutine(waitForAttackAnimationToStop(/*getActorStats().animationManager,*/ combatantToBeMoved));
+        AnimationTracker.getInstance().StartCoroutine(waitForAttackAnimationToStop(/*getActorStats().animationManager,*/ combatantToBeMoved));
     }
 
     public virtual IEnumerator waitForAttackAnimationToStop(/*AnimationManager animationManager,*/ Stats combatantToBeMoved)
     {
 
-        // while(CombatAnimationManager.trackerBeingTracked(animationManager))
+        // while(AnimationTracker.trackerBeingTracked(animationManager))
         // {
             yield return null;
         // }

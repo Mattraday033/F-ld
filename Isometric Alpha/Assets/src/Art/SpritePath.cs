@@ -6,19 +6,38 @@
 public enum SpritePath
 {
     NoSprite, // reserved: no asset
+    Body_LovashiArmor_NoWeapon_Death_Back, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Death_Back
+    Body_LovashiArmor_NoWeapon_Death_Front, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Death_Front
     Body_LovashiArmor_NoWeapon_OOC_Idle_Back, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Back
     Body_LovashiArmor_NoWeapon_OOC_Idle_Front, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/OOC_Idle_Front
     Body_LovashiArmor_NoWeapon_Run_Back_Left, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Back_Left
     Body_LovashiArmor_NoWeapon_Run_Back_Right, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Back_Right
     Body_LovashiArmor_NoWeapon_Run_Front_Left, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Front_Left
     Body_LovashiArmor_NoWeapon_Run_Front_Right, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Run_Front_Right
+    Body_LovashiArmor_NoWeapon_Special_Attack_Back, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Special_Attack_Back
+    Body_LovashiArmor_NoWeapon_Special_Attack_Front, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Special_Attack_Front
+    Body_LovashiArmor_NoWeapon_Wounded_Back, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Wounded_Back
+    Body_LovashiArmor_NoWeapon_Wounded_Front, // Sprites/SpriteLayers/Body/LovashiArmor/NoWeapon/Wounded_Front
+    Body_LovashiArmor_Polearm_OOC_Idle_Back, // Sprites/SpriteLayers/Body/LovashiArmor/Polearm/OOC_Idle_Back
+    Body_LovashiArmor_Polearm_OOC_Idle_Front, // Sprites/SpriteLayers/Body/LovashiArmor/Polearm/OOC_Idle_Front
+    Body_LovashiArmor_TwoHandedStab_Attack_Normal_Back, // Sprites/SpriteLayers/Body/LovashiArmor/TwoHandedStab/Attack_Normal_Back
+    Body_LovashiArmor_TwoHandedStab_Attack_Normal_Front, // Sprites/SpriteLayers/Body/LovashiArmor/TwoHandedStab/Attack_Normal_Front
+    Body_LovashiArmor_TwoHandedStab_Idle_Back, // Sprites/SpriteLayers/Body/LovashiArmor/TwoHandedStab/Idle_Back
     Body_LovashiArmor_TwoHandedStab_Idle_Front, // Sprites/SpriteLayers/Body/LovashiArmor/TwoHandedStab/Idle_Front
-    Body_LovashiArmor_TwoHandedStab_Normal_Attack_Front, // Sprites/SpriteLayers/Body/LovashiArmor/TwoHandedStab/Normal_Attack_Front
+    Face_Short_Goatee_Back, // Sprites/SpriteLayers/Face/Short_Goatee/Back
+    Face_Short_Goatee_Front, // Sprites/SpriteLayers/Face/Short_Goatee/Front
     Face_Short_Goatee_OOC_Idle_Front, // Sprites/SpriteLayers/Face/Short_Goatee/OOC_Idle_Front
     Face_Short_Goatee_TwoHandedStab_Normal_Attack_Front, // Sprites/SpriteLayers/Face/Short_Goatee/TwoHandedStab/Normal_Attack_Front
     Hair_Short_Ruffled_Attack_Front_Two_Handed_Stab, // Sprites/SpriteLayers/Hair/Short_Ruffled/Attack_Front_Two_Handed_Stab
-    Hair_Short_Ruffled_Normal, // Sprites/SpriteLayers/Hair/Short_Ruffled/Normal
+    Hair_Short_Ruffled_Back, // Sprites/SpriteLayers/Hair/Short_Ruffled/Back
+    Hair_Short_Ruffled_Front, // Sprites/SpriteLayers/Hair/Short_Ruffled/Front
+    Hair_Short_Ruffled_IMG_5905, // Sprites/SpriteLayers/Hair/Short_Ruffled/IMG_5905
+    Hair_Short_Ruffled_IMG_5908, // Sprites/SpriteLayers/Hair/Short_Ruffled/IMG_5908
     Hair_Short_Ruffled_Old, // Sprites/SpriteLayers/Hair/Short_Ruffled/Old
+    Weapon_SpearSimple_Attack_Normal_Back, // Sprites/SpriteLayers/Weapon/SpearSimple/Attack_Normal_Back
     Weapon_SpearSimple_Attack_Normal_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/Attack_Normal_Front
+    Weapon_SpearSimple_Death_Back, // Sprites/SpriteLayers/Weapon/SpearSimple/Death_Back
+    Weapon_SpearSimple_Death_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/Death_Front
+    Weapon_SpearSimple_Idle_Back, // Sprites/SpriteLayers/Weapon/SpearSimple/Idle_Back
     Weapon_SpearSimple_Idle_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/Idle_Front
 }

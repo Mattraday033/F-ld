@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,7 @@ public class SaveHandler : ScreenManager, IEscapable
     public const string autoSave2Name = "Autosave 2";
     public const string autoSave3Name = "Autosave 3";
 	public const string quickSaveName = "Quicksave";
+	private const float quickSaveCooldownSeconds = 5f;
 
 	public const string cleanSlateSaveName = "cleanSlateSave";
 
@@ -36,6 +38,8 @@ public class SaveHandler : ScreenManager, IEscapable
     public SaveBlueprint currentSaveFile;
 
 	private static SaveHandler instance;
+
+	private static bool quickSaveOnCooldown;
 
 	private static void deselectCurrentGameObject(IDescribable blueprint)
 	{
@@ -382,9 +386,31 @@ public class SaveHandler : ScreenManager, IEscapable
 
 	public static void quickSave()
 	{
+		if (quickSaveOnCooldown)
+		{
+			return;
+		}
+
 		SaveBlueprint quicksave = save(quickSaveName + " " + getNextQuickSaveNumber());
 
 		NotificationManager.spawnQuickSaveNotification(quicksave);
+
+		//Hosted on the FadeToBlackManager because it survives scene loads; a host destroyed mid-wait
+		//would leave the cooldown flag set for the rest of the session.
+		FadeToBlackManager cooldownHost = FadeToBlackManager.getInstance();
+
+		if (cooldownHost != null)
+		{
+			quickSaveOnCooldown = true;
+			cooldownHost.StartCoroutine(waitForQuickSaveCooldown());
+		}
+	}
+
+	private static IEnumerator waitForQuickSaveCooldown()
+	{
+		yield return new WaitForSecondsRealtime(quickSaveCooldownSeconds);
+
+		quickSaveOnCooldown = false;
 	}
 
 	public static int getNextQuickSaveNumber()
@@ -662,6 +688,7 @@ public class SaveHandler : ScreenManager, IEscapable
         saveGameList = new Dictionary<string, SaveBlueprint>();
         createSavedGameList();
         instance = null;
+        quickSaveOnCooldown = false;
 
         LoadSaveFile.OnLoadResetData.AddListener(createSavedGameListSkipInvoke);
 		OnSaveCreated.AddListener(deselectCurrentGameObject);

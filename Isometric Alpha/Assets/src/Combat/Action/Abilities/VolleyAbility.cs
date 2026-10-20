@@ -119,7 +119,7 @@ public class VolleyAbility : Ability
 				finalDamage = -1;
 			}
 
-            CombatAnimationManager.loadInstantEffect(actor.getVolleyAnimationType(), targetTileCoords[targetCoordsIndex], crit, finalDamage, healsTarget(), targetMustBeDead(), false);
+            AnimationTracker.loadInstantEffect(actor.getVolleyAnimationType(), targetTileCoords[targetCoordsIndex], crit, finalDamage, healsTarget(), targetMustBeDead(), false);
 			
             projectileNumber++;
 			

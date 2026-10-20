@@ -1,3 +1,5 @@
+#nullable enable annotations
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -112,6 +114,8 @@ public interface IAppearance
     {
         get;
     }
+
+    public AnimationData? getAnimationData(CharacterAnimationType animationType);
 }
 
 public class SpriteDescription: IAppearance
@@ -245,6 +249,12 @@ public class SpriteDescription: IAppearance
         // transform.
     }
 
+
+    public AnimationData? getAnimationData(CharacterAnimationType animationType)
+    {
+        return null;
+    }
+
 }
 
 public class Costume: IAppearance
@@ -293,6 +303,7 @@ public class Costume: IAppearance
         this._Large = large;
     }
 
+    #region Sprites/Colors
     private ColorReplaceSchema getColorSchema()
     {
         return ColorSchemaList.getSchema(MonsterNameList.spearman);
@@ -329,29 +340,45 @@ public class Costume: IAppearance
     //the canvas a hair type wears for any front facing animation it has no sprite of its own for
     private static readonly Dictionary<HairType, SpritePath> frontHairCanvases = new Dictionary<HairType, SpritePath>()
     {
-        [HairType.Short_Ruffled] = SpritePath.Hair_Short_Ruffled_Normal
+        [HairType.Short_Ruffled] = SpritePath.Hair_Short_Ruffled_Front
+    };
+
+    //the canvas a hair type wears for any back facing animation it has no sprite of its own for
+    private static readonly Dictionary<HairType, SpritePath> backHairCanvases = new Dictionary<HairType, SpritePath>()
+    {
+        [HairType.Short_Ruffled] = SpritePath.Hair_Short_Ruffled_Back
     };
 
     private SpritePath getHairSpritePath(CharacterAnimationType animationType)
     {
         SpritePath spritePath = getSpritePath(SpriteLayer.Hair, hairType, animationType, getWeaponPose(animationType));
 
-        if(spritePath == SpritePath.NoSprite &&
-            facesFront(animationType) &&
-            frontHairCanvases.TryGetValue(hairType, out SpritePath canvasPath))
+        if(spritePath != SpritePath.NoSprite)
         {
-            return canvasPath;
+            return spritePath;
+        }
+
+        if(fallsBackTo(animationType, CharacterAnimationType.OOC_Idle_Front) &&
+            frontHairCanvases.TryGetValue(hairType, out SpritePath frontCanvasPath))
+        {
+            return frontCanvasPath;
+        }
+
+        if(fallsBackTo(animationType, CharacterAnimationType.OOC_Idle_Back) &&
+            backHairCanvases.TryGetValue(hairType, out SpritePath backCanvasPath))
+        {
+            return backCanvasPath;
         }
 
         return spritePath;
     }
 
-    //every front facing animation falls back to OOC_Idle_Front in the end
-    private static bool facesFront(CharacterAnimationType animationType)
+    //every front facing animation falls back to OOC_Idle_Front in the end, and every back facing one to OOC_Idle_Back
+    private static bool fallsBackTo(CharacterAnimationType animationType, CharacterAnimationType idleType)
     {
         while(animationType != CharacterAnimationType.None)
         {
-            if(animationType == CharacterAnimationType.OOC_Idle_Front)
+            if(animationType == idleType)
             {
                 return true;
             }
@@ -443,6 +470,56 @@ public class Costume: IAppearance
         }
     }
 
+    #endregion
+
+    #region AnimationData
+
+    public AnimationData? getAnimationData(CharacterAnimationType animationType)
+    {
+
+        float[] timings = null;
+
+        switch(animationType)
+        {
+            case CharacterAnimationType.Attack_Normal:
+            case CharacterAnimationType.Attack_Normal_Front:
+            case CharacterAnimationType.Attack_Normal_Back:
+                timings = AnimationDataList.getAttackAnimationTimings(weaponAnimationInfo[animationType]);
+                break;
+            default:
+                return null;
+        }
+
+        Dictionary<SpriteLayer, Sprite[]> spriteInfo = new Dictionary<SpriteLayer, Sprite[]>()
+                                    {
+                                        [SpriteLayer.Shield_Back] = getSprites(SpriteLayer.Shield_Back, animationType),
+                                        [SpriteLayer.Weapon] = getSprites(SpriteLayer.Weapon, animationType),
+                                        [SpriteLayer.Body] = getSprites(SpriteLayer.Body, animationType),
+                                        [SpriteLayer.Cloak] = getSprites(SpriteLayer.Cloak, animationType),
+                                        [SpriteLayer.Face] = getSprites(SpriteLayer.Face, animationType),
+                                        [SpriteLayer.Hair] = getSprites(SpriteLayer.Hair, animationType),
+                                        [SpriteLayer.Shield_Front] = getSprites(SpriteLayer.Shield_Front, animationType)
+                                    };
+
+        //the head layers are drawn on a small canvas, which has to follow the body's head from frame to frame
+        SpritePath bodyPath = getSpritePath(SpriteLayer.Body, animationType);
+        Dictionary<SpriteLayer, CanvasPlacement[]> placements = new Dictionary<SpriteLayer, CanvasPlacement[]>();
+
+        foreach(SpriteLayer layer in spriteInfo.Keys)
+        {
+            CanvasPlacement[] layerPlacements = CanvasPositionList.getPlacements(layer, bodyPath, getSpritePath(layer, animationType));
+
+            if(layerPlacements.Length > 0)
+            {
+                placements[layer] = layerPlacements;
+            }
+        }
+
+        return new AnimationData(spriteInfo, timingInSeconds: timings, placements: placements);
+    }
+
+    #endregion
+
 }
 
 public static class WeaponAnimationInfoFactory
@@ -456,7 +533,7 @@ public static class WeaponAnimationInfoFactory
                 return new Dictionary<CharacterAnimationType, WeaponPose>()
                 {
                     [CharacterAnimationType.OOC_Idle_Back] = WeaponPose.NoWeapon,
-                    // [CharacterAnimationType.Idle_Back] = WeaponPose.TwoHandedStab,
+                    [CharacterAnimationType.Idle_Back] = WeaponPose.TwoHandedStab,
                     [CharacterAnimationType.Idle_Front] = WeaponPose.TwoHandedStab,
                     [CharacterAnimationType.OOC_Idle_Back] = WeaponPose.NoWeapon,
                     [CharacterAnimationType.OOC_Idle_Front] = WeaponPose.NoWeapon,

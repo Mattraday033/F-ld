@@ -181,7 +181,8 @@ public class OverHeadIconManager : MonoBehaviour, IRevealable
 
     private bool nameTagSuppressed()
     {
-        INameTagSuppressor suppressor = nameSource as INameTagSuppressor;
+        //a temporary gate sits beside the dialogue trigger the manager takes its name from, so the suppressor may be a sibling instead
+        INameTagSuppressor suppressor = nameSource as INameTagSuppressor ?? GetComponent<INameTagSuppressor>();
 
         return suppressor != null && suppressor.suppressNameTag;
     }

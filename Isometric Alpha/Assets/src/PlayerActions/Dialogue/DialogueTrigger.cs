@@ -44,6 +44,8 @@ public static class NameSourceExtensions
             case NPCNameList.statue:
             case NPCNameList.rubble:
             case NPCNameList.awkwardRubble:
+            case NPCNameList.ancientPortcullis:
+            case NPCNameList.button:
 
             //occupation
             case NPCNameList.guard:
@@ -126,7 +128,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
     public PlaySFXLogic introAudioClipLogic;
 
-    public NewAnimationManager animationManager;
+    public CreatureAnimationManager animationManager;
 
     // public GameObject[] extraSpaces;
 
@@ -186,7 +188,7 @@ public class DialogueTrigger : MonoBehaviour, IDialogueParticipant
 
         if(animationManager == null)
         {
-            animationManager = GetComponent<NewAnimationManager>();
+            animationManager = GetComponent<CreatureAnimationManager>();
         }
     }
 

@@ -220,7 +220,7 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
     public ChestState chestState = ChestState.Closed;
     public ContainerType chestType = ContainerType.Chest;
 
-    public NewAnimationManager animationManager;
+    public CreatureAnimationManager animationManager;
 
     public SpriteLayerRendererList rendererList
     {
@@ -416,7 +416,7 @@ public class Container : MonoBehaviour, IRevealable, IQuestActivationObject, IAp
 
     public void populate(int index, ContainerType type)
     {
-        animationManager = GetComponent<NewAnimationManager>();
+        animationManager = GetComponent<CreatureAnimationManager>();
         animationManager.appearanceSource = this;
 
         chestIndex = index;

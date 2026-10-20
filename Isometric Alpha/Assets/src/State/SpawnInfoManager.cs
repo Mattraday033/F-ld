@@ -113,7 +113,7 @@ public static class SpawnInfoManager
         Transform player = GameObject.Instantiate(Resources.Load<GameObject>(PrefabNames.playerPrefab), AreaManager.getPlayerParent()).transform;
         ActivationListenerSpawnBehaviour.addActivationListener(player.gameObject);
 
-        NewAnimationManager animationManager = player.GetComponent<NewAnimationManager>();
+        CreatureAnimationManager animationManager = player.GetComponent<CreatureAnimationManager>();
 
         if (AreaManager.saveBlueprint != null)
         {
@@ -146,7 +146,7 @@ public static class SpawnInfoManager
 
             List<GameObject> interactables = details.spawnInteractables();
 
-            if (spawnParams != null && !spawnParams.canSpawn(details.displayName))
+            if (spawnParams != null && !spawnParams.canSpawn(details.uniqueName))
             {
                 foreach(GameObject interactable in interactables)
                 {

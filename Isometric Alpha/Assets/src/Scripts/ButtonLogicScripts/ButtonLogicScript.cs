@@ -143,28 +143,18 @@ public class OnOffButtonLogicScript : ButtonLogicScript
 
     private Dictionary<int, int[]> gatesPerButton;
     private Dictionary<int, bool> released;
-    private int[] gatesOpenAtStart;
 
-    public OnOffButtonLogicScript(string gateKey, Dictionary<int, int[]> gatesPerButton, int[] gatesOpenAtStart)
+    //the gates that start open are listed in TrapStateList, where they can't override a loaded save
+    public OnOffButtonLogicScript(string gateKey, Dictionary<int, int[]> gatesPerButton)
     {
         this.gateKey = gateKey;
         this.gatesPerButton = gatesPerButton;
-        this.gatesOpenAtStart = gatesOpenAtStart;
 
         released = new Dictionary<int, bool>();
 
         foreach (KeyValuePair<int, int[]> kvp in gatesPerButton)
         {
             released.Add(kvp.Key, true);
-        }
-    }
-
-    public override void startingAction()
-    {
-        foreach (int gateIndex in gatesOpenAtStart)
-        {
-            string fullKey = AreaManager.locationName + gateKey + gateIndex;
-            TrapAndButtonStateManager.setKey(fullKey, true);           
         }
     }
 
@@ -187,7 +177,7 @@ public class OnOffButtonLogicScript : ButtonLogicScript
     {
         foreach (int gateIndex in gatesPerButton[lastPressedButtonIndex])
         {
-            string fullKey = AreaManager.locationName + gateKey + gateIndex;
+            string fullKey = TemporaryGate.generateKey(AreaManager.locationName, gateKey, gateIndex);
             bool activated = TrapAndButtonStateManager.contains(fullKey);
 
             TrapAndButtonStateManager.setKey(fullKey, !activated);

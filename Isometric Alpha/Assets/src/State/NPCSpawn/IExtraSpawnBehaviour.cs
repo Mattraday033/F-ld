@@ -70,7 +70,7 @@ public class AnimationManagerSpawnBehaviour : IExtraSpawnBehaviour
 
     public Component addBehaviour(GameObject gameObject)
     {
-        NewAnimationManager animationManager = gameObject.AddComponent<NewAnimationManager>();
+        CreatureAnimationManager animationManager = gameObject.AddComponent<CreatureAnimationManager>();
 
         animationManager.appearanceSource = appearanceSource;
         animationManager.characterFacing.currentFacing = facing;
@@ -275,7 +275,7 @@ public class EnemyMovementSpawnBehaviour : IExtraSpawnBehaviour
         enemyMovement.movementType = spawnDetails.movementType;
 
         //the animation manager arrives with the aesthetic behaviours, so its OnEnable ran before this tracker existed to be found
-        NewAnimationManager animationManager = gameObject.GetComponent<NewAnimationManager>();
+        CreatureAnimationManager animationManager = gameObject.GetComponent<CreatureAnimationManager>();
 
         if(animationManager != null)
         {
@@ -359,13 +359,31 @@ public class GateSpawnBehaviour : IExtraSpawnBehaviour
 
     public Component addBehaviour(GameObject gameObject)
     {
-        Gate gate = gameObject.AddComponent<Gate>();
+        Gate gate = addGate(gameObject);
 
         //setKey checks whether the gate is already open, which needs the flag in place first
         gate.hiddenTerrainFlag = hiddenTerrainFlag;
         gate.setKey(gateKey);
 
         return gate;
+    }
+
+    protected virtual Gate addGate(GameObject gameObject)
+    {
+        return gameObject.AddComponent<Gate>();
+    }
+}
+
+public class TemporaryGateSpawnBehaviour : GateSpawnBehaviour
+{
+    public TemporaryGateSpawnBehaviour(string gateKey) :
+    base(gateKey)
+    {
+    }
+
+    protected override Gate addGate(GameObject gameObject)
+    {
+        return gameObject.AddComponent<TemporaryGate>();
     }
 }
 
@@ -587,7 +605,7 @@ public class PartyMemberMovementSpawnBehaviour : IExtraSpawnBehaviour
         partyMemberMovement.placeInTrain = placeInTrain;
 
         //the animation manager arrives with the aesthetic behaviours, so its OnEnable ran before this tracker existed to be found
-        NewAnimationManager animationManager = gameObject.GetComponent<NewAnimationManager>();
+        CreatureAnimationManager animationManager = gameObject.GetComponent<CreatureAnimationManager>();
 
         if(animationManager != null)
         {
@@ -606,6 +624,19 @@ public class PlacedPartyMemberMouseHoverSpawnBehaviour : NPCMouseHoverSpawnBehav
         PlacedPartyMemberMouseHover mouseHover = bodyColliderObject.AddComponent<PlacedPartyMemberMouseHover>();
 
         mouseHover.placedPartyMember = gameObject.GetComponent<PlacedPartyMember>();
+
+        return mouseHover;
+    }
+}
+
+public class TemporaryGateMouseHoverSpawnBehaviour : NPCMouseHoverSpawnBehaviour
+{
+    //the hover has to know when its gate is open, so it does not bring the body collider back over an empty doorway
+    protected override NPCMouseHover addMouseHover(GameObject gameObject, GameObject bodyColliderObject)
+    {
+        TemporaryGateMouseHover mouseHover = bodyColliderObject.AddComponent<TemporaryGateMouseHover>();
+
+        mouseHover.temporaryGate = gameObject.GetComponent<TemporaryGate>();
 
         return mouseHover;
     }

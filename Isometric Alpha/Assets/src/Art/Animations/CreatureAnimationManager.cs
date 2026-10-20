@@ -13,8 +13,9 @@ public interface IAppearanceSource
     }
 }
 
-public class NewAnimationManager : MonoBehaviour
+public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
 {
+
     public PolygonCollider2D polygonCollider2D
     {
         get
@@ -24,6 +25,31 @@ public class NewAnimationManager : MonoBehaviour
     }
 
     public SpriteLayerRendererList rendererList;
+
+    SpriteLayerRendererList IAnimationManager.rendererList
+    {
+        get
+        {
+            return rendererList;
+        }
+    }
+
+    private int _Key = -1;
+    public int key
+    {
+        get
+        {
+            if(_Key < 0)
+            {
+                _Key = AnimationTracker.getCurrentKey();
+            }
+
+            return _Key;
+        }
+    }
+
+    //the character outlives its animations, so removing one from AnimationTracker mustn't destroy it
+    public bool singleFire { get { return false; } }
 
     private MovementTracker _MovementTracker;
     public MovementTracker movementTracker
@@ -123,20 +149,38 @@ public class NewAnimationManager : MonoBehaviour
 
     public void playAnimation(CharacterAnimationType animationType = CharacterAnimationType.None)
     {
-        currentIdle = animationType;
 
-        appearance.applyAppearance(rendererList, animationType);
+        switch(animationType)
+        {
+            case CharacterAnimationType.Run_Back:
+            case CharacterAnimationType.Run_Back_Left:
+            case CharacterAnimationType.Run_Back_Right:
+            case CharacterAnimationType.Run_Front:
+            case CharacterAnimationType.Run_Front_Left:
+            case CharacterAnimationType.Run_Front_Right:
+            case CharacterAnimationType.OOC_Idle_Front:
+            case CharacterAnimationType.OOC_Idle_Back:
+            case CharacterAnimationType.Idle_Front:
+            case CharacterAnimationType.Idle_Back:
 
-        // switch(animationType)
-        // {
-        //     case CharacterAnimationType.OOC_Idle_Front:
+                currentIdle = animationType;
 
+                appearance.applyAppearance(rendererList, animationType);
 
+                return;
+            case CharacterAnimationType.Attack_Normal_Front:
+            case CharacterAnimationType.Attack_Normal_Back:
 
-        //         return;
-        //     default:
-        //         return;
-        // }
+                AnimationData animationData = appearance.getAnimationData(animationType);
+
+                Coroutine animationDataCoroutine = StartCoroutine(animationData.animationCoroutine(this));
+
+                AnimationTracker.trackAnimation(key, this);
+
+                return;
+            default:
+                return;
+        }
     }
 
     public void handleMovementAnimation(int i)
@@ -206,6 +250,25 @@ public class NewAnimationManager : MonoBehaviour
         rendererList.setFlipX(characterFacing.flipSprite());
     }
 
+    #region IAnimationManager
+
+    public void onFirstFrameFinished()
+    {
+        //Empty on purpose
+    }
+
+    public void onAnimationFinished()
+    {
+        playAnimation(currentIdle);
+
+        if(AnimationTracker.trackerBeingTracked(this))
+        {
+            this.removeAnimation();
+        }
+    }
+
+    #endregion
+
     #region Combat
     //shells for the combat animations Stats used to drive through the old AnimationManager;
     //each TODO names the commented-out AnimationManager.cs method its body should be ported from
@@ -217,17 +280,39 @@ public class NewAnimationManager : MonoBehaviour
 
     public void playAttackAnimation()
     {
-        //TODO: port AnimationManager.playAttackAnimation
+        if(characterFacing.facingNorth())
+        {
+            playAnimation(CharacterAnimationType.Attack_Normal_Back);
+        } else
+        {
+            playAnimation(CharacterAnimationType.Attack_Normal_Front);
+        }
     }
 
     public void playAttackIntoFrontIdleAnimation()
     {
-        //TODO: port AnimationManager.playAttackIntoFrontIdleAnimation
+        playAttackAnimation();
+        
+        if(AreaList.currentAreaIsHostile())
+        {
+            currentIdle = CharacterAnimationType.Idle_Front;
+        } else
+        {
+            currentIdle = CharacterAnimationType.OOC_Idle_Front;
+        }
     }
 
     public void playAttackIntoSecondaryIdleAnimation()
     {
-        //TODO: port AnimationManager.playAttackIntoSecondaryIdleAnimation
+        playAttackAnimation();
+        
+        if(characterFacing.facingNorth())
+        {
+            currentIdle = CharacterAnimationType.Secondary_Idle_Back;
+        } else
+        {
+            currentIdle = CharacterAnimationType.Secondary_Idle_Front;
+        }
     }
 
     public void playSpecialAttackAnimation()

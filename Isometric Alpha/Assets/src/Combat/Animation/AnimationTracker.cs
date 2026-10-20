@@ -3,19 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAnimationTracker
+public static class AnimationManagerExtensions
 {
-    public GameObject gameObject { get; }
-    //implementers take a key from CombatAnimationManager.getCurrentKey the first time it's read
-    public int key { get; }
-    public bool singleFire { get; }
-}
-
-public static class AnimationTrackerExtensions
-{
-    public static void removeAnimation(this IAnimationTracker tracker)
+    public static void removeAnimation(this IAnimationManager tracker)
     {
-        CombatAnimationManager.removeAnimation(tracker.key);
+        AnimationTracker.removeAnimation(tracker.key);
 
         // if(spriteSetByHeartBeat())
         // {
@@ -28,23 +20,18 @@ public static class AnimationTrackerExtensions
             GameObject.Destroy(tracker.gameObject);
         }
 
-        if(!CombatStateManager.inCombat)
-        {
-            return;
-        }
-
-        CombatAnimationManager.checkAllAnimationsFinished();
+        AnimationTracker.checkAllAnimationsFinished();
     }
 }
 
-public class CombatAnimationManager : MonoBehaviour
+public class AnimationTracker : MonoBehaviour
 {
 
     public Transform damageNumberCanvas;
 
-    private static Dictionary<int, IAnimationTracker> currentAnimations;
+    private static Dictionary<int, IAnimationManager> currentAnimations;
 
-    private static CombatAnimationManager instance;
+    private static AnimationTracker instance;
 
     private const int framesBetweenActorAndTarget = 100;
     private const float adjustment = -3f;
@@ -55,9 +42,9 @@ public class CombatAnimationManager : MonoBehaviour
 
 
     [RuntimeInitializeOnLoadMethod]
-    private static void initializeCombatAnimationManager()
+    private static void initializeAnimationTracker()
     {
-        currentAnimations = new Dictionary<int, IAnimationTracker>();
+        currentAnimations = new Dictionary<int, IAnimationManager>();
         instance = null;
     }
 
@@ -71,19 +58,19 @@ public class CombatAnimationManager : MonoBehaviour
         instance = this;
     }
 
-    public static CombatAnimationManager getInstance()
+    public static AnimationTracker getInstance()
     {
         return instance;
     }
 
     public static void flushAnimations()
     {
-        foreach (KeyValuePair<int, IAnimationTracker> kvp in currentAnimations)
+        foreach (KeyValuePair<int, IAnimationManager> kvp in currentAnimations)
         {
             Destroy(kvp.Value.gameObject);
         }
 
-        currentAnimations = new Dictionary<int, IAnimationTracker>();
+        currentAnimations = new Dictionary<int, IAnimationManager>();
     }
 
     public static int getCurrentKey()
@@ -91,7 +78,7 @@ public class CombatAnimationManager : MonoBehaviour
         return currentKey++;
     }
 
-    public static void trackAnimation(int key, IAnimationTracker tracker)
+    public static void trackAnimation(int key, IAnimationManager tracker)
     {
         if(tracker == null)
         {
@@ -104,7 +91,7 @@ public class CombatAnimationManager : MonoBehaviour
         }
     }
 
-    public static void trackAnimation(int key, IAnimationTracker tracker, float animationDuration)
+    public static void trackAnimation(int key, IAnimationManager tracker, float animationDuration)
     {
         trackAnimation(key, tracker);
 
@@ -135,7 +122,13 @@ public class CombatAnimationManager : MonoBehaviour
 
     public static void checkAllAnimationsFinished()
     {
-        if (!getInstance().hasOngoingAnimations())
+        if(currentAnimations.Count > 0)
+        {
+            return;
+        }
+
+        //tracking works anywhere, but finishing every animation only ends a turn in combat
+        if(CombatStateManager.inCombat)
         {
             DeadCombatantManager.handleDeadCombatants();
 
@@ -180,7 +173,7 @@ public class CombatAnimationManager : MonoBehaviour
         EffectAnimationManager currentEffect = EffectAnimationManager.createEffect(targetCoords, animationType, animationData,
                                                     damagePacket: new DamagePacket(damageNumber, crit, healsTarget));
 
-        //EffectAnimationManager isn't an IAnimationTracker and has no key, so the effect can't be tracked yet
+        //the effect isn't tracked yet: its length would come from its AnimationData timings rather than a clip
         // AnimationClip clip = Resources.Load<AnimationClip>(PrefabNames.abilityEffectFolderPath + animationType);
         // float effectDuration = clip != null ? clip.length : 2f;
         // trackAnimation(currentEffect.key, currentEffect, effectDuration);
@@ -284,7 +277,7 @@ public class CombatAnimationManager : MonoBehaviour
         return outputArray;
     }
 
-    public static bool trackerBeingTracked(IAnimationTracker tracker)
+    public static bool trackerBeingTracked(IAnimationManager tracker)
     {
         return currentAnimations.ContainsValue(tracker);
     }

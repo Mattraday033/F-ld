@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour, IAnimationTracker
+public class Projectile : MonoBehaviour, IAnimationManager
 {
     private int _Key = -1;
     public int key
@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour, IAnimationTracker
         {
             if(_Key < 0)
             {
-                _Key = CombatAnimationManager.getCurrentKey();
+                _Key = AnimationTracker.getCurrentKey();
             }
 
             return _Key;
@@ -19,6 +19,32 @@ public class Projectile : MonoBehaviour, IAnimationTracker
     }
 
     public bool singleFire { get { return true; } }
+
+    //a projectile is drawn by its Animator, not with sprite layers
+    public SpriteLayerRendererList rendererList
+    {
+        get
+        {
+            return null;
+        }
+    }
+
+    public void onFirstFrameFinished()
+    {
+        //Empty on purpose
+    }
+
+    public void onAnimationFinished()
+    {
+        if(AnimationTracker.trackerBeingTracked(this))
+        {
+            //destroys this object too, since a projectile is singleFire
+            this.removeAnimation();
+            return;
+        }
+
+        Destroy(gameObject);
+    }
 
     public ScriptOnLanding scriptOnLanding;
     public Animator animator;
@@ -94,7 +120,7 @@ public class Projectile : MonoBehaviour, IAnimationTracker
                 }
 
                 DamageNumberPopup.create(targetCoords, damage, transform.position, DamageNumberPopup.getDirectionByTargetCoords(targetCoords), 
-                                            CombatAnimationManager.getInstance().damageNumberCanvas, crit, healsTarget);
+                                            AnimationTracker.getInstance().damageNumberCanvas, crit, healsTarget);
             }
 
             skipSpawningDamageNumbers = true;

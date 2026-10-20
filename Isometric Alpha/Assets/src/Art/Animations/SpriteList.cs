@@ -36,7 +36,7 @@ public static class SpriteList
     /// have to be dropped rather than handed out as references to objects Unity already unloaded.
     ///
     /// Self-hooked rather than called by an owning manager because sprite layers have no manager to
-    /// hang it off - neither AnimationManager nor NewAnimationManager carries a
+    /// hang it off - neither AnimationManager nor CreatureAnimationManager carries a
     /// [RuntimeInitializeOnLoadMethod] of its own, so hooking into one would be an arbitrary
     /// coupling. Ordering against the other initializers doesn't matter: ResourceList loads on first
     /// read anyway, so an initializer that reads sprites before this one runs still gets the right

@@ -105,7 +105,7 @@ public class CombatActionManager : MonoBehaviour
 	{
         do{
             yield return null;
-        }while(CombatAnimationManager.getInstance().hasOngoingAnimations());
+        }while(AnimationTracker.getInstance().hasOngoingAnimations());
 
         currentWait = null;
 

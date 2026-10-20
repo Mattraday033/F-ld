@@ -10,7 +10,7 @@ public abstract class MovementTracker : MonoBehaviour
 
         if(animationManager == null)
         {
-            animationManager = GetComponent<NewAnimationManager>();
+            animationManager = GetComponent<CreatureAnimationManager>();
         }
     }
 
@@ -147,7 +147,7 @@ public abstract class MovementTracker : MonoBehaviour
 
     #region Animation
 
-    public NewAnimationManager animationManager;
+    public CreatureAnimationManager animationManager;
 
     public virtual CharacterFacing characterFacing
     {

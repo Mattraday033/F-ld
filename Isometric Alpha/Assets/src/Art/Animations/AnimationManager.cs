@@ -139,7 +139,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     // public virtual bool spriteSetByHeartBeat()
     // {
-    //     return !currentIdle.ToString().Contains("Death") && !CombatAnimationManager.trackerBeingTracked(this) && 
+    //     return !currentIdle.ToString().Contains("Death") && !AnimationTracker.trackerBeingTracked(this) && 
     //             ((!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation() && PlayerStateManager.currentActivity != CurrentActivity.Defeat) || 
     //             (CombatStateManager.inCombat && !linkedStats.isDead()));
     // }
@@ -318,7 +318,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     // private void Awake()
     // {
-    //     key = CombatAnimationManager.getCurrentKey();
+    //     key = AnimationTracker.getCurrentKey();
 
     //     if(CombatStateManager.inCombat)
     //     {
@@ -333,7 +333,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     // public virtual void removeAnimation()
     // {
-    //     CombatAnimationManager.removeAnimation(key);
+    //     AnimationTracker.removeAnimation(key);
 
     //     if(spriteSetByHeartBeat())
     //     {
@@ -345,7 +345,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //         return;
     //     }
 
-    //     CombatAnimationManager.checkAllAnimationsFinished();
+    //     AnimationTracker.checkAllAnimationsFinished();
     // }
 
     // #endregion
@@ -636,7 +636,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     // public void playSpawnAnimation()
     // {
     //     disableExtras();
-    //     CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Spawn));
+    //     AnimationTracker.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Spawn));
     //     playAnimation(createClipTransitionToIdle(CharacterAnimationType.Spawn));
     //     linkedStats.playAnimationSFX(CharacterAnimationType.Spawn);
     // }
@@ -714,7 +714,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //         }
     //     }
 
-    //     CombatAnimationManager.trackAnimation(key, this, getAnimationLength(attackAnimationType));
+    //     AnimationTracker.trackAnimation(key, this, getAnimationLength(attackAnimationType));
     //     playAnimation(createClipTransitionToIdle(attackAnimationType));
 
     //     if(CombatStateManager.inCombat)
@@ -725,7 +725,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     // public void playAttackFrontAnimation()
     // {
-    //     CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Normal_Front));
+    //     AnimationTracker.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Normal_Front));
     //     playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal_Front));
 
     //     if(CombatStateManager.inCombat)
@@ -736,7 +736,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     // public void playAttackBackAnimation()
     // {
-    //     CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Normal_Back));
+    //     AnimationTracker.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Normal_Back));
     //     playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal_Back));
 
     //     if(CombatStateManager.inCombat)
@@ -747,7 +747,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     // public void playAttackIntoFrontIdleAnimation()
     // {
-    //     CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Normal));
+    //     AnimationTracker.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Normal));
     //     setCurrentIdle(CharacterAnimationType.Idle_Front);
     //     playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Normal));
         
@@ -756,7 +756,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     // public void playAttackIntoSecondaryIdleAnimation()
     // {
-    //     CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Special));
+    //     AnimationTracker.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Special));
     //     setCurrentIdle(CharacterAnimationType.Secondary_Idle);
     //     playAnimation(createClipTransitionToIdle(CharacterAnimationType.Attack_Special));
     //     linkedStats.playAnimationSFX(CharacterAnimationType.Attack_Normal);
@@ -764,7 +764,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     // public void playSpecialAttackAnimation()
     // {
-    //     CombatAnimationManager.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Special));
+    //     AnimationTracker.trackAnimation(key, this, getAnimationLength(CharacterAnimationType.Attack_Special));
 
     //     if(CombatStateManager.inCombat &&
     //         healthBarManager!= null && 
@@ -802,7 +802,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //         }
     //     }
 
-    //     CombatAnimationManager.trackAnimation(key, this, getAnimationLength(woundedAnimationType));
+    //     AnimationTracker.trackAnimation(key, this, getAnimationLength(woundedAnimationType));
     //     playAnimation(createClipTransitionToIdle(woundedAnimationType));
     // }
 
@@ -1033,7 +1033,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //         Debug.Log("No such animation for type: " + clipTransition.Clip.name);
     //     } else if(!CombatStateManager.inCombat)
     //     {
-    //         CombatAnimationManager.trackAnimation(key, this);
+    //         AnimationTracker.trackAnimation(key, this);
     //         // Debug.Log("Play Animation: " + clipTransition.Clip.name);
     //     }
     // }

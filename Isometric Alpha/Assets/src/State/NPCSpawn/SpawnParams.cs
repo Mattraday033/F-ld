@@ -40,6 +40,9 @@ public class InteractableSpawnParams : SpawnParams
 
     public override bool canSpawn(string displayName)
     {
+        //a gate's index is part of its key, so the opened check needs the name as it was handed in
+        string uniqueName = displayName;
+
         displayName = DialogueList.scrubNameOfEndNumbers(displayName);
 
         if (DeathFlagManager.isDead(displayName))
@@ -72,7 +75,7 @@ public class InteractableSpawnParams : SpawnParams
             return doNotSpawn;
         }
 
-        if(GateAndChestManager.hasBeenOpened(AreaManager.locationName+displayName))
+        if(GateAndChestManager.hasBeenOpened(AreaManager.locationName+uniqueName))
         {
             return doNotSpawn;
         }

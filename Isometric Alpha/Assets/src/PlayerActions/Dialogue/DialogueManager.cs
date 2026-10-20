@@ -478,7 +478,7 @@ public class DialogueManager : MonoBehaviour
         int intParameter = 0;
         string parameter = "";
         string[] args = new string[0];
-        NewAnimationManager targetAnimationManager = null;
+        CreatureAnimationManager targetAnimationManager = null;
 
         if (currentStory.canContinue)
         {
@@ -1068,7 +1068,7 @@ public class DialogueManager : MonoBehaviour
                     camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
                     string npcFacingArgs = getArgument(buffer, Constants.indexOne);
 
-                    targetAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<NewAnimationManager>();
+                    targetAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<CreatureAnimationManager>();
 
                     if(targetAnimationManager != null)
                     {
