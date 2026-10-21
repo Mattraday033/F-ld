@@ -32,12 +32,14 @@ public enum SpritePath
     Hair_Short_Ruffled_Back, // Sprites/SpriteLayers/Hair/Short_Ruffled/Back
     Hair_Short_Ruffled_Front, // Sprites/SpriteLayers/Hair/Short_Ruffled/Front
     Hair_Short_Ruffled_IMG_5905, // Sprites/SpriteLayers/Hair/Short_Ruffled/IMG_5905
-    Hair_Short_Ruffled_IMG_5908, // Sprites/SpriteLayers/Hair/Short_Ruffled/IMG_5908
     Hair_Short_Ruffled_Old, // Sprites/SpriteLayers/Hair/Short_Ruffled/Old
+    Head_Human, // Sprites/SpriteLayers/Head/Human
     Weapon_SpearSimple_Attack_Normal_Back, // Sprites/SpriteLayers/Weapon/SpearSimple/Attack_Normal_Back
     Weapon_SpearSimple_Attack_Normal_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/Attack_Normal_Front
     Weapon_SpearSimple_Death_Back, // Sprites/SpriteLayers/Weapon/SpearSimple/Death_Back
     Weapon_SpearSimple_Death_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/Death_Front
     Weapon_SpearSimple_Idle_Back, // Sprites/SpriteLayers/Weapon/SpearSimple/Idle_Back
     Weapon_SpearSimple_Idle_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/Idle_Front
+    Weapon_SpearSimple_OOC_Idle_Back, // Sprites/SpriteLayers/Weapon/SpearSimple/OOC_Idle_Back
+    Weapon_SpearSimple_OOC_Idle_Front, // Sprites/SpriteLayers/Weapon/SpearSimple/OOC_Idle_Front
 }

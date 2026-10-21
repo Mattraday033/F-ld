@@ -53,6 +53,11 @@ public enum BodyType
     LovashiPriestRobe
 }
 
+public enum HeadType
+{
+    Human
+}
+
 public enum FacialFeatureType
 {
     None,
@@ -439,7 +444,7 @@ public class Costume: IAppearance
                 return spritePath;
             } else
             {
-                animationType = animationType.nextAnimationType();
+                animationType = animationType.nextAnimationType(layer);
             }
         } while(animationType != CharacterAnimationType.None);
 
@@ -468,6 +473,16 @@ public class Costume: IAppearance
                                         SpriteList.getSprite(layerPath),
                                         CanvasPositionList.getPlacement(layer, bodyPath, layerPath, Constants.indexZero));
         }
+    }
+
+    public void applyHeadshot(HeadshotDisplay headshotDisplay)
+    {
+        headshotDisplay.hairImage.sprite = getSprite(SpriteLayer.Hair, CharacterAnimationType.OOC_Idle_Front);
+
+        headshotDisplay.faceImage.sprite = getSprite(SpriteLayer.Face, CharacterAnimationType.OOC_Idle_Front);
+
+        headshotDisplay.hairImage.sprite = getSprite(SpriteLayer.Hair, CharacterAnimationType.OOC_Idle_Front);
+
     }
 
     #endregion
@@ -537,8 +552,8 @@ public static class WeaponAnimationInfoFactory
                     [CharacterAnimationType.Idle_Front] = WeaponPose.TwoHandedStab,
                     [CharacterAnimationType.OOC_Idle_Back] = WeaponPose.NoWeapon,
                     [CharacterAnimationType.OOC_Idle_Front] = WeaponPose.NoWeapon,
-                    // [CharacterAnimationType.OOC_Idle_Back] = WeaponPose.Polearm,
-                    // [CharacterAnimationType.OOC_Idle_Front] = WeaponPose.Polearm,
+                    [CharacterAnimationType.OOC_Idle_Back] = WeaponPose.Polearm,
+                    [CharacterAnimationType.OOC_Idle_Front] = WeaponPose.Polearm,
                     [CharacterAnimationType.Attack_Normal_Back] = WeaponPose.TwoHandedStab,
                     [CharacterAnimationType.Attack_Normal_Front] = WeaponPose.TwoHandedStab
                 };

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8400308146848237443}
   - component: {fileID: 3842633388501494027}
   - component: {fileID: 387306591066946761}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: World Map Landmark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -77,6 +77,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -299,7 +302,7 @@ PrefabInstance:
     - target: {fileID: 7876504877818156881, guid: c6f8327726818194b974970337238486,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

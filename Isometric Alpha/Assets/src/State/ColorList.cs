@@ -445,9 +445,9 @@ public static class ColorSchemaList
         colorSchemaDict.Add(MonsterNameList.spearman, new ColorReplaceSchema(
                                                                                 weapon: new Dictionary<ColorReplacementSlot, Color>()
                                                                                 {
-                                                                                    [ColorReplacementSlot.R] = ColorList.Metal_Bronze,
-                                                                                    [ColorReplacementSlot.G] = ColorList.Cloth_PaleBlue,
-                                                                                    [ColorReplacementSlot.B] = ColorList.Wood_WeaponShaft
+                                                                                    [ColorReplacementSlot.B] = ColorList.Metal_Bronze,
+                                                                                    [ColorReplacementSlot.V] = ColorList.Cloth_PaleBlue,
+                                                                                    [ColorReplacementSlot.O] = ColorList.Wood_WeaponShaft
                                                                                 },
                                                                                 body: new Dictionary<ColorReplacementSlot, Color>()
                                                                                 {

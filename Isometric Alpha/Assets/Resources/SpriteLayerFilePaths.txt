@@ -24,11 +24,13 @@ Sprites/SpriteLayers/Hair/Short_Ruffled/Attack_Front_Two_Handed_Stab
 Sprites/SpriteLayers/Hair/Short_Ruffled/Back
 Sprites/SpriteLayers/Hair/Short_Ruffled/Front
 Sprites/SpriteLayers/Hair/Short_Ruffled/IMG_5905
-Sprites/SpriteLayers/Hair/Short_Ruffled/IMG_5908
 Sprites/SpriteLayers/Hair/Short_Ruffled/Old
+Sprites/SpriteLayers/Head/Human
 Sprites/SpriteLayers/Weapon/SpearSimple/Attack_Normal_Back
 Sprites/SpriteLayers/Weapon/SpearSimple/Attack_Normal_Front
 Sprites/SpriteLayers/Weapon/SpearSimple/Death_Back
 Sprites/SpriteLayers/Weapon/SpearSimple/Death_Front
 Sprites/SpriteLayers/Weapon/SpearSimple/Idle_Back
 Sprites/SpriteLayers/Weapon/SpearSimple/Idle_Front
+Sprites/SpriteLayers/Weapon/SpearSimple/OOC_Idle_Back
+Sprites/SpriteLayers/Weapon/SpearSimple/OOC_Idle_Front

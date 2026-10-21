@@ -272,7 +272,7 @@ public static class EnumUtil
         return (T[]) Enum.GetValues(typeof(T));
     }
 
-    public static CharacterAnimationType nextAnimationType(this CharacterAnimationType animationType)
+    public static CharacterAnimationType nextAnimationType(this CharacterAnimationType animationType, SpriteLayer layer = SpriteLayer.Body)
     {
         switch(animationType)
         {
@@ -320,16 +320,44 @@ public static class EnumUtil
 
             case CharacterAnimationType.Vertical_Falling:
             case CharacterAnimationType.Idle_Front:
-            case CharacterAnimationType.Run_Front:
                 return CharacterAnimationType.OOC_Idle_Front;
 
-            case CharacterAnimationType.Run_Back:
             case CharacterAnimationType.Idle_Back:
                 return CharacterAnimationType.OOC_Idle_Back;
 
+            case CharacterAnimationType.Run_Front:
+
+                switch(layer)
+                {
+                    case SpriteLayer.Weapon:
+                        return CharacterAnimationType.None;
+                        
+                    default:
+                        return CharacterAnimationType.OOC_Idle_Front;
+                }
+
+            case CharacterAnimationType.Run_Back:
+
+                switch(layer)
+                {
+                    case SpriteLayer.Weapon:
+                        return CharacterAnimationType.None;
+
+                    default:
+                        return CharacterAnimationType.OOC_Idle_Back;
+                }
 
             default:
                 return CharacterAnimationType.None;
+        }
+    }
+
+    public static HeadType getHeadType(this BodyType bodyType)
+    {
+        switch(bodyType)
+        {
+            default:
+                return HeadType.Human;
         }
     }
 
