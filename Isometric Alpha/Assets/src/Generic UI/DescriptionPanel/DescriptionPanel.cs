@@ -47,9 +47,7 @@ public class DescriptionPanel : MonoBehaviour
 
 	public bool showingShopkeeperInventory = false;
 
-	public Image hairImage;
-    public Image faceImage;
-    public Image bodyImage;
+	public HeadshotDisplay headshotDisplay;
 
 	public Image iconBackgroundPanel;
 	public Image iconPanel;

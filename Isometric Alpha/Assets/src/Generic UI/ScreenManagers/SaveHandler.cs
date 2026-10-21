@@ -283,7 +283,18 @@ public class SaveHandler : ScreenManager, IEscapable
 
     public static void autosave(Transition transition)
     {
-        if(transition == null || !transition.allowAutosave)
+        if(transition == null)
+        {
+            return;
+        }
+
+        if(transition.autosaveInPlace)
+        {
+            autosaveInPlace();
+            return;
+        }
+
+        if(!transition.allowAutosave)
         {
             return;
         }
@@ -291,13 +302,25 @@ public class SaveHandler : ScreenManager, IEscapable
         autosave(transition.getPositionOnSaveMultiplier(), transition.playerSpawnDirection.getOpposingFacing());
     }
 
-    public static void autosave(Vector3Int cellCoords, Facing facing)
+    //keeps the cell and facing the blueprint takes from the player as they stand
+    public static void autosaveInPlace()
+    {
+        createSave(buildAutosaveBlueprint());
+    }
+
+    //autosaves are numbered below zero, so they sort apart from the player's own saves
+    private static SaveBlueprint buildAutosaveBlueprint()
     {
 		int saveNumber = getHighestSaveNumber() + 1;
 
         saveNumber *= -1;
 
-		SaveBlueprint blueprint = SaveBlueprint.build(determineCurrentAutosaveName(), saveNumber);
+		return SaveBlueprint.build(determineCurrentAutosaveName(), saveNumber);
+    }
+
+    public static void autosave(Vector3Int cellCoords, Facing facing)
+    {
+		SaveBlueprint blueprint = buildAutosaveBlueprint();
 
         Vector3Int currentTransitionCell = MovementManager.getPlayerCell();
 

@@ -151,7 +151,8 @@ public class OOCSpawnDetails: IAppearanceSource
     {
         GameObject visible = generateBlankPrefab(cell, prefabName, extra);
 
-        appearance.applyAppearance(visible.GetComponent<SpriteLayerRendererList>(), updateColors: true);
+        //the same idle the animation manager settles on, so a creature doesn't spawn relaxed in a hostile area or facing the wrong way
+        appearance.applyAppearance(visible.GetComponent<SpriteLayerRendererList>(), CreatureAnimationManager.getDefaultIdle(facing), updateColors: true);
 
         foreach(IExtraSpawnBehaviour behaviour in aestheticSpawnBehaviours.Values)
         {
@@ -594,7 +595,7 @@ public class ContainerSpawnDetails : OOCSpawnDetails
     {
         this.type = type;
 
-        aestheticSpawnBehaviours[typeof(AnimationManagerSpawnBehaviour)] = new AnimationManagerSpawnBehaviour(this, facing);
+        aestheticSpawnBehaviours[typeof(AnimationManagerSpawnBehaviour)] = new AnimationManagerSpawnBehaviour(this, facing, hasShadow: false);
         aestheticSpawnBehaviours[typeof(NPCMouseHoverSpawnBehaviour)] = new NPCMouseHoverSpawnBehaviour();
         aestheticSpawnBehaviours[typeof(OverHeadIconManagerSpawnBehaviour)] = new OverHeadIconManagerSpawnBehaviour(ignoresSecretDoors: true);
         universalSpawnBehaviours[typeof(ContainerSpawnBehaviour)] = new ContainerSpawnBehaviour(index, script, secretDoorFlag, type);

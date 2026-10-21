@@ -11,5 +11,9 @@ public class AbilityWheelChooseAbility : TutorialSequenceStepScript
         abilityMenuManager.getCurrentlySelectedAbilityMenuButton().disableCombatActionSelectorPreview();
         abilityMenuManager.getCurrentlySelectedAbilityMenuButton().enableCombatActionSelector();
         abilityMenuManager.disableAbilityButtonCanvas();
+
+        //the tutorial stays InTutorialSequence instead of moving to ChoosingLocation, so the activity change
+        //that normally redraws the selectors never fires
+        SelectorManager.declareSelectors();
     }
 }

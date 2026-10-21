@@ -47,7 +47,7 @@ public class DialogueManager : MonoBehaviour
 
     private void setNameText(int targetIndex)
     {
-        // AnimationManager.RemoveAllShadowOutlines.Invoke();
+        CreatureAnimationManager.ShadowExtras.RemoveAllShadowOutlines.Invoke();
 
         _NameText = DialogueList.scrubNameOfEndNumbers(dialogue.names[targetIndex]) + ":";
 
@@ -61,12 +61,12 @@ public class DialogueManager : MonoBehaviour
     {
         if(GameplaySettingsList.highlightSpeakerInDialogue.settingOptions[Constants.onSettingIndex].set)
         {
-            // AnimationManager animationManager = cameraFoci.GetComponent<AnimationManager>();
+            CreatureAnimationManager animationManager = cameraFoci.GetComponent<CreatureAnimationManager>();
 
-            // if(animationManager != null)
-            // {
-            //     animationManager.showShadowOutline();
-            // }
+            if(animationManager != null)
+            {
+                animationManager.shadowExtras.showShadowOutline();
+            }
         }
     }
 
@@ -1211,12 +1211,12 @@ public class DialogueManager : MonoBehaviour
                         targetFallingNPC = dialogue.cameraFoci[camTargetIndex].AddComponent<FallingNPCMovement>();
                     }
 
-                    // targetAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+                    CreatureAnimationManager fallingAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<CreatureAnimationManager>();
 
-                    // if(targetAnimationManager != null)
-                    // {
-                    //     targetAnimationManager.disableExtras();
-                    // }
+                    if(fallingAnimationManager != null)
+                    {
+                        fallingAnimationManager.shadowExtras.disableExtras();
+                    }
 
                     targetFallingNPC.moveBetweenCells(startCoords, endCoords, durationSeconds, disableAtEnd, effectAtEndName: effectName);
 
@@ -1230,12 +1230,12 @@ public class DialogueManager : MonoBehaviour
 
                     camTargetIndex = getArgumentInt(buffer, Constants.indexZero);
 
-                    // AnimationManager animationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<AnimationManager>();
+                    CreatureAnimationManager extrasAnimationManager = dialogue.cameraFoci[camTargetIndex].GetComponent<CreatureAnimationManager>();
 
-                    // if(animationManager != null)
-                    // {
-                    //     animationManager.disableExtras();
-                    // }
+                    if(extrasAnimationManager != null)
+                    {
+                        extrasAnimationManager.shadowExtras.disableExtras();
+                    }
 
                     continueStory();
 

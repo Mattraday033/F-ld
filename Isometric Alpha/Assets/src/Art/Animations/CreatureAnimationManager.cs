@@ -109,12 +109,19 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
         set
         {
             _AppearanceSource = value;
-        } 
+
+            //a new appearance may bring a new color scheme, which is applied along with its first sprites
+            colorsPending = true;
+        }
     }
+
+    //true until the current appearance's colors have been applied to the renderers
+    private bool colorsPending = false;
+
     public void setAppearanceSource(IAppearanceSource appearanceSource,
                                     CharacterAnimationType newIdle = CharacterAnimationType.None)
     {
-        _AppearanceSource = appearanceSource;
+        this.appearanceSource = appearanceSource;
 
         if(newIdle != CharacterAnimationType.None)
         {
@@ -141,10 +148,21 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
         }
     }
 
+    public ShadowExtras shadowExtras { get; private set; }
+
     private void Awake()
     {
         rendererList = GetComponent<SpriteLayerRendererList>();
         rendererList.Awake();
+
+        shadowExtras = new ShadowExtras(this);
+    }
+
+    //the name and combatant components come with spawn behaviours that run after this one is added,
+    //and the shadow is chosen by name, so it waits until they're all in place
+    private void Start()
+    {
+        shadowExtras.createShadow();
     }
 
     public void playAnimation(CharacterAnimationType animationType = CharacterAnimationType.None)
@@ -165,7 +183,8 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
 
                 currentIdle = animationType;
 
-                appearance.applyAppearance(rendererList, animationType);
+                appearance.applyAppearance(rendererList, animationType, updateColors: colorsPending);
+                colorsPending = false;
 
                 return;
             case CharacterAnimationType.Attack_Normal_Front:
@@ -180,6 +199,23 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
                 return;
             default:
                 return;
+        }
+    }
+
+    //the idle a character stands in when nothing else is playing: the combat-ready idle in a hostile area and the
+    //relaxed one elsewhere, facing the camera unless the character faces north. A random facing hasn't been
+    //chosen yet, so it's treated as facing the camera
+    public static CharacterAnimationType getDefaultIdle(Facing facing)
+    {
+        bool hostile = AreaList.currentAreaIsHostile();
+
+        switch(facing)
+        {
+            case Facing.NorthEast:
+            case Facing.NorthWest:
+                return hostile ? CharacterAnimationType.Idle_Back : CharacterAnimationType.OOC_Idle_Back;
+            default:
+                return hostile ? CharacterAnimationType.Idle_Front : CharacterAnimationType.OOC_Idle_Front;
         }
     }
 
@@ -222,32 +258,11 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
             }
         } else
         {
-            switch(characterFacing.getFacing())
-            {
-                case Facing.NorthEast:
-                case Facing.NorthWest:
-                    if(AreaList.currentAreaIsHostile())
-                    {
-                        playAnimation(CharacterAnimationType.Idle_Back);
-                    } else
-                    {
-                        playAnimation(CharacterAnimationType.OOC_Idle_Back);
-                    }
-                    break;
-                case Facing.SouthEast:
-                case Facing.SouthWest:
-                    if(AreaList.currentAreaIsHostile())
-                    {
-                        playAnimation(CharacterAnimationType.Idle_Front);
-                    } else
-                    {
-                        playAnimation(CharacterAnimationType.OOC_Idle_Front);
-                    }
-                    break;
-            }
+            playAnimation(getDefaultIdle(characterFacing.getFacing()));
         }
 
         rendererList.setFlipX(characterFacing.flipSprite());
+        shadowExtras.updateShadowFacing();
     }
 
     #region IAnimationManager
@@ -385,6 +400,335 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
         MovementManager.OnMoveFinished.RemoveListener(handleMovementAnimation);
 
         characterFacing.OnFacingChange.RemoveListener(handleMovementAnimation);
+
+        shadowExtras.destroy();
+    }
+
+    //The shadow drawn under the character, and the "extras" that are hidden and shown along with it:
+    //the shadow itself and, in combat, the health bar
+    public class ShadowExtras
+    {
+        //clears every speaker outline at once, as dialogue moves from one speaker to the next
+        public readonly static UnityEvent RemoveAllShadowOutlines = new UnityEvent();
+
+        private static readonly int blackBorderSizeXID = Shader.PropertyToID("_BlackBorderSizeX");
+        private static readonly int blackBorderSizeYID = Shader.PropertyToID("_BlackBorderSizeY");
+        private static readonly int colorOutlineSizeXID = Shader.PropertyToID("_ColorOutlineSizeX");
+        private static readonly int colorOutlineSizeYID = Shader.PropertyToID("_ColorOutlineSizeY");
+        private static readonly int blackBorderColorID = Shader.PropertyToID("_BlackBorderColor");
+
+        //a 256x128 shadow sits off centre, so it's moved to stay under a character facing away from the camera
+        private static readonly Vector3 northWestShadowPosition = new Vector3(.5f, -.225f);
+        private static readonly Vector3 northEastShadowPosition = new Vector3(-.5f, -.225f);
+
+        private readonly CreatureAnimationManager owner;
+
+        private SpriteRenderer shadowSprite;
+        private string shadowPrefabName;
+
+        //the shadow's own material, put back when its outline is removed
+        private Material shadowMaterial;
+        //made on the first outline, so a shadow that's never outlined doesn't get its own material
+        private Material outlineMaterial;
+
+        private bool listening = false;
+
+        //kept apart from the shadow, so extras hidden before the shadow is made, like a train member spawned
+        //on top of another, stay hidden once it is
+        private bool extrasActive = true;
+
+        //false for things that shouldn't cast one, like containers. Set by the spawn behaviour before the shadow is made
+        private bool _HasShadow = true;
+        public bool hasShadow
+        {
+            get
+            {
+                return _HasShadow;
+            }
+            set
+            {
+                _HasShadow = value;
+
+                if(!_HasShadow)
+                {
+                    destroyShadow();
+                }
+            }
+        }
+
+        public ShadowExtras(CreatureAnimationManager owner)
+        {
+            this.owner = owner;
+        }
+
+        private Combatant combatant
+        {
+            get
+            {
+                return owner.GetComponent<Combatant>();
+            }
+        }
+
+        //the first name source beside the manager that has a name to give
+        private string uniqueName
+        {
+            get
+            {
+                foreach(INameSource nameSource in owner.GetComponents<INameSource>())
+                {
+                    //the icon manager only passes on another source's name, so it's skipped in favour of that source
+                    if(nameSource is OverHeadIconManager)
+                    {
+                        continue;
+                    }
+
+                    string name = nameSource.uniqueName;
+
+                    if(!string.IsNullOrEmpty(name))
+                    {
+                        return name;
+                    }
+                }
+
+                return Constants.emptyString;
+            }
+        }
+
+        public void createShadow()
+        {
+            if(shadowSprite != null || !hasShadow)
+            {
+                return;
+            }
+
+            //a reposition placeholder is drawn faded, and a full strength shadow under it would give it away
+            Combatant ownerCombatant = combatant;
+
+            if(ownerCombatant != null && ownerCombatant.isPlaceholder)
+            {
+                return;
+            }
+
+            shadowPrefabName = EnemyTypeFolderPathList.getShadowPrefabName(uniqueName);
+
+            GameObject shadowPrefab = Resources.Load<GameObject>(shadowPrefabName);
+
+            if(shadowPrefab == null)
+            {
+                Debug.LogError("No shadow prefab at " + shadowPrefabName);
+                return;
+            }
+
+            GameObject shadow = Instantiate(shadowPrefab, owner.transform);
+            shadow.transform.SetAsFirstSibling();
+
+            shadowSprite = shadow.GetComponent<SpriteRenderer>();
+            shadowMaterial = shadowSprite.sharedMaterial;
+
+            shadow.SetActive(extrasActive);
+
+            RemoveAllShadowOutlines.AddListener(removeShadowOutline);
+            PlayerStateManager.OnStateChangeFromInDialogue.AddListener(removeShadowOutline);
+            listening = true;
+
+            updateShadowFacing();
+        }
+
+        #region Facing
+
+        public void updateShadowFacing()
+        {
+            if(shadowSprite == null || !canChangeShadowFacing())
+            {
+                return;
+            }
+
+            Facing facing = owner.characterFacing.getFacing();
+
+            bool flip = facing == Facing.NorthWest ||
+                        facing == Facing.SouthEast ||
+                        flipShadowByName();
+
+            foreach(SpriteRenderer shadowPart in shadowSprite.GetComponentsInChildren<SpriteRenderer>(true))
+            {
+                shadowPart.flipX = flip;
+            }
+
+            switch(facing)
+            {
+                case Facing.SouthEast:
+                case Facing.SouthWest:
+                    shadowSprite.transform.localPosition = Vector3.zero;
+                    break;
+                case Facing.NorthWest:
+                    shadowSprite.transform.localPosition = northWestShadowPosition;
+                    break;
+                case Facing.NorthEast:
+                    shadowSprite.transform.localPosition = northEastShadowPosition;
+                    break;
+            }
+        }
+
+        //some characters' combat sprites face the other way from their shadow's default
+        private bool flipShadowByName()
+        {
+            Combatant ownerCombatant = combatant;
+
+            if(!CombatStateManager.inCombat || ownerCombatant == null)
+            {
+                return false;
+            }
+
+            switch(ownerCombatant.uniqueName)
+            {
+                case NPCNameList.captainAdela:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        //only the off centre 256x128 shadow turns with its character
+        private bool canChangeShadowFacing()
+        {
+            return shadowPrefabName == PrefabNames.shadow256x128;
+        }
+
+        #endregion
+
+        #region Extras
+
+        public void disableExtras()
+        {
+            setExtrasActive(false);
+        }
+
+        public void enableExtras()
+        {
+            setExtrasActive(true);
+        }
+
+        private void setExtrasActive(bool active)
+        {
+            extrasActive = active;
+
+            if(CombatStateManager.inCombat)
+            {
+                Combatant ownerCombatant = combatant;
+
+                if(ownerCombatant != null && ownerCombatant.healthBarManager != null)
+                {
+                    if(active)
+                    {
+                        ownerCombatant.healthBarManager.show();
+                    } else
+                    {
+                        ownerCombatant.healthBarManager.hide();
+                    }
+                }
+            }
+
+            if(shadowSprite != null)
+            {
+                shadowSprite.gameObject.SetActive(active);
+            }
+        }
+
+        #endregion
+
+        #region Outline
+
+        public void showShadowOutline()
+        {
+            createShadowOutline(ColorList.canBeInteractedWith, getOutlineSize());
+        }
+
+        private void createShadowOutline(Color color, float sizeMod)
+        {
+            if(shadowSprite == null)
+            {
+                return;
+            }
+
+            if(!shadowSprite.gameObject.activeInHierarchy || shadowSprite.color.Equals(Color.clear) || shadowSprite.sprite == null)
+            {
+                removeShadowOutline();
+                return;
+            }
+
+            if(outlineMaterial == null)
+            {
+                outlineMaterial = new Material(Resources.Load<Material>(PrefabNames.outlineMaterial));
+            }
+
+            outlineMaterial.color = color;
+            outlineMaterial.SetColor(blackBorderColorID, Color.black);
+
+            //the sizes are in UV space, so they're measured against the shadow's texture
+            float sizeX = sizeMod/shadowSprite.sprite.texture.width;
+            float sizeY = sizeMod/shadowSprite.sprite.texture.height;
+
+            outlineMaterial.SetFloat(blackBorderSizeXID, sizeX/4f);
+            outlineMaterial.SetFloat(blackBorderSizeYID, sizeY/4f);
+            outlineMaterial.SetFloat(colorOutlineSizeXID, sizeX);
+            outlineMaterial.SetFloat(colorOutlineSizeYID, sizeY);
+
+            shadowSprite.sharedMaterial = outlineMaterial;
+        }
+
+        public void removeShadowOutline()
+        {
+            if(shadowSprite == null)
+            {
+                return;
+            }
+
+            shadowSprite.sharedMaterial = shadowMaterial;
+        }
+
+        //the bigger shadows are drawn from bigger textures, so they need fewer UV pixels for the same width of outline
+        private float getOutlineSize()
+        {
+            switch(DialogueList.scrubNameOfEndNumbers(uniqueName))
+            {
+                case NPCNameList.horse:
+                case NPCNameList.csalan:
+                    return Constants.shadow512x512OutlineSize;
+                default:
+                    return Constants.shadow256x256OutlineSize;
+            }
+        }
+
+        #endregion
+
+        //for a shadow turned off after it was made
+        private void destroyShadow()
+        {
+            if(shadowSprite == null)
+            {
+                return;
+            }
+
+            Destroy(shadowSprite.gameObject);
+            shadowSprite = null;
+            shadowMaterial = null;
+        }
+
+        public void destroy()
+        {
+            if(listening)
+            {
+                RemoveAllShadowOutlines.RemoveListener(removeShadowOutline);
+                PlayerStateManager.OnStateChangeFromInDialogue.RemoveListener(removeShadowOutline);
+                listening = false;
+            }
+
+            if(outlineMaterial != null)
+            {
+                Destroy(outlineMaterial);
+                outlineMaterial = null;
+            }
+        }
     }
 
 }

@@ -25,6 +25,9 @@ public class CunningManager : SkillManager
 
         LoadSaveFile.OnLoadReadBlueprint.AddListener(readSaveBlueprint);
         PlayerStateManager.OnStateChangeFromSkill.AddListener(enableAllHoverColliders);
+
+        //a tutorial runs the skill while staying InTutorialSequence, so leaving the skill is never seen; the colliders go back on here instead
+        PlayerStateManager.OnLeavingTutorialSequenceState.AddListener(enableAllHoverColliders);
     }
 
     public override ContactFilter2D getCollisionFilter()
@@ -538,8 +541,7 @@ public class CunningManager : SkillManager
 
         if (!Helpers.hasCollision(selectorCollider))
         {
-
-            EnemyMovement.ToggleHoverColliders.Invoke(false);
+            restoreHoverCollidersAfterTargetCheck();
             return target;
         }
         else
@@ -559,8 +561,19 @@ public class CunningManager : SkillManager
                 }
             }
 
-            EnemyMovement.ToggleHoverColliders.Invoke(false);
+            restoreHoverCollidersAfterTargetCheck();
             return target;
+        }
+    }
+
+    //The colliders only stay off while in Cunning mode, where leaving the mode turns them back on. A tutorial uses the
+    //skill without ever entering that mode, so switching them off there would leave the player's transition collider
+    //off for good, and tutorial colliders and doors would stop reacting
+    private static void restoreHoverCollidersAfterTargetCheck()
+    {
+        if (PlayerStateManager.currentActivity == CurrentActivity.Cunning)
+        {
+            EnemyMovement.ToggleHoverColliders.Invoke(false);
         }
     }
 

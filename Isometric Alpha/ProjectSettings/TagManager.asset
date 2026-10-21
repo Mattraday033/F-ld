@@ -36,7 +36,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - FlattenedFade
   - Water
   - UI
   - Outline

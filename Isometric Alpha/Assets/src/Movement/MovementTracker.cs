@@ -238,14 +238,17 @@ public abstract class MovementTracker : MonoBehaviour
         nextInTrain.moveNextInTrain();
     }
 
+    //the shadow and other extras go with the sprite, so a hidden train member doesn't leave its shadow behind
     public void hideSprite()
     {
         animationManager.rendererList.disableAllLayers();
+        animationManager.shadowExtras.disableExtras();
     }
 
     public void showSprite()
     {
         animationManager.rendererList.enableAllLayers();
+        animationManager.shadowExtras.enableExtras();
     }
 
     public static MovementTracker determineLowestTrainPriority(MovementTracker movementOne, MovementTracker movementTwo)

@@ -72,9 +72,11 @@ public abstract class FullScreenTransition : ScreenFade
 
     public abstract void setFrameCountAtStart();
 
+    //a quick fade is chosen on purpose, so it isn't slowed down on the main menu
     public void setToQuickFadeTime()
     {
         fadeTime = quickFadeInSpeed;
+        useCustomFadeTime = true;
     }
 
     public void setCustomFadeTime(float time)
@@ -123,7 +125,7 @@ public class FadeToBlackTransition : FullScreenTransition
 
 		FadeToBlackManager.OnFadeToBlack.Invoke();
 
-        if(PlayerStateManager.inMainMenu())
+        if(PlayerStateManager.inMainMenu() && !useCustomFadeTime)
         {
             fadeTime = slowFadeInSpeed;
         }

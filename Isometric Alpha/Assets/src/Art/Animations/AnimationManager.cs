@@ -63,8 +63,6 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     // public SpriteRenderer spriteRenderer;
 
     // private CharacterAnimationType currentIdle;
-    // [SerializeField]
-    // private SpriteRenderer shadowSprite;
     // public PolygonCollider2D polygonCollider2D;
     // public HealthBarManager healthBarManager;
     // private Stats _LinkedStats;
@@ -93,11 +91,8 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     // public readonly static UnityEvent<string, EffectAnimationType> CreateEffectByNPCName = new UnityEvent<string, EffectAnimationType>();
     // public readonly static UnityEngine.Events.UnityEvent HideAllStapledEffects = new UnityEngine.Events.UnityEvent();
     // public readonly static UnityEvent<string, EffectAnimationType> ShowStapledEffectByNPCName = new UnityEvent<string, EffectAnimationType>();
-    // public readonly static UnityEngine.Events.UnityEvent RemoveAllShadowOutlines = new UnityEngine.Events.UnityEvent();
 
     // public Dictionary<CharacterAnimationType, AnimationClip> animationDict;
-
-    // private SpriteOutline shadowOutline;
 
     // private List<EffectAnimationManager> stapledEffects = new List<EffectAnimationManager>();
 
@@ -263,9 +258,6 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //     HideAllStapledEffects.RemoveListener(hideAllStapledEffects);
     //     CreateEffectByNPCName.RemoveListener(createEffectByNPCName);
     //     ShowStapledEffectByNPCName.RemoveListener(showStapledEffect);
-
-    //     RemoveAllShadowOutlines.RemoveListener(removeShadowOutline);
-    //     PlayerStateManager.OnStateChangeFromInDialogue.RemoveListener(removeShadowOutline);
     // }
 
     // private void disablePolygonCollider()
@@ -355,8 +347,6 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //     animationName = monsterName;
     //     string folderPath = EnemyTypeFolderPathList.getEnemyTypeFolderPath(animationName);
 
-    //     instantiateShadow();
-
     //     if (folderPath == null)
     //     {
     //         animationDict = new Dictionary<CharacterAnimationType, AnimationClip>();
@@ -391,79 +381,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //     CreateEffectByNPCName.AddListener(createEffectByNPCName);
     //     ShowStapledEffectByNPCName.AddListener(showStapledEffect);
 
-    //     RemoveAllShadowOutlines.AddListener(removeShadowOutline);
-    //     PlayerStateManager.OnStateChangeFromInDialogue.AddListener(removeShadowOutline);
-
     //     setToDefaultIdle();
-    // }
-
-    // private void instantiateShadow()
-    // {
-    //     GameObject shadow = Instantiate(Resources.Load<GameObject>(EnemyTypeFolderPathList.getShadowPrefabName(animationName)), transform);
-    //     shadow.transform.SetAsFirstSibling();
-    //     shadowSprite = shadow.GetComponent<SpriteRenderer>();
-
-    //     // shadowOutline = new SpriteOutline();
-    //     // shadowOutline.setSpriteRenderer(shadowSprite);
-
-    //     if(CombatStateManager.inCombat)
-    //     {
-    //         setFacing(facing.getFacing());
-    //     }
-
-    //     setAllShadowDirections(shadowSprite);
-    // }
-
-    // public void setAllShadowDirections(SpriteRenderer shadow)
-    // {
-    //     if(shadow == null || !canChangeShadowFacing())
-    //     {
-    //         return;
-    //     }
-
-    //     shadow.flipX = facing.getFacing() == Facing.NorthWest || 
-    //                     facing.getFacing() == Facing.SouthEast || 
-    //                     flipShadowByName();
-
-    //     switch(facing.getFacing())
-    //     {
-    //         case Facing.SouthEast:
-    //         case Facing.SouthWest:
-    //             shadowSprite.transform.localPosition = Vector3.zero;
-    //             break;
-    //         case Facing.NorthWest:
-    //             shadowSprite.transform.localPosition = new Vector3(.5f, -.225f);
-    //             break;
-    //         case Facing.NorthEast:
-    //             shadowSprite.transform.localPosition = new Vector3(-.5f, -.225f);
-    //             break;
-    //     }
-
-    //     foreach(Transform transform in shadow.transform)
-    //     {
-    //         setAllShadowDirections(transform.GetComponent<SpriteRenderer>());
-    //     }
-    // }
-
-    // private bool flipShadowByName()
-    // {
-    //     if(CombatStateManager.inCombat && linkedStats != null)
-    //     {
-    //         switch(linkedStats.uniqueName)
-    //         {
-    //             case NPCNameList.captainAdela:
-    //                 return true;
-    //             default:
-    //                 return false;
-    //         }
-    //     }
-
-    //     return false;
-    // }
-
-    // private bool canChangeShadowFacing()
-    // {
-    //     return EnemyTypeFolderPathList.getShadowPrefabName(animationName).Equals(PrefabNames.shadow256x128);
     // }
 
     // private void setHeartBeatRow()
@@ -1197,67 +1115,8 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //             break;
     //     }
 
-        
-    //     setAllShadowDirections(shadowSprite);
+
     //     Helpers.updatePolygonCollider(spriteRenderer, polygonCollider2D);
-    // }
-
-    // public void disableExtras()
-    // {
-    //     if(CombatStateManager.inCombat)
-    //     {
-    //         healthBarManager.hide();
-    //     }
-
-    //     if(shadowSprite != null)
-    //     {
-    //         // shadowSprite.enabled = false;
-    //         shadowSprite.gameObject.SetActive(false);
-    //     }
-    // }
-
-    // public void enableExtras()
-    // {
-    //     if(CombatStateManager.inCombat)
-    //     {
-    //         healthBarManager.show();
-    //     }
-        
-    //     if(shadowSprite != null)
-    //     {
-    //         // shadowSprite.enabled = true;
-    //         shadowSprite.gameObject.SetActive(true);
-    //     }
-
-    // }
-
-    // public void showShadowOutline()
-    // {
-    //     if(shadowSprite != null)
-    //     {
-    //         shadowOutline.createOutline(ColorList.canBeInteractedWith, getOutlineSize());
-    //     }
-    // }
-
-    // public void removeShadowOutline()
-    // {
-    //     if(shadowSprite != null)
-    //     {
-    //         shadowOutline.removeOutline();
-    //     }
-    // }
-
-    // private float getOutlineSize()
-    // {
-    //     switch(displayName)
-    //     {
-    //         case NPCNameList.horse:
-    //         case NPCNameList.csalan:
-    //             return Constants.shadow512x512OutlineSize;
-
-    //         default:
-    //             return Constants.shadow256x256OutlineSize;
-    //     }
     // }
 
     // public CharacterAnimationType getFallBackAnimationType(CharacterAnimationType animationType)

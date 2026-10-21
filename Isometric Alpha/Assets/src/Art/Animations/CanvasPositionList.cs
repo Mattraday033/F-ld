@@ -25,9 +25,16 @@ public static class CanvasPositionList
             new Vector2Int(71, 28), new Vector2Int(65, 31), new Vector2Int(56, 29)
         },
 
-        [SpritePath.Body_LovashiArmor_NoWeapon_OOC_Idle_Front] = new Vector2Int[] { new Vector2Int(41, 5) },
-        [SpritePath.Body_LovashiArmor_NoWeapon_Run_Front_Left] = new Vector2Int[] { new Vector2Int(56, 32) },
-        [SpritePath.Body_LovashiArmor_NoWeapon_Run_Front_Right] = new Vector2Int[] { new Vector2Int(56, 33) },
+        [SpritePath.Body_LovashiArmor_NoWeapon_OOC_Idle_Front] = new Vector2Int[]
+        {
+            new Vector2Int(60, 32), new Vector2Int(60, 33), new Vector2Int(60, 34), new Vector2Int(60, 33)
+        },
+        [SpritePath.Body_LovashiArmor_Polearm_OOC_Idle_Front] = new Vector2Int[]
+        {
+            new Vector2Int(59, 32), new Vector2Int(59, 33), new Vector2Int(59, 34), new Vector2Int(59, 33)
+        },
+        [SpritePath.Body_LovashiArmor_NoWeapon_Run_Front_Left] = new Vector2Int[] { new Vector2Int(56, 33) },
+        [SpritePath.Body_LovashiArmor_NoWeapon_Run_Front_Right] = new Vector2Int[] { new Vector2Int(56, 34) },
 
         [SpritePath.Body_LovashiArmor_NoWeapon_OOC_Idle_Back] = new Vector2Int[]
         {

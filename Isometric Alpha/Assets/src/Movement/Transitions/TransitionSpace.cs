@@ -12,6 +12,10 @@ public class Transition
 
     public bool allowAutosave = false;
 
+    //autosaves the player exactly where they stand, rather than one step back out of a doorway. For a fast travel,
+    //which can start anywhere, so stepping back could leave the save inside a wall
+    public bool autosaveInPlace = false;
+
     public string indicatorFlag;
 
     public int index;
@@ -303,7 +307,13 @@ public class TransitionSpace : MonoBehaviour, ICounter
         }
 
         GameplaySettingsList.OnTransitionIndicatorVisibilitySettingChange.AddListener(handleTransitionVisibilitySettingChange);
+
+        //Destroy waits for the end of the frame, but the next area's transitions are collected in the frame the old
+        //area is wiped. Left listening until then, this space would be collected with them, and a fast travel would
+        //land on this area's fast travel cell in the next area's grid
+        EventList.DestroyAllSpawnedGameObjects.AddListener(removeListeners);
     }
+
     public void removeListeners()
     {
         List<UnityEvent> listOfEvents = getUpdateEvents();
@@ -317,6 +327,8 @@ public class TransitionSpace : MonoBehaviour, ICounter
         SecretDoorFlags.OnSecretDoorDiscovery.RemoveListener(updateIndicatorVisibility);
         
         GameplaySettingsList.OnTransitionIndicatorVisibilitySettingChange.RemoveListener(handleTransitionVisibilitySettingChange);
+
+        EventList.DestroyAllSpawnedGameObjects.RemoveListener(removeListeners);
     }
 
     public void updateCounter()

@@ -224,7 +224,8 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         }
     }
 
-	public CharacterFacing enemyFacing = new CharacterFacing();
+    //only movable objects use this: everything else reads and writes the animation manager's facing through characterFacing
+	private CharacterFacing enemyFacing = new CharacterFacing();
 
     //movable objects have no animation manager to hold their facing
     public override CharacterFacing characterFacing
@@ -388,7 +389,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
         else
         {
             // CombatStateManager.whoIsSurprised = SurpriseState.PlayerSurprised;
-            CombatStateManager.whoIsSurprised = MovementManager.determineSurprisedParty(PlayerMovement.getInstance().transform.position, transform.position, enemyFacing.getFacing());
+            CombatStateManager.whoIsSurprised = MovementManager.determineSurprisedParty(PlayerMovement.getInstance().transform.position, transform.position, characterFacing.getFacing());
         }
 
         SceneChange.changeSceneToCombat(this);
@@ -681,7 +682,7 @@ public class EnemyMovement : MovementTracker, ISkillTarget, IRevealable, ITutori
     {
         cunningStunCounter = CunningManager.cunningRange / 2;
 
-        enemyFacing.setToOpposingFacing();
+        characterFacing.setToOpposingFacing();
 
         iconManager.createOverHeadIcon(OverHeadIconType.Cunning, this);
     }

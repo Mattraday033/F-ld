@@ -18,10 +18,11 @@ public static class OverallUIManager
         {
             _ShowFormula = value;
 
-            if(showFormula)
-            {
-                DescriptionPanelBuilder.OnFormulaSwap.Invoke();
-            } else
+            //fired both ways so hover panels can hide their extra info again on release
+            DescriptionPanelBuilder.OnFormulaSwap.Invoke();
+
+            //on release, health bars go back to whatever the selectors say should be visible
+            if(!showFormula)
             {
                 SelectorManager.declareSelectors();
             }

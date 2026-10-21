@@ -109,8 +109,8 @@ public static class MonsterSpawnDetailsList
         #region 6SlaveShack
         list = new List<MonsterSpawnDetails>();
 
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-1, -5), Facing.SouthEast, tutorialTargetHash: TutorialSequenceList.firstTutorialEnemyTargetHash));
-        list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(4, -2), Facing.NorthEast, tutorialTargetHash: TutorialSequenceList.secondTutorialEnemyTargetHash));
+        // list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(-1, -5), Facing.SouthEast, tutorialTargetHash: TutorialSequenceList.firstTutorialEnemyTargetHash));
+        // list.Add(new MonsterSpawnDetails(EnemyCategoryNameList.bats, new Vector3Int(4, -2), Facing.NorthEast, tutorialTargetHash: TutorialSequenceList.secondTutorialEnemyTargetHash));
 
         monsterSpawnDetailsDict.Add(LocationNameList.slaveShackSix, list);
         #endregion

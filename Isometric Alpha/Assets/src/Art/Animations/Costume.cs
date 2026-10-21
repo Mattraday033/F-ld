@@ -477,12 +477,18 @@ public class Costume: IAppearance
 
     public void applyHeadshot(HeadshotDisplay headshotDisplay)
     {
+        if(headshotDisplay == null)
+        {
+            return;
+        }
+
         headshotDisplay.hairImage.sprite = getSprite(SpriteLayer.Hair, CharacterAnimationType.OOC_Idle_Front);
 
         headshotDisplay.faceImage.sprite = getSprite(SpriteLayer.Face, CharacterAnimationType.OOC_Idle_Front);
 
-        headshotDisplay.hairImage.sprite = getSprite(SpriteLayer.Hair, CharacterAnimationType.OOC_Idle_Front);
+        headshotDisplay.bodyImage.sprite = HeadshotDisplay.getHeadSprite(bodyType);
 
+        headshotDisplay.interpretSchema(getColorSchema());
     }
 
     #endregion

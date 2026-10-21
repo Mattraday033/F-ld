@@ -58,12 +58,18 @@ public class AnimationManagerSpawnBehaviour : IExtraSpawnBehaviour
     private IAppearanceSource appearanceSource;
     private Facing facing;
     private CharacterAnimationType animationType;
+    private bool hasShadow;
 
-    public AnimationManagerSpawnBehaviour(IAppearanceSource appearanceSource, Facing facing, CharacterAnimationType animationType = CharacterAnimationType.None)
+    //hasShadow is false for things that shouldn't cast a shadow, like containers
+    public AnimationManagerSpawnBehaviour(IAppearanceSource appearanceSource,
+                                            Facing facing,
+                                            CharacterAnimationType animationType = CharacterAnimationType.None,
+                                            bool hasShadow = true)
     {
         this.appearanceSource = appearanceSource;
         this.facing = facing;
         this.animationType = animationType;
+        this.hasShadow = hasShadow;
     }
 
     public KeyValuePair<ActivationDesignatorType, ActivationCategory>[] activationRequirements => new KeyValuePair<ActivationDesignatorType, ActivationCategory>[0];
@@ -71,6 +77,9 @@ public class AnimationManagerSpawnBehaviour : IExtraSpawnBehaviour
     public Component addBehaviour(GameObject gameObject)
     {
         CreatureAnimationManager animationManager = gameObject.AddComponent<CreatureAnimationManager>();
+
+        //set before the manager's Start, which is when the shadow is made
+        animationManager.shadowExtras.hasShadow = hasShadow;
 
         animationManager.appearanceSource = appearanceSource;
         animationManager.characterFacing.currentFacing = facing;

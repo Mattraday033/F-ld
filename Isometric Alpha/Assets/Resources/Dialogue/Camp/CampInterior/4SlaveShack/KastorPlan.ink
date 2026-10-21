@@ -1216,7 +1216,7 @@ The pay was good, but that was about the only part of the job worth praising. Th
 
 === kastorBackstory_MedicineTeacher_1b(->returnDivert) ===
 
-Aye, that I did. Don't look so disgusted: I was a medic, and a conscript besides. I wasn't without sympathy for the mutineers we caught. I would patch them up as well when I could. Though of course, the rebels I saved from death's chilly vice would all end up branded in the end.
+Aye, that I did. Don't look so disgusted: I was a medic, and a conscript besides. I wasn't without sympathy for the mutineers we caught. I would patch them up as well when I could. Though of course, the rebels I saved from death's chilly vice would all be branded in the end.
 
 Now that I personally know the fate that awaited them, I wonder if it would have been the greater mercy to have let them succumb instead.
 

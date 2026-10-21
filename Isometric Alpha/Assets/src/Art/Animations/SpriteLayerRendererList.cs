@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SpriteLayerRendererList : MonoBehaviour
+public class SpriteLayerRendererList : MonoBehaviour, IColorSchemaTarget
 {
-    private const string replaceVarName = "_Replace";    
-
     private static readonly int blackBorderSizeXID = Shader.PropertyToID("_BlackBorderSizeX");
     private static readonly int blackBorderSizeYID = Shader.PropertyToID("_BlackBorderSizeY");
     private static readonly int colorOutlineSizeXID = Shader.PropertyToID("_ColorOutlineSizeX");
@@ -55,7 +53,6 @@ public class SpriteLayerRendererList : MonoBehaviour
     #endregion
 
     private bool instantiated = false;
-    private ColorReplaceSchema colorSchema;
     private Dictionary<SpriteLayer, SpriteRenderer> spriteLayers;
 
     public PolygonCollider2D bodyCollider;
@@ -244,6 +241,24 @@ public class SpriteLayerRendererList : MonoBehaviour
         }
     }
 
+    //hands the character layers to another parent and Unity layer, so they can be drawn somewhere other than where the character stands.
+    //Their local positions and scales are kept, so they stack the same way under the new parent.
+    //The outline and terrain renderers stay where they are
+    public void moveCharacterLayers(Transform parent, int layer)
+    {
+        //a missing layer stands in on the body's renderer, so the body would otherwise be moved more than once
+        HashSet<SpriteRenderer> moved = new HashSet<SpriteRenderer>();
+
+        foreach(SpriteRenderer renderer in characterRenderers)
+        {
+            if(moved.Add(renderer))
+            {
+                renderer.transform.SetParent(parent, false);
+                renderer.gameObject.layer = layer;
+            }
+        }
+    }
+
     public void setAlpha(float alpha)
     {
         foreach(SpriteRenderer renderer in characterRenderers)
@@ -254,31 +269,24 @@ public class SpriteLayerRendererList : MonoBehaviour
         }
     }
 
-    public void ignoreColorReplace()
+    #region IColorSchemaTarget
+    //a missing layer stands in on the body's renderer, and is left out so its colors don't overwrite the body's
+    public Material getColorSchemaMaterial(SpriteLayer layer)
     {
-        foreach(SpriteRenderer renderer in characterRenderers)
+        SpriteRenderer renderer = spriteLayers[layer];
+
+        if(renderer == null || (layer != SpriteLayer.Body && renderer == bodyRenderer))
         {
-            renderer.material.SetFloat(replaceVarName, Constants.falseFloatToBool);
+            return null;
         }
+
+        return renderer.material;
     }
 
-    public void interpretSchema(ColorReplaceSchema schema)
+    public void onColorSchemaMaterialsChanged()
     {
-        colorSchema = schema;
-
-        foreach(SpriteLayer layer in EnumUtil.CharacterSpriteLayers)
-        {
-            applySchemaToLayer(layer);
-        }
     }
-
-    private void applySchemaToLayer(SpriteLayer layer)
-    {
-        foreach(ColorReplacementSlot slot in EnumUtil.ColorReplacementSlots)
-        {
-            spriteLayers[layer].material.SetColor(slot.getMaterialVARName(), colorSchema.getColor(layer, slot));
-        }
-    }
+    #endregion
 
     #region Canvas
     //where each renderer's sprite sits on the body frame. A renderer that was never placed isn't in here, and fills the frame

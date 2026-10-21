@@ -133,6 +133,20 @@ public class PlacedPartyMember : MonoBehaviour, INameSource, INameTagSuppressor
             rendererList.enableAllLayers();
         }
 
+        //the shadow goes with the sprite, so a hidden party member doesn't leave it behind
+        CreatureAnimationManager animationManager = GetComponent<CreatureAnimationManager>();
+
+        if(animationManager != null)
+        {
+            if(hide)
+            {
+                animationManager.shadowExtras.disableExtras();
+            } else
+            {
+                animationManager.shadowExtras.enableExtras();
+            }
+        }
+
         //left on, the body collider would take the mouse hover from whatever shares the cell
         rendererList.setBodyColliderEnabled(!hide);
 

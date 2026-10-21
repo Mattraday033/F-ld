@@ -24,6 +24,8 @@ public static class LayerAndTagManager
     public readonly static int UILayer = LayerMask.NameToLayer("UI");
 	public readonly static int observableLayer = LayerMask.NameToLayer("Observable");
     public readonly static int mouseHoverLayer = LayerMask.NameToLayer("MouseHover");
+	//no camera in the scene draws this layer, so FlattenedFade's capture cameras are the only ones that see what's on it
+	public readonly static int flattenedFadeLayer = LayerMask.NameToLayer("FlattenedFade");
 
 	public const string groundSortingLayerName = "Ground";	
     public const string firstSortingLayerName = "First";

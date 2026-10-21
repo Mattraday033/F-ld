@@ -56,10 +56,14 @@ public class ActivationListener : MonoBehaviour
         Formation.OnFormationChange.RemoveListener(checkFormation);
     }
 
-    //immediate, because the next area's objects are spawned straight after the old ones are wiped
+    //The next area's objects are spawned straight after the old ones are wiped, in the same frame, but Destroy waits for
+    //the end of it. Switched off first, the old object is already out of play: tag searches like the terrain lookup skip
+    //it, and its components unsubscribe in OnDisable rather than at the end of the frame
     private void destroySpawnedGameObject()
     {
         OnDestroy();
+
+        gameObject.SetActive(false);
 
         Destroy(gameObject);
     }

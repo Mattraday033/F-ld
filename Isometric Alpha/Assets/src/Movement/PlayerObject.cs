@@ -126,28 +126,26 @@ public class PlayerObject : MonoBehaviour
 
     public static void hidePlayerSprite()
     {
-        // if(instance == null || 
-        //     instance.playerSpriteRenderer == null ||
-        //     instance.animationManager == null)
-        // {
-        //     return;
-        // }
+        PlayerMovement playerMovement = PlayerMovement.getInstance();
 
-        // instance.playerSpriteRenderer.color = Color.clear;
-        // instance.animationManager.disableExtras();
+        if(playerMovement == null || playerMovement.animationManager == null)
+        {
+            return;
+        }
+
+        playerMovement.hideSprite();
     }
 
     public static void showPlayerSprite()
     {
-        // if(instance == null || 
-        //     instance.playerSpriteRenderer == null ||
-        //     instance.animationManager == null)
-        // {
-        //     return;
-        // }
+        PlayerMovement playerMovement = PlayerMovement.getInstance();
 
-        // instance.playerSpriteRenderer.color = Color.white;
-        // instance.animationManager.enableExtras();
+        if(playerMovement == null || playerMovement.animationManager == null)
+        {
+            return;
+        }
+
+        playerMovement.showSprite();
     }
 
     public static bool isBehindTerrain()

@@ -38,6 +38,9 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
         this.zoneKey = spawnDetails.zoneKey;
         this.landmarkName = spawnDetails.landmarkName;
 
+        //landmarks aren't spawned through the spawn behaviours that hand other icon managers their name source
+        overHeadIconManager.nameSource = this;
+
         baseSortPriority = spawnDetails.getSortPriority();
 
         spriteRenderer.sprite = spawnDetails.getSprite();
@@ -64,6 +67,8 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
     //for a landmark on the prebuilt world map, which can be hidden while the pointer is on it and then never gets OnMouseExit
     public void clearHover()
     {
+        hovered = false;
+
         rectTransform.localScale = Vector3.one;
         spriteRenderer.sortingOrder = baseSortPriority;
         spriteRenderer.color = Color.white;
@@ -87,8 +92,14 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
         spriteRenderer.sortingOrder = previousSortPriority;
     }
 
+    //OnMouseUp fires on release wherever the pointer is, so these tell a click on the landmark apart from a drag of the map
+    private bool hovered = false;
+    private Vector3 pressPosition;
+
     private void OnMouseEnter()
     {
+        hovered = true;
+
         setLandmarkToLarge();
         overHeadIconManager.spawnNameTag();
         spriteRenderer.color = ColorList.grey245;
@@ -96,6 +107,8 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
 
     private void OnMouseExit()
     {
+        hovered = false;
+
         setLandmarkToNormal();
         overHeadIconManager.destroyNameTag();
         spriteRenderer.color = Color.white;
@@ -103,16 +116,33 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
 
     private void OnMouseDown()
     {
+        pressPosition = Input.mousePosition;
         spriteRenderer.color = ColorList.grey215;
     }
 
     private void OnMouseUp()
     {
-        spriteRenderer.color = ColorList.grey245;
+        spriteRenderer.color = hovered ? ColorList.grey245 : Color.white;
+
+        if(pressWasDrag())
+        {
+            return;
+        }
 
         WorldMapPopUpWindow.getInstance().popupProgenitor.destroyPopUp();
 
         mapPopUpButton.spawnPopUp(zoneKey);
     }
+
+    //the world map's scroll rect starts dragging once the pointer passes the event system's drag threshold, so the same distance is used here
+    private bool pressWasDrag()
+    {
+        int dragThreshold = EventSystem.current != null ? EventSystem.current.pixelDragThreshold : defaultDragThreshold;
+
+        return (Input.mousePosition - pressPosition).sqrMagnitude >= dragThreshold * dragThreshold;
+    }
+
+    //the event system's own default, for when there is none
+    private const int defaultDragThreshold = 10;
 
 }

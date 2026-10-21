@@ -92,9 +92,14 @@ public class TransitionManager : MonoBehaviour
         currentTransitions.Add(transition);
     }
 
+    //the autosave is taken in the area being left, before the new area loads, so a quest update or story event the
+    //fast travel sets off can be undone by loading it
     public static void fastTravel(string targetLocationName)
 	{
-        changeLocation(new Transition(AreaManager.locationName, targetLocationName));
+        Transition transition = new Transition(AreaManager.locationName, targetLocationName);
+        transition.autosaveInPlace = true;
+
+        changeLocation(transition);
 	}
 
     private IEnumerator waitForBlackScreenThenTransition(Transition transition, bool skipAutosave)

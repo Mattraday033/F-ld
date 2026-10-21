@@ -379,7 +379,7 @@ public class MovementManager : MonoBehaviour
             EnemyMovement enemyMovement = allMovementTrackers[index + 1] as EnemyMovement;
 
             statWrappers[index] = new EnemyStatWrapper(enemyMovement.transform.position,
-                                                        enemyMovement.enemyFacing.getFacing(),
+                                                        enemyMovement.characterFacing.getFacing(),
                                                         enemyMovement.intimidateCounter,
                                                         enemyMovement.cunningStunCounter,
                                                         enemyMovement.retreatStunCounter);

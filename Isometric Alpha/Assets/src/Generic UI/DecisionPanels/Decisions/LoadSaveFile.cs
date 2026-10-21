@@ -50,7 +50,58 @@ public class LoadSaveFile: IDecision
         return loadLostProgressMessageStart + saveBlueprint.displayName + loadLostProgressMessageEnd;
     }
 
+    //true while the screen fades out ahead of a load, so a second press doesn't start the load twice
+    private static bool fadingOutToLoad = false;
+
+    //statics survive between play sessions with domain reload disabled
+    [RuntimeInitializeOnLoadMethod]
+    private static void init()
+    {
+        fadingOutToLoad = false;
+        SceneManager.sceneLoaded -= clearFadeUnderLoadingScreen;
+    }
+
+    //The scene change blocks for a few frames, and the last frame drawn before it would otherwise be the UI half torn down,
+    //so the screen goes black first. A screen that's already black, as after character creation, goes straight on
     public void execute()
+    {
+        if(fadingOutToLoad)
+        {
+            return;
+        }
+
+        bool fadingOut = !FadeToBlackManager.isBlack() && FadeToBlackManager.getInstance() != null;
+
+        fadingOutToLoad = true;
+
+        FadeToBlackManager.quickFadeToBlackThen(() =>
+        {
+            fadingOutToLoad = false;
+
+            //the black was only there to cover the freeze, so it's cleared once the loading screen is up to take over
+            if(fadingOut && !showMonologueFirst)
+            {
+                SceneManager.sceneLoaded -= clearFadeUnderLoadingScreen;
+                SceneManager.sceneLoaded += clearFadeUnderLoadingScreen;
+            }
+
+            changeScene();
+        });
+    }
+
+    private static void clearFadeUnderLoadingScreen(Scene scene, LoadSceneMode mode)
+    {
+        if(!scene.name.Equals(SceneNameList.loadingScreen))
+        {
+            return;
+        }
+
+        SceneManager.sceneLoaded -= clearFadeUnderLoadingScreen;
+
+        FadeToBlackManager.setToClear();
+    }
+
+    private void changeScene()
     {
         midLoad = true;
         beforeSecondStageLoad = true;

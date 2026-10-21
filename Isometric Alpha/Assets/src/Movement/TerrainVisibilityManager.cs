@@ -75,6 +75,9 @@ public static class TerrainVisibilityManager
 
     private static void adjustTerrainVisibilityToMatchState()
     {
+        //a renderer destroyed since the lists were made would throw part way through and leave the rest of the terrain unset
+        removeDestroyedRenderers();
+
         switch(currentTerrainHiddenState)
         {
             case TerrainHiddenState.InFrontOfTerrain:
@@ -134,6 +137,14 @@ public static class TerrainVisibilityManager
                     }
                 break;
         }
+    }
+
+    //a destroyed Unity object compares equal to null
+    private static void removeDestroyedRenderers()
+    {
+        terrainTilemaps.RemoveAll(tilemap => tilemap == null);
+        terrainSprites.RemoveAll(sprite => sprite == null);
+        shownWhileTerrainHiddenTilemaps.RemoveAll(tilemap => tilemap == null);
     }
 
     public static void changeTerrainStateOnTerrainCollision(int i)

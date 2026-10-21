@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8748194933295724854}
   - component: {fileID: 584820116062191324}
   - component: {fileID: 5540592052679351486}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12518,6 +12518,9 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -12561,7 +12564,7 @@ GameObject:
   - component: {fileID: 311050114878867130}
   - component: {fileID: 2636899080792119225}
   - component: {fileID: 3991791053661271632}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: Cloud (Inverted X)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12722,6 +12725,9 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -12764,7 +12770,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2238710289191916524}
   - component: {fileID: 4189028077421634113}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: World Map Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12819,7 +12825,7 @@ GameObject:
   - component: {fileID: 953845308943785806}
   - component: {fileID: 6733455740758702426}
   - component: {fileID: 5333070071174809304}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: Cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13020,6 +13026,9 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -13063,7 +13072,7 @@ GameObject:
   - component: {fileID: 5923236794412250981}
   - component: {fileID: 2832415105765845179}
   - component: {fileID: 7305214609366944301}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: Rivers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14708,6 +14717,9 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14751,7 +14763,7 @@ GameObject:
   - component: {fileID: 5970147984672093913}
   - component: {fileID: 2336844758366975093}
   - component: {fileID: 3937543175294131348}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: Above Ground (InvertedX)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14916,6 +14928,9 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14959,7 +14974,7 @@ GameObject:
   - component: {fileID: 8028143189171654800}
   - component: {fileID: 6929547779164564015}
   - component: {fileID: 393426539616363444}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: Structures
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15470,6 +15485,9 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -15513,7 +15531,7 @@ GameObject:
   - component: {fileID: 668462223199509853}
   - component: {fileID: 5760068252728279076}
   - component: {fileID: 8858679785165871522}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: Ground (InvertedY)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15652,6 +15670,9 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -15693,7 +15714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5606323803709085120}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: Landmark Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15726,7 +15747,7 @@ GameObject:
   - component: {fileID: 4585664022835830973}
   - component: {fileID: 1948107864876176783}
   - component: {fileID: 3854941586820182056}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: Above Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19498,6 +19519,9 @@ TilemapRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -19539,7 +19563,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3177620510247771792}
-  m_Layer: 0
+  m_Layer: 30
   m_Name: World Map Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}

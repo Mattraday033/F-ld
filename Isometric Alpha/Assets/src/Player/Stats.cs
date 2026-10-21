@@ -1099,7 +1099,12 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public void setHeadSprite(DescriptionPanel panel)
     {
-        DescriptionPanel.setImage(panel.typeIconPanel, getHeadSprite());
+        Costume costume = appearance as Costume;
+
+        if(costume != null)
+        {
+            costume.applyHeadshot(panel?.headshotDisplay);
+        }
     }
 
     public void setHeadSprite(Image image)

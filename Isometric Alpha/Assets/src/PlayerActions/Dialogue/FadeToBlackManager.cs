@@ -162,6 +162,37 @@ public class FadeToBlackManager : MonoBehaviour
 		createFade(quickFade);
 	}
 
+    //Fades quickly to black and holds it there, then runs onBlack. For a scene change that blocks for a few frames:
+    //the last frame drawn before it is then black rather than a UI half torn down. A screen that's already black,
+    //or no fader to cover it with, runs onBlack straight away. The fader isn't unloaded with the scene, so the
+    //wait carries on through whatever onBlack starts
+    public static void quickFadeToBlackThen(System.Action onBlack)
+    {
+        if(instance == null || isBlack())
+        {
+            onBlack();
+            return;
+        }
+
+        instance.StartCoroutine(quickFadeToBlackThenCoroutine(onBlack));
+    }
+
+    private static IEnumerator quickFadeToBlackThenCoroutine(System.Action onBlack)
+    {
+        StopFade(FadeType.Screen);
+
+        FadeToBlackTransition fadeOut = new FadeToBlackTransition(skipFadeIn: true);
+        fadeOut.setToQuickFadeTime();
+        createFade(fadeOut);
+
+        while(!fadeOut.isFinished())
+        {
+            yield return null;
+        }
+
+        onBlack();
+    }
+
     public static void startCombatTransition(Transform monsterTransform)
     {
         if(instance == null)
@@ -230,6 +261,16 @@ public class FadeToBlackManager : MonoBehaviour
         }
         
         instance.fadeToBlackImage.color = Color.black;
+    }
+
+    public static void setToClear()
+    {
+        if(instance == null)
+        {
+            return;
+        }
+
+        instance.fadeToBlackImage.color = Color.clear;
     }
 
     public static void StopFade(FadeType type)

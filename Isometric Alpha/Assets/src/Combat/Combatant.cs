@@ -64,7 +64,11 @@ public class Combatant : MonoBehaviour, INameSource
 
         if(isPlaceholder)
         {
-            rendererList.setAlpha(RepositionPlaceholderGenerator.placeHolderSpriteOpaqueness);
+            //a placeholder is drawn as one faded image, so its layers don't show through each other
+            if(!FlattenedFade.apply(rendererList, RepositionPlaceholderGenerator.placeHolderSpriteOpaqueness))
+            {
+                rendererList.setAlpha(RepositionPlaceholderGenerator.placeHolderSpriteOpaqueness);
+            }
 
             //a reposition clone is drawn by its placeholder, but a combatant that already has a GameObject keeps it
             if(stats.combatant != null)

@@ -66,6 +66,19 @@ public class ThreeRingButton : Button, IPointerDownHandler, IPointerUpHandler
         {
             setToResting();
         }
+
+        deselect();
+    }
+
+    //a click leaves the button selected, and Unity shows Selected ahead of Highlighted, so a button still under
+    //the pointer would stop showing its hover colour. Letting go of the selection hands it back to Highlighted.
+    //onClick fires after this, and doesn't depend on the selection
+    private void deselect()
+    {
+        if(EventSystem.current != null && EventSystem.current.currentSelectedGameObject == gameObject)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
     protected override void DoStateTransition(SelectionState state, bool instant)

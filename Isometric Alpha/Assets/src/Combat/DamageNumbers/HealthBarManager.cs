@@ -37,7 +37,7 @@ public class HealthBarManager : MonoBehaviour
         Trait.OnTraitRemoval.AddListener(updateHealthBarColor);
         // LargeEnemyStats.OnLargeEnemySpawn.AddListener(cleanUpHiddenHealthBars);
         DescriptionPanelBuilder.OnFormulaSwap.AddListener(updateCreatureTypeSymbols);
-        DescriptionPanelBuilder.OnFormulaSwap.AddListener(show);
+        DescriptionPanelBuilder.OnFormulaSwap.AddListener(showIfFormulasShown);
         CombatUIModule.OnHideCombatUI.AddListener(hide);
         GameplaySettingsList.OnHealthBarVisibilitySettingChange.AddListener(show);
         SelectorManager.SelectorMoved.AddListener(determineVisibility);
@@ -60,7 +60,7 @@ public class HealthBarManager : MonoBehaviour
         Trait.OnTraitRemoval.RemoveListener(updateHealthBarColor);
         // LargeEnemyStats.OnLargeEnemySpawn.RemoveListener(cleanUpHiddenHealthBars);
         DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(updateCreatureTypeSymbols);
-        DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(show);
+        DescriptionPanelBuilder.OnFormulaSwap.RemoveListener(showIfFormulasShown);
         SelectorManager.SelectorMoved.RemoveListener(determineVisibility);
         CombatUIModule.OnHideCombatUI.RemoveListener(hide);
         GameplaySettingsList.OnHealthBarVisibilitySettingChange.RemoveListener(show);
@@ -75,7 +75,6 @@ public class HealthBarManager : MonoBehaviour
 
     private bool healthBarsAlwaysVisibleSettingOn()
     {
-        Debug.LogError("set = " + GameplaySettingsList.healthBarsAlwaysVisible.settingOptions[Constants.onSettingIndex].set);
         return GameplaySettingsList.healthBarsAlwaysVisible.settingOptions[Constants.onSettingIndex].set;
     }
 
@@ -175,6 +174,15 @@ public class HealthBarManager : MonoBehaviour
     public void hide()
     {
         gameObject.SetActive(false);
+    }
+
+    //on release, visibility is left to determineVisibility via SelectorManager.declareSelectors
+    private void showIfFormulasShown()
+    {
+        if(OverallUIManager.showFormula)
+        {
+            show();
+        }
     }
 
     public void show()
