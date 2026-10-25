@@ -38,22 +38,7 @@ public class RetreatUIManager : SlotIconHover
         setRetreatChanceDisplay();
     }
 
-    void Update()
-    {
-        if (PlayerStateManager.currentActivity == CurrentActivity.Retreating)
-        {
-            KeyPressManager.updateKeyBools();
-
-            if (KeyBindingList.settingsScreenOrBackKeyPressed() && !KeyPressManager.handlingPrimaryKeyPress)
-            {
-                EscapeStack.handleEscapePress();
-
-                PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
-
-                KeyPressManager.handlingPrimaryKeyPress = true;
-            }
-        }
-    }
+    //The back and settings keys while Retreating are PlayerInputList.retreatingDeselect and retreatingOpenSettings.
 
     public void setCurrentActivityToRetreating()
     {

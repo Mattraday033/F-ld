@@ -52,63 +52,52 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 		repositionsRemaining = PartyManager.getPlayerStats().getMaximumRepositionsPerCombat();
 	}
 	
-	void Update() //here for Key Input
+	//Key input while Repositioning comes from PlayerInputList's repositioning actions, which call these two.
+	//Each returns whether it acted, so the caller only claims the press when something happened.
+
+	public bool handleSelectKeyPress()
 	{
-		if(PlayerStateManager.currentActivity == CurrentActivity.Repositioning)
+		if(currentRepositionType == CurrentRepositionType.AllyFormation &&
+			currentRepositionActivity == CurrentRepositionActivity.ChoosingNewLocation &&
+			combatantsRemainingToReposition() > 0)
 		{
-			KeyPressManager.updateKeyBools();
-			
-			if(KeyPressManager.handlingPrimaryKeyPress)
-			{
-				return;
-			}
-			
-			if(currentRepositionType == CurrentRepositionType.SingleAlly)
-			{
-				if(currentRepositionActivity == CurrentRepositionActivity.ChoosingRepositionTarget)
-				{
-					if(KeyBindingList.settingsScreenOrBackKeyPressed())
-					{
-						resetCurrentActivity();
-						resetRepositioningTypeAndActivity();
-						
-						KeyPressManager.handlingPrimaryKeyPress = true;
-					}
-				} else if(currentRepositionActivity == CurrentRepositionActivity.ChoosingNewLocation)
-				{
-					if(KeyBindingList.settingsScreenOrBackKeyPressed()) 
-					{
-						deselectSingleAllyToMove();
-						
-						SelectorManager.resetCurrentSelector();
-						
-						KeyPressManager.handlingPrimaryKeyPress = true;
-					}
-				}
-				
-			} else if(currentRepositionType == CurrentRepositionType.AllyFormation)
-			{
-				if(currentRepositionActivity == CurrentRepositionActivity.ChoosingNewLocation && 
-					combatantsRemainingToReposition() > 0 &&
-					Input.GetKey(KeyBindingList.combatSelectKey.getCurrentKeyCode()))
-				{
-					placeNextRepositionDetailsInList();
-					KeyPressManager.handlingPrimaryKeyPress = true;
-				} else if(KeyBindingList.settingsScreenOrBackKeyPressed())
-				{
-					if(repositionDetailsList.Count == 0)
-					{
-						exitRepositioning();
-					} else
-					{
-						requeueLatestRepositionDetails();
-						repositionUIManager.setConfirmRepositionButtonInteractability(deactivate);
-					}
-					
-					KeyPressManager.handlingPrimaryKeyPress = true;
-				}
-			}
+			placeNextRepositionDetailsInList();
+			return true;
 		}
+
+		return false;
+	}
+
+	public bool handleBackKeyPress()
+	{
+		if(currentRepositionType == CurrentRepositionType.SingleAlly)
+		{
+			if(currentRepositionActivity == CurrentRepositionActivity.ChoosingRepositionTarget)
+			{
+				resetCurrentActivity();
+				resetRepositioningTypeAndActivity();
+				return true;
+			} else if(currentRepositionActivity == CurrentRepositionActivity.ChoosingNewLocation)
+			{
+				deselectSingleAllyToMove();
+				SelectorManager.resetCurrentSelector();
+				return true;
+			}
+		} else if(currentRepositionType == CurrentRepositionType.AllyFormation)
+		{
+			if(repositionDetailsList.Count == 0)
+			{
+				exitRepositioning();
+			} else
+			{
+				requeueLatestRepositionDetails();
+				repositionUIManager.setConfirmRepositionButtonInteractability(deactivate);
+			}
+
+			return true;
+		}
+
+		return false;
 	}
 	
 	public void startSingleAllyReposition()

@@ -68,6 +68,8 @@ public class LoadingBarProgressTracker : MonoBehaviour
     {
         instance = this;
         PlayerStateManager.setCurrentActivity(CurrentActivity.Loading);
+
+        HeadlessLogger.LogEvent("LoadingScreen.Opened");
     }
 
     private void Start()
@@ -77,7 +79,12 @@ public class LoadingBarProgressTracker : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(PlayerStateManager.currentActivity != CurrentActivity.InDialogue && 
+        HeadlessLogger.LogEvent("LoadingScreen.Closed");
+
+        //before the activity change below, which re-syncs the input set itself only if the activity changes
+        PlayerStateManager.removeInputOverlay(InputOverlay.LoadingScreenContinue);
+
+        if(PlayerStateManager.currentActivity != CurrentActivity.InDialogue &&
            PlayerStateManager.currentActivity != CurrentActivity.InTutorialSequence)
         {
             PlayerStateManager.setCurrentActivity(CurrentActivity.Walking);
@@ -88,13 +95,22 @@ public class LoadingBarProgressTracker : MonoBehaviour
         loadSaveFile = null;
     }
 
-	void Update()
-	{
-		if(canChangeScene && (KeyBindingList.continueUIKeyIsPressed() || Input.GetKey(KeyCode.Mouse0)))
-		{
-            loadSaveFile.performOutro();
-            loadSaveFile = null;
-        } 
+    //Called by the LoadingScreenContinue overlay's actions (the continue keys and a left click). The overlay
+    //is added once the "press any key" prompt shows; its actions check the initial state, so a key that is
+    //already held then continues straight away, as the old polling did.
+    public static void continueFromKey()
+    {
+        if(instance == null || !instance.canChangeScene || loadSaveFile == null)
+        {
+            return;
+        }
+
+        instance.canChangeScene = false;
+
+        HeadlessLogger.LogEvent("LoadingScreen.Continued");
+
+        loadSaveFile.performOutro();
+        loadSaveFile = null;
     }
 
     private IEnumerator progressLoadBar()
@@ -178,6 +194,8 @@ public class LoadingBarProgressTracker : MonoBehaviour
 
         canChangeScene = true;
 		pressAnyKeyMessage.SetActive(true);
+
+        PlayerStateManager.addInputOverlay(InputOverlay.LoadingScreenContinue);
     }
 
     private static void animateProtagRunSprite(int row)

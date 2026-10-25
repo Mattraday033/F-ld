@@ -240,6 +240,8 @@ public class DialogueManager : MonoBehaviour
 		storyName = dialogue.inkJSON.name;
 		atConvoEndPoint = dialogue.convoEndableAtStart;
 
+		HeadlessLogger.LogEvent("Dialogue.Started", "story", storyName, "midDialogue", midDialogue);
+
         if (dialogue.isVaultable)
         {
             VaultableObject vaultableObject = dialogue.cameraFoci[Dialogue.mainNPCIndex].GetComponent<VaultableObject>();
@@ -283,6 +285,8 @@ public class DialogueManager : MonoBehaviour
 
 	public void endDialogue()
 	{
+		HeadlessLogger.LogEvent("Dialogue.Ended", "story", storyName);
+
 		mainCM.Follow = PlayerMovement.getInstance().gameObject.transform;
 
 		setCameraToDefaultSpeed();
@@ -340,6 +344,8 @@ public class DialogueManager : MonoBehaviour
 
 	private void displayChoices()
 	{
+		displayChoicesCallCount++;
+
 		List<ChoiceDescription> choiceDescriptions = new List<ChoiceDescription>();
 
 		if (currentStory.currentChoices.Count <= 0)
@@ -360,6 +366,12 @@ public class DialogueManager : MonoBehaviour
 		{
 			dialogueTrackerWindow.populateChoices(choiceDescriptions);
 			currentChoiceInkObjects = currentStory.currentChoices;
+
+			//count=0 is a line with only the default "Continue..." entry
+			if (HeadlessLogger.IsHeadless && continueStoryDepth == 1 && !storyPausedThisPass)
+			{
+				HeadlessLogger.LogEvent("Dialogue.AwaitingInput", "story", storyName, "count", currentStory.currentChoices.Count);
+			}
 		}
 	}
 
@@ -374,14 +386,25 @@ public class DialogueManager : MonoBehaviour
 
 		if(currentChoiceInkObjects[choiceIndex].text.Contains(ChoiceDescription.unimplementedTag))
 		{
+			HeadlessLogger.LogWarningEvent("Dialogue.ChoiceIgnored", "story", storyName, "index", choiceIndex, "reason", "unimplemented");
 			return;
 		}
 
 		ChoiceKey currentChoice = new ChoiceKey(storyName, currentChoiceInkObjects[choiceIndex].sourcePath);
 
+		if (previousChoice != null && currentChoice.Equals(previousChoice))
+		{
+			HeadlessLogger.LogWarningEvent("Dialogue.ChoiceIgnored", "story", storyName, "index", choiceIndex, "reason", "repeat");
+		}
+
 		if (previousChoice == null || !currentChoice.Equals(previousChoice))
 		{
 			previousChoice = currentChoice;
+
+			if (HeadlessLogger.IsHeadless)
+			{
+				HeadlessLogger.LogEvent("Dialogue.ChoiceMade", "story", storyName, "index", choiceIndex, "text", currentChoiceInkObjects[choiceIndex].text);
+			}
 
 			string newLine = PartyManager.getPlayerNameForDisplay() + ": " + currentChoiceInkObjects[choiceIndex].text;
 
@@ -467,7 +490,43 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    //continueStory calls itself for command lines, and every level that reaches its end calls displayChoices,
+    //so one key press shows the same choices once per level. These track the outermost call and whether any
+    //level stopped early to wait on a fade, a wait() or a scene change (it returns without displaying choices,
+    //and a coroutine or Update continues the story later), so headless runs log one Dialogue.AwaitingInput
+    //per point where the story really waits for the player.
+    private int continueStoryDepth = 0;
+    private bool storyPausedThisPass = false;
+    private int displayChoicesCallCount = 0;
+
     public void continueStory()
+    {
+        continueStoryDepth++;
+
+        if (continueStoryDepth == 1)
+        {
+            storyPausedThisPass = false;
+        }
+
+        bool couldContinue = currentStory != null && currentStory.canContinue;
+        int displayChoicesCallsBefore = displayChoicesCallCount;
+
+        try
+        {
+            continueStoryOneLine();
+        }
+        finally
+        {
+            if (couldContinue && displayChoicesCallCount == displayChoicesCallsBefore)
+            {
+                storyPausedThisPass = true;
+            }
+
+            continueStoryDepth--;
+        }
+    }
+
+    private void continueStoryOneLine()
     {
 
         string newLine;

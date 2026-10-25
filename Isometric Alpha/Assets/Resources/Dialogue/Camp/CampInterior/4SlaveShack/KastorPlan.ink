@@ -1250,7 +1250,7 @@ The rest you experienced yourself: the captain needed little support to have me 
     +Duty means little to you, it seems.
         \*Kastor looks uncomfortable.* Does a levy have a duty to his lord, when his oaths are taken at the point of a spear? Or perhaps you mean my duty as a healer to my patient, which I should have performed over my duty to his victims?
 
-        You come quickly to an answer I have not found, despite the magnitudes of difference in our time spent seeking it. Just don't let that answer get in the way of our duties to our fellow conspirators.
+        You come quickly to an answer I have not found, despite the difference in our time spent seeking it. Just don't let that answer get in the way of our duties to our fellow conspirators.
         ->kastorBackstory_Hub(returnDivert)
     +It would be unfair for me to judge. I wasn't there, after all.
         I appreciate such a response. I was there, and still I find it difficult to keep an even head about it.

@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.InputSystem.Utilities;
 using UnityEngine.UI;
 using TMPro;
 
@@ -48,6 +51,8 @@ public class KeyBindingSettingsManager : MonoBehaviour
 
     private void OnDisable()
     {
+        stopKeyCapture();
+
         bool wasListening = listeningForKeyBinding();
 
         newKeyCode = KeyCode.None;
@@ -55,10 +60,10 @@ public class KeyBindingSettingsManager : MonoBehaviour
         keybindToOverwrite = null;
 
         //Closing the screen while a bind button is armed is the third way out of listening mode. Without
-        //this the actions KeybindingButton.listenForKeyPress disabled would stay disabled for good.
+        //this the overlay KeybindingButton.listenForKeyPress added would keep every action off for good.
         if (wasListening)
         {
-            PlayerStateManager.updateEnabledInputActions();
+            restoreInputAfterListening();
         }
     }
 
@@ -109,87 +114,84 @@ public class KeyBindingSettingsManager : MonoBehaviour
         {
             clickToExitMessage.SetActive(true);   
 
-            if((!CombatStateManager.inCombat && EscapeStack.getEscapableObjectsCount() > 0) || 
+            //The overwrite pop-up is open. Its accept and back keys are the ConfirmingKeyBindOverwrite overlay.
+            if((!CombatStateManager.inCombat && EscapeStack.getEscapableObjectsCount() > 0) ||
                 (CombatStateManager.inCombat && EscapeStack.getEscapableObjectsCount() > 2))
             {
-                clickToExitMessage.SetActive(false);   
-
-                if(KeyBindingList.continueUIKeyIsPressed())
-                {
-                    BinaryDescisionPanel.AcceptBinaryDecision.Invoke();
-                    KeyPressManager.handlingPrimaryKeyPress = true;
-                } else if(KeyBindingList.settingsScreenOrBackKeyPressed())
-                {
-                    EscapeStack.handleEscapePress();
-                    exitListeningModeWithoutChange();
-                    KeyPressManager.handlingPrimaryKeyPress = true;
-                }
-
+                clickToExitMessage.SetActive(false);
                 return;
-            } else if(Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1))
+            } else if(InputReader.isHeld(KeyCode.Mouse0) || InputReader.isHeld(KeyCode.Mouse1))
             {
                 exitListeningModeWithoutChange();
+                return;
             }
 
-            KeyCode newKey = KeyCode.None;
-
-            if(Input.GetKey(KeyCode.LeftAlt))
+            if(capturedKey != KeyCode.None)
             {
-                newKey = KeyCode.LeftAlt;
-            }
-            else if(Input.GetKey(KeyCode.RightAlt))
-            {
-                newKey = KeyCode.RightAlt;
-            }
-            else if(Input.GetKey(KeyCode.LeftShift))
-            {
-                newKey = KeyCode.LeftShift;
-            }
-            else if(Input.GetKey(KeyCode.RightShift))
-            {
-                newKey = KeyCode.RightShift;
-            }
-            else if(Input.GetKey(KeyCode.LeftControl))
-            {
-                newKey = KeyCode.LeftControl;
-            }
-            else if(Input.GetKey(KeyCode.RightControl))
-            {
-                newKey = KeyCode.RightControl;
-            } else if(Input.GetKey(KeyCode.CapsLock))
-            {
-                newKey = KeyCode.CapsLock;
-            } else if(Input.GetKey(KeyCode.Tab))
-            {
-                newKey = KeyCode.Tab;
-            } else if(Input.GetKey(KeyCode.Escape))
-            {
-                newKey = KeyCode.Escape;
-            } else if(Input.GetKey(KeyCode.UpArrow))
-            {
-                newKey = KeyCode.UpArrow;
-            } else if(Input.GetKey(KeyCode.DownArrow))
-            {
-                newKey = KeyCode.DownArrow;
-            } else if(Input.GetKey(KeyCode.LeftArrow))
-            {
-                newKey = KeyCode.LeftArrow;
-            } else if(Input.GetKey(KeyCode.RightArrow))
-            {
-                newKey = KeyCode.RightArrow;
-            } else if(Input.inputString.Length > 0)
-            {
-                newKey = (KeyCode) Input.inputString.ToLower()[0];
-            }
-
-            if(newKey != KeyCode.None)
-            {
-                newKeyCode = newKey;
+                newKeyCode = capturedKey;
+                capturedKey = KeyCode.None;
                 endListening();
             }
         } else
         {
-            clickToExitMessage.SetActive(false);   
+            clickToExitMessage.SetActive(false);
+        }
+
+        if(listeningForKeyBinding())
+        {
+            startKeyCapture();
+        } else
+        {
+            stopKeyCapture();
+        }
+    }
+
+    //The key for a new binding comes from the Input System's any-button-press hook rather than typed text,
+    //so it's the physical key (the same one the CustomInputActions will be bound to) and every key with a
+    //KeyCode can be bound. The hook runs before Update; Update applies the key.
+    private IDisposable keyCaptureSubscription = null;
+    private KeyCode capturedKey = KeyCode.None;
+
+    private void startKeyCapture()
+    {
+        if(keyCaptureSubscription == null)
+        {
+            capturedKey = KeyCode.None;
+            keyCaptureSubscription = InputSystem.onAnyButtonPress.Call(onAnyButtonPress);
+        }
+    }
+
+    private void stopKeyCapture()
+    {
+        if(keyCaptureSubscription != null)
+        {
+            keyCaptureSubscription.Dispose();
+            keyCaptureSubscription = null;
+        }
+
+        capturedKey = KeyCode.None;
+    }
+
+    private void onAnyButtonPress(InputControl control)
+    {
+        //Mouse buttons end listening instead (in Update), and a key still held from the press that started
+        //listening is ignored, as before
+        if(!(control is KeyControl keyControl) || KeyPressManager.handlingPrimaryKeyPress)
+        {
+            return;
+        }
+
+        //a key pressed while the overwrite pop-up is open answers the pop-up, not the binding
+        if(keybindToOverwrite != null)
+        {
+            return;
+        }
+
+        KeyCode keyCode = keyControl.keyCode.ToKeyCode();
+
+        if(keyCode != KeyCode.None)
+        {
+            capturedKey = keyCode;
         }
     }
 
@@ -217,7 +219,15 @@ public class KeyBindingSettingsManager : MonoBehaviour
         keybindToOverwrite = null;
         EnableAllKeyBindButtons.Invoke();
 
-        //Puts back the actions KeybindingButton.listenForKeyPress disabled.
+        restoreInputAfterListening();
+    }
+
+    //Takes off the overlays listening mode added (KeybindingButton.listenForKeyPress and the overwrite
+    //pop-up), which puts back the current activity's actions.
+    private static void restoreInputAfterListening()
+    {
+        PlayerStateManager.removeInputOverlay(InputOverlay.ConfirmingKeyBindOverwrite, refresh: false);
+        PlayerStateManager.removeInputOverlay(InputOverlay.ListeningForKeyBind, refresh: false);
         PlayerStateManager.updateEnabledInputActions();
     }
 
@@ -249,8 +259,7 @@ public class KeyBindingSettingsManager : MonoBehaviour
 
         EnableAllKeyBindButtons.Invoke();
 
-        //Puts back the actions KeybindingButton.listenForKeyPress disabled.
-        PlayerStateManager.updateEnabledInputActions();
+        restoreInputAfterListening();
     }
 
     public void spawnReturnToDefaultsPopUp()
@@ -261,6 +270,8 @@ public class KeyBindingSettingsManager : MonoBehaviour
     public void spawnOverwritePopUp()
     {
         overwriteKeyBindPopUpButton.spawnPopUp();
+
+        PlayerStateManager.addInputOverlay(InputOverlay.ConfirmingKeyBindOverwrite);
     }
 
 }

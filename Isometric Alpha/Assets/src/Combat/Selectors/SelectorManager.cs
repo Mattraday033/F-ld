@@ -518,7 +518,7 @@ public class SelectorManager : MonoBehaviour
             return;
         }
 
-        if(heartBeatCount < heartBeatsToWait && !Input.GetKey(KeyBindingList.jumpMoveKey.getCurrentKeyCode()))
+        if(heartBeatCount < heartBeatsToWait && !InputReader.isHeld(KeyBindingList.jumpMoveKey))
         {
             heartBeatCount++;
             return;
@@ -535,7 +535,7 @@ public class SelectorManager : MonoBehaviour
         heartBeatCount = 0;
         isMoving = true;
 
-		if (Input.GetKey(KeyBindingList.jumpMoveKey.getCurrentKeyCode()) &&
+		if (InputReader.isHeld(KeyBindingList.jumpMoveKey) &&
 			// currentSelector.singleTile() &&
 			CombatStateManager.snappingToTargetDuringReposition())
 		{
@@ -551,25 +551,25 @@ public class SelectorManager : MonoBehaviour
 		if (isMoving)
 		{
 
-			if (Input.GetKey(KeyBindingList.moveNorthKey.getCurrentKeyCode()) && canMoveUp())
+			if (InputReader.isHeld(KeyBindingList.moveNorthKey) && canMoveUp())
 			{
 				currentSelector.setToLocation(new GridCoords(currentSelector.currentRow - 1, currentSelector.currentCol));
 				moved = true;
 
 			}
-			else if (Input.GetKey(KeyBindingList.moveSouthKey.getCurrentKeyCode()) && canMoveDown())
+			else if (InputReader.isHeld(KeyBindingList.moveSouthKey) && canMoveDown())
 			{
 				currentSelector.setToLocation(new GridCoords(currentSelector.currentRow + 1, currentSelector.currentCol));
 				moved = true;
 
 			}
-			else if (Input.GetKey(KeyBindingList.moveWestKey.getCurrentKeyCode()) && canMoveLeft())
+			else if (InputReader.isHeld(KeyBindingList.moveWestKey) && canMoveLeft())
 			{
 				currentSelector.setToLocation(new GridCoords(currentSelector.currentRow, currentSelector.currentCol - 1));
 				moved = true;
 
 			}
-			else if (Input.GetKey(KeyBindingList.moveEastKey.getCurrentKeyCode()) && canMoveRight())
+			else if (InputReader.isHeld(KeyBindingList.moveEastKey) && canMoveRight())
 			{
 				currentSelector.setToLocation(new GridCoords(currentSelector.currentRow, currentSelector.currentCol + 1));
 				moved = true;
@@ -698,7 +698,7 @@ public class SelectorManager : MonoBehaviour
 			GridCoords targetPosition = GridCoords.getDefaultCoords();
             bool onAllySide = CombatGrid.positionIsOnAlliedSide(currentSelector.getCoords());
 
-			if (Input.GetKey(KeyBindingList.moveWestKey.getCurrentKeyCode()))
+			if (InputReader.isHeld(KeyBindingList.moveWestKey))
 			{
                 if(onAllySide)
                 {
@@ -708,7 +708,7 @@ public class SelectorManager : MonoBehaviour
 				    targetPosition = CombatGrid.getPreviousEnemyToJumpSelectorTo(currentSelector.getFirstCombatantCoords());
                 }
 			}
-			else if (Input.GetKey(KeyBindingList.moveEastKey.getCurrentKeyCode()))
+			else if (InputReader.isHeld(KeyBindingList.moveEastKey))
 			{
                 if(onAllySide)
                 {
@@ -718,7 +718,7 @@ public class SelectorManager : MonoBehaviour
 				    targetPosition = CombatGrid.getNextEnemyToJumpSelectorTo(currentSelector.getFirstCombatantCoords());
                 }
 			}
-			else if((Input.GetKey(KeyBindingList.moveNorthKey.getCurrentKeyCode()) || Input.GetKey(KeyBindingList.moveSouthKey.getCurrentKeyCode())) && 
+			else if((InputReader.isHeld(KeyBindingList.moveNorthKey) || InputReader.isHeld(KeyBindingList.moveSouthKey)) && 
                     canJumpBetweenAllyEnemySections())
 			{
                 if(onAllySide)
@@ -834,51 +834,6 @@ public class SelectorManager : MonoBehaviour
 	private static  bool canMoveRight()
 	{
 		return currentSelector.rightBounds < CombatGrid.colRightBounds;
-	}
-
-	public bool moveWouldLeaveMandatoryTarget()
-	{
-		Selector testSelector = currentSelector.clone();
-
-		if (Input.GetKey(KeyBindingList.moveNorthKey.getCurrentKeyCode()))
-		{
-			if (currentSelector.currentRow - 1 < CombatGrid.enemyRowUpperBounds)
-			{
-				return true;
-			}
-
-			testSelector.setToLocation(new GridCoords(currentSelector.currentRow - 1, currentSelector.currentCol));
-		}
-		else if (Input.GetKey(KeyBindingList.moveWestKey.getCurrentKeyCode()))
-		{
-			if (currentSelector.currentCol - 1 < CombatGrid.colLeftBounds)
-			{
-				return true;
-			}
-
-			testSelector.setToLocation(new GridCoords(currentSelector.currentRow, currentSelector.currentCol - 1));
-
-		}
-		else if (Input.GetKey(KeyBindingList.moveSouthKey.getCurrentKeyCode()))
-		{
-			if (currentSelector.currentRow + 1 > CombatGrid.enemyRowLowerBounds)
-			{
-				return true;
-			}
-
-			testSelector.setToLocation(new GridCoords(currentSelector.currentRow + 1, currentSelector.currentCol));
-		}
-		else if (Input.GetKey(KeyBindingList.moveEastKey.getCurrentKeyCode()))
-		{
-			if (currentSelector.currentCol + 1 > CombatGrid.colRightBounds)
-			{
-				return true;
-			}
-
-			testSelector.setToLocation(new GridCoords(currentSelector.currentRow, currentSelector.currentCol + 1));
-		}
-
-		return !testSelector.hasAtLeastOneMandatoryTarget();
 	}
 
 	public static GridCoords findLegalCoordsContainingMandatoryTarget(Selector selector, Stats mandatoryTarget)

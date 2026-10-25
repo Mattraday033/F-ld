@@ -27,9 +27,9 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
+        //show-formula while inspecting is part of the Inspecting overlay's set
         if(InspectNode.inspecting)
         {
-            showFormulaToggleCheck();
             return;
         }
 
@@ -40,6 +40,9 @@ public class PlayerInput : MonoBehaviour
             return;
         }
 
+        //Stays a held-key read rather than an action: it clears notifications only when this frame's back or
+        //settings action didn't already claim the press, and actions on the same key fire in no fixed order,
+        //while Update always runs after them.
         if (KeyBindingList.settingsScreenOrBackKeyPressed() && PlayerStateManager.currentActivity != CurrentActivity.InChestUI)
         {
             if (NotificationManager.getCurrentNotificationPopUpWindowGameObject() != null &&
@@ -102,7 +105,7 @@ public class PlayerInput : MonoBehaviour
             return false;
         }
 
-        if (!Input.anyKey)
+        if (!InputReader.anyButtonHeld())
         {
             currentMovementKeyCode = KeyCode.None;
         }
@@ -120,10 +123,8 @@ public class PlayerInput : MonoBehaviour
                 currentMovementKeyCode = KeyCode.None;
                 return false;
             case 1:
-                if (!Input.GetKeyDown(currentMovementKeyCode) || currentMovementKeyCode == KeyCode.None)
-                {
-                    currentMovementKeyCode = KeyPressManager.getFirstMovementKeyPressedDetectedInWASDOrder();
-                }
+                //with exactly one movement key held, that key is the one to move by
+                currentMovementKeyCode = KeyPressManager.getFirstMovementKeyPressedDetectedInWASDOrder();
 
                 if (barredMovementKeyCodes.Count != 0)
                 {
@@ -133,13 +134,13 @@ public class PlayerInput : MonoBehaviour
             case 2:
                 KeyCode otherKeyCode = KeyPressManager.getFirstMovementKeyPressedDetectedInWASDOrderSkippingGivenKey(currentMovementKeyCode);
 
-                if (Input.GetKey(currentMovementKeyCode) && !barredMovementKeyCodes.Contains(otherKeyCode))
+                if (InputReader.isHeld(currentMovementKeyCode) && !barredMovementKeyCodes.Contains(otherKeyCode))
                 {
                     barredMovementKeyCodes.Add(currentMovementKeyCode);
 
                     currentMovementKeyCode = otherKeyCode;
                 }
-                else if (Input.GetKey(currentMovementKeyCode) && barredMovementKeyCodes.Contains(otherKeyCode) && barredMovementKeyCodes.Contains(currentMovementKeyCode))
+                else if (InputReader.isHeld(currentMovementKeyCode) && barredMovementKeyCodes.Contains(otherKeyCode) && barredMovementKeyCodes.Contains(currentMovementKeyCode))
                 {
                     return false;
                 }
@@ -157,7 +158,7 @@ public class PlayerInput : MonoBehaviour
                 return false;
         }
 
-        if (currentMovementKeyCode != KeyCode.None && Input.GetKey(currentMovementKeyCode) && !PlayerMovement.playerIsMoving() && !KeyPressManager.handlingPrimaryKeyPress)
+        if (currentMovementKeyCode != KeyCode.None && InputReader.isHeld(currentMovementKeyCode) && !PlayerMovement.playerIsMoving() && !KeyPressManager.handlingPrimaryKeyPress)
         {
             if(currentMovementKeyCode == KeyBindingList.moveNorthKey.getCurrentKeyCode())
             {
@@ -330,24 +331,11 @@ public class PlayerInput : MonoBehaviour
 
     public static void toggleTerrainKeyCheck()
     {
-        if (Input.GetKey(KeyBindingList.hideTerrainKey.getCurrentKeyCode()) && !KeyPressManager.handlingSecondaryKeyPress)
+        if (InputReader.isHeld(KeyBindingList.hideTerrainKey) && !KeyPressManager.handlingSecondaryKeyPress)
         {
             TerrainVisibilityManager.toggleTerrainVisibility();
 
             KeyPressManager.handlingSecondaryKeyPress = true;
-        }
-    }
-
-    public static void showFormulaToggleCheck()
-    {
-        if (Input.GetKey(KeyBindingList.showFormulaKey.getCurrentKeyCode()) && !OverallUIManager.showFormula)
-        {
-            OverallUIManager.showFormula = true;
-            KeyPressManager.handlingPrimaryKeyPress = true;
-        }
-        else if (!Input.GetKey(KeyBindingList.showFormulaKey.getCurrentKeyCode()) && OverallUIManager.showFormula)
-        {
-            OverallUIManager.showFormula = false;
         }
     }
 }
@@ -404,8 +392,8 @@ public static class PlayerInputList
             return false;
         }
 
-        //CharacterCreationPopUpWindow.Update deselects the name field on Escape itself, and R is a letter the
-        //player may be typing.
+        //R is a letter the player may be typing, so a focused name field claims the press without closing
+        //anything. Escape leaving the field is handled by onMainMenuOpenSettingsKeyPress before this.
         if (CharacterCreationPopUpWindow.inNameInputField())
         {
             return true;
@@ -564,7 +552,7 @@ public static class PlayerInputList
     //they step the selector once per press.
 
     #region Move North
-    public static readonly CustomInputAction moveNorth = new CustomInputAction(KeyBindingList.moveNorthKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction moveNorth = new CustomInputAction(KeyBindingList.moveNorthKey,
                                                                                     onStarted: onMoveNorthKeyPress,
                                                                                     initialStateCheck: true);
 
@@ -575,7 +563,7 @@ public static class PlayerInputList
     #endregion
 
     #region Move West
-    public static readonly CustomInputAction moveWest = new CustomInputAction(KeyBindingList.moveWestKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction moveWest = new CustomInputAction(KeyBindingList.moveWestKey,
                                                                                     onStarted: onMoveWestKeyPress,
                                                                                     initialStateCheck: true);
 
@@ -586,7 +574,7 @@ public static class PlayerInputList
     #endregion
 
     #region Move South
-    public static readonly CustomInputAction moveSouth = new CustomInputAction(KeyBindingList.moveSouthKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction moveSouth = new CustomInputAction(KeyBindingList.moveSouthKey,
                                                                                     onStarted: onMoveSouthKeyPress,
                                                                                     initialStateCheck: true);
 
@@ -597,7 +585,7 @@ public static class PlayerInputList
     #endregion
 
     #region Move East
-    public static readonly CustomInputAction moveEast = new CustomInputAction(KeyBindingList.moveEastKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction moveEast = new CustomInputAction(KeyBindingList.moveEastKey,
                                                                                     onStarted: onMoveEastKeyPress,
                                                                                     initialStateCheck: true);
 
@@ -640,7 +628,7 @@ public static class PlayerInputList
     #region Overworld Keys
 
     #region Hide Terrain
-    public static readonly CustomInputAction toggleTerrain = new CustomInputAction(KeyBindingList.hideTerrainKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction toggleTerrain = new CustomInputAction(KeyBindingList.hideTerrainKey,
                                                                                     onStarted: onHideTerrainKeyPress);
 
     private static void onHideTerrainKeyPress(InputAction.CallbackContext context)
@@ -650,7 +638,7 @@ public static class PlayerInputList
     #endregion
 
     #region Reveal Interactable Objects
-    public static readonly CustomInputAction toggleReveal = new CustomInputAction(KeyBindingList.revealKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction toggleReveal = new CustomInputAction(KeyBindingList.revealKey,
                                                                                     onStarted: onRevealKeyPress);
 
     private static void onRevealKeyPress(InputAction.CallbackContext context)
@@ -660,7 +648,7 @@ public static class PlayerInputList
     #endregion
 
     #region Remove Object
-    public static readonly CustomInputAction removePlacedObject = new CustomInputAction(KeyBindingList.removePlacedCompanionMovableObjectKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction removePlacedObject = new CustomInputAction(KeyBindingList.removePlacedCompanionMovableObjectKey,
                                                                                     onStarted: onRemovePlacedCompanionMovableObjectKeyPress);
 
     private static void onRemovePlacedCompanionMovableObjectKeyPress(InputAction.CallbackContext context)
@@ -692,7 +680,7 @@ public static class PlayerInputList
     #endregion
 
     #region Quick Save
-    public static readonly CustomInputAction quickSave = new CustomInputAction(KeyBindingList.quicksaveKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction quickSave = new CustomInputAction(KeyBindingList.quicksaveKey,
                                                                                     onStarted: onQuicksaveKeyPress);
 
     private static void onQuicksaveKeyPress(InputAction.CallbackContext context)
@@ -702,7 +690,7 @@ public static class PlayerInputList
     #endregion
 
     #region Show/Hide Keybindings
-    public static readonly CustomInputAction toggleKeyBindingsList = new CustomInputAction(KeyBindingList.showHideKeyBindingsListKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction toggleKeyBindingsList = new CustomInputAction(KeyBindingList.showHideKeyBindingsListKey,
                                                                                     onStarted: onShowHideKeyBindingsListKeyPress);
 
     private static void onShowHideKeyBindingsListKeyPress(InputAction.CallbackContext context)
@@ -726,7 +714,7 @@ public static class PlayerInputList
     #region Skill Keys
 
     #region Next Skill
-    public static readonly CustomInputAction cycleSkillAscending = new CustomInputAction(KeyBindingList.cycleSkillAscendingKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction cycleSkillAscending = new CustomInputAction(KeyBindingList.cycleSkillAscendingKey,
                                                                                     onStarted: onCycleSkillAscendingKeyPress);
 
     private static void onCycleSkillAscendingKeyPress(InputAction.CallbackContext context)
@@ -736,7 +724,7 @@ public static class PlayerInputList
     #endregion
 
     #region Previous Skill
-    public static readonly CustomInputAction cycleSkillDescending = new CustomInputAction(KeyBindingList.cycleSkillDescendingKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction cycleSkillDescending = new CustomInputAction(KeyBindingList.cycleSkillDescendingKey,
                                                                                     onStarted: onCycleSkillDescendingKeyPress);
 
     private static void onCycleSkillDescendingKeyPress(InputAction.CallbackContext context)
@@ -750,7 +738,7 @@ public static class PlayerInputList
     #region UI Keybinds
 
     #region Left Screen
-    public static readonly CustomInputAction moveScreenLeft = new CustomInputAction(KeyBindingList.moveLeftKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction moveScreenLeft = new CustomInputAction(KeyBindingList.moveLeftKey,
                                                                                     onStarted: onMoveLeftKeyPress);
 
     private static void onMoveLeftKeyPress(InputAction.CallbackContext context)
@@ -765,7 +753,7 @@ public static class PlayerInputList
     #endregion
 
     #region Right Screen
-    public static readonly CustomInputAction moveScreenRight = new CustomInputAction(KeyBindingList.moveRightKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction moveScreenRight = new CustomInputAction(KeyBindingList.moveRightKey,
                                                                                     onStarted: onMoveRightKeyPress);
 
     private static void onMoveRightKeyPress(InputAction.CallbackContext context)
@@ -779,22 +767,10 @@ public static class PlayerInputList
     }
     #endregion
 
-    #region Inspect
-    public static readonly CustomInputAction toggleInspect = new CustomInputAction(KeyBindingList.inspectKey.getCurrentKeyCode(),
-                                                                                    onStarted: onInspectKeyPress);
-
-    private static void onInspectKeyPress(InputAction.CallbackContext context)
-    {
-        //No effect available yet. InspectNode.setToInspectingMode and exitInspectingMode are private instance
-        //methods (InspectNode.cs:76-90), and entering inspect mode also needs the private SerializeField hover.
-        //This needs a public toggle on InspectNode before it can be written.
-    }
-    #endregion
-
     #region Show Formulas
-    //Hold to show rather than a toggle (showFormulaToggleCheck, PlayerInput.cs:975-986), so the same handler
-    //takes both edges and reads the button state off the context - started gives true, canceled gives false.
-    public static readonly CustomInputAction showFormula = new CustomInputAction(KeyBindingList.showFormulaKey.getCurrentKeyCode(),
+    //Hold to show rather than a toggle, so the same handler takes both edges and reads the button state off
+    //the context - started gives true, canceled gives false.
+    public static readonly CustomInputAction showFormula = new CustomInputAction(KeyBindingList.showFormulaKey,
                                                                                     onStarted: onShowFormulaKeyPress,
                                                                                     onCanceled: onShowFormulaKeyPress);
 
@@ -804,52 +780,21 @@ public static class PlayerInputList
     }
     #endregion
 
-    #region Shop Max Amount
-    public static readonly CustomInputAction maxAmount = new CustomInputAction(KeyBindingList.maxAmountKey.getCurrentKeyCode(),
-                                                                                    onStarted: onMaxAmountKeyPress);
-
-    private static void onMaxAmountKeyPress(InputAction.CallbackContext context)
-    {
-        //No effect on its own. This is a held modifier read inside AmountPanel.incrementAmount and
-        //decrementAmount (AmountPanel.cs:143, 157), both driven by UI button clicks rather than by this key.
-    }
-    #endregion
-
-    #region Shop Amount x10
-    public static readonly CustomInputAction multiplyByTenAmount = new CustomInputAction(KeyBindingList.multiplyByTenAmountKey.getCurrentKeyCode(),
-                                                                                    onStarted: onMultiplyByTenAmountKeyPress);
-
-    private static void onMultiplyByTenAmountKeyPress(InputAction.CallbackContext context)
-    {
-        //No effect on its own. This is a held modifier read inside AmountPanel.incrementAmount and
-        //decrementAmount (AmountPanel.cs:146, 161), both driven by UI button clicks rather than by this key.
-    }
-    #endregion
+    //The shop's max-amount (Shift) and x10 (Ctrl) keys are held modifiers, read through InputReader inside
+    //AmountPanel's button clicks rather than as actions.
 
     #endregion
 
     #region Combat Keys
 
     //The per-state combat keys (select, deselect, resolve turn, settings) are under Per-State KeyBinds, since what
-    //each does depends on the activity.
-
-    #region Jump Move
-    public static readonly CustomInputAction jumpMove = new CustomInputAction(KeyBindingList.jumpMoveKey.getCurrentKeyCode(),
-                                                                                    onStarted: onJumpMoveKeyPress);
-
-    private static void onJumpMoveKeyPress(InputAction.CallbackContext context)
-    {
-        //The polled version is really a chord - it also requires KeyBindingList.movementKeyPressed()
-        //(SelectorManager.cs:514), so as a standalone press this snaps without a direction.
-        SelectorManager.moveCurrentSelectorToNextSingleTileTarget();
-        SelectorManager.displayCurrentHoverUI();
-    }
-    #endregion
+    //each does depends on the activity. Jump move (Shift) is a chord with a movement key, read through
+    //InputReader in SelectorManager's key-repeat.
 
     #region Fast Forward
     //Hold rather than press, so both edges record whether it's held and CombatInputManager applies the time scale
     //each frame of the resolve. initialStateCheck lets a key already held when Waiting starts take effect.
-    public static readonly CustomInputAction fastForwardAnimation = new CustomInputAction(KeyBindingList.combatFastForwardAnimationKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction fastForwardAnimation = new CustomInputAction(KeyBindingList.combatFastForwardAnimationKey,
                                                                                     onStarted: onCombatFastForwardAnimationKeyPress,
                                                                                     onCanceled: onCombatFastForwardAnimationKeyPress,
                                                                                     initialStateCheck: true);
@@ -866,7 +811,7 @@ public static class PlayerInputList
 
     //Live in ChoosingAbility only, alongside the rest of the Choosing Ability set below
     #region Action Wheel Counter Clockwise
-    public static readonly CustomInputAction moveWheelCounterClockwise = new CustomInputAction(KeyBindingList.moveCounterClockwiseKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction moveWheelCounterClockwise = new CustomInputAction(KeyBindingList.moveCounterClockwiseKey,
                                                                                     onStarted: onMoveCounterClockwiseKeyPress);
 
     private static void onMoveCounterClockwiseKeyPress(InputAction.CallbackContext context)
@@ -880,7 +825,7 @@ public static class PlayerInputList
     #endregion
 
     #region Action Wheel Clockwise
-    public static readonly CustomInputAction moveWheelClockwise = new CustomInputAction(KeyBindingList.moveClockwiseKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction moveWheelClockwise = new CustomInputAction(KeyBindingList.moveClockwiseKey,
                                                                                     onStarted: onMoveClockwiseKeyPress);
 
     private static void onMoveClockwiseKeyPress(InputAction.CallbackContext context)
@@ -996,7 +941,7 @@ public static class PlayerInputList
 
     #region Walking
 
-    public static readonly CustomInputAction walkingInteract = new CustomInputAction(KeyBindingList.interactKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingInteract = new CustomInputAction(KeyBindingList.interactKey,
                                                                                     onStarted: onWalkingInteractKeyPress);
 
     private static void onWalkingInteractKeyPress(InputAction.CallbackContext context)
@@ -1009,7 +954,7 @@ public static class PlayerInputList
 
     //Clearing notifications is the whole effect of the back key while walking - handleBackOut ran the sweep
     //and then fell through to its default arm (PlayerInput.cs:1018-1019).
-    public static readonly CustomInputAction walkingBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onWalkingBackOutKeyPress);
 
     private static void onWalkingBackOutKeyPress(InputAction.CallbackContext context)
@@ -1017,7 +962,7 @@ public static class PlayerInputList
         notificationsCleared();
     }
 
-    public static readonly CustomInputAction walkingOpenTranscript = new CustomInputAction(KeyBindingList.transcriptKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingOpenTranscript = new CustomInputAction(KeyBindingList.transcriptKey,
                                                                                     onStarted: onWalkingOpenTranscriptKeyPress);
 
     private static void onWalkingOpenTranscriptKeyPress(InputAction.CallbackContext context)
@@ -1028,7 +973,7 @@ public static class PlayerInputList
         PlayerStateManager.setCurrentActivity(CurrentActivity.InDialoguePopUp);
     }
 
-    public static readonly CustomInputAction walkingUseSkill = new CustomInputAction(KeyBindingList.skillKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingUseSkill = new CustomInputAction(KeyBindingList.skillKey,
                                                                                     onStarted: onWalkingUseSkillKeyPress);
 
     private static void onWalkingUseSkillKeyPress(InputAction.CallbackContext context)
@@ -1036,7 +981,7 @@ public static class PlayerInputList
         SkillButtonManager.useSkill();
     }
 
-    public static readonly CustomInputAction walkingOpenLastScreen = new CustomInputAction(KeyBindingList.lastScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingOpenLastScreen = new CustomInputAction(KeyBindingList.lastScreenKey,
                                                                                     onStarted: onWalkingOpenLastScreenKeyPress);
 
     private static void onWalkingOpenLastScreenKeyPress(InputAction.CallbackContext context)
@@ -1055,7 +1000,7 @@ public static class PlayerInputList
         ScreenOpenProbe.step("setCurrentActivity");
     }
 
-    public static readonly CustomInputAction walkingOpenCharacter = new CustomInputAction(KeyBindingList.characterScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingOpenCharacter = new CustomInputAction(KeyBindingList.characterScreenKey,
                                                                                     onStarted: onWalkingOpenCharacterKeyPress);
 
     private static void onWalkingOpenCharacterKeyPress(InputAction.CallbackContext context)
@@ -1063,7 +1008,7 @@ public static class PlayerInputList
         openScreen(ScreenType.Character);
     }
 
-    public static readonly CustomInputAction walkingOpenInventory = new CustomInputAction(KeyBindingList.inventoryScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingOpenInventory = new CustomInputAction(KeyBindingList.inventoryScreenKey,
                                                                                     onStarted: onWalkingOpenInventoryKeyPress);
 
     private static void onWalkingOpenInventoryKeyPress(InputAction.CallbackContext context)
@@ -1071,7 +1016,7 @@ public static class PlayerInputList
         openScreen(ScreenType.Inventory);
     }
 
-    public static readonly CustomInputAction walkingOpenParty = new CustomInputAction(KeyBindingList.partyScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingOpenParty = new CustomInputAction(KeyBindingList.partyScreenKey,
                                                                                     onStarted: onWalkingOpenPartyKeyPress);
 
     private static void onWalkingOpenPartyKeyPress(InputAction.CallbackContext context)
@@ -1079,7 +1024,7 @@ public static class PlayerInputList
         openScreen(ScreenType.Party);
     }
 
-    public static readonly CustomInputAction walkingOpenJournal = new CustomInputAction(KeyBindingList.journalScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingOpenJournal = new CustomInputAction(KeyBindingList.journalScreenKey,
                                                                                     onStarted: onWalkingOpenJournalKeyPress);
 
     private static void onWalkingOpenJournalKeyPress(InputAction.CallbackContext context)
@@ -1087,7 +1032,7 @@ public static class PlayerInputList
         openScreen(ScreenType.Journal);
     }
 
-    public static readonly CustomInputAction walkingOpenSaveAndLoad = new CustomInputAction(KeyBindingList.loadScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingOpenSaveAndLoad = new CustomInputAction(KeyBindingList.loadScreenKey,
                                                                                     onStarted: onWalkingOpenSaveAndLoadKeyPress);
 
     private static void onWalkingOpenSaveAndLoadKeyPress(InputAction.CallbackContext context)
@@ -1095,7 +1040,7 @@ public static class PlayerInputList
         openScreen(ScreenType.SaveAndLoad);
     }
 
-    public static readonly CustomInputAction walkingOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onWalkingOpenSettingsKeyPress);
 
     private static void onWalkingOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1108,7 +1053,7 @@ public static class PlayerInputList
         openScreen(ScreenType.Settings);
     }
 
-    public static readonly CustomInputAction walkingOpenMap = new CustomInputAction(KeyBindingList.mapKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingOpenMap = new CustomInputAction(KeyBindingList.mapKey,
                                                                                     onStarted: onWalkingOpenMapKeyPress);
 
     private static void onWalkingOpenMapKeyPress(InputAction.CallbackContext context)
@@ -1116,7 +1061,7 @@ public static class PlayerInputList
         PlayerObject.getMapPopUpButton().spawnPopUp();
     }
 
-    public static readonly CustomInputAction walkingOpenWorldMap = new CustomInputAction(KeyBindingList.worldMapKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction walkingOpenWorldMap = new CustomInputAction(KeyBindingList.worldMapKey,
                                                                                     onStarted: onWalkingOpenWorldMapKeyPress);
 
     private static void onWalkingOpenWorldMapKeyPress(InputAction.CallbackContext context)
@@ -1128,7 +1073,7 @@ public static class PlayerInputList
 
     #region In Dialogue
 
-    public static readonly CustomInputAction inDialogueInteract = new CustomInputAction(KeyBindingList.interactKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inDialogueInteract = new CustomInputAction(KeyBindingList.interactKey,
                                                                                     onStarted: onInDialogueInteractKeyPress);
 
     private static void onInDialogueInteractKeyPress(InputAction.CallbackContext context)
@@ -1136,7 +1081,7 @@ public static class PlayerInputList
         continueDialogue();
     }
 
-    public static readonly CustomInputAction inDialogueAccept = new CustomInputAction(KeyBindingList.acceptKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inDialogueAccept = new CustomInputAction(KeyBindingList.acceptKey,
                                                                                     onStarted: onInDialogueAcceptKeyPress);
 
     private static void onInDialogueAcceptKeyPress(InputAction.CallbackContext context)
@@ -1144,7 +1089,7 @@ public static class PlayerInputList
         continueDialogue();
     }
 
-    public static readonly CustomInputAction inDialogueAcceptInput = new CustomInputAction(KeyBindingList.acceptInputKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inDialogueAcceptInput = new CustomInputAction(KeyBindingList.acceptInputKey,
                                                                                     onStarted: onInDialogueAcceptInputKeyPress);
 
     private static void onInDialogueAcceptInputKeyPress(InputAction.CallbackContext context)
@@ -1156,7 +1101,7 @@ public static class PlayerInputList
 
     #region In UI
 
-    public static readonly CustomInputAction inUIBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inUIBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onInUIBackOutKeyPress);
 
     private static void onInUIBackOutKeyPress(InputAction.CallbackContext context)
@@ -1170,7 +1115,7 @@ public static class PlayerInputList
     }
 
     //The same key that opened the UI from walking closes it again (onLastScreenKeyPress, PlayerInput.cs:1384).
-    public static readonly CustomInputAction inUIOpenLastScreen = new CustomInputAction(KeyBindingList.lastScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inUIOpenLastScreen = new CustomInputAction(KeyBindingList.lastScreenKey,
                                                                                     onStarted: onInUIOpenLastScreenKeyPress);
 
     private static void onInUIOpenLastScreenKeyPress(InputAction.CallbackContext context)
@@ -1183,7 +1128,7 @@ public static class PlayerInputList
         backOutOfUI();
     }
 
-    public static readonly CustomInputAction inUIOpenCharacter = new CustomInputAction(KeyBindingList.characterScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inUIOpenCharacter = new CustomInputAction(KeyBindingList.characterScreenKey,
                                                                                     onStarted: onInUIOpenCharacterKeyPress);
 
     private static void onInUIOpenCharacterKeyPress(InputAction.CallbackContext context)
@@ -1191,7 +1136,7 @@ public static class PlayerInputList
         openScreen(ScreenType.Character);
     }
 
-    public static readonly CustomInputAction inUIOpenInventory = new CustomInputAction(KeyBindingList.inventoryScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inUIOpenInventory = new CustomInputAction(KeyBindingList.inventoryScreenKey,
                                                                                     onStarted: onInUIOpenInventoryKeyPress);
 
     private static void onInUIOpenInventoryKeyPress(InputAction.CallbackContext context)
@@ -1199,7 +1144,7 @@ public static class PlayerInputList
         openScreen(ScreenType.Inventory);
     }
 
-    public static readonly CustomInputAction inUIOpenParty = new CustomInputAction(KeyBindingList.partyScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inUIOpenParty = new CustomInputAction(KeyBindingList.partyScreenKey,
                                                                                     onStarted: onInUIOpenPartyKeyPress);
 
     private static void onInUIOpenPartyKeyPress(InputAction.CallbackContext context)
@@ -1207,7 +1152,7 @@ public static class PlayerInputList
         openScreen(ScreenType.Party);
     }
 
-    public static readonly CustomInputAction inUIOpenJournal = new CustomInputAction(KeyBindingList.journalScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inUIOpenJournal = new CustomInputAction(KeyBindingList.journalScreenKey,
                                                                                     onStarted: onInUIOpenJournalKeyPress);
 
     private static void onInUIOpenJournalKeyPress(InputAction.CallbackContext context)
@@ -1215,7 +1160,7 @@ public static class PlayerInputList
         openScreen(ScreenType.Journal);
     }
 
-    public static readonly CustomInputAction inUIOpenSaveAndLoad = new CustomInputAction(KeyBindingList.loadScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inUIOpenSaveAndLoad = new CustomInputAction(KeyBindingList.loadScreenKey,
                                                                                     onStarted: onInUIOpenSaveAndLoadKeyPress);
 
     private static void onInUIOpenSaveAndLoadKeyPress(InputAction.CallbackContext context)
@@ -1223,7 +1168,7 @@ public static class PlayerInputList
         openScreen(ScreenType.SaveAndLoad);
     }
 
-    public static readonly CustomInputAction inUIOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inUIOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onInUIOpenSettingsKeyPress);
 
     private static void onInUIOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1248,7 +1193,7 @@ public static class PlayerInputList
 
     #region In Map
 
-    public static readonly CustomInputAction inMapBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inMapBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onInMapBackOutKeyPress);
 
     private static void onInMapBackOutKeyPress(InputAction.CallbackContext context)
@@ -1256,7 +1201,7 @@ public static class PlayerInputList
         backOutOfMap();
     }
 
-    public static readonly CustomInputAction inMapOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inMapOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onInMapOpenSettingsKeyPress);
 
     private static void onInMapOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1266,7 +1211,7 @@ public static class PlayerInputList
 
     //An open fast travel panel owns the map keys until a back key closes it (handleMapStateKeyPresses,
     //PlayerInput.cs:469-491).
-    public static readonly CustomInputAction inMapOpenMap = new CustomInputAction(KeyBindingList.mapKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inMapOpenMap = new CustomInputAction(KeyBindingList.mapKey,
                                                                                     onStarted: onInMapOpenMapKeyPress);
 
     private static void onInMapOpenMapKeyPress(InputAction.CallbackContext context)
@@ -1279,7 +1224,7 @@ public static class PlayerInputList
         PlayerObject.getMapPopUpButton().destroyPopUp();
     }
 
-    public static readonly CustomInputAction inMapOpenWorldMap = new CustomInputAction(KeyBindingList.worldMapKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inMapOpenWorldMap = new CustomInputAction(KeyBindingList.worldMapKey,
                                                                                     onStarted: onInMapOpenWorldMapKeyPress);
 
     private static void onInMapOpenWorldMapKeyPress(InputAction.CallbackContext context)
@@ -1297,7 +1242,7 @@ public static class PlayerInputList
 
     #region Cunning
 
-    public static readonly CustomInputAction cunningBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction cunningBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onCunningBackOutKeyPress);
 
     private static void onCunningBackOutKeyPress(InputAction.CallbackContext context)
@@ -1305,7 +1250,7 @@ public static class PlayerInputList
         cancelCunning();
     }
 
-    public static readonly CustomInputAction cunningOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction cunningOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onCunningOpenSettingsKeyPress);
 
     private static void onCunningOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1315,7 +1260,7 @@ public static class PlayerInputList
 
     //No notification sweep: the skill key cancels through the second disjunct of the polled check
     //(handleCunningStateKeyPresses, PlayerInput.cs:511), not through the back-key predicate.
-    public static readonly CustomInputAction cunningUseSkill = new CustomInputAction(KeyBindingList.skillKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction cunningUseSkill = new CustomInputAction(KeyBindingList.skillKey,
                                                                                     onStarted: onCunningUseSkillKeyPress);
 
     private static void onCunningUseSkillKeyPress(InputAction.CallbackContext context)
@@ -1323,7 +1268,7 @@ public static class PlayerInputList
         CunningManager.leaveCunningMode();
     }
 
-    public static readonly CustomInputAction cunningInteract = new CustomInputAction(KeyBindingList.interactKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction cunningInteract = new CustomInputAction(KeyBindingList.interactKey,
                                                                                     onStarted: onCunningInteractKeyPress);
 
     private static void onCunningInteractKeyPress(InputAction.CallbackContext context)
@@ -1334,13 +1279,10 @@ public static class PlayerInputList
         }
     }
 
-    //These do not go through CunningManager.handleWASDMovement: that method re-reads Input.GetKey to work out
-    //which way to go (CunningManager.cs:300-315), so driving it from an event would make all four keys
-    //interchangeable. Calling the matching mover directly keeps the key that fired as the one that decides.
-    //The setButtonPromptVisibility call is the part handleWASDMovement did afterwards (CunningManager.cs:317)
-    //that moveCurrentSelector does not do for itself.
+    //Each key calls its own mover, so the key that fired decides the direction. setButtonPromptVisibility
+    //is called after each move because moveCurrentSelector does not do it for itself.
 
-    public static readonly CustomInputAction cunningMoveNorth = new CustomInputAction(KeyBindingList.moveNorthKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction cunningMoveNorth = new CustomInputAction(KeyBindingList.moveNorthKey,
                                                                                     onStarted: onCunningMoveNorthKeyPress);
 
     private static void onCunningMoveNorthKeyPress(InputAction.CallbackContext context)
@@ -1349,7 +1291,7 @@ public static class PlayerInputList
         PlayerObject.setButtonPromptVisibility();
     }
 
-    public static readonly CustomInputAction cunningMoveWest = new CustomInputAction(KeyBindingList.moveWestKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction cunningMoveWest = new CustomInputAction(KeyBindingList.moveWestKey,
                                                                                     onStarted: onCunningMoveWestKeyPress);
 
     private static void onCunningMoveWestKeyPress(InputAction.CallbackContext context)
@@ -1358,7 +1300,7 @@ public static class PlayerInputList
         PlayerObject.setButtonPromptVisibility();
     }
 
-    public static readonly CustomInputAction cunningMoveSouth = new CustomInputAction(KeyBindingList.moveSouthKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction cunningMoveSouth = new CustomInputAction(KeyBindingList.moveSouthKey,
                                                                                     onStarted: onCunningMoveSouthKeyPress);
 
     private static void onCunningMoveSouthKeyPress(InputAction.CallbackContext context)
@@ -1367,7 +1309,7 @@ public static class PlayerInputList
         PlayerObject.setButtonPromptVisibility();
     }
 
-    public static readonly CustomInputAction cunningMoveEast = new CustomInputAction(KeyBindingList.moveEastKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction cunningMoveEast = new CustomInputAction(KeyBindingList.moveEastKey,
                                                                                     onStarted: onCunningMoveEastKeyPress);
 
     private static void onCunningMoveEastKeyPress(InputAction.CallbackContext context)
@@ -1380,7 +1322,7 @@ public static class PlayerInputList
 
     #region Observing
 
-    public static readonly CustomInputAction observingBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction observingBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onObservingBackOutKeyPress);
 
     private static void onObservingBackOutKeyPress(InputAction.CallbackContext context)
@@ -1388,7 +1330,7 @@ public static class PlayerInputList
         cancelObserving();
     }
 
-    public static readonly CustomInputAction observingOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction observingOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onObservingOpenSettingsKeyPress);
 
     private static void onObservingOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1396,7 +1338,7 @@ public static class PlayerInputList
         cancelObserving();
     }
 
-    public static readonly CustomInputAction observingUseSkill = new CustomInputAction(KeyBindingList.skillKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction observingUseSkill = new CustomInputAction(KeyBindingList.skillKey,
                                                                                     onStarted: onObservingUseSkillKeyPress);
 
     private static void onObservingUseSkillKeyPress(InputAction.CallbackContext context)
@@ -1408,7 +1350,7 @@ public static class PlayerInputList
 
     #region Intimidating
 
-    public static readonly CustomInputAction intimidatingBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction intimidatingBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onIntimidatingBackOutKeyPress);
 
     private static void onIntimidatingBackOutKeyPress(InputAction.CallbackContext context)
@@ -1416,7 +1358,7 @@ public static class PlayerInputList
         cancelIntimidating();
     }
 
-    public static readonly CustomInputAction intimidatingOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction intimidatingOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onIntimidatingOpenSettingsKeyPress);
 
     private static void onIntimidatingOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1424,7 +1366,7 @@ public static class PlayerInputList
         cancelIntimidating();
     }
 
-    public static readonly CustomInputAction intimidatingUseSkill = new CustomInputAction(KeyBindingList.skillKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction intimidatingUseSkill = new CustomInputAction(KeyBindingList.skillKey,
                                                                                     onStarted: onIntimidatingUseSkillKeyPress);
 
     private static void onIntimidatingUseSkillKeyPress(InputAction.CallbackContext context)
@@ -1432,7 +1374,7 @@ public static class PlayerInputList
         IntimidateManager.leaveIntimidateMode();
     }
 
-    public static readonly CustomInputAction intimidatingInteract = new CustomInputAction(KeyBindingList.interactKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction intimidatingInteract = new CustomInputAction(KeyBindingList.interactKey,
                                                                                     onStarted: onIntimidatingInteractKeyPress);
 
     private static void onIntimidatingInteractKeyPress(InputAction.CallbackContext context)
@@ -1447,7 +1389,7 @@ public static class PlayerInputList
 
     #region In Chest UI
 
-    public static readonly CustomInputAction inChestUIBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inChestUIBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onInChestUIBackOutKeyPress);
 
     private static void onInChestUIBackOutKeyPress(InputAction.CallbackContext context)
@@ -1455,7 +1397,7 @@ public static class PlayerInputList
         closeChestUI();
     }
 
-    public static readonly CustomInputAction inChestUIOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inChestUIOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onInChestUIOpenSettingsKeyPress);
 
     private static void onInChestUIOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1463,7 +1405,7 @@ public static class PlayerInputList
         closeChestUI();
     }
 
-    public static readonly CustomInputAction inChestUIInteract = new CustomInputAction(KeyBindingList.interactKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inChestUIInteract = new CustomInputAction(KeyBindingList.interactKey,
                                                                                     onStarted: onInChestUIInteractKeyPress);
 
     private static void onInChestUIInteractKeyPress(InputAction.CallbackContext context)
@@ -1471,7 +1413,7 @@ public static class PlayerInputList
         closeChestUI();
     }
 
-    public static readonly CustomInputAction inChestUIAccept = new CustomInputAction(KeyBindingList.acceptKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inChestUIAccept = new CustomInputAction(KeyBindingList.acceptKey,
                                                                                     onStarted: onInChestUIAcceptKeyPress);
 
     private static void onInChestUIAcceptKeyPress(InputAction.CallbackContext context)
@@ -1479,7 +1421,7 @@ public static class PlayerInputList
         closeChestUI();
     }
 
-    public static readonly CustomInputAction inChestUIAcceptInput = new CustomInputAction(KeyBindingList.acceptInputKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inChestUIAcceptInput = new CustomInputAction(KeyBindingList.acceptInputKey,
                                                                                     onStarted: onInChestUIAcceptInputKeyPress);
 
     private static void onInChestUIAcceptInputKeyPress(InputAction.CallbackContext context)
@@ -1491,7 +1433,7 @@ public static class PlayerInputList
 
     #region In Book UI
 
-    public static readonly CustomInputAction inBookUIBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inBookUIBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onInBookUIBackOutKeyPress);
 
     private static void onInBookUIBackOutKeyPress(InputAction.CallbackContext context)
@@ -1499,7 +1441,7 @@ public static class PlayerInputList
         backOutOfBookUI();
     }
 
-    public static readonly CustomInputAction inBookUIOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inBookUIOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onInBookUIOpenSettingsKeyPress);
 
     private static void onInBookUIOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1507,7 +1449,7 @@ public static class PlayerInputList
         backOutOfBookUI();
     }
 
-    public static readonly CustomInputAction inBookUIInteract = new CustomInputAction(KeyBindingList.interactKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inBookUIInteract = new CustomInputAction(KeyBindingList.interactKey,
                                                                                     onStarted: onInBookUIInteractKeyPress);
 
     private static void onInBookUIInteractKeyPress(InputAction.CallbackContext context)
@@ -1515,7 +1457,7 @@ public static class PlayerInputList
         closeBookUI();
     }
 
-    public static readonly CustomInputAction inBookUIAccept = new CustomInputAction(KeyBindingList.acceptKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inBookUIAccept = new CustomInputAction(KeyBindingList.acceptKey,
                                                                                     onStarted: onInBookUIAcceptKeyPress);
 
     private static void onInBookUIAcceptKeyPress(InputAction.CallbackContext context)
@@ -1523,7 +1465,7 @@ public static class PlayerInputList
         closeBookUI();
     }
 
-    public static readonly CustomInputAction inBookUIAcceptInput = new CustomInputAction(KeyBindingList.acceptInputKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inBookUIAcceptInput = new CustomInputAction(KeyBindingList.acceptInputKey,
                                                                                     onStarted: onInBookUIAcceptInputKeyPress);
 
     private static void onInBookUIAcceptInputKeyPress(InputAction.CallbackContext context)
@@ -1535,7 +1477,7 @@ public static class PlayerInputList
 
     #region In Shop UI
 
-    public static readonly CustomInputAction inShopUIBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inShopUIBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onInShopUIBackOutKeyPress);
 
     private static void onInShopUIBackOutKeyPress(InputAction.CallbackContext context)
@@ -1543,7 +1485,7 @@ public static class PlayerInputList
         backOutToWalking();
     }
 
-    public static readonly CustomInputAction inShopUIOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inShopUIOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onInShopUIOpenSettingsKeyPress);
 
     private static void onInShopUIOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1555,7 +1497,7 @@ public static class PlayerInputList
 
     #region In Dialogue PopUp
 
-    public static readonly CustomInputAction inDialoguePopUpBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inDialoguePopUpBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onInDialoguePopUpBackOutKeyPress);
 
     private static void onInDialoguePopUpBackOutKeyPress(InputAction.CallbackContext context)
@@ -1563,7 +1505,7 @@ public static class PlayerInputList
         backOutToWalking();
     }
 
-    public static readonly CustomInputAction inDialoguePopUpOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inDialoguePopUpOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onInDialoguePopUpOpenSettingsKeyPress);
 
     private static void onInDialoguePopUpOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1573,7 +1515,7 @@ public static class PlayerInputList
 
     //No notification sweep: the transcript key closes the transcript it opened through its own disjunct
     //(handleDialoguePopUpStateKeyPresses, PlayerInput.cs:609), not through the back-key predicate.
-    public static readonly CustomInputAction inDialoguePopUpOpenTranscript = new CustomInputAction(KeyBindingList.transcriptKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inDialoguePopUpOpenTranscript = new CustomInputAction(KeyBindingList.transcriptKey,
                                                                                     onStarted: onInDialoguePopUpOpenTranscriptKeyPress);
 
     private static void onInDialoguePopUpOpenTranscriptKeyPress(InputAction.CallbackContext context)
@@ -1596,7 +1538,7 @@ public static class PlayerInputList
     //state is currently unreachable. Written from handleTutorialPopUpStateKeyPresses (PlayerInput.cs:624-634)
     //so the set is already right when a tutorial pop-up button starts setting the state.
 
-    public static readonly CustomInputAction inTutorialPopUpBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inTutorialPopUpBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onInTutorialPopUpBackOutKeyPress);
 
     private static void onInTutorialPopUpBackOutKeyPress(InputAction.CallbackContext context)
@@ -1604,7 +1546,7 @@ public static class PlayerInputList
         backOutToWalking();
     }
 
-    public static readonly CustomInputAction inTutorialPopUpOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inTutorialPopUpOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onInTutorialPopUpOpenSettingsKeyPress);
 
     private static void onInTutorialPopUpOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1617,12 +1559,13 @@ public static class PlayerInputList
     #region In Tutorial Sequence
 
     //Both sides of the combat boundary - a combat tutorial differs only where noted, matching the
-    //TutorialSequenceInput polling it replaced. The key each slot is built with is a placeholder;
-    //refreshTutorialSequenceInputActions rebinds a slot to the current step's key before enabling it.
-    public static readonly CustomInputAction tutorialNextStepA = new CustomInputAction(KeyBindingList.acceptKey.getCurrentKeyCode(),
+    //TutorialSequenceInput polling it replaced. Each slot starts unbound (KeyCode.None, not a KeyBind, so
+    //rebinding a key in settings can't overwrite it); refreshTutorialSequenceInputActions rebinds a slot to
+    //the current step's key before enabling it.
+    public static readonly CustomInputAction tutorialNextStepA = new CustomInputAction(KeyCode.None,
                                                                                     onStarted: onTutorialNextStepKeyPress);
 
-    public static readonly CustomInputAction tutorialNextStepB = new CustomInputAction(KeyBindingList.acceptKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction tutorialNextStepB = new CustomInputAction(KeyCode.None,
                                                                                     onStarted: onTutorialNextStepKeyPress);
 
     private static bool tutorialNextStepOnSlotA = false;
@@ -1654,10 +1597,10 @@ public static class PlayerInputList
     //selector or turning the ability wheel. Each slot is bound to one of the current step's additionalScripts.
     private static readonly CustomInputAction[] tutorialAdditionalScripts = new CustomInputAction[]
     {
-        new CustomInputAction(KeyBindingList.acceptKey.getCurrentKeyCode(), onStarted: context => runTutorialAdditionalScript(0)),
-        new CustomInputAction(KeyBindingList.acceptKey.getCurrentKeyCode(), onStarted: context => runTutorialAdditionalScript(1)),
-        new CustomInputAction(KeyBindingList.acceptKey.getCurrentKeyCode(), onStarted: context => runTutorialAdditionalScript(2)),
-        new CustomInputAction(KeyBindingList.acceptKey.getCurrentKeyCode(), onStarted: context => runTutorialAdditionalScript(3))
+        new CustomInputAction(KeyCode.None, onStarted: context => runTutorialAdditionalScript(0)),
+        new CustomInputAction(KeyCode.None, onStarted: context => runTutorialAdditionalScript(1)),
+        new CustomInputAction(KeyCode.None, onStarted: context => runTutorialAdditionalScript(2)),
+        new CustomInputAction(KeyCode.None, onStarted: context => runTutorialAdditionalScript(3))
     };
 
     private static void runTutorialAdditionalScript(int scriptIndex)
@@ -1678,13 +1621,13 @@ public static class PlayerInputList
         additionalScripts[scriptIndex].runScript();
     }
 
-    //Shift + Escape, as KeyBindingList.skipTutorialKeysArePressed
+    //Shift + Escape
     public static readonly CustomInputAction tutorialSkip = new CustomInputAction(KeyCode.Escape,
                                                                                     onStarted: onTutorialSkipKeyPress);
 
     private static void onTutorialSkipKeyPress(InputAction.CallbackContext context)
     {
-        if (!Keyboard.current.shiftKey.isPressed || !TutorialSequence.currentlyInTutorialSequence())
+        if (!(InputReader.isHeld(KeyCode.LeftShift) || InputReader.isHeld(KeyCode.RightShift)) || !TutorialSequence.currentlyInTutorialSequence())
         {
             return;
         }
@@ -1705,7 +1648,8 @@ public static class PlayerInputList
     //A combat step always listens for its next-step key, as the polling it replaced did.
     public static void refreshTutorialSequenceInputActions()
     {
-        if (PlayerStateManager.currentActivity != CurrentActivity.InTutorialSequence)
+        //an input overlay (inspecting, a results screen) owns the input until it is removed
+        if (PlayerStateManager.currentActivity != CurrentActivity.InTutorialSequence || PlayerStateManager.hasInputOverlay)
         {
             return;
         }
@@ -1767,7 +1711,7 @@ public static class PlayerInputList
 
     #region In World Map
 
-    public static readonly CustomInputAction inWorldMapBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inWorldMapBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: onInWorldMapBackOutKeyPress);
 
     private static void onInWorldMapBackOutKeyPress(InputAction.CallbackContext context)
@@ -1775,7 +1719,7 @@ public static class PlayerInputList
         backOutOfWorldMap();
     }
 
-    public static readonly CustomInputAction inWorldMapOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inWorldMapOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onInWorldMapOpenSettingsKeyPress);
 
     private static void onInWorldMapOpenSettingsKeyPress(InputAction.CallbackContext context)
@@ -1783,7 +1727,7 @@ public static class PlayerInputList
         backOutOfWorldMap();
     }
 
-    public static readonly CustomInputAction inWorldMapOpenWorldMap = new CustomInputAction(KeyBindingList.worldMapKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inWorldMapOpenWorldMap = new CustomInputAction(KeyBindingList.worldMapKey,
                                                                                     onStarted: onInWorldMapOpenWorldMapKeyPress);
 
     private static void onInWorldMapOpenWorldMapKeyPress(InputAction.CallbackContext context)
@@ -1791,7 +1735,7 @@ public static class PlayerInputList
         PlayerObject.getWorldMapPopUpButton().destroyPopUp();
     }
 
-    public static readonly CustomInputAction inWorldMapOpenMap = new CustomInputAction(KeyBindingList.mapKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inWorldMapOpenMap = new CustomInputAction(KeyBindingList.mapKey,
                                                                                     onStarted: onInWorldMapOpenMapKeyPress);
 
     private static void onInWorldMapOpenMapKeyPress(InputAction.CallbackContext context)
@@ -1804,39 +1748,64 @@ public static class PlayerInputList
 
     #region Main Menu
 
-    public static readonly CustomInputAction mainMenuOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction mainMenuOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onMainMenuOpenSettingsKeyPress);
 
     private static void onMainMenuOpenSettingsKeyPress(InputAction.CallbackContext context)
+    {
+        //first press leaves the character name field, as Escape did there before
+        if (CharacterCreationPopUpWindow.deselectNameFieldFromKey())
+        {
+            return;
+        }
+
+        if (closeStartingMenuScreen())
+        {
+            return;
+        }
+
+        escapeTopMainMenuScreen();
+    }
+
+    public static readonly CustomInputAction mainMenuBackOut = new CustomInputAction(KeyBindingList.backOutKey,
+                                                                                    onStarted: onMainMenuBackOutKeyPress);
+
+    private static void onMainMenuBackOutKeyPress(InputAction.CallbackContext context)
     {
         if (closeStartingMenuScreen())
         {
             return;
         }
 
-        //Not backOutOfUI: no OOC screen can be open in MainMenu, and its leaveUI fallback touches
-        //OverallUIManager.UIParentPanel, which is destroyed once the credits scene replaces the start menu.
+        escapeTopMainMenuScreen();
+    }
+
+    //Return leaves the character name field.
+    public static readonly CustomInputAction mainMenuAcceptInput = new CustomInputAction(KeyBindingList.acceptInputKey,
+                                                                                    onStarted: onMainMenuAcceptInputKeyPress);
+
+    private static void onMainMenuAcceptInputKeyPress(InputAction.CallbackContext context)
+    {
+        CharacterCreationPopUpWindow.deselectNameFieldFromKey();
+    }
+
+    //Closes the topmost escapable screen (LoadScreenButton.Update used to do this for both keys, every frame
+    //they were held). Not backOutOfUI: no OOC screen can be open in MainMenu, and its leaveUI fallback touches
+    //OverallUIManager.UIParentPanel, which is destroyed once the credits scene replaces the start menu.
+    private static void escapeTopMainMenuScreen()
+    {
         if (EscapeStack.getEscapableObjectsCount() > 0)
         {
             EscapeStack.handleEscapePress();
+            KeyPressManager.handlingPrimaryKeyPress = true;
         }
-    }
-
-    //Only ever acted while a start menu screen was open (StartingMenuManager.Update), so unlike Escape it has
-    //no EscapeStack fallback.
-    public static readonly CustomInputAction mainMenuBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
-                                                                                    onStarted: onMainMenuBackOutKeyPress);
-
-    private static void onMainMenuBackOutKeyPress(InputAction.CallbackContext context)
-    {
-        closeStartingMenuScreen();
     }
 
     #endregion
 
     #region Input Field
 
-    public static readonly CustomInputAction leaveInputField = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction leaveInputField = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: onLeaveInputFieldKeyPress);
 
     private static void onLeaveInputFieldKeyPress(InputAction.CallbackContext context)
@@ -1844,7 +1813,7 @@ public static class PlayerInputList
         PlayerStateManager.returnToPreviousActivity();
     }
 
-    public static readonly CustomInputAction acceptInputFromField = new CustomInputAction(KeyBindingList.acceptInputKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction acceptInputFromField = new CustomInputAction(KeyBindingList.acceptInputKey,
                                                                                     onStarted: onAcceptInputFieldContentsKeyPress);
 
     private static void onAcceptInputFieldContentsKeyPress(InputAction.CallbackContext context)
@@ -1868,7 +1837,7 @@ public static class PlayerInputList
     //that method's: no input while inspecting, while an earlier press is still held, or outside the player's turn
     //unless a tutorial is up. A handler that acts claims the press with handlingPrimaryKeyPress, which
     //CombatInputManager releases once every key is up - this is also what stops a press that changes the state
-    //being read again by the next state's actions, and RepositionManager and RetreatUIManager still poll it.
+    //being read again by the next state's actions.
     private static bool combatAcceptsKeyPress()
     {
         return !InspectNode.inspecting &&
@@ -1889,11 +1858,175 @@ public static class PlayerInputList
 
     #endregion
 
+    #region Repositioning
+
+    //Select places the next combatant of a formation reposition; deselect or settings steps back. What each
+    //does depends on RepositionManager's own sub-state, so the handlers hand over to it.
+    public static readonly CustomInputAction repositioningSelect = new CustomInputAction(KeyBindingList.combatSelectKey,
+                                                                                    onStarted: onRepositioningSelectKeyPress);
+
+    public static readonly CustomInputAction repositioningDeselect = new CustomInputAction(KeyBindingList.combatDeselectKey,
+                                                                                    onStarted: onRepositioningBackKeyPress);
+
+    public static readonly CustomInputAction repositioningOpenSettings = new CustomInputAction(KeyBindingList.combatSettingsScreenKey,
+                                                                                    onStarted: onRepositioningBackKeyPress);
+
+    private static void onRepositioningSelectKeyPress(InputAction.CallbackContext context)
+    {
+        if (!combatAcceptsKeyPress() || RepositionManager.getInstance() == null)
+        {
+            return;
+        }
+
+        if (RepositionManager.getInstance().handleSelectKeyPress())
+        {
+            KeyPressManager.handlingPrimaryKeyPress = true;
+        }
+    }
+
+    private static void onRepositioningBackKeyPress(InputAction.CallbackContext context)
+    {
+        if (!combatAcceptsKeyPress() || RepositionManager.getInstance() == null)
+        {
+            return;
+        }
+
+        if (RepositionManager.getInstance().handleBackKeyPress())
+        {
+            KeyPressManager.handlingPrimaryKeyPress = true;
+        }
+    }
+
+    #endregion
+
+    #region Retreating
+
+    public static readonly CustomInputAction retreatingDeselect = new CustomInputAction(KeyBindingList.combatDeselectKey,
+                                                                                    onStarted: onRetreatingBackKeyPress);
+
+    public static readonly CustomInputAction retreatingOpenSettings = new CustomInputAction(KeyBindingList.combatSettingsScreenKey,
+                                                                                    onStarted: onRetreatingBackKeyPress);
+
+    private static void onRetreatingBackKeyPress(InputAction.CallbackContext context)
+    {
+        if (!combatAcceptsKeyPress())
+        {
+            return;
+        }
+
+        EscapeStack.handleEscapePress();
+        PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingActor);
+
+        KeyPressManager.handlingPrimaryKeyPress = true;
+    }
+
+    #endregion
+
+    #region Input Overlays
+
+    //Each overlay has its own action instances, so the one-action-per-key-per-set rule still holds when an
+    //overlay comes or goes inside one of these callbacks. Where the keys differ between combat and the
+    //overworld, enableOverlayInputActions picks the side that is live.
+
+    private static CustomInputAction overlayAction(KeyBind keyBind, Action onPress, bool initialStateCheck = false)
+    {
+        return new CustomInputAction(keyBind, onStarted: context => onPress(), initialStateCheck: initialStateCheck);
+    }
+
+    //Inspecting: the inspect, settings and continue keys leave the node.
+    private static readonly CustomInputAction inspectingExitInspect = overlayAction(KeyBindingList.inspectKey, InspectNode.exitInspectingFromKey);
+    private static readonly CustomInputAction inspectingExitSettings = overlayAction(KeyBindingList.settingsScreenKey, InspectNode.exitInspectingFromKey);
+    private static readonly CustomInputAction inspectingExitInteract = overlayAction(KeyBindingList.interactKey, InspectNode.exitInspectingFromKey);
+    private static readonly CustomInputAction inspectingExitAccept = overlayAction(KeyBindingList.acceptKey, InspectNode.exitInspectingFromKey);
+    private static readonly CustomInputAction inspectingExitAcceptInput = overlayAction(KeyBindingList.acceptInputKey, InspectNode.exitInspectingFromKey);
+    private static readonly CustomInputAction inspectingExitCombatSelect = overlayAction(KeyBindingList.combatSelectKey, InspectNode.exitInspectingFromKey);
+
+    //Overwrite pop-up in the key binding screen: accept overwrites, back cancels the new binding.
+    private static readonly CustomInputAction keyBindOverwriteInteract = overlayAction(KeyBindingList.interactKey, onKeyBindOverwriteAcceptKeyPress);
+    private static readonly CustomInputAction keyBindOverwriteAccept = overlayAction(KeyBindingList.acceptKey, onKeyBindOverwriteAcceptKeyPress);
+    private static readonly CustomInputAction keyBindOverwriteAcceptInput = overlayAction(KeyBindingList.acceptInputKey, onKeyBindOverwriteAcceptKeyPress);
+    private static readonly CustomInputAction keyBindOverwriteCombatSelect = overlayAction(KeyBindingList.combatSelectKey, onKeyBindOverwriteAcceptKeyPress);
+    private static readonly CustomInputAction keyBindOverwriteSettings = overlayAction(KeyBindingList.settingsScreenKey, onKeyBindOverwriteBackKeyPress);
+    private static readonly CustomInputAction keyBindOverwriteBackOut = overlayAction(KeyBindingList.backOutKey, onKeyBindOverwriteBackKeyPress);
+    private static readonly CustomInputAction keyBindOverwriteCombatSettings = overlayAction(KeyBindingList.combatSettingsScreenKey, onKeyBindOverwriteBackKeyPress);
+    private static readonly CustomInputAction keyBindOverwriteCombatDeselect = overlayAction(KeyBindingList.combatDeselectKey, onKeyBindOverwriteBackKeyPress);
+
+    private static void onKeyBindOverwriteAcceptKeyPress()
+    {
+        if (KeyPressManager.handlingPrimaryKeyPress)
+        {
+            return;
+        }
+
+        KeyPressManager.handlingPrimaryKeyPress = true;
+        BinaryDescisionPanel.AcceptBinaryDecision.Invoke();
+    }
+
+    private static void onKeyBindOverwriteBackKeyPress()
+    {
+        if (KeyPressManager.handlingPrimaryKeyPress)
+        {
+            return;
+        }
+
+        KeyPressManager.handlingPrimaryKeyPress = true;
+        EscapeStack.handleEscapePress();
+        KeyBindingSettingsManager.exitListeningModeWithoutChange();
+    }
+
+    //Combat results: every select, accept, deselect and settings key takes the results and leaves combat.
+    private static readonly CustomInputAction combatResultsSelect = overlayAction(KeyBindingList.combatSelectKey, onCombatResultsKeyPress);
+    private static readonly CustomInputAction combatResultsAccept = overlayAction(KeyBindingList.acceptKey, onCombatResultsKeyPress);
+    private static readonly CustomInputAction combatResultsAcceptInput = overlayAction(KeyBindingList.acceptInputKey, onCombatResultsKeyPress);
+    private static readonly CustomInputAction combatResultsDeselect = overlayAction(KeyBindingList.combatDeselectKey, onCombatResultsKeyPress);
+    private static readonly CustomInputAction combatResultsSettings = overlayAction(KeyBindingList.combatSettingsScreenKey, onCombatResultsKeyPress);
+
+    private static void onCombatResultsKeyPress()
+    {
+        if (CombatResultsUI.getInstance() != null)
+        {
+            CombatResultsUI.getInstance().acceptFromKey();
+        }
+    }
+
+    //Game Over: the back and settings keys close the save screen opened from it.
+    private static readonly CustomInputAction gameOverSettings = overlayAction(KeyBindingList.settingsScreenKey, onGameOverBackKeyPress);
+    private static readonly CustomInputAction gameOverBackOut = overlayAction(KeyBindingList.backOutKey, onGameOverBackKeyPress);
+    private static readonly CustomInputAction gameOverCombatSettings = overlayAction(KeyBindingList.combatSettingsScreenKey, onGameOverBackKeyPress);
+    private static readonly CustomInputAction gameOverCombatDeselect = overlayAction(KeyBindingList.combatDeselectKey, onGameOverBackKeyPress);
+
+    private static void onGameOverBackKeyPress()
+    {
+        if (KeyPressManager.handlingPrimaryKeyPress || EscapeStack.getEscapableObjectsCount() <= 0)
+        {
+            return;
+        }
+
+        KeyPressManager.handlingPrimaryKeyPress = true;
+        EscapeStack.handleEscapePress();
+    }
+
+    //Loading screen: once the prompt shows, a continue key or a left click leaves it. These check the
+    //initial state, so a key already held when the prompt appears continues at once, as the polling did.
+    private static readonly CustomInputAction loadingContinueInteract = overlayAction(KeyBindingList.interactKey, LoadingBarProgressTracker.continueFromKey, initialStateCheck: true);
+    private static readonly CustomInputAction loadingContinueAccept = overlayAction(KeyBindingList.acceptKey, LoadingBarProgressTracker.continueFromKey, initialStateCheck: true);
+    private static readonly CustomInputAction loadingContinueAcceptInput = overlayAction(KeyBindingList.acceptInputKey, LoadingBarProgressTracker.continueFromKey, initialStateCheck: true);
+    private static readonly CustomInputAction loadingContinueCombatSelect = overlayAction(KeyBindingList.combatSelectKey, LoadingBarProgressTracker.continueFromKey, initialStateCheck: true);
+    private static readonly CustomInputAction loadingContinueClick = new CustomInputAction(KeyCode.Mouse0,
+                                                                                    onStarted: context => LoadingBarProgressTracker.continueFromKey(),
+                                                                                    initialStateCheck: true);
+
+    //Opening monologue: Space finishes the page being written out, then turns to the next page.
+    private static readonly CustomInputAction openingMonologueAdvance = new CustomInputAction(KeyCode.Space,
+                                                                                    onStarted: context => OpeningMonologueManager.recordAdvancePress());
+
+    #endregion
+
     #region Choosing Actor
 
     //Finished shares this set - it's ChoosingActor once every party member has an action queued.
 
-    public static readonly CustomInputAction choosingActorSelect = new CustomInputAction(KeyBindingList.combatSelectKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingActorSelect = new CustomInputAction(KeyBindingList.combatSelectKey,
                                                                                     onStarted: onChoosingActorSelectKeyPress);
 
     private static void onChoosingActorSelectKeyPress(InputAction.CallbackContext context)
@@ -1908,7 +2041,7 @@ public static class PlayerInputList
     }
 
     //takes back the last queued action, or opens the escape menu when there's none to take back
-    public static readonly CustomInputAction choosingActorDeselect = new CustomInputAction(KeyBindingList.combatDeselectKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingActorDeselect = new CustomInputAction(KeyBindingList.combatDeselectKey,
                                                                                     onStarted: onChoosingActorDeselectKeyPress);
 
     private static void onChoosingActorDeselectKeyPress(InputAction.CallbackContext context)
@@ -1928,10 +2061,10 @@ public static class PlayerInputList
         openCombatEscapeMenu();
     }
 
-    public static readonly CustomInputAction choosingActorOpenSettings = new CustomInputAction(KeyBindingList.combatSettingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingActorOpenSettings = new CustomInputAction(KeyBindingList.combatSettingsScreenKey,
                                                                                     onStarted: context => openCombatEscapeMenu());
 
-    public static readonly CustomInputAction choosingActorResolveTurn = new CustomInputAction(KeyBindingList.resolveTurnKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingActorResolveTurn = new CustomInputAction(KeyBindingList.resolveTurnKey,
                                                                                     onStarted: onChoosingActorResolveTurnKeyPress);
 
     private static void onChoosingActorResolveTurnKeyPress(InputAction.CallbackContext context)
@@ -1949,7 +2082,7 @@ public static class PlayerInputList
 
     #region Choosing Location
 
-    public static readonly CustomInputAction choosingLocationSelect = new CustomInputAction(KeyBindingList.combatSelectKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingLocationSelect = new CustomInputAction(KeyBindingList.combatSelectKey,
                                                                                     onStarted: onChoosingLocationSelectKeyPress);
 
     private static void onChoosingLocationSelectKeyPress(InputAction.CallbackContext context)
@@ -1963,7 +2096,7 @@ public static class PlayerInputList
         KeyPressManager.handlingPrimaryKeyPress = true;
     }
 
-    public static readonly CustomInputAction choosingLocationDeselect = new CustomInputAction(KeyBindingList.combatDeselectKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingLocationDeselect = new CustomInputAction(KeyBindingList.combatDeselectKey,
                                                                                     onStarted: onChoosingLocationDeselectKeyPress);
 
     private static void onChoosingLocationDeselectKeyPress(InputAction.CallbackContext context)
@@ -1977,14 +2110,14 @@ public static class PlayerInputList
         KeyPressManager.handlingPrimaryKeyPress = true;
     }
 
-    public static readonly CustomInputAction choosingLocationOpenSettings = new CustomInputAction(KeyBindingList.combatSettingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingLocationOpenSettings = new CustomInputAction(KeyBindingList.combatSettingsScreenKey,
                                                                                     onStarted: context => openCombatEscapeMenu());
 
     #endregion
 
     #region Choosing Tertiary
 
-    public static readonly CustomInputAction choosingTertiarySelect = new CustomInputAction(KeyBindingList.combatSelectKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingTertiarySelect = new CustomInputAction(KeyBindingList.combatSelectKey,
                                                                                     onStarted: onChoosingTertiarySelectKeyPress);
 
     private static void onChoosingTertiarySelectKeyPress(InputAction.CallbackContext context)
@@ -1998,7 +2131,7 @@ public static class PlayerInputList
         KeyPressManager.handlingPrimaryKeyPress = true;
     }
 
-    public static readonly CustomInputAction choosingTertiaryDeselect = new CustomInputAction(KeyBindingList.combatDeselectKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingTertiaryDeselect = new CustomInputAction(KeyBindingList.combatDeselectKey,
                                                                                     onStarted: onChoosingTertiaryDeselectKeyPress);
 
     private static void onChoosingTertiaryDeselectKeyPress(InputAction.CallbackContext context)
@@ -2012,7 +2145,7 @@ public static class PlayerInputList
         KeyPressManager.handlingPrimaryKeyPress = true;
     }
 
-    public static readonly CustomInputAction choosingTertiaryOpenSettings = new CustomInputAction(KeyBindingList.combatSettingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingTertiaryOpenSettings = new CustomInputAction(KeyBindingList.combatSettingsScreenKey,
                                                                                     onStarted: context => openCombatEscapeMenu());
 
     #endregion
@@ -2031,10 +2164,10 @@ public static class PlayerInputList
         KeyPressManager.handlingPrimaryKeyPress = true;
     }
 
-    public static readonly CustomInputAction inEscapeMenuBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inEscapeMenuBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: context => backOutOfCombatEscapeMenu());
 
-    public static readonly CustomInputAction inEscapeMenuOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction inEscapeMenuOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: context => backOutOfCombatEscapeMenu());
 
     #endregion
@@ -2065,16 +2198,16 @@ public static class PlayerInputList
         KeyPressManager.handlingPrimaryKeyPress = true;
     }
 
-    public static readonly CustomInputAction resolveActionWarningBackOut = new CustomInputAction(KeyBindingList.backOutKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction resolveActionWarningBackOut = new CustomInputAction(KeyBindingList.backOutKey,
                                                                                     onStarted: context => backOutOfResolveActionWarning());
 
-    public static readonly CustomInputAction resolveActionWarningOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction resolveActionWarningOpenSettings = new CustomInputAction(KeyBindingList.settingsScreenKey,
                                                                                     onStarted: context => backOutOfResolveActionWarning());
 
-    public static readonly CustomInputAction resolveActionWarningSelect = new CustomInputAction(KeyBindingList.combatSelectKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction resolveActionWarningSelect = new CustomInputAction(KeyBindingList.combatSelectKey,
                                                                                     onStarted: context => acceptResolveActionWarning());
 
-    public static readonly CustomInputAction resolveActionWarningResolveTurn = new CustomInputAction(KeyBindingList.resolveTurnKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction resolveActionWarningResolveTurn = new CustomInputAction(KeyBindingList.resolveTurnKey,
                                                                                     onStarted: context => acceptResolveActionWarning());
 
     #endregion
@@ -2100,7 +2233,7 @@ public static class PlayerInputList
     }
 
     //hides the selected ability's selector preview, then backs out of the wheel - the two polled versions did one each
-    public static readonly CustomInputAction choosingAbilityDeselect = new CustomInputAction(KeyBindingList.combatDeselectKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingAbilityDeselect = new CustomInputAction(KeyBindingList.combatDeselectKey,
                                                                                     onStarted: onChoosingAbilityDeselectKeyPress);
 
     private static void onChoosingAbilityDeselectKeyPress(InputAction.CallbackContext context)
@@ -2120,7 +2253,7 @@ public static class PlayerInputList
         KeyPressManager.handlingPrimaryKeyPress = true;
     }
 
-    public static readonly CustomInputAction choosingAbilityOpenSettings = new CustomInputAction(KeyBindingList.combatSettingsScreenKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingAbilityOpenSettings = new CustomInputAction(KeyBindingList.combatSettingsScreenKey,
                                                                                     onStarted: context => openCombatEscapeMenu());
 
     private static void chooseAbilityAtIndex(int abilityIndex)
@@ -2161,11 +2294,11 @@ public static class PlayerInputList
         }
     }
 
-    public static readonly CustomInputAction choosingAbilityInteract = new CustomInputAction(KeyBindingList.interactKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingAbilityInteract = new CustomInputAction(KeyBindingList.interactKey,
                                                                                     onStarted: context => selectAbility());
-    public static readonly CustomInputAction choosingAbilityAccept = new CustomInputAction(KeyBindingList.acceptKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingAbilityAccept = new CustomInputAction(KeyBindingList.acceptKey,
                                                                                     onStarted: context => selectAbility());
-    public static readonly CustomInputAction choosingAbilityAcceptInput = new CustomInputAction(KeyBindingList.acceptInputKey.getCurrentKeyCode(),
+    public static readonly CustomInputAction choosingAbilityAcceptInput = new CustomInputAction(KeyBindingList.acceptInputKey,
                                                                                     onStarted: context => selectAbility());
 
     #endregion
@@ -2314,9 +2447,6 @@ public static class PlayerInputList
 
         inShopUIBackOut.enabled = true;
         inShopUIOpenSettings.enabled = true;
-
-        //maxAmount and multiplyByTenAmount stay off: their handlers are no-ops, and AmountPanel reads those
-        //keys directly while handling a button click.
     }
 
     public static void enableDialoguePopUpInputActions()
@@ -2357,6 +2487,7 @@ public static class PlayerInputList
     {
         mainMenuOpenSettings.enabled = true;
         mainMenuBackOut.enabled = true;
+        mainMenuAcceptInput.enabled = true;
     }
 
     public static void enableInputFieldActions()
@@ -2435,11 +2566,23 @@ public static class PlayerInputList
         choosingTertiaryOpenSettings.enabled = true;
     }
 
-    //RepositionManager and RetreatUIManager still poll their own keys
-    public static void enableRepositioningAndRetreatingInputActions()
+    public static void enableRepositioningInputActions()
     {
         showFormula.enabled = true;
         toggleKeyBindingsList.enabled = true;
+
+        repositioningSelect.enabled = true;
+        repositioningDeselect.enabled = true;
+        repositioningOpenSettings.enabled = true;
+    }
+
+    public static void enableRetreatingInputActions()
+    {
+        showFormula.enabled = true;
+        toggleKeyBindingsList.enabled = true;
+
+        retreatingDeselect.enabled = true;
+        retreatingOpenSettings.enabled = true;
     }
 
     public static void enableCombatEscapeMenuInputActions()
@@ -2459,6 +2602,101 @@ public static class PlayerInputList
         resolveActionWarningOpenSettings.enabled = true;
         resolveActionWarningSelect.enabled = true;
         resolveActionWarningResolveTurn.enabled = true;
+    }
+
+    //The set for the topmost input overlay. It replaces the activity's set entirely.
+    public static void enableOverlayInputActions(InputOverlay overlay)
+    {
+        bool inCombat = CombatStateManager.inCombat;
+
+        switch (overlay)
+        {
+            case InputOverlay.Inspecting:
+                showFormula.enabled = true;
+
+                inspectingExitInspect.enabled = true;
+                inspectingExitSettings.enabled = true;
+
+                if (inCombat)
+                {
+                    inspectingExitCombatSelect.enabled = true;
+                }
+                else
+                {
+                    inspectingExitInteract.enabled = true;
+                    inspectingExitAccept.enabled = true;
+                    inspectingExitAcceptInput.enabled = true;
+                }
+                break;
+
+            //nothing at all: the key being bound mustn't do anything else
+            case InputOverlay.ListeningForKeyBind:
+                break;
+
+            case InputOverlay.ConfirmingKeyBindOverwrite:
+                if (inCombat)
+                {
+                    keyBindOverwriteCombatSelect.enabled = true;
+                    keyBindOverwriteCombatSettings.enabled = true;
+                    keyBindOverwriteCombatDeselect.enabled = true;
+                }
+                else
+                {
+                    keyBindOverwriteInteract.enabled = true;
+                    keyBindOverwriteAccept.enabled = true;
+                    keyBindOverwriteAcceptInput.enabled = true;
+                    keyBindOverwriteSettings.enabled = true;
+                    keyBindOverwriteBackOut.enabled = true;
+                }
+                break;
+
+            case InputOverlay.CombatResults:
+                showFormula.enabled = true;
+                toggleKeyBindingsList.enabled = true;
+
+                combatResultsSelect.enabled = true;
+                combatResultsAccept.enabled = true;
+                combatResultsAcceptInput.enabled = true;
+                combatResultsDeselect.enabled = true;
+                combatResultsSettings.enabled = true;
+                break;
+
+            case InputOverlay.GameOver:
+                if (inCombat)
+                {
+                    gameOverCombatSettings.enabled = true;
+                    gameOverCombatDeselect.enabled = true;
+                }
+                else
+                {
+                    gameOverSettings.enabled = true;
+                    gameOverBackOut.enabled = true;
+                }
+                break;
+
+            case InputOverlay.LoadingScreenContinue:
+                loadingContinueClick.enabled = true;
+
+                if (inCombat)
+                {
+                    loadingContinueCombatSelect.enabled = true;
+                }
+                else
+                {
+                    loadingContinueInteract.enabled = true;
+                    loadingContinueAccept.enabled = true;
+                    loadingContinueAcceptInput.enabled = true;
+                }
+                break;
+
+            case InputOverlay.OpeningMonologue:
+                openingMonologueAdvance.enabled = true;
+                break;
+
+            default:
+                Debug.LogError("Unrecognized InputOverlay: " + overlay.ToString());
+                break;
+        }
     }
 
     #endregion
@@ -2506,6 +2744,20 @@ public class CustomInputAction
     //Input System checks the key on the first update after Enable() and fires started if it is down.
     private readonly bool initialStateCheck;
 
+    //For rebindable keys: the action follows the KeyBind, so changing the key in the settings screen,
+    //resetting to defaults or loading Config rebinds it straight away.
+    public CustomInputAction(KeyBind keyBind,
+                                Action<InputAction.CallbackContext> onStarted = null,
+                                Action<InputAction.CallbackContext> onCanceled = null,
+                                Action<InputAction.CallbackContext> onPerformed = null,
+                                bool initialStateCheck = false)
+        : this(keyBind.getCurrentKeyCode(), onStarted, onCanceled, onPerformed, initialStateCheck)
+    {
+        keyBind.bindAction(this);
+    }
+
+    //For fixed keys (dialogue and ability numbers, Shift+Esc tutorial skip) and for slots that are rebound by
+    //hand (the tutorial step slots, built with KeyCode.None).
     public CustomInputAction(KeyCode keyCode,
                                 Action<InputAction.CallbackContext> onStarted = null,
                                 Action<InputAction.CallbackContext> onCanceled = null,
@@ -2546,16 +2798,26 @@ public class CustomInputAction
 
     //An InputAction whose binding path resolves to no controls never fires and never complains, so an
     //unmappable KeyCode is reported here rather than turning into an input that silently does nothing.
+    //KeyCode.None is deliberate (an unassigned bind, or a tutorial slot awaiting its key) and builds an
+    //action with no binding.
     private InputAction buildInputAction(KeyCode keyCode)
     {
-        string keyboardPath = keyCode.ToKeyboardPath();
+        if (keyCode == KeyCode.None)
+        {
+            InputAction unboundAction = new InputAction(type: InputActionType.Button);
+            unboundAction.wantsInitialStateCheck = initialStateCheck;
 
-        if (keyboardPath == null)
+            return unboundAction;
+        }
+
+        string bindingPath = keyCode.ToBindingPath();
+
+        if (bindingPath == null)
         {
             Debug.LogError("KeyCode has no Input System equivalent: " + keyCode.ToString());
         }
 
-        InputAction action = new InputAction(type: InputActionType.Button, binding: keyboardPath);
+        InputAction action = new InputAction(type: InputActionType.Button, binding: bindingPath);
         action.wantsInitialStateCheck = initialStateCheck;
 
         return action;

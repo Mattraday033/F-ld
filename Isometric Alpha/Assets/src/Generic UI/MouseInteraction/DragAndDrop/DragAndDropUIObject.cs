@@ -22,7 +22,7 @@ public class DragAndDropUIObject : MonoBehaviour, IDragAndDropContainer
 
     void Update()
     {
-        if (!Input.GetKey(KeyCode.Mouse0))
+        if (!InputReader.isHeld(KeyCode.Mouse0))
         {
             handleMouseUp();
         }

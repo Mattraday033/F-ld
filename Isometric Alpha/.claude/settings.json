@@ -116,7 +116,9 @@
       "Skill(update-config:*)",
       "Skill(claude-api)",
       "Skill(claude-api:*)",
-      "mcp__claude-vscode__getDiagnostics"
+      "mcp__claude-vscode__getDiagnostics",
+      "Bash(git rm *)",
+      "Edit(/.claude/skills/headless-regression-tests/**)"
     ]
   }
 }

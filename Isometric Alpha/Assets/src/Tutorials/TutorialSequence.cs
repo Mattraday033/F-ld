@@ -182,11 +182,6 @@ public struct TutorialSequenceStep : IDescribable
         return true;
 	}
 
-    public bool nextStepKeyCodePressed()
-    {
-        return Input.GetKey(nextStepKey.getCurrentKeyCode());
-    }
-
     public void activateStartingScript(ITutorialSequenceTarget tutorialTarget)
     {
         TutorialSequence.fromButton = false;
@@ -212,31 +207,6 @@ public struct TutorialSequenceStep : IDescribable
         else if (TutorialSequenceStepTargetButton.currentButton != null)
         {
             TutorialSequenceStepTargetButton.currentButton.onClick.Invoke();
-        }
-    }
-
-    public bool additionalScriptButtonPressed()
-    {
-        foreach (TutorialSequenceAdditionalScript additionalScript in additionalScripts)
-        {
-            if (Input.GetKey(additionalScript.keyCode))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public void runAdditionalScripts()
-    {
-        foreach (TutorialSequenceAdditionalScript additionalScript in additionalScripts)
-        {
-            if (Input.GetKey(additionalScript.keyCode))
-            {
-                additionalScript.runScript();
-                return;
-            }
         }
     }
 
@@ -887,13 +857,6 @@ public class TutorialSequence
         DestroyAllTutorialMessageWindows.Invoke();
     }
 
-    private bool nextStepKeyCodeIsPressed()
-    {
-        TutorialSequenceStep currentStep = getCurrentTutorialSequenceStep();
-
-        return currentStep.nextStepKeyCodePressed();
-    }
-
     public TutorialSequenceStep getCurrentTutorialSequenceStep()
     {
         return tutorialSequenceSteps[currentStepIndex];
@@ -995,11 +958,6 @@ public class TutorialSequence
         return currentTutorialSequence != null;
     }
 
-    public static bool shouldAdvanceCurrentTutorialSequence()
-    {
-        return currentTutorialSequence.nextStepKeyCodeIsPressed();
-    }
-
     public static void advanceCurrentTutorialSequence(bool fromButton)
     {
         currentTutorialSequence.moveToNextStep(fromButton);
@@ -1008,16 +966,6 @@ public class TutorialSequence
     public static void advanceCurrentTutorialSequence()
     {
         currentTutorialSequence.moveToNextStep();
-    }
-
-    public static bool additionalScriptButtonPressed()
-    {
-        return currentTutorialSequence.getCurrentTutorialSequenceStep().additionalScriptButtonPressed();
-    }
-
-    public static void runAdditionalScripts()
-    {
-        currentTutorialSequence.getCurrentTutorialSequenceStep().runAdditionalScripts();
     }
 
     private static void setStateToInTutorialSequence()

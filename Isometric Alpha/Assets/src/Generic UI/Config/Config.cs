@@ -259,6 +259,7 @@ public struct KeyBindingSettingsWrapper
     public KeyCode? resolveTurnKey;
     public KeyCode? jumpMoveKey;
     public KeyCode? combatSettingsScreenKey;
+    public KeyCode? combatFastForwardAnimationKey;
 
     public KeyCode? moveCounterClockwiseKey;
     public KeyCode? moveClockwiseKey;
@@ -308,6 +309,7 @@ public struct KeyBindingSettingsWrapper
             resolveTurnKey = KeyBindingList.resolveTurnKey.getCurrentKeyCode(),
             jumpMoveKey = KeyBindingList.jumpMoveKey.getCurrentKeyCode(),
             combatSettingsScreenKey = KeyBindingList.combatSettingsScreenKey.getCurrentKeyCode(),
+            combatFastForwardAnimationKey = KeyBindingList.combatFastForwardAnimationKey.getCurrentKeyCode(),
 
             moveCounterClockwiseKey = KeyBindingList.moveCounterClockwiseKey.getCurrentKeyCode(),
             moveClockwiseKey = KeyBindingList.moveClockwiseKey.getCurrentKeyCode()
@@ -353,16 +355,28 @@ public struct KeyBindingSettingsWrapper
         setKeyCodeIfPresent(KeyBindingList.resolveTurnKey, resolveTurnKey);
         setKeyCodeIfPresent(KeyBindingList.jumpMoveKey, jumpMoveKey);
         setKeyCodeIfPresent(KeyBindingList.combatSettingsScreenKey, combatSettingsScreenKey);
+        setKeyCodeIfPresent(KeyBindingList.combatFastForwardAnimationKey, combatFastForwardAnimationKey);
         setKeyCodeIfPresent(KeyBindingList.moveCounterClockwiseKey, moveCounterClockwiseKey);
         setKeyCodeIfPresent(KeyBindingList.moveClockwiseKey, moveClockwiseKey);
     }
 
+    //A config written before the fast-forward key was saved has no value for it, so the default stays.
+    //A saved key the Input System can't bind (the old settings screen could capture typed characters such
+    //as '!') is skipped too, so the bind keeps working on its default instead of becoming dead.
     private static void setKeyCodeIfPresent(KeyBind keyBind, KeyCode? keyCode)
     {
-        if(keyCode.HasValue)
+        if(!keyCode.HasValue)
         {
-            keyBind.setCurrentKeyCode(keyCode.Value);
+            return;
         }
+
+        if(keyCode.Value != KeyCode.None && keyCode.Value.ToBindingPath() == null)
+        {
+            Debug.LogWarning("Config.json binds " + keyBind.getTitle() + " to " + keyCode.Value + ", which has no Input System equivalent; keeping " + keyBind.getCurrentKeyCode());
+            return;
+        }
+
+        keyBind.setCurrentKeyCode(keyCode.Value);
     }
 
 }

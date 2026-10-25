@@ -65,7 +65,7 @@ public class CreditScreenManager : MonoBehaviour
 
         while (elapsed < duration)
         {
-            if(EventSystem.current.IsPointerOverGameObject() && Input.GetKey(KeyCode.Mouse0))
+            if(EventSystem.current.IsPointerOverGameObject() && InputReader.isHeld(KeyCode.Mouse0))
             {
                 slider.gameObject.SetActive(true);
                 yield break;

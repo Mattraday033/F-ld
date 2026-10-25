@@ -121,17 +121,78 @@ public static class EnumUtil
         { KeyCode.Equals, InputKey.Equals },
     };
 
-    //Turns a KeyCode into the binding path the Input System expects, for example "<Keyboard>/leftShift".
-    //Returns null for KeyCodes with no keyboard equivalent - an action bound to a path that resolves to
-    //nothing never fires and never complains, so callers have to handle the miss themselves.
-    public static string ToKeyboardPath(this KeyCode keyCode)
+    //Mouse0-4 in legacy order. The Input System calls Mouse3 and Mouse4 the back and forward buttons.
+    private static readonly string[] mouseButtonPaths = new string[]
     {
+        "<Mouse>/leftButton", "<Mouse>/rightButton", "<Mouse>/middleButton", "<Mouse>/backButton", "<Mouse>/forwardButton"
+    };
+
+    //Several KeyCodes share one physical key (AltGr and RightAlt; LeftCommand and LeftWindows), so the
+    //reverse map is built from keyCodeToKey with these picks for the shared keys. Windows names win because
+    //the game ships on Windows, and the settings screen shows these names.
+    private static readonly Dictionary<InputKey, KeyCode> keyToKeyCode = buildKeyToKeyCode();
+
+    private static Dictionary<InputKey, KeyCode> buildKeyToKeyCode()
+    {
+        Dictionary<InputKey, KeyCode> reverse = new Dictionary<InputKey, KeyCode>();
+
+        foreach (KeyValuePair<KeyCode, InputKey> pair in keyCodeToKey)
+        {
+            if (!reverse.ContainsKey(pair.Value))
+            {
+                reverse[pair.Value] = pair.Key;
+            }
+        }
+
+        reverse[InputKey.RightAlt] = KeyCode.RightAlt;
+        reverse[InputKey.LeftMeta] = KeyCode.LeftWindows;
+        reverse[InputKey.RightMeta] = KeyCode.RightWindows;
+
+        return reverse;
+    }
+
+    //Turns a KeyCode into the binding path the Input System expects, for example "<Keyboard>/leftShift" or
+    //"<Mouse>/leftButton". Returns null for KeyCodes with no equivalent - an action bound to a path that
+    //resolves to nothing never fires and never complains, so callers have to handle the miss themselves.
+    public static string ToBindingPath(this KeyCode keyCode)
+    {
+        int mouseButton = keyCode.ToMouseButtonIndex();
+
+        if (mouseButton >= 0)
+        {
+            return mouseButtonPaths[mouseButton];
+        }
+
         if (!keyCodeToKey.TryGetValue(keyCode, out InputKey key))
         {
             return null;
         }
 
         return keyboardPathPrefix + key.toControlName();
+    }
+
+    //The Input System key for a keyboard KeyCode; false for mouse buttons and KeyCodes with no equivalent.
+    public static bool TryGetInputKey(this KeyCode keyCode, out InputKey key)
+    {
+        return keyCodeToKey.TryGetValue(keyCode, out key);
+    }
+
+    //0-4 for Mouse0-Mouse4, -1 for anything else.
+    public static int ToMouseButtonIndex(this KeyCode keyCode)
+    {
+        if (keyCode >= KeyCode.Mouse0 && keyCode <= KeyCode.Mouse4)
+        {
+            return keyCode - KeyCode.Mouse0;
+        }
+
+        return -1;
+    }
+
+    //The KeyCode stored for an Input System key, for the settings screen's key capture. KeyCode.None for
+    //keys the game has no KeyCode for.
+    public static KeyCode ToKeyCode(this InputKey key)
+    {
+        return keyToKeyCode.TryGetValue(key, out KeyCode keyCode) ? keyCode : KeyCode.None;
     }
 
     //The keyboard's controls are named after the Keys with a lower case first letter, apart from the number

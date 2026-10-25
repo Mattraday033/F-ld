@@ -23,14 +23,14 @@ public static class DragAndDropManager
     {
         float timeWaited = 0f;
 
-        while (Input.GetKey(KeyCode.Mouse0) && timeWaited < timeToWait/1.5f)
+        while (InputReader.isHeld(KeyCode.Mouse0) && timeWaited < timeToWait/1.5f)
         {
             yield return null;
 
             timeWaited += Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (InputReader.isHeld(KeyCode.Mouse0))
         {
             // Debug.LogError("Time Passed: " + timeWaited);
 

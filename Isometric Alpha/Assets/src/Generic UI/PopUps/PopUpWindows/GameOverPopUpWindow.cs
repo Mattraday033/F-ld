@@ -21,6 +21,15 @@ public class GameOverPopUpWindow : PopUpWindow
         }
 
         instance = this;
+
+        //A lost fight freezes the combat activity and an overworld defeat has no keys, so the back and
+        //settings keys for the save screen opened from here come through an overlay.
+        PlayerStateManager.addInputOverlay(InputOverlay.GameOver);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerStateManager.removeInputOverlay(InputOverlay.GameOver);
     }
 
 

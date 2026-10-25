@@ -116,7 +116,7 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
 
     private void OnMouseDown()
     {
-        pressPosition = Input.mousePosition;
+        pressPosition = InputReader.mousePosition;
         spriteRenderer.color = ColorList.grey215;
     }
 
@@ -139,7 +139,7 @@ public class WorldMapLandmark : MonoBehaviour, INameSource
     {
         int dragThreshold = EventSystem.current != null ? EventSystem.current.pixelDragThreshold : defaultDragThreshold;
 
-        return (Input.mousePosition - pressPosition).sqrMagnitude >= dragThreshold * dragThreshold;
+        return (InputReader.mousePosition - pressPosition).sqrMagnitude >= dragThreshold * dragThreshold;
     }
 
     //the event system's own default, for when there is none

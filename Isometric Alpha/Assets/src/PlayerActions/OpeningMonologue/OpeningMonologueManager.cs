@@ -29,12 +29,44 @@ public class OpeningMonologueManager : MonoBehaviour
 
     private bool canExit = false;
 
+    private static OpeningMonologueManager instance;
+
+    //The frame Space was last pressed, set by the OpeningMonologue overlay's action. The coroutines only
+    //accept a press from the current frame, as Input.GetKeyDown did, so a press made between pages is not
+    //carried over to the next one.
+    private int advancePressFrame = -1;
+
     private void Awake()
     {
+        instance = this;
+
         // continuePromptText.text = "Press <nobr>' " + KeyBindingList.acceptKey.getCurrentKeyCode().ToString() + " '</nobr> to continue...";
         // scrollText.text = openingText;
 
         StartCoroutine(FadeQuote());
+    }
+
+    private void OnDestroy()
+    {
+        PlayerStateManager.removeInputOverlay(InputOverlay.OpeningMonologue);
+
+        if(instance == this)
+        {
+            instance = null;
+        }
+    }
+
+    public static void recordAdvancePress()
+    {
+        if(instance != null)
+        {
+            instance.advancePressFrame = Time.frameCount;
+        }
+    }
+
+    private bool advancePressedThisFrame()
+    {
+        return advancePressFrame == Time.frameCount && !KeyPressManager.handlingPrimaryKeyPress;
     }
 
     private IEnumerator FadeQuote()
@@ -56,6 +88,8 @@ public class OpeningMonologueManager : MonoBehaviour
         FadeToBlackManager.createFade(firstFadeIn);
         yield return new WaitForSeconds(fadeInTime); // time to fade in
 
+        HeadlessLogger.LogEvent("Monologue.QuoteShown");
+
         yield return new WaitForSeconds(fadeInTime*2f); //time quote is visible
 
         FadeToBlackTransition fadeToBlack = new(skipFadeIn: true);
@@ -66,6 +100,8 @@ public class OpeningMonologueManager : MonoBehaviour
 
         quoteBackground.gameObject.SetActive(false);
         scrollBackground.gameObject.SetActive(true);
+
+        HeadlessLogger.LogEvent("Monologue.QuoteFinished");
 
         // StartCoroutine(ScrollMonologue()); // scroll starts half second before fade starts
 
@@ -82,6 +118,10 @@ public class OpeningMonologueManager : MonoBehaviour
 
         canExit = true;
 
+        //The activity stays MainMenu through the monologue (inMainMenu() has many readers), so Space comes
+        //through an overlay.
+        PlayerStateManager.addInputOverlay(InputOverlay.OpeningMonologue);
+
         StartCoroutine(FeedPages());
     }
 
@@ -91,34 +131,49 @@ public class OpeningMonologueManager : MonoBehaviour
     // Feeds each page of the opening monologue to the scroll text box in turn.
     // Each page reveals one letter at a time; a spacebar press advances to the
     // next page once the current page has been fully shown.
+    //FeedPages only yields nested coroutines, so these lines run once per page. Never log inside FeedPage,
+    //FeedCenteredThenScroll or WaitForSpacePress, which loop every frame.
     private IEnumerator FeedPages()
     {
         setUpNextMonologueImageGroup();
 
+        logPage("Monologue.PageShown", 1);
         yield return StartCoroutine(FeedCenteredThenScroll(openingTextFirstPageCentered, openingTextFirstPageLeftAligned));
+        logPage("Monologue.PageWaiting", 1);
         yield return StartCoroutine(WaitForSpacePress());
+        logPage("Monologue.PageAdvanced", 1);
 
         centeredText.gameObject.SetActive(false);
 
-        yield return StartCoroutine(FeedPage(openingTextSecondPage));
-        yield return StartCoroutine(WaitForSpacePress());
+        string[] remainingPages = new string[]
+        {
+            openingTextSecondPage,
+            openingTextThirdPage,
+            openingTextFourthPage,
+            openingTextFifthPage,
+            openingTextSixthPage,
+            openingTextSeventhPage
+        };
 
-        yield return StartCoroutine(FeedPage(openingTextThirdPage));
-        yield return StartCoroutine(WaitForSpacePress());
+        for (int pageIndex = 0; pageIndex < remainingPages.Length; pageIndex++)
+        {
+            int pageNumber = pageIndex + 2;
 
-        yield return StartCoroutine(FeedPage(openingTextFourthPage));
-        yield return StartCoroutine(WaitForSpacePress());
+            logPage("Monologue.PageShown", pageNumber);
+            yield return StartCoroutine(FeedPage(remainingPages[pageIndex]));
+            logPage("Monologue.PageWaiting", pageNumber);
+            yield return StartCoroutine(WaitForSpacePress());
+            logPage("Monologue.PageAdvanced", pageNumber);
+        }
 
-        yield return StartCoroutine(FeedPage(openingTextFifthPage));
-        yield return StartCoroutine(WaitForSpacePress());        
-        
-        yield return StartCoroutine(FeedPage(openingTextSixthPage));
-        yield return StartCoroutine(WaitForSpacePress());
-
-        yield return StartCoroutine(FeedPage(openingTextSeventhPage));
-        yield return StartCoroutine(WaitForSpacePress());
+        HeadlessLogger.LogEvent("Monologue.Finished");
 
         SceneChange.changeSceneToOverworldWithLoadingScreen();
+    }
+
+    private static void logPage(string eventName, int pageNumber)
+    {
+        HeadlessLogger.LogEvent(eventName, "page", pageNumber);
     }
 
     // Reveals a single page one letter at a time at letterInterval seconds per
@@ -156,7 +211,7 @@ public class OpeningMonologueManager : MonoBehaviour
             float elapsed = 0f;
             while (elapsed < interval)
             {
-                if (Input.GetKeyDown(KeyCode.Space) && !KeyPressManager.handlingPrimaryKeyPress)
+                if (advancePressedThisFrame())
                 {
                     scrollText.maxVisibleCharacters = totalVisible;
                     setAllImagesToVisible();
@@ -212,7 +267,7 @@ public class OpeningMonologueManager : MonoBehaviour
             float elapsed = 0f;
             while (elapsed < interval)
             {
-                if (Input.GetKeyDown(KeyCode.Space) && !KeyPressManager.handlingPrimaryKeyPress)
+                if (advancePressedThisFrame())
                 {
                     centeredText.maxVisibleCharacters = centeredTotal;
                     scrollText.maxVisibleCharacters = scrollTotal;
@@ -249,7 +304,7 @@ public class OpeningMonologueManager : MonoBehaviour
             float elapsed = 0f;
             while (elapsed < interval)
             {
-                if (Input.GetKeyDown(KeyCode.Space) && !KeyPressManager.handlingPrimaryKeyPress)
+                if (advancePressedThisFrame())
                 {
                     centeredText.maxVisibleCharacters = centeredTotal;
                     scrollText.maxVisibleCharacters = scrollTotal;
@@ -286,7 +341,7 @@ public class OpeningMonologueManager : MonoBehaviour
         Color promptColor = continuePromptText.color;
         Coroutine pulse = StartCoroutine(PulseContinuePrompt(promptColor));
 
-        while (!Input.GetKeyDown(KeyCode.Space) || KeyPressManager.handlingPrimaryKeyPress)
+        while (!advancePressedThisFrame())
         {
             KeyPressManager.updateKeyBools();
 

@@ -50,64 +50,66 @@ public class InspectNode : MonoBehaviour
         keybindText.text = "[" + KeyBindingList.inspectKey.ToString() + "]";
     }
 
+    //Entering stays a held-key read here rather than an action: the node appears inside many activities, and
+    //the inspect key is also the Walking transcript key. Leaving is the Inspecting overlay's actions.
     void Update()
     {
         KeyPressManager.updateKeyBools();
 
-        if(!inspecting && Input.GetKey(KeyBindingList.inspectKey.getCurrentKeyCode()) && !KeyPressManager.handlingPrimaryKeyPress)
+        if(!inspecting && InputReader.isHeld(KeyBindingList.inspectKey) && !KeyPressManager.handlingPrimaryKeyPress)
         {
             KeyPressManager.handlingPrimaryKeyPress = true;
             setToInspectingMode();
             return;
         }
-
-        if(inspecting && 
-            (Input.GetKey(KeyBindingList.inspectKey.getCurrentKeyCode()) || 
-            Input.GetKey(KeyBindingList.settingsScreenKey.getCurrentKeyCode()) || 
-            KeyBindingList.continueUIKeyIsPressed()) &&
-             !KeyPressManager.handlingPrimaryKeyPress)
-        {
-            KeyPressManager.handlingPrimaryKeyPress = true;
-            exitInspectingMode();
-            return;
-        }
     }
 
-    //PlayerInput.Update returns early while inspecting, but the CustomInputActions are event driven rather
-    //than polled, so they would keep firing underneath the inspect node - one Space would dismiss the node
-    //and close the chest behind it. Same pattern as KeybindingButton.listenForKeyPress: pull the whole set
-    //and let PlayerStateManager put back whatever the current activity calls for.
-    //Combat is left alone - no OOC action is enabled there, and CombatInputManager.Update already gates
-    //itself on InspectNode.inspecting.
+    //While inspecting, the Inspecting overlay replaces every other action set, in and out of combat, so one
+    //Space dismisses the node without also closing the chest behind it. Its actions are the ways out (the
+    //inspect, settings and continue keys) plus show-formula.
     private void setToInspectingMode()
     {
         inspecting = true;
 
-        if (!CombatStateManager.inCombat)
-        {
-            CustomInputAction.DisableAllInputActions.Invoke();
-        }
+        PlayerStateManager.addInputOverlay(InputOverlay.Inspecting);
 
         TutorialSequenceStepTargetUIObject.createCutOutMask(hover);
-
-
     }
 
     private void exitInspectingMode()
     {
         inspecting = false;
 
-        if (!CombatStateManager.inCombat)
-        {
-            PlayerStateManager.updateEnabledInputActions();
-        }
+        PlayerStateManager.removeInputOverlay(InputOverlay.Inspecting);
 
         MouseHoverManager.OnHoverPanelCreation.Invoke();
     }
 
+    //Called by the Inspecting overlay's actions.
+    public static void exitInspectingFromKey()
+    {
+        if(!inspecting || KeyPressManager.handlingPrimaryKeyPress)
+        {
+            return;
+        }
+
+        KeyPressManager.handlingPrimaryKeyPress = true;
+
+        if(instance != null)
+        {
+            instance.exitInspectingMode();
+        } else
+        {
+            inspecting = false;
+            PlayerStateManager.removeInputOverlay(InputOverlay.Inspecting);
+        }
+    }
+
+    //The state change that fires this re-syncs the input set itself, so the overlay goes without a refresh.
     private static void endInspectingOnStateChange()
     {
         _Inspecting = false;
+        PlayerStateManager.removeInputOverlay(InputOverlay.Inspecting, refresh: false);
     }
 
     private void OnEnable()

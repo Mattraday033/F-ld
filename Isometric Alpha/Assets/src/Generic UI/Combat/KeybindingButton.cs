@@ -58,10 +58,10 @@ public class KeybindingButton : MonoBehaviour
         KeyBindingSettingsManager.currentKeyIndex = keyIndex;
         keybindingButtonLabel.text = blankButtonText;
 
-        //PlayerInput.Update stops reading keys while listeningForKeyBinding, but the CustomInputActions are
-        //driven by events rather than by Update, so the key being bound would also fire whatever it is
-        //currently bound to. They come back in setNewKey and exitListeningModeWithoutChange.
-        CustomInputAction.DisableAllInputActions.Invoke();
+        //The key being bound would otherwise also fire whatever it is currently bound to. The ListeningForKeyBind
+        //overlay has no actions, so it switches every set off; setNewKey and exitListeningModeWithoutChange
+        //remove it.
+        PlayerStateManager.addInputOverlay(InputOverlay.ListeningForKeyBind);
     }
 
     public void disableButton(int keyIndexToDisable)

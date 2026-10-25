@@ -140,10 +140,10 @@ public class AmountPanel : MonoBehaviour
 	
 	public void incrementAmount()
 	{
-		if(Input.GetKey(KeyBindingList.maxAmountKey.getCurrentKeyCode()))
+		if(InputReader.isHeld(KeyBindingList.maxAmountKey))
 		{
 			setAmountToMax();
-        } else if(Input.GetKey(KeyBindingList.multiplyByTenAmountKey.getCurrentKeyCode()))
+        } else if(InputReader.isHeld(KeyBindingList.multiplyByTenAmountKey))
 		{
             setAmount(currentAmount + 10);
         } else
@@ -154,11 +154,11 @@ public class AmountPanel : MonoBehaviour
 	
 	public void decrementAmount()
 	{
-		if(Input.GetKey(KeyBindingList.maxAmountKey.getCurrentKeyCode()))
+		if(InputReader.isHeld(KeyBindingList.maxAmountKey))
         {
 			setAmountToOne();
         } 
-        else if(Input.GetKey(KeyBindingList.multiplyByTenAmountKey.getCurrentKeyCode()))
+        else if(InputReader.isHeld(KeyBindingList.multiplyByTenAmountKey))
         {
             setAmount(currentAmount - 10);
         }

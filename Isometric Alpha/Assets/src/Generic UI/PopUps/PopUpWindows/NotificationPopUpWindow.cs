@@ -25,6 +25,8 @@ public class NotificationPopUpWindow : PageReaderPopUpWindow
         instance = this;
         pagesFadeIn = false;
         readInNotifications();
+
+        HeadlessLogger.LogEvent("Notification.WindowOpened", "count", notificationQueue.Count);
     }
 
     private void readInNotifications()
@@ -54,6 +56,8 @@ public class NotificationPopUpWindow : PageReaderPopUpWindow
 
     private void OnDestroy()
     {
+        HeadlessLogger.LogEvent("Notification.WindowClosed");
+
         if (popupProgenitor != null)
         {
             NotificationManager.OnDeleteAllNotifications.RemoveListener(popupProgenitor.destroyPopUp);

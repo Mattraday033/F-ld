@@ -55,9 +55,13 @@ public class AreaManager : MonoBehaviour
 
     public static void changeArea(string newArea)
     {
+        string previousArea = locationName;
+
         locationName = newArea;
 
         instance.Awake();
+
+        HeadlessLogger.LogEvent("Area.Changed", "from", previousArea, "to", newArea);
     }
 
     public void Awake()

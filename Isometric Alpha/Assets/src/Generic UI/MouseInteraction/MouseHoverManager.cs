@@ -126,7 +126,7 @@ public static class MouseHoverManager
 
         while (timeWaited < timeToWait)
         {
-            if (Input.GetKey(KeyCode.Mouse0) && !destroy)
+            if (InputReader.isHeld(KeyCode.Mouse0) && !destroy)
             {
                 timeWaited = 0f;
             }

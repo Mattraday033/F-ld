@@ -134,7 +134,25 @@ public static class PrefabNames
 
     #endregion
 
-    public readonly static string rootGameFolder = Application.persistentDataPath + "/";
+    public readonly static string rootGameFolder = getRootGameFolder();
+
+    private const string headlessDataFolderName = "HeadlessData";
+
+    //A headless (-batchmode) run keeps its saves and config in a HeadlessData folder next to the exe, so
+    //regression tests never touch a player's real saves or key bindings. The path must contain no dots:
+    //SaveHandler.createSavedGameList and Config.readConfig find the extension with Split(".").
+    private static string getRootGameFolder()
+    {
+        if(Application.isBatchMode)
+        {
+            string dataPath = Application.dataPath.Replace('\\', '/');
+            string exeFolder = dataPath.Substring(0, dataPath.LastIndexOf('/'));
+
+            return exeFolder + "/" + headlessDataFolderName + "/";
+        }
+
+        return Application.persistentDataPath + "/";
+    }
 
     #region Saves
     public readonly static string savesFolder = rootGameFolder + "Saves/";

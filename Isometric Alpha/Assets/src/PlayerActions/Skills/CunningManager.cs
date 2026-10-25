@@ -299,29 +299,6 @@ public class CunningManager : SkillManager
         return current;
     }
 
-    public virtual void handleWASDMovement()
-    {
-        if (Input.GetKey(KeyBindingList.moveNorthKey.getCurrentKeyCode()))
-        {
-            moveCurrentSelectorNorthEast();
-        }
-        else if (Input.GetKey(KeyBindingList.moveWestKey.getCurrentKeyCode()))
-        {
-            moveCurrentSelectorNorthWest();
-        }
-        else if (Input.GetKey(KeyBindingList.moveSouthKey.getCurrentKeyCode()))
-        {
-            moveCurrentSelectorSouthWest();
-        }
-        else if (Input.GetKey(KeyBindingList.moveEastKey.getCurrentKeyCode()))
-        {
-            moveCurrentSelectorSouthEast();
-        }
-
-        PlayerObject.setButtonPromptVisibility();
-    }
-
-
     public void moveCurrentSelectorNorthEast()
     {
         moveCurrentSelector((Vector2Int)MovementManager.distance1TileNorthEastGrid);

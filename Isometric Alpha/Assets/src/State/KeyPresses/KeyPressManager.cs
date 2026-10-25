@@ -11,7 +11,7 @@ public static class KeyPressManager
         set
         {
            _HandlingPrimaryKeyPress = value;
-        } 
+        }
     }
 
     public static bool _HandlingSecondaryKeyPress = false;
@@ -21,17 +21,22 @@ public static class KeyPressManager
         set => _HandlingSecondaryKeyPress = value;
     }
 
-
-    public static KeyCode[] movementKeys;
-
+    //In WASD order. The binds themselves rather than copies of their keys, so a rebind is picked up at once.
+    private static readonly KeyBind[] movementKeyBinds = new KeyBind[]
+    {
+        KeyBindingList.moveNorthKey,
+        KeyBindingList.moveWestKey,
+        KeyBindingList.moveSouthKey,
+        KeyBindingList.moveEastKey
+    };
 
 	public static KeyCode getFirstMovementKeyPressedDetectedInWASDOrder()
 	{
-        foreach(KeyCode keyCode in movementKeys)
+        foreach(KeyBind keyBind in movementKeyBinds)
         {
-            if(Input.GetKey(keyCode))
+            if(InputReader.isHeld(keyBind))
             {
-                return keyCode;
+                return keyBind.getCurrentKeyCode();
             }
         }
 
@@ -40,22 +45,28 @@ public static class KeyPressManager
 
     public static KeyCode getFirstNonBarredMovementKeyPressedDetectedInWASDOrder(List<KeyCode> barredMovementKeyCodes)
     {
-        foreach (KeyCode keyCode in movementKeys)
+        foreach (KeyBind keyBind in movementKeyBinds)
         {
-            if (Input.GetKey(keyCode) && !barredMovementKeyCodes.Contains(keyCode))
+            KeyCode keyCode = keyBind.getCurrentKeyCode();
+
+            if (InputReader.isHeld(keyBind) && !barredMovementKeyCodes.Contains(keyCode))
             {
                 return keyCode;
             }
         }
 
-        return KeyCode.Z;
+        //None, which handleWASDMovement treats as "don't move". This used to return KeyCode.Z, which
+        //slipped past that check.
+        return KeyCode.None;
     }
 
     public static KeyCode getFirstMovementKeyPressedDetectedInWASDOrderSkippingGivenKey(KeyCode givenKey)
     {
-        foreach (KeyCode keyCode in movementKeys)
+        foreach (KeyBind keyBind in movementKeyBinds)
         {
-            if (Input.GetKey(keyCode) && givenKey != keyCode)
+            KeyCode keyCode = keyBind.getCurrentKeyCode();
+
+            if (InputReader.isHeld(keyBind) && givenKey != keyCode)
             {
                 return keyCode;
             }
@@ -68,15 +79,15 @@ public static class KeyPressManager
     {
 		int movementKeysPressed = 0;
 
-		foreach(KeyCode keyCode in movementKeys)
+		foreach(KeyBind keyBind in movementKeyBinds)
 		{
-			if(Input.GetKey(keyCode))
+			if(InputReader.isHeld(keyBind))
 			{
 				movementKeysPressed++;
             }
 		}
 
-		return movementKeysPressed; 
+		return movementKeysPressed;
     }
 
     public static bool secondaryKeyPressed()
@@ -90,7 +101,7 @@ public static class KeyPressManager
         {
             case CurrentActivity.Walking:
             case CurrentActivity.InDialogue:
-                return Input.GetKey(KeyBindingList.revealKey.getCurrentKeyCode()) || Input.GetKey(KeyBindingList.hideTerrainKey.getCurrentKeyCode());
+                return InputReader.isHeld(KeyBindingList.revealKey) || InputReader.isHeld(KeyBindingList.hideTerrainKey);
             case CurrentActivity.InUI:
             case CurrentActivity.InMap:
             case CurrentActivity.Cunning:
@@ -111,9 +122,11 @@ public static class KeyPressManager
     }
 
 
+    //Polled from the Update methods of the screens that take input, so the debounce flags clear at the same
+    //point in the frame they always have.
     public static void updateKeyBools()
     {
-        if (!Input.anyKey)
+        if (!InputReader.anyButtonHeld())
         {
             handlingPrimaryKeyPress = false;
             handlingSecondaryKeyPress = false;
@@ -123,21 +136,13 @@ public static class KeyPressManager
             handlingSecondaryKeyPress = false;
         }
     }
-	
+
     [RuntimeInitializeOnLoadMethod]
     private static void initializeKeyPressManager()
     {
+        //Loading Config sets each KeyBind's key, and the KeyBinds rebind their actions, so it no longer
+        //matters whether this runs before or after PlayerInputList is first touched.
         Config.initializeSettingsFromConfigFile();
-
-        movementKeys = new KeyCode[] { 
-                                        KeyBindingList.moveNorthKey.getCurrentKeyCode(), 
-                                        KeyBindingList.moveWestKey.getCurrentKeyCode(), 
-                                        KeyBindingList.moveSouthKey.getCurrentKeyCode(), 
-                                        KeyBindingList.moveEastKey.getCurrentKeyCode() 
-                                    };      
-
-        KeyBindingSettingsManager.EnableAllKeyBindButtons.RemoveListener(initializeKeyPressManager); 
-        KeyBindingSettingsManager.EnableAllKeyBindButtons.AddListener(initializeKeyPressManager);  
     }
 
 }

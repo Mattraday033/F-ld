@@ -43,6 +43,17 @@ public enum CurrentActivity {
                             ResolveActionWarning = 33
                         };
 
+//Screens that take input above the activity; see PlayerStateManager.addInputOverlay.
+public enum InputOverlay {
+                            Inspecting,
+                            ListeningForKeyBind,
+                            ConfirmingKeyBindOverwrite,
+                            CombatResults,
+                            GameOver,
+                            LoadingScreenContinue,
+                            OpeningMonologue
+                        };
+
 public static class CurrentActivityExtensions
 {
     //the activities that only exist inside combat
@@ -109,11 +120,54 @@ public static class PlayerStateManager
     public readonly static UnityEvent OnStateChangeToInLevelUpPopUp = new UnityEvent();
 
     public readonly static UnityEvent OnLeavingTutorialSequenceState = new UnityEvent();
-    
+
+    //Input overlays sit above the activity. While one is active only its own action set is enabled, whatever
+    //the activity is. They're for screens that take input but can't own an activity: the opening monologue
+    //runs while the activity is still MainMenu, combat results and Game Over appear after the combat activity
+    //has frozen, and inspecting happens inside many activities. The most recently added overlay wins.
+    private readonly static List<InputOverlay> inputOverlays = new List<InputOverlay>();
+
+    public static bool hasInputOverlay
+    {
+        get => inputOverlays.Count > 0;
+    }
+
+    public static bool inputOverlayIsActive(InputOverlay overlay)
+    {
+        return inputOverlays.Contains(overlay);
+    }
+
+    public static void addInputOverlay(InputOverlay overlay)
+    {
+        inputOverlays.Remove(overlay);
+        inputOverlays.Add(overlay);
+
+        HeadlessLogger.LogEvent("Input.OverlayAdded", "overlay", overlay);
+
+        updateEnabledInputActions();
+    }
+
+    //refresh is false only for a caller that is about to set an activity itself, which re-syncs the input set.
+    public static void removeInputOverlay(InputOverlay overlay, bool refresh = true)
+    {
+        if(!inputOverlays.Remove(overlay))
+        {
+            return;
+        }
+
+        HeadlessLogger.LogEvent("Input.OverlayRemoved", "overlay", overlay);
+
+        if(refresh)
+        {
+            updateEnabledInputActions();
+        }
+    }
 
     [RuntimeInitializeOnLoadMethod]
     private static void initializePlayerStateManager()
     {
+        inputOverlays.Clear();
+
         //Every boot lands on the start menu (SceneChange.setSceneToStartMenu), so that is the state the game
         //starts in. This is what the newGame flag used to say by being true in the Flags static constructor.
         currentActivity = CurrentActivity.MainMenu;
@@ -200,6 +254,8 @@ public static class PlayerStateManager
         previousActivity = currentActivity;
         currentActivity = newActivity;
 
+        HeadlessLogger.LogEvent("Activity.Changed", "from", previousActivity, "to", currentActivity, "combat", true);
+
         CombatStateManager.fireActivityChangeToEvents(newActivity);
 
         updateEnabledInputActions();
@@ -221,6 +277,9 @@ public static class PlayerStateManager
         previousActivity = currentActivity;
 
         currentActivity = newActivity;
+
+        //logged before the events fire, since their listeners can set the activity again
+        HeadlessLogger.LogEvent("Activity.Changed", "from", previousActivity, "to", currentActivity);
 
         // Debug.LogError("previousActivity = " + previousActivity);
         // Debug.LogError("currentActivity = " + currentActivity);
@@ -346,6 +405,12 @@ public static class PlayerStateManager
 
         CustomInputAction.DisableAllInputActions.Invoke();
 
+        if (inputOverlays.Count > 0)
+        {
+            PlayerInputList.enableOverlayInputActions(inputOverlays[inputOverlays.Count - 1]);
+            return;
+        }
+
         switch (currentActivity)
         {
             case CurrentActivity.Walking:
@@ -429,8 +494,10 @@ public static class PlayerStateManager
                 PlayerInputList.enableChoosingTertiaryInputActions();
                 break;
             case CurrentActivity.Repositioning:
+                PlayerInputList.enableRepositioningInputActions();
+                break;
             case CurrentActivity.Retreating:
-                PlayerInputList.enableRepositioningAndRetreatingInputActions();
+                PlayerInputList.enableRetreatingInputActions();
                 break;
             case CurrentActivity.InEscapeMenu:
                 PlayerInputList.enableCombatEscapeMenuInputActions();

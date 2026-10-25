@@ -30,14 +30,14 @@ public class CursorController : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.Mouse0) && !clicked)
+        if(InputReader.isHeld(KeyCode.Mouse0) && !clicked)
         {
             clicked = true;
             Cursor.SetCursor(cursorClickedSprite, clickPosition, CursorMode.Auto);
             return;
         }
 
-        if(!Input.GetKey(KeyCode.Mouse0) && clicked)
+        if(!InputReader.isHeld(KeyCode.Mouse0) && clicked)
         {
             clicked = false;
             Cursor.SetCursor(cursorDefaultSprite, clickPosition, CursorMode.Auto);
@@ -49,7 +49,7 @@ public class CursorController : MonoBehaviour
     {
         if (Camera.main == null) return;
 
-        Vector3 mousePos = Input.mousePosition;
+        Vector3 mousePos = InputReader.mousePosition;
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(
             new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane + 1f));
 

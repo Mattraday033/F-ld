@@ -102,6 +102,8 @@ public static class OverallUIManager
 
         ScreenButtonManager.setCurrentScreenButton(newScreenType);
 
+        HeadlessLogger.LogEvent("Screen.Opened", "screen", newScreenType);
+
         ScreenOpenProbe.step("changeScreen");
         // currentScreenManager.setToScreenState(getScreenState(newScreenType));
     }

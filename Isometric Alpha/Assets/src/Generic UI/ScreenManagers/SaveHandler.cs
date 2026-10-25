@@ -482,11 +482,33 @@ public class SaveHandler : ScreenManager, IEscapable
 	{
 		string json = JsonConvert.SerializeObject(blueprint);
 
-		File.WriteAllText(PrefabNames.savesFolder + blueprint.saveName + Constants.jsonFileExtension, json);
+		string saveFilePath = PrefabNames.savesFolder + blueprint.saveName + Constants.jsonFileExtension;
+
+		File.WriteAllText(saveFilePath, json);
+
+		if (HeadlessLogger.IsHeadless)
+		{
+			HeadlessLogger.LogEvent("Save.Written", "name", blueprint.saveName, "type", getSaveTypeForLog(blueprint), "file", saveFilePath);
+		}
 
 		createSavedGameList();
 
         OnSaveCreated.Invoke(blueprint);
+	}
+
+	private static string getSaveTypeForLog(SaveBlueprint blueprint)
+	{
+		if (blueprint.isAutosave())
+		{
+			return "autosave";
+		}
+
+		if (blueprint.saveName.StartsWith(quickSaveName))
+		{
+			return "quicksave";
+		}
+
+		return "manual";
 	}
 
 	public static SaveBlueprint getCleanSlateSave()

@@ -38,6 +38,11 @@ public class BinaryPanelPopUpButton : PopUpButton
 		BinaryDescisionPanel binaryDecisionPanel = (BinaryDescisionPanel) getPopUpWindow();
 		
 		binaryDecisionPanel.populate(decision);
+
+		if (HeadlessLogger.IsHeadless)
+		{
+			HeadlessLogger.LogEvent("DecisionPanel.Opened", "decision", decision == null ? "null" : decision.GetType().Name);
+		}
 	}
 
 	public override void spawnPopUp()
@@ -47,6 +52,8 @@ public class BinaryPanelPopUpButton : PopUpButton
 		BinaryDescisionPanel binaryDecisionPanel = (BinaryDescisionPanel) getPopUpWindow();
 		
 		binaryDecisionPanel.populate(getDecisionType());
+
+		HeadlessLogger.LogEvent("DecisionPanel.Opened", "decision", decisionType);
 	}
 	
 	public void executeDecisionWithoutPopUp()

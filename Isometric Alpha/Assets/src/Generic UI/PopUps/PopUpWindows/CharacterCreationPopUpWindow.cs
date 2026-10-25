@@ -84,23 +84,28 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
         populate();
         AudioManager.playChangeScreenSFX();
+
+        HeadlessLogger.LogEvent("CharacterCreation.Opened");
     }
 
-    void Update() //here for Key Input
+    void Update()
     {
         KeyPressManager.updateKeyBools();
-
-        if ((Input.GetKey(KeyCode.Escape) || Input.GetKey(KeyCode.Return)) && !KeyPressManager.handlingPrimaryKeyPress && inNameInputField())
-        {
-            KeyPressManager.handlingPrimaryKeyPress = true;
-
-            handleESCPress();
-        }
     }
 
-    private void handleESCPress()
+    //The settings (Esc) and accept-input (Return) keys leave the name field; the MainMenu actions call this.
+    //Returns whether the field was focused.
+    public static bool deselectNameFieldFromKey()
     {
+        if (KeyPressManager.handlingPrimaryKeyPress || !inNameInputField())
+        {
+            return false;
+        }
+
+        KeyPressManager.handlingPrimaryKeyPress = true;
         EventSystem.current.SetSelectedGameObject(null);
+
+        return true;
     }
 
     public void selectNameField()
@@ -137,6 +142,8 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         }
 
         populate();
+
+        HeadlessLogger.LogEvent("CharacterCreation.StatIncreased", "stat", currentPrimaryStatPage, "pointsLeft", pointsToSpend);
     }
 
     public void decrementStat()
@@ -256,6 +263,9 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         }
 
         isFadingToMonologue = true;
+
+        HeadlessLogger.LogEvent("CharacterCreation.Accepted", "name", nameField.text, "pointsLeft", pointsToSpend);
+
         StartCoroutine(fadeOutThenStartMonologue());
     }
 
@@ -313,6 +323,9 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         cleanSaveBlueprint.currentFlags = JsonConvert.SerializeObject(startingFlags, Formatting.Indented);
 
         LoadSaveFile loadSaveFile = new LoadSaveFile(cleanSaveBlueprint, CurrentActivity.InDialogue, showMonologueFirst: true);
+
+        HeadlessLogger.LogEvent("NewGame.Started", "player", name);
+
         loadSaveFile.execute();
     }
 

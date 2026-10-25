@@ -18,7 +18,7 @@ public class MouseHoverBase : MonoBehaviour
 
     public void Update()
     {
-        Vector3 mousePos = Input.mousePosition;
+        Vector3 mousePos = InputReader.mousePosition;
 
         baseRectTransform.position = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane+1f));
     }

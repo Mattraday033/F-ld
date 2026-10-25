@@ -13,15 +13,11 @@ public class LoadScreenButton : PopUpButton
 		
 	}
 
-    // Update is called once per frame
+    //Clears the key debounce on the start menu and Game Over screen, where nothing else does. The back and
+    //settings keys there are the MainMenu actions and the GameOver overlay.
     void Update()
     {
 		KeyPressManager.updateKeyBools();
-		
-		if(KeyBindingList.settingsScreenOrBackKeyPressed() && !KeyPressManager.handlingPrimaryKeyPress)
-		{
-			EscapeStack.handleEscapePress();
-		}
     }
 	
 	private void Awake()

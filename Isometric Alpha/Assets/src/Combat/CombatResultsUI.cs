@@ -40,6 +40,15 @@ public class CombatResultsUI : PopUpWindow
         AudioManager.playAudioClipAsSingleton(SFXType.Win);
 
         setTitleText();
+
+        //The combat activity is frozen once the fight is won or lost, so the results screen takes its keys
+        //through an overlay rather than an activity.
+        PlayerStateManager.addInputOverlay(InputOverlay.CombatResults);
+    }
+
+    private void OnDestroy()
+    {
+        PlayerStateManager.removeInputOverlay(InputOverlay.CombatResults);
     }
 
     private void setTitleText()
@@ -61,21 +70,19 @@ public class CombatResultsUI : PopUpWindow
 	void Update()
 	{
 		KeyPressManager.updateKeyBools();
+    }
 
-        if(InspectNode.inspecting)
+    //Called by the CombatResults overlay's actions (select, both accept keys, deselect and settings).
+    //Inspecting adds its own overlay on top, which turns these off.
+    public void acceptFromKey()
+    {
+        if(KeyPressManager.handlingPrimaryKeyPress)
         {
             return;
         }
 
-		if ((Input.GetKey(KeyBindingList.combatSelectKey.getCurrentKeyCode()) || 
-                Input.GetKey(KeyBindingList.acceptKey.getCurrentKeyCode()) || 
-                Input.GetKey(KeyBindingList.acceptInputKey.getCurrentKeyCode())
-                || KeyBindingList.settingsScreenOrBackKeyPressed())
-			&& !KeyPressManager.handlingPrimaryKeyPress)
-		{
-			acceptButtonPress();
-			KeyPressManager.handlingPrimaryKeyPress = true;
-		}
+        acceptButtonPress();
+        KeyPressManager.handlingPrimaryKeyPress = true;
     }
 
     public void displayDrops(EnemyPackInfo packInfo)

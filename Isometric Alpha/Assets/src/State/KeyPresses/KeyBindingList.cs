@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+//The project's own Key item class would win over the Input System's Key enum, so the enum is aliased.
+using InputKey = UnityEngine.InputSystem.Key;
 
 public class KeyBind
 {
@@ -19,6 +21,17 @@ public class KeyBind
     private KeyCode currentKeyCode;
     private KeyCode defaultKeyCode;
 
+    //Every CustomInputAction built from this bind. Changing the key rebinds them, so a new key in the
+    //settings screen, a reset to defaults or a Config load takes effect straight away.
+    private readonly List<CustomInputAction> boundActions = new List<CustomInputAction>();
+
+    //The Input System form of currentKeyCode, worked out whenever the key changes so InputReader doesn't
+    //look it up on every poll. hasInputKey is false for mouse buttons and None; mouseButtonIndex is -1
+    //unless the key is a mouse button.
+    public InputKey inputKey { get; private set; }
+    public bool hasInputKey { get; private set; }
+    public int mouseButtonIndex { get; private set; } = -1;
+
     public List<KeyBindType> types
     {
         get;
@@ -31,6 +44,7 @@ public class KeyBind
 
         this.defaultKeyCode = defaultKeyCode;
         this.currentKeyCode = defaultKeyCode;
+        cacheInputSystemKey();
 
         if(types != null)
         {
@@ -96,12 +110,35 @@ public class KeyBind
 
     public void setCurrentKeyCode(KeyCode newCode)
     {
+        if(currentKeyCode == newCode)
+        {
+            return;
+        }
+
         currentKeyCode = newCode;
+        cacheInputSystemKey();
+
+        foreach(CustomInputAction action in boundActions)
+        {
+            action.rebind(currentKeyCode);
+        }
+    }
+
+    private void cacheInputSystemKey()
+    {
+        hasInputKey = currentKeyCode.TryGetInputKey(out InputKey key);
+        inputKey = key;
+        mouseButtonIndex = currentKeyCode.ToMouseButtonIndex();
     }
 
     public void resetToDefault()
     {
-        currentKeyCode = defaultKeyCode;
+        setCurrentKeyCode(defaultKeyCode);
+    }
+
+    public void bindAction(CustomInputAction action)
+    {
+        boundActions.Add(action);
     }
 
     public string getTitle()
@@ -203,17 +240,10 @@ public static class KeyBindingList
 
     public static bool movementKeyPressed()
     {
-        return Input.GetKey(moveNorthKey.getCurrentKeyCode()) ||
-                Input.GetKey(moveWestKey.getCurrentKeyCode()) ||
-                Input.GetKey(moveSouthKey.getCurrentKeyCode()) ||
-                Input.GetKey(moveEastKey.getCurrentKeyCode());
-    }
-    public static bool noMovementKeyPressed()
-    {
-        return !Input.GetKey(moveNorthKey.getCurrentKeyCode()) &&
-                !Input.GetKey(moveWestKey.getCurrentKeyCode()) &&
-                !Input.GetKey(moveSouthKey.getCurrentKeyCode()) &&
-                !Input.GetKey(moveEastKey.getCurrentKeyCode());
+        return InputReader.isHeld(moveNorthKey) ||
+                InputReader.isHeld(moveWestKey) ||
+                InputReader.isHeld(moveSouthKey) ||
+                InputReader.isHeld(moveEastKey);
     }
 
     #endregion
@@ -295,7 +325,7 @@ public static class KeyBindingList
     {
         return new List<KeyBind>()
         {
-            combatSelectKey, combatDeselectKey, resolveTurnKey, jumpMoveKey, combatSettingsScreenKey
+            combatSelectKey, combatDeselectKey, resolveTurnKey, jumpMoveKey, combatSettingsScreenKey, combatFastForwardAnimationKey
         };
     }
 
@@ -319,73 +349,24 @@ public static class KeyBindingList
     {
         if(CombatStateManager.inCombat)
         {
-            return Input.GetKey(combatSettingsScreenKey.getCurrentKeyCode()) || 
-               Input.GetKey(combatDeselectKey.getCurrentKeyCode());
+            return InputReader.isHeld(combatSettingsScreenKey) ||
+               InputReader.isHeld(combatDeselectKey);
         } else
         {
-            return Input.GetKey(settingsScreenKey.getCurrentKeyCode()) || 
-               Input.GetKey(backOutKey.getCurrentKeyCode());
+            return InputReader.isHeld(settingsScreenKey) ||
+               InputReader.isHeld(backOutKey);
         }
 
     }
 
     public static bool mouseWheelScrollingUp()
     {
-        return Input.mouseScrollDelta.y > 0;
+        return InputReader.scrollY > 0;
     }
 
     public static bool mouseWheelScrollingDown()
     {
-        return Input.mouseScrollDelta.y < 0;
-    }
-
-    public static bool continueUIKeyIsPressed()
-    {
-        if(CombatStateManager.inCombat)
-        {
-            return Input.GetKey(combatSelectKey.getCurrentKeyCode());
-            
-        } else
-        {
-            return Input.GetKey(interactKey.getCurrentKeyCode()) ||
-                    Input.GetKey(acceptKey.getCurrentKeyCode()) ||
-                    Input.GetKey(acceptInputKey.getCurrentKeyCode());
-        }
-    }
-
-    public static bool screenNavigationButtonIsPressed()
-    {
-        return !SaveHandler.saveNameFieldIsSelected() && 
-                (Input.GetKey(characterScreenKey.getCurrentKeyCode()) ||
-                 Input.GetKey(inventoryScreenKey.getCurrentKeyCode()) || 
-                 Input.GetKey(partyScreenKey.getCurrentKeyCode()) || 
-                 Input.GetKey(journalScreenKey.getCurrentKeyCode()) || 
-                 Input.GetKey(loadScreenKey.getCurrentKeyCode()) || 
-                 Input.GetKey(settingsScreenKey.getCurrentKeyCode()));
-    }
-
-    public static bool skipTutorialKeysArePressed()
-    {
-        return (Input.GetKey(KeyCode.LeftShift) ||
-                Input.GetKey(KeyCode.RightShift)) &&
-                Input.GetKey(KeyCode.Escape);
-    }
-
-    //Dialogue KeyBinds
-    public static bool continueStoryKeyIsPressed()
-    {
-        return Input.GetKey(interactKey.getCurrentKeyCode()) ||
-                Input.GetKey(KeyCode.Alpha1) ||
-                Input.GetKey(acceptKey.getCurrentKeyCode()) ||
-                Input.GetKey(acceptInputKey.getCurrentKeyCode());
-    }
-
-    //Misc Keys
-    public static bool quickLoadKeysPressed()
-    {
-        return (Application.isEditor &&
-                Input.GetKey(KeyCode.Q) &&
-                Input.GetKey(KeyCode.LeftControl));
+        return InputReader.scrollY < 0;
     }
 
 }

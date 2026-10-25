@@ -18,6 +18,8 @@ public class QuitToDesktop : IDecision
  
 	public void execute()
 	{
+        HeadlessLogger.LogEvent("Game.QuitRequested", "source", nameof(QuitToDesktop));
+
         EscapeStack.instantiateEscapeStack();
 
         Config.writeConfig();

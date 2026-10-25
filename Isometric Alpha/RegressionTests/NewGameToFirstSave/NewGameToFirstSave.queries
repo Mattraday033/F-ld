@@ -1,0 +1,89 @@
+# NewGameToFirstSave queries
+# Each [section] is one named test in the summary; it passes when every query under it passes.
+# A step's window runs from its Command.Started line to the next step's; by=<step> stretches it to the end
+# of that later step, for effects that land after the command that caused them.
+
+[Reached Character Creation Screen]
+boot:              expect Scene.Loaded scene=StartMenu
+new-game:         expect CharacterCreation.Opened by=creation-open
+spend-point:       expect CharacterCreation.StatIncreased pointsLeft=0
+accept:            expect CharacterCreation.Accepted
+
+[Reached Intro Quote]
+accept:            expect NewGame.Started by=quote
+accept:            expect Scene.Loaded scene=OpeningMonologue by=quote
+quote:             expect Monologue.QuoteShown
+all:               order Scene.Loaded scene=OpeningMonologue before Monologue.QuoteShown
+pages-ready:       expect Monologue.QuoteFinished
+
+[Reached Intro Page 1]
+pages-ready:       expect Monologue.PageShown page=1 by=page1-wait
+pages-ready:       expect Monologue.PageWaiting page=1 by=page1-wait
+page1:             expect Monologue.PageAdvanced page=1 by=page2-wait
+
+[Reached Intro Page 2]
+page1:             expect Monologue.PageShown page=2 by=page2-wait
+page1:             expect Monologue.PageWaiting page=2 by=page2-wait
+page2:             expect Monologue.PageAdvanced page=2 by=page3-wait
+
+[Reached Intro Page 3]
+page2:             expect Monologue.PageShown page=3 by=page3-wait
+page2:             expect Monologue.PageWaiting page=3 by=page3-wait
+page3:             expect Monologue.PageAdvanced page=3 by=page4-wait
+
+[Reached Intro Page 4]
+page3:             expect Monologue.PageShown page=4 by=page4-wait
+page3:             expect Monologue.PageWaiting page=4 by=page4-wait
+page4:             expect Monologue.PageAdvanced page=4 by=page5-wait
+
+[Reached Intro Page 5]
+page4:             expect Monologue.PageShown page=5 by=page5-wait
+page4:             expect Monologue.PageWaiting page=5 by=page5-wait
+page5:             expect Monologue.PageAdvanced page=5 by=page6-wait
+
+[Reached Intro Page 6]
+page5:             expect Monologue.PageShown page=6 by=page6-wait
+page5:             expect Monologue.PageWaiting page=6 by=page6-wait
+page6:             expect Monologue.PageAdvanced page=6 by=page7-wait
+
+[Reached Intro Page 7]
+page6:             expect Monologue.PageShown page=7 by=page7-wait
+page6:             expect Monologue.PageWaiting page=7 by=page7-wait
+page7:             expect Monologue.PageAdvanced page=7 by=loading
+page7:             expect Monologue.Finished by=loading
+
+[Reached Loading Screen]
+page7:             expect Scene.Loaded scene="Loading Screen" by=loading
+page7:             expect LoadingScreen.Opened by=loading
+loading:           expect Input.OverlayAdded overlay=LoadingScreenContinue by=loading-prompt
+loading-continue:  expect LoadingScreen.Continued by=loading-done
+loading-continue:  expect LoadingScreen.Closed by=intro-dialogue
+
+[Started Introduction Conversation]
+loading-continue:  expect Dialogue.Started story=IntroDialogue by=intro-dialogue
+all:               order LoadingScreen.Continued before Dialogue.Started story=IntroDialogue
+loading-continue:  expect Dialogue.AwaitingInput story=IntroDialogue by=intro-dialogue
+
+[Ended Introduction Conversation]
+intro-dialogue:    expect Dialogue.Ended story=IntroDialogue
+intro-dialogue:    count Dialogue.ChoiceMade story=IntroDialogue == 18
+intro-dialogue:    expectNone Dialogue.ChoiceIgnored
+intro-dialogue:    expect Activity.Changed from=InDialogue to=Walking by=walking
+
+[Walked Out Of The Starting Hut]
+walk-out:          expect Area.Changed from=2SlaveShack to=NECamp by=reach-door
+walk-out:          expect Save.Written type=autosave by=arrived
+walk-out:          expect Transition.Finished area=NECamp by=arrived
+walk-out:          expect Activity.Changed from=InFade to=Walking by=arrived
+stop-walking:      expectNone Area.Changed by=open-settings
+
+[Created Save]
+save:              expect Save.Written type=quicksave by=saved
+
+[Quit Game]
+open-settings:     expect Screen.Opened screen=Settings by=settings-open
+quit:              expect DecisionPanel.Opened decision=QuitToDesktop
+confirm-quit:      expect Game.QuitRequested source=QuitToDesktop by=quitting
+confirm-quit:      expect App.Quitting by=quitting
+all:               order Game.QuitRequested source=QuitToDesktop before App.Quitting
+all:               expect Script.Finished reason=gameQuit

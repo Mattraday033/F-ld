@@ -1,0 +1,61 @@
+# NewGameToFirstSave
+# A new game from a cold start: character creation, the opening quote and all seven monologue pages, the
+# loading screen, the introduction conversation with Brush and Géza, walking out of the starting hut
+# (2SlaveShack -> NECamp), a quicksave, then Settings > Quit Game.
+#
+# Actions only. What happened is logged by the game itself; NewGameToFirstSave.queries judges it.
+
+# --- Start menu and character creation ---
+# StartMenu has no EventSystem, so these clicks fall back to onClick.Invoke (the runner notes it).
+boot:              waitFor Scene.Loaded scene=StartMenu timeout=60
+new-game:          click "New Game Button" timeout=15
+creation-open:     waitFor CharacterCreation.Opened timeout=10
+# Start stays disabled until the one free stat point is spent.
+spend-point:       click "Plus Top Ring" timeout=10
+accept:            click "Start Button" timeout=10
+
+# --- Opening quote and monologue ---
+quote:             waitFor Monologue.QuoteShown timeout=60
+pages-ready:       waitFor Input.OverlayAdded overlay=OpeningMonologue timeout=60
+page1-wait:        waitFor Monologue.PageWaiting page=1 timeout=60
+page1:             press Space
+page2-wait:        waitFor Monologue.PageWaiting page=2 timeout=60
+page2:             press Space
+page3-wait:        waitFor Monologue.PageWaiting page=3 timeout=60
+page3:             press Space
+page4-wait:        waitFor Monologue.PageWaiting page=4 timeout=60
+page4:             press Space
+page5-wait:        waitFor Monologue.PageWaiting page=5 timeout=60
+page5:             press Space
+page6-wait:        waitFor Monologue.PageWaiting page=6 timeout=60
+page6:             press Space
+page7-wait:        waitFor Monologue.PageWaiting page=7 timeout=60
+page7:             press Space
+
+# --- Loading screen ---
+loading:           waitFor LoadingScreen.Opened timeout=60
+loading-prompt:    waitFor Input.OverlayAdded overlay=LoadingScreenContinue timeout=120
+loading-continue:  press interactKey
+loading-done:      waitFor Input.OverlayRemoved overlay=LoadingScreenContinue timeout=15
+
+# --- Introduction conversation (IntroDialogue.ink) ---
+# Indices are 0-based. Choice 0 at knot 1fa and choices 0-2 at knot 2b loop back, hence the 1 and the 3.
+# since= covers the conversation starting before this step does.
+intro-dialogue:    playDialogue choices=0,0,0,1,0,3,0,0,0,0,0,0,0,0,0,0,0,0 since=loading-continue timeout=600
+walking:           waitFor Activity.Changed to=Walking since=intro-dialogue timeout=15
+
+# --- Walk out of the hut: (4,1) south to the transition tile at (1,1) ---
+walk-out:          hold moveSouthKey
+reach-door:        waitFor Area.Changed from=2SlaveShack to=NECamp timeout=30
+stop-walking:      release moveSouthKey
+# At 10x the player can be back in Walking before Area.Changed is logged, so look back to walk-out.
+arrived:           waitFor Activity.Changed from=InFade to=Walking since=walk-out timeout=30
+
+# --- Save, then Settings > Quit Game ---
+save:              press quicksaveKey
+saved:             waitFor Save.Written type=quicksave timeout=10
+open-settings:     press settingsScreenKey
+settings-open:     waitFor Screen.Opened screen=Settings timeout=10
+quit:              mouseClick "Exit Game Button" timeout=10
+confirm-quit:      mouseClick "Confirm Button" timeout=10
+quitting:          waitFor App.Quitting timeout=30
