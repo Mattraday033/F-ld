@@ -16,6 +16,8 @@ public class ExuberanceEquippedPassive : EquippedPassive
 	private MultiStackProcType[] procTypes;
 
 
+	public override bool autoApply => false;
+
 	public ExuberanceEquippedPassive(CombatActionSettings settings, MultiStackProcType procType, int numberOfFreeStacks) :
 	base(settings)
 	{
@@ -30,33 +32,28 @@ public class ExuberanceEquippedPassive : EquippedPassive
 		this.procTypes = procTypes;
 	}
 
-	public override bool autoApply()
-	{
-		return false;
-	}
-
 	public override string getUseDescription()
     {
         string useDescription = "This Equipped Passive adds the following Exuberances to the Party's total at the beginning of Combat:\n\n";
 
-        if(getRedStacksAtStart() > 0)
+        if(redStacksAtStart > 0)
         {
-            useDescription += getRedStacksAtStart() + " Red Knife stack(s).\n";
+            useDescription += redStacksAtStart + " Red Knife stack(s).\n";
         }
 
-        if(getBlueStacksAtStart() > 0)
+        if(blueStacksAtStart > 0)
         {
-            useDescription += getBlueStacksAtStart() + " Blue Shield stack(s).\n";
+            useDescription += blueStacksAtStart + " Blue Shield stack(s).\n";
         }
 
-        if(getYellowStacksAtStart() > 0)
+        if(yellowStacksAtStart > 0)
         {
-            useDescription += getYellowStacksAtStart() + " Yellow Thorn stack(s).\n";
+            useDescription += yellowStacksAtStart + " Yellow Thorn stack(s).\n";
         }
 
-        if(getGreenStacksAtStart() > 0)
+        if(greenStacksAtStart > 0)
         {
-            useDescription += getGreenStacksAtStart() + " Green Leaf stack(s).";
+            useDescription += greenStacksAtStart + " Green Leaf stack(s).";
         }
 
         if(useDescription[useDescription.Length-1] == '\n')
@@ -67,43 +64,18 @@ public class ExuberanceEquippedPassive : EquippedPassive
         return useDescription;
     }
 
-    public override int getRedStacksAtStart()
+    public override int redStacksAtStart => getFreeStacks(redStackIndex);
+    public override int blueStacksAtStart => getFreeStacks(blueStackIndex);
+    public override int yellowStacksAtStart => getFreeStacks(yellowStackIndex);
+    public override int greenStacksAtStart => getFreeStacks(greenStackIndex);
+
+    private int getFreeStacks(int stackIndex)
     {
-        if (numberOfFreeStacks == null || numberOfFreeStacks.Length <= redStackIndex)
+        if (numberOfFreeStacks == null || numberOfFreeStacks.Length <= stackIndex)
         {
             return 0;
         }
 
-        return numberOfFreeStacks[redStackIndex];
-    }
-
-    public override int getBlueStacksAtStart()
-    {
-        if (numberOfFreeStacks == null || numberOfFreeStacks.Length <= blueStackIndex)
-        {
-            return 0;
-        }
-
-        return numberOfFreeStacks[blueStackIndex];
-    }
-
-    public override int getYellowStacksAtStart()
-    {
-        if (numberOfFreeStacks == null || numberOfFreeStacks.Length <= yellowStackIndex)
-        {
-            return 0;
-        }
-
-        return numberOfFreeStacks[yellowStackIndex];
-    }
-
-    public override int getGreenStacksAtStart()
-    {
-        if (numberOfFreeStacks == null || numberOfFreeStacks.Length <= greenStackIndex)
-        {
-            return 0;
-        }
-
-        return numberOfFreeStacks[greenStackIndex];
+        return numberOfFreeStacks[stackIndex];
     }
 }

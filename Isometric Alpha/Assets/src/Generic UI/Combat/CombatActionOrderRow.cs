@@ -161,7 +161,7 @@ public class CombatActionOrderRow : GridRow, IPointerEnterHandler, IPointerExitH
             return;
         }
 
-        Selector hoverSelector = combatAction.getSelector().clone();
+        Selector hoverSelector = combatAction.selector.clone();
 
         hoverSelector.alwaysRed = true;
 

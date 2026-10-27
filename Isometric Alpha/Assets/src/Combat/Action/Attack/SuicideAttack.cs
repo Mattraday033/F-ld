@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SuicideAttack : Attack	
 {
+	public override bool killsCaster => true;
+
 	public SuicideAttack(Stats actor, Weapon mainHandWeapon): base(actor, mainHandWeapon)
 	{
 
@@ -13,16 +15,10 @@ public class SuicideAttack : Attack
 	{
 		base.performCombatAction(targets);
 		
-		Stats caster = getActorStats();
+		Stats caster = actorStats;
 		
 		caster.modifyCurrentHealth(caster.getTotalHealth()*2);
 		
 		caster.setToDeadSprite();
 	}
-	
-	public override bool killsCaster()
-	{
-		return true;
-	}
-
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ReviveAbility : HealingAbility
 {
-    
+	public override bool targetMustBeDead => true;
 
 	public ReviveAbility(CombatActionSettings settings) :
     base(settings)
@@ -18,7 +18,7 @@ public class ReviveAbility : HealingAbility
 
         foreach(Stats target in targets)
         {
-            if(target != null && !getActorStats().Equals(target) && !target.notResurrectable())
+            if(target != null && !actorStats.Equals(target) && !target.notResurrectable)
             {
                 targetsExludingSelf.Add(target);
             }
@@ -28,9 +28,9 @@ public class ReviveAbility : HealingAbility
 
 		foreach(Stats targetCombatant in targets)
 		{
-			if(targetCombatant != null && getDamageFormula() != null && !targetCombatant.isAlive())
+			if(targetCombatant != null && getDamageFormula() != null && !targetCombatant.isAlive)
 			{
-				if(!inPreviewMode && actorIsAlly())
+				if(!inPreviewMode && actorIsAlly)
 				{
 					Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
 				}
@@ -44,9 +44,4 @@ public class ReviveAbility : HealingAbility
 		ZoneOfInfluenceManager.getInstance().applyAllZOITraits();
 	}
 	
-
-	public override bool targetMustBeDead()
-	{
-		return true;
-	}
 }

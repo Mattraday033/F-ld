@@ -57,7 +57,7 @@ public class PlayerAbilityGridRow : GridRow, IPointerDownHandler, IDragAndDropSo
             action = action.alternateActionWhenPlacedInActionSlot();
         }
 
-        if (action == null || !action.canBePlacedInActionSlot() || action.getMaximumSlots() <= 0)
+        if (action == null || !action.canBePlacedInActionSlot || action.getMaximumSlots() <= 0)
         {
             return false;
         }
@@ -120,7 +120,7 @@ public class PlayerAbilityGridRow : GridRow, IPointerDownHandler, IDragAndDropSo
 
         if(combatAction == null || 
             !combatAction.getDisplayType().Equals(AbilityList.passiveActionTypeName) || 
-            !combatAction.meetsStatRequirement())
+            !combatAction.meetsStatRequirement)
         {
             base.setToIneligible();
             return;

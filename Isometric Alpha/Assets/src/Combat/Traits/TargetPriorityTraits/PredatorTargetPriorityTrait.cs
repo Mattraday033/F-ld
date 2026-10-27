@@ -18,7 +18,7 @@ public class PredatoryTargetPriorityTrait : TargetPriorityTrait
 	{
         foreach(Stats stats in listOfTargets)
         {
-            if(stats != null && stats.isAlive() && stats.mandatoryTargetForTargetingType(this))
+            if(stats != null && stats.isAlive && stats.mandatoryTargetForTargetingType(this))
             {
                 return stats;
             }

@@ -39,12 +39,12 @@ public class LinkTrait : Trait
 
         if (getTraitHolder().positions.Count > 0)
         {
-            linkAction.setActor(getTraitHolder());
+            linkAction.actorStats = getTraitHolder();
         }
 
         foreach (Stats target in linkedTargets)
         {
-            if(target != null && !target.isDead() && target.positions.Count > 0)
+            if(target != null && !target.isDead && target.positions.Count > 0)
             {
                 projectileNumber += linkAction.sendProjectileAt(target.positions[0], target, projectileNumber, getDamageToDeal(incomingDamage), false);
             }

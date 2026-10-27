@@ -50,11 +50,11 @@ public class PlayerCombatActionManager : MonoBehaviour
             return;
         }
 
-		action.setActor(actor);
+		action.actorStats = actor;
 		
-		action.setSelector(targetSelector.clone());
+		action.selector = targetSelector.clone();
 		
-        if(action.actorIsSlowed())
+        if(action.actorIsSlowed)
         {
             slowedPlayerCombatActionQueue.Add(action);
         } else
@@ -94,7 +94,7 @@ public class PlayerCombatActionManager : MonoBehaviour
 
         List<CombatAction> currentActionQueue;
 
-        if(actorToRemoveFromQueue.isSlowed())
+        if(actorToRemoveFromQueue.isSlowed)
         {
             currentActionQueue = slowedPlayerCombatActionQueue;
         } else
@@ -133,15 +133,15 @@ public class PlayerCombatActionManager : MonoBehaviour
             return;
         }
 
-		action.setActor(actor);
+		action.actorStats = actor;
 
-		Selector targetSelector = action.getSelector().clone();
+		Selector targetSelector = action.selector.clone();
 		
 		targetSelector.setToLocation(action.getTargetCoords(), declareSelectors: false);
 		
-		action.setSelector((Selector) targetSelector.Clone());
+		action.selector = (Selector) targetSelector.Clone();
 		
-        if(action.actorIsSlowed())
+        if(action.actorIsSlowed)
         {
             slowedPlayerCombatActionQueue.Add(action);
         } else

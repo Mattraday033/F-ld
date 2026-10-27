@@ -7,6 +7,12 @@ public class RepositionAllyAbility : RepositionAbility, IJSONConvertable
 {
     private bool requiresAction;
 
+	public override bool repositionsCaster => false;
+	// public override bool targetsOnlyEmptySpace => true;
+	public override bool targetsAllySection => true;
+	public override bool requiresAnAction => requiresAction;
+	public override bool healsTarget => true;
+
 	public RepositionAllyAbility(CombatActionSettings settings, bool requiresAction = true) :
 		base(settings)
 	{
@@ -17,51 +23,22 @@ public class RepositionAllyAbility : RepositionAbility, IJSONConvertable
 	{
 		base.performCombatAction();
 
-		getActorStats().addTrait(getAppliedTrait());
+		actorStats.addTrait(getAppliedTrait());
 
-        if(!requiresAnAction())
+        if(!requiresAnAction)
         {
 	        chargeActorActionCost();
             setCooldownToMax();
         }
 	}
 
-	public override bool repositionsCaster()
-	{
-		return false;
-	}
+    public override EffectAnimationType effectAnimationType => EffectAnimationType.Positive;
 
-	// public override bool targetsOnlyEmptySpace()
-	// {
-	// 	return true;
-	// }
-
-	public override bool targetsAllySection()
-	{
-		return true;
-	}
-
-
-    public override bool requiresAnAction()
-    {
-        return requiresAction;
-    }
-
-	public override bool healsTarget()
-	{
-		return true;
-	}
-
-    public override EffectAnimationType getEffectAnimationType()
-    {
-        return EffectAnimationType.Positive;
-    }
-
-    public override void createEffectAnimation(GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
+    public override void createEffectAnimation(GridCoords targetCoords, bool crit = false, int damageNumber = noDamage)
     {
         targetCoords = getDestinationCoords();
 
-        AnimationTracker.loadInstantEffect(getEffectAnimationType(), targetCoords, crit, damageNumber, healsTarget, targetCanBeDead);
+        AnimationTracker.loadInstantEffect(effectAnimationType, targetCoords, crit, damageNumber, healsTarget, targetMustBeDead);
     }
 	
 }

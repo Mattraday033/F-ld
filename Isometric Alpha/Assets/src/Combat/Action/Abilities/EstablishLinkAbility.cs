@@ -19,6 +19,6 @@ public class EstablishLinkAbility : Ability
         LinkTrait linkTraitClone = (LinkTrait) linkTrait.clone();
         linkTraitClone.setLinkedTargets(targets);
 
-        getActorStats().addTrait(linkTraitClone);
+        actorStats.addTrait(linkTraitClone);
     }
 }

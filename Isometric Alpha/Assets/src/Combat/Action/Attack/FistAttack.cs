@@ -19,7 +19,7 @@ public class FistAttack : Attack, IJSONConvertable
 	
 	public override Item getSourceItem()
 	{
-		return (Item) ItemList.getMainHandFist(getActorStats() as AllyStats);
+		return (Item) ItemList.getMainHandFist(actorStats as AllyStats);
 	}
 	
 	//convertToJson is for save files, you will never need to save an actions coords so actor/target coords are not saved

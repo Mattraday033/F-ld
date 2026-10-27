@@ -12,6 +12,43 @@ public class VolleyAbility : Ability
 
 	public bool alliedSide;
 
+    public override bool multiActorAction => true;
+    public override GridCoords actorCoords => actorStats.positions.Count > 0 ? actorStats.positions[0] : GridCoords.getDefaultCoords();
+
+	public override Stats actorStats
+	{
+		set
+		{
+			base.actorStats = value;
+			allActors[0] = value;
+
+			// if (value != null)
+			// {
+			// 	Debug.LogError("actorStats set to " + value.position.ToString());
+			// }
+		}
+	}
+
+	public override Selector selector
+	{		
+        get
+        {
+            List<Stats> listOfTargets;
+            
+            if(actorStats?.shouldTargetEnemy ?? false)
+            {
+                listOfTargets = CombatGrid.getAllAliveEnemyCombatants();
+            } else
+            {
+                listOfTargets = CombatGrid.getAllAliveAllyCombatants();
+            }
+            
+            selector = volleyTargetingPriority.findTargetLocation(SelectorFactory.buildByTemplate(getRangeTemplate()), listOfTargets);
+            
+            return selector;
+        }
+	}
+
     public VolleyAbility(bool alliedSide) :
 	base(CombatActionSettings.build(DescriptionParams.build(volleyName, useDescription: volleyDescription)))
 	{
@@ -20,7 +57,7 @@ public class VolleyAbility : Ability
 
 		if(allActors.Count > 0)
 		{
-			setActor(allActors[0]);
+			actorStats = allActors[0];
 		}
 
 		this.volleyTargetingPriority = new BombardmentTargetPriorityTrait(generateVolleyGuaranteedHitChance(), allActors.Count);
@@ -44,11 +81,11 @@ public class VolleyAbility : Ability
 			{
 				continue;
 			}
-			else if (volleyActor.isDead())
+			else if (volleyActor.isDead)
 			{
 				deadActors.Add(volleyActor);
 			}
-			else if (volleyActor.isStunned())
+			else if (volleyActor.isStunned)
 			{
 				stunnedActors.Add(volleyActor);
 			}
@@ -81,15 +118,9 @@ public class VolleyAbility : Ability
         return allActors.Contains(actor);
     }
 
-
-    public override GridCoords getActorCoords()
-    {
-        return getActorStats().positions.Count > 0 ? getActorStats().positions[0] : GridCoords.getDefaultCoords();
-    }
-
     public override void performCombatAction() 
 	{
-		GridCoords[] targetTileCoords = getSelector().getAllSelectorCoords();
+		GridCoords[] targetTileCoords = selector.getAllSelectorCoords();
 		int coordIndex = 0;
 		int projectileNumber = 1;
         List<Trait> appliedTraits = getAllAppliedTraits();
@@ -108,18 +139,18 @@ public class VolleyAbility : Ability
 			int finalDamage;
 			
 			if(CombatGrid.combatantExistsAtCoords(targetTileCoords[targetCoordsIndex], out Stats targetCombatant) && 
-                targetCombatant.isAlive())
+                targetCombatant.isAlive)
 			{
 				crit = DamageCalculator.isACrit(getCritFormula(), uniqueName);
 				finalDamage = findFinalDamage(targetCombatant, crit);
 			
-				targetCombatant.modifyCurrentHealth(finalDamage, healing: healsTarget());
+				targetCombatant.modifyCurrentHealth(finalDamage, healing: healsTarget);
 			} else
 			{
 				finalDamage = -1;
 			}
 
-            AnimationTracker.loadInstantEffect(actor.getVolleyAnimationType(), targetTileCoords[targetCoordsIndex], crit, finalDamage, healsTarget(), targetMustBeDead(), false);
+            AnimationTracker.loadInstantEffect(actor.getVolleyAnimationType(), targetTileCoords[targetCoordsIndex], crit, finalDamage, healsTarget, targetMustBeDead, false);
 			
             projectileNumber++;
 			
@@ -142,7 +173,7 @@ public class VolleyAbility : Ability
             VolleyParticipantStats participant = stats as VolleyParticipantStats;
 
             if(participant == null || 
-                stats.isDead())
+                stats.isDead)
             {
                 continue;
             }
@@ -165,58 +196,9 @@ public class VolleyAbility : Ability
 
     private bool isParticipating(Stats actor)
     {
-        return actor != null && !actor.isDead() && !actor.isStunned();
+        return actor != null && !actor.isDead && !actor.isStunned;
     }
 
-	public override Selector getTargetSelector()
-	{		
-		SelectorManager selectorManager = SelectorManager.getInstance();
-		Selector selector = null;
-		Stats actor = getActorStats();
-
-		// Debug.LogError(actor.uniqueName + " is at position " + actor.position.ToString());
-
-		List<Stats> listOfTargets;
-		
-		if(actor.shouldTargetEnemy())
-		{
-			listOfTargets = CombatGrid.getAllAliveEnemyCombatants();
-		} else
-		{
-			listOfTargets = CombatGrid.getAllAliveAllyCombatants();
-		}
-		
-		selector = volleyTargetingPriority.findTargetLocation(SelectorFactory.buildByTemplate(getRangeTemplate()), listOfTargets);
-		
-		return selector;
-	}
-
-	public override void highlightActorSprites()
-	{
-		foreach(Stats actorStats in allActors)
-		{
-            if(actorStats == null)
-            {
-                continue;
-            }
-
-            actorStats.setOutline();
-		}
-	}
-	
-	public override void removeHighlightFromActorSprites()
-    {
-		foreach(Stats actorStats in allActors)
-		{
-            if(actorStats == null)
-            {
-                continue;
-            }
-
-            actorStats.removeOutline();
-		}
-	}
-	
 	public void findAllVolleyActorCoords(bool alliedSide)
 	{
 		List<Stats> allSummonActors;
@@ -233,7 +215,7 @@ public class VolleyAbility : Ability
 		
 		foreach(VolleyParticipantStats summon in allSummonActors)
 		{
-			if(summon.isPartOfVolley())
+			if(summon.isPartOfVolley)
 			{
 				allActors.Add(summon);
 			}
@@ -241,7 +223,7 @@ public class VolleyAbility : Ability
 
 		if (allActors.Count > 0)
 		{
-			setActor(allActors[0]);
+			actorStats = allActors[0];
 		}
 	}
 
@@ -256,7 +238,7 @@ public class VolleyAbility : Ability
         {
             VolleyParticipantStats volleyParticipant = volleyer as VolleyParticipantStats;
 
-            if(volleyParticipant != null && volleyer.isAlive() && !volleyer.isStunned())
+            if(volleyParticipant != null && volleyer.isAlive && !volleyer.isStunned)
             {
                 totalDamage += DamageCalculator.calculateFormula(average(volleyParticipant.getCombatAction()), volleyParticipant); //.getDamageFormulaTotal()
                 aliveVolleyers++;
@@ -298,7 +280,7 @@ public class VolleyAbility : Ability
 
 		foreach (AlliedSummonStats summon in allSummonActors)
 		{
-			if (summon.isPartOfVolley())
+			if (summon.isPartOfVolley)
 			{
 				volleyActors++;
 			}
@@ -323,16 +305,6 @@ public class VolleyAbility : Ability
 		return totalVolleyAccuracy/allActors.Count;
 	}
 
-	public override void setActor(Stats actor)
-	{
-		base.setActor(actor);
-		allActors[0] = actor;
-		
-		// if (actor != null)
-		// {
-		// 	Debug.LogError("setActor to " + actor.position.ToString());
-		// }
-	}
 
 	public void printAllActorCoords()
 	{
@@ -341,9 +313,4 @@ public class VolleyAbility : Ability
 			Debug.LogError("Volley Actor at coords " + string.Join(", ", actor.positions));
 		}
 	}
-
-    public override bool multiActorAction()
-    {
-        return true;
-    }
 }

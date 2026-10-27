@@ -8,25 +8,22 @@ public class SwapAbility : Ability
 {
 	private const bool healing = true;
 
+    public override bool healsTarget => true;
+
     public SwapAbility(CombatActionSettings settings) :
 	base(settings)
 	{
 
 	}
 
-	public override bool healsTarget()
-	{
-		return true;
-	}
-
 	public override void performCombatAction(List<Stats> targets)
 	{
-        if(getActorStats().isMultiTile())
+        if(actorStats.isMultiTile)
         {
             return;
         }
 
-		GridCoords tempCoords = getActorCoords().clone();
+		GridCoords tempCoords = actorCoords.clone();
 
 		Stats target = null;
 
@@ -44,12 +41,12 @@ public class SwapAbility : Ability
 			return;
 		}
 
-		getActorStats().moveTo(target.positions.Select(p => p.clone()).ToList());
-		getActorStats().addTrait(getAppliedTrait());
+		actorStats.moveTo(target.positions.Select(p => p.clone()).ToList());
+		actorStats.addTrait(getAppliedTrait());
 
 		target.moveTo(new List<GridCoords> { tempCoords });
 		target.addTrait(getAppliedTrait());
 
-		sendProjectileAt(getActorCoords(), getActorStats(), 0, getDamageFormulaTotal(), false);
+		sendProjectileAt(actorCoords, actorStats, 0, getDamageFormulaTotal(), false);
 	}
 }

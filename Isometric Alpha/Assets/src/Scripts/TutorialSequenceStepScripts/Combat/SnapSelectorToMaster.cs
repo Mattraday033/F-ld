@@ -14,7 +14,7 @@ public class SnapSelectorToMaster : TutorialSequenceStepScript
 
         foreach (EnemyStats enemy in allEnemies)
         {
-            if (enemy.isMaster() && enemy.hasTrait(TraitList.shielded))
+            if (enemy.isMaster && enemy.hasTrait(TraitList.shielded))
             {
                 shieldedEnemy = enemy;
 
@@ -44,7 +44,7 @@ public class SnapSelectorToMandatoryTarget : TutorialSequenceStepScript
 
         foreach (EnemyStats enemy in allEnemies)
         {
-            if (enemy.isMandatoryTarget())
+            if (enemy.isMandatoryTarget)
             {
                 mandatoryTarget = enemy;
 

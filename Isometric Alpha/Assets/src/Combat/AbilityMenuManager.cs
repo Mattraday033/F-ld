@@ -161,7 +161,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
     private void checkForPaymentTutorial()
     {
-        ActionCostType[] costTypes = abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction.getActionCostTypes();
+        IEnumerable<ActionCostType> costTypes = abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction.actionCostTypes;
 
         bool playExuberanceTutorial = false;
         bool playTraitCostTutorial = false;
@@ -238,12 +238,12 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         abilityButtons[previousIndex].updateCooldownCostText();
         getCurrentlySelectedAbilityMenuButton().updateCooldownCostText();
 
-        if (CombatStateManager.inCombat && getCurrentlySelectedAction() != null && !getCurrentlySelectedAction().unactivatable() &&
+        if (CombatStateManager.inCombat && getCurrentlySelectedAction() != null && !getCurrentlySelectedAction().unactivatable &&
             !noButtonsSelectable)
         {
             getCurrentlySelectedAbilityMenuButton().enableCombatActionSelectorPreview();
             CurrentActionHoverPanelManager.addPrimaryDescriptionPanel(getCurrentlySelectedAction());
-            getCurrentlySelectedAction().getSelector().setToStartLocation();
+            getCurrentlySelectedAction().selector.setToStartLocation();
             SelectorManager.declareSelectors();
         }
     }
@@ -342,7 +342,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         }
 
         if (abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction != null &&
-            abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction.needsItemQuantityPanel())
+            abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction.needsItemQuantityPanel)
         {
             Item sourceItem = abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction.getSourceItem();
             itemQuantityPanel.SetActive(true);
@@ -414,7 +414,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
         for (int actionIndex = 0; actionIndex < CombatActionArray.numberOfActivatablePlayerCombatActions; actionIndex++)
         {
-            if (actions[actionIndex] != null && !actions[actionIndex].unactivatable())
+            if (actions[actionIndex] != null && !actions[actionIndex].unactivatable)
             {
                 hasAtLeastOneActivatableAction = true;
                 break;
@@ -445,7 +445,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
             abilityButtons[index].loadCombatAction(action);
             abilityButtons[index].enable();
-            abilityButtons[index].enable(SpriteUtil.loadSpriteFromResources(action.getIconName()), ColorList.bubbleBackgroundColor, action);
+            abilityButtons[index].enable(action.iconSprite,ColorList.bubbleBackgroundColor, action);
 
             index++;
         }
@@ -489,12 +489,12 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     {
         foreach (AbilityMenuButton button in abilityButtons)
         {
-            if (button.loadedCombatAction != null && button.loadedCombatAction.getCooldownRemaining() > 0)
+            if (button.loadedCombatAction != null && button.loadedCombatAction.cooldownRemaining > 0)
             {
                 button.greyOutAbility();
                 button.updateCooldownCostText();
             }
-            else if (button.loadedCombatAction != null && button.loadedCombatAction.getCooldownRemaining() <= 0)
+            else if (button.loadedCombatAction != null && button.loadedCombatAction.cooldownRemaining <= 0)
             {
                 button.resetGreyOutStatus();
                 button.updateCooldownCostText();
@@ -506,7 +506,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     {
         foreach (AbilityMenuButton button in abilityButtons)
         {
-            if (button.loadedCombatAction != null && button.enabled && !button.loadedCombatAction.usableWithoutItemsInInventory())
+            if (button.loadedCombatAction != null && button.enabled && !button.loadedCombatAction.usableWithoutItemsInInventory)
             {
                 if (button.loadedCombatAction.getSourceItem().getQuantity() == 0)
                 {
@@ -523,12 +523,12 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
     public bool canPlaceWeaponHere()
     {
-        if (!getActionArraySource().hasAvailableWeaponSlots())
+        if (!getActionArraySource().hasAvailableWeaponSlots)
         {
             //if there are no available weapon slots BUT the hovered over ability IS a weapon, 
             //allow an accept button press. Otherwise, don't
             if (getEquippedCombatActionInCurrentlySelectedSlot() != null &&
-                getEquippedCombatActionInCurrentlySelectedSlot().takesAWeaponSlot())
+                getEquippedCombatActionInCurrentlySelectedSlot().takesAWeaponSlot)
             {
                 return true;
             }
@@ -606,7 +606,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     {
         return (!displayOnly && (!abilityButtons[currentlySelectedAbilityIndex].enabled ||
                     abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction == null ||
-                    abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction.unactivatable()))
+                    abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction.unactivatable))
 
                     || (displayOnly && !canPlaceWeaponHere());
     }
@@ -615,7 +615,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     {
         if (!abilityButtons[abilityIndex].enabled ||
             abilityButtons[abilityIndex].loadedCombatAction == null ||
-            abilityButtons[abilityIndex].loadedCombatAction.unactivatable())
+            abilityButtons[abilityIndex].loadedCombatAction.unactivatable)
         {
             return;
         }
@@ -651,7 +651,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
             return;
         }
 
-        abilityButtons[abilityIndex].enable(SpriteUtil.loadSpriteFromResources(combatAction.getIconName()), Color.clear, combatAction);
+        abilityButtons[abilityIndex].enable(combatAction.iconSprite,Color.clear, combatAction);
 
         if (selectButton)
         {
@@ -676,7 +676,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
             return true;
         }
 
-        if (combatAction.takesAWeaponSlot() && !getActionArraySource().hasAvailableWeaponSlots())
+        if (combatAction.takesAWeaponSlot && !getActionArraySource().hasAvailableWeaponSlots)
         {
             return false;
         }
@@ -695,7 +695,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
             if(action != null)
             {
-                Selector previewSelector = action.getSelector().clone();
+                Selector previewSelector = action.selector.clone();
 
                 previewSelector.hoverSelector = true;
 

@@ -11,6 +11,8 @@ public class AlliedSummonStats : VolleyParticipantStats
 	
     private bool partOfVolley;
 
+    public override bool isPartOfVolley => partOfVolley;
+
 	public AlliedSummonStats(EnemyStats enemyStats, bool partOfVolley = true): 
 		base(enemyStats.uniqueName, enemyStats.getTotalArmorRating(), enemyStats.getTotalHealth(), enemyStats.getCombatAction())
     {
@@ -30,12 +32,12 @@ public class AlliedSummonStats : VolleyParticipantStats
 
     public override List<GridCoords> findLocationToSpawn()
     {
-        if(isFrontline())
+        if(isFrontline)
         {
             return new List<GridCoords> { CreatureSpawner.getNextFreeAllyFrontLineSpace() };
         }
 
-        if(isBackline())
+        if(isBackline)
         {
             return new List<GridCoords> { CreatureSpawner.getNextFreeAllyBackLineSpace() };
         }
@@ -52,11 +54,6 @@ public class AlliedSummonStats : VolleyParticipantStats
     {
         return PartyStats.getVolleyAccuracy();
     }
-
-	public override bool isPartOfVolley()
-	{
-		return partOfVolley;
-	}
 
     //tagged as an NPC by CombatantSpawnDetails, which is how allied summons are told apart from party members
     public override void spawningActions()

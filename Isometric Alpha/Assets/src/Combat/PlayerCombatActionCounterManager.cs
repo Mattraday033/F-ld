@@ -23,13 +23,13 @@ public class PlayerCombatActionCounterManager : MonoBehaviour
 		int panelIndex = 0;
 		foreach (CombatAction action in actionOrder)
 		{
-			if (!CombatGrid.combatantExistsAtCoords(action.getActorCoords(), out Stats combatant) 
-                || combatant.isDead())
+			if (!CombatGrid.combatantExistsAtCoords(action.actorCoords, out Stats combatant) 
+                || combatant.isDead)
 			{
 				deadActorFound = true;
 			}
 
-			if (combatant.costsPartyCombatActions())
+			if (combatant.costsPartyCombatActions)
 			{
 				partyMemberCombatActionPanels[panelIndex].setToGreen();
 				panelIndex++;

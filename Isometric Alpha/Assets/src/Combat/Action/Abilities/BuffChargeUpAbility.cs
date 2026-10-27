@@ -5,21 +5,54 @@ using UnityEngine;
 public class BuffChargeUpAbility : ChargeUpAbility
 {
 
+    public override Selector selector
+    {
+        get
+        {
+            if (selfTargeting)
+            {
+                _Selector = SelectorFactory.buildByTemplate(getRangeTemplate());
+                _Selector.setToLocation(actorCoords);
+                return _Selector;
+            }
+
+            if(actorStats?.usePlayerTargeting ?? false)
+            {
+                return _Selector;
+            }
+            
+            if(charged)
+            {
+                return base.selector;
+            } 
+            else if(CombatGrid.positionIsOnAlliedSide(actorCoords))
+            {
+                Debug.LogError("BuffChargeUpAbility has not implemented Ally Side Targeting when not charged");
+
+                return base.selector;
+                
+            }
+            else
+            {
+                TraitContainer newTraitContainer = new TraitContainer(actorStats);
+
+                newTraitContainer.addTrait(TraitList.specificHexadecupleBoxEnemySide);
+
+                return newTraitContainer.findTargetLocation(SelectorFactory.buildByTemplate(getRangeTemplate()), new List<Stats>());
+            }
+        }
+    }
+
+
 	public BuffChargeUpAbility(Trait chargeUpTrait, Ability actionWhenCharged) :
 		base(chargeUpTrait, actionWhenCharged) 
 	{
 
 	}
 
-
-	public override bool isSelfTargeting()
-	{
-        return false;
-	}
-
 	public override SelectorTemplate getRangeTemplate()
 	{
-		if (isCharged())
+		if (charged)
 		{
 			return actionWhenCharged.getRangeTemplate();
 		}
@@ -31,7 +64,7 @@ public class BuffChargeUpAbility : ChargeUpAbility
 
 	public override string getRangeTitle()
 	{
-		if (isCharged())
+		if (charged)
 		{
 			return actionWhenCharged.getRangeTemplate().ToFriendlyString();
 		}
@@ -41,27 +74,4 @@ public class BuffChargeUpAbility : ChargeUpAbility
 		}
 	}
 
-    public override Selector getTargetSelector() //used for finding selectors when enemies are targeting
-    {
-        if(isCharged())
-        {
-            return base.getTargetSelector();
-        } 
-        else if(CombatGrid.positionIsOnAlliedSide(getActorCoords()))
-        {
-            Debug.LogError("BuffChargeUpAbility has not implemented Ally Side Targeting when not charged");
-
-            return base.getTargetSelector();
-            
-        }
-        else
-        {
-
-            TraitContainer newTraitContainer = new TraitContainer(getActorStats());
-
-            newTraitContainer.addTrait(TraitList.specificHexadecupleBoxEnemySide);
-
-            return newTraitContainer.findTargetLocation(SelectorFactory.buildByTemplate(getRangeTemplate()), new List<Stats>());
-        }
-    }
 }

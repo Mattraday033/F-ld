@@ -192,7 +192,7 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
 
                 AnimationData animationData = appearance.getAnimationData(animationType);
 
-                Coroutine animationDataCoroutine = StartCoroutine(animationData.animationCoroutine(this));
+                currentAnimation = StartCoroutine(animationData.animationCoroutine(this));
 
                 AnimationTracker.trackAnimation(key, this);
 
@@ -274,6 +274,8 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
 
     public void onAnimationFinished()
     {
+        currentAnimation = null;
+
         playAnimation(currentIdle);
 
         if(AnimationTracker.trackerBeingTracked(this))
@@ -283,6 +285,21 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
     }
 
     #endregion
+
+    //stops the animation partway through and returns to the current idle. Unlike finishing, this doesn't check whether
+    //every animation is done, so halting the last one doesn't end the turn
+    public void haltAnimation()
+    {
+        if(currentAnimation != null)
+        {
+            StopCoroutine(currentAnimation);
+            currentAnimation = null;
+        }
+
+        playAnimation(currentIdle);
+
+        AnimationTracker.removeAnimation(key);
+    }
 
     #region Combat
     //shells for the combat animations Stats used to drive through the old AnimationManager;

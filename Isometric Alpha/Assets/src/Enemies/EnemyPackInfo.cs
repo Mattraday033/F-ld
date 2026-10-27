@@ -33,7 +33,7 @@ public class EnemyPackInfo : IDescribableInBlocks, ICreatureSpawnPackage
             {
                 foreach(CreatureAmount creatureAmount in FoeTypes)
                 {
-                    if(creatureAmount.enemyStats.isMandatoryTarget())
+                    if(creatureAmount.enemyStats.isMandatoryTarget)
                     {
                         return TutorialSequenceList.mandatoryTargetTutorialSequenceKey;
                     }

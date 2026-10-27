@@ -34,6 +34,7 @@ public class AllyStats : Stats
     #region UnityEvents
 
     public readonly static UnityEvent OnPartyMemberUpgraded = new UnityEvent();
+    public readonly static UnityEvent OnAllyDeath = new UnityEvent();
 
     #endregion
 
@@ -57,6 +58,17 @@ public class AllyStats : Stats
 
     public CombatActionArray combatActionArray;
     public EquippedItems equippedItems;
+
+    public override bool usePlayerTargeting => true;
+
+    #endregion
+
+    #region Boolean Properties
+
+    public override bool costsPartyCombatActions => true;
+    public override bool notResurrectable => false;
+    public override bool hasAvailableWeaponSlots => combatActionArray.hasAvailableWeaponSlots();
+    public override bool removableFromFormation => this != PartyManager.getPlayerStats();
 
     #endregion
 
@@ -682,11 +694,6 @@ public class AllyStats : Stats
         return combatActionArray;
     }
 
-	public override bool costsPartyCombatActions()
-	{
-		return true;
-	}
-
 	public void resetAllCooldowns()
 	{
         combatActionArray.resetAllCooldowns();
@@ -763,11 +770,6 @@ public class AllyStats : Stats
         }
     }
 
-    public override bool notResurrectable()
-    {
-        return false;
-    } 
-
     #region Zone of Influence
 
     public override ZoneOfInfluenceTrait getZoneOfInfluenceTrait()
@@ -808,11 +810,6 @@ public class AllyStats : Stats
         totalArmorRating += getExtraArmorFromDexterity();
 
         return totalArmorRating;
-    }
-
-    public override bool hasAvailableWeaponSlots()
-    {
-        return combatActionArray.hasAvailableWeaponSlots();
     }
 
     public void checkStatsAfterEquipmentRemoval()
@@ -892,17 +889,6 @@ public class AllyStats : Stats
         return currentStory;
     }
 
-    public override bool removableFromFormation()
-    {
-        if (this == PartyManager.getPlayerStats())
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
 
 
     public override int getVolleyAccuracy()

@@ -7,6 +7,9 @@ public class HealingAbility : Ability
 {
 	private const string healingCritFormula = "0";
 
+	public override bool healsTarget => true;
+	public override bool targetsAllySection => true;
+
 	public HealingAbility(CombatActionSettings settings):
 	base(settings)
 	{
@@ -19,14 +22,4 @@ public class HealingAbility : Ability
 
         base.applySettings(settings);
     }
-    
-	public override bool healsTarget()
-	{
-		return true;
-	}
-	
-	public override bool targetsAllySection()
-	{
-		return true;
-	}
 }

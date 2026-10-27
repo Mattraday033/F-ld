@@ -26,7 +26,7 @@ public class SelectTarget : TutorialSequenceStepScript
 
         PlayerStateManager.setCurrentActivity(CurrentActivity.InTutorialSequence);
 
-        if (loadedCombatAction.requiresTertiaryCoords())
+        if (loadedCombatAction.requiresTertiaryCoords)
         {
             TutorialSequence.overrideTutorialSequence(TutorialSequenceList.getCombatTutorialSequenceForReposition());
         }

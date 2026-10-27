@@ -440,6 +440,11 @@ public static class DamageCalculator
         return formula.calculateBonusDamage();
 	}
 	
+	public static bool rollCritChance(CombatAction action)
+	{
+        return isACrit(action.getCritFormula(), action.uniqueName);
+    }
+
 	public static bool isACrit(string critFormula, string critKey)
 	{
 		bool isCrit = false;
@@ -515,12 +520,12 @@ public static class DamageCalculator
 
 				if (currentStatSource.positions.Count > 0)
 				{
-					fear.setActor(currentStatSource);
+					fear.actorStats = currentStatSource;
 				} else
                 {
                     return;
                 }
-				fear.setSelector(targetSelector);
+				fear.selector = targetSelector;
 				//fear.setTargetCoords(targetSelector.getCoords());
 
 				CombatActionManager.addCritCombatAction(fear);

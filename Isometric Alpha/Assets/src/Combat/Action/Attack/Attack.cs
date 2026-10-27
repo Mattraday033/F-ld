@@ -8,6 +8,20 @@ public class Attack : CombatAction, IJSONConvertable
 {
 	private Weapon mainHandWeapon;
 
+    public override bool takesAWeaponSlot => true;
+    public override bool canBePlacedInPassiveSlot => true;
+
+    public override Stats actorStats
+    {
+        set
+        {
+            base.actorStats = value;
+            EquippableItem item = getSourceItem() as EquippableItem;
+
+            item.equipTarget = value;
+        }
+    }
+
     public Attack(Stats actor, Weapon mainHandWeapon) :
     base(actor, SelectorFactory.buildByTemplate(mainHandWeapon.getRangeTemplate()))
     {
@@ -22,7 +36,7 @@ public class Attack : CombatAction, IJSONConvertable
 		{
             foreach (Stats targetCombatant in targets)
             {
-                if (targetCombatant != null && targetCombatant.isAlive())
+                if (targetCombatant != null && targetCombatant.isAlive)
                 {
                     Exuberances.addExuberance(MultiStackProcType.RedKnife, singleExuberanceStack);
                 }
@@ -43,11 +57,11 @@ public class Attack : CombatAction, IJSONConvertable
 
         if(mainHandWeapon != null && mainHandWeapon.getIsTwoHanded())
 		{
-            AllyStats actor = getActorStats() as AllyStats;
+            AllyStats actor = actorStats as AllyStats;
 
             if(actor != null && actor.equippedItems != null && actor.equippedItems.getOffHand() != null)
             {
-                getActorStats().addTrait(new AntiShieldTrait(actor.equippedItems.getOffHand()));
+                actorStats.addTrait(new AntiShieldTrait(actor.equippedItems.getOffHand()));
             }
         }
 	}
@@ -57,10 +71,7 @@ public class Attack : CombatAction, IJSONConvertable
 		return getMainHandWeapon().getKey();
 	}
 
-	public override string getIconName()
-	{
-		return getMainHandWeapon().getIconName();
-	}
+	public override string iconName => getMainHandWeapon().getIconName();
 
 	public override string displayName { get { return getMainHandWeapon().displayName; } }
 	public override string uniqueName { get { return getMainHandWeapon().uniqueName; } }
@@ -90,7 +101,7 @@ public class Attack : CombatAction, IJSONConvertable
 		{
 
             Trait traitToApply = mainHandWeapon.getAppliedTrait();
-            traitToApply.traitApplier = getActorStats();
+            traitToApply.traitApplier = actorStats;
 
 			return traitToApply;	
 		}
@@ -135,11 +146,6 @@ public class Attack : CombatAction, IJSONConvertable
         return allStats;
     }
 
-	public override bool takesAWeaponSlot()
-	{
-		return true;
-	}
-
     public override void playEquipSFX()
     {
         Weapon sourceWeapon = getSourceItem() as Weapon;
@@ -175,23 +181,7 @@ public class Attack : CombatAction, IJSONConvertable
 		return mainHandWeapon.convertToJson().Substring(0, itemJson.Length - 1) + ",\"CombatActionSaveType\":\"" + getSaveType() + "}";
 	}
 
-    public override bool canBePlacedInPassiveSlot()
-    {
-        return true;
-    }
-
-    public override void setActor(Stats actor)
-    {
-        base.setActor(actor);
-        EquippableItem item = getSourceItem() as EquippableItem;
-
-        item.equipTarget = actor;
-    }
-
-    public override EffectAnimationType getEffectAnimationType()
-    {
-        return getSourceItem().getEffectAnimationType();
-    }
+    public override EffectAnimationType effectAnimationType => getSourceItem().getEffectAnimationType();
 
     public override int getQuantity()
     {
@@ -205,7 +195,7 @@ public class Attack : CombatAction, IJSONConvertable
 
     private EquippableItem getOffHandWeapon()
     {
-        return getActorStats().getEquippedItems().getOffHand();
+        return actorStats.getEquippedItems().getOffHand();
     }
 
 
@@ -275,9 +265,9 @@ public class Attack : CombatAction, IJSONConvertable
 	{
 		getSourceItem().describeSelfRow(panel);
 
-        if(getActorStats() != null)
+        if(actorStats != null)
         {
-            getActorStats().setHeadSprite(panel);
+            actorStats.setHeadSprite(panel);
         }
 
         DescriptionPanel.setText(panel.damageText, getDamageTotalForDisplay());
@@ -314,7 +304,7 @@ public class Attack : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getIconName()));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: iconName));
 
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getSourceItem().getSlotIconName()));
 

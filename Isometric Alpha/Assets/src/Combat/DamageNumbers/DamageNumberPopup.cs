@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using System;
 
 public enum PopUpMoveDirection { Up, UpLeft, UpRight }
 
@@ -153,4 +154,3 @@ public class DamageNumberPopup : MonoBehaviour
         }
     }
 }
-

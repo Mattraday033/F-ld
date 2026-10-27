@@ -153,9 +153,9 @@ public class SelectorManager : MonoBehaviour
 
         CombatAction loadedCombatAction = currentAbilityManager.getCurrentlySelectedAction();
 
-        currentSelector = loadedCombatAction.getSelector();
+        currentSelector = loadedCombatAction.selector;
 
-        if (loadedCombatAction.resetCoordsOnBackOutOfTertiary())
+        if (loadedCombatAction.resetCoordsOnBackOutOfTertiary)
         {
             currentSelector.setToStartLocation();
         }
@@ -214,7 +214,7 @@ public class SelectorManager : MonoBehaviour
 	{
 		destroyPressEPrompt();
 
-		if (!CombatGrid.combatantExistsAtCoords(getCurrentSelectorCoords(), out Stats target) || target.isDead() || 
+		if (!CombatGrid.combatantExistsAtCoords(getCurrentSelectorCoords(), out Stats target) || target.isDead || 
             CombatActionManager.actorAlreadyHasCombatAction(getCurrentSelectorCoords()) ||
 			(CombatGrid.positionIsOnAlliedSide(getCurrentSelectorCoords()) && CombatActionManager.finishedChoosingPartyMemberCombatActions()))
 		{
@@ -281,13 +281,13 @@ public class SelectorManager : MonoBehaviour
 			loadedCombatAction = currentAbilityManager.getCurrentlySelectedAction();
 		}
 
-		if (loadedCombatAction.movesTarget() && currentSelector.targetsImmobileTarget())
+		if (loadedCombatAction.movesTarget && currentSelector.targetsImmobileTarget())
 		{
             AudioManager.playCannotChooseActorAbilityLocationSFX();
 			return;
 		}
 
-		if (loadedCombatAction.targetsOnlyEmptySpace())
+		if (loadedCombatAction.targetsOnlyEmptySpace)
 		{
 			if (!currentSelector.hasAtLeastOneTarget(allyAndEnemyTagCriteria))
 			{
@@ -300,13 +300,13 @@ public class SelectorManager : MonoBehaviour
 		}
 		else
 		{
-			if (loadedCombatAction.targetMustBeDead())
+			if (loadedCombatAction.targetMustBeDead)
 			{
 				if (currentSelector.hasAtLeastOneTarget(enemyTagCriteria))
 				{
 					if (CombatGrid.enemyHasMandatoryTarget(out Stats mandatoryTarget) &&
                         !currentSelector.hasAtLeastOneMandatoryTarget() &&
-                        !loadedCombatAction.isSelfTargeting())
+                        !loadedCombatAction.selfTargeting)
 					{
                         AudioManager.playCannotChooseActorAbilityLocationSFX();
                         CombatantHover.HighlightAllMandatoryTargets.Invoke();
@@ -322,10 +322,10 @@ public class SelectorManager : MonoBehaviour
 			}
 			else
 			{
-				if (loadedCombatAction.targetsAllySection())
+				if (loadedCombatAction.targetsAllySection)
 				{
 					if (currentSelector.hasAtLeastOneLivingTarget(allyTagCriteria))
-                    //  && !(currentSelector.getAllSelectorCoords().Contains(loadedCombatAction.getActorCoords()) && !loadedCombatAction.repositionsCaster()))
+                    //  && !(currentSelector.getAllSelectorCoords().Contains(loadedCombatAction.actorCoords) && !loadedCombatAction.repositionsCaster))
 					{
 						instance.finishChoosingLocation(loadedCombatAction);
 					}
@@ -336,7 +336,7 @@ public class SelectorManager : MonoBehaviour
 					{
 						if (CombatGrid.enemyHasMandatoryTarget(out Stats mandatoryTarget) &&
                             !currentSelector.hasAtLeastOneMandatoryTarget() && 
-                            !loadedCombatAction.isSelfTargeting())
+                            !loadedCombatAction.selfTargeting)
 						{
                             AudioManager.playCannotChooseActorAbilityLocationSFX();
                             CombatantHover.HighlightAllMandatoryTargets.Invoke();
@@ -358,9 +358,9 @@ public class SelectorManager : MonoBehaviour
 	{
 		//loadedCombatAction.setTargetCoords(new GridCoords(currentSelector.currentRow, currentSelector.currentCol));
 
-		if (!loadedCombatAction.requiresTertiaryCoords())
+		if (!loadedCombatAction.requiresTertiaryCoords)
 		{
-			if (loadedCombatAction.requiresAnAction())
+			if (loadedCombatAction.requiresAnAction)
 			{
 				playerCombatActionManager.queueCombatAction(SelectorFactory.playerCursor, currentSelector, loadedCombatAction);
                 AudioManager.playChooseActorAbilityLocationSFX();
@@ -387,7 +387,7 @@ public class SelectorManager : MonoBehaviour
 
 			Selector tertiarySelector = loadedCombatAction.getTertiarySelector();
 
-			if (loadedCombatAction.resetCoordsWhenChoosingTertiary())
+			if (loadedCombatAction.resetCoordsWhenChoosingTertiary)
 			{
 				tertiarySelector.setToStartLocation();
 			}
@@ -448,11 +448,11 @@ public class SelectorManager : MonoBehaviour
 
 	public void finishChoosingTertiary(CombatAction loadedCombatAction)
 	{
-        if (loadedCombatAction.requiresAnAction())
+        if (loadedCombatAction.requiresAnAction)
         {
             playerCombatActionManager.queueCombatActionWithTertiary(SelectorFactory.playerCursor, currentSelector, loadedCombatAction);
 
-            currentSelector.setToLocation(loadedCombatAction.getActorCoords());
+            currentSelector.setToLocation(loadedCombatAction.actorCoords);
         }
         else
         {
@@ -472,7 +472,7 @@ public class SelectorManager : MonoBehaviour
 		if (!SelectionInfo.selectedAllyCanAct(currentSelector.getCoords()) ||
             !CombatGrid.combatantExistsAtCoords(currentSelector.getCoords(), out Stats currentTarget) ||
             !(currentTarget is AllyStats) ||
-            currentTarget.isRepositionClone())
+            currentTarget.isRepositionClone)
 		{
 			return;
 		}
@@ -650,7 +650,7 @@ public class SelectorManager : MonoBehaviour
             case CurrentActivity.ChoosingLocation:
                 if(AbilityMenuManager.getInstance() != null && 
                     AbilityMenuManager.getInstance().getCurrentlySelectedAction() != null && 
-                    AbilityMenuManager.getInstance().getCurrentlySelectedAction().getSelector() != null)
+                    AbilityMenuManager.getInstance().getCurrentlySelectedAction().selector != null)
                 {
                     Selector abilitySelector = AbilityMenuManager.getSelectorToShowWhileChoosingAbility();
                     if(abilitySelector != null)
@@ -663,7 +663,7 @@ public class SelectorManager : MonoBehaviour
 
                 CombatAction currentAction = AbilityMenuManager.getInstance().getCurrentlySelectedAction();
 
-                Selector oldSelector = currentAction.getSelector().clone();
+                Selector oldSelector = currentAction.selector.clone();
 
                 oldSelector.setToLocation(currentAction.getSecondaryCoords(), declareSelectors: false);
                 oldSelector.alwaysRed = true;
@@ -777,7 +777,7 @@ public class SelectorManager : MonoBehaviour
             if(hoverSelector != null)
             {
                 CombatAction actionClone = AbilityMenuManager.getInstance().getCurrentlySelectedAction().clone();
-                actionClone.setSelector(hoverSelector);
+                actionClone.selector = hoverSelector;
 
                 DamagePreviewManager.UpdateDamagePreviews.Invoke(actionClone);
             }
@@ -924,7 +924,7 @@ public static class SelectionInfo
 	public static bool selectedAllyCanAct(GridCoords coords)
 	{
 		return CombatGrid.combatantExistsAtCoords(coords, out Stats actor) &&
-                actor.isAlive() && 
+                actor.isAlive && 
                 !PlayerCombatActionManager.actorHasActionsInQueue(actor) 
                 && PlayerCombatActionCounterManager.playerHasActionsLeft();
 	}

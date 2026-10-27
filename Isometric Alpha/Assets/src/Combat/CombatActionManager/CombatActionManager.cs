@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,12 +33,62 @@ public class CombatActionManager : MonoBehaviour
 	public static Coroutine currentWait;
 
 	public static Stats currentActor;
+
+    public static CombatActionState actionState = CombatActionState.NoAction;
+
+    private static List<Stats> targets;
+    private static List<IActionUnit> actionUnits;
+    private static int actionUnitIndex = 0;
 	
+    protected Dictionary<Type, List<IAnimationUnit>> animationUnits = new();
+
 	public static CombatActionManager getInstance()
 	{
 		return instance;
 	}
 	
+    public static void runCombatAction(CombatAction action)
+    {
+        if(action == null)
+        {
+            return;
+        }
+
+        try
+        {
+            actionState = CombatActionState.Calculation;
+
+            targets = action.findAllTargets();
+
+            actionUnits = action.getAllActionUnits();
+
+            actionState = CombatActionState.Application;
+
+            for(int index = 0; index < actionUnits.Count; index++)
+            {
+                actionUnits[index].perform();
+            }
+
+            actionState = CombatActionState.Animation;
+
+            
+
+        } catch(Exception e)
+        {
+            switch(actionState)
+            {
+                case CombatActionState.Calculation:
+                    return;
+                case CombatActionState.Application:
+                    return;
+                case CombatActionState.Animation:
+                    return;
+                default:
+                    return;
+            }            
+        }
+    }
+
 	public CombatAction determineNextCombatAction()
 	{		
 		CombatAction nextCombatAction = null;
@@ -86,7 +137,7 @@ public class CombatActionManager : MonoBehaviour
 			return; //if determineNextCombatAction() returns null then that means both action queues are empty. 
 		}
 		
-		if(actionBeingResolved.hasAssignedActor(out Stats actor) && !actor.isStunned())
+		if(actionBeingResolved.hasAssignedActor(out Stats actor) && !actor.isStunned)
 		{
 			actionBeingResolved.performCombatAction();
 			actionBeingResolved.setCooldownToMax();
@@ -174,7 +225,7 @@ public class CombatActionManager : MonoBehaviour
 	{
 		for(int actionIndex = onDeathCombatActionQueue.Count-1; actionIndex >= 0; actionIndex--)
 		{
-			if(!onDeathCombatActionQueue[actionIndex].hasAssignedActor(out Stats actor) || actor.isAlive())
+			if(!onDeathCombatActionQueue[actionIndex].hasAssignedActor(out Stats actor) || actor.isAlive)
 			{
 				onDeathCombatActionQueue.RemoveAt(actionIndex);
 			}
@@ -187,7 +238,7 @@ public class CombatActionManager : MonoBehaviour
 		
 		foreach(CombatAction action in actions)
 		{
-			if(action.getActorCoords().Equals(coords))
+			if(action.actorCoords.Equals(coords))
 			{
 				return true;
 			}
@@ -223,15 +274,15 @@ public class CombatActionManager : MonoBehaviour
 
 	private void findNewTarget(CombatAction action)
 	{
-		if (action == null || action.targetsOnlyEmptySpace())
+		if (action == null || action.targetsOnlyEmptySpace)
 		{
 			return;
 		}
 
-		// EnemyStats enemyActor = (EnemyStats)CombatGrid.combatantExistsAtCoords(action.getActorCoords());
+		// EnemyStats enemyActor = (EnemyStats)CombatGrid.combatantExistsAtCoords(action.actorCoords);
 		action.addPreviousTarget(action.getTargetCoords());
 		//action.setTargetCoords(action.getTargetSelector().getCoords());
-		action.getSelector().setToLocation(action.getTargetSelector().getCoords());
+		action.selector.setToLocation(action.selector.getCoords());
 	}
 	
 	public void promptLaterCombatActionsToReturnToPreviousTarget()
@@ -255,7 +306,7 @@ public class CombatActionManager : MonoBehaviour
 		}
 
 		//action.setTargetCoords(action.getPreviousTarget());
-		action.getSelector().setToLocation(action.getPreviousTarget());
+		action.selector.setToLocation(action.getPreviousTarget());
 	}
 	
 	public static List<CombatAction> getCombatActionOrder()
@@ -316,7 +367,7 @@ public class CombatActionManager : MonoBehaviour
 	
 	public static void addOnDeathCombatAction(CombatAction action)
 	{
-		if(onDeathCombatActionQueueHasCombatActionAtCoords(action.getActorCoords()))
+		if(onDeathCombatActionQueueHasCombatActionAtCoords(action.actorCoords))
 		{
 			return;
 		}
@@ -363,7 +414,7 @@ public class CombatActionManager : MonoBehaviour
 		foreach (CombatAction action in actions)
 		{
 			if (action.hasAssignedActor(out Stats actor) &&
-				actor.costsPartyCombatActions())
+				actor.costsPartyCombatActions)
 			{
 				numberOfPartyCombatActions++;
 			}
@@ -384,7 +435,7 @@ public class CombatActionManager : MonoBehaviour
 	{
 		foreach(CombatAction action in onDeathCombatActionQueue)
 		{
-			if(action.getActorCoords().Equals(coords))
+			if(action.actorCoords.Equals(coords))
 			{
 				return true;
 			}

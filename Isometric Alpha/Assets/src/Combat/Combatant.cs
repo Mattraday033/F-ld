@@ -93,7 +93,7 @@ public class Combatant : MonoBehaviour, INameSource
 
         addListeners();
 
-        if(stats.isDead())
+        if(stats.isDead)
         {
             setToDeadIdle();
         }
@@ -213,12 +213,12 @@ public class Combatant : MonoBehaviour, INameSource
     //the CombatantHover that used to answer this is no longer spawned, so the primary previews the damage on its own health bar
     private void addDamagePreview(CombatAction combatAction)
     {
-        if(healthBarManager == null || combatAction == null || combatAction.getSelector() == null)
+        if(healthBarManager == null || combatAction == null || combatAction.selector == null)
         {
             return;
         }
 
-        if(stats.isInsideCoordinates(combatAction.getSelector().getAllSelectorCoords()))
+        if(stats.isInsideCoordinates(combatAction.selector.getAllSelectorCoords()))
         {
             DamagePreviewManager.addDamagePreview(stats, healthBarManager, combatAction);
         }
@@ -270,7 +270,7 @@ public class Combatant : MonoBehaviour, INameSource
 
     private void onTraitRemoved(Trait trait)
     {
-        if(stats.isDead())
+        if(stats.isDead)
         {
             return;
         }
@@ -337,7 +337,7 @@ public class Combatant : MonoBehaviour, INameSource
 
     public void removeOutline()
     {
-        if(stats.isDead() && stats.notResurrectable())
+        if(stats.isDead && stats.notResurrectable)
         {
             return;
         }
@@ -358,7 +358,7 @@ public class Combatant : MonoBehaviour, INameSource
 
     public void playAnimationOnDamage()
     {
-        if(stats.isDead())
+        if(stats.isDead)
         {
             if(healthBarManager != null)
             {

@@ -101,10 +101,10 @@ public abstract class CombatMouseHover : MonoBehaviour
 
     protected bool canMoveToLocation(CombatAction combatAction)
     {
-        if (CombatGrid.positionIsOnAlliedSide(getTargetCoords()) && combatAction.targetsAllySection())
+        if (CombatGrid.positionIsOnAlliedSide(getTargetCoords()) && combatAction.targetsAllySection)
         {
             return true;
-        } else if (CombatGrid.positionIsOnEnemySide(getTargetCoords()) && !combatAction.targetsAllySection())
+        } else if (CombatGrid.positionIsOnEnemySide(getTargetCoords()) && !combatAction.targetsAllySection)
         {
             return true;
         }

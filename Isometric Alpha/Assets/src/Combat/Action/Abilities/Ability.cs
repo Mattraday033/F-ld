@@ -14,8 +14,6 @@ public class Ability: CombatAction, IJSONConvertable
 	
 	private string name;
 	
-	private string iconName;
-	
 	protected string useDescription;
 
 	private string loreDescription;
@@ -32,7 +30,6 @@ public class Ability: CombatAction, IJSONConvertable
 	
 	public EnemyStats spawnType;
 
-    public bool selfTargeting;
     public bool targetsOnlyAllies;
     
     private bool _OnlyUsableDuringSurpriseRound; 
@@ -47,11 +44,58 @@ public class Ability: CombatAction, IJSONConvertable
 
 	private Trait appliedTrait;
 
-	private ActionCostType[] costTypes = new ActionCostType[] { ActionCostType.None };
-    private int[] actionCosts = new int[] { 0 };
-
     private CombatAnimationType animationType;
-    private EffectAnimationType effectAnimationType;
+
+    public override bool targetsAllySection => targetsOnlyAllies;
+
+    public override bool meetsStatRequirement
+    {
+        get
+        {
+            if (statKey.Length <= 0 || getRequiredStatLevel() < 0)
+            {
+                return true;
+            }
+
+            int currentStat = 0;
+
+            char statKeyChar = statKey[0];
+
+            switch(statKeyChar)
+            {
+                case AbilityList.levelKeyChar:
+                    currentStat = OverallUIManager.getCurrentPartyMember().getLevel();
+                    break;
+                case AbilityList.strengthKeyChar:
+                    currentStat = OverallUIManager.getCurrentPartyMember().getStrength();
+                    break;
+                case AbilityList.dexterityKeyChar:
+                    currentStat = OverallUIManager.getCurrentPartyMember().getDexterity();
+                    break;
+                case AbilityList.wisdomKeyChar:
+                    currentStat = OverallUIManager.getCurrentPartyMember().getWisdom();
+                    break;
+                case AbilityList.charismaKeyChar:
+                    currentStat = OverallUIManager.getCurrentPartyMember().getCharisma();
+                    break;
+            }
+
+            return getRequiredStatLevel() <= currentStat;
+        }
+    }
+
+    public override Stats actorStats
+    {
+        set
+        {
+            base.actorStats = value;
+
+            if(appliedTrait != null && value != null)
+            {
+                appliedTrait.traitApplier = value;
+            }
+        }
+    }
 
     public Ability(CombatActionSettings settings) :
     base(null, SelectorFactory.buildByTemplate(settings.targetParams.rangeTemplate))
@@ -74,18 +118,22 @@ public class Ability: CombatAction, IJSONConvertable
 
         rangeTemplate = settings.targetParams.rangeTemplate;
 
-        selfTargeting = settings.targetParams.selfTargeting;
+        _SelfTargeting = settings.targetParams.selfTargeting;
         targetsOnlyAllies = settings.targetParams.targetsOnlyAllies;
 
 		maximumSlots = settings.frequencyParams.maximumSlots;
 		maximumCooldown = settings.frequencyParams.maximumCooldown;
 		_OnlyUsableDuringSurpriseRound = settings.frequencyParams.onlyUsableDuringSurpriseRound;
 
-		costTypes = settings.costParams.costTypes;
-		actionCosts = settings.costParams.actionCosts;
+		clearActionCosts();
+
+		for (int index = 0; index < settings.costParams.costTypes.Length && index < settings.costParams.actionCosts.Length; index++)
+		{
+			this[settings.costParams.costTypes[index]] = settings.costParams.actionCosts[index];
+		}
 
         animationType = settings.animationParams.animationType;
-        effectAnimationType = settings.animationParams.effectAnimationType;
+        _EffectAnimationType = settings.animationParams.effectAnimationType;
         useSpecialAttackAnimation = settings.animationParams.useSpecialAttackAnimation;
 
         appliedTrait = settings.appliedTrait;
@@ -94,11 +142,6 @@ public class Ability: CombatAction, IJSONConvertable
 
 	public override string displayName { get { return name; } }
 	public override string uniqueName { get { return key; } }
-	
-	public override string getIconName()
-	{
-		return iconName;
-	}
 	
 	public override string getKey()
 	{
@@ -132,65 +175,43 @@ public class Ability: CombatAction, IJSONConvertable
 		return "<i>" + loreDescription + "</i>";
 	}
 
-	public override void setCooldownToMax()
-	{
-        setCooldownRemaining(getMaximumCooldown());
-	}
-	
-	public override int getMaximumCooldown()
-	{
-		return maximumCooldown;
-	}
-	
 	public override string getRangeTitle()
 	{
 		return rangeTemplate.ToFriendlyString();
 	}
-
-    public override int[] getActionCosts()
-    {
-        return actionCosts;
-    }
-
-    public override ActionCostType[] getActionCostTypes()
-    {
-        return costTypes;
-    }
 
     //convertToJson is for save files, you will never need to save an actions coords so actor/target coords are not saved
     public override string convertToJson()
     {
         return "{sourceAbility\":\"" + getKey() + "\",\"CombatActionSaveType\":\"" + getSaveType() + "}";
     }
-	
-    public override CombatAnimationType getCombatAnimationType()
+
+    public override EffectAnimationType effectAnimationType
     {
-        return CombatAnimationType.Effect;
-    }
-
-    public override EffectAnimationType getEffectAnimationType()
-    {
-        if(effectAnimationType != EffectAnimationType.Default)
+        get
         {
-            return effectAnimationType;
-        }
+            if(_EffectAnimationType != EffectAnimationType.Default)
+            {
+                return _EffectAnimationType ;
+            }
 
-        if(healsTarget())
-        {
-            return EffectAnimationType.Healing;
-        }
+            if(healsTarget)
+            {
+                return EffectAnimationType.Healing;
+            }
 
-        if(getAppliedTrait() != null && getAppliedTrait().isDebuff())
-        {
-            return EffectAnimationType.Negative;
-        }
+            if(getAppliedTrait() != null && getAppliedTrait().isDebuff())
+            {
+                return EffectAnimationType.Negative;
+            }
 
-        if(getAppliedTrait() != null && getAppliedTrait().isBuff())
-        {
-            return EffectAnimationType.Positive;
-        }
+            if(getAppliedTrait() != null && getAppliedTrait().isBuff())
+            {
+                return EffectAnimationType.Positive;
+            }
 
-        return EffectAnimationType.Slash;
+            return EffectAnimationType.Slash;
+        }
     }
 
 	public override string getDamageFormula()
@@ -210,7 +231,7 @@ public class Ability: CombatAction, IJSONConvertable
 			return Constants.zeroRating;
 		}
 
-        return DamageCalculator.combineFormulas(gatherAllNonActionFormulas(a => a.getDamageFormula()), "+" + getActorStats().getBonusAbilityDamage());
+        return DamageCalculator.combineFormulas(gatherAllNonActionFormulas(a => a.getDamageFormula()), "+" + actorStats.getBonusAbilityDamage());
     }
 
     protected override string gatherAllNonActionFormulas(FormulaDelegate<StatBoostSource> getFormula)
@@ -249,16 +270,6 @@ public class Ability: CombatAction, IJSONConvertable
 		return maximumSlots;
 	}
 	
-    public override void setActor(Stats actor)
-    {
-        base.setActor(actor);
-
-        if(appliedTrait != null && actor != null)
-        {
-            appliedTrait.traitApplier = actor;
-        }
-    }
-
 	public override Trait getAppliedTrait()
 	{
 		if (appliedTrait == null)
@@ -271,16 +282,6 @@ public class Ability: CombatAction, IJSONConvertable
 		}
 	}
 	
-	public override bool isSelfTargeting()
-	{
-		return selfTargeting;
-	}
-	
-    public override bool targetsAllySection()
-    {
-        return targetsOnlyAllies;
-    }
-
 	public override string getDisplayType()
 	{
 		return AbilityList.abilityActionTypeName;
@@ -334,7 +335,7 @@ public class Ability: CombatAction, IJSONConvertable
 
 		if (CombatStateManager.inCombat)
 		{
-			if(getActorStats().isStunned())
+			if(actorStats.isStunned)
 			{
                 return true;
             } else
@@ -344,42 +345,9 @@ public class Ability: CombatAction, IJSONConvertable
 		}
 		else
 		{
-            return !meetsStatRequirement();
+            return !meetsStatRequirement;
 		}
 	}
-
-    public override bool meetsStatRequirement()
-    {
-        if (statKey.Length <= 0 || getRequiredStatLevel() < 0)
-        {
-            return true;
-        }
-
-        int currentStat = 0;
-
-        char statKeyChar = statKey[0];
-
-        switch(statKeyChar)
-        {
-            case AbilityList.levelKeyChar:
-                currentStat = OverallUIManager.getCurrentPartyMember().getLevel();
-                break;
-            case AbilityList.strengthKeyChar:
-                currentStat = OverallUIManager.getCurrentPartyMember().getStrength();
-                break;
-            case AbilityList.dexterityKeyChar:
-                currentStat = OverallUIManager.getCurrentPartyMember().getDexterity();
-                break;
-            case AbilityList.wisdomKeyChar:
-                currentStat = OverallUIManager.getCurrentPartyMember().getWisdom();
-                break;
-            case AbilityList.charismaKeyChar:
-                currentStat = OverallUIManager.getCurrentPartyMember().getCharisma();
-                break;
-        }
-
-        return getRequiredStatLevel() <= currentStat;
-    }
 
     public override List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()
     {
@@ -402,7 +370,7 @@ public class Ability: CombatAction, IJSONConvertable
     {
         List<IDescribable> relatedDescribables = base.getRelatedDescribables();
 
-        foreach(ActionCostType costType in costTypes)
+        foreach(ActionCostType costType in actionCostTypes)
         {
             Trait costTrait = costType.getCostTrait();
 
@@ -418,24 +386,7 @@ public class Ability: CombatAction, IJSONConvertable
 
     public string getCostDescription()
     {
-        string costDescription = "";
-
-        if(costTypes.Contains(ActionCostType.None))
-        {
-            return costDescription;
-        }
-
-        for(int i = 0; i < costTypes.Length; i++)
-        {
-            costDescription += costTypes[i].getCostDescription(actionCosts[i]);
-
-            if(i < costTypes.Length-1)
-            {
-                costDescription += "\n";
-            }
-        }
-
-        return costDescription;
+        return string.Join("\n", actionCostTypes.Select(costType => costType.getCostDescription(this[costType])));
     }
 
     //ISortable Methods

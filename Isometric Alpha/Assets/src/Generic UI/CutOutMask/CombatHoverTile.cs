@@ -165,7 +165,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     //Every tile under a creature reaches the same answer, since the whole creature is checked rather than this one tile
     private void updateOutlineFromSelectors(List<Selector> visibleSelectors)
     {
-        if(!hasTargetStats(out Stats target) || target.isRepositionClone() || outlineIsHeld(target))
+        if(!hasTargetStats(out Stats target) || target.isRepositionClone || outlineIsHeld(target))
         {
             return;
         }
@@ -173,7 +173,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         //a mandatory target's fading highlight would otherwise go on to overwrite the outline set here
         CombatantHover.StopHighlightFadeMandatoryTarget.Invoke(target);
 
-        if(!target.isDead() && insideSelectors(target, visibleSelectors))
+        if(!target.isDead && insideSelectors(target, visibleSelectors))
         {
             target.setOutline();
         } else
@@ -208,7 +208,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
             GridCoords[] gridCoords = selector.getAllSelectorCoords();
 
             if(target.isInsideCoordinates(gridCoords) ||
-                (target.queuedToMove() && target.repositionClone.isInsideCoordinates(gridCoords)))
+                (target.queuedToMove && target.repositionClone.isInsideCoordinates(gridCoords)))
             {
                 return true;
             }
@@ -300,7 +300,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
         CombatHoverTileManager.GetHoverSelector.AddListener(getHoverSelector);
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive())
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive)
         {
             revealPriorityHeld = true;
 
@@ -322,7 +322,7 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
         CombatHoverTileManager.GetHoverSelector.RemoveListener(getHoverSelector);
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive())
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive)
         {
             revealPriorityHeld = false;
 

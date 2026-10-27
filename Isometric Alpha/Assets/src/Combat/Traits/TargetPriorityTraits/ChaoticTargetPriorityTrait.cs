@@ -25,7 +25,7 @@ public class ChaoticTargetPriorityTrait : TargetPriorityTrait
 		
         foreach(Stats stats in listOfTargets)
         {
-            if(stats != null && stats.isAlive() && stats.mandatoryTargetForTargetingType(this))
+            if(stats != null && stats.isAlive && stats.mandatoryTargetForTargetingType(this))
             {
                 return stats;
             }
@@ -49,7 +49,7 @@ public class ChaoticTargetPriorityTrait : TargetPriorityTrait
 
 		foreach(Stats target in listOfTargets)
 		{
-			if(!target.isSummon())
+			if(!target.isSummon)
 			{
 				newListOfTargets.Add(target);
 			}
@@ -91,7 +91,7 @@ public class NonMasterChaoticTargetPriorityTrait : TargetPriorityTrait
 
 		foreach(Stats target in listOfTargets)
 		{
-			if(target != null && target.isSummon() || target.isMinion())
+			if(target != null && target.isSummon || target.isMinion)
 			{
 				newListOfTargets.Add(target);
 			}

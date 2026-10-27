@@ -34,14 +34,14 @@ public class SquadAbility : Ability
 
 	private bool checkCoords(GridCoords coords)
 	{
-		return CombatGrid.combatantExistsAtCoords(coords, out Stats target) && target.isAlive();
+		return CombatGrid.combatantExistsAtCoords(coords, out Stats target) && target.isAlive;
 	}
 
 	private bool checkTopCoords()
 	{
-		GridCoords topCoords = new GridCoords(getActorCoords().row - 1, getActorCoords().col);
+		GridCoords topCoords = new GridCoords(actorCoords.row - 1, actorCoords.col);
 		
-		if(topCoords.row < CombatGrid.enemyRowUpperBounds || getActorCoords().row == CombatGrid.allyRowUpperBounds)
+		if(topCoords.row < CombatGrid.enemyRowUpperBounds || actorCoords.row == CombatGrid.allyRowUpperBounds)
 		{
 			return false;
 		}
@@ -51,9 +51,9 @@ public class SquadAbility : Ability
 	
 	private bool checkBottomCoords()
 	{
-		GridCoords bottomCoords = new GridCoords(getActorCoords().row + 1, getActorCoords().col);
+		GridCoords bottomCoords = new GridCoords(actorCoords.row + 1, actorCoords.col);
 		
-		if(bottomCoords.row > CombatGrid.allyRowLowerBounds || getActorCoords().row == CombatGrid.enemyRowLowerBounds)
+		if(bottomCoords.row > CombatGrid.allyRowLowerBounds || actorCoords.row == CombatGrid.enemyRowLowerBounds)
 		{
 			return false;
 		}
@@ -63,9 +63,9 @@ public class SquadAbility : Ability
 	
 	private bool checkLeftCoords()
 	{
-		GridCoords leftCoords = new GridCoords(getActorCoords().row, getActorCoords().col - 1);
+		GridCoords leftCoords = new GridCoords(actorCoords.row, actorCoords.col - 1);
 		
-		if(getActorCoords().col == CombatGrid.colLeftBounds)
+		if(actorCoords.col == CombatGrid.colLeftBounds)
 		{
 			return false;
 		}
@@ -75,9 +75,9 @@ public class SquadAbility : Ability
 	
 	private bool checkRightCoords()
 	{
-		GridCoords rightCoords = new GridCoords(getActorCoords().row, getActorCoords().col + 1);
+		GridCoords rightCoords = new GridCoords(actorCoords.row, actorCoords.col + 1);
 		
-		if(getActorCoords().col == CombatGrid.colRightBounds)
+		if(actorCoords.col == CombatGrid.colRightBounds)
 		{
 			return false;
 		}

@@ -4,69 +4,58 @@ using UnityEngine;
 
 public class LastManStandingAbility : ChargeUpAbility
 {
-	private bool hasCharge = false;
-	
+    /*
+    NEEDS TESTING OF LOGIC FOR WHEN IS CHARGED/WHEN IS NOT CHARGED/WHEN SHOULD ATTACK/WHEN SHOULD DEFEND for the Cave Matron
+    */
+
+	public bool hasCharge
+    {
+        get
+        {
+            return false;
+        }
+        protected set
+        {
+            hasCharge = value;
+        }
+    }
+
+	public override Stats actorStats
+	{
+		set
+		{
+			base.actorStats = value;
+			actionWhenCharged.actorStats = value;
+		}
+	}
+
 	public LastManStandingAbility(Trait chargeUpTrait, Ability actionWhenCharged):
 		base(chargeUpTrait, actionWhenCharged)
 	{
 		
 	}
 	
-	public void setCharge(bool hasCharge)
+	public override Selector selector
 	{
-		this.hasCharge = hasCharge;
-	}
-	
-	public override void setSelector(Selector newSelector)
-	{
-		base.setSelector(newSelector);
-		actionWhenCharged.setSelector(newSelector);
+		set
+		{
+			base.selector = value;
+			actionWhenCharged.selector = value;
+		}
 	}
 
-	public override void setActor(Stats actor)
-	{
-		base.setActor(actor);
-		actionWhenCharged.setActor(actor);
-		
-		// if (actor != null)
-		// {
-		// 	Debug.LogError("setActor to " + actor.position.ToString());
-		// }
-	}
-	/*
-	public override void setTargetCoords(GridCoords newTargetCoords)
-	{
-		base.setTargetCoords(newTargetCoords);
-		actionWhenCharged.setTargetCoords(newTargetCoords);
-	}
-	*/
 	public override void performCombatAction(List<Stats> targets)
 	{
-		if(isCharged())
+		if(charged)
 		{
-			getActorStats().removeTrait(chargeUpTrait);
+			actorStats.removeTrait(chargeUpTrait);
 			actionWhenCharged.performCombatAction(targets);
 		}
 		
 		if(shouldApplyTrait())
 		{
-            createEffectAnimation(getActorCoords());
-			getActorStats().addTrait(chargeUpTrait);
-		}
-	}
-	
-	//a bit of a hack, but when isSelfTargeting is called is when the game is asking if it should target itself or not
-	// so it should lock in that choice when isSelfTargeting is called
-	public override bool isSelfTargeting()
-	{
-		if(shouldApplyTrait())
-		{
-			setCharge(false);
-			return true;
-		} else
-		{
-			setCharge(true);
-			return false;
+            createEffectAnimation(actorCoords);
+			actorStats.addTrait(chargeUpTrait);
 		}
 	}
 	
@@ -74,21 +63,38 @@ public class LastManStandingAbility : ChargeUpAbility
     {
         if (shouldApplyTrait())
         {
-            getActorStats().playAttackIntoSecondaryIdleAnimation();
+            actorStats.playAttackIntoSecondaryIdleAnimation();
         }
         else
         {
-            getActorStats().playAttackIntoFrontIdleAnimation();
+            actorStats.playAttackIntoFrontIdleAnimation();
         }
     }
 
 	public bool shouldApplyTrait()
 	{
-		return CombatGrid.getTotalAliveEnemyCount() > 1;
+		return charged && !actorStats.hasTrait(chargeUpTrait);
 	}
 	
-	public override bool isCharged()
+	public override bool charged
 	{
-		return hasCharge;
+        get
+        {
+            if(actorStats?.isAlive ?? false)
+            {
+                switch(actorStats.getCombatGridSide())
+                {
+                    case CombatGridSide.Ally:
+                        return CombatGrid.getTotalAliveAllyCount() != 1;
+                    case CombatGridSide.Enemy:
+                        return CombatGrid.getTotalAliveEnemyCount() != 1;
+                    default:
+                        return false;
+                }
+            } 
+
+            return false;
+        }
 	}
+
 }

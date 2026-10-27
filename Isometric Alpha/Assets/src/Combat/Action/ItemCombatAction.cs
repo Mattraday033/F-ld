@@ -7,6 +7,12 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 {
 	private UsableItem sourceItem;
 
+	public override bool targetsAllySection => sourceItem.targetsAllySection();
+	public override bool requiresAnAction => sourceItem.useRequiresAnAction();
+	public override bool healsTarget => sourceItem.getAmountToHeal() > 0;
+	public override bool usableWithoutItemsInInventory => false;
+	public override bool needsItemQuantityPanel => true;
+
 	public ItemCombatAction(Stats actor, UsableItem sourceItem):
     base(actor, SelectorFactory.buildByTemplate(sourceItem.getRangeTemplate()))
 	{
@@ -17,11 +23,6 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 	public override string getDisplayType()
 	{
 		return AbilityList.itemActionTypeName;
-	}
-
-	public override bool targetsAllySection()
-	{
-		return sourceItem.targetsAllySection();
 	}
 
 	public override string getKey()
@@ -54,10 +55,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		this.sourceItem = (UsableItem)sourceItem;
 	}
 
-	public override string getIconName()
-	{
-		return this.sourceItem.getIconName();
-	}
+	public override string iconName => this.sourceItem.getIconName();
 
 	//item keys are written to be shown to the player
 	public override string displayName { get { return getKey(); } }
@@ -65,7 +63,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 	public override string getDamageTotalForDisplay()
 	{
-		if (healsTarget() && getDamageFormulaTotal() > 0)
+		if (healsTarget && getDamageFormulaTotal() > 0)
 		{
 			return "Heals " + getDamageFormula().Replace(" ", "");
 		}
@@ -93,14 +91,9 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
         return Constants.zeroRating;
     }
 
-	public override bool requiresAnAction()
-	{
-		return sourceItem.useRequiresAnAction();
-	}
-
     public override int findFinalDamage(Stats targetCombatant, bool isCrit)
     {
-        if(healsTarget())
+        if(healsTarget)
         {
             return sourceItem.getAmountToHeal();
         }
@@ -119,7 +112,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
                 {
                     foreach (GridCoords targetCoords in targetCombatant.positions)
                     {
-                        AnimationTracker.loadInstantEffect(getEffectAnimationType(), targetCoords, false, findFinalDamage(targetCombatant, false), healsTarget(), false, null, getActorCoords());
+                        AnimationTracker.loadInstantEffect(effectAnimationType,targetCoords, false, findFinalDamage(targetCombatant, false), healsTarget, false, null, actorCoords);
                     }
                 }
 			}
@@ -133,7 +126,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		if (Inventory.inventoryContainsItem(sourceItem.getKey()))
 		{
 			sourceItem = (UsableItem)Inventory.getItem(sourceItem.getKey());
-            sourceItem.equipTarget = getActorStats();
+            sourceItem.equipTarget = actorStats;
 		}
 		else
 		{
@@ -141,10 +134,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		}
 	}
 
-    public override EffectAnimationType getEffectAnimationType()
-    {
-        return sourceItem.getEffectAnimationType();
-    }
+    public override EffectAnimationType effectAnimationType => sourceItem.getEffectAnimationType();
 
 	public override void onAddToAbilityMenu() //for updating things like checking for source item quantity
 	{
@@ -168,24 +158,9 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		return 1;
 	}
 
-	public override bool healsTarget()
-	{
-		return sourceItem.getAmountToHeal() > 0;
-	}
-
 	public override int getSaveType()
 	{
 		return (int)CombatActionSaveType.ItemCombatAction;
-	}
-
-	public override bool usableWithoutItemsInInventory()
-	{
-		return false;
-	}
-
-	public override bool needsItemQuantityPanel()
-	{
-		return true;
 	}
 
 	public override void activatingAction()
@@ -225,7 +200,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		DescriptionPanel.setText(panel.typeText, getDisplayType());
 
 
-		DescriptionPanel.setImage(panel.iconPanel, SpriteUtil.loadSpriteFromResources(getIconName()));
+		DescriptionPanel.setImage(panel.iconPanel, iconSprite);
 
 		/* commented out because apparently getIconBackgroundColor() doesn't exist (was thinking fo traits
 			may implement later
@@ -270,7 +245,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getIconName()));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: iconName));
 
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getSourceItem().getTypeIconName()));
 

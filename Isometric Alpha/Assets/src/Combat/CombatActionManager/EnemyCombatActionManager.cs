@@ -29,31 +29,31 @@ public class EnemyCombatActionManager : MonoBehaviour
 
 			if(enemyCombatAction == null ||
                 Helpers.hasQuality<Trait>(enemy.traitContainer, t => t.isPacifist()) ||
-				enemy.positions.Any(p => containsCombatActionFromPosition(p)) || enemy.isPartOfVolley())
+				enemy.positions.Any(p => containsCombatActionFromPosition(p)) || enemy.isPartOfVolley)
 			{
 				continue; //if enemy failed to find a target, it shouldn't do anything
 			}
-			enemyCombatAction.setActor(enemy);
-			Selector selector = enemyCombatAction.getTargetSelector(); 
+			enemyCombatAction.actorStats = enemy;
+			Selector selector = enemyCombatAction.selector;
 			
 			if(selector == null)
 			{
 				continue; //if enemy failed to find a target, it shouldn't do anything
 			}
 			
-			enemyCombatAction.setSelector(selector);
+			enemyCombatAction.selector = selector;
 			
 			enemyCombatAction.queueingAction();
 
-			if (enemyCombatAction.actorIsSlowed())
+			if (enemyCombatAction.actorIsSlowed)
 			{
 				slowedAttacks.Add(enemyCombatAction);
 
-            } else if(enemyCombatAction.actorIsPriorityAttacker())
+            } else if(enemyCombatAction.actorIsPriorityAttacker)
 			{
 				enemyCombatActionQueue.Insert(0, enemyCombatAction);
 
-			} else if(enemyCombatAction.actorIsLowPriorityAttacker())
+			} else if(enemyCombatAction.actorIsLowPriorityAttacker)
 			{
 				lowPriorityAttacks.Add(enemyCombatAction);
 			} else
@@ -75,7 +75,7 @@ public class EnemyCombatActionManager : MonoBehaviour
 	{
 		foreach(CombatAction action in enemyCombatActionQueue)
 		{
-			if(action.getActorCoords().Equals(actorCoords))
+			if(action.actorCoords.Equals(actorCoords))
 			{
 				return true;
 			}
@@ -83,7 +83,7 @@ public class EnemyCombatActionManager : MonoBehaviour
 
         foreach (CombatAction action in slowedEnemyCombatActionQueue)
         {
-            if (action.getActorCoords().Equals(actorCoords))
+            if (action.actorCoords.Equals(actorCoords))
             {
                 return true;
             }

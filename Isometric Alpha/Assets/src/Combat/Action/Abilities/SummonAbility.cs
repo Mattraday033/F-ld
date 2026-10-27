@@ -34,7 +34,7 @@ public class SummonAbility: Ability
     {
 		base.queueingAction();
 
-		GridCoords[] allTileCoords = getSelector().getAllSelectorCoords();
+		GridCoords[] allTileCoords = selector.getAllSelectorCoords();
 
         foreach (GridCoords coords in allTileCoords)
 		{
@@ -46,7 +46,7 @@ public class SummonAbility: Ability
     {
         base.unqueueingAction();
 
-        GridCoords[] allTileCoords = getSelector().getAllSelectorCoords();
+        GridCoords[] allTileCoords = selector.getAllSelectorCoords();
 
         foreach (GridCoords coords in allTileCoords)
         {
@@ -64,12 +64,11 @@ public class SummonAbility: Ability
     public override void performCombatAction()
 	{
 		List<EnemyStats> comboToSpawn = creaturesToSpawn.getNextCombo();
-		Selector selector = getSelector();
 		GridCoords[] targetCoords = selector.getAllSelectorCoords();
 		
         if(activatesAfterDeath)
         {
-            getActorStats().removeFromGrid();
+            actorStats.removeFromGrid();
         }
 
 		int comboIndex = 0;

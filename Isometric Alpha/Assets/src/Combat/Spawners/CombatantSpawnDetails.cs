@@ -206,12 +206,17 @@ public class CombatantSpawnDetails : OOCSpawnDetails
             //positions are replaced before touching the grid, since a party member's Stats still hold the cells of its last combat.
             //The sprite is placed by the spawn itself, so only the grid needs updating here
             stats.positions = allSpawnPositions.Select(p => p.clone()).ToList();
-            CombatGrid.addCombatantToGrid(stats);
         }
 
         List<Combatant> combatants = spawnInteractables().Select(g => g.GetComponent<Combatant>())
                                                          .Where(c => c != null)
                                                          .ToList();
+
+        //the grid holds Combatants, so the Stats can only go on it once its GameObjects exist
+        if(!placeholder)
+        {
+            CombatGrid.addCombatantToGrid(stats);
+        }
 
         if(stats is LargeEnemyStats largeEnemy && !placeholder)
         {

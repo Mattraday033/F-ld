@@ -11,6 +11,10 @@ public class EquippedPassive : Ability
 
 	private List<Trait> relatedTraits = new List<Trait>();
 
+	public override bool unactivatable => true;
+	public override bool autoApply => true;
+	public override bool canBePlacedInPassiveSlot => true;
+
 	public EquippedPassive(CombatActionSettings settings) :
 	base(settings)
 	{
@@ -43,16 +47,6 @@ public class EquippedPassive : Ability
 		return personalRangeTitle;
 	}
 
-	public override bool unactivatable()
-	{
-		return true;
-	}
-
-	public override bool autoApply()
-	{
-		return true;
-	}
-
 	public override List<Trait> getNonAppliedRelatedTraits()
 	{
 		return relatedTraits;
@@ -62,11 +56,6 @@ public class EquippedPassive : Ability
 	{
 		return null;
 	}
-
-    public override bool canBePlacedInPassiveSlot()
-    {
-        return true;
-    }
 
 	public override string getUseDescription()
     {
@@ -96,7 +85,7 @@ public class EquippedPassive : Ability
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getIconName()));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: iconName));
 
         buildingBlocks.AddRange(getStatBoostDescriptionBuildingBlocks(getStatSource(), this));
 

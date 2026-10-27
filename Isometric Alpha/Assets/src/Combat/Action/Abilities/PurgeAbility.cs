@@ -30,14 +30,11 @@ public class PurgeAbility : Ability
                 }
             }
 
-            sendProjectileAt(getActorCoords(), target, 1);
+            sendProjectileAt(actorCoords, target, 1);
 
         }
     }
 
-    public override EffectAnimationType getEffectAnimationType()
-    {
-        return EffectAnimationType.Negative;
-    }
+    public override EffectAnimationType effectAnimationType => EffectAnimationType.Negative;
 
 }

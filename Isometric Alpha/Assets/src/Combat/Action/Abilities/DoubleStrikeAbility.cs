@@ -9,6 +9,10 @@ public class DoubleStrikeAbility : Ability
     private GridCoords secondaryCoords;
     private GridCoords tertiaryCoords = GridCoords.getDefaultCoords();
 
+    public override bool requiresTertiaryCoords => true;
+    public override bool resetCoordsWhenChoosingTertiary => true; // if true, when the player chooses the first selector and moves to the tertiary, it will snap to it's default position
+    public override bool resetCoordsOnBackOutOfTertiary => true; // if true, when the player backs out of choosing the tertiary target, then the previous selector will snap to it's default position
+
     public DoubleStrikeAbility(CombatActionSettings settings, SelectorTemplate secondAttackRangeIndex) :
     base(settings)
     {
@@ -45,20 +49,6 @@ public class DoubleStrikeAbility : Ability
         return false;
     }
 
-    public override bool requiresTertiaryCoords()
-    {
-        return true;
-    }
-	public override bool resetCoordsWhenChoosingTertiary() // if true, when the player chooses the first selector and moves to the tertiary, it will snap to it's default position
-    {
-        return true;
-    }
-
-	public override bool resetCoordsOnBackOutOfTertiary() // if true, when the player backs out of choosing the tertiary target, then the previous selector will snap to it's default position 
-	{
-		return true;
-	}
-
     public override Selector getTertiarySelector()
     {
         Selector tertiarySelector = SelectorFactory.buildByTemplate(secondAttackRangeIndex);
@@ -83,10 +73,10 @@ public class DoubleStrikeAbility : Ability
             return;
         }
 
-        Debug.LogError("getSelector() coords = " + getSelector().getCoords().ToString());
+        Debug.LogError("selector coords = " + selector.getCoords().ToString());
         Debug.LogError("getTertiarySelector() coords = " + getTertiarySelector().getCoords().ToString());
 
-        Selector firstSelector = getSelector();
+        Selector firstSelector = selector;
         List<Stats> firstListOfTargets = firstSelector.getAllTargets();
 
         Debug.LogError("firstListOfTargets.Count = " + firstListOfTargets.Count);

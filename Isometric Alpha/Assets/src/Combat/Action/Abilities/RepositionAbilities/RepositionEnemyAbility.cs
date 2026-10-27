@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class RepositionEnemyAbility : RepositionAbility
 {
+    public override bool movesTarget => true;
+
     public RepositionEnemyAbility(CombatActionSettings settings) :
 	base(settings)
 	{
@@ -48,13 +50,5 @@ public class RepositionEnemyAbility : RepositionAbility
 		destroyPlaceHolderObject();
 	}
 	
-	public override bool movesTarget()
-	{
-		return true;
-	}
-
-    public override EffectAnimationType getEffectAnimationType()
-    {
-        return EffectAnimationType.Negative;
-    }
+    public override EffectAnimationType effectAnimationType => EffectAnimationType.Negative;
 }

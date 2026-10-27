@@ -8,6 +8,8 @@ public class MissesArePunishedAbility : Ability
     private EffectAnimationType missEffectType;
     private int missDamageMult = 3;
 
+	public override bool healsTarget => hasTargets();
+
 	public MissesArePunishedAbility(CombatActionSettings settings, int missDamageMult = 3, EffectAnimationType missEffectType = EffectAnimationType.Slash):
 	base(settings)
 	{
@@ -19,9 +21,9 @@ public class MissesArePunishedAbility : Ability
     {
         if (!hasTargets())
         {
-            Stats targetCombatant = getActorStats();
+            Stats targetCombatant = actorStats;
 
-            sendProjectileAt(getActorCoords(), targetCombatant, 1);
+            sendProjectileAt(actorCoords, targetCombatant, 1);
         }
         else
         {
@@ -52,7 +54,7 @@ public class MissesArePunishedAbility : Ability
 
         foreach (Stats targetCombatant in targets)
         {
-            if (targetCombatant != null && !targetCombatant.isDead())
+            if (targetCombatant != null && !targetCombatant.isDead)
             {
                 return true;
             }
@@ -61,21 +63,19 @@ public class MissesArePunishedAbility : Ability
         return false;
     }
 
-    public override EffectAnimationType getEffectAnimationType()
+    public override EffectAnimationType effectAnimationType
     {
-        if(!hasTargets())
+        get
         {
-            return missEffectType;
-        } else
-        {
-            return base.getEffectAnimationType();
+            if(!hasTargets())
+            {
+                return missEffectType;
+            } else
+            {
+                return base.effectAnimationType;
+            }
         }
     }
-
-    public override bool healsTarget()
-	{
-		return hasTargets();
-	}
 
 	public override string getRangeTitle()
 	{

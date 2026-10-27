@@ -18,6 +18,13 @@ public class LargeEnemyStats : EnemyStats
 
     #endregion
 
+    #region Boolean Properties
+
+    public override bool multiSpaceEnemy => true;
+    public override bool isLarge => true;
+
+    #endregion
+
     #region Unity Events
     public readonly static UnityEvent OnLargeEnemySpawn = new UnityEvent();
     #endregion
@@ -42,11 +49,6 @@ public class LargeEnemyStats : EnemyStats
     #endregion
 
     #region Sprite and GameObject
-
-    public override bool multiSpaceEnemy()
-    {
-        return true;
-    }
 
     //nests share a heartbeat, and each one's row decides where in it its idle beats
     public int getHeartBeatRow()
@@ -77,11 +79,6 @@ public class LargeEnemyStats : EnemyStats
     #endregion
 
     #region Traits
-
-    public override bool isLarge()
-    {
-        return true;
-    }
 
     #endregion
 

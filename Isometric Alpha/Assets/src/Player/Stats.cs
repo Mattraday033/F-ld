@@ -71,6 +71,9 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     public bool inPreviewMode = false;
     public bool inOnDeathEffect = false;
 
+    //true when the player picks this combatant's targets, false when its actions find their own targets
+    public virtual bool usePlayerTargeting => false;
+
     public Stats repositionClone;
     //used to track if Reposition Ability
     //is already moving creature
@@ -82,6 +85,53 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     public TraitContainer traitContainer;
 
     protected Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary;
+
+    #endregion
+
+    #region Boolean Properties
+
+    public virtual bool multiSpaceEnemy => false;
+    public bool isAlive => currentHealth > 0;
+    public bool isDead => currentHealth <= 0;
+    public bool queuedToMove => repositionClone != null;
+    public bool isRepositionClone => Helpers.hasQuality<Trait>(traitContainer, t => t.Equals(TraitList.repositioningInvulnerability));
+    public virtual bool isPriorityAttacker => false;
+    public virtual bool isLowPriorityAttacker => false;
+    public virtual bool costsPartyCombatActions => false;
+    public bool shouldTargetEnemy => positions.Any(p => CombatGrid.positionIsOnAlliedSide(p));
+    public bool isMandatoryTarget => Helpers.hasQuality<Trait>(traitContainer, t => t.isMandatoryTarget());
+    public bool isTargetable => !Helpers.hasQuality<Trait>(traitContainer, t => t.isUntargetable());
+    public virtual bool isPartOfVolley => false;
+    public bool isMaster => hasTrait(TraitList.master);
+    public bool isMinion => hasTrait(TraitList.minion);
+    public bool isSummon => hasTrait(TraitList.summoned);
+    public virtual bool isLarge => hasTrait(TraitList.large);
+    public bool isSlowed => Helpers.hasQuality<Trait>(traitContainer, t => t.slowsTraitHolder());
+    public bool isImmobile => isLarge || isMultiTile;
+
+
+    public bool isStunned
+    {
+        get
+        {
+            if(Helpers.hasQuality<Trait>(traitContainer, t => t.immuneToStun()))
+            {
+                return false;
+            }
+
+            return Helpers.hasQuality<Trait>(traitContainer, t => t.preventsCombatAction());
+        }
+    }
+
+    public bool hasUnusedDeathEffect => Helpers.hasQuality<Trait>(traitContainer, t => t.hasUnusedOnDeathEffect()) || inOnDeathEffect;
+    public virtual bool notResurrectable => Helpers.hasQuality<Trait>(traitContainer, t => t.preventsResurrection());
+    public bool isBuffed => Helpers.hasQuality<Trait>(traitContainer, t => t.isBuff());
+    public bool isDebuffed => Helpers.hasQuality<Trait>(traitContainer, t => t.isDebuff());
+    public bool isFrontline => hasTrait(TraitList.frontLine);
+    public bool isBackline => hasTrait(TraitList.backLine);
+    public virtual bool hasAvailableWeaponSlots => false;
+    public bool isMultiTile => positions.Count > Constants.sizeOne;
+    public virtual bool removableFromFormation => true;
 
     #endregion
 
@@ -140,7 +190,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             return;
         }
 
-        bool removedFromCombat = notResurrectable() && !hasUnusedDeathEffect();
+        bool removedFromCombat = notResurrectable && !hasUnusedDeathEffect;
 
         if (removedFromCombat)
         {
@@ -184,11 +234,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     public virtual void spawningActions()
     {
         //Empty on Purpose
-    }
-
-    public virtual bool multiSpaceEnemy()
-    {
-        return false;
     }
 
     public void instateEnvironmentalCombatAction()
@@ -244,7 +289,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             return TutorialSequenceList.playerCombatSpriteTargetHash;
         }
 
-        if(isMandatoryTarget())
+        if(isMandatoryTarget)
         {
             return TutorialSequenceList.mandatoryTargetMonsterTargetHash;
         }
@@ -274,16 +319,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public abstract int getTotalHealth();
 
-    public bool isAlive()
-    {
-        return currentHealth > 0;
-    }
-
-    public bool isDead()
-    {
-        return currentHealth <= 0;
-    }
-
     public int getMissingHealth()
     {
         return getTotalHealth() - currentHealth;
@@ -303,7 +338,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     {
         int totalHealth = getTotalHealth();
 
-        if (!inPreviewMode && changeInHealth >= totalHealth && !healing && isMaster())
+        if (!inPreviewMode && changeInHealth >= totalHealth && !healing && isMaster)
         {
             PredationProc.Invoke();
         }
@@ -473,26 +508,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #region Combat and Action Arrays
     
-    public bool queuedToMove()
-    {
-        return repositionClone != null;
-    }
-
-    public bool isRepositionClone()
-    {
-        return Helpers.hasQuality<Trait>(traitContainer, t => t.Equals(TraitList.repositioningInvulnerability));
-    }
-
-    public virtual bool isPriorityAttacker()
-    {
-        return false;
-    }
-
-    public virtual bool isLowPriorityAttacker()
-    {
-        return false;
-    }
-
     public void moveTo(List<GridCoords> newCoords, bool moveSprite = true)
     {
         List<GridCoords> oldCoords = positions.Select(p => p.clone()).ToList();
@@ -538,20 +553,15 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         return 1f;
     }
 
-    public bool canPayActionCost(ActionCostType[] costTypes, int[] actionCosts)
+    public bool canPayActionCost(CombatAction action)
     {
-        bool[] costsPayable = new bool[costTypes.Length];
+        List<bool> costsPayable = new List<bool>();
         List<ActionCostType> actionCostTypesUnpayable = new List<ActionCostType>();
 
-        int index = -1;
-        foreach (ActionCostType costType in costTypes)
+        foreach (ActionCostType costType in action.actionCostTypes)
         {
-            index++;
-            if (costType == ActionCostType.None)
-            {
-                costsPayable[index] = true;
-                continue;
-            }
+            int actionCost = action[costType];
+            bool costPayable = false;
 
             if (costType == ActionCostType.RedKnife ||
                 costType == ActionCostType.BlueShield ||
@@ -559,13 +569,14 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
                 costType == ActionCostType.GreenLeaf
                 )
             {
-                costsPayable[index] = Exuberances.canPayCost(costType, actionCosts[index]);
+                costPayable = Exuberances.canPayCost(costType, actionCost);
 
-                if(!costsPayable[index])
+                if(!costPayable)
                 {
                     actionCostTypesUnpayable.Add(costType);
                 }
 
+                costsPayable.Add(costPayable);
                 continue;
             }
 
@@ -576,16 +587,18 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
                     continue;
                 }
 
-                if (trait.getNumberOfStacks(costType) >= actionCosts[index])
+                if (trait.getNumberOfStacks(costType) >= actionCost)
                 {
-                    costsPayable[index] = true;
-                    
-                    if(!costsPayable[index])
+                    costPayable = true;
+
+                    if(!costPayable)
                     {
                         actionCostTypesUnpayable.Add(costType);
                     }
                 }
             }
+
+            costsPayable.Add(costPayable);
         }
 
         ExuberanceTracker.ActionCostCannotBePaid.Invoke(actionCostTypesUnpayable);
@@ -624,66 +637,52 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         return baseDamage + int.Parse(healingBoost);
     }
 
-    public virtual bool costsPartyCombatActions()
+    public void payActionCost(CombatAction action)
     {
-        return false;
-    }
-
-    public void payActionCost(ActionCostType[] costTypes, int[] actionCosts)
-    {
-        for (int index = 0; index < costTypes.Length && index < actionCosts.Length; index++)
+        foreach (ActionCostType costType in action.actionCostTypes)
         {
-            switch(costTypes[index])
+            switch(costType)
             {
-                case ActionCostType.None:
-                    continue;
                 case ActionCostType.RedKnife:
                 case ActionCostType.BlueShield:
                 case ActionCostType.YellowThorn:
                 case ActionCostType.GreenLeaf:
-                    Exuberances.payCost(costTypes[index], actionCosts[index]);
+                    Exuberances.payCost(costType, action[costType]);
                     continue;
                 default:
-                    Trait costTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.hasActionCostType(costTypes[index]));
+                    Trait costTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.hasActionCostType(costType));
 
                     if (costTrait != null)
                     {
-                        costTrait.removeStacks(costTypes[index], actionCosts[index]);
+                        costTrait.removeStacks(costType, action[costType]);
                     }
                     break;
             }
         }
     }
 
-    public void refundActionCost(ActionCostType[] costTypes, int[] actionCosts)
+    public void refundActionCost(CombatAction action)
     {
-        for (int index = 0; index < costTypes.Length && index < actionCosts.Length; index++)
+        foreach (ActionCostType costType in action.actionCostTypes)
         {
-            switch(costTypes[index])
+            switch(costType)
             {
-                case ActionCostType.None:
-                    continue;
                 case ActionCostType.RedKnife:
                 case ActionCostType.BlueShield:
                 case ActionCostType.YellowThorn:
                 case ActionCostType.GreenLeaf:
-                    Exuberances.addExuberance(costTypes[index], actionCosts[index]);
+                    Exuberances.addExuberance(costType, action[costType]);
                     continue;
                 default:
-                    Trait costTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.hasActionCostType(costTypes[index]));
+                    Trait costTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.hasActionCostType(costType));
 
                     if (costTrait != null)
                     {
-                        costTrait.removeStacks(costTypes[index], actionCosts[index]);
+                        costTrait.removeStacks(costType, action[costType]);
                     }
                     break;
             }
         }
-    }
-
-    public bool shouldTargetEnemy()
-    {
-        return positions.Any(p => CombatGrid.positionIsOnAlliedSide(p));
     }
 
     public virtual CombatActionArray getActionArray()
@@ -709,16 +708,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             default:
                 return false;
         }
-    }
-
-    public bool isMandatoryTarget()
-    {
-        return Helpers.hasQuality<Trait>(traitContainer, t => t.isMandatoryTarget());
-    }
-
-    public bool isTargetable()
-    {
-        return !Helpers.hasQuality<Trait>(traitContainer, t => t.isUntargetable());
     }
 
     public virtual int getBonusAbilityDamage()
@@ -757,11 +746,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     }
 
     #region Volley
-    public virtual bool isPartOfVolley()
-    {
-        return false;
-    }
-
     public virtual int getVolleyAccuracy()
     {
         return Constants.perfectVolleyAccuracy;
@@ -779,29 +763,9 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #region Traits
 
-    public bool isMaster()
-    {
-        return hasTrait(TraitList.master);
-    }
-
-    public bool isMinion()
-    {
-        return hasTrait(TraitList.minion);
-    }
-
-    public bool isSummon()
-    {
-        return hasTrait(TraitList.summoned);
-    }
-
-    public virtual bool isLarge()
-    {
-        return hasTrait(TraitList.large);
-    }
-
     public void addTrait(Trait newTrait)
     {
-        if (newTrait == null || (isDead() && CombatStateManager.whoseTurn != WhoseTurn.Start))
+        if (newTrait == null || (isDead && CombatStateManager.whoseTurn != WhoseTurn.Start))
         {
             return;
         }
@@ -906,21 +870,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         //empty on purpose
     }
 
-    public bool isSlowed()
-    {
-        return Helpers.hasQuality<Trait>(traitContainer, t => t.slowsTraitHolder());
-    }
-
-    public bool isStunned()
-    {
-        if(Helpers.hasQuality<Trait>(traitContainer, t => t.immuneToStun()))
-        {
-            return false;
-        }
-
-        return Helpers.hasQuality<Trait>(traitContainer, t => t.preventsCombatAction());
-    }
-
     private void removeTraitsRemovedByDamage()
     {
         traitContainer.removeAllTraitsRemovedByDamage();
@@ -961,36 +910,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         }
     }
 
-    public bool hasUnusedDeathEffect()
-    {
-        return Helpers.hasQuality<Trait>(traitContainer, t => t.hasUnusedOnDeathEffect()) || inOnDeathEffect;
-    }
-
-    public virtual bool notResurrectable()
-    {
-        return Helpers.hasQuality<Trait>(traitContainer, t => t.preventsResurrection());
-    } 
-
-    public bool isBuffed()
-    {
-        return Helpers.hasQuality<Trait>(traitContainer, t => t.isBuff());
-    } 
-
-    public bool isDebuffed()
-    {
-        return Helpers.hasQuality<Trait>(traitContainer, t => t.isDebuff());
-    } 
-
-    public bool isFrontline()
-    {
-        return hasTrait(TraitList.frontLine);
-    } 
-
-    public bool isBackline()
-    {
-        return hasTrait(TraitList.backLine);
-    } 
-
     #region Zone of Influence
 
     public virtual ZoneOfInfluenceTrait getZoneOfInfluenceTrait()
@@ -1014,11 +933,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         return null;
     }
 
-    public virtual bool hasAvailableWeaponSlots()
-    {
-        return false;
-    }
-
     public virtual int getWeaponSlots()
     {
         return 0;
@@ -1029,11 +943,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     #region Miscellaneous
 
     public abstract List<GridCoords> findLocationToSpawn();
-
-    public bool isMultiTile()
-    {
-        return positions.Count > Constants.sizeOne;
-    }
 
     public virtual string getGenderMarker()
     {
@@ -1068,11 +977,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     public override int GetHashCode()
     {
         return uniqueName.GetHashCode();
-    }
-
-    public virtual bool removableFromFormation()
-    {
-        return true;
     }
 
     public static AllyStats convertIDescribableToStats(IDescribable describable)

@@ -203,7 +203,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
         foreach (KeyValuePair<GridCoords, AllyStats> entry in grid)
         {
-            if (entry.Value != null && entry.Value.removableFromFormation())
+            if (entry.Value != null && entry.Value.removableFromFormation)
             {
                 coordsToClear.Add(entry.Key);
             }

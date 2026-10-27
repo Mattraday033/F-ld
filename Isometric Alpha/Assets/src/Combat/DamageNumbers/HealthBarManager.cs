@@ -23,7 +23,7 @@ public class HealthBarManager : MonoBehaviour
 	
     public Stats linkedStats;
 
-    private bool linkedStatsIsAlive => linkedStats != null && linkedStats.isAlive();
+    private bool linkedStatsIsAlive => linkedStats != null && linkedStats.isAlive;
     private bool hovered;
 
     private void Awake()
@@ -83,8 +83,8 @@ public class HealthBarManager : MonoBehaviour
         // OverallUIManager.showFormula &&
         if(linkedStats != null)
         {
-            masterSymbol.SetActive(linkedStats.isMaster());
-            minionSymbol.SetActive(linkedStats.isMinion());
+            masterSymbol.SetActive(linkedStats.isMaster);
+            minionSymbol.SetActive(linkedStats.isMinion);
         }
         // else
         // {
@@ -100,22 +100,22 @@ public class HealthBarManager : MonoBehaviour
             return;
         }
 
-        stunnedSymbol.SetActive(linkedStats.isStunned());
-        mandatoryTargetSymbol.SetActive(linkedStats.isMandatoryTarget());
+        stunnedSymbol.SetActive(linkedStats.isStunned);
+        mandatoryTargetSymbol.SetActive(linkedStats.isMandatoryTarget);
         
-        if(linkedStats.isDebuffed() && linkedStats.isBuffed())
+        if(linkedStats.isDebuffed && linkedStats.isBuffed)
         {
             backgroundImage.color = ColorList.buffedDebuffed;
             return;
         }
 
-        if(linkedStats.isBuffed())
+        if(linkedStats.isBuffed)
         {
             backgroundImage.color = ColorList.buffedBlue;
             return;
         }
 
-        if(linkedStats.isDebuffed())
+        if(linkedStats.isDebuffed)
         {
             backgroundImage.color = ColorList.debuffedPurple;
             return;
@@ -126,7 +126,7 @@ public class HealthBarManager : MonoBehaviour
 
     public void setLinkedStats(Stats statsToLink)
     {
-        if(statsToLink != null && statsToLink.isRepositionClone())
+        if(statsToLink != null && statsToLink.isRepositionClone)
         {
             return;
         }
@@ -139,7 +139,7 @@ public class HealthBarManager : MonoBehaviour
 
     private void determineVisibility(List<Selector> declaredSelectors)
     {
-        if(linkedStats == null || linkedStats.isDead() ||
+        if(linkedStats == null || linkedStats.isDead ||
             CombatStateManager.whoseTurn == WhoseTurn.Won ||
                     CombatStateManager.whoseTurn == WhoseTurn.Lost || 
                     CombatStateManager.whoseTurn == WhoseTurn.Resolving)
@@ -275,7 +275,7 @@ public class HealthBarManager : MonoBehaviour
 	
     // private void cleanUpHiddenHealthBars()
     // {
-    //     if(!gameObject.activeInHierarchy && (linkedStats == null || linkedStats.isLarge()))
+    //     if(!gameObject.activeInHierarchy && (linkedStats == null || linkedStats.isLarge))
     //     {
     //         Destroy(gameObject);
     //     }

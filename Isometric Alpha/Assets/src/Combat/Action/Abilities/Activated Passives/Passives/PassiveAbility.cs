@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PassiveAbility : EquippedPassive //passives are (currently) mostly used to explain to the player some mechanic that happens naturally,
 {                                              //like regeneration
+
+    public override bool canBePlacedInActionSlot => false;
+
     public PassiveAbility(CombatActionSettings settings) :
     base(settings)
     {
@@ -26,16 +29,6 @@ public class PassiveAbility : EquippedPassive //passives are (currently) mostly 
 	{
 		return 0;
 	}
-    
-    public override int getMaximumCooldown()
-	{
-		return 0;
-	}
-
-    public override bool canBePlacedInActionSlot()
-    {
-        return false;
-    }
 
     //IDescribable
 

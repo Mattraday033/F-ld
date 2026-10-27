@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DescriptionParams
@@ -166,6 +167,19 @@ public class CostParams
         parameters.actionCosts = actionCosts;
 
         return parameters;
+    }
+
+    //copies another action's costs
+    public static CostParams build(CombatAction action)
+    {
+        ActionCostType[] costTypes = action.actionCostTypes.ToArray();
+
+        if (costTypes.Length == 0)
+        {
+            return build();
+        }
+
+        return build(costTypes, costTypes.Select(costType => action[costType]).ToArray());
     }
 }
 

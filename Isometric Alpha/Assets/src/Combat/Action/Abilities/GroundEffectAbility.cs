@@ -16,7 +16,7 @@ public class GroundEffectAbility : Ability
 
 	public override void performCombatAction(List<Stats> targets)
 	{
-		GridCoords[] allTargetCoords = getSelector().getAllSelectorCoords();
+		GridCoords[] allTargetCoords = selector.getAllSelectorCoords();
 
 		int index = 0;
 		foreach (GridCoords coords in allTargetCoords)

@@ -462,12 +462,12 @@ public struct TutorialSequenceStep : IDescribable
                     loadedCombatAction = AbilityMenuManager.getInstance().getCurrentlySelectedAction();
                 }
 
-                if (loadedCombatAction.movesTarget() && currentSelector.targetsImmobileTarget())
+                if (loadedCombatAction.movesTarget && currentSelector.targetsImmobileTarget())
                 {
                     return false;
                 }
 
-                if (loadedCombatAction.targetsOnlyEmptySpace())
+                if (loadedCombatAction.targetsOnlyEmptySpace)
                 {
                     if (!currentSelector.hasAtLeastOneTarget(SelectorManager.allyAndEnemyTagCriteria))
                     {
@@ -476,13 +476,13 @@ public struct TutorialSequenceStep : IDescribable
                 }
                 else
                 {
-                    if (loadedCombatAction.targetMustBeDead())
+                    if (loadedCombatAction.targetMustBeDead)
                     {
                         if (currentSelector.hasAtLeastOneTarget(SelectorManager.enemyTagCriteria))
                         {
                             if (CombatGrid.enemyHasMandatoryTarget(out Stats mandatoryTarget) &&
                                 !currentSelector.hasAtLeastOneMandatoryTarget() && 
-                                !loadedCombatAction.isSelfTargeting())
+                                !loadedCombatAction.selfTargeting)
                             {
                                 return false;
                             }
@@ -496,7 +496,7 @@ public struct TutorialSequenceStep : IDescribable
                         {
                             if (CombatGrid.enemyHasMandatoryTarget(out Stats mandatoryTarget) && 
                                 !currentSelector.hasAtLeastOneMandatoryTarget() && 
-                                !loadedCombatAction.isSelfTargeting())
+                                !loadedCombatAction.selfTargeting)
                             {
                                 return false;
                             }

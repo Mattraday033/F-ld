@@ -32,7 +32,7 @@ public class SummonsCombatActionManager : MonoBehaviour
 	{
 		foreach(VolleyParticipantStats summon in listOfSummons)
 		{	
-			if(summon.isPartOfVolley())
+			if(summon.isPartOfVolley)
 			{
 				continue; 
 			}
@@ -41,17 +41,17 @@ public class SummonsCombatActionManager : MonoBehaviour
 
 			if (summon.positions.Count > 0)
 			{
-				summonCombatAction.setActor(summon);
+				summonCombatAction.actorStats = summon;
 			}
 
-			Selector selector = summonCombatAction.getTargetSelector();
+			Selector selector = summonCombatAction.selector;
 			
 			if(selector == null)
 			{
 				continue;
 			}
 			
-			summonCombatAction.setSelector(selector);
+			summonCombatAction.selector = selector;
 			//summonCombatAction.setTargetCoords(new GridCoords(selector.currentRow, selector.currentCol));
 			
 			summonCombatAction.queueingAction();
@@ -65,7 +65,7 @@ public class SummonsCombatActionManager : MonoBehaviour
 			}
 		}
 		
-		if(Helpers.hasQuality<VolleyParticipantStats>(listOfSummons, s => s.isPartOfVolley()))
+		if(Helpers.hasQuality<VolleyParticipantStats>(listOfSummons, s => s.isPartOfVolley))
 		{
 			VolleyAbility newVolleyAbility = constructVolleyCombatAction(alliedSide);
 		
@@ -89,14 +89,14 @@ public class SummonsCombatActionManager : MonoBehaviour
 	public VolleyAbility constructVolleyCombatAction(bool alliedSide)
 	{
 		VolleyAbility newVolleyAbility = new VolleyAbility(alliedSide);
-		Selector selector = newVolleyAbility.getTargetSelector();
+		Selector selector = newVolleyAbility.selector;
 		
 		if(selector == null)
 		{
 			return null;
 		}
 		
-		newVolleyAbility.setSelector(selector);
+		newVolleyAbility.selector = selector;
 		//newVolleyAbility.setTargetCoords(selector.getCoords());
 		
 		return newVolleyAbility;

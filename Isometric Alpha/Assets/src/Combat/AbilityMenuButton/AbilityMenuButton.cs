@@ -77,7 +77,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     private void enableButtonComponent()
     {
-        if (CombatStateManager.inCombat && abilityMenuButton != null && !abilityMenuManager.displayOnly && loadedCombatAction != null && !loadedCombatAction.unactivatable())
+        if (CombatStateManager.inCombat && abilityMenuButton != null && !abilityMenuManager.displayOnly && loadedCombatAction != null && !loadedCombatAction.unactivatable)
         {
             abilityMenuButton.enabled = true;
         }
@@ -98,7 +98,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
             return;
         }
 
-        setDisplay(loadedCombatAction.getIconSprite(), ColorList.grey25);
+        setDisplay(loadedCombatAction.iconSprite, ColorList.grey25);
     }
 
     public void setDisplay(Sprite abilityIconSprite, Color iconBackgroundColor)
@@ -122,15 +122,15 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (CombatStateManager.inCombat && CombatGrid.combatantExistsAtCoords(SelectorManager.currentSelector.getCoords(), out Stats actor))
         {
-            loadedCombatAction.setActor(actor);
+            loadedCombatAction.actorStats = actor;
         }
     }
 
     public bool isSelectable()
     {
         return enabled && loadedCombatAction != null &&
-                loadedCombatAction.getCooldownRemaining() <= 0 &&
-                (loadedCombatAction.usableWithoutItemsInInventory() ||
+                loadedCombatAction.cooldownRemaining <= 0 &&
+                (loadedCombatAction.usableWithoutItemsInInventory ||
                     (loadedCombatAction.getSourceItem() != null &&
                         loadedCombatAction.getSourceItem().getQuantity() > 0));
     }
@@ -232,11 +232,11 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
             // previewSelectorObject = selectorClone.getSelectorObject();
 
-            if (loadedCombatAction.isSelfTargeting())
+            if (loadedCombatAction.selfTargeting)
             {
                 selectorClone.setToLocation(SelectorFactory.playerCursor.getCoords());
             }
-            else if (loadedCombatAction.targetsAllySection())
+            else if (loadedCombatAction.targetsAllySection)
             {
                 selectorClone.setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeTemplate()));
             }
@@ -253,15 +253,15 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
     public void enableCombatActionSelector()
     {
-        loadedCombatAction.setSelector(SelectorFactory.buildByTemplate(loadedCombatAction.getRangeTemplate()));
+        loadedCombatAction.selector = SelectorFactory.buildByTemplate(loadedCombatAction.getRangeTemplate());
 
-        SelectorManager.currentSelector = loadedCombatAction.getSelector();
+        SelectorManager.currentSelector = loadedCombatAction.selector;
 
         loadedCombatAction = setCombatActionSelectorStartingPosition(loadedCombatAction);
 
         if(CombatGrid.combatantExistsAtCoords(SelectorFactory.playerCursor.getCoords(), out Stats actor))
         {
-            loadedCombatAction.setActor(actor);
+            loadedCombatAction.actorStats = actor;
         }
 
         getDescriptionPanelSlot().revertToPrimaryDescribable();
@@ -277,44 +277,44 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         SelectorManager selectorManager = SelectorManager.getInstance();
 
-        if (loadedCombatAction.isSelfTargeting())
+        if (loadedCombatAction.selfTargeting)
         {
-            loadedCombatAction.getSelector().setToLocation(SelectorFactory.playerCursor.getCoords());
-            loadedCombatAction.getSelector().selfTargeting = true;
+            loadedCombatAction.selector.setToLocation(SelectorFactory.playerCursor.getCoords());
+            loadedCombatAction.selector.selfTargeting = true;
             return action;
         }
 
-        loadedCombatAction.getSelector().selfTargeting = false;
+        loadedCombatAction.selector.selfTargeting = false;
 
-        if (loadedCombatAction.targetsAllySection())
+        if (loadedCombatAction.targetsAllySection)
         {
             if (loadedCombatAction.getRangeTemplate() == SelectorTemplate.BoxThree)
             {
-                loadedCombatAction.getSelector().setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeTemplate()));
+                loadedCombatAction.selector.setToLocation(Range.getRangeAllyStartingPosition(loadedCombatAction.getRangeTemplate()));
             }
             else
             {
-                loadedCombatAction.getSelector().setToLocation(SelectorFactory.playerCursor.getCoords());
+                loadedCombatAction.selector.setToLocation(SelectorFactory.playerCursor.getCoords());
             }
 
             return action;
         }
-        else if (!loadedCombatAction.targetsAllySection() && loadedCombatAction.getRangeTemplate() == SelectorTemplate.BoxThree)
+        else if (!loadedCombatAction.targetsAllySection && loadedCombatAction.getRangeTemplate() == SelectorTemplate.BoxThree)
         {
-            loadedCombatAction.getSelector().setToStartLocation();
+            loadedCombatAction.selector.setToStartLocation();
 
             return action;
         }
 
-        //loadedCombatAction.getSelector().setToStartLocation();
+        //loadedCombatAction.selector.setToStartLocation();
 
         if (CombatGrid.enemyHasMandatoryTarget(out Stats mandatoryTarget) &&
-            !loadedCombatAction.getSelector().hasAtLeastOneMandatoryTarget() && 
-            loadedCombatAction.getSelector().singleTile())
+            !loadedCombatAction.selector.hasAtLeastOneMandatoryTarget() && 
+            loadedCombatAction.selector.singleTile())
         {
             GridCoords mandatoryTargetCoords = mandatoryTarget.positions.Count > 0 ? mandatoryTarget.positions[0] : GridCoords.getDefaultCoords();
 
-            loadedCombatAction.getSelector().setToClosestLegalLocation(new GridCoords(mandatoryTargetCoords.row,
+            loadedCombatAction.selector.setToClosestLegalLocation(new GridCoords(mandatoryTargetCoords.row,
                                                                     mandatoryTargetCoords.col));
 
             return action;
@@ -326,7 +326,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         if (closestTarget.positions.Count > 0)
         {
-            loadedCombatAction.getSelector().setToClosestLegalLocation(closestTarget.positions[0]);
+            loadedCombatAction.selector.setToClosestLegalLocation(closestTarget.positions[0]);
         }
 
         return action;
@@ -376,13 +376,13 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
     {
         if (loadedCombatAction != null)
         {
-            if (loadedCombatAction.getCooldownRemaining() == 0)
+            if (loadedCombatAction.cooldownRemaining == 0)
             {
                 cooldownParent.SetActive(false);
 
-                if (isSelected() && !loadedCombatAction.getActionCostTypes().Contains(ActionCostType.None))
+                if (isSelected() && loadedCombatAction.hasActionCost)
                 {
-                    setAllActionCosts(loadedCombatAction.getActionCostTypes(), loadedCombatAction.getActionCosts());
+                    setAllActionCosts(loadedCombatAction);
                 }
                 else
                 {
@@ -392,7 +392,7 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
             else
             {
                 cooldownParent.SetActive(true);
-                cooldownCostText.text = "" + loadedCombatAction.getCooldownRemaining();
+                cooldownCostText.text = "" + loadedCombatAction.cooldownRemaining;
 
                 destroyAllCostIcons();
             }
@@ -409,13 +409,13 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         costParent.gameObject.SetActive(false);
     }
 
-    private void setAllActionCosts(ActionCostType[] costTypes, int[] actionCosts)
+    private void setAllActionCosts(CombatAction action)
     {
         destroyAllCostIcons();
 
-        for (int index = 0; index < costTypes.Length && index < actionCosts.Length; index++)
+        foreach (ActionCostType costType in action.actionCostTypes)
         {
-            setActionCostText(costTypes[index], actionCosts[index]);
+            setActionCostText(costType, action[costType]);
         }
     }
 
@@ -498,9 +498,9 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         {
             getDescriptionPanelSlot().setTempDescribable(loadedCombatAction);
 
-            if (!loadedCombatAction.getActionCostTypes().Contains(ActionCostType.None) && !loadedCombatAction.unactivatable())
+            if (loadedCombatAction.hasActionCost && !loadedCombatAction.unactivatable)
             {
-                setAllActionCosts(loadedCombatAction.getActionCostTypes(), loadedCombatAction.getActionCosts());
+                setAllActionCosts(loadedCombatAction);
             }
 
             CombatHoverTileManager.GetHoverSelector.RemoveAllListeners();

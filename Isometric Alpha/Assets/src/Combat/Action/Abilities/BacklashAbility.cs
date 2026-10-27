@@ -21,7 +21,7 @@ public class BacklashAbility : Ability
 	
 	private void dealBacklashDamage()
 	{
-		getActorStats().modifyCurrentHealth((int) ((double) DamageCalculator.calculateFormula(getDamageFormula(), getActorStats()) * backlashMultiplier));
+		actorStats.modifyCurrentHealth((int) ((double) DamageCalculator.calculateFormula(getDamageFormula(), actorStats) * backlashMultiplier));
 	}
 
 }

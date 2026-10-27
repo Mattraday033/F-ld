@@ -33,6 +33,14 @@ public class EnemyStats : Stats
 
     #endregion
 
+    #region Boolean Properties
+
+    public override bool isPriorityAttacker => priorityAttacker;
+    public override bool isLowPriorityAttacker => lowPriorityAttacker;
+    public override bool notResurrectable => isMinion || isSummon || base.notResurrectable;
+
+    #endregion
+
     #region Constructors
 
     public EnemyStats(  string key,
@@ -90,7 +98,7 @@ public class EnemyStats : Stats
     {
         base.setToDeadSprite();
 
-        if (isMinion() || isSummon())
+        if (isMinion || isSummon)
         {
             OnMinionSummonDeath.Invoke();
         }
@@ -145,20 +153,10 @@ public class EnemyStats : Stats
 
         if(combatAction.hasAssignedActor(out Stats actor))
         {
-            combatActionClone.setActor(actor);
+            combatActionClone.actorStats = actor;
         } 
 
         return combatActionClone;
-    }
-
-    public override bool isPriorityAttacker()
-    {
-        return priorityAttacker;
-    }
-
-    public override bool isLowPriorityAttacker()
-    {
-        return lowPriorityAttacker;
     }
 
     public override EffectAnimationType getVolleyAnimationType()
@@ -168,17 +166,12 @@ public class EnemyStats : Stats
             return EffectAnimationType.Pierce;
         }
 
-        return getCombatAction().getEffectAnimationType();
+        return getCombatAction().effectAnimationType;
     }
 
     #endregion
 
     #region Traits
-
-    public override bool notResurrectable()
-    {
-        return isMinion() || isSummon() || base.notResurrectable();
-    } 
 
     public double getLinkedPercentage()
     {
@@ -257,12 +250,12 @@ public class EnemyStats : Stats
 
     public override List<GridCoords> findLocationToSpawn()
     {
-        if(isFrontline())
+        if(isFrontline)
         {
             return new List<GridCoords>() { CreatureSpawner.getNextFreeEnemyFrontLineSpace()};
         }
 
-        if(isBackline())
+        if(isBackline)
         {
             return new List<GridCoords>() { CreatureSpawner.getNextFreeEnemyBackLineSpace()};
         }
@@ -278,11 +271,11 @@ public class EnemyStats : Stats
     {
         base.describeSelfFull(panel);
 
-        if (isMinion())
+        if (isMinion)
         {
             DescriptionPanel.setText(panel.typeText, TraitList.minion.displayName);
         }
-        else if (isSummon())
+        else if (isSummon)
         {
             DescriptionPanel.setText(panel.typeText, TraitList.summoned.displayName);
         }

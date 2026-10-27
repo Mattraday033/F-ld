@@ -32,11 +32,11 @@ public class DeadCombatantManager : MonoBehaviour
         {
             Stats currentCombatant = listOfCombatants[i];
 
-            if (currentCombatant.isDead())
+            if (currentCombatant.isDead)
             {
                 deadCombatantList.Add(currentCombatant);
 
-                if (currentCombatant.isMinion())
+                if (currentCombatant.isMinion)
                 {
                     EnemyCombatActionManager.applyLinkDamage();
                 }
@@ -54,9 +54,9 @@ public class DeadCombatantManager : MonoBehaviour
 		for(int actionIndex = 0; actionIndex < actionQueue.Count; actionIndex++)
 		{
 			CombatAction action = actionQueue[actionIndex];
-			if (!action.multiActorAction() &&
-				(!CombatGrid.combatantExistsAtCoords(action.getActorCoords(), out Stats combatant) ||
-				!combatant.isAlive()))
+			if (!action.multiActorAction &&
+				(!CombatGrid.combatantExistsAtCoords(action.actorCoords, out Stats combatant) ||
+				!combatant.isAlive))
 			{
 				actionQueue.RemoveAt(actionIndex);
 				actionIndex--;

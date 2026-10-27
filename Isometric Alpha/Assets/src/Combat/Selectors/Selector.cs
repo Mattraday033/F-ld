@@ -226,10 +226,10 @@ public class Selector : ICloneable
 
 			GameObject combatSprite = stats.getCombatSprite();
 
-			if (GameObjectUtil.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
+			if (GameObjectUtil.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove)
 			{
 				return true;
-			} else if(stats.queuedToMove())
+			} else if(stats.queuedToMove)
             {
                 targetsQueuedToMove.Add(stats);
             }
@@ -261,17 +261,17 @@ public class Selector : ICloneable
 
 		foreach (Stats stats in allTargets)
 		{
-			if (stats.isDead())
+			if (stats.isDead)
 			{
 				continue;
 			}
 
 			GameObject combatSprite = stats.getCombatSprite();
 
-			if (GameObjectUtil.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove())
+			if (GameObjectUtil.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove)
 			{
 				return true;
-			}else if(stats.queuedToMove())
+			}else if(stats.queuedToMove)
             {
                 targetsQueuedToMove.Add(stats);
             }
@@ -290,7 +290,7 @@ public class Selector : ICloneable
 		{
 			if (CombatGrid.combatantExistsAtCoords(targetTileCoord, out Stats targetCombatant) &&
                     Helpers.hasQuality<Trait>(targetCombatant.traitContainer, t => t.isMandatoryTarget()) &&
-                    !targetCombatant.queuedToMove())
+                    !targetCombatant.queuedToMove)
 			{
 				return true;
 			}

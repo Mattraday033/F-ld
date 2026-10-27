@@ -14,7 +14,7 @@ public class SnapSelectorToMinion : TutorialSequenceStepScript
 
         foreach (EnemyStats enemy in allEnemies)
         {
-            if (enemy.isMinion())
+            if (enemy.isMinion)
             {
                 allMasterEnemies.Add(enemy);
             }

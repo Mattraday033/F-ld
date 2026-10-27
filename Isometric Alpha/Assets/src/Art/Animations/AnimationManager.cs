@@ -100,7 +100,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     // private void updateIdleAnimation(int rowToUpdate)
     // {
-    //     if(linkedStats != null && linkedStats.isDead() || LoadSaveFile.midLoad)
+    //     if(linkedStats != null && linkedStats.isDead || LoadSaveFile.midLoad)
     //     {
     //         return;
     //     }
@@ -136,7 +136,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     // {
     //     return !currentIdle.ToString().Contains("Death") && !AnimationTracker.trackerBeingTracked(this) && 
     //             ((!CombatStateManager.inCombat && !PlayerMovement.getInstance().canPlayRunAnimation() && PlayerStateManager.currentActivity != CurrentActivity.Defeat) || 
-    //             (CombatStateManager.inCombat && !linkedStats.isDead()));
+    //             (CombatStateManager.inCombat && !linkedStats.isDead));
     // }
 
     // public void playAnimationByNPCName(string displayName, CharacterAnimationType animationType)
@@ -223,13 +223,13 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //         return;
     //     }
 
-    //     if(isAlly && linkedStats.isDead())
+    //     if(isAlly && linkedStats.isDead)
     //     {
     //         currentIdle = CharacterAnimationType.Death_Back;
-    //     } else if(isAlly && !linkedStats.isDead())
+    //     } else if(isAlly && !linkedStats.isDead)
     //     {
     //         currentIdle = CharacterAnimationType.Idle_Back;
-    //     } else if(!isAlly && linkedStats.isDead())
+    //     } else if(!isAlly && linkedStats.isDead)
     //     {
     //         currentIdle = CharacterAnimationType.Death_Front;
     //     } else
@@ -687,8 +687,8 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
     //     if(CombatStateManager.inCombat &&
     //         healthBarManager!= null && 
     //         linkedStats != null && 
-    //         linkedStats.isDead() && 
-    //         linkedStats.notResurrectable())
+    //         linkedStats.isDead && 
+    //         linkedStats.notResurrectable)
     //     {
     //         // linkedStats.outline.createOutline(Color.clear);
     //         playAnimation(createClipTransitionSpecialAnimationThenHide());

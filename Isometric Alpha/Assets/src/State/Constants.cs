@@ -126,6 +126,8 @@ public static class Constants
     public const string femaleMarker = " (F)";
     public const string maleMarker = " (M)";
 
+    public const float thirtyPercentPerSquareMoved = .3f;
+
     #region Creature Amounts
     public const int oneCreature = 1;
     public const int twoCreatures = 2;

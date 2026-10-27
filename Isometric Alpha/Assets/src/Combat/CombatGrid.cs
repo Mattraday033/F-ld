@@ -6,6 +6,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum CombatGridSide
+{
+    Enemy,
+    Ally,
+    NoPosition
+}
 
 public delegate bool CombatantSearchCriteria(Stats stats);
 
@@ -26,13 +32,33 @@ public static class CombatGrid
 	
 	public const int maximumNumberOfSpaces = 16;
 	
-    public static Dictionary<GridCoords,Stats> combatantsDict = new Dictionary<GridCoords,Stats>();
+    public static Dictionary<GridCoords,Combatant> combatantsDict = new Dictionary<GridCoords,Combatant>();
     public readonly static UnityEvent LastEnemyKilled = new UnityEvent();
-    
+
     [RuntimeInitializeOnLoadMethod]
     public static void cleanCombatGrid()
     {
-        combatantsDict = new Dictionary<GridCoords,Stats>();
+        combatantsDict = new Dictionary<GridCoords,Combatant>();
+    }
+
+    //the Combatant drawn on that cell, which for a combatant with a single sprite is its primary on every cell it covers
+    private static Combatant getCombatantForCell(Stats stats, GridCoords coords)
+    {
+        foreach(Combatant combatant in stats.combatants)
+        {
+            if(combatant != null && combatant.cell.Equals(coords))
+            {
+                return combatant;
+            }
+        }
+
+        return stats.getCombatant();
+    }
+
+    //the Stats of every Combatant on the grid, skipping destroyed ones. A multi cell combatant appears once per cell
+    private static IEnumerable<Stats> getStatsOnGrid()
+    {
+        return combatantsDict.Values.Where(c => c != null && c.stats != null).Select(c => c.stats);
     }
 
 	public static Vector3 getPositionAt(GridCoords coords)
@@ -44,6 +70,11 @@ public static class CombatGrid
     {
         return getPositionAt(coords.row, coords.col) + new Vector3(0f, 0.4f);
 	}
+
+    public static Vector3 getAveragePositionAt(IEnumerable<GridCoords> coords)
+    {
+        return Helpers.getAveragePosition(coords.Select(getPositionAt).ToList());
+    }
 
     public static Vector3 getPositionAt(int row, int col)
     {
@@ -57,6 +88,23 @@ public static class CombatGrid
         Vector3 position = creatureGrid.GetCellCenterWorld(new Vector3Int(-1 * row, -1 * col));
 
         return new Vector3(position.x, position.y, -1*(row+col) - .01f*row);
+    }
+
+    public static CombatGridSide getCombatGridSide(this Stats stats)
+    {
+        if(stats == null || 
+            stats.positions == null ||
+            stats.positions.Count <= 0)
+        {
+            return CombatGridSide.NoPosition;
+        }
+
+        if(positionIsOnAlliedSide(stats.positions[0]))
+        {
+            return CombatGridSide.Ally;
+        }
+
+            return CombatGridSide.Enemy;
     }
 
 	public static bool positionIsOnAlliedSide(GridCoords coords)
@@ -99,7 +147,15 @@ public static class CombatGrid
             return;
         }
 
-        combatantsDict[coords] = newCombatant;
+        Combatant combatant = getCombatantForCell(newCombatant, coords);
+
+        if(combatant == null)
+        {
+            Debug.LogWarning("CombatGrid: " + newCombatant.uniqueName + " has no Combatant, so it can't be placed at " + coords.ToString());
+            return;
+        }
+
+        combatantsDict[coords] = combatant;
 
         removeNullCombatants();
 	}
@@ -147,10 +203,10 @@ public static class CombatGrid
 
         if(ally)
         {
-            stats = new List<Stats>(combatantsDict.Values.Where(s => s.positions.Count > 0 && positionIsOnAlliedSide(s.positions[0])));
+            stats = new List<Stats>(getStatsOnGrid().Where(s => s.positions.Count > 0 && positionIsOnAlliedSide(s.positions[0])));
         } else
         {
-            stats = new List<Stats>(combatantsDict.Values.Where(s => s.positions.Count > 0 && positionIsOnEnemySide(s.positions[0])));
+            stats = new List<Stats>(getStatsOnGrid().Where(s => s.positions.Count > 0 && positionIsOnEnemySide(s.positions[0])));
         }
 
         stats = stats.Distinct().ToList();
@@ -263,14 +319,14 @@ public static class CombatGrid
 
 	public static bool combatantExistsAtCoords(GridCoords coords, out Stats combatant)
 	{
-		if(coords.row < 0 || coords.col < 0 || 
-            !combatantsDict.ContainsKey(coords))
+        combatant = null;
+
+		if(coords.row >= 0 && coords.col >= 0 &&
+            combatantsDict.TryGetValue(coords, out Combatant combatantAtCoords) &&
+            combatantAtCoords != null)
 		{
-            combatant = null;
-		} else
-        {
-            combatant = combatantsDict[coords];
-        } 
+            combatant = combatantAtCoords.stats;
+        }
     
         return combatant != null;
     }
@@ -343,9 +399,9 @@ public static class CombatGrid
     {
         List<Stats> matches = new List<Stats>();
 
-        foreach(Stats combatant in combatantsDict.Values)
+        foreach(Stats combatant in getStatsOnGrid())
         {
-            if(combatant != null && meetsCriteria(combatant))
+            if(meetsCriteria(combatant))
             {
                 matches.Add(combatant);
             }
@@ -356,57 +412,57 @@ public static class CombatGrid
 
 	public static List<Stats> getAllAliveSummonedEnemies()
 	{
-		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isAlive() && c.isTargetable() && c.isPartOfVolley());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isAlive && c.isTargetable && c.isPartOfVolley);
 	}
 
 	public static List<Stats> getAllAliveNonsummonedEnemies()
 	{
-		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isAlive() && c.isTargetable() &&  !c.isPartOfVolley());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isAlive && c.isTargetable &&  !c.isPartOfVolley);
 	}
 
 	public static List<Stats> getAllAliveSummonedAllies()
 	{
-		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isAlive() && c.isTargetable() && c.isSummon());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isAlive && c.isTargetable && c.isSummon);
 	}
 
 	public static List<Stats> getAllAliveNonsummonedAllies()
 	{
-		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isAlive() && c.isTargetable() && !c.isSummon());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isAlive && c.isTargetable && !c.isSummon);
 	}
 
 	public static List<Stats> getAllAliveAllyCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isAlive() && c.isTargetable());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isAlive && c.isTargetable);
 	}
 
 	public static List<Stats> getAllAliveEnemyCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isAlive() && c.isTargetable());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isAlive && c.isTargetable);
 	}
 
 	public static List<Stats> getAllAliveCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => c.isAlive() && c.isTargetable());
+		return getAllCombatantsThatMeetCriteria(c => c.isAlive && c.isTargetable);
 	}
 
 	public static List<Stats> getAllAllyCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isTargetable());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isTargetable);
 	}
 
 	public static bool selectableAllyAtLocation(GridCoords coords)
 	{
-        return combatantExistsAtCoords(coords, out Stats ally) && ally.isAlive();
+        return combatantExistsAtCoords(coords, out Stats ally) && ally.isAlive;
 	}
 
 	public static List<Stats> getAllNonsummonedAllyCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isTargetable() && !c.isSummon());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnAlliedSide(p)) && c.isTargetable && !c.isSummon);
 	}
 
 	public static List<Stats> getAllEnemyCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isTargetable());
+		return getAllCombatantsThatMeetCriteria(c => c.positions.Any(p => positionIsOnEnemySide(p)) && c.isTargetable);
 	}
 
     public static Stats findOriginalCombatant(Stats repositionClone)
@@ -426,7 +482,7 @@ public static class CombatGrid
 
 	public static List<Stats> getAllCombatants()
 	{
-		return getAllCombatantsThatMeetCriteria(c => c.isTargetable());
+		return getAllCombatantsThatMeetCriteria(c => c.isTargetable);
 	}
 
 	public static List<Stats> getAllZOITargets(GridCoords coords)
@@ -553,13 +609,13 @@ public static class CombatGrid
 	
 	public static void deleteDeadOnDeathEffectActors()
 	{
-        List<Stats> combatants = new List<Stats>(combatantsDict.Values);
+        List<Stats> combatants = getStatsOnGrid().Distinct().ToList();
 
 		for (int index = 0; index < combatants.Count; index++)
 		{
             Stats currentCombatant = combatants[index];
 
-            if (currentCombatant != null && currentCombatant.isDead() &&
+            if (currentCombatant != null && currentCombatant.isDead &&
                 Helpers.hasQuality<Trait>(currentCombatant.traitContainer, t => t.deleteIfDead()))
             {
 
@@ -574,7 +630,7 @@ public static class CombatGrid
 		{
 			Stats currentCombatant = combatantList[combatantIndex];
 
-            // if(currentCombatant.multiSpaceEnemy())
+            // if(currentCombatant.multiSpaceEnemy)
             // {
             //     continue;
             // }
@@ -602,6 +658,6 @@ public static class CombatGrid
             return false;
         }
 
-        return stats.isRepositionClone();
+        return stats.isRepositionClone;
     }
 }

@@ -203,7 +203,7 @@ public class CombatActionArray : StatBoostSourceCombiner
 
         int firstAvailableSlotIndex = -1;
 
-        if (newCombatAction.canBePlacedInPassiveSlot() && !actionIsAttack(newCombatAction))
+        if (newCombatAction.canBePlacedInPassiveSlot && !actionIsAttack(newCombatAction))
         {
             for (int index = (combatActions.Length - 1); index >= 0; index--)
             {
@@ -265,7 +265,7 @@ public class CombatActionArray : StatBoostSourceCombiner
             }
 
             combatActions[slotIndex] = newCombatAction.clone();
-            combatActions[slotIndex].setActor(actor);
+            combatActions[slotIndex].actorStats = actor;
         }
         else
         {
@@ -352,7 +352,7 @@ public class CombatActionArray : StatBoostSourceCombiner
                 continue;
             }
 
-            if (action.takesAWeaponSlot())
+            if (action.takesAWeaponSlot)
             {
                 amountOfWeapons++;
             }
@@ -385,7 +385,7 @@ public class CombatActionArray : StatBoostSourceCombiner
                 continue;
             }
 
-            if (action.autoApply())
+            if (action.autoApply)
             {
                 action.getAppliedTrait().resetStacksToStartingAmount();
 
@@ -435,22 +435,22 @@ public class CombatActionArray : StatBoostSourceCombiner
 
     public int getTotalRedStacksAtStart()
     {
-        return Helpers.sum<CombatAction>(this, t => t.getRedStacksAtStart()) + actor.getBonusExuberances();
+        return Helpers.sum<CombatAction>(this, t => t.redStacksAtStart) + actor.getBonusExuberances();
     }
 
     public int getTotalBlueStacksAtStart()
     {
-        return Helpers.sum<CombatAction>(this, t => t.getBlueStacksAtStart()) + actor.getBonusExuberances();
+        return Helpers.sum<CombatAction>(this, t => t.blueStacksAtStart) + actor.getBonusExuberances();
     }
 
     public int getTotalYellowStacksAtStart()
     {
-        return Helpers.sum<CombatAction>(this, t => t.getYellowStacksAtStart()) + actor.getBonusExuberances();
+        return Helpers.sum<CombatAction>(this, t => t.yellowStacksAtStart) + actor.getBonusExuberances();
     }
 
     public int getTotalGreenStacksAtStart()
     {
-        return Helpers.sum<CombatAction>(this, t => t.getGreenStacksAtStart()) + actor.getBonusExuberances();
+        return Helpers.sum<CombatAction>(this, t => t.greenStacksAtStart) + actor.getBonusExuberances();
     }
 
     public override string displayName { get { return actor.displayName + "'s Combat Action Array"; } }

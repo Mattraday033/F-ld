@@ -12,7 +12,7 @@ public class StanceReapplicationAbility : HealingAbility
 
     public override void performCombatAction()
     {
-        Stats actor = getActorStats();
+        Stats actor = actorStats;
         setAppliedTrait(actor.getTraitOfType(TraitType.Stance)); // no null check because it's ok to set appliedTrait to null
 
         base.performCombatAction();

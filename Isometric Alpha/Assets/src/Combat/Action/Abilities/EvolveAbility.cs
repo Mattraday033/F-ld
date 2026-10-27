@@ -7,6 +7,20 @@ public class EvolveAbility : Ability
 
 	public CombatAction actionWhenInAttackMode {get; private set;}
 
+	public override Stats actorStats
+	{
+		set
+		{
+			base.actorStats = value;
+			actionWhenInAttackMode.actorStats = value;
+
+			// if (value != null)
+			// {
+			// 	Debug.LogError("actorStats set to " + value.position.ToString());
+			// }
+		}
+	}
+
 	public EvolveAbility(CombatActionSettings settings, CombatAction actionWhenInAttackMode):
 	base(settings)
 	{
@@ -63,14 +77,17 @@ public class EvolveAbility : Ability
 		}
 	}
 	
-	public override string getIconName()
+	public override string iconName
 	{
-		if(inAttackMode())
+		get
 		{
-			return actionWhenInAttackMode.getIconName();
-		} else
-		{
-			return base.getIconName();
+			if(inAttackMode())
+			{
+				return actionWhenInAttackMode.iconName;
+			} else
+			{
+				return base.iconName;
+			}
 		}
 	}
 	
@@ -90,22 +107,15 @@ public class EvolveAbility : Ability
 		return CombatStateManager.turnNumber % 2 == 1;
 	}
 	
-	public override void setSelector(Selector newSelector)
+	public override Selector selector
 	{
-		base.setSelector(newSelector);
-		actionWhenInAttackMode.setSelector(newSelector);
+		set
+		{
+			base.selector = value;
+			actionWhenInAttackMode.selector = value;
+		}
 	}
 
-	public override void setActor(Stats actor)
-	{
-		base.setActor(actor);
-		actionWhenInAttackMode.setActor(actor);
-		
-		// if (actor != null)
-		// {
-		// 	Debug.LogError("setActor to " + actor.position.ToString());
-		// }
-	}
 	
 	/*public override void setTargetCoords(GridCoords newTargetCoords)
 	{

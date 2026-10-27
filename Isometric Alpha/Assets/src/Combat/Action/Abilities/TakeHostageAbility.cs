@@ -35,7 +35,7 @@ public class TakeHostageAbility : Ability
 
         foreach (Stats target in targets)
         {
-            if(target == null || target.isDead() || !(target.hasTrait(TraitList.summoned) || target.hasTrait(TraitList.minion)))
+            if(target == null || target.isDead || !(target.hasTrait(TraitList.summoned) || target.hasTrait(TraitList.minion)))
             {
                 continue;
             }
@@ -52,9 +52,9 @@ public class TakeHostageAbility : Ability
                 skipLog.Add(target, 1);
             }
 
-            projectileNumber += sendProjectileAt(target.getPositionToHit(getSelector(), skips), target, projectileNumber);
+            projectileNumber += sendProjectileAt(target.getPositionToHit(selector, skips), target, projectileNumber);
 
-            if (target.isDead() && !target.isLarge())
+            if (target.isDead && !target.isLarge)
             {
                 List<GridCoords> emptySpaces = new List<GridCoords>(CombatGrid.getAllEmptySpacesInEnemyZone());
 

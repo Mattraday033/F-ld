@@ -12,6 +12,8 @@ public class EvolutionaryEnemyStats : EnemyStats
 	//[SerializeField]
 	private EnemyStats devolutionEnemyType;
 
+	public override bool notResurrectable => true;
+
 	public EvolutionaryEnemyStats(string name, int armor, int tHP, string evolutionEnemyType, Trait[] traits, Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary = null): 
 	base(name, armor, tHP, traits: traits, animationAudioClipDictionary: animationAudioClipDictionary)
 	{
@@ -75,11 +77,6 @@ public class EvolutionaryEnemyStats : EnemyStats
 		setToDeadSprite(willEvolveOrDevolve);
 		
 		CreatureSpawner.spawn(evolutionEnemyType.clone(), positions);
-	}
-
-	public override bool notResurrectable()
-	{
-		return true;
 	}
 
 }

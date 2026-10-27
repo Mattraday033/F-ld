@@ -7,6 +7,8 @@ public class RepetitionAbility : Ability
     private int maxRepetitions;
     private int completedRepetitions = 0;
 
+    public override bool hasRepetitionsRemaining => completedRepetitions < maxRepetitions;
+
     public RepetitionAbility(CombatActionSettings settings) :
     base(settings)
     {
@@ -25,7 +27,7 @@ public class RepetitionAbility : Ability
 
         completedRepetitions++;
 
-        if (hasRepetitionsRemaining() && CombatActionManager.lockedInCombatActionQueue != null)
+        if (hasRepetitionsRemaining && CombatActionManager.lockedInCombatActionQueue != null)
         {
             CombatActionManager.lockedInCombatActionQueue.Insert(0, this);
         }
@@ -34,11 +36,6 @@ public class RepetitionAbility : Ability
     public virtual int getRepetitions()
     {
         return maxRepetitions;
-    }
-
-    public override bool hasRepetitionsRemaining()
-    {
-        return completedRepetitions < maxRepetitions;
     }
 
     public override CombatAction clone()

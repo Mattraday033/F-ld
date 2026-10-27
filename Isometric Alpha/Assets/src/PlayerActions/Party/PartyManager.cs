@@ -305,7 +305,7 @@ public static class PartyManager
         {
             if( !partyMember.uniqueName.Contains(playerMarker) &&
                 State.formation.contains(partyMember.stats.uniqueName) &&
-                !partyMember.stats.isDead())
+                !partyMember.stats.isDead)
             {
                 train.Add(partyMember);
             }

@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class ChargeUpAbility : Ability
 {
-    public EffectAnimationType? currentEffectType = null;
-	public CombatAction actionWhenCharged { get; private set; }
-	public Trait chargeUpTrait { get; private set; }
 	public const string chargingUpName = "Charging Up";
     public const string chargingUpDescription = "Target creature gains a Charge Trait. Charge Type Traits enable creatures to use more powerful abilities, and often provide other passive benefits.";
 
+
+    public EffectAnimationType? currentEffectType = null;
+	public CombatAction actionWhenCharged { get; private set; }
+	public Trait chargeUpTrait { get; private set; }
+
+	public virtual bool charged => actorStats?.hasTrait(chargeUpTrait) ?? false;
+
+	public override Stats actorStats
+	{
+		set
+		{
+			base.actorStats = value;
+			actionWhenCharged.actorStats = value;
+		}
+	}
+
 	public ChargeUpAbility(Trait chargeUpTrait, Ability actionWhenCharged) :
-		base(CombatActionSettings.build(actionWhenCharged.getKey(), DescriptionParams.build(actionWhenCharged.displayName, iconName: actionWhenCharged.getIconName(), useDescription: actionWhenCharged.getUseDescription(), loreDescription: actionWhenCharged.getLoreDescription()),
+		base(CombatActionSettings.build(actionWhenCharged.getKey(), DescriptionParams.build(actionWhenCharged.displayName, iconName: actionWhenCharged.iconName, useDescription: actionWhenCharged.getUseDescription(), loreDescription: actionWhenCharged.getLoreDescription()),
 																	DamageParams.build(actionWhenCharged.getDamageFormula(), actionWhenCharged.getCritFormula()),
 																	TargetParams.build(SelectorTemplate.Single, actionWhenCharged.selfTargeting),
-																	FrequencyParams.build(actionWhenCharged.getMaximumSlots(), actionWhenCharged.getMaximumCooldown()),
-																	costParams: CostParams.build(actionWhenCharged.getActionCostTypes(), actionWhenCharged.getActionCosts()),
+																	FrequencyParams.build(actionWhenCharged.getMaximumSlots(), actionWhenCharged.maximumCooldown),
+																	costParams: CostParams.build(actionWhenCharged),
 																	appliedTrait: actionWhenCharged.getAppliedTrait()) //Left off relatedTraits
 			)
 	{
@@ -23,17 +36,15 @@ public class ChargeUpAbility : Ability
 		this.actionWhenCharged = actionWhenCharged.clone();
 	}
 
-	public override void setSelector(Selector newSelector)
+	public override Selector selector
 	{
-		base.setSelector(newSelector);
-		actionWhenCharged.setSelector(newSelector);
+		set
+		{
+			base.selector = value;
+			actionWhenCharged.selector = value;
+		}
 	}
 
-	public override void setActor(Stats actor)
-	{
-		base.setActor(actor);
-		actionWhenCharged.setActor(actor);
-	}
     /*
 	public override void setTargetCoords(GridCoords newTargetCoords)
 	{
@@ -43,7 +54,7 @@ public class ChargeUpAbility : Ability
 	*/
     public override void performCombatAction(List<Stats> targets)
     {
-        if (!isCharged())
+        if (!charged)
         {
             foreach(Stats target in targets)
             {
@@ -59,39 +70,42 @@ public class ChargeUpAbility : Ability
         }
         else
         {
-            getActorStats().removeTrait(chargeUpTrait);
-            //actionWhenCharged.setSelector(getSelector());
+            actorStats.removeTrait(chargeUpTrait);
+            //actionWhenCharged.selector = selector;
             actionWhenCharged.performCombatAction(targets);
         }
     }
     
     public override void playActivationAnimation()
     {
-        // if (!isCharged())
+        // if (!charged)
         // {
-            // getActorStats().playAttackIntoSecondaryIdleAnimation();
+            // actorStats.playAttackIntoSecondaryIdleAnimation();
         // }
         // else
         // {
-            getActorStats().playAttackIntoFrontIdleAnimation();
+            actorStats.playAttackIntoFrontIdleAnimation();
         // }
     }
 
-	public override bool isSelfTargeting()
+	public override bool selfTargeting
 	{
-		if (isCharged())
-		{
-			return actionWhenCharged.isSelfTargeting();
-		}
-		else
-		{
-			return true;
-		}
+        get
+        {
+            if (charged)
+            {
+                return actionWhenCharged.selfTargeting;
+            }
+            else
+            {
+                return true;
+            }
+        }
 	}
 
 	public override SelectorTemplate getRangeTemplate()
 	{
-		if (isCharged())
+		if (charged)
 		{
 			return actionWhenCharged.getRangeTemplate();
 		}
@@ -103,7 +117,7 @@ public class ChargeUpAbility : Ability
 
 	public override string getRangeTitle()
 	{
-		if (isCharged())
+		if (charged)
 		{
 			return actionWhenCharged.getRangeTemplate().ToFriendlyString();
 		}
@@ -118,7 +132,7 @@ public class ChargeUpAbility : Ability
     {
         get
         {
-            if (isCharged())
+            if (charged)
             {
                 return base.displayName;
             }
@@ -129,28 +143,26 @@ public class ChargeUpAbility : Ability
         }
     }
     
-    public override CombatAnimationType getCombatAnimationType()
+    public override EffectAnimationType effectAnimationType
     {
-        return CombatAnimationType.Effect;
-    }
-
-    public override EffectAnimationType getEffectAnimationType()
-    {
-        if(currentEffectType == null)
+        get
         {
-            if(!isCharged())
+            if(currentEffectType == null)
             {
-                currentEffectType = EffectAnimationType.Positive;
-            } else
-            {
-                currentEffectType = actionWhenCharged.getEffectAnimationType();
+                if(!charged)
+                {
+                    currentEffectType = EffectAnimationType.Positive;
+                } else
+                {
+                    currentEffectType = actionWhenCharged.effectAnimationType;
+                }
+
+                CombatStateManager.OnNewTurn.AddListener(removeCurrentEffectType);
+                CombatStateManager.OnCombatEnd.AddListener(removeCurrentEffectType);
             }
 
-            CombatStateManager.OnNewTurn.AddListener(removeCurrentEffectType);
-            CombatStateManager.OnCombatEnd.AddListener(removeCurrentEffectType);
+            return currentEffectType.Value;
         }
-
-        return currentEffectType.Value;
     }
 
     private void removeCurrentEffectType()
@@ -160,22 +172,20 @@ public class ChargeUpAbility : Ability
         CombatStateManager.OnCombatEnd.RemoveListener(removeCurrentEffectType);
     }
 
-    public override string getIconName()
+    public override string iconName
     {
-        if (isCharged())
+        get
         {
-            return actionWhenCharged.getIconName();
-        }
-        else
-        {
-            return chargeUpTrait.getIconName();
+            if (charged)
+            {
+                return actionWhenCharged.iconName;
+            }
+            else
+            {
+                return chargeUpTrait.getIconName();
+            }
         }
     }
-
-	public virtual bool isCharged()
-	{
-		return getActorStats().hasTrait(chargeUpTrait);
-	}
 	
 	public override CombatAction clone()
 	{
@@ -188,7 +198,7 @@ public class ChargeUpAbility : Ability
 
     public override string getUseDescription()
 	{
-        if(isCharged())
+        if(charged)
         {
             return actionWhenCharged.getUseDescription();
         } 

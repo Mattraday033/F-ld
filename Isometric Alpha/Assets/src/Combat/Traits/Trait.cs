@@ -348,7 +348,7 @@ public class Trait : StatBoostSource, ICloneable, IDescribable, IDescribableInBl
 
     public virtual bool dealTickDownDamage()
     {
-        if (getTraitHolder() == null || getTraitHolder().isDead())
+        if (getTraitHolder() == null || getTraitHolder().isDead)
         {
             return false;
         }

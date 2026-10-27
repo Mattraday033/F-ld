@@ -28,7 +28,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 			CombatAction envCombatAction = kvp.Key.clone();
 			
 			if(!envCombatAction.hasAssignedActor(out Stats actor) 
-                || actor.isDead())
+                || actor.isDead)
 			{
 				continue;
 			}
@@ -36,7 +36,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 			Trait targetingTrait = kvp.Value.clone();
 			List<Stats> listOfTargets;
 			
-			if(actor.shouldTargetEnemy())
+			if(actor.shouldTargetEnemy)
 			{
 				listOfTargets = CombatGrid.getAllAliveEnemyCombatants();
 			} else
@@ -51,7 +51,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
 				continue;
 			}
 			
-			envCombatAction.setSelector(envCombatActionSelector);
+			envCombatAction.selector = envCombatActionSelector;
 			
 			actionList.Add(envCombatAction);
 		}
@@ -126,7 +126,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
                 return;
         }
 
-        envCombatAction.setActor(actorStats);
+        envCombatAction.actorStats = actorStats;
         environmentalCombatActions.Add(envCombatAction, targetingTrait);
 	}
 	
@@ -163,7 +163,7 @@ public static class EnvironmentalCombatActionList
         SummonAbility summonAbility = AbilityList.getAbility(EnemyStatsList.getEnemyStats(NPCNameList.takacs), key) as SummonAbility;
         Selector summonSelector = SelectorFactory.buildByTemplate(SelectorTemplate.HorizontalThree).clone();
         summonSelector.setToLocation(new GridCoords(row,0));
-        summonAbility.setSelector(summonSelector);
+        summonAbility.selector = summonSelector;
 
         return summonAbility;
     }

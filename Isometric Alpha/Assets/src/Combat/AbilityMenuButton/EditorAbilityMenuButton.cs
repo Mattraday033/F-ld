@@ -9,14 +9,14 @@ public class EditorAbilityMenuButton : AbilityMenuButton
 
     public bool setPlayerCombatActionAtIndex(CombatAction combatAction)
     {
-        if (isPassiveSlot && !combatAction.canBePlacedInPassiveSlot())
+        if (isPassiveSlot && !combatAction.canBePlacedInPassiveSlot)
         {
             return false;
         }
 
         CombatActionArray combatActionArray = abilityMenuManager.getStoredCombatActionArray();
 
-        if(combatAction.takesAWeaponSlot() && loadedCombatAction != null && loadedCombatAction.takesAWeaponSlot())
+        if(combatAction.takesAWeaponSlot && loadedCombatAction != null && loadedCombatAction.takesAWeaponSlot)
         {
             combatActionArray.unequipCombatAction(index);
 

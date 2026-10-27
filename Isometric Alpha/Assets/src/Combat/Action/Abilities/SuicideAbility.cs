@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SuicideAbility : Ability
 {
+	public override bool killsCaster => true;
+
 	public SuicideAbility(CombatActionSettings settings):
 	base(settings)
 	{
@@ -14,17 +16,11 @@ public class SuicideAbility : Ability
 	{
 		base.performCombatAction(targets);
 		
-        if(CombatGrid.combatantExistsAtCoords(getActorCoords(), out Stats caster))
+        if(CombatGrid.combatantExistsAtCoords(actorCoords, out Stats caster))
         {
             caster.modifyCurrentHealth(caster.getTotalHealth()*2);
 		
 		    caster.setToDeadSprite();
         }
 	}
-	
-	public override bool killsCaster()
-	{
-		return true;
-	}
-
 }

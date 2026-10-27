@@ -24,13 +24,13 @@ public class OnDeathEffectTrait : Trait
         }
 
 		CombatAction actionOnDeath = AbilityList.enemyAbilityDictionary[abilityKey].clone();
-		actionOnDeath.setActor(actor);
+		actionOnDeath.actorStats = actor;
         actor.inOnDeathEffect = true;
 		Selector actionSelector = SelectorFactory.buildByTemplate(actionOnDeath.getRangeTemplate());
 		
 		List<Stats> listOfTargets;
 		
-		if(actor.shouldTargetEnemy())
+		if(actor.shouldTargetEnemy)
 		{
 			listOfTargets = CombatGrid.getAllAliveEnemyCombatants();
 		} else
@@ -38,12 +38,12 @@ public class OnDeathEffectTrait : Trait
 			listOfTargets = CombatGrid.getAllAliveAllyCombatants();
 		}
 		
-		if(actionOnDeath.isSelfTargeting())
+		if(actionOnDeath.selfTargeting)
 		{
-			actionOnDeath.setSelector(actionOnDeath.getTargetSelector());
+			actionOnDeath.selector = actionOnDeath.selector;
 			if (actor.positions.Count > 0)
 			{
-				actionOnDeath.getSelector().setToLocation(GridCoords.sum(actor.positions[0], GridCoords.getDefaultCoords()));
+				actionOnDeath.selector.setToLocation(GridCoords.sum(actor.positions[0], GridCoords.getDefaultCoords()));
 			}
 			//actionOnDeath.setTargetCoords(actor.position);
 		} else
@@ -55,7 +55,7 @@ public class OnDeathEffectTrait : Trait
                 return;
             }
 
-			actionOnDeath.setSelector(targetSelector.clone());
+			actionOnDeath.selector = targetSelector.clone();
 		}
 		
 		CombatActionManager.addOnDeathCombatAction(actionOnDeath);

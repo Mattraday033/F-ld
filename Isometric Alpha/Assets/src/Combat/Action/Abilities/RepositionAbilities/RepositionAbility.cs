@@ -12,6 +12,10 @@ public class RepositionAbility : Ability, IJSONConvertable
 
     public GridCoords tertiaryCoords;
 
+    public override bool secondaryCoordsRequiresEmptySpace => true;
+    public override bool requiresSecondaryCoords => true;
+    public override bool requiresTertiaryCoords => true;
+
     public RepositionAbility(CombatActionSettings settings) :
         base(settings)
     {
@@ -22,12 +26,12 @@ public class RepositionAbility : Ability, IJSONConvertable
         base.performCombatAction();
 
         if (combatantToBeMovedExists(out Stats combatantToBeMoved) && 
-            getActorStats() != null)
+            actorStats != null)
         {
             return;
         }
 
-        AnimationTracker.getInstance().StartCoroutine(waitForAttackAnimationToStop(/*getActorStats().animationManager,*/ combatantToBeMoved));
+        AnimationTracker.getInstance().StartCoroutine(waitForAttackAnimationToStop(/*actorStats.animationManager,*/ combatantToBeMoved));
     }
 
     public virtual IEnumerator waitForAttackAnimationToStop(/*AnimationManager animationManager,*/ Stats combatantToBeMoved)
@@ -42,7 +46,7 @@ public class RepositionAbility : Ability, IJSONConvertable
 
         // applyTrait(combatantToBeMoved);
 
-        // if (!inPreviewMode && actorIsAlly())
+        // if (!inPreviewMode && actorIsAlly)
         // {
         //     Exuberances.addExuberance(MultiStackProcType.BlueShield, singleExuberanceStack);
         // }
@@ -73,20 +77,21 @@ public class RepositionAbility : Ability, IJSONConvertable
             statsClone.inPreviewMode = false;
             statsClone.addTrait(TraitList.untargetable);
 
+            //the placeholder is the clone's Combatant, so it has to exist before the clone can go on the grid
+            placeHolderObject = RepositionPlaceholderGenerator.generatePlaceholderObject(statsClone, getDestinationCoords());
+
             foreach (GridCoords cloneCoords in statsClone.positions)
             {
                 CombatGrid.setCombatantAtCoords(cloneCoords, statsClone);
             }
             combatantToBeMoved.repositionClone = statsClone;
-
-            placeHolderObject = RepositionPlaceholderGenerator.generatePlaceholderObject(statsClone, getDestinationCoords());
         }
         else
         {
             placeHolderObject = null;
         }
 
-        if (targetsAllySection())
+        if (targetsAllySection)
         {
             CombatActionManager.getInstance().promptLaterCombatActionsToFindNewTarget();
         }
@@ -155,16 +160,6 @@ public class RepositionAbility : Ability, IJSONConvertable
         secondaryCoords = coords.clone();
     }
 
-    public override bool secondaryCoordsRequiresEmptySpace()
-    {
-        return true;
-    }
-
-    public override bool requiresSecondaryCoords()
-    {
-        return true;
-    }
-
     public void setPlaceHolderObject(GameObject placeHolderObject)
     {
         this.placeHolderObject = placeHolderObject;
@@ -211,11 +206,6 @@ public class RepositionAbility : Ability, IJSONConvertable
     }
 
     public override bool tertiaryCoordsRequiresEmptySpace()
-    {
-        return true;
-    }
-
-    public override bool requiresTertiaryCoords()
     {
         return true;
     }

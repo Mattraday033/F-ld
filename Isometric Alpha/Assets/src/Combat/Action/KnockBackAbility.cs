@@ -10,6 +10,8 @@ public class KnockBackAbility : RepositionEnemyAbility
 
     private double damageMultiplierPerSquareMoved;
 
+    public override bool requiresTertiaryCoords => false;
+
     public KnockBackAbility(CombatActionSettings settings, double damageMultiplierPerSquareMoved) :
     base(settings)
     {
@@ -19,11 +21,6 @@ public class KnockBackAbility : RepositionEnemyAbility
     public override bool combatantToBeMovedExists(out Stats combatant)
     {
         return CombatGrid.combatantExistsAtCoords(getTargetCoords(), out combatant);
-    }
-
-    public override bool requiresTertiaryCoords()
-    {
-        return false;
     }
 
     private GridCoords determineDestinationCoords()
@@ -123,22 +120,22 @@ public class KnockBackAbility : RepositionEnemyAbility
         }
     }
 
-    public override ScriptOnLanding getLandingScript()
+    public override ScriptOnLanding landingScript
     {
-        if (!inPreviewMode)
+        get
         {
-            GridCoords secondTargetCoords = getDestinationCoords();
-            secondTargetCoords.row--;
-            return new KnockBackOnLanding(getTargetCoords(), getDestinationCoords(), secondTargetCoords);
-        } else
-        {
-            return null;
+            if (!inPreviewMode)
+            {
+                GridCoords secondTargetCoords = getDestinationCoords();
+                secondTargetCoords.row--;
+                return new KnockBackOnLanding(getTargetCoords(), getDestinationCoords(), secondTargetCoords);
+            } else
+            {
+                return null;
+            }
         }
     }
 
-    public override EffectAnimationType getEffectAnimationType()
-    {
-        return EffectAnimationType.Blunt;
-    }
+    public override EffectAnimationType effectAnimationType => EffectAnimationType.Blunt;
 
 }

@@ -23,7 +23,7 @@ public static class DamagePreviewManager
         CombatAction actionClone = actionToPreview.clone();
 
         actionClone.setToPreviewMode();
-        int healthBarOccurances = actionToPreview.getSelector().countHealthBarOccurances(healthBar);
+        int healthBarOccurances = actionToPreview.selector.countHealthBarOccurances(healthBar);
 
         if(healthBarOccurances <= 0)
         {
@@ -46,7 +46,7 @@ public static class DamagePreviewManager
     public static void addDamagePreview(Stats stats, HealthBarManager healthBar, CombatAction combatAction)
     {
         if(damagePreviewHealthBarDict.ContainsKey(stats) || stats == null || combatAction == null ||
-			stats.isDead() || improperTargetForAction(stats, combatAction))
+			stats.isDead || improperTargetForAction(stats, combatAction))
         {
             return;
         }
@@ -77,9 +77,9 @@ public static class DamagePreviewManager
 
 	private static bool improperTargetForAction(Stats actualTarget, CombatAction actionToPreview)
 	{
-		if ((actionToPreview.targetsAllySection() && actualTarget.positions.Any(p => CombatGrid.positionIsOnEnemySide(p))) ||
-            (!actionToPreview.targetsAllySection() && actualTarget.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p))) ||
-                actualTarget.queuedToMove())
+		if ((actionToPreview.targetsAllySection && actualTarget.positions.Any(p => CombatGrid.positionIsOnEnemySide(p))) ||
+            (!actionToPreview.targetsAllySection && actualTarget.positions.Any(p => CombatGrid.positionIsOnAlliedSide(p))) ||
+                actualTarget.queuedToMove)
 		{
 			return true;
 		}

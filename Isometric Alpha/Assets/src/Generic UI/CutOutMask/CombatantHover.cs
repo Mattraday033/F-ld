@@ -43,7 +43,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     private void highlightMandatoryTarget()
     {
-        if(linkedStats != null && linkedStats as AllyStats == null && linkedStats.isMandatoryTarget())
+        if(linkedStats != null && linkedStats as AllyStats == null && linkedStats.isMandatoryTarget)
         {
             if(highlightAndFadeCoroutine != null)
             {
@@ -66,7 +66,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     private Stats getHighlightTarget()
     {
-        if(hasTargetStats(out Stats target) && target.queuedToMove())
+        if(hasTargetStats(out Stats target) && target.queuedToMove)
         {
             return target.repositionClone;
         }
@@ -122,7 +122,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
             return;
         }
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive())
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive)
         {
             revealPriorityHeld = true;
 
@@ -155,7 +155,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
             return;
         }
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive())
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive)
         {
             if (getTargetGameObject() != null)
             {
@@ -257,7 +257,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
             StopHighlightFadeMandatoryTarget.Invoke(target);
         }
 
-        if(toggleReveal && (!target.isDead() || revealPriorityHeld))
+        if(toggleReveal && (!target.isDead || revealPriorityHeld))
         {
             target.setOutline();
         } else
@@ -277,7 +277,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
             return;
         }
 
-        if(toggleReveal && (!target.isDead() || revealPriorityHeld))
+        if(toggleReveal && (!target.isDead || revealPriorityHeld))
         {
             healthBarManager.show();
         } else
@@ -309,7 +309,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
     {
         this.selectors = selectors;
 
-        if(revealPriorityHeld || linkedStats.isRepositionClone() || !hasTargetStats(out Stats target))
+        if(revealPriorityHeld || linkedStats.isRepositionClone || !hasTargetStats(out Stats target))
         {
             return;
         }
@@ -324,7 +324,7 @@ public class CombatantHover : CombatMouseHover, IRevealable
             GridCoords[] gridCoords = selector.getAllSelectorCoords();
 
             if(linkedStats.isInsideCoordinates(gridCoords) || 
-                (linkedStats.queuedToMove() && linkedStats.repositionClone.isInsideCoordinates(gridCoords)))
+                (linkedStats.queuedToMove && linkedStats.repositionClone.isInsideCoordinates(gridCoords)))
             {
                 return true;
             }
@@ -335,12 +335,12 @@ public class CombatantHover : CombatMouseHover, IRevealable
 
     private void addDamagePreview(CombatAction combatAction)
     {
-        if(combatAction == null || combatAction.getSelector() == null)
+        if(combatAction == null || combatAction.selector == null)
         {
             return;
         }
 
-        if(revealPriorityHeld || linkedStats.isInsideCoordinates(combatAction.getSelector().getAllSelectorCoords()))
+        if(revealPriorityHeld || linkedStats.isInsideCoordinates(combatAction.selector.getAllSelectorCoords()))
         {
             DamagePreviewManager.addDamagePreview(linkedStats, linkedStats.getHealthBarManager(), combatAction);
         }

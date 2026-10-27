@@ -154,7 +154,7 @@ public class Projectile : MonoBehaviour, IAnimationManager
 
     private bool shouldSpawnDamageNumbers()
     {
-        if (damage >= 0 && targetSnapshot != null && (!targetSnapshot.isDead() || (healsTarget && affectsDeadTargets)))
+        if (damage >= 0 && targetSnapshot != null && (!targetSnapshot.isDead || (healsTarget && affectsDeadTargets)))
         {
             return true;
         }
@@ -249,14 +249,14 @@ public class KnockBackOnLanding : ScriptOnLanding
         {
             combatantToBeMoved.moveTo(new List<GridCoords> { moveToCoords });
 
-            if(!targetSnapshot.isDead())
+            if(!targetSnapshot.isDead)
             {
                 combatantToBeMoved.playAnimationOnDamage();
                 combatantToBeMoved.updateHealthBar();
             }
 
             // if(CombatGrid.combatantExistsAtCoords(collisionCoords, out Stats combatantCollision) &&
-            //      !collisionTargetSnapshot.isDead())
+            //      !collisionTargetSnapshot.isDead)
             // {
             //     combatantCollision.updateHealthBar();
             //     combatantCollision.playAnimationOnDamage();

@@ -34,7 +34,7 @@ public class HoverPanelPopUpButton : PopUpButton
         }
 
         //a reposition placeholder stands in for its original on either path, so the panel sees them as the same combatant
-        if(currentCombatant != null && currentCombatant.isRepositionClone())
+        if(currentCombatant != null && currentCombatant.isRepositionClone)
         {
             Stats originalCombatant = CombatGrid.findOriginalCombatant(currentCombatant);
 
