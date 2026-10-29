@@ -54,13 +54,22 @@ public class CombatActionManager : MonoBehaviour
             return;
         }
 
+        //test action
+        action = new Ability(CombatActionSettings.build("testKey", DescriptionParams.build("Send Flying", 
+                                                                                            iconName: "SendFlying", 
+                                                                                            useDescription: "Deliver a powerful blow which throws the target backwards into whatever is behind them. Extra damage is dealt depending on how far backwards they travel. If they collide with an enemy, the second enemy also takes damage."), 
+                                                                    DamageParams.build("3S", "D + S"), 
+                                                                    frequencyParams: FrequencyParams.build(2, 5)));
+
+        Catalog<IActionUnit> actionCatalog = new Catalog<IActionUnit>();
+
         try
         {
             actionState = CombatActionState.Calculation;
 
-            targets = action.findAllTargets();
+            // targets = action.findAllTargets();
 
-            actionUnits = action.getAllActionUnits();
+            // actionUnits = action.getAllActionUnits();
 
             actionState = CombatActionState.Application;
 

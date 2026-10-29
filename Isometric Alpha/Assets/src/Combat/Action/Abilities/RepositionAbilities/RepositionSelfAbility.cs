@@ -9,8 +9,8 @@ public class RepositionSelfAbility : RepositionAbility
 	public override bool targetsOnlyEmptySpace => true;
 	public override bool requiresTertiaryCoords => false;
 
-	public RepositionSelfAbility(CombatActionSettings settings) :
-		base(settings)
+	public RepositionSelfAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+		base(settings, targetingLogics)
 	{
 
 	}

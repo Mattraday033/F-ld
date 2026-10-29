@@ -6,8 +6,8 @@ public class SuicideAbility : Ability
 {
 	public override bool killsCaster => true;
 
-	public SuicideAbility(CombatActionSettings settings):
-	base(settings)
+	public SuicideAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null):
+	base(settings, targetingLogics)
 	{
 
 	}

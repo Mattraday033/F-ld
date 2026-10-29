@@ -29,8 +29,8 @@ public class LastManStandingAbility : ChargeUpAbility
 		}
 	}
 
-	public LastManStandingAbility(Trait chargeUpTrait, Ability actionWhenCharged):
-		base(chargeUpTrait, actionWhenCharged)
+	public LastManStandingAbility(Trait chargeUpTrait, Ability actionWhenCharged, List<TargetingLogic> targetingLogics = null):
+		base(chargeUpTrait, actionWhenCharged, targetingLogics)
 	{
 		
 	}

@@ -8,8 +8,8 @@ public class PurgeAbility : Ability
     private int traitsToRemove = -1;
     private TraitType traitType = TraitType.Protection;
 
-	public PurgeAbility(CombatActionSettings settings, TraitType traitType = TraitType.Protection, int traitsToRemove = -1):
-	base(settings)
+	public PurgeAbility(CombatActionSettings settings, TraitType traitType = TraitType.Protection, int traitsToRemove = -1, List<TargetingLogic> targetingLogics = null):
+	base(settings, targetingLogics)
 	{
         this.traitsToRemove = traitsToRemove;
         this.traitType = traitType;

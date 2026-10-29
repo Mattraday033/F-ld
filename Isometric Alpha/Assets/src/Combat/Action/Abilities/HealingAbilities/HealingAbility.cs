@@ -10,8 +10,8 @@ public class HealingAbility : Ability
 	public override bool healsTarget => true;
 	public override bool targetsAllySection => true;
 
-	public HealingAbility(CombatActionSettings settings):
-	base(settings)
+	public HealingAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null):
+	base(settings, targetingLogics)
 	{
 		
 	}

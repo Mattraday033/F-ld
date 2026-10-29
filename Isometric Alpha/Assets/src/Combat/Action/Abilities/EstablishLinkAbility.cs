@@ -6,8 +6,8 @@ public class EstablishLinkAbility : Ability
 {
     private LinkTrait linkTrait;
 
-    public EstablishLinkAbility(CombatActionSettings settings, LinkTrait linkTrait):
-    base(settings)
+    public EstablishLinkAbility(CombatActionSettings settings, LinkTrait linkTrait, List<TargetingLogic> targetingLogics = null):
+    base(settings, targetingLogics)
     {
         this.linkTrait = (LinkTrait) linkTrait.clone();
     }

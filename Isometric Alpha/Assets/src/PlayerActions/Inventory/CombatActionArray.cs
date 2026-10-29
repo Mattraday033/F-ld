@@ -387,9 +387,9 @@ public class CombatActionArray : StatBoostSourceCombiner
 
             if (action.autoApply)
             {
-                action.getAppliedTrait().resetStacksToStartingAmount();
+                action.appliedTrait.resetStacksToStartingAmount();
 
-                equippedPassiveTraits.Add(action.getAppliedTrait());
+                equippedPassiveTraits.Add(action.appliedTrait);
             }
         }
 

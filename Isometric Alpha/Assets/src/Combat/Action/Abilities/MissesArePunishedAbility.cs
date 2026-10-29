@@ -10,8 +10,8 @@ public class MissesArePunishedAbility : Ability
 
 	public override bool healsTarget => hasTargets();
 
-	public MissesArePunishedAbility(CombatActionSettings settings, int missDamageMult = 3, EffectAnimationType missEffectType = EffectAnimationType.Slash):
-	base(settings)
+	public MissesArePunishedAbility(CombatActionSettings settings, int missDamageMult = 3, EffectAnimationType missEffectType = EffectAnimationType.Slash, List<TargetingLogic> targetingLogics = null):
+	base(settings, targetingLogics)
 	{
         this.missDamageMult = missDamageMult;
         this.missEffectType = missEffectType;

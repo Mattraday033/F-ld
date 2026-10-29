@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RepetitionPerCompanionAbility : RepetitionAbility
 {
-    public RepetitionPerCompanionAbility(CombatActionSettings settings) :
-    base(settings)
+    public RepetitionPerCompanionAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
     {
 
     }

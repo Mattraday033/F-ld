@@ -11,8 +11,8 @@ public class TraitBasedDamageAbility: Ability
 {
 	private double extraDamagePercentagePerTrait = -1.0;
 
-	public TraitBasedDamageAbility(CombatActionSettings settings, double extraDamagePercentagePerTrait):
-	base(settings)
+	public TraitBasedDamageAbility(CombatActionSettings settings, double extraDamagePercentagePerTrait, List<TargetingLogic> targetingLogics = null):
+	base(settings, targetingLogics)
 	{
 		this.extraDamagePercentagePerTrait = extraDamagePercentagePerTrait;
 	}

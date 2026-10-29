@@ -22,8 +22,8 @@ public class Attack : CombatAction, IJSONConvertable
         }
     }
 
-    public Attack(Stats actor, Weapon mainHandWeapon) :
-    base(actor, SelectorFactory.buildByTemplate(mainHandWeapon.getRangeTemplate()))
+    public Attack(Stats actor, Weapon mainHandWeapon, List<TargetingLogic> targetingLogics = null) :
+    base(actor, SelectorFactory.buildByTemplate(mainHandWeapon.getRangeTemplate()), targetingLogics)
     {
         this.mainHandWeapon = (Weapon) mainHandWeapon.clone();
         this.mainHandWeapon.setQuantity(1);
@@ -91,19 +91,21 @@ public class Attack : CombatAction, IJSONConvertable
 		mainHandWeapon = (Weapon)sourceItem;
 	}
 
-	public override Trait getAppliedTrait()
+	//an attack's trait comes from its weapon, which already hands back a clone
+	public override Trait appliedTrait
 	{
-		if (mainHandWeapon == null || mainHandWeapon.getAppliedTrait() == null)
+		get
 		{
-			return null;
-		}
-		else
-		{
+			Trait traitToApply = mainHandWeapon?.getAppliedTrait();
 
-            Trait traitToApply = mainHandWeapon.getAppliedTrait();
-            traitToApply.traitApplier = actorStats;
+			if (traitToApply == null)
+			{
+				return null;
+			}
 
-			return traitToApply;	
+			traitToApply.traitApplier = actorStats;
+
+			return traitToApply;
 		}
 	}
 
@@ -297,9 +299,9 @@ public class Attack : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getRangeBlock(getRangeTitle()));
 
-		// if (getAppliedTrait() != null)
+		// if (appliedTrait != null)
 		// {
-		// 	buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getAppliedTrait().getMaxRoundsLeftForDisplay()));
+		// 	buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(appliedTrait.getMaxRoundsLeftForDisplay()));
 		// }
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));

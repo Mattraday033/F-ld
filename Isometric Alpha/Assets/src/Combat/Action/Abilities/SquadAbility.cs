@@ -6,8 +6,8 @@ public class SquadAbility : Ability
 {
 	private string overridingDamageFormula;
 
-	public SquadAbility(CombatActionSettings settings, string overridingDamageFormula) :
-	base(settings)
+	public SquadAbility(CombatActionSettings settings, string overridingDamageFormula, List<TargetingLogic> targetingLogics = null) :
+	base(settings, targetingLogics)
 	{
 		this.overridingDamageFormula = overridingDamageFormula;
 	}

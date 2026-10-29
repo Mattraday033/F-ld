@@ -18,15 +18,15 @@ public class ExuberanceEquippedPassive : EquippedPassive
 
 	public override bool autoApply => false;
 
-	public ExuberanceEquippedPassive(CombatActionSettings settings, MultiStackProcType procType, int numberOfFreeStacks) :
-	base(settings)
+	public ExuberanceEquippedPassive(CombatActionSettings settings, MultiStackProcType procType, int numberOfFreeStacks, List<TargetingLogic> targetingLogics = null) :
+	base(settings, targetingLogics)
 	{
 		this.numberOfFreeStacks = new int[] { numberOfFreeStacks };
 		this.procTypes = new MultiStackProcType[] { procType };
 	}
 
-	public ExuberanceEquippedPassive(CombatActionSettings settings, MultiStackProcType[] procTypes, int[] numberOfFreeStacks) :
-	base(settings)
+	public ExuberanceEquippedPassive(CombatActionSettings settings, MultiStackProcType[] procTypes, int[] numberOfFreeStacks, List<TargetingLogic> targetingLogics = null) :
+	base(settings, targetingLogics)
 	{
 		this.numberOfFreeStacks = numberOfFreeStacks;
 		this.procTypes = procTypes;

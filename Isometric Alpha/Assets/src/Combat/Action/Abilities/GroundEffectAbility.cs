@@ -8,8 +8,8 @@ public class GroundEffectAbility : Ability
 
 	public GroundEffect template;
 	
-	public GroundEffectAbility(CombatActionSettings settings, GroundEffect template):
-		base(settings)
+	public GroundEffectAbility(CombatActionSettings settings, GroundEffect template, List<TargetingLogic> targetingLogics = null):
+		base(settings, targetingLogics)
 	{
 		this.template = template;
 	}

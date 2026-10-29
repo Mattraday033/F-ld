@@ -42,8 +42,6 @@ public class Ability: CombatAction, IJSONConvertable
         }
     }
 
-	private Trait appliedTrait;
-
     private CombatAnimationType animationType;
 
     public override bool targetsAllySection => targetsOnlyAllies;
@@ -84,21 +82,8 @@ public class Ability: CombatAction, IJSONConvertable
         }
     }
 
-    public override Stats actorStats
-    {
-        set
-        {
-            base.actorStats = value;
-
-            if(appliedTrait != null && value != null)
-            {
-                appliedTrait.traitApplier = value;
-            }
-        }
-    }
-
-    public Ability(CombatActionSettings settings) :
-    base(null, SelectorFactory.buildByTemplate(settings.targetParams.rangeTemplate))
+    public Ability(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+    base(null, SelectorFactory.buildByTemplate(settings.targetParams.rangeTemplate), targetingLogics)
     {
         applySettings(settings);
     }
@@ -136,7 +121,7 @@ public class Ability: CombatAction, IJSONConvertable
         _EffectAnimationType = settings.animationParams.effectAnimationType;
         useSpecialAttackAnimation = settings.animationParams.useSpecialAttackAnimation;
 
-        appliedTrait = settings.appliedTrait;
+        _AppliedTrait = settings.appliedTrait;
     }
 
 
@@ -150,14 +135,14 @@ public class Ability: CombatAction, IJSONConvertable
 	
 	public override string getUseDescription()
 	{
-        if(getAppliedTrait() != null)
+        if(appliedTrait != null)
         {
             if(useDescription.Length <= 0)
             {
-                return getAppliedTrait().getApplicationDescription();
+                return appliedTrait.getApplicationDescription();
             } else
             {
-                return useDescription + " " + getAppliedTrait().getApplicationDescription();
+                return useDescription + " " + appliedTrait.getApplicationDescription();
             }
         } else
         {
@@ -200,12 +185,12 @@ public class Ability: CombatAction, IJSONConvertable
                 return EffectAnimationType.Healing;
             }
 
-            if(getAppliedTrait() != null && getAppliedTrait().isDebuff())
+            if(appliedTrait != null && appliedTrait.isDebuff())
             {
                 return EffectAnimationType.Negative;
             }
 
-            if(getAppliedTrait() != null && getAppliedTrait().isBuff())
+            if(appliedTrait != null && appliedTrait.isBuff())
             {
                 return EffectAnimationType.Positive;
             }
@@ -270,18 +255,6 @@ public class Ability: CombatAction, IJSONConvertable
 		return maximumSlots;
 	}
 	
-	public override Trait getAppliedTrait()
-	{
-		if (appliedTrait == null)
-		{
-			return null;
-		}
-		else
-		{
-			return appliedTrait.clone();	
-		}
-	}
-	
 	public override string getDisplayType()
 	{
 		return AbilityList.abilityActionTypeName;
@@ -311,7 +284,7 @@ public class Ability: CombatAction, IJSONConvertable
 
     public virtual void setAppliedTrait(Trait trait)
     {
-        appliedTrait = trait;
+        _AppliedTrait = trait;
     }
 
     //IDescribable Methods

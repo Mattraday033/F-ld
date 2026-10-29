@@ -7,15 +7,15 @@ public class PassiveAbility : EquippedPassive //passives are (currently) mostly 
 
     public override bool canBePlacedInActionSlot => false;
 
-    public PassiveAbility(CombatActionSettings settings) :
-    base(settings)
+    public PassiveAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
     {
 
     }
 
     //        statAbilityDictionary.Add(currentKey, new PassiveAbility(CombatActionSettings.build(currentKey, DescriptionParams.build(TraitList.exitStrategy2Round.displayName, TraitList.exitStrategy2Round.getDescription(), TraitList.exitStrategy2Round.getIconName()), FrequencyParams.build(zeroSlotMax, noCooldown))));
-    public PassiveAbility(string key, Trait trait) :
-    base(CombatActionSettings.build(key, DescriptionParams.build(trait.displayName, iconName: trait.getIconName(), useDescription: trait.getDescription()), frequencyParams: FrequencyParams.build(AbilityList.zeroSlotMax, AbilityList.noCooldown)))
+    public PassiveAbility(string key, Trait trait, List<TargetingLogic> targetingLogics = null) :
+    base(CombatActionSettings.build(key, DescriptionParams.build(trait.displayName, iconName: trait.getIconName(), useDescription: trait.getDescription()), frequencyParams: FrequencyParams.build(AbilityList.zeroSlotMax, AbilityList.noCooldown)), targetingLogics)
     {
 
     }
@@ -59,8 +59,8 @@ public class ZoneOfInfluenceDescriptorAbility : PassiveAbility
 {                                             
     private ZoneOfInfluenceTrait zoiTrait;
 
-    public ZoneOfInfluenceDescriptorAbility(string key, ZoneOfInfluenceTrait trait) :
-    base(CombatActionSettings.build(key, DescriptionParams.build(trait.displayName, iconName: trait.getIconName(), useDescription: trait.getDescription()), frequencyParams: FrequencyParams.build(AbilityList.zeroSlotMax, AbilityList.noCooldown)))
+    public ZoneOfInfluenceDescriptorAbility(string key, ZoneOfInfluenceTrait trait, List<TargetingLogic> targetingLogics = null) :
+    base(CombatActionSettings.build(key, DescriptionParams.build(trait.displayName, iconName: trait.getIconName(), useDescription: trait.getDescription()), frequencyParams: FrequencyParams.build(AbilityList.zeroSlotMax, AbilityList.noCooldown)), targetingLogics)
     {
         zoiTrait = trait;
     }

@@ -21,8 +21,8 @@ public class EvolveAbility : Ability
 		}
 	}
 
-	public EvolveAbility(CombatActionSettings settings, CombatAction actionWhenInAttackMode):
-	base(settings)
+	public EvolveAbility(CombatActionSettings settings, CombatAction actionWhenInAttackMode, List<TargetingLogic> targetingLogics = null):
+	base(settings, targetingLogics)
 	{
 		this.actionWhenInAttackMode = actionWhenInAttackMode.clone();
 	}

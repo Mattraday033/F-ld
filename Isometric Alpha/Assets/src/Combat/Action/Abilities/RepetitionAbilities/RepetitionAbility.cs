@@ -9,14 +9,14 @@ public class RepetitionAbility : Ability
 
     public override bool hasRepetitionsRemaining => completedRepetitions < maxRepetitions;
 
-    public RepetitionAbility(CombatActionSettings settings) :
-    base(settings)
+    public RepetitionAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
     {
         this.maxRepetitions = 1;
     }
 
-    public RepetitionAbility(CombatActionSettings settings, int maxRepetitions) :
-    base(settings)
+    public RepetitionAbility(CombatActionSettings settings, int maxRepetitions, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
     {
         this.maxRepetitions = maxRepetitions;
     }

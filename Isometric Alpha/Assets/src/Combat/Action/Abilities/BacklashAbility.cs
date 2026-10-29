@@ -6,8 +6,8 @@ public class BacklashAbility : Ability
 {
 	private double backlashMultiplier;
 
-	public BacklashAbility(CombatActionSettings settings, double backlashMultiplier):
-	base(settings)
+	public BacklashAbility(CombatActionSettings settings, double backlashMultiplier, List<TargetingLogic> targetingLogics = null):
+	base(settings, targetingLogics)
 	{
 		this.backlashMultiplier = backlashMultiplier;
 	}

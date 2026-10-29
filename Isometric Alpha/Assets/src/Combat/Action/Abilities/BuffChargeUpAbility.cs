@@ -44,8 +44,8 @@ public class BuffChargeUpAbility : ChargeUpAbility
     }
 
 
-	public BuffChargeUpAbility(Trait chargeUpTrait, Ability actionWhenCharged) :
-		base(chargeUpTrait, actionWhenCharged) 
+	public BuffChargeUpAbility(Trait chargeUpTrait, Ability actionWhenCharged, List<TargetingLogic> targetingLogics = null) :
+		base(chargeUpTrait, actionWhenCharged, targetingLogics) 
 	{
 
 	}

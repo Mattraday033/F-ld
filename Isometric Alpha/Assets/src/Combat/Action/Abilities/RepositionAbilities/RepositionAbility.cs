@@ -16,8 +16,8 @@ public class RepositionAbility : Ability, IJSONConvertable
     public override bool requiresSecondaryCoords => true;
     public override bool requiresTertiaryCoords => true;
 
-    public RepositionAbility(CombatActionSettings settings) :
-        base(settings)
+    public RepositionAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+        base(settings, targetingLogics)
     {
     }
 
@@ -73,7 +73,7 @@ public class RepositionAbility : Ability, IJSONConvertable
             statsClone.positions = new List<GridCoords> { getDestinationCoords().clone() };
             statsClone.addTrait(TraitList.repositioningInvulnerability);
             statsClone.inPreviewMode = true;
-            statsClone.addTrait(getAppliedTrait());
+            statsClone.addTrait(appliedTrait);
             statsClone.inPreviewMode = false;
             statsClone.addTrait(TraitList.untargetable);
 

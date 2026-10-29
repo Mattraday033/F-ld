@@ -7,8 +7,8 @@ using UnityEngine;
 public class TakeHostageAbility : Ability
 {
 
-    public TakeHostageAbility(CombatActionSettings settings) :
-    base(settings)
+    public TakeHostageAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
     {
 
     }

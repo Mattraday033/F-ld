@@ -9,14 +9,14 @@ public class InterruptAbility : Ability
 
     private bool shouldApplyTrait = false;
 
-    public InterruptAbility(CombatActionSettings settings):
-        base(settings)
+    public InterruptAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null):
+        base(settings, targetingLogics)
     {
 
     }
 
-    public InterruptAbility(CombatActionSettings settings, TraitType traitTypeToPurge) :
-    base(settings)
+    public InterruptAbility(CombatActionSettings settings, TraitType traitTypeToPurge, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
     {
         this.traitTypeToPurge = traitTypeToPurge;
     }
@@ -88,15 +88,18 @@ public class InterruptAbility : Ability
             return "" + DamageCalculator.critAutoFailureThreshold;
         }
     }
-    public override Trait getAppliedTrait()
+    public override Trait appliedTrait
     {
-        if (shouldApplyTrait)
+        get
         {
-            return base.getAppliedTrait();
-        }
-        else
-        {
-            return null;
+            if (shouldApplyTrait)
+            {
+                return base.appliedTrait;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 
@@ -104,7 +107,7 @@ public class InterruptAbility : Ability
     {
         List<IDescribable> relatedDescribables = base.getRelatedDescribables();
 
-        relatedDescribables.Add(base.getAppliedTrait());
+        relatedDescribables.Add(base.appliedTrait);
 
         return relatedDescribables;
     }

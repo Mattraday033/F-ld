@@ -9,8 +9,8 @@ public class Stance: EquippedPassive
     public const string stanceNameFragment = "Stance";
 	public readonly static UnityEvent OnStanceApplyingWeaponAttack = new UnityEvent();
 
-    public Stance(CombatActionSettings settings) :
-    base(settings)
+    public Stance(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
     {
 
     }

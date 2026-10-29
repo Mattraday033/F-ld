@@ -13,8 +13,8 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 	public override bool usableWithoutItemsInInventory => false;
 	public override bool needsItemQuantityPanel => true;
 
-	public ItemCombatAction(Stats actor, UsableItem sourceItem):
-    base(actor, SelectorFactory.buildByTemplate(sourceItem.getRangeTemplate()))
+	public ItemCombatAction(Stats actor, UsableItem sourceItem, List<TargetingLogic> targetingLogics = null):
+    base(actor, SelectorFactory.buildByTemplate(sourceItem.getRangeTemplate()), targetingLogics)
 	{
 		this.sourceItem = sourceItem.clone() as UsableItem;
         this.sourceItem.equipTarget = actor;
@@ -238,9 +238,9 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getCritBlock(getCritTotalForDisplay(), getCritFormulaForDisplay()));
 
-		// if (getAppliedTrait() != null)
+		// if (appliedTrait != null)
 		// {
-		// 	buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getAppliedTrait().getMaxRoundsLeftForDisplay()));
+		// 	buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(appliedTrait.getMaxRoundsLeftForDisplay()));
 		// }
 
 		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));

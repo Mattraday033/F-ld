@@ -10,8 +10,8 @@ public class SwapAbility : Ability
 
     public override bool healsTarget => true;
 
-    public SwapAbility(CombatActionSettings settings) :
-	base(settings)
+    public SwapAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+	base(settings, targetingLogics)
 	{
 
 	}
@@ -42,10 +42,10 @@ public class SwapAbility : Ability
 		}
 
 		actorStats.moveTo(target.positions.Select(p => p.clone()).ToList());
-		actorStats.addTrait(getAppliedTrait());
+		actorStats.addTrait(appliedTrait);
 
 		target.moveTo(new List<GridCoords> { tempCoords });
-		target.addTrait(getAppliedTrait());
+		target.addTrait(appliedTrait);
 
 		sendProjectileAt(actorCoords, actorStats, 0, getDamageFormulaTotal(), false);
 	}

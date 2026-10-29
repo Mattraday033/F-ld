@@ -27,7 +27,7 @@ public class ApplyTrait : IActionUnit
     public ApplyTrait(Combatant target, Trait trait)
     {
         this.target = target;
-        this.trait = trait;
+        this.trait = trait.clone();
     }
 
     public List<IAnimationUnit> perform()
@@ -43,10 +43,10 @@ public class ApplyTrait : IActionUnit
             return new List<IAnimationUnit>() { new CreateMessage(target, Constants.resist) };
         } else
         {
-            traitApplicationState = TraitApplicationState.Applied;
-
             target.stats.addTrait(trait);
             
+            traitApplicationState = TraitApplicationState.Applied;
+
             return new List<IAnimationUnit>();
         }
     }

@@ -297,6 +297,13 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #endregion
 
+    #region Targeting Logic
+
+    protected List<TargetingLogic> _TargetingLogics;
+    public List<TargetingLogic> targetingLogics => _TargetingLogics;
+
+    #endregion
+
     #region Cooldown
 
     protected readonly int _MaximumCooldown;
@@ -358,11 +365,12 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #region Constructors
 
-    public CombatAction(Stats actor, Selector selector)
+    public CombatAction(Stats actor, Selector selector, List<TargetingLogic> targetingLogics = null)
     {
         //writes the backing fields so subclass actorStats and selector setters don't run before their own fields exist
         _ActorStats = actor;
         _Selector = selector;
+        _TargetingLogics = targetingLogics ?? new List<TargetingLogic>();
     }
 
     #endregion
@@ -483,15 +491,15 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #region Perform Combat Action
 
-    public List<Stats> findAllTargets()
-    {
-        return null;
-    }
+    // public List<Stats> findAllTargets()
+    // {
+    //     return null;
+    // }
 
-    public List<IActionUnit> getAllActionUnits()
-    {
-        return null;
-    }
+    // public List<IActionUnit> getAllActionUnits()
+    // {
+    //     return null;
+    // }
 
     public virtual int findFinalDamage(Stats targetCombatant, bool isCrit)
     {
@@ -762,12 +770,30 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #region Traits
 
+    protected Trait _AppliedTrait;
+
+    public virtual Trait appliedTrait
+    {
+        get
+        {
+            if (_AppliedTrait == null)
+            {
+                return null;
+            }
+
+            Trait appliedTraitClone = _AppliedTrait.clone();
+            appliedTraitClone.traitApplier = actorStats;
+
+            return appliedTraitClone;
+        }
+    }
+
     //sometimes you want an applied trait, but you don't want to describe it as in the case of activated passives which
     //apply a trait that is basically a copy of their ability description. In this case it would be redundant to describe
     //both, and in these cases the action should reimplement getAppliedTraitForDescription() to return null or another trait
     public virtual Trait getAppliedTraitForDescription()
     {
-        return getAppliedTrait();
+        return appliedTrait;
     }
 
     //nonapplied related traits are traits that may be related to an action, but aren't directly applied by it, such as the
@@ -792,16 +818,11 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return listOfTraits;
     }
 
-    public virtual Trait getAppliedTrait()
-    {
-        return null;
-    }
-
     public virtual void applyTrait(Stats target, Trait traitToApply = null)
     {
         if(traitToApply == null)
         {
-            traitToApply = getAppliedTrait();
+            traitToApply = appliedTrait;
         }
 
         if (target == null || traitToApply == null)
@@ -837,7 +858,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     {
         if(traitToApply == null)
         {
-            traitToApply = getAppliedTrait();
+            traitToApply = appliedTrait;
         }
 
         if(!traitToApply.isDebuff())
@@ -1350,9 +1371,9 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getCooldownBlock(getMaximumCooldownForDisplay()));
 
-        // if (getAppliedTrait() != null)
+        // if (appliedTrait != null)
         // {
-        //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getAppliedTrait().getMaxRoundsLeftForDisplay()));
+        //     buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(appliedTrait.getMaxRoundsLeftForDisplay()));
         // }
 
         if (!CombatStateManager.inCombat)

@@ -6,8 +6,8 @@ public class ReviveAbility : HealingAbility
 {
 	public override bool targetMustBeDead => true;
 
-	public ReviveAbility(CombatActionSettings settings) :
-    base(settings)
+	public ReviveAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
     {
 
     }

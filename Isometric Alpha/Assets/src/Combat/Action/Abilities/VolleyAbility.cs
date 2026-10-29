@@ -49,8 +49,8 @@ public class VolleyAbility : Ability
         }
 	}
 
-    public VolleyAbility(bool alliedSide) :
-	base(CombatActionSettings.build(DescriptionParams.build(volleyName, useDescription: volleyDescription)))
+    public VolleyAbility(bool alliedSide, List<TargetingLogic> targetingLogics = null) :
+	base(CombatActionSettings.build(DescriptionParams.build(volleyName, useDescription: volleyDescription)), targetingLogics)
 	{
 		this.alliedSide = alliedSide;
 		findAllVolleyActorCoords(alliedSide);
@@ -181,13 +181,13 @@ public class VolleyAbility : Ability
             CombatAction action = participant.getCombatAction();
 
             if(action == null || 
-                action.getAppliedTrait() == null || 
-                appliedTraits.Contains(action.getAppliedTrait()))
+                action.appliedTrait == null || 
+                appliedTraits.Contains(action.appliedTrait))
             {
                 continue;
             }
 
-            appliedTraits.Add(action.getAppliedTrait());
+            appliedTraits.Add(action.appliedTrait);
         }
 
         return appliedTraits;

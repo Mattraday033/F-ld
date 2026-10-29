@@ -6,7 +6,7 @@ public class SuicideAttack : Attack
 {
 	public override bool killsCaster => true;
 
-	public SuicideAttack(Stats actor, Weapon mainHandWeapon): base(actor, mainHandWeapon)
+	public SuicideAttack(Stats actor, Weapon mainHandWeapon, List<TargetingLogic> targetingLogics = null): base(actor, mainHandWeapon, targetingLogics)
 	{
 
 	}

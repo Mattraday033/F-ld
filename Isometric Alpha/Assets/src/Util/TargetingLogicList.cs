@@ -4,33 +4,55 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public delegate Catalog<IActionUnit> TargetingLogic(CombatAction combatAction);
+public delegate Catalog<IActionUnit> TargetingLogic(CombatAction action, Catalog<IActionUnit> catalog);
 
 public static class TargetingLogicList
 {
-
-    public readonly static TargetingLogic pushBackWithCollision = (a) =>
+    public readonly static TargetingLogic pushBack = (action, catalog) =>
     {
-        List<Stats> targets = a.selector.getAllTargets();
-        Catalog<IActionUnit> output = new Catalog<IActionUnit>();
+        List<Stats> targets = action.selector.getAllTargets();
 
         foreach(Stats target in targets)
         {
             if(target.isImmobile)
             {
-                output.Add(new MoveCombatant(target.combatant, target.positions));
+                catalog.Add(new MoveCombatant(target.combatant, target.positions));
             } else
             {
-                output.Add(TargetingUtil.push(target));
+                catalog.Add(TargetingUtil.push(target));
             }
         }
 
-        output.Add(output.GetValue(typeof(MoveCombatant)).Cast<MoveCombatant>().Select(m => new ChangeHealth(   
-                                                                                                                m.target, 
-                                                                                                                CombatActionUtil.calculateDamage(a, m.target.stats, DamageCalculator.rollCritChance(a)) * (int) (1.0f + (m.rowDifference * Constants.thirtyPercentPerSquareMoved)),
-                                                                                                                a.healsTarget)).Cast<IActionUnit>().ToList());
+        return catalog;
+    };
 
-        return output;
+    public readonly static TargetingLogic modifyHealth = (action, catalog) =>
+    {
+        List<Stats> targets = action.selector.getAllTargets();
+
+        catalog.Add(targets.Select(t => new ChangeHealth(t.combatant, 
+                                                        CombatActionUtil.calculateDamage(action, t, DamageCalculator.rollCritChance(action)),
+                                                        action.healsTarget)).Cast<IActionUnit>().ToList());  
+        return catalog;
+    };
+
+    public readonly static TargetingLogic damageFromPushback = (action, catalog) =>
+    {
+      
+        catalog.Add(catalog.GetValue(typeof(MoveCombatant)).Cast<MoveCombatant>().Select(m => new ChangeHealth(   
+                                                                                                                m.target, 
+                                                                                                                CombatActionUtil.calculateDamage(action, m.target.stats, DamageCalculator.rollCritChance(action)) * (int) (1.0f + (m.rowDifference * Constants.thirtyPercentPerSquareMoved)),
+                                                                                                                action.healsTarget)).Cast<IActionUnit>().ToList());  
+
+        return catalog;
+    };
+
+    public readonly static TargetingLogic applyTraitToAllDamaged = (action, catalog) =>
+    {
+        catalog.Add(catalog.GetValue(typeof(ChangeHealth)).Cast<ChangeHealth>().Select(m => new ApplyTrait( m.target, 
+                                                                                                            action.appliedTrait)).Cast<IActionUnit>().ToList());  
+
+        return catalog;
     };
 
 }

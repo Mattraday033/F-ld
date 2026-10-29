@@ -23,14 +23,14 @@ public class ChargeUpAbility : Ability
 		}
 	}
 
-	public ChargeUpAbility(Trait chargeUpTrait, Ability actionWhenCharged) :
+	public ChargeUpAbility(Trait chargeUpTrait, Ability actionWhenCharged, List<TargetingLogic> targetingLogics = null) :
 		base(CombatActionSettings.build(actionWhenCharged.getKey(), DescriptionParams.build(actionWhenCharged.displayName, iconName: actionWhenCharged.iconName, useDescription: actionWhenCharged.getUseDescription(), loreDescription: actionWhenCharged.getLoreDescription()),
 																	DamageParams.build(actionWhenCharged.getDamageFormula(), actionWhenCharged.getCritFormula()),
 																	TargetParams.build(SelectorTemplate.Single, actionWhenCharged.selfTargeting),
 																	FrequencyParams.build(actionWhenCharged.getMaximumSlots(), actionWhenCharged.maximumCooldown),
 																	costParams: CostParams.build(actionWhenCharged),
-																	appliedTrait: actionWhenCharged.getAppliedTrait()) //Left off relatedTraits
-			)
+																	appliedTrait: actionWhenCharged.appliedTrait) //Left off relatedTraits
+			, targetingLogics)
 	{
 		this.chargeUpTrait = chargeUpTrait.clone();
 		this.actionWhenCharged = actionWhenCharged.clone();

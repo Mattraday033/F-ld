@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StanceReapplicationAbility : HealingAbility
 {
-    public StanceReapplicationAbility(CombatActionSettings settings) :
-    base(settings)
+    public StanceReapplicationAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
     {
 
     }

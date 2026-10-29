@@ -13,8 +13,8 @@ public class DoubleStrikeAbility : Ability
     public override bool resetCoordsWhenChoosingTertiary => true; // if true, when the player chooses the first selector and moves to the tertiary, it will snap to it's default position
     public override bool resetCoordsOnBackOutOfTertiary => true; // if true, when the player backs out of choosing the tertiary target, then the previous selector will snap to it's default position
 
-    public DoubleStrikeAbility(CombatActionSettings settings, SelectorTemplate secondAttackRangeIndex) :
-    base(settings)
+    public DoubleStrikeAbility(CombatActionSettings settings, SelectorTemplate secondAttackRangeIndex, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
     {
         this.secondAttackRangeIndex = secondAttackRangeIndex;
     }

@@ -15,8 +15,8 @@ public class EquippedPassive : Ability
 	public override bool autoApply => true;
 	public override bool canBePlacedInPassiveSlot => true;
 
-	public EquippedPassive(CombatActionSettings settings) :
-	base(settings)
+	public EquippedPassive(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+	base(settings, targetingLogics)
 	{
 
 	}
@@ -59,12 +59,12 @@ public class EquippedPassive : Ability
 
 	public override string getUseDescription()
     {
-        if(getAppliedTrait() == null)
+        if(appliedTrait == null)
         {
             Debug.LogError("Null applied Trait in Equipped Passive: " + uniqueName);
         }
 
-        return "Applies the " + getAppliedTrait().displayName + " Trait at the start of Combat to whoever equips this Ability to their Action Wheel.";
+        return "Applies the " + appliedTrait.displayName + " Trait at the start of Combat to whoever equips this Ability to their Action Wheel.";
     }
 
 	//ISortable Methods
@@ -96,9 +96,9 @@ public class EquippedPassive : Ability
     {
         List<IDescribable> relatedDescribables = base.getRelatedDescribables();
 
-        if(getAppliedTrait() != null)
+        if(appliedTrait != null)
         {
-            relatedDescribables.Add(getAppliedTrait());
+            relatedDescribables.Add(appliedTrait);
         }
 
         return relatedDescribables;

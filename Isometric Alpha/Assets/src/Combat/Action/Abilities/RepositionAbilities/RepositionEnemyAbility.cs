@@ -8,8 +8,8 @@ public class RepositionEnemyAbility : RepositionAbility
 {
     public override bool movesTarget => true;
 
-    public RepositionEnemyAbility(CombatActionSettings settings) :
-	base(settings)
+    public RepositionEnemyAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
+	base(settings, targetingLogics)
 	{
 
 	}

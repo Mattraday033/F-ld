@@ -13,8 +13,8 @@ public class RepositionAllyAbility : RepositionAbility, IJSONConvertable
 	public override bool requiresAnAction => requiresAction;
 	public override bool healsTarget => true;
 
-	public RepositionAllyAbility(CombatActionSettings settings, bool requiresAction = true) :
-		base(settings)
+	public RepositionAllyAbility(CombatActionSettings settings, bool requiresAction = true, List<TargetingLogic> targetingLogics = null) :
+		base(settings, targetingLogics)
 	{
         this.requiresAction = requiresAction;
 	}
@@ -23,7 +23,7 @@ public class RepositionAllyAbility : RepositionAbility, IJSONConvertable
 	{
 		base.performCombatAction();
 
-		actorStats.addTrait(getAppliedTrait());
+		actorStats.addTrait(appliedTrait);
 
         if(!requiresAnAction)
         {

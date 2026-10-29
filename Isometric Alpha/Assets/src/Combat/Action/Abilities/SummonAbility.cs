@@ -12,19 +12,19 @@ public class SummonAbility: Ability
     private bool activatesAfterDeath = false;
 	private SummonCombos creaturesToSpawn;
 
-	public SummonAbility(CombatActionSettings settings, string creatureKey, bool activatesAfterDeath = false): base(settings)
+	public SummonAbility(CombatActionSettings settings, string creatureKey, bool activatesAfterDeath = false, List<TargetingLogic> targetingLogics = null): base(settings, targetingLogics)
 	{
 		this.creaturesToSpawn = new SummonCombos(new string[][]{new string[]{creatureKey}});
         this.activatesAfterDeath = activatesAfterDeath;
 	}
 
-    public SummonAbility(CombatActionSettings settings, string[] creatureComboToSpawn, bool activatesAfterDeath = false) : base(settings)
+    public SummonAbility(CombatActionSettings settings, string[] creatureComboToSpawn, bool activatesAfterDeath = false, List<TargetingLogic> targetingLogics = null) : base(settings, targetingLogics)
     {
 		this.creaturesToSpawn = new SummonCombos(new string[][]{ creatureComboToSpawn });
         this.activatesAfterDeath = activatesAfterDeath;
     }
 
-    public SummonAbility(CombatActionSettings settings, string[][] creatureCombosToSpawn, bool activatesAfterDeath = false) : base(settings)
+    public SummonAbility(CombatActionSettings settings, string[][] creatureCombosToSpawn, bool activatesAfterDeath = false, List<TargetingLogic> targetingLogics = null) : base(settings, targetingLogics)
     {
         this.creaturesToSpawn = new SummonCombos(creatureCombosToSpawn);
         this.activatesAfterDeath = activatesAfterDeath;

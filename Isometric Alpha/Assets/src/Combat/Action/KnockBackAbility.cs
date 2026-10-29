@@ -12,8 +12,8 @@ public class KnockBackAbility : RepositionEnemyAbility
 
     public override bool requiresTertiaryCoords => false;
 
-    public KnockBackAbility(CombatActionSettings settings, double damageMultiplierPerSquareMoved) :
-    base(settings)
+    public KnockBackAbility(CombatActionSettings settings, double damageMultiplierPerSquareMoved, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
     {
         this.damageMultiplierPerSquareMoved = damageMultiplierPerSquareMoved;
     }
