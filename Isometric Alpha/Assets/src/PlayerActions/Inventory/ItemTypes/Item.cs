@@ -162,8 +162,14 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 		return subtype;
 	}
 
+	//empty rather than bare italic tags when there's no lore, so callers can tell there's nothing to show
 	public string getLoreDescription()
 	{
+		if(string.IsNullOrEmpty(loreDescription))
+		{
+			return "";
+		}
+
 		return "<i>"+loreDescription+"</i>";
 	}
 
@@ -278,9 +284,9 @@ public abstract class Item : StatBoostSource, ICloneable, IJSONConvertable, IDes
 
 	public virtual bool isEquipped(AllyStats target)
 	{
-		foreach (CombatAction action in target.getActionArray().getActions())
+		foreach (CombatAction action in target.actionArray.getActions())
         {
-            if (action != null && action.getSourceItem() != null && action.getSourceItem().getKey().Equals(getKey()))
+            if (action != null && action.sourceItem != null && action.sourceItem.getKey().Equals(getKey()))
             {
                 return true;
             }

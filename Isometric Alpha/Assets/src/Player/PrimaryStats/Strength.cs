@@ -24,9 +24,9 @@ public static class Strength
 
     public static int getCurrentRegenerationAmount(AllyStats stats)
     {
-        int amountToHeal = (int)(stats.getTotalHealth() * PartyStats.getPartyRegenAmount()) + StatBoostSource.calculateAllStatFormulas(stats.getAllStatBoosts(), b => b.getBonusStrengthFormula());
+        int amountToHeal = (int)(stats.totalHealth * PartyStats.getPartyRegenAmount()) + StatBoostSource.calculateAllStatFormulas(stats.allStatBoosts, b => b.getBonusStrengthFormula());
 
-        int missingHealth = stats.getMissingHealth();
+        int missingHealth = stats.missingHealth;
 
         if (missingHealth < amountToHeal)
         {

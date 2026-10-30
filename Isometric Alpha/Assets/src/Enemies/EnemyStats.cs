@@ -16,7 +16,7 @@ public class EnemyStats : Stats
     #region Global Variables
 
     [SerializeField]
-    private int totalHealth;
+    private int _TotalHealth;
     [SerializeField]
     private bool priorityAttacker;
     [SerializeField]
@@ -24,12 +24,31 @@ public class EnemyStats : Stats
     public int armor;
 
     public bool gendered;
-    protected string genderMarker;
+    protected string _GenderMarker;
 
     //an enemy takes at most one layout from its pack's spawn layouts, see CombatantSpawnDetails.forSpawn
     public bool obtainedSpawnLayout = false;
 
-    private CombatAction combatAction;
+    private CombatAction _CombatAction;
+
+    private const int noCloneKey = -1;
+
+    //set when a template is cloned into an enemy; that enemy's own clones (previews, snapshots) keep it, so they still Equal it
+    private int cloneKey = noCloneKey;
+
+    #endregion
+
+    #region Names
+
+    //the key follows the name with no separator, so DialogueList.scrubNameOfEndNumbers still finds the enemy type.
+    //characterName is left as is, so it still names the enemy type and displayName never shows the key
+    public override string uniqueName
+    {
+        get
+        {
+            return cloneKey == noCloneKey ? base.uniqueName : base.uniqueName + cloneKey;
+        }
+    }
 
     #endregion
 
@@ -41,28 +60,125 @@ public class EnemyStats : Stats
 
     #endregion
 
+    #region Properties
+
+    #region Sprite and GameObject
+
+    public override Color outlineColor => ColorList.attacksOnSight;
+
+    #endregion
+
+    #region Health
+
+    public override int totalHealth => _TotalHealth;
+
+    #endregion
+
+    #region Combat and Actions
+
+    public override int totalArmorRating => armor + StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getArmorFormula());
+
+    //a fresh clone on every read, so callers can't change the enemy's own action
+    public CombatAction combatAction
+    {
+        get
+        {
+            if (_CombatAction == null || _CombatAction is null)
+            {
+                return null;
+            }
+
+            CombatAction combatActionClone = _CombatAction.clone();
+
+            if(_CombatAction.hasAssignedActor(out Stats actor))
+            {
+                combatActionClone.actorStats = actor;
+            }
+
+            return combatActionClone;
+        }
+    }
+
+    public override EffectAnimationType volleyAnimationType
+    {
+        get
+        {
+            if(combatAction == null)
+            {
+                return EffectAnimationType.Pierce;
+            }
+
+            return combatAction.effectAnimationType;
+        }
+    }
+
+    #endregion
+
+    #region Traits
+
+    public double linkedPercentage
+    {
+        get
+        {
+            Trait linkedTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.getLinkedPercentage() > 0.0);
+
+            if(linkedTrait == null)
+            {
+                return 0.0;
+            }
+
+            return linkedTrait.getLinkedPercentage();
+        }
+    }
+
+    #endregion
+
+    #region Miscellanious
+
+    public override string genderMarker
+    {
+        get
+        {
+            if(!gendered)
+            {
+                return base.genderMarker;
+            }
+
+            if(_GenderMarker == null || _GenderMarker.Length <= 0)
+            {
+                setGenderMarker();
+            }
+
+            return _GenderMarker;
+        }
+    }
+
+    #endregion
+
+    #endregion
+
     #region Constructors
 
     public EnemyStats(  string key,
-                        int armor, 
-                        int tHP, 
-                        CombatAction combatAction = null, 
-                        Trait[] traits = null, 
+                        int armor,
+                        int tHP,
+                        CombatAction combatAction = null,
+                        Trait[] traits = null,
                         bool gendered = false,
                         Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary = null) :
     base(key)
     {
         this.armor = armor;
 
-        // this.totalHealth = tHP;
-        this.totalHealth = 1;
-        this.currentHealth = totalHealth;
+        // this._TotalHealth = tHP;
+        this._TotalHealth = 1;
+        this.currentHealth = _TotalHealth;
 
         this.gendered = gendered;
 
         if(combatAction != null)
         {
-            this.combatAction = combatAction.clone(this);
+            this._CombatAction = combatAction.clone(this);
         }
 
         if(traits != null)
@@ -79,6 +195,22 @@ public class EnemyStats : Stats
 
     #endregion
 
+    #region ICloneable
+
+    public override Stats clone()
+    {
+        EnemyStats clone = (EnemyStats)base.clone();
+
+        if(clone.cloneKey == noCloneKey)
+        {
+            clone.cloneKey = INameSource.getCurrentKey();
+        }
+
+        return clone;
+    }
+
+    #endregion
+
     #region Sprite and GameObject
 
     public override IAppearance appearance
@@ -87,11 +219,6 @@ public class EnemyStats : Stats
         {
             return Costume.getDefaultCostume();
         }
-    }
-
-    public override Color getOutlineColor()
-    {
-        return ColorList.attacksOnSight;
     }
 
     public override void setToDeadSprite()
@@ -121,68 +248,11 @@ public class EnemyStats : Stats
 
     #endregion
 
-    #region Health
-
-    public override int getTotalHealth()
-    {
-       return totalHealth;
-    }
-
-    #endregion
-
     #region Combat and Actions
-
-    public override int getTotalArmorRating()
-    {
-        return armor + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getArmorFormula());
-    }
 
     public virtual void spawningCombatAction()
     {
         //Empty On Purpose
-    }
-
-    public CombatAction getCombatAction()
-    {
-        if (combatAction == null || combatAction is null)
-        {
-            return null;
-        }
-
-        CombatAction combatActionClone = combatAction.clone();
-
-        if(combatAction.hasAssignedActor(out Stats actor))
-        {
-            combatActionClone.actorStats = actor;
-        } 
-
-        return combatActionClone;
-    }
-
-    public override EffectAnimationType getVolleyAnimationType()
-    {
-        if(getCombatAction() == null)
-        {
-            return EffectAnimationType.Pierce;
-        }
-
-        return getCombatAction().effectAnimationType;
-    }
-
-    #endregion
-
-    #region Traits
-
-    public double getLinkedPercentage()
-    {
-        Trait linkedTrait = Helpers.getObjectWithQuality<Trait>(traitContainer, t => t.getLinkedPercentage() > 0.0);
-
-        if(linkedTrait == null)
-        {
-            return 0.0;
-        }
-
-        return linkedTrait.getLinkedPercentage();
     }
 
     #endregion
@@ -191,7 +261,7 @@ public class EnemyStats : Stats
 
     public override void playAnimationSFX(CharacterAnimationType animationType)
     {
-        if(animationAudioClipDictionary == null || 
+        if(animationAudioClipDictionary == null ||
             !animationAudioClipDictionary.ContainsKey(animationType))
         {
             return;
@@ -199,7 +269,7 @@ public class EnemyStats : Stats
 
         if(gendered)
         {
-            switch(getGenderMarker())
+            switch(genderMarker)
             {
                 case Constants.maleMarker:
                     animationAudioClipDictionary = AnimationSFXDictionaryList.maleHumanAudioDictionary;
@@ -219,21 +289,6 @@ public class EnemyStats : Stats
     #endregion
 
     #region Miscellanious
-    
-    public override string getGenderMarker()
-    {
-        if(!gendered)
-        {
-            return base.getGenderMarker();
-        }
-
-        if(genderMarker == null || genderMarker.Length <= 0)
-        {
-            setGenderMarker();
-        }
-        
-        return genderMarker;
-    }
 
     public void setGenderMarker()
     {
@@ -241,10 +296,10 @@ public class EnemyStats : Stats
 
         if(gender == Constants.indexZero)
         {
-            genderMarker = Constants.maleMarker;
+            _GenderMarker = Constants.maleMarker;
         } else
         {
-            genderMarker = Constants.femaleMarker;
+            _GenderMarker = Constants.femaleMarker;
         }
     }
 
@@ -264,6 +319,8 @@ public class EnemyStats : Stats
     }
 
     #endregion
+
+
 
     #region IDescribable
 

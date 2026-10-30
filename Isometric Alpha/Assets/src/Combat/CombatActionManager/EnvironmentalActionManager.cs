@@ -69,7 +69,7 @@ public class EnvironmentalCombatActionManager : MonoBehaviour
         CombatAction envCombatAction;
         Trait targetingTrait;
 
-        switch(actorStats.uniqueName)
+        switch(actorStats.characterName)
         {
             case NPCNameList.kende:
                 envCombatAction = AbilityList.getAbility(actorStats, AbilityList.turnUpTheHeatKey);
@@ -149,22 +149,24 @@ public static class EnvironmentalCombatActionList
 
         CombatActionManager.skipWaitBetweenCombatActions = true;
 
-        CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonAxemanPuppetsKey, 3));
+        //uses deprecated combat actions (SummonAbility), see Assets/src/DepricatedCombatActions
+        // CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonAxemanPuppetsKey, 3));
 
-        CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonSpearmanPuppetsKey, 2));
-        
-        CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonDisciplinarianPuppetsKey, 1));
-        
-        CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonJavelineerPuppetsKey, 0));
+        // CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonSpearmanPuppetsKey, 2));
+
+        // CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonDisciplinarianPuppetsKey, 1));
+
+        // CombatActionManager.addCritCombatAction(prepareSummonWaveAbility(AbilityList.summonJavelineerPuppetsKey, 0));
     }
 
-    private static SummonAbility prepareSummonWaveAbility(string key, int row)
-    {
-        SummonAbility summonAbility = AbilityList.getAbility(EnemyStatsList.getEnemyStats(NPCNameList.takacs), key) as SummonAbility;
-        Selector summonSelector = SelectorFactory.buildByTemplate(SelectorTemplate.HorizontalThree).clone();
-        summonSelector.setToLocation(new GridCoords(row,0));
-        summonAbility.selector = summonSelector;
+    //uses deprecated combat actions (SummonAbility), see Assets/src/DepricatedCombatActions
+    // private static SummonAbility prepareSummonWaveAbility(string key, int row)
+    // {
+    //     SummonAbility summonAbility = AbilityList.getAbility(EnemyStatsList.getEnemyStats(NPCNameList.takacs), key) as SummonAbility;
+    //     Selector summonSelector = SelectorFactory.buildByTemplate(SelectorTemplate.HorizontalThree).clone();
+    //     summonSelector.setToLocation(new GridCoords(row,0));
+    //     summonAbility.selector = summonSelector;
 
-        return summonAbility;
-    }
+    //     return summonAbility;
+    // }
 }

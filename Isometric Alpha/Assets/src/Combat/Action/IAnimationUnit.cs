@@ -2,13 +2,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public interface IAnimationUnit
 {
+    public readonly static Type[] executionOrder =  { 
+                                                        typeof(StartAnimation), 
+                                                        typeof(CreateMessage), 
+                                                        typeof(CreateEffect)
+                                                    };
+
     public void perform();
 
     public void halt();
+}
+
+public static class AnimationUnitUtil
+{
+    public readonly static UnityEvent haltAllAnimationUnits = new UnityEvent();
+
+    public static void retireAllAnimationUnits()
+    {
+        haltAllAnimationUnits.RemoveAllListeners();
+    }
+
+    public static void AddToCatalog(this IAnimationUnit unit, Catalog<IAnimationUnit> catalog)
+    {
+        catalog[unit.GetType()].Add(unit);
+    }
 }
 
 public class StartAnimation : IAnimationUnit

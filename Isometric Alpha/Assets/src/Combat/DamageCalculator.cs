@@ -270,27 +270,27 @@ public class Formula
 
                     if(source == null) continue;
 
-                    output += kvp.Value * source.getStrength();
+                    output += kvp.Value * source.totalStrength;
                     break;
 
                 case PrimaryStat.Dexterity:
 
                     if(source == null) continue;
 
-                    output += kvp.Value * source.getDexterity();
+                    output += kvp.Value * source.totalDexterity;
                     break;
 
                 case PrimaryStat.Wisdom:
                     if(source == null) continue;
 
-                    output += kvp.Value * source.getWisdom();
+                    output += kvp.Value * source.totalWisdom;
                     break;
 
                 case PrimaryStat.Charisma:
 
                     if(source == null) continue;
 
-                    output += kvp.Value * source.getCharisma();
+                    output += kvp.Value * source.totalCharisma;
                     break;
 
                 case PrimaryStat.None:

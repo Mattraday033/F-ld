@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CombatActionManager : MonoBehaviour
@@ -36,65 +37,100 @@ public class CombatActionManager : MonoBehaviour
 
     public static CombatActionState actionState = CombatActionState.NoAction;
 
-    private static List<Stats> targets;
-    private static List<IActionUnit> actionUnits;
-    private static int actionUnitIndex = 0;
-	
-    protected Dictionary<Type, List<IAnimationUnit>> animationUnits = new();
-
 	public static CombatActionManager getInstance()
 	{
 		return instance;
 	}
 	
-    public static void runCombatAction(CombatAction action)
+    //targets defaults to everything under the action's selector; damage previews pass in preview clones instead
+    public static void runCombatAction(CombatAction action, List<Stats> targets = null)
     {
         if(action == null)
         {
             return;
         }
 
-        //test action
-        action = new Ability(CombatActionSettings.build("testKey", DescriptionParams.build("Send Flying", 
-                                                                                            iconName: "SendFlying", 
-                                                                                            useDescription: "Deliver a powerful blow which throws the target backwards into whatever is behind them. Extra damage is dealt depending on how far backwards they travel. If they collide with an enemy, the second enemy also takes damage."), 
-                                                                    DamageParams.build("3S", "D + S"), 
-                                                                    frequencyParams: FrequencyParams.build(2, 5)));
+        //the action units work on Stats, so the Combatants under the selector hand theirs over
+        targets ??= action.selector.getAllTargets().Select(c => c.stats).ToList();
 
-        Catalog<IActionUnit> actionCatalog = new Catalog<IActionUnit>();
+        List<IActionUnit> actionUnits = new List<IActionUnit>();
+        List<IAnimationUnit> animationUnits = new List<IAnimationUnit>();
+        int unitIndex = 0;
 
         try
         {
             actionState = CombatActionState.Calculation;
 
-            // targets = action.findAllTargets();
-
-            // actionUnits = action.getAllActionUnits();
+            foreach(TargetingLogic logic in action.targetingLogics)
+            {
+                logic(action, targets);
+            }
 
             actionState = CombatActionState.Application;
 
-            for(int index = 0; index < actionUnits.Count; index++)
+            actionUnits = action.actionCatalog.GetValuesInOrder(IActionUnit.executionOrder);
+
+            //logic like push can pull in real neighbours, which a preview must never touch
+            if(action.inPreviewMode)
             {
-                actionUnits[index].perform();
+                actionUnits = actionUnits.Where(u => u.target.inPreviewMode).ToList();
+            }
+
+            for(unitIndex = 0; unitIndex < actionUnits.Count; unitIndex++)
+            {
+                action.animationCatalog.Add(actionUnits[unitIndex].perform());
+            }
+
+            if(action.inPreviewMode)
+            {
+                return;
             }
 
             actionState = CombatActionState.Animation;
 
-            
+            animationUnits = action.animationCatalog.GetValuesInOrder(IAnimationUnit.executionOrder);
+
+            for(unitIndex = 0; unitIndex < animationUnits.Count; unitIndex++)
+            {
+                animationUnits[unitIndex].perform();
+            }
 
         } catch(Exception e)
         {
+            //logs the message and full stack trace, so a failed action doesn't fail silently
+            Debug.LogException(e);
+
             switch(actionState)
             {
                 case CombatActionState.Calculation:
                     return;
                 case CombatActionState.Application:
+
+                    //start at the unit that threw, since it may have partially applied before failing
+                    for(unitIndex = Math.Min(unitIndex, actionUnits.Count - 1); unitIndex >= 0; unitIndex--)
+                    {
+                        actionUnits[unitIndex].repeal();
+                    }
+
                     return;
                 case CombatActionState.Animation:
+
+                    //start at the unit that threw, since it may have partially started before failing
+                    for(unitIndex = Math.Min(unitIndex, animationUnits.Count - 1); unitIndex >= 0; unitIndex--)
+                    {
+                        animationUnits[unitIndex].halt();
+                    }
+
                     return;
                 default:
                     return;
-            }            
+            }
+        } finally
+        {
+            //runs on every exit, previews and failures included, so the next run starts from empty catalogs.
+            //clear swaps in new lists, so units already pulled out above carry on unaffected
+            action.actionCatalog.clear();
+            action.animationCatalog.clear();
         }
     }
 
@@ -127,8 +163,6 @@ public class CombatActionManager : MonoBehaviour
 
         if(nextCombatAction.hasAssignedActor(out currentActor))
         {
-            nextCombatAction.activatingAction();
-
 		    return nextCombatAction;
         } else
         {
@@ -148,7 +182,7 @@ public class CombatActionManager : MonoBehaviour
 		
 		if(actionBeingResolved.hasAssignedActor(out Stats actor) && !actor.isStunned)
 		{
-			actionBeingResolved.performCombatAction();
+			runCombatAction(actionBeingResolved);
 			actionBeingResolved.setCooldownToMax();
 
             if (actor != null && 

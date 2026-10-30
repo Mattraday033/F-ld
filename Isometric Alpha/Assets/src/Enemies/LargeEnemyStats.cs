@@ -25,6 +25,31 @@ public class LargeEnemyStats : EnemyStats
 
     #endregion
 
+    #region Properties
+
+    //nests share a heartbeat, and each one's row decides where in it its idle beats
+    public int heartBeatRow
+    {
+        get
+        {
+            switch(characterName)
+            {
+                case MonsterNameList.hiveHeraldNest:
+                    return 0;
+                case MonsterNameList.martyrWormNest:
+                    return 1;
+                case MonsterNameList.toxicWormNest:
+                    return 2;
+                case MonsterNameList.wormNest:
+                    return 3;
+                default:
+                    return noHeartBeatRow;
+            }
+        }
+    }
+
+    #endregion
+
     #region Unity Events
     public readonly static UnityEvent OnLargeEnemySpawn = new UnityEvent();
     #endregion
@@ -43,28 +68,6 @@ public class LargeEnemyStats : EnemyStats
         if(!traits.Contains(TraitList.large) && !traits.Contains(TraitList.immobile))
         {
             traitContainer.addTrait(TraitList.large);
-        }
-    }
-
-    #endregion
-
-    #region Sprite and GameObject
-
-    //nests share a heartbeat, and each one's row decides where in it its idle beats
-    public int getHeartBeatRow()
-    {
-        switch(uniqueName)
-        {
-            case MonsterNameList.hiveHeraldNest:
-                return 0;
-            case MonsterNameList.martyrWormNest:
-                return 1;
-            case MonsterNameList.toxicWormNest:
-                return 2;
-            case MonsterNameList.wormNest:
-                return 3;
-            default:
-                return noHeartBeatRow;
         }
     }
 

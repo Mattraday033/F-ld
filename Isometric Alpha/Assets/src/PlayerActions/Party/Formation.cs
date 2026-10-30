@@ -328,27 +328,27 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
     public int getTotalStrength()
     {
-        return Helpers.sum<AllyStats>(grid.Values, t => t.getStrength());
+        return Helpers.sum<AllyStats>(grid.Values, t => t.totalStrength);
     }
 
     public int getTotalDexterity()
     {
-        return Helpers.sum<AllyStats>(grid.Values, t => t.getDexterity());
+        return Helpers.sum<AllyStats>(grid.Values, t => t.totalDexterity);
     }
 
     public int getTotalWisdom()
     {
-        return Helpers.sum<AllyStats>(grid.Values, t => t.getWisdom());
+        return Helpers.sum<AllyStats>(grid.Values, t => t.totalWisdom);
     }
 
     public int getTotalCharisma()
     {
-        return Helpers.sum<AllyStats>(grid.Values, t => t.getCharisma());
+        return Helpers.sum<AllyStats>(grid.Values, t => t.totalCharisma);
     }
 
     public int getTotalBonusVolleyAccuracy()
     {
-        return Helpers.sum<AllyStats>(grid.Values, t => t.getBonusVolleyAccuracy());
+        return Helpers.sum<AllyStats>(grid.Values, t => t.bonusVolleyAccuracy);
     }
 
     public int getHighestLevel()
@@ -357,9 +357,9 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
 
         foreach (AllyStats stats in this)
         {
-            if (stats != null && stats.getLevel() > highest)
+            if (stats != null && stats.level > highest)
             {
-                highest = stats.getLevel();
+                highest = stats.level;
             }
         }
 
@@ -374,7 +374,7 @@ public class Formation : ICloneable, IDescribable, IDescribableInBlocks, IEnumer
         {
             if (stats != null)
             {
-                allCombatActionArrays.Add(stats.getActionArray());
+                allCombatActionArrays.Add(stats.actionArray);
             }
         }
 

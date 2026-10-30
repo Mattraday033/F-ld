@@ -22,13 +22,13 @@ public class PrimaryStatsPanel : MonoBehaviour, IStatsPanel
 
     public void updateStatsPanel(AllyStats playerStats)
     {
-        strengthStatText.text = "" + playerStats.getStrength();
+        strengthStatText.text = "" + playerStats.totalStrength;
 
-        dexterityStatText.text = "" + playerStats.getDexterity();
+        dexterityStatText.text = "" + playerStats.totalDexterity;
 
-        wisdomStatText.text = "" + playerStats.getWisdom();
+        wisdomStatText.text = "" + playerStats.totalWisdom;
 
-        charismaStatText.text = "" + playerStats.getCharisma();
+        charismaStatText.text = "" + playerStats.totalCharisma;
     }
 	
 }

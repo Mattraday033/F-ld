@@ -49,7 +49,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	{
 		resetRepositioningTypeAndActivity();
 		
-		repositionsRemaining = PartyManager.getPlayerStats().getMaximumRepositionsPerCombat();
+		repositionsRemaining = PartyManager.getPlayerStats().maximumRepositionsPerCombat;
 	}
 	
 	//Key input while Repositioning comes from PlayerInputList's repositioning actions, which call these two.
@@ -196,7 +196,7 @@ public class RepositionManager : MonoBehaviour, INeedsUpdateOnStateChange
 	
 	public void resetRepositionsRemaining()
 	{
-		repositionsRemaining = PartyManager.getPlayerStats().getMaximumRepositionsPerCombat();
+		repositionsRemaining = PartyManager.getPlayerStats().maximumRepositionsPerCombat;
 	}
 	
 	private void requeueLatestRepositionDetails()

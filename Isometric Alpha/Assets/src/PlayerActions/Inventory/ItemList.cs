@@ -499,17 +499,17 @@ public static class ItemList
     {
         Weapon fist;
 
-        if (targetStats == null || targetStats.getWisdomWithoutBoosts() < Wisdom.improvedStrikesLevel)
+        if (targetStats == null || targetStats.wisdom < Wisdom.improvedStrikesLevel)
         {
             fist = (Weapon)getItem(weaponsListIndex, mainHandFistIndex, 1);
 
         }
-        else if (targetStats.getWisdomWithoutBoosts() >= Wisdom.improvedStrikesLevel && targetStats.getWisdomWithoutBoosts() < Wisdom.greaterStrikesLevel)
+        else if (targetStats.wisdom >= Wisdom.improvedStrikesLevel && targetStats.wisdom < Wisdom.greaterStrikesLevel)
         {
             fist = (Weapon)getItem(weaponsListIndex, improvedMainHandFistIndex, 1);
 
         }
-        else if (targetStats.getWisdomWithoutBoosts() >= Wisdom.greaterStrikesLevel && targetStats.getWisdomWithoutBoosts() < Wisdom.ruinousStrikesLevel)
+        else if (targetStats.wisdom >= Wisdom.greaterStrikesLevel && targetStats.wisdom < Wisdom.ruinousStrikesLevel)
         {
             fist = (Weapon)getItem(weaponsListIndex, greaterMainHandFistIndex, 1);
 

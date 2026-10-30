@@ -30,7 +30,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
 
             if (actionInSlot != null)
             {
-                return OverallUIManager.getCurrentActionArray().getActionInSlot(combatActionSlotIndex).getSourceItem() as EquippableItem;
+                return OverallUIManager.getCurrentActionArray().getActionInSlot(combatActionSlotIndex).sourceItem as EquippableItem;
             }
             else
             {
@@ -269,7 +269,7 @@ public class EquipmentDisplayEditorSlot : SlotIconHover
 
         if ((usableItem) != null)
         {
-            OverallUIManager.getCurrentPartyMember().getActionArray().unequipCombatAction(usableItem.getKey());
+            OverallUIManager.getCurrentPartyMember().actionArray.unequipCombatAction(usableItem.getKey());
         }
     }
 

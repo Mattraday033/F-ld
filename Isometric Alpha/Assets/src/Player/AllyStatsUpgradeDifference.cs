@@ -122,102 +122,102 @@ public class AllyStatsUpgradeDifference: IDescribable, IDescribableInBlocks
 
         #region Main Stat Differences
 
-        if (upperLevelStats.getLevel() > lowerLevelStats.getLevel())
+        if (upperLevelStats.level > lowerLevelStats.level)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getLevelBlock(getDifferenceForDisplay(upperLevelStats.getLevel(), lowerLevelStats.getLevel())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getLevelBlock(getDifferenceForDisplay(upperLevelStats.level, lowerLevelStats.level)));
         }
 
-        if (upperLevelStats.getTotalHealth() > lowerLevelStats.getTotalHealth())
+        if (upperLevelStats.totalHealth > lowerLevelStats.totalHealth)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(getDifferenceForDisplay(upperLevelStats.getTotalHealth(), lowerLevelStats.getTotalHealth())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(getDifferenceForDisplay(upperLevelStats.totalHealth, lowerLevelStats.totalHealth)));
         }
         #endregion
 
         #region Strength Differences
 
-        if (upperLevelStats.getStrength() > lowerLevelStats.getStrength())
+        if (upperLevelStats.totalStrength > lowerLevelStats.totalStrength)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getStrengthBlock(getDifferenceForDisplay(upperLevelStats.getStrength(), lowerLevelStats.getStrength())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getStrengthBlock(getDifferenceForDisplay(upperLevelStats.totalStrength, lowerLevelStats.totalStrength)));
         }
 
-        if (upperLevelStats.getCritDamageMultiplier() > lowerLevelStats.getCritDamageMultiplier())
+        if (upperLevelStats.critDamageMultiplier > lowerLevelStats.critDamageMultiplier)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(getDifferencePercentageForDisplay(upperLevelStats.getCritDamageMultiplier(), lowerLevelStats.getCritDamageMultiplier())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(getDifferencePercentageForDisplay(upperLevelStats.critDamageMultiplier, lowerLevelStats.critDamageMultiplier)));
         }
 
-        if (upperLevelStats.getWoundResistance() > lowerLevelStats.getWoundResistance())
+        if (upperLevelStats.woundResistance > lowerLevelStats.woundResistance)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getWoundResistBlock(getDifferencePercentageForDisplay(upperLevelStats.getWoundResistance(), lowerLevelStats.getWoundResistance())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getWoundResistBlock(getDifferencePercentageForDisplay(upperLevelStats.woundResistance, lowerLevelStats.woundResistance)));
         }
 
         #endregion
 
         #region Dexterity Differences
 
-        if (upperLevelStats.getDexterity() > lowerLevelStats.getDexterity())
+        if (upperLevelStats.totalDexterity > lowerLevelStats.totalDexterity)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getDexterityBlock(getDifferenceForDisplay(upperLevelStats.getDexterity(), lowerLevelStats.getDexterity())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getDexterityBlock(getDifferenceForDisplay(upperLevelStats.totalDexterity, lowerLevelStats.totalDexterity)));
         }
 
-        if (upperLevelStats.getSurpriseDamageMultiplier() > lowerLevelStats.getSurpriseDamageMultiplier())
+        if (upperLevelStats.surpriseDamageMultiplier > lowerLevelStats.surpriseDamageMultiplier)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getSurpriseRoundDamageMultiplierBlock(getDifferencePercentageForDisplay(upperLevelStats.getSurpriseDamageMultiplier(), lowerLevelStats.getSurpriseDamageMultiplier())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getSurpriseRoundDamageMultiplierBlock(getDifferencePercentageForDisplay(upperLevelStats.surpriseDamageMultiplier, lowerLevelStats.surpriseDamageMultiplier)));
         }
 
-        if (upperLevelStats.getArmorPenetration() > lowerLevelStats.getArmorPenetration())
+        if (upperLevelStats.armorPenetration > lowerLevelStats.armorPenetration)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getArmorPenetrationBlock(getDifferencePercentageForDisplay(upperLevelStats.getArmorPenetration(), lowerLevelStats.getArmorPenetration())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getArmorPenetrationBlock(getDifferencePercentageForDisplay(upperLevelStats.armorPenetration, lowerLevelStats.armorPenetration)));
         }
 
-        if (upperLevelStats.getExtraArmorFromDexterity() > lowerLevelStats.getExtraArmorFromDexterity())
+        if (upperLevelStats.extraArmorFromDexterity > lowerLevelStats.extraArmorFromDexterity)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getExtraArmorBlock(getDifferenceForDisplay(upperLevelStats.getExtraArmorFromDexterity(), lowerLevelStats.getExtraArmorFromDexterity())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getExtraArmorBlock(getDifferenceForDisplay(upperLevelStats.extraArmorFromDexterity, lowerLevelStats.extraArmorFromDexterity)));
         }
         #endregion
 
         #region Wisdom Differences
 
-        if (upperLevelStats.getWisdom() > lowerLevelStats.getWisdom())
+        if (upperLevelStats.totalWisdom > lowerLevelStats.totalWisdom)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getWisdomBlock(getDifferenceForDisplay(upperLevelStats.getWisdom(), lowerLevelStats.getWisdom())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getWisdomBlock(getDifferenceForDisplay(upperLevelStats.totalWisdom, lowerLevelStats.totalWisdom)));
         }
 
-        if (upperLevelStats.getPassiveSlotsUnlocked() > lowerLevelStats.getPassiveSlotsUnlocked())
+        if (upperLevelStats.passiveSlotsUnlocked > lowerLevelStats.passiveSlotsUnlocked)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getPassiveSlotsBlock(getDifferenceForDisplay(upperLevelStats.getPassiveSlotsUnlocked(), lowerLevelStats.getPassiveSlotsUnlocked())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getPassiveSlotsBlock(getDifferenceForDisplay(upperLevelStats.passiveSlotsUnlocked, lowerLevelStats.passiveSlotsUnlocked)));
         }
 
-        if (upperLevelStats.getWeaponSlots() > lowerLevelStats.getWeaponSlots())
+        if (upperLevelStats.weaponSlots > lowerLevelStats.weaponSlots)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getBonusWeaponSlotsBlock(getDifferenceForDisplay(upperLevelStats.getWeaponSlots(), lowerLevelStats.getWeaponSlots())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getBonusWeaponSlotsBlock(getDifferenceForDisplay(upperLevelStats.weaponSlots, lowerLevelStats.weaponSlots)));
         }
 
-        if (upperLevelStats.getMentalResistance() > lowerLevelStats.getMentalResistance())
+        if (upperLevelStats.mentalResistance > lowerLevelStats.mentalResistance)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getMentalResistBlock(getDifferencePercentageForDisplay(upperLevelStats.getMentalResistance(), lowerLevelStats.getMentalResistance())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getMentalResistBlock(getDifferencePercentageForDisplay(upperLevelStats.mentalResistance, lowerLevelStats.mentalResistance)));
         }
         #endregion
 
         #region Charisma Differences
 
-        if (upperLevelStats.getCharisma() > lowerLevelStats.getCharisma())
+        if (upperLevelStats.totalCharisma > lowerLevelStats.totalCharisma)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getCharismaBlock(getDifferenceForDisplay(upperLevelStats.getCharisma(), lowerLevelStats.getCharisma())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getCharismaBlock(getDifferenceForDisplay(upperLevelStats.totalCharisma, lowerLevelStats.totalCharisma)));
         }
 
-        if (upperLevelStats.getSynergyCoefficient() > lowerLevelStats.getSynergyCoefficient())
+        if (upperLevelStats.synergyCoefficient > lowerLevelStats.synergyCoefficient)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getSynergyBlock(getDifferenceForDisplay(upperLevelStats.getSynergyCoefficient(), lowerLevelStats.getSynergyCoefficient())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getSynergyBlock(getDifferenceForDisplay(upperLevelStats.synergyCoefficient, lowerLevelStats.synergyCoefficient)));
         }
 
-        if (upperLevelStats.getBonusExuberances() > lowerLevelStats.getBonusExuberances())
+        if (upperLevelStats.bonusExuberances > lowerLevelStats.bonusExuberances)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getBonusExuberancesBlock(getDifferenceForDisplay(upperLevelStats.getBonusExuberances(), lowerLevelStats.getBonusExuberances())));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getBonusExuberancesBlock(getDifferenceForDisplay(upperLevelStats.bonusExuberances, lowerLevelStats.bonusExuberances)));
         }
 
-        if (upperLevelStats.getCharisma() > lowerLevelStats.getCharisma())
+        if (upperLevelStats.totalCharisma > lowerLevelStats.totalCharisma)
         {
-            listOfBlocks.Add(DescriptionPanelBuildingBlock.getZOIBlock(getDifferenceForDisplay(upperLevelStats.getCharisma(), lowerLevelStats.getCharisma()), lowerLevelStats.getZoneOfInfluenceTrait().getIconName()));
+            listOfBlocks.Add(DescriptionPanelBuildingBlock.getZOIBlock(getDifferenceForDisplay(upperLevelStats.totalCharisma, lowerLevelStats.totalCharisma), lowerLevelStats.zoneOfInfluenceTrait.getIconName()));
         }
 
         #endregion

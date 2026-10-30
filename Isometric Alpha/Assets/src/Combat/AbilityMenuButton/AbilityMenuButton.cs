@@ -120,9 +120,9 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         loadedCombatAction = action;
 
-        if (CombatStateManager.inCombat && CombatGrid.combatantExistsAtCoords(SelectorManager.currentSelector.getCoords(), out Stats actor))
+        if (CombatStateManager.inCombat && CombatGrid.tryGetCombatantAt(SelectorManager.currentSelector.getCoords(), out Combatant actor))
         {
-            loadedCombatAction.actorStats = actor;
+            loadedCombatAction.actorStats = actor.stats;
         }
     }
 
@@ -131,8 +131,8 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
         return enabled && loadedCombatAction != null &&
                 loadedCombatAction.cooldownRemaining <= 0 &&
                 (loadedCombatAction.usableWithoutItemsInInventory ||
-                    (loadedCombatAction.getSourceItem() != null &&
-                        loadedCombatAction.getSourceItem().getQuantity() > 0));
+                    (loadedCombatAction.sourceItem != null &&
+                        loadedCombatAction.sourceItem.getQuantity() > 0));
     }
 
 
@@ -259,9 +259,9 @@ public class AbilityMenuButton : MonoBehaviour, IPointerEnterHandler,
 
         loadedCombatAction = setCombatActionSelectorStartingPosition(loadedCombatAction);
 
-        if(CombatGrid.combatantExistsAtCoords(SelectorFactory.playerCursor.getCoords(), out Stats actor))
+        if(CombatGrid.tryGetCombatantAt(SelectorFactory.playerCursor.getCoords(), out Combatant actor))
         {
-            loadedCombatAction.actorStats = actor;
+            loadedCombatAction.actorStats = actor.stats;
         }
 
         getDescriptionPanelSlot().revertToPrimaryDescribable();

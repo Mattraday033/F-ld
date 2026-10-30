@@ -1,0 +1,73 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LastManStandingAbility : ChargeUpAbility
+{
+    /*
+    NEEDS TESTING OF LOGIC FOR WHEN IS CHARGED/WHEN IS NOT CHARGED/WHEN SHOULD ATTACK/WHEN SHOULD DEFEND for the Cave Matron
+    */
+
+	public bool hasCharge
+    {
+        get
+        {
+            return false;
+        }
+        protected set
+        {
+            hasCharge = value;
+        }
+    }
+
+	public override Stats actorStats
+	{
+		set
+		{
+			base.actorStats = value;
+			actionWhenCharged.actorStats = value;
+		}
+	}
+
+	public LastManStandingAbility(Trait chargeUpTrait, Ability actionWhenCharged, List<TargetingLogic> targetingLogics = null):
+		base(chargeUpTrait, actionWhenCharged, targetingLogics)
+	{
+		
+	}
+	
+	public override Selector selector
+	{
+		set
+		{
+			base.selector = value;
+			actionWhenCharged.selector = value;
+		}
+	}
+
+	public bool shouldApplyTrait()
+	{
+		return charged && !actorStats.hasTrait(chargeUpTrait);
+	}
+	
+	public override bool charged
+	{
+        get
+        {
+            if(actorStats?.isAlive ?? false)
+            {
+                switch(actorStats.getCombatGridSide())
+                {
+                    case CombatGridSide.Ally:
+                        return CombatGrid.getTotalAliveAllyCount() != 1;
+                    case CombatGridSide.Enemy:
+                        return CombatGrid.getTotalAliveEnemyCount() != 1;
+                    default:
+                        return false;
+                }
+            } 
+
+            return false;
+        }
+	}
+
+}

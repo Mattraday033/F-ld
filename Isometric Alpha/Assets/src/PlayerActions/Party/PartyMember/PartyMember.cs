@@ -72,7 +72,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 	{
 		int affinity = AffinityManager.getTotalAffinity();
 
-		if (affinity >= getNextUpgradeCost(stats.getLevel()))
+		if (affinity >= getNextUpgradeCost(stats.level))
 		{
 			return true;
 		}
@@ -178,7 +178,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
 
 		DescriptionPanel.setText(panel.nameText, displayName);
 		
-		DescriptionPanel.setImage(panel.iconPanel, stats.getSpriteIcon());
+		DescriptionPanel.setImage(panel.iconPanel, stats.spriteIcon);
 
 	}
 
@@ -187,7 +187,7 @@ public class PartyMember : IDescribable, IDescribableInBlocks
         panel.setObjectBeingDescribed(this);
 
         DescriptionPanel.setText(panel.nameText, displayName);
-        DescriptionPanel.setText(panel.levelText, stats.getLevel());
+        DescriptionPanel.setText(panel.levelText, stats.level);
 	}
 
 	public void setUpDecisionPanel(IDecisionPanel descisionPanel)
@@ -255,7 +255,7 @@ public class CompanionCombatActionDescriptionWrapper : IDescribable, IDescribabl
 
 	public bool ineligible()
 	{
-		if (partyMember.stats.getLevel() >= requiredLevel)
+		if (partyMember.stats.level >= requiredLevel)
 		{
 			return false;
 		}

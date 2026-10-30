@@ -67,8 +67,8 @@ public abstract class EquippableItem : Item, IJSONConvertable
             return base.isEquipped(target);
         }
 
-        if (target.getEquippedItems().getItemInSlot(getSlotID()) != null &&
-            String.Equals(getKey(), target.getEquippedItems().getItemInSlot(getSlotID()).getKey(), StringComparison.OrdinalIgnoreCase))
+        if (target.equippedItems.getItemInSlot(getSlotID()) != null &&
+            String.Equals(getKey(), target.equippedItems.getItemInSlot(getSlotID()).getKey(), StringComparison.OrdinalIgnoreCase))
         {
             return true;
         }

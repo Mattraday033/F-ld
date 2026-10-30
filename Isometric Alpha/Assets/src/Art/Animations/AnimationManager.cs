@@ -310,7 +310,7 @@ public class AnimationManager : MonoBehaviour//, IAnimationTracker
 
     // private void Awake()
     // {
-    //     key = AnimationTracker.getCurrentKey();
+    //     key = INameSource.getCurrentKey();
 
     //     if(CombatStateManager.inCombat)
     //     {

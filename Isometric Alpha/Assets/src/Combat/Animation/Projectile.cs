@@ -11,12 +11,19 @@ public class Projectile : MonoBehaviour, IAnimationManager
         {
             if(_Key < 0)
             {
-                _Key = AnimationTracker.getCurrentKey();
+                _Key = INameSource.getCurrentKey();
             }
 
             return _Key;
         }
     }
+
+    #region INameSource
+
+    public string displayName { get { return gameObject.name; } }
+    public string uniqueName { get { return gameObject.name + "_" + key; } }
+
+    #endregion
 
     public bool singleFire { get { return true; } }
 
@@ -113,9 +120,10 @@ public class Projectile : MonoBehaviour, IAnimationManager
             {
                 if((scriptOnLanding == null || !scriptOnLanding.ran) && targetSnapshot != null)
                 {
-                    if(CombatGrid.combatantExistsAtCoords(targetCoords, out Stats target))
+                    //through the Stats, which reaches the primary, so its health bar hides on a death
+                    if(CombatGrid.tryGetCombatantAt(targetCoords, out Combatant target))
                     {
-                        target.playAnimationOnDamage();
+                        target.stats.playAnimationOnDamage();
                     }
                 }
 
@@ -174,9 +182,9 @@ public class Projectile : MonoBehaviour, IAnimationManager
     {
         this.targetCoords = targetCoords.clone();
 
-        if(CombatGrid.combatantExistsAtCoords(this.targetCoords, out Stats target))
+        if(CombatGrid.tryGetCombatantAt(this.targetCoords, out Combatant target))
         {
-            targetSnapshot = target.clone();  
+            targetSnapshot = target.stats.clone();
         }
     }
 
@@ -228,16 +236,16 @@ public class KnockBackOnLanding : ScriptOnLanding
     {
         this.targetCoords = targetCoords;
 
-        if (CombatGrid.combatantExistsAtCoords(targetCoords, out Stats target))
+        if (CombatGrid.tryGetCombatantAt(targetCoords, out Combatant target))
         {
-            this.targetSnapshot = target.clone();
+            this.targetSnapshot = target.stats.clone();
         }
 
         this.moveToCoords = moveToCoords;
 
-        if (CombatGrid.combatantExistsAtCoords(collisionCoords, out Stats collisionTarget))
+        if (CombatGrid.tryGetCombatantAt(collisionCoords, out Combatant collisionTarget))
         {
-            this.collisionTargetSnapshot = collisionTarget.clone();
+            this.collisionTargetSnapshot = collisionTarget.stats.clone();
         }
 
         this.collisionCoords = collisionCoords;
@@ -245,14 +253,16 @@ public class KnockBackOnLanding : ScriptOnLanding
 
     public override void runScript()
     {
-        if(CombatGrid.combatantExistsAtCoords(targetCoords, out Stats combatantToBeMoved))
+        if(CombatGrid.tryGetCombatantAt(targetCoords, out Combatant combatantToBeMoved))
         {
-            combatantToBeMoved.moveTo(new List<GridCoords> { moveToCoords });
+            Stats statsToBeMoved = combatantToBeMoved.stats;
+
+            statsToBeMoved.moveTo(new List<GridCoords> { moveToCoords });
 
             if(!targetSnapshot.isDead)
             {
-                combatantToBeMoved.playAnimationOnDamage();
-                combatantToBeMoved.updateHealthBar();
+                statsToBeMoved.playAnimationOnDamage();
+                statsToBeMoved.updateHealthBar();
             }
 
             // if(CombatGrid.combatantExistsAtCoords(collisionCoords, out Stats combatantCollision) &&

@@ -71,7 +71,7 @@ public class LowestHealthEnemySideTargetPriorityTrait : TargetPriorityTrait
 			}
 
 			float currentHealth = target.currentHealth;
-			float totalHealth = target.getTotalHealth();
+			float totalHealth = target.totalHealth;
 
 			float missingHealthRatio = currentHealth / totalHealth;
 

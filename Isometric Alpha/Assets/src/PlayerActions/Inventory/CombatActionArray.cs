@@ -85,16 +85,16 @@ public class CombatActionArray : StatBoostSourceCombiner
     {
         int highestBonusAbilityDamage = 0;
 
-        int offHandBonusDamage = calculateAllStatFormulas(getStatSource().getAllStatBoosts(),
+        int offHandBonusDamage = calculateAllStatFormulas(getStatSource().allStatBoosts,
                                                           b => b.getBonusDamageFormula());
 
         foreach (CombatAction action in combatActions)
         {
-            if (action != null && action.getSourceItem() != null && action.getSourceItem().isEquippable())
+            if (action != null && action.sourceItem != null && action.sourceItem.isEquippable())
             {
                 int currentBonusDamage = DamageCalculator.calculateBonusDamage(action.getDamageFormula());
 
-                Weapon sourceWeapon = action.getSourceItem() as Weapon;
+                Weapon sourceWeapon = action.sourceItem as Weapon;
 
                 if(sourceWeapon != null && sourceWeapon.getIsTwoHanded() && currentBonusDamage > highestBonusAbilityDamage)
                 {
@@ -144,7 +144,7 @@ public class CombatActionArray : StatBoostSourceCombiner
             return;
         }
 
-        Item oldItem = combatActions[slotIndex].getSourceItem();
+        Item oldItem = combatActions[slotIndex].sourceItem;
 
         if (oldItem != null && oldItem.getQuantity() > 0 && !oldItem.usableInCombat())
         {
@@ -179,12 +179,12 @@ public class CombatActionArray : StatBoostSourceCombiner
 
     private bool actionIsAttack(CombatAction action)
     {
-        return action.getSourceItem() != null && action.getSourceItem().isEquippable();
+        return action.sourceItem != null && action.sourceItem.isEquippable();
     }
 
     private bool indexIsUnlocked(int index)
     {
-        if (index < numberOfActivatablePlayerCombatActions + actor.getPassiveSlotsUnlocked())
+        if (index < numberOfActivatablePlayerCombatActions + actor.passiveSlotsUnlocked)
         {
             return true;
         }
@@ -220,7 +220,7 @@ public class CombatActionArray : StatBoostSourceCombiner
 
             if (actionIsAttack(newCombatAction))
             {
-                maxIndex += actor.getPassiveSlotsUnlocked();
+                maxIndex += actor.passiveSlotsUnlocked;
             }
 
             for (int index = 0; index < maxIndex; index++)
@@ -255,7 +255,7 @@ public class CombatActionArray : StatBoostSourceCombiner
 
         if (newCombatAction != null)
         {
-            Item newItem = newCombatAction.getSourceItem();
+            Item newItem = newCombatAction.sourceItem;
 
             if (removeItem && newItem != null && !newItem.usableInCombat() &&
                 !newItem.getKey().Equals(ItemList.getMainHandFist(actor as AllyStats).getKey()) &&
@@ -302,12 +302,12 @@ public class CombatActionArray : StatBoostSourceCombiner
                 continue;
             }
 
-            if (String.Equals(newAction.getKey(), action.getKey(), StringComparison.OrdinalIgnoreCase))
+            if (String.Equals(newAction.key, action.key, StringComparison.OrdinalIgnoreCase))
             {
                 actionSlots++;
             }
 
-            if (actionSlots >= newAction.getMaximumSlots())
+            if (actionSlots >= newAction.maximumSlots)
             {
                 return false;
             }
@@ -327,7 +327,7 @@ public class CombatActionArray : StatBoostSourceCombiner
                 continue;
             }
 
-            if (String.Equals(newAction.getKey(), action.getKey(), StringComparison.OrdinalIgnoreCase))
+            if (String.Equals(newAction.key, action.key, StringComparison.OrdinalIgnoreCase))
             {
                 actionSlots++;
             }
@@ -338,7 +338,7 @@ public class CombatActionArray : StatBoostSourceCombiner
 
     public bool hasAvailableWeaponSlots()
     {
-        return getAmountOfWeaponCombatActions() < actor.getWeaponSlots();
+        return getAmountOfWeaponCombatActions() < actor.weaponSlots;
     }
 
     public int getAmountOfWeaponCombatActions()
@@ -363,7 +363,7 @@ public class CombatActionArray : StatBoostSourceCombiner
 
     public bool everyAvailableCombatActionSlotFilled()
     {
-        for (int index = 0; index < numberOfActivatablePlayerCombatActions + actor.getPassiveSlotsUnlocked(); index++)
+        for (int index = 0; index < numberOfActivatablePlayerCombatActions + actor.passiveSlotsUnlocked; index++)
         {
             if (combatActions[index] == null)
             {
@@ -398,13 +398,14 @@ public class CombatActionArray : StatBoostSourceCombiner
 
     public bool alreadyHasStance()
     {
-        foreach (CombatAction action in combatActions)
-        {
-            if (action != null && action.uniqueName.Contains(Stance.stanceNameFragment))
-            {
-                return true;
-            }
-        }
+        //uses deprecated combat actions (Stance), see Assets/src/DepricatedCombatActions
+        // foreach (CombatAction action in combatActions)
+        // {
+        //     if (action != null && action.uniqueName.Contains(Stance.stanceNameFragment))
+        //     {
+        //         return true;
+        //     }
+        // }
 
         return false;
     }
@@ -413,7 +414,7 @@ public class CombatActionArray : StatBoostSourceCombiner
     {
         for (int index = 0; index < maxPlayerCombatActions; index++)
         {
-            if (combatActions[index] != null && combatActions[index].getKey().Equals(action.getKey()))
+            if (combatActions[index] != null && combatActions[index].key.Equals(action.key))
             {
                 return index;
             }
@@ -435,22 +436,22 @@ public class CombatActionArray : StatBoostSourceCombiner
 
     public int getTotalRedStacksAtStart()
     {
-        return Helpers.sum<CombatAction>(this, t => t.redStacksAtStart) + actor.getBonusExuberances();
+        return Helpers.sum<CombatAction>(this, t => t.redStacksAtStart) + actor.bonusExuberances;
     }
 
     public int getTotalBlueStacksAtStart()
     {
-        return Helpers.sum<CombatAction>(this, t => t.blueStacksAtStart) + actor.getBonusExuberances();
+        return Helpers.sum<CombatAction>(this, t => t.blueStacksAtStart) + actor.bonusExuberances;
     }
 
     public int getTotalYellowStacksAtStart()
     {
-        return Helpers.sum<CombatAction>(this, t => t.yellowStacksAtStart) + actor.getBonusExuberances();
+        return Helpers.sum<CombatAction>(this, t => t.yellowStacksAtStart) + actor.bonusExuberances;
     }
 
     public int getTotalGreenStacksAtStart()
     {
-        return Helpers.sum<CombatAction>(this, t => t.greenStacksAtStart) + actor.getBonusExuberances();
+        return Helpers.sum<CombatAction>(this, t => t.greenStacksAtStart) + actor.bonusExuberances;
     }
 
     public override string displayName { get { return actor.displayName + "'s Combat Action Array"; } }
@@ -482,7 +483,7 @@ public class CombatActionArray : StatBoostSourceCombiner
 
     public bool allActionSlotsFull()
     {
-        for (int index = 0; index < numberOfActivatablePlayerCombatActions + actor.getPassiveSlotsUnlocked(); index++)
+        for (int index = 0; index < numberOfActivatablePlayerCombatActions + actor.passiveSlotsUnlocked; index++)
         {
             if(getActions()[index] == null)
             {

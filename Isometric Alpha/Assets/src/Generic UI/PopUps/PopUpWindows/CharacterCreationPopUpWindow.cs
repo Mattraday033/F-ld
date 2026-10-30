@@ -128,16 +128,16 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         switch (currentPrimaryStatPage)
         {
             case PrimaryStat.Strength:
-                currentStats.strength = currentStats.getStrength() + 1;
+                currentStats.strength = currentStats.totalStrength + 1;
                 break;
             case PrimaryStat.Dexterity:
-                currentStats.dexterity = currentStats.getDexterity() + 1;
+                currentStats.dexterity = currentStats.totalDexterity + 1;
                 break;
             case PrimaryStat.Wisdom:
-                currentStats.wisdom = currentStats.getWisdom() + 1;
+                currentStats.wisdom = currentStats.totalWisdom + 1;
                 break;
             default:
-                currentStats.charisma = currentStats.getCharisma() + 1;
+                currentStats.charisma = currentStats.totalCharisma + 1;
                 break;
         }
 
@@ -154,16 +154,16 @@ public class CharacterCreationPopUpWindow : PopUpWindow
         switch (currentPrimaryStatPage)
         {
             case PrimaryStat.Strength:
-                currentStats.strength = currentStats.getStrength() - 1;
+                currentStats.strength = currentStats.totalStrength - 1;
                 break;
             case PrimaryStat.Dexterity:
-                currentStats.dexterity = currentStats.getDexterity() - 1;
+                currentStats.dexterity = currentStats.totalDexterity - 1;
                 break;
             case PrimaryStat.Wisdom:
-                currentStats.wisdom = currentStats.getWisdom() - 1;
+                currentStats.wisdom = currentStats.totalWisdom - 1;
                 break;
             default:
-                currentStats.charisma = currentStats.getCharisma() - 1;
+                currentStats.charisma = currentStats.totalCharisma - 1;
                 break;
         }
 
@@ -242,7 +242,7 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
     public int getStatAmount()
     {
-        int[] statsAsArray = currentStats.getStatsAsArray();
+        int[] statsAsArray = currentStats.statsAsArray;
 
         return statsAsArray[(int) currentPrimaryStatPage];
     }
@@ -306,7 +306,7 @@ public class CharacterCreationPopUpWindow : PopUpWindow
             name = SaveDefaultValues.defaultPlayerName;
         }
 
-        PartyMember player = new PartyMember(new AllyStats(name + PartyManager.playerMarker, currentStats.getStrength(), currentStats.getDexterity(), currentStats.getWisdom(), currentStats.getCharisma()));
+        PartyMember player = new PartyMember(new AllyStats(name + PartyManager.playerMarker, currentStats.totalStrength, currentStats.totalDexterity, currentStats.totalWisdom, currentStats.totalCharisma));
         player.canJoinParty = true;
         player.stats.combatActionArray = new CombatActionArray(player.stats, getStartingActions(player.stats));
 
@@ -331,7 +331,7 @@ public class CharacterCreationPopUpWindow : PopUpWindow
 
     public static CombatAction[] getStartingActions(AllyStats stats)
     {
-        PrimaryStat chosenStat = stats.getHighestPrimaryStats()[0];
+        PrimaryStat chosenStat = stats.highestPrimaryStats[0];
 
         switch (chosenStat)
         {

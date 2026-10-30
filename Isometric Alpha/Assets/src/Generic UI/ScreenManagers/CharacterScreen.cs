@@ -43,15 +43,15 @@ public class CharacterScreen : ScreenManager, ICounter
         switch (AbilityGridSideTab.getDescribableListType())
         {
             case DescribableList.CharacterSpecificAbilities:
-                return OverallUIManager.getCurrentPartyMember().getLevel();
+                return OverallUIManager.getCurrentPartyMember().level;
             case DescribableList.Strength:
-                return OverallUIManager.getCurrentPartyMember().getStrength();
+                return OverallUIManager.getCurrentPartyMember().totalStrength;
             case DescribableList.Dexterity:
-                return OverallUIManager.getCurrentPartyMember().getDexterity();
+                return OverallUIManager.getCurrentPartyMember().totalDexterity;
             case DescribableList.Wisdom:
-                return OverallUIManager.getCurrentPartyMember().getWisdom();
+                return OverallUIManager.getCurrentPartyMember().totalWisdom;
             case DescribableList.Charisma:
-                return OverallUIManager.getCurrentPartyMember().getCharisma();
+                return OverallUIManager.getCurrentPartyMember().totalCharisma;
             default:
                 return 0;
         }

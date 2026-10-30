@@ -15,8 +15,7 @@ public static class ProjectileManager
     //moved from AnimationTracker
     private const float defaultMaxTime = .5f;
 
-    //moved from AnimationTracker. The visible projectile is currently only reachable through CombatAnimationType.Projectile,
-    //which no CombatAction returns; loadInvisibleProjectile still uses it.
+    //moved from AnimationTracker. The visible projectile isn't used by any CombatAction yet; loadInvisibleProjectile still uses it.
     public static Projectile loadProjectile(GridCoords actorCoords, GridCoords targetCoords, bool crit, int damageNumber, bool healsTarget, bool targetCanBeDead)
     {
         return loadProjectile(actorCoords, targetCoords, crit, damageNumber, healsTarget, targetCanBeDead, null);

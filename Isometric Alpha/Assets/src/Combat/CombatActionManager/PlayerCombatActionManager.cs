@@ -45,12 +45,12 @@ public class PlayerCombatActionManager : MonoBehaviour
 
 	public void queueCombatAction(Selector actorSelector, Selector targetSelector, CombatAction action)
 	{
-        if(!CombatGrid.combatantExistsAtCoords(actorSelector.getCoords(), out Stats actor))
+        if(!CombatGrid.tryGetCombatantAt(actorSelector.getCoords(), out Combatant actor))
         {
             return;
         }
 
-		action.actorStats = actor;
+		action.actorStats = actor.stats;
 		
 		action.selector = targetSelector.clone();
 		
@@ -66,7 +66,7 @@ public class PlayerCombatActionManager : MonoBehaviour
 
 		CombatUI.populateCombatActionPanels();
 		
-		action.queueingAction();
+		action.performAllQueuingUnits();
 		
 		CombatUI.checkAndSetResolveTurnButtonInteractability();
 		
@@ -106,7 +106,7 @@ public class PlayerCombatActionManager : MonoBehaviour
         {
             CombatAction actionToBeRemoved = currentActionQueue[currentActionQueue.Count - 1];
 
-            actionToBeRemoved.unqueueingAction();
+            actionToBeRemoved.performAllUnqueuingUnits();
 
             currentActionQueue.RemoveAt(currentActionQueue.Count - 1);
 
@@ -128,12 +128,12 @@ public class PlayerCombatActionManager : MonoBehaviour
 
 	public void queueCombatActionWithTertiary(Selector actorSelector, Selector tertiarySelector, CombatAction action)
 	{
-        if(!CombatGrid.combatantExistsAtCoords(actorSelector.getCoords(), out Stats actor))
+        if(!CombatGrid.tryGetCombatantAt(actorSelector.getCoords(), out Combatant actor))
         {
             return;
         }
 
-		action.actorStats = actor;
+		action.actorStats = actor.stats;
 
 		Selector targetSelector = action.selector.clone();
 		
@@ -153,7 +153,7 @@ public class PlayerCombatActionManager : MonoBehaviour
 		
 		CombatUI.populateCombatActionPanels();
 		
-		action.queueingAction();
+		action.performAllQueuingUnits();
 		
 		CombatUI.checkAndSetResolveTurnButtonInteractability();
 	}

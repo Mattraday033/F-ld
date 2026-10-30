@@ -1,0 +1,15 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SuicideAbility : Ability
+{
+	public override bool killsCaster => true;
+
+	public SuicideAbility(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null):
+	base(settings, targetingLogics)
+	{
+
+	}
+	
+}

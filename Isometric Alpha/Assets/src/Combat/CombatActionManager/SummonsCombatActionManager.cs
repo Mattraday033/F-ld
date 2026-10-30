@@ -37,7 +37,7 @@ public class SummonsCombatActionManager : MonoBehaviour
 				continue; 
 			}
 			
-			CombatAction summonCombatAction = summon.getCombatAction();
+			CombatAction summonCombatAction = summon.combatAction;
 
 			if (summon.positions.Count > 0)
 			{
@@ -54,7 +54,7 @@ public class SummonsCombatActionManager : MonoBehaviour
 			summonCombatAction.selector = selector;
 			//summonCombatAction.setTargetCoords(new GridCoords(selector.currentRow, selector.currentCol));
 			
-			summonCombatAction.queueingAction();
+			summonCombatAction.performAllQueuingUnits();
 			
 			if(alliedSide)
 			{
@@ -65,40 +65,42 @@ public class SummonsCombatActionManager : MonoBehaviour
 			}
 		}
 		
-		if(Helpers.hasQuality<VolleyParticipantStats>(listOfSummons, s => s.isPartOfVolley))
-		{
-			VolleyAbility newVolleyAbility = constructVolleyCombatAction(alliedSide);
-		
-			if(newVolleyAbility != null)
-			{
-				//newVolleyAbility.printAllActorCoords();
-				
-				if(alliedSide)
-				{
-					alliedSummonsCombatActionQueue.Add(newVolleyAbility);
-				} else
-				{
-					enemySummonsCombatActionQueue.Add(newVolleyAbility);
-				}
-				
-			}
-		}
+		//uses deprecated combat actions (VolleyAbility), see Assets/src/DepricatedCombatActions
+		// if(Helpers.hasQuality<VolleyParticipantStats>(listOfSummons, s => s.isPartOfVolley))
+		// {
+		// 	VolleyAbility newVolleyAbility = constructVolleyCombatAction(alliedSide);
+
+		// 	if(newVolleyAbility != null)
+		// 	{
+		// 		//newVolleyAbility.printAllActorCoords();
+
+		// 		if(alliedSide)
+		// 		{
+		// 			alliedSummonsCombatActionQueue.Add(newVolleyAbility);
+		// 		} else
+		// 		{
+		// 			enemySummonsCombatActionQueue.Add(newVolleyAbility);
+		// 		}
+
+		// 	}
+		// }
 	}
-	
-	
-	public VolleyAbility constructVolleyCombatAction(bool alliedSide)
-	{
-		VolleyAbility newVolleyAbility = new VolleyAbility(alliedSide);
-		Selector selector = newVolleyAbility.selector;
-		
-		if(selector == null)
-		{
-			return null;
-		}
-		
-		newVolleyAbility.selector = selector;
-		//newVolleyAbility.setTargetCoords(selector.getCoords());
-		
-		return newVolleyAbility;
-	}
+
+
+	//uses deprecated combat actions (VolleyAbility), see Assets/src/DepricatedCombatActions
+	// public VolleyAbility constructVolleyCombatAction(bool alliedSide)
+	// {
+	// 	VolleyAbility newVolleyAbility = new VolleyAbility(alliedSide);
+	// 	Selector selector = newVolleyAbility.selector;
+
+	// 	if(selector == null)
+	// 	{
+	// 		return null;
+	// 	}
+
+	// 	newVolleyAbility.selector = selector;
+	// 	//newVolleyAbility.setTargetCoords(selector.getCoords());
+
+	// 	return newVolleyAbility;
+	// }
 }

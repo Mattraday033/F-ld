@@ -52,9 +52,9 @@ public class ZoneOfInfluenceManager: MonoBehaviour
 																	//benefits back to the target
 		foreach(Stats target in ZOITargets)
 		{
-			if(target.getZoneOfInfluenceTrait() != null && !(target.getZoneOfInfluenceTrait() is null))
+			if(target.zoneOfInfluenceTrait != null && !(target.zoneOfInfluenceTrait is null))
 			{
-				traits.Add(target.getZoneOfInfluenceTrait());
+				traits.Add(target.zoneOfInfluenceTrait);
 			}
 		}
 		

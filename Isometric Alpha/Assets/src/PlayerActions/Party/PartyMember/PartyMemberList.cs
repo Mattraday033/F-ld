@@ -75,7 +75,7 @@ public static class PartyMemberList
 
                 carter.stats.combatActionArray = new CombatActionArray(carter.stats, Dexterity.getStartingActions(carter.stats));
                 carter.stats.combatActionArray.equipCombatAction(new Attack(carter.stats, ItemList.getItem(ItemList.weaponsListIndex, ItemList.lightPickIndex) as Weapon), 0, removeItem: false, skipUIUpdate: true);
-                carter.stats.equippedItems = new EquippedItems(carter.stats, carterStartingArmor);
+                carter.stats.setEquippedItems(new EquippedItems(carter.stats, carterStartingArmor));
 
                 return carter;
 
@@ -84,7 +84,7 @@ public static class PartyMemberList
 
                 gaspar.stats.combatActionArray = new CombatActionArray(gaspar.stats, new CombatAction[] { null, AbilityList.getAbility(gaspar.stats,"d-2-1"), AbilityList.getAbility(gaspar.stats,"s-2-1"), AbilityList.getAbility(gaspar.stats,"s-2-1"), null, null, null, null, AbilityList.getAbility(gaspar.stats, "d-2-2"), null, null, null });
                 gaspar.stats.combatActionArray.equipCombatAction(new Attack(gaspar.stats, ItemList.getItem(ItemList.weaponsListIndex, ItemList.whipIndex) as Weapon), 0, removeItem: false, skipUIUpdate: true);
-                gaspar.stats.equippedItems = new EquippedItems(gaspar.stats, gasparStartingArmor);
+                gaspar.stats.setEquippedItems(new EquippedItems(gaspar.stats, gasparStartingArmor));
                 gaspar.stats.setLevel(Constants.sizeTwo);
 
                 return gaspar;
@@ -94,7 +94,7 @@ public static class PartyMemberList
                 PartyMember nandor = new PartyMember(new AllyStats(NPCNameList.nandor, normalStat, normalStat, higherWisdom, normalStat));
 
                 nandor.stats.combatActionArray = new CombatActionArray(nandor.stats, Wisdom.getStartingActions(nandor.stats));
-                nandor.stats.equippedItems = new EquippedItems(nandor.stats, nandorStartingArmor);
+                nandor.stats.setEquippedItems(new EquippedItems(nandor.stats, nandorStartingArmor));
 
                 return nandor;
                 
@@ -104,7 +104,7 @@ public static class PartyMemberList
 
                 thatch.stats.combatActionArray = new CombatActionArray(thatch.stats, Strength.getStartingActions(thatch.stats));
                 thatch.stats.combatActionArray.equipCombatAction(new Attack(thatch.stats, ItemList.getItem(ItemList.weaponsListIndex, ItemList.cudgelIndex) as Weapon), 0, removeItem: false, skipUIUpdate: true);
-                thatch.stats.equippedItems = new EquippedItems(thatch.stats, thatchStartingArmor);
+                thatch.stats.setEquippedItems(new EquippedItems(thatch.stats, thatchStartingArmor));
 
                 return thatch;
 
@@ -114,7 +114,7 @@ public static class PartyMemberList
 
                 weft.stats.combatActionArray = new CombatActionArray(weft.stats, Charisma.getStartingActions(weft.stats));
                 weft.stats.combatActionArray.equipCombatAction(new Attack(weft.stats, ItemList.getItem(ItemList.weaponsListIndex, ItemList.sharpRockIndex) as Weapon), 0, removeItem: false, skipUIUpdate: true);
-                weft.stats.equippedItems = new EquippedItems(weft.stats, weftStartingArmor);
+                weft.stats.setEquippedItems(new EquippedItems(weft.stats, weftStartingArmor));
 
                 return weft;
         }

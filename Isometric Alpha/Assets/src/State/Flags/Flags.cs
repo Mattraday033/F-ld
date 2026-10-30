@@ -126,7 +126,7 @@ public static class Flags
 	
 	public static string getStatTutorialFlag(AllyStats playerStats) //only use when starting new game
     {
-        PrimaryStat chosenStat = playerStats.getHighestPrimaryStats()[0];
+        PrimaryStat chosenStat = playerStats.highestPrimaryStats[0];
 
         switch (chosenStat)
         {

@@ -9,6 +9,14 @@ public interface INameSource
 
     //used for dictionary look ups, so it may carry indexes and underscores
     public string uniqueName { get; }
+
+    private static int currentKey = 0;
+
+    //hands out a key no earlier call has, for sources that need a unique number
+    public static int getCurrentKey()
+    {
+        return currentKey++;
+    }
 }
 
 public static class NameSourceExtensions

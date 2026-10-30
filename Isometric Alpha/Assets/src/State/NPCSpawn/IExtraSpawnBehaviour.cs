@@ -579,8 +579,9 @@ public class OverHeadIconManagerSpawnBehaviour : IExtraSpawnBehaviour
 
         foreach(INameSource nameSource in iconManager.GetComponents<INameSource>())
         {
-            //the manager is an INameSource itself, and delegates to whichever one sits beside it
-            if(!ReferenceEquals(nameSource, iconManager))
+            //the manager is an INameSource itself, and delegates to whichever one sits beside it.
+            //The animation managers only name their own GameObject, so they're passed over too
+            if(!ReferenceEquals(nameSource, iconManager) && !(nameSource is IAnimationManager))
             {
                 iconManager.nameSource = nameSource;
                 yield break;

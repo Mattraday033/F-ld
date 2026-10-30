@@ -71,7 +71,7 @@ public class GeneratedTargetPriorityTrait : TargetPriorityTrait
 		
 		foreach(GridCoords coords in placeHolderGridCoords)
 		{
-			CombatGrid.setCombatantAtCoords(coords, null);
+			CombatGrid.removeCombatantAtCoords(coords);
 		}
 		
 		return SelectorGenerator.generate(allTargetSelectors.ToArray());

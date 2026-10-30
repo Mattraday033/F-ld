@@ -18,6 +18,10 @@ public class Combatant : MonoBehaviour, INameSource
     public bool isPrimary { get; private set; }
     public bool isPlaceholder { get; private set; }
 
+    //the Combatant carrying the Stats' health bar, which is this one unless the Stats is drawn on several cells
+    public Combatant primary => isPrimary ? this : stats.getCombatant();
+    public HealthBarManager primaryHealthBar => primary == null ? null : primary.healthBarManager;
+
     public CreatureAnimationManager animationManager { get; private set; }
     public SpriteLayerRendererList rendererList { get; private set; }
     public HealthBarManager healthBarManager { get; private set; }
@@ -71,7 +75,7 @@ public class Combatant : MonoBehaviour, INameSource
             }
 
             //a reposition clone is drawn by its placeholder, but a combatant that already has a GameObject keeps it
-            if(stats.combatant != null)
+            if(stats.getCombatant() != null)
             {
                 return;
             }
@@ -83,8 +87,6 @@ public class Combatant : MonoBehaviour, INameSource
         {
             return;
         }
-
-        stats.combatant = this;
 
         if(!isPlaceholder)
         {
@@ -178,11 +180,6 @@ public class Combatant : MonoBehaviour, INameSource
         removeListeners();
 
         stats.combatants.Remove(this);
-
-        if(ReferenceEquals(stats.combatant, this))
-        {
-            stats.combatant = null;
-        }
     }
 
     //a multi cell combatant keeps one GameObject on each of its cells, so only a single sprite follows the Stats around
@@ -205,8 +202,8 @@ public class Combatant : MonoBehaviour, INameSource
         }
 
         healthBarManager.setLinkedStats(stats);
-        healthBarManager.setTotalHealth(stats.getTotalHealth());
-        healthBarManager.setMissingHealth(stats.getMissingHealth());
+        healthBarManager.setTotalHealth(stats.totalHealth);
+        healthBarManager.setMissingHealth(stats.missingHealth);
         healthBarManager.resetPreviewHealth();
     }
 
@@ -315,12 +312,12 @@ public class Combatant : MonoBehaviour, INameSource
 
     public void setOutline()
     {
-        setOutline(stats.getOutlineColor());
+        setOutline(stats.outlineColor);
     }
 
     public void setOutline(byte alpha)
     {
-        Color32 color = stats.getOutlineColor();
+        Color32 color = stats.outlineColor;
 
         color.a = alpha;
 
@@ -411,14 +408,15 @@ public class Combatant : MonoBehaviour, INameSource
 //Each returns a real null, rather than a destroyed Unity object, when the Stats has no GameObject
 public static class CombatantStatsExtensions
 {
+    //the primary Combatant, the one carrying the health bar
     public static Combatant getCombatant(this Stats stats)
     {
-        if(stats == null || stats.combatant == null)
+        if(stats == null)
         {
             return null;
         }
 
-        return stats.combatant;
+        return stats.combatants.LastOrDefault(c => c != null && c.isPrimary);
     }
 
     public static GameObject getCombatSprite(this Stats stats)

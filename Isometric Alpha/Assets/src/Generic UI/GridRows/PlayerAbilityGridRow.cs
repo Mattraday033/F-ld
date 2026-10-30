@@ -57,7 +57,7 @@ public class PlayerAbilityGridRow : GridRow, IPointerDownHandler, IDragAndDropSo
             action = action.alternateActionWhenPlacedInActionSlot();
         }
 
-        if (action == null || !action.canBePlacedInActionSlot || action.getMaximumSlots() <= 0)
+        if (action == null || !action.canBePlacedInActionSlot || action.maximumSlots <= 0)
         {
             return false;
         }

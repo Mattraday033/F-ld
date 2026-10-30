@@ -39,7 +39,7 @@ public class DragAndDropUIObject : MonoBehaviour, IDragAndDropContainer
 
         if(itemCombatAction != null)
         {
-            return itemCombatAction.getSourceItem();
+            return itemCombatAction.sourceItem;
         } else
         {
             return getObjectBeingDragged() as Item;

@@ -118,6 +118,7 @@ public static class PrebuiltScreenManager
     [System.Diagnostics.Conditional("UNITY_EDITOR"), System.Diagnostics.Conditional("DEVELOPMENT_BUILD")]
     private static void reportBuild()
     {
+        return;
         List<string> results = new List<string>();
         bool anyLeftOut = false;
 

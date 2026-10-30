@@ -22,13 +22,13 @@ public class InventoryStatsPanel : MonoBehaviour, IStatsPanel
 
     public void updateStatsPanel()
     {
-        bonusAbilityDamageText.text = "+" + PartyManager.getPlayerStats().getBonusAbilityDamage();
+        bonusAbilityDamageText.text = "+" + PartyManager.getPlayerStats().bonusAbilityDamage;
 
-        totalArmorText.text = PartyManager.getPlayerStats().getTotalArmorRating() + "";
+        totalArmorText.text = PartyManager.getPlayerStats().totalArmorRating + "";
 
         currentHPText.text = PartyManager.getPlayerStats().currentHealth + "";
 
-        totalHPText.text = PartyManager.getPlayerStats().getTotalHealth() + "";
+        totalHPText.text = PartyManager.getPlayerStats().totalHealth + "";
 
         totalGoldText.text = Purse.getCoinsInPurseForDisplay();
     }

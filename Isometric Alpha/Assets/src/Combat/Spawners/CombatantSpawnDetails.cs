@@ -51,7 +51,7 @@ public class CombatantSpawnDetails : OOCSpawnDetails
          appearance: stats.appearance,
          cellCoords: getPrimaryCell(stats, positions).toVector3Int(),
          facing: getFacing(positions),
-         tutorialTargetHash: placeholder ? "" : stats.getTutorialTargetHash(),
+         tutorialTargetHash: placeholder ? "" : stats.tutorialTargetHash,
          extraSpaces: getExtraSpaces(stats, positions))
     {
         this.stats = stats;
@@ -220,7 +220,7 @@ public class CombatantSpawnDetails : OOCSpawnDetails
 
         if(stats is LargeEnemyStats largeEnemy && !placeholder)
         {
-            int heartBeatRow = largeEnemy.getHeartBeatRow();
+            int heartBeatRow = largeEnemy.heartBeatRow;
 
             if(heartBeatRow != LargeEnemyStats.noHeartBeatRow)
             {

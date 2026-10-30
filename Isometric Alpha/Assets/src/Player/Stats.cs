@@ -4,8 +4,8 @@ using System.IO;
 using System.Linq;
 using System;
 using UnityEngine;
-using UnityEngine.UI; 
-using UnityEngine.Events; 
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 
 public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IAppearanceSource
@@ -22,7 +22,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     #endregion
 
     #region Unity Events
-    
+
     public readonly static UnityEvent OnHealthChange = new UnityEvent();
     public readonly static UnityEvent OnStatsChange = new UnityEvent();
     public readonly static UnityEvent PredationProc = new UnityEvent();
@@ -62,7 +62,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         }
     }
 
-    
+
     public virtual IAppearance appearance
     {
         get;
@@ -80,8 +80,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public int currentHealth;
 
-    // public Trait[] traits = new Trait[0];
-    // public Trait[] hiddenTraits = new Trait[0];
     public TraitContainer traitContainer;
 
     protected Dictionary<CharacterAnimationType, SFXType> animationAudioClipDictionary;
@@ -135,6 +133,180 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #endregion
 
+    #region Properties
+
+    #region Combatant
+
+    public virtual Color outlineColor => ColorList.canBeInteractedWith;
+
+    #endregion
+
+    #region Tutorial
+
+    public string tutorialTargetHash
+    {
+        get
+        {
+            if(uniqueName.Equals(PartyManager.getPlayerStats().uniqueName))
+            {
+                return TutorialSequenceList.playerCombatSpriteTargetHash;
+            }
+
+            if(isMandatoryTarget)
+            {
+                return TutorialSequenceList.mandatoryTargetMonsterTargetHash;
+            }
+
+            //characterName, since an enemy's uniqueName carries its clone key
+            switch(characterName)
+            {
+                case MonsterNameList.armoredBat:
+                    return TutorialSequenceList.traitMonsterTargetHash;
+                default:
+                    return characterName;
+            }
+        }
+    }
+
+    #endregion
+
+    #region Health
+
+    public abstract int totalHealth { get; }
+
+    public int missingHealth => totalHealth - currentHealth;
+
+    #endregion
+
+    #region Primary Stats
+
+    //the total* stats include every boost; AllyStats keeps the unboosted values in strength, dexterity, wisdom and charisma
+    public virtual int totalStrength => 1;
+
+    public virtual int totalDexterity => 1;
+    public virtual int extraArmorFromDexterity => 0;
+
+    public virtual int totalWisdom => 1;
+    public virtual int passiveSlotsUnlocked => 0;
+    public virtual int armorPenetration => StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusArmorPenetrationFormula());
+
+    public virtual int totalCharisma => 1;
+    public virtual int zoiStat => totalCharisma;
+    public virtual int synergyCoefficient => 0;
+
+    public int synergyModifier
+    {
+        get
+        {
+            int sum = 0;
+            int synergyBonus = synergyCoefficient;
+
+            foreach (Trait trait in traitContainer)
+            {
+                if (trait.fromZoneOfInfluence())
+                {
+                    sum += synergyBonus;
+                }
+            }
+
+            return sum;
+        }
+    }
+
+    public virtual int bonusExuberances => 0;
+
+    #endregion
+
+    #region Tertiary Stats
+
+    public virtual string invulnerability => "" + StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getInvulnerableFormula());
+    public virtual string vulnerability => "" + StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getVulnerableFormula());
+    public virtual string healingBoost => "" + StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getHealingBoostFormula());
+
+    #endregion
+
+    #region Combat and Action Arrays
+
+    public abstract int totalArmorRating { get; }
+    public virtual int totalArmorShred => StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getArmorShredFormula());
+
+    public string totalArmorRatingForDisplay
+    {
+        get
+        {
+            int armorAfterShred = totalArmorRating - totalArmorShred;
+
+            if(armorAfterShred < 0)
+            {
+                return Constants.zeroRating + "%";
+            } else
+            {
+                return armorAfterShred.ToString() + "%";
+            }
+        }
+    }
+
+    public virtual double critDamageMultiplier => 1.5;
+    public virtual float surpriseDamageMultiplier => 1f;
+
+    public virtual CombatActionArray actionArray => new CombatActionArray(null);
+
+    public virtual int bonusAbilityDamage => 0;
+
+    public virtual string bonusCritChance
+    {
+        get
+        {
+            string critChance = "" + StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getCritFormula());
+
+            if (critChance == null ||
+                critChance.Length <= 0 ||
+                critChance.Equals(Constants.zeroRating) ||
+                critChance.Equals(Constants.zeroBonus))
+            {
+                return "";
+            }
+
+            return "+" + critChance;
+        }
+    }
+
+    public virtual float devastatingCriticalPercentage => 0f;
+
+    #region Volley
+
+    public virtual int volleyAccuracy => Constants.perfectVolleyAccuracy;
+    public virtual int bonusVolleyAccuracy => Constants.sizeZero;
+    public abstract EffectAnimationType volleyAnimationType { get; }
+
+    #endregion
+
+    #endregion
+
+    #region Traits
+
+    public virtual ZoneOfInfluenceTrait zoneOfInfluenceTrait => null;
+
+    #endregion
+
+    #region Equipment
+
+    public virtual EquippedItems equippedItems => null;
+    public virtual int weaponSlots => 0;
+
+    #endregion
+
+    #region Miscellaneous
+
+    public virtual string genderMarker => "";
+    public virtual List<StatBoostSource> allStatBoosts => StatBoostSource.getAllStatBoosts(traitContainer);
+
+    private Sprite headSprite => EnemyTypeFolderPathList.getHeadSprite(uniqueName);
+
+    #endregion
+
+    #endregion
+
     #region Constructors
 
     public Stats(string name)
@@ -148,9 +320,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     #region Combatant
 
     //the GameObject side lives on the Combatant, which sets these when it's spawned and listens to the events below.
-    //combatant is the one carrying the health bar; combatants holds one per GameObject, so several for a MultiAnimationEnemyStats
-    [NonSerialized]
-    public Combatant combatant;
+    //one per GameObject, so several for a MultiAnimationEnemyStats; the primary one carries the health bar (see getCombatant)
     [NonSerialized]
     public List<Combatant> combatants = new List<Combatant>();
 
@@ -165,7 +335,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     //clones share no GameObject with the Stats they came from, so the Combatant never hears from them
     private void detachCombatant()
     {
-        combatant = null;
         combatants = new List<Combatant>();
 
         OnPositionsChanged = null;
@@ -174,11 +343,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         OnRevive = null;
         OnTraitAdded = null;
         OnTraitRemoved = null;
-    }
-
-    public virtual Color getOutlineColor()
-    {
-        return ColorList.canBeInteractedWith;
     }
 
     public virtual void setToDeadSprite()
@@ -245,10 +409,10 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     {
         foreach (GridCoords coords in positions)
         {
-            if (CombatGrid.combatantExistsAtCoords(coords, out Stats combatant)
-                && combatant.Equals(this))
+            if (CombatGrid.tryGetCombatantAt(coords, out Combatant combatant)
+                && combatant.stats.Equals(this))
             {
-                CombatGrid.setCombatantAtCoords(coords, null);
+                CombatGrid.removeCombatantAtCoords(coords);
             }
         }
     }
@@ -269,38 +433,13 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public virtual void playAnimationSFX(CharacterAnimationType animationType)
     {
-        if(animationAudioClipDictionary == null || 
+        if(animationAudioClipDictionary == null ||
             !animationAudioClipDictionary.ContainsKey(animationType))
         {
             return;
         }
-        
+
         AudioManager.playAudioClipAsSingleton(AudioClipList.getAudioClip(animationAudioClipDictionary[animationType]));
-    }
-
-    #endregion
-
-    #region Tutorial
-
-    public string getTutorialTargetHash()
-    {
-        if(uniqueName.Equals(PartyManager.getPlayerStats().uniqueName))
-        {
-            return TutorialSequenceList.playerCombatSpriteTargetHash;
-        }
-
-        if(isMandatoryTarget)
-        {
-            return TutorialSequenceList.mandatoryTargetMonsterTargetHash;
-        }
-
-        switch(uniqueName)
-        {
-            case MonsterNameList.armoredBat:
-                return TutorialSequenceList.traitMonsterTargetHash;
-            default:
-                return uniqueName;
-        }
     }
 
     #endregion
@@ -317,16 +456,9 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #region Health
 
-    public abstract int getTotalHealth();
-
-    public int getMissingHealth()
-    {
-        return getTotalHealth() - currentHealth;
-    }
-
     public void fullHeal()
     {
-        modifyCurrentHealth(getTotalHealth(), true);
+        modifyCurrentHealth(totalHealth, true);
     }
 
     // public void modifyCurrentHealth(int changeInHealth)
@@ -336,9 +468,9 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public void modifyCurrentHealth(int changeInHealth, bool healing = false, bool playAnimation = true)
     {
-        int totalHealth = getTotalHealth();
+        int maxHealth = totalHealth;
 
-        if (!inPreviewMode && changeInHealth >= totalHealth && !healing && isMaster)
+        if (!inPreviewMode && changeInHealth >= maxHealth && !healing && isMaster)
         {
             PredationProc.Invoke();
         }
@@ -365,9 +497,9 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             else
             { //handle Healing
 
-                if ((changeInHealth + currentHealth) >= totalHealth)
+                if ((changeInHealth + currentHealth) >= maxHealth)
                 {
-                    currentHealth = totalHealth; //healed actor to full, set to total to not go over;
+                    currentHealth = maxHealth; //healed actor to full, set to total to not go over;
                 }
                 else
                 {
@@ -384,7 +516,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             }
 
             updateHealthBar();
-        } 
+        }
 
         OnHealthChange.Invoke();
     }
@@ -395,11 +527,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #region Strength + Secondaries
 
-    public virtual int getStrength()
-    {
-        return 1;
-    }
-
     public virtual bool rollAgainstWoundResistance()
     {
         return failedToResist;
@@ -407,36 +534,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #endregion
 
-    #region Dexterity + Secondaries
-
-    public virtual int getDexterity()
-    {
-        return 1;
-    }
-
-    public virtual int getExtraArmorFromDexterity()
-    {
-        return 0;
-    }
-
-    #endregion
-
     #region Wisdom + Secondaries
-
-    public virtual int getWisdom()
-    {
-        return 1;
-    }
-
-    public virtual int getPassiveSlotsUnlocked()
-    {
-        return 0;
-    }
-
-    public virtual int getArmorPenetration()
-    {
-        return StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusArmorPenetrationFormula());
-    }
 
     public virtual bool rollAgainstMentalResistance()
     {
@@ -445,69 +543,10 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #endregion
 
-    #region Charisma + Secondaries
-
-    public virtual int getCharisma()
-    {
-        return 1;
-    }
-
-    public virtual int getZOIStat()
-    {
-        return getCharisma();
-    }
-
-    public virtual int getSynergyCoefficient()
-    {
-        return 0;
-    }
-
-    public int getSynergyModifier()
-    {
-        int sum = 0;
-        int synergyBonus = getSynergyCoefficient();
-
-        foreach (Trait trait in traitContainer)
-        {
-            if (trait.fromZoneOfInfluence())
-            {
-                sum += synergyBonus;
-            }
-        }
-
-        return sum;
-    }
-
-    public virtual int getBonusExuberances()
-    {
-        return 0;
-    }
-
-    #endregion
-
-    #endregion
-
-    #region Tertiary Stats
-
-    public virtual string getInvulnerability()
-    {
-        return "" + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getInvulnerableFormula());
-    }
-
-    public virtual string getVulnerability()
-    {
-        return "" + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getVulnerableFormula());
-    }
-
-    public virtual string getHealingBoost()
-    {
-        return "" + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getHealingBoostFormula());
-    }
-
     #endregion
 
     #region Combat and Action Arrays
-    
+
     public void moveTo(List<GridCoords> newCoords, bool moveSprite = true)
     {
         List<GridCoords> oldCoords = positions.Select(p => p.clone()).ToList();
@@ -522,35 +561,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         {
             OnPositionsChanged?.Invoke();
         }
-    }
-
-    public abstract int getTotalArmorRating();
-    public virtual int getTotalArmorShred()
-    {
-        return StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getArmorShredFormula());
-    }
-
-    public string getTotalArmorRatingForDisplay()
-    {
-        int armorAfterShred = getTotalArmorRating() - getTotalArmorShred();
-
-        if(armorAfterShred < 0)
-        {
-            return Constants.zeroRating + "%";
-        } else
-        {
-            return armorAfterShred.ToString() + "%";
-        }
-    }
-
-    public virtual double getCritDamageMultiplier()
-    {
-        return 1.5;
-    }
-
-    public virtual float getSurpriseDamageMultiplier()
-    {
-        return 1f;
     }
 
     public bool canPayActionCost(CombatAction action)
@@ -609,13 +619,13 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     public int modifyIncomingDamage(int baseDamage, int armorPen)
     {
         // int modifiedDamage = baseDamage;
-        int modifiedDamage = (int)(((double)baseDamage) * (1.0 - Armor.getDamageReduction(getTotalArmorRating() - (getTotalArmorShred() + armorPen))));
+        int modifiedDamage = (int)(((double)baseDamage) * (1.0 - Armor.getDamageReduction(totalArmorRating - (totalArmorShred + armorPen))));
 
-        int vulnInvulnMod = int.Parse(getVulnerability()) - int.Parse(getInvulnerability());
+        int vulnInvulnMod = int.Parse(vulnerability) - int.Parse(invulnerability);
 
         modifiedDamage += vulnInvulnMod;
 
-        modifiedDamage -= getSynergyModifier();
+        modifiedDamage -= synergyModifier;
 
         if (modifiedDamage < 1)
         {
@@ -627,14 +637,14 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     public int modifyIncomingHealing(int baseDamage)
     {
-        string healingBoost = getHealingBoost();
+        string boost = healingBoost;
 
-        if(healingBoost.Length <= 0)
+        if(boost.Length <= 0)
         {
             return baseDamage;
         }
 
-        return baseDamage + int.Parse(healingBoost);
+        return baseDamage + int.Parse(boost);
     }
 
     public void payActionCost(CombatAction action)
@@ -685,11 +695,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         }
     }
 
-    public virtual CombatActionArray getActionArray()
-    {
-        return new CombatActionArray(null);
-    }
-
     public bool mandatoryTargetForTargetingType(Trait targetTrait)
     {
         if(targetTrait == null)
@@ -710,26 +715,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         }
     }
 
-    public virtual int getBonusAbilityDamage()
-    {
-        return 0;
-    }
-
-    public virtual string getBonusCritChance()
-    {
-        string bonusCritChance = "" + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getCritFormula());
-
-        if (bonusCritChance == null || 
-            bonusCritChance.Length <= 0 || 
-            bonusCritChance.Equals(Constants.zeroRating) || 
-            bonusCritChance.Equals(Constants.zeroBonus))
-        {
-            return "";
-        }
-
-        return "+" + bonusCritChance;
-    }
-
     public virtual void evolve()
     {
         //left intentionally blank
@@ -740,25 +725,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         //left intentionally blank
     }
 
-    public virtual float getDevastatingCriticalPercentage()
-    {
-        return 0f;
-    }
-
-    #region Volley
-    public virtual int getVolleyAccuracy()
-    {
-        return Constants.perfectVolleyAccuracy;
-    }
-
-    public virtual int getBonusVolleyAccuracy()
-    {
-        return Constants.sizeZero;
-    }
-
-
-    public abstract EffectAnimationType getVolleyAnimationType();
-    #endregion
     #endregion
 
     #region Traits
@@ -779,7 +745,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         if(!newTrait.isHiddenTrait())
         {
             dealTraitApplicationDamage(newTrait);
-        }        
+        }
 
         traitContainer.addTrait(newTrait);
 
@@ -912,47 +878,18 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
     #region Zone of Influence
 
-    public virtual ZoneOfInfluenceTrait getZoneOfInfluenceTrait()
-    {
-        return null;
-    }
-
     public void removeAllZoneOfInfluenceTraits()
     {
         traitContainer.removeAllTraitsOfType(TraitType.Influence);
     }
-    
-    #endregion
 
     #endregion
-
-    #region Equipment
-
-    public virtual EquippedItems getEquippedItems()
-    {
-        return null;
-    }
-
-    public virtual int getWeaponSlots()
-    {
-        return 0;
-    }
 
     #endregion
 
     #region Miscellaneous
 
     public abstract List<GridCoords> findLocationToSpawn();
-
-    public virtual string getGenderMarker()
-    {
-        return "";
-    }
-
-    public virtual List<StatBoostSource> getAllStatBoosts()
-    {
-        return StatBoostSource.getAllStatBoosts(traitContainer);
-    }
 
     public override bool Equals(object obj)
     {
@@ -963,7 +900,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
             return false;
         }
 
-        if(CombatStateManager.inCombat  && 
+        if(CombatStateManager.inCombat  &&
             !(stats.positions.Count <= 0 && positions.Count <= 0))
         {
 
@@ -996,11 +933,6 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         return formation.isInParty(this);
     }
 
-    private Sprite getHeadSprite()
-    {
-        return EnemyTypeFolderPathList.getHeadSprite(uniqueName);
-    }
-
     public void setHeadSprite(DescriptionPanel panel)
     {
         Costume costume = appearance as Costume;
@@ -1015,7 +947,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     {
         if(image != null)
         {
-            image.sprite = getHeadSprite();
+            image.sprite = headSprite;
         }
     }
 
@@ -1023,7 +955,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
     {
         if(spriteRenderer != null)
         {
-            spriteRenderer.sprite = getHeadSprite();
+            spriteRenderer.sprite = headSprite;
         }
     }
 
@@ -1050,6 +982,7 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         return clone;
     }
 
+    //a method rather than a property, since it builds a new clone each time
     public Stats getPreviewClone()
     {
         Stats previewClone = clone();
@@ -1102,8 +1035,8 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
         panel.setObjectBeingDescribed(this);
 
         DescriptionPanel.setText(panel.nameText, displayName);
-        DescriptionPanel.setText(panel.hpText, currentHealth + " / " + getTotalHealth());
-        DescriptionPanel.setText(panel.armorRatingText, getTotalArmorRatingForDisplay());
+        DescriptionPanel.setText(panel.hpText, currentHealth + " / " + totalHealth);
+        DescriptionPanel.setText(panel.armorRatingText, totalArmorRatingForDisplay);
     }
 
     public virtual void describeSelfRow(DescriptionPanel panel)
@@ -1142,21 +1075,21 @@ public abstract class Stats : ICloneable, IDescribable, IDescribableInBlocks, IA
 
         buildingBlocks.Add(DescriptionPanelBuildingBlock.getNameBlock(displayName));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth, getTotalHealth()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getHealthBlock(currentHealth, totalHealth));
 
-        int totalArmorShred = getTotalArmorShred();
+        int armorShred = totalArmorShred;
 
-        if(totalArmorShred > 0)
+        if(armorShred > 0)
         {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay(), getTotalArmorRating() + " - " + totalArmorShred));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(totalArmorRatingForDisplay, totalArmorRating + " - " + armorShred));
         } else
         {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(getTotalArmorRatingForDisplay()));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorBlock(totalArmorRatingForDisplay));
         }
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(getInvulnerability()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getInvulnerableBlock(invulnerability));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getVulnerableBlock(getVulnerability()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getVulnerableBlock(vulnerability));
 
         return buildingBlocks;
     }

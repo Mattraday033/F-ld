@@ -23,7 +23,7 @@ public struct NewAbilityWrapper
 
         foreach(Ability ability in newAbilityList)
         {
-            newAbilityKeysList.Add(ability.getKey());
+            newAbilityKeysList.Add(ability.key);
         }
 
         newAbilityKeys = newAbilityKeysList.ToArray();

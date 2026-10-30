@@ -40,12 +40,13 @@ public class AllyStats : Stats
 
     #region Global Variables
 
-    public int strength { private get; set; }
-    public int dexterity { private get; set; }
-    public int wisdom { private get; set; }
-    public int charisma { private get; set; }
+    //unboosted; totalStrength and the others add every boost on top
+    public int strength { get; set; }
+    public int dexterity { get; set; }
+    public int wisdom { get; set; }
+    public int charisma { get; set; }
 
-    private int level;
+    public int level { get; private set; }
     public int xp;
 
     public override IAppearance appearance
@@ -57,7 +58,8 @@ public class AllyStats : Stats
     }
 
     public CombatActionArray combatActionArray;
-    public EquippedItems equippedItems;
+
+    private EquippedItems _EquippedItems;
 
     public override bool usePlayerTargeting => true;
 
@@ -72,16 +74,478 @@ public class AllyStats : Stats
 
     #endregion
 
+    #region Properties
+
+    #region Animation Manager
+
+    public Sprite spriteIcon => SpriteUtil.loadFirstSpriteOfSheetFromResources(EnemyTypeFolderPathList.getEnemyTypeFolderPath(uniqueName) + CharacterAnimationType.Idle_Front.ToString());
+
+    #endregion
+
+    #region Level/XP
+
+    public virtual int levelMaximum => playerLevelMaximum;
+
+    #endregion
+
+    #region Health
+
+    public virtual int baseHealth => playerBaseHealth;
+    public virtual int healthPerLevelAboveOne => playerHealthPerLevelAboveOne;
+
+    public override int totalHealth => playerBaseHealth + (playerHealthPerLevelAboveOne * (level - 1)) + bonusHealthFromAllSources;
+
+    private int bonusHealthFromAllSources
+    {
+        get
+        {
+            int healthFromStrength = Strength.getHealthFromStrength(strength);
+
+            int bonusFormulas = StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusHealthFormula());
+
+            return healthFromStrength + bonusFormulas;
+        }
+    }
+
+    #endregion
+
+    #region Primary Stats
+
+    public int[] statsAsArray => new int[] { strength, dexterity, wisdom, charisma };
+
+    public PrimaryStat highestStat
+    {
+        get
+        {
+            int[] primaryStats = statsAsArray;
+
+            int highestStatValue = 0;
+            int highestStatIndex = 0;
+            int currentIndex = 0;
+
+            foreach (int stat in primaryStats)
+            {
+                if (stat > highestStatValue)
+                {
+                    highestStatValue = stat;
+                    highestStatIndex = currentIndex;
+                }
+
+                currentIndex++;
+            }
+
+            return (PrimaryStat)highestStatIndex;
+        }
+    }
+
+    public List<PrimaryStat> highestPrimaryStats
+    {
+        get
+        {
+            int[] allPrimaryStats = new int[] { strength, dexterity, wisdom, charisma };
+            List<PrimaryStat> highestStats = new List<PrimaryStat>();
+
+            int highestStatLvl = allPrimaryStats.Max(x => x);
+
+            if (strength >= highestStatLvl)
+            {
+                highestStats.Add(PrimaryStat.Strength);
+            }
+
+            if (dexterity >= highestStatLvl)
+            {
+                highestStats.Add(PrimaryStat.Dexterity);
+            }
+
+            if (wisdom >= highestStatLvl)
+            {
+                highestStats.Add(PrimaryStat.Wisdom);
+            }
+
+            if (charisma >= highestStatLvl)
+            {
+                highestStats.Add(PrimaryStat.Charisma);
+            }
+
+            if (highestStatLvl <= 1 || highestStats.Count >= 4)
+            {
+                return new List<PrimaryStat>() { PrimaryStat.Strength };
+            }
+
+            return highestStats;
+        }
+    }
+
+    #region Strength + Secondaries
+
+    public override int totalStrength => strength + StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusStrengthFormula());
+
+    public override double critDamageMultiplier
+    {
+        get
+        {
+            double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(allStatBoosts, b => b.getBonusCriticalDamageMultiplierFormula());
+
+            return (DamageCalculator.baseCriticalDamage + (Strength.critDamMultPerStrengthDouble * ((double)totalStrength))) + bonusFormulas;
+        }
+    }
+
+    public string extraCritDamageForDisplay
+    {
+        get
+        {
+            int bonusFormulas = StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusCriticalDamageMultiplierFormula());
+
+            return (totalStrength * Strength.critDamMultPerStrength) + bonusFormulas + (DamageCalculator.baseCriticalDamage * 100) + "%";
+        }
+    }
+
+    public double woundResistance
+    {
+        get
+        {
+            double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(allStatBoosts, b => b.getBonusWoundResistanceFormula());
+
+            return Strength.woundResistBaseDouble + (((double)totalStrength) * Strength.woundResistPerStrengthDouble) + bonusFormulas;
+        }
+    }
+
+    public string woundResistanceForDisplay
+    {
+        get
+        {
+            int bonusFormulas = StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusWoundResistanceFormula());
+
+            return Strength.woundResistBase + (totalStrength * Strength.woundResistPerStrength) + bonusFormulas + "%";
+        }
+    }
+
+    #endregion
+
+    #region Dexterity + Secondaries
+
+    public override int totalDexterity => dexterity + StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusDexterityFormula());
+
+    public override int extraArmorFromDexterity => totalDexterity * Dexterity.extraArmorMultiplier;
+
+    public override int armorPenetration
+    {
+        get
+        {
+            int baseArmorPen = base.armorPenetration;
+
+            switch (totalDexterity)
+            {
+                case 2:
+                case 3:
+                    baseArmorPen += 5;
+                    break;
+                case 4:
+                case 5:
+                    baseArmorPen += 10;
+                    break;
+                case 6:
+                case 7:
+                    baseArmorPen += 15;
+                    break;
+                case 8:
+                case 9:
+                    baseArmorPen += 20;
+                    break;
+                case >= 10:
+                    baseArmorPen += 25;
+                    break;
+            }
+
+            return baseArmorPen;
+        }
+    }
+
+    public string armorPenetrationForDisplay => armorPenetration + "%";
+
+    public override float surpriseDamageMultiplier
+    {
+        get
+        {
+            float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(allStatBoosts, b => b.getBonusSurpriseRoundDamageFormula());
+
+            return Dexterity.surpriseDamMultBase + (((float)totalDexterity) * Dexterity.surpriseDamMultCoefficient) + bonusFormulas;
+        }
+    }
+
+    public string surpriseDamageMultiplierForDisplay
+    {
+        get
+        {
+            float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(allStatBoosts, b => b.getBonusSurpriseRoundDamageFormula());
+
+            return (((float)totalDexterity) * Dexterity.surpriseDamMultCoefficient + bonusFormulas) * 100f + "%";
+        }
+    }
+
+    #endregion
+
+    #region Wisdom + Secondaries
+
+    public override int totalWisdom => wisdom + StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusWisdomFormula());
+
+    public double mentalResistance
+    {
+        get
+        {
+            double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(allStatBoosts, b => b.getBonusMentalResistanceFormula());
+
+            return Wisdom.mentalResistBaseDouble + (((double)totalWisdom) * Wisdom.mentalResistPerWisdomDouble) + (bonusFormulas / 100.0);
+        }
+    }
+
+    public string mentalResistanceForDisplay
+    {
+        get
+        {
+            int bonusFormulas = StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusMentalResistanceFormula());
+
+            return (Wisdom.mentalResistBase + (totalWisdom * Wisdom.mentalResistPerWisdom) + bonusFormulas) + "%";
+        }
+    }
+
+    public override int weaponSlots
+    {
+        get
+        {
+            int weaponSlotsFromWisdom = 1;
+
+            if (totalWisdom >= 3 && totalWisdom < 7)
+            {
+                weaponSlotsFromWisdom = 2;
+            }
+            else if (totalWisdom >= 7)
+            {
+                weaponSlotsFromWisdom = Wisdom.maxNumberOfWeaponSlots;
+            }
+
+            int bonusFormula = StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusWeaponSlotsFormula());
+
+            if ((weaponSlotsFromWisdom + bonusFormula) > Wisdom.maxNumberOfWeaponSlots)
+            {
+                return Wisdom.maxNumberOfWeaponSlots;
+            }
+            else
+            {
+                return weaponSlotsFromWisdom + bonusFormula;
+            }
+        }
+    }
+
+    public override int passiveSlotsUnlocked
+    {
+        get
+        {
+            int passivesUnlockedFromWisdom = 1;
+
+            switch (wisdom)
+            {
+                case >= Wisdom.thirdPassiveSlotUnlockLevel:
+                    passivesUnlockedFromWisdom = Wisdom.maximumPassiveSlots;
+                    break;
+                case >= Wisdom.secondPassiveSlotUnlockLevel:
+                    passivesUnlockedFromWisdom = 3;
+                    break;
+                case >= Wisdom.firstPassiveSlotUnlockLevel:
+                    passivesUnlockedFromWisdom = 2;
+                    break;
+            }
+
+            int bonusFormula = StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusPassiveSlotsFormula());
+
+            if (passivesUnlockedFromWisdom + bonusFormula > Wisdom.maximumPassiveSlots)
+            {
+                return Wisdom.maximumPassiveSlots;
+            }
+            else
+            {
+                return passivesUnlockedFromWisdom + bonusFormula;
+            }
+        }
+    }
+
+    public int maximumRepositionsPerCombat
+    {
+        get
+        {
+            if (wisdom < Wisdom.oneRepositionLevel)
+            {
+                return 0;
+            }
+            else if (wisdom < Wisdom.twoRepositionLevel)
+            {
+                return 1;
+            }
+            else if (wisdom < Wisdom.threeRepositionLevel)
+            {
+                return 2;
+            }
+            else if (wisdom < Wisdom.fourRepositionLevel)
+            {
+                return 3;
+            }
+            else if (wisdom < Wisdom.fiveRepositionLevel)
+            {
+                return 4;
+            }
+            else
+            {
+                return 5;
+            }
+        }
+    }
+
+    #endregion
+
+    #region Charisma + Secondaries
+
+    public override int totalCharisma => charisma + StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusCharismaFormula());
+
+    public override int zoiStat
+    {
+        get
+        {
+            switch(uniqueName)
+            {
+                case NPCNameList.thatch:
+
+                    if(totalStrength > totalCharisma)
+                    {
+                        return totalStrength;
+                    } else
+                    {
+                        return totalCharisma;
+                    }
+                default:
+                    return totalCharisma;
+            }
+        }
+    }
+
+    public override int bonusExuberances => charisma/3;
+
+    public override int synergyCoefficient => (totalCharisma * Charisma.playerSynergyModifierCoefficient) + StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusSynergyFormula());
+
+    public string synergyCoefficientForDisplay => synergyCoefficient + "";
+
+    #endregion
+
+    #endregion
+
+    #region Combat and Action Array
+
+    public override int bonusAbilityDamage => combatActionArray.calculateBonusAbilityDamage();
+
+    public override CombatActionArray actionArray => combatActionArray;
+
+    public override EffectAnimationType volleyAnimationType => EffectAnimationType.Pierce;
+
+    #endregion
+
+    #region Traits
+
+    public override ZoneOfInfluenceTrait zoneOfInfluenceTrait => new ZoneOfInfluenceTrait(this);
+
+    #endregion
+
+    #region Equipment
+
+    public override EquippedItems equippedItems => _EquippedItems;
+
+    // public override string getBonusCritChanceFromArmor()
+    // {
+    //     return "" + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getCritFormula());
+    // }
+
+    public override int totalArmorRating
+    {
+        get
+        {
+            int armorRating = 0;
+
+            foreach (EquippableItem item in equippedItems)
+            {
+                if (item == null)
+                {
+                    continue;
+                }
+
+                armorRating += item.getArmorRating();
+            }
+
+            armorRating += extraArmorFromDexterity;
+
+            return armorRating;
+        }
+    }
+
+    #endregion
+
+    #region Miscellaneous
+
+    public override List<StatBoostSource> allStatBoosts
+    {
+        get
+        {
+            List<StatBoostSource> boosts = base.allStatBoosts;
+
+            boosts.AddRange(StatBoostSource.getAllStatBoosts(equippedItems));
+
+            return boosts;
+        }
+    }
+
+    public override float devastatingCriticalPercentage
+    {
+        get
+        {
+            if (!hasTrait(TraitList.devastatingCriticals))
+            {
+                return 0f;
+            }
+
+            float percentage = (float)dexterity / 100f;
+
+            if (CombatStateManager.isPlayerSurpriseRound())
+            {
+                return percentage;
+            }
+            else
+            {
+                return percentage * 2f;
+            }
+        }
+    }
+
+    public override int volleyAccuracy => PartyStats.getVolleyAccuracy();
+
+    public override int bonusVolleyAccuracy => StatBoostSource.calculateAllStatFormulas(allStatBoosts, b => b.getBonusVolleyAccuracyFormula());
+
+    #endregion
+
+    #region IDescribable
+
+    public string nameWithoutPlayerMarker => displayName;
+
+    #endregion
+
+    #endregion
+
     #region Constructors
 
     public AllyStats() : base("")
     {
-        combatActionArray = new CombatActionArray(this); 
-        equippedItems = new EquippedItems(this);
+        combatActionArray = new CombatActionArray(this);
+        _EquippedItems = new EquippedItems(this);
         this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(uniqueName);
     }
 
-    public AllyStats(string name, int Str, int Dex, int Wis, int Cha) : base(name) 
+    public AllyStats(string name, int Str, int Dex, int Wis, int Cha) : base(name)
     {
         this.characterName = name;
 
@@ -93,10 +557,10 @@ public class AllyStats : Stats
         this.level = 1;
         this.xp = 0;
 
-        combatActionArray = new CombatActionArray(this); 
-        equippedItems = new EquippedItems(this);
+        combatActionArray = new CombatActionArray(this);
+        _EquippedItems = new EquippedItems(this);
 
-        this.currentHealth = getTotalHealth();
+        this.currentHealth = totalHealth;
         this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(uniqueName);
     }
 
@@ -114,7 +578,7 @@ public class AllyStats : Stats
         this.currentHealth = wrapper.currentHealth;
 
         combatActionArray = new CombatActionArray(this, SaveBlueprint.extractCombatActionsFromJson(this, wrapper.combatActions));
-        equippedItems = new EquippedItems(this, SaveBlueprint.extractEquippedItemsFromJson(wrapper.currentEquipment));
+        _EquippedItems = new EquippedItems(this, SaveBlueprint.extractEquippedItemsFromJson(wrapper.currentEquipment));
         this.animationAudioClipDictionary = PartyMemberList.getAudioDictionary(uniqueName);
     }
 
@@ -125,15 +589,6 @@ public class AllyStats : Stats
     public override void spawningActions()
     {
         Dexterity.addExitStrategy(this);
-    }
-
-    #endregion
-
-    #region Animation Manager
-    
-    public Sprite getSpriteIcon()
-    {
-        return SpriteUtil.loadFirstSpriteOfSheetFromResources(EnemyTypeFolderPathList.getEnemyTypeFolderPath(uniqueName) + CharacterAnimationType.Idle_Front.ToString());
     }
 
     #endregion
@@ -169,11 +624,6 @@ public class AllyStats : Stats
         return xp >= xpNeededToLevelUp;
     }
 
-    public int getLevel()
-    {
-        return level;
-    }
-
     public void setLevel(int newLevel)
     {
         this.level = newLevel;
@@ -189,38 +639,9 @@ public class AllyStats : Stats
         }
     }
 
-    public virtual int getLevelMaximum()
-    {
-        return playerLevelMaximum;
-    }
-
     #endregion
 
     #region Health
-
-    public virtual int getBaseHealth()
-    {
-        return playerBaseHealth;
-    }
-
-    public virtual int getHealthPerLevelAboveOne()
-    {
-        return playerHealthPerLevelAboveOne;
-    }
-
-    public override int getTotalHealth()
-    {
-        return playerBaseHealth + (playerHealthPerLevelAboveOne * (level - 1)) + getBonusHealthFromAllSources();
-    }
-
-    private int getBonusHealthFromAllSources()
-    {
-        int healthFromStrength = Strength.getHealthFromStrength(strength);
-
-        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusHealthFormula());
-
-        return healthFromStrength + bonusFormulas;
-    }
 
     public static int calculateTotalHealth(int potentialLevel, int potentialStrength, List<StatBoostSource> statBoostSources)
     {
@@ -231,41 +652,12 @@ public class AllyStats : Stats
 
         int bonusFormulas = StatBoostSource.calculateAllStatFormulas(statBoostSources, b => b.getBonusHealthFormula());
 
-        return dummyPlayer.getTotalHealth() + bonusFormulas;
+        return dummyPlayer.totalHealth + bonusFormulas;
     }
 
     #endregion
 
     #region Primary Stats
-
-    // public int getAllStatBoosts
-
-    public int[] getStatsAsArray()
-    {
-        return new int[] { strength, dexterity, wisdom, charisma };
-    }
-
-    public PrimaryStat getHighestStat()
-    {
-        int[] primaryStats = getStatsAsArray();
-
-        int highestStat = 0;
-        int highestStatIndex = 0;
-        int currentIndex = 0;
-
-        foreach (int stat in primaryStats)
-        {
-            if (stat > highestStat)
-            {
-                highestStat = stat;
-                highestStatIndex = currentIndex;
-            }
-
-            currentIndex++;
-        }
-
-        return (PrimaryStat)highestStatIndex;
-    }
 
     public static PrimaryStat convertStringToPrimaryStat(string statName)
     {
@@ -309,52 +701,7 @@ public class AllyStats : Stats
         }
     }
 
-    public List<PrimaryStat> getHighestPrimaryStats()
-    {
-        int[] allPrimaryStats = new int[] { strength, dexterity, wisdom, charisma };
-        List<PrimaryStat> highestStats = new List<PrimaryStat>();
-
-        int highestStatLvl = allPrimaryStats.Max(x => x);
-
-        if (strength >= highestStatLvl)
-        {
-            highestStats.Add(PrimaryStat.Strength);
-        }
-
-        if (dexterity >= highestStatLvl)
-        {
-            highestStats.Add(PrimaryStat.Dexterity);
-        }
-
-        if (wisdom >= highestStatLvl)
-        {
-            highestStats.Add(PrimaryStat.Wisdom);
-        }
-
-        if (charisma >= highestStatLvl)
-        {
-            highestStats.Add(PrimaryStat.Charisma);
-        }
-
-        if (highestStatLvl <= 1 || highestStats.Count >= 4)
-        {
-            return new List<PrimaryStat>() { PrimaryStat.Strength };
-        }
-
-        return highestStats;
-    }
-
     #region Strength + Secondaries
-
-    public int getStrengthWithoutBoosts()
-    {
-        return strength;
-    }
-
-    public override int getStrength()
-    {
-        return strength + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusStrengthFormula());
-    }
 
     public void incrementStrength(bool displayOnly = false)
     {
@@ -366,61 +713,21 @@ public class AllyStats : Stats
         }
     }
 
-
-
-    public override double getCritDamageMultiplier()
-    {
-        double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(getAllStatBoosts(), b => b.getBonusCriticalDamageMultiplierFormula());
-
-        return (DamageCalculator.baseCriticalDamage + (Strength.critDamMultPerStrengthDouble * ((double)getStrength()))) + bonusFormulas;
-    }
-
-    public string getExtraCritDamageForDisplay()
-    {
-        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusCriticalDamageMultiplierFormula());
-
-        return (getStrength() * Strength.critDamMultPerStrength) + bonusFormulas + (DamageCalculator.baseCriticalDamage * 100) + "%";
-    }
-
-    public double getWoundResistance()
-    {
-        double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(getAllStatBoosts(), b => b.getBonusWoundResistanceFormula());
-
-        return Strength.woundResistBaseDouble + (((double)getStrength()) * Strength.woundResistPerStrengthDouble) + bonusFormulas;
-    }
-
-    public string getWoundResistanceForDisplay()
-    {
-        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusWoundResistanceFormula());
-
-        return Strength.woundResistBase + (getStrength() * Strength.woundResistPerStrength) + bonusFormulas + "%";
-    }
-
     public override bool rollAgainstWoundResistance()
     {
-        double woundResistance = getWoundResistance();
+        double resistance = woundResistance;
 
-        if(woundResistance >= Constants.autoSuccess)
+        if(resistance >= Constants.autoSuccess)
         {
             return true;
         }
 
-        return UnityEngine.Random.Range(0f, 1f) <= woundResistance;
+        return UnityEngine.Random.Range(0f, 1f) <= resistance;
     }
 
     #endregion
 
     #region Dexterity + Secondaries
-
-    public int getDexterityWithoutBoosts()
-    {
-        return dexterity;
-    }
-
-    public override int getDexterity()
-    {
-        return dexterity + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusDexterityFormula());
-    }
 
     public void incrementDexterity(bool displayOnly = false)
     {
@@ -432,226 +739,35 @@ public class AllyStats : Stats
         }
     }
 
-    public override int getExtraArmorFromDexterity()
-    {
-        // int bonusFormulas = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusArmorFormula());
-
-        return getDexterity() * Dexterity.extraArmorMultiplier;
-    }
-
-    public override int getArmorPenetration()
-    {
-        int baseArmorPen = base.getArmorPenetration();
-
-		switch (getDexterity())
-		{
-			case 2:
-			case 3:
-                baseArmorPen += 5;
-                break;
-			case 4:
-			case 5:
-                baseArmorPen += 10;
-                break;
-			case 6:
-			case 7:
-                baseArmorPen += 15;
-                break;
-			case 8:
-			case 9:
-                baseArmorPen += 20;
-                break;
-			case >= 10:
-                baseArmorPen += 25;
-                break;
-		}
-
-        return baseArmorPen;
-    }
-
-    public string getArmorPenetrationForDisplay()
-    {
-        return getArmorPenetration() + "%";
-    }
-
-    public override float getSurpriseDamageMultiplier()
-    {
-        float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(getAllStatBoosts(), b => b.getBonusSurpriseRoundDamageFormula());
-
-        return Dexterity.surpriseDamMultBase + (((float)getDexterity()) * Dexterity.surpriseDamMultCoefficient) + bonusFormulas;
-    }
-
-    public string getSurpriseDamageMultiplierForDisplay()
-    {
-        float bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageFloat(getAllStatBoosts(), b => b.getBonusSurpriseRoundDamageFormula());
-
-        return (((float)getDexterity()) * Dexterity.surpriseDamMultCoefficient + bonusFormulas) * 100f + "%";
-    }
-
     #endregion
 
     #region Wisdom + Secondaries
 
-    public int getWisdomWithoutBoosts()
-    {
-        return wisdom;
-    }
-
-    public override int getWisdom()
-    {
-        return wisdom + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusWisdomFormula());
-    }
-
     public void incrementWisdom(bool displayOnly = false)
     {
         wisdom++;
-        
+
         if(!displayOnly)
         {
             setAbilitiesAsNew(PrimaryStat.Wisdom);
         }
     }
 
-    public double getMentalResistance()
-    {
-        double bonusFormulas = StatBoostSource.calculateAllStatFormulasAsPercentageDouble(getAllStatBoosts(), b => b.getBonusMentalResistanceFormula());
-
-        return Wisdom.mentalResistBaseDouble + (((double)getWisdom()) * Wisdom.mentalResistPerWisdomDouble) + (bonusFormulas / 100.0);
-    }
-
-    public string getMentalResistanceForDisplay()
-    {
-        int bonusFormulas = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusMentalResistanceFormula());
-
-        return (Wisdom.mentalResistBase + (getWisdom() * Wisdom.mentalResistPerWisdom) + bonusFormulas) + "%";
-    }
-
     public override bool rollAgainstMentalResistance()
     {
-        double woundResistance = getWoundResistance();
+        double resistance = woundResistance;
 
-        if(woundResistance >= Constants.autoSuccess)
+        if(resistance >= Constants.autoSuccess)
         {
             return true;
         }
 
-        return UnityEngine.Random.Range(0f, 1f) <= woundResistance;
-    }
-
-
-    public override int getWeaponSlots()
-    {
-        int weaponSlotsFromWisdom = 1;
-
-        if (getWisdom() >= 3 && getWisdom() < 7)
-        {
-            weaponSlotsFromWisdom = 2;
-        }
-        else if (getWisdom() >= 7)
-        {
-            weaponSlotsFromWisdom = Wisdom.maxNumberOfWeaponSlots;
-        }
-
-        int bonusFormula = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusWeaponSlotsFormula());
-
-        if ((weaponSlotsFromWisdom + bonusFormula) > Wisdom.maxNumberOfWeaponSlots)
-        {
-            return Wisdom.maxNumberOfWeaponSlots;
-        }
-        else
-        {
-            return weaponSlotsFromWisdom + bonusFormula;
-        }
-    }
-
-    public override int getPassiveSlotsUnlocked()
-    {
-        int passivesUnlockedFromWisdom = 1;
-
-        switch (wisdom)
-        {
-            case >= Wisdom.thirdPassiveSlotUnlockLevel:
-                passivesUnlockedFromWisdom = Wisdom.maximumPassiveSlots;
-                break;
-            case >= Wisdom.secondPassiveSlotUnlockLevel:
-                passivesUnlockedFromWisdom = 3;
-                break;
-            case >= Wisdom.firstPassiveSlotUnlockLevel:
-                passivesUnlockedFromWisdom = 2;
-                break;
-        }
-
-        int bonusFormula = StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusPassiveSlotsFormula());
-
-        if (passivesUnlockedFromWisdom + bonusFormula > Wisdom.maximumPassiveSlots)
-        {
-            return Wisdom.maximumPassiveSlots;
-        }
-        else
-        {
-            return passivesUnlockedFromWisdom + bonusFormula;
-        }
-    }
-
-    public int getMaximumRepositionsPerCombat()
-    {
-        if (wisdom < Wisdom.oneRepositionLevel)
-        {
-            return 0;
-        }
-        else if (wisdom < Wisdom.twoRepositionLevel)
-        {
-            return 1;
-        }
-        else if (wisdom < Wisdom.threeRepositionLevel)
-        {
-            return 2;
-        }
-        else if (wisdom < Wisdom.fourRepositionLevel)
-        {
-            return 3;
-        }
-        else if (wisdom < Wisdom.fiveRepositionLevel)
-        {
-            return 4;
-        }
-        else
-        {
-            return 5;
-        }
+        return UnityEngine.Random.Range(0f, 1f) <= resistance;
     }
 
     #endregion
 
     #region Charisma + Secondaries
-
-    public int getCharismaWithoutBoosts()
-    {
-        return charisma;
-    }
-
-    public override int getCharisma()
-    {
-        return charisma + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusCharismaFormula());
-    }
-
-    public override int getZOIStat()
-    {
-        switch(uniqueName)
-        {
-            case NPCNameList.thatch:
-
-                if(getStrength() > getCharisma())
-                {
-                    return getStrength();
-                } else
-                {
-                    return getCharisma();
-                }
-            default:
-                return getCharisma();
-        }
-    }
 
     public void incrementCharisma(bool displayOnly = false)
     {
@@ -663,46 +779,16 @@ public class AllyStats : Stats
         }
     }
 
-    public override int getBonusExuberances()
-    {
-        return charisma/3;
-    }
-
-    public override int getSynergyCoefficient()
-    {
-        return (getCharisma() * Charisma.playerSynergyModifierCoefficient) + StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusSynergyFormula());
-    }
-
-    public string getSynergyCoefficientForDisplay()
-    {
-        return getSynergyCoefficient() + "";
-    }
-
     #endregion
 
     #endregion
 
     #region Combat and Action Array
 
-    public override int getBonusAbilityDamage()
-    {
-        return combatActionArray.calculateBonusAbilityDamage();
-    }
-
-    public override CombatActionArray getActionArray()
-    {
-        return combatActionArray;
-    }
-
 	public void resetAllCooldowns()
 	{
         combatActionArray.resetAllCooldowns();
 	}
-
-    public override EffectAnimationType getVolleyAnimationType()
-    {
-        return EffectAnimationType.Pierce;
-    }
 
     private void setAbilitiesAsNew(PrimaryStat primaryStat)
     {
@@ -728,7 +814,7 @@ public class AllyStats : Stats
 
                 foreach(CombatAction companionAbility in companionAbilities)
                 {
-                    if(companionAbility.getRequiredStatLevel() == getLevel())
+                    if(companionAbility.getRequiredStatLevel() == level)
                     {
                         newCombatActions.Add(companionAbility);
                     }
@@ -770,53 +856,21 @@ public class AllyStats : Stats
         }
     }
 
-    #region Zone of Influence
-
-    public override ZoneOfInfluenceTrait getZoneOfInfluenceTrait()
-    {
-        return new ZoneOfInfluenceTrait(this);
-    }
-
-    #endregion
-
     #endregion
 
     #region Equipment
-    
-    public override EquippedItems getEquippedItems()
+
+    //equippedItems overrides a get-only property on Stats, so it can't take a setter of its own
+    public void setEquippedItems(EquippedItems newEquippedItems)
     {
-        return equippedItems;
-    }
-
-    // public override string getBonusCritChanceFromArmor()
-    // {
-    //     return "" + StatBoostSource.calculateAllStatFormulas(this, getAllStatBoosts(), b => b.getCritFormula());
-    // }
-
-    public override int getTotalArmorRating()
-    {
-        int totalArmorRating = 0;
-
-        foreach (EquippableItem item in equippedItems)
-        {
-            if (item == null)
-            {
-                continue;
-            }
-
-            totalArmorRating += item.getArmorRating();
-        }
-
-        totalArmorRating += getExtraArmorFromDexterity();
-
-        return totalArmorRating;
+        _EquippedItems = newEquippedItems;
     }
 
     public void checkStatsAfterEquipmentRemoval()
     {
-        if(currentHealth > getTotalHealth())
+        if(currentHealth > totalHealth)
         {
-            currentHealth = getTotalHealth();
+            currentHealth = totalHealth;
         }
     }
 
@@ -829,34 +883,6 @@ public class AllyStats : Stats
         GridCoords coords = Formation.findLocationOfStats(this);
 
         return new List<GridCoords> { new GridCoords(coords.row + CombatGrid.allyRowUpperBounds, coords.col) };
-    }
-
-    public override List<StatBoostSource> getAllStatBoosts()
-    {
-        List<StatBoostSource> boosts = base.getAllStatBoosts();
-
-        boosts.AddRange(StatBoostSource.getAllStatBoosts(equippedItems));
-
-        return boosts;
-    }
-
-    public override float getDevastatingCriticalPercentage()
-    {
-        if (!hasTrait(TraitList.devastatingCriticals))
-        {
-            return 0f;
-        }
-
-        float devastatingCriticalPercentage = (float)dexterity / 100f;
-
-        if (CombatStateManager.isPlayerSurpriseRound())
-        {
-            return devastatingCriticalPercentage;
-        }
-        else
-        {
-            return devastatingCriticalPercentage * 2f;
-        }
     }
 
     public Story addAllStats(Story currentStory)
@@ -889,26 +915,9 @@ public class AllyStats : Stats
         return currentStory;
     }
 
-
-
-    public override int getVolleyAccuracy()
-    {
-        return PartyStats.getVolleyAccuracy();
-    }
-
-    public override int getBonusVolleyAccuracy()
-    {
-        return StatBoostSource.calculateAllStatFormulas(getAllStatBoosts(), b => b.getBonusVolleyAccuracyFormula());
-    }
-
     #endregion
 
     #region IDescribable
-
-    public string getNameWithoutPlayerMarker()
-    {
-        return displayName;
-    }
 
     public override GameObject getRowType(RowType rowType)
     {
@@ -927,7 +936,7 @@ public class AllyStats : Stats
         }
 
         DescriptionPanel.setImageColor(panel.iconBackgroundPanel, ColorList.grey125);
-        DescriptionPanel.setImage(panel.iconPanel, getSpriteIcon());
+        DescriptionPanel.setImage(panel.iconPanel, spriteIcon);
     }
 
     #endregion
@@ -939,7 +948,7 @@ public class AllyStats : Stats
 
         List<DescriptionPanelBuildingBlock> buildingBlocks = new List<DescriptionPanelBuildingBlock>();
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getLevelBlock(getLevel().ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getLevelBlock(level.ToString()));
 
         if (!CombatStateManager.inCombat)
         {
@@ -953,36 +962,36 @@ public class AllyStats : Stats
             buildingBlocks.Add(DescriptionPanelBuildingBlock.getPartyGoldBlock(Purse.getCoinsInPurse().ToString()));
         }
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusDamageBlock(getBonusAbilityDamage().ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusDamageBlock(bonusAbilityDamage.ToString()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getStrengthBlock(getStrength().ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getStrengthBlock(totalStrength.ToString()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusHealthBlock("+" + getBonusHealthFromAllSources().ToString()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(getExtraCritDamageForDisplay().ToString()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getWoundResistBlock(getWoundResistanceForDisplay().ToString()));
-
-
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDexterityBlock(getDexterity().ToString()));
-
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getExtraArmorBlock("+" + getExtraArmorFromDexterity().ToString()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getSurpriseRoundDamageMultiplierBlock(getSurpriseDamageMultiplierForDisplay()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorPenetrationBlock(getArmorPenetrationForDisplay()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusHealthBlock("+" + bonusHealthFromAllSources.ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getCriticalHitDamageBlock(extraCritDamageForDisplay.ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getWoundResistBlock(woundResistanceForDisplay.ToString()));
 
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getWisdomBlock(getWisdom().ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDexterityBlock(totalDexterity.ToString()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getPassiveSlotsBlock(getPassiveSlotsUnlocked().ToString()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusWeaponSlotsBlock(getWeaponSlots().ToString()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getMentalResistBlock(getMentalResistanceForDisplay()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getExtraArmorBlock("+" + extraArmorFromDexterity.ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getSurpriseRoundDamageMultiplierBlock(surpriseDamageMultiplierForDisplay));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getArmorPenetrationBlock(armorPenetrationForDisplay));
 
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getCharismaBlock(getCharisma().ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getWisdomBlock(totalWisdom.ToString()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getSynergyBlock(getSynergyCoefficientForDisplay()));
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusExuberancesBlock(getBonusExuberances().ToString()));
-        if(getZoneOfInfluenceTrait() != null)
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getPassiveSlotsBlock(passiveSlotsUnlocked.ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusWeaponSlotsBlock(weaponSlots.ToString()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getMentalResistBlock(mentalResistanceForDisplay));
+
+
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getCharismaBlock(totalCharisma.ToString()));
+
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getSynergyBlock(synergyCoefficientForDisplay));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getBonusExuberancesBlock(bonusExuberances.ToString()));
+        if(zoneOfInfluenceTrait != null)
         {
-            buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text: getZOIStat().ToString(), iconName: IconList.ZOIIconName, symbolChar: Charisma.symbolChar[0]));
+            buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.SecondaryStat, text: zoiStat.ToString(), iconName: IconList.ZOIIconName, symbolChar: Charisma.symbolChar[0]));
         }
         // buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, getZoneOfInfluenceTrait().getIconName()));
 

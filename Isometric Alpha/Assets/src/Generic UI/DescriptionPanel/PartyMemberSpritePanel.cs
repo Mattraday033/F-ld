@@ -53,14 +53,14 @@ public class PartyMemberSpritePanel : DescriptionPanel, ICounter
             levelUpSymbol.SetActive(false);
         }
 
-        setText(levelText, stats.getLevel());
+        setText(levelText, stats.level);
     }
 
     private void zoiTraitCheck()
     {
         if (additionalSlots.Length >= 2 && additionalSlots[1] != null)
         {
-            additionalSlots[1].setPrimaryDescribable(Stats.convertIDescribableToStats(getObjectBeingDescribed()).getZoneOfInfluenceTrait());
+            additionalSlots[1].setPrimaryDescribable(Stats.convertIDescribableToStats(getObjectBeingDescribed()).zoneOfInfluenceTrait);
         }
     }
 
@@ -77,7 +77,7 @@ public class PartyMemberSpritePanel : DescriptionPanel, ICounter
             ScreenManager.currentPartyMember = partyMember.stats;
         } 
         
-        iconPanel.sprite = partyMember.stats.getSpriteIcon();
+        iconPanel.sprite = partyMember.stats.spriteIcon;
         iconPanel.color = Color.white;
 
         if(ScreenManager.currentPartyMember.Equals(partyMember.stats))
@@ -120,8 +120,8 @@ public class PartyMemberSpritePanel : DescriptionPanel, ICounter
 
         if (zoneOfInfluenceIcon != null)
         {
-            zoneOfInfluenceIcon.setObjectBeingDescribed(partyMember.stats.getZoneOfInfluenceTrait());
-            partyMember.stats.getZoneOfInfluenceTrait().describeSelfFull(zoneOfInfluenceIcon);
+            zoneOfInfluenceIcon.setObjectBeingDescribed(partyMember.stats.zoneOfInfluenceTrait);
+            partyMember.stats.zoneOfInfluenceTrait.describeSelfFull(zoneOfInfluenceIcon);
         }
 
         updateCounter();
@@ -169,10 +169,10 @@ public class PartyMemberSpritePanel : DescriptionPanel, ICounter
     {
         Stats stats = Stats.convertIDescribableToStats(getObjectBeingDescribed());
 
-        healthText.text = stats.currentHealth + "/" + stats.getTotalHealth();
+        healthText.text = stats.currentHealth + "/" + stats.totalHealth;
 
-        healthBar.setTotalHealth(stats.getTotalHealth());
-        healthBar.setMissingHealth(stats.getTotalHealth() - stats.currentHealth);
+        healthBar.setTotalHealth(stats.totalHealth);
+        healthBar.setMissingHealth(stats.totalHealth - stats.currentHealth);
     }
 
     public List<UnityEvent> getUpdateEvents()

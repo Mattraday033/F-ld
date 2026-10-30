@@ -157,7 +157,7 @@ public static class PartyStats
                 continue;
             }
 
-            goldMultiplier += StatBoostSource.calculateAllStatFormulasAsPercentageDouble(ally.getAllStatBoosts(), b => b.getBonusGoldMultiplierFormula());
+            goldMultiplier += StatBoostSource.calculateAllStatFormulasAsPercentageDouble(ally.allStatBoosts, b => b.getBonusGoldMultiplierFormula());
         }
 
         return goldMultiplier;
@@ -175,7 +175,7 @@ public static class PartyStats
     {
         foreach (Stats stats in State.formation)
         {
-            if (stats != null && stats.getCharisma() >= 2)
+            if (stats != null && stats.totalCharisma >= 2)
             {
                 return true;
             }
@@ -236,7 +236,7 @@ public static class PartyStats
 
     public static int getHighestStrength()
     {
-        return State.formation.getHighestStat(t => t.getStrength());
+        return State.formation.getHighestStat(t => t.totalStrength);
     }
 
     public static int getTotalDexterity()
@@ -246,7 +246,7 @@ public static class PartyStats
 
     public static int getHighestDexterity()
     {
-        return State.formation.getHighestStat(t => t.getDexterity());
+        return State.formation.getHighestStat(t => t.totalDexterity);
     }
 
     public static int getTotalWisdom()
@@ -256,7 +256,7 @@ public static class PartyStats
 
     public static int getHighestWisdom()
     {
-        return State.formation.getHighestStat(t => t.getWisdom());
+        return State.formation.getHighestStat(t => t.totalWisdom);
     }
 
     public static int getTotalCharisma()
@@ -266,7 +266,7 @@ public static class PartyStats
 
     public static int getHighestCharisma()
     {
-        return State.formation.getHighestStat(t => t.getCharisma());
+        return State.formation.getHighestStat(t => t.totalCharisma);
     }
 
     public static int getHighestLevel()
@@ -369,7 +369,7 @@ public static class PartyStats
         }
         else
         {
-            int bonusFormulas = StatBoostSource.calculateAllStatFormulas(PartyManager.getPlayerStats().getAllStatBoosts(), b => b.getBonusCunningChargesFormula());
+            int bonusFormulas = StatBoostSource.calculateAllStatFormulas(PartyManager.getPlayerStats().allStatBoosts, b => b.getBonusCunningChargesFormula());
 
             return baseDexCharges + bonusFormulas;
         }
@@ -390,7 +390,7 @@ public static class PartyStats
         }
         else
         {
-            return playerWisdom + StatBoostSource.calculateAllStatFormulas(PartyManager.getPlayerStats().getAllStatBoosts(), b => b.getBonusObservationLevelFormula());
+            return playerWisdom + StatBoostSource.calculateAllStatFormulas(PartyManager.getPlayerStats().allStatBoosts, b => b.getBonusObservationLevelFormula());
         }
     }
 
@@ -453,7 +453,7 @@ public static class PartyStats
     public static int getPartyLevel() //party level is the level the game considers the player to be when determining xp rewards
     {
         AllyStats playerStats = PartyManager.getPlayerStats();
-        int playerLevel = playerStats.getLevel();
+        int playerLevel = playerStats.level;
 
         playerLevel += playerStats.xp / AllyStats.xpNeededToLevelUp;
 

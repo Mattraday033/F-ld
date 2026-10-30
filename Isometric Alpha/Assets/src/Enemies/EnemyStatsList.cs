@@ -39,7 +39,7 @@ public static class EnemyStatsList
         enemyStatsDict.Add(NPCNameList.guardVazul, new EnemyStats(NPCNameList.guardVazul,
                                                                                     Constants.twentyFiveArmor,
                                                                                             50,
-new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.skewerKey) as Ability),
+null /* uses a deprecated combat action, see Assets/src/DepricatedCombatActions: new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.skewerKey) as Ability) */,
                                                                 new Trait[] { TraitList.master,
                                                                           TraitList.territorial,
                                                                           TraitList.frontLine
@@ -118,7 +118,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         enemyStatsDict.Add(NPCNameList.guardMuzsa, new EnemyStats(NPCNameList.guardMuzsa,
                                                                 Constants.twentyFiveArmor,
                                                                                         65,
-new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, AbilityList.bladeBlitzKey) as Ability),
+null /* uses a deprecated combat action, see Assets/src/DepricatedCombatActions: new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, AbilityList.bladeBlitzKey) as Ability) */,
                                                                     new Trait[] { TraitList.master,
                                                                             TraitList.territorial,
                                                                                 TraitList.frontLine
@@ -185,7 +185,7 @@ new BuffChargeUpAbility(TraitList.coordinated, AbilityList.getAbility(null, Abil
         enemyStatsDict.Add(NPCNameList.dezso, new EnemyStats(NPCNameList.dezso+1,
                                                                             Constants.twentyFiveArmor,
                                                                                     95,
-new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.guardAxeKey) as Ability),
+null /* uses a deprecated combat action, see Assets/src/DepricatedCombatActions: new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.guardAxeKey) as Ability) */,
                                                         new Trait[] { 
                                                                       TraitList.master,
                                                                       TraitList.territorial,
@@ -369,7 +369,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         enemyStatsDict.Add(MonsterNameList.signaleer, new EnemyStats(MonsterNameList.signaleer,
                                                                                     Constants.fifteenArmor,
                                                                                             45,
-new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.guardArrowBarrageKey) as Ability),
+null /* uses a deprecated combat action, see Assets/src/DepricatedCombatActions: new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.guardArrowBarrageKey) as Ability) */,
                                                                 new Trait[] { 
                                                                                 TraitList.master,
                                                                                 TraitList.rapidInaccurateBombardment,
@@ -487,7 +487,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         enemyStatsDict.Add(MonsterNameList.screecher, new EnemyStats(MonsterNameList.screecher,
                                                                                       Constants.tenArmor,
                                                                                             38,
-  new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.screechKey) as Ability),
+  null /* uses a deprecated combat action, see Assets/src/DepricatedCombatActions: new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.screechKey) as Ability) */,
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.chaotic
                                                                                 },
@@ -497,7 +497,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         enemyStatsDict.Add(MonsterNameList.armoredBat, new EnemyStats(MonsterNameList.armoredBat,
                                                                                       Constants.fifteenArmor,
                                                                                             45,
-  new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
+  null /* uses a deprecated combat action, see Assets/src/DepricatedCombatActions: new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability) */,
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.territorial
                                                                                 },
@@ -506,7 +506,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         enemyStatsDict.Add(MonsterNameList.armoredBatShielded, new EnemyStats(MonsterNameList.armoredBat,
                                                                                       Constants.fifteenArmor,
                                                                                             45,
-  new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability),
+  null /* uses a deprecated combat action, see Assets/src/DepricatedCombatActions: new ChargeUpAbility(TraitList.shielded, AbilityList.getAbility(null, AbilityList.flurryKey) as Ability) */,
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.territorial,
                                                                                   TraitList.shielded
@@ -527,7 +527,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
         enemyStatsDict.Add(MonsterNameList.caveMatron, new EnemyStats(MonsterNameList.caveMatron,
                                                                                       Constants.zeroArmor,
                                                                                             70,
-    new LastManStandingAbility(TraitList.extraShielded, AbilityList.getAbility(null, AbilityList.rouseColonyKey) as Ability),
+    null /* uses a deprecated combat action, see Assets/src/DepricatedCombatActions: new LastManStandingAbility(TraitList.extraShielded, AbilityList.getAbility(null, AbilityList.rouseColonyKey) as Ability) */,
                                                                     new Trait[] { TraitList.master,
                                                                                   TraitList.emptyGenerated2
                                                                                 },
@@ -565,7 +565,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                                     TraitList.master,
                                                                                     TraitList.rapidInaccurateBombardment
                                                                                 },
-new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.bossWormFumesKey) as Ability),
+null /* uses a deprecated combat action, see Assets/src/DepricatedCombatActions: new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.bossWormFumesKey) as Ability) */,
 animationAudioClipDictionary : AnimationSFXDictionaryList.vomitWormAudioDictionary));
         enemyStatsDict.Add(MonsterNameList.wormNest, new LargeEnemyStats(MonsterNameList.wormNest,
                                                                               Constants.tenArmor,
@@ -667,7 +667,7 @@ animationAudioClipDictionary : AnimationSFXDictionaryList.vomitWormAudioDictiona
         enemyStatsDict.Add(MonsterNameList.toxicWorm, new EnemyStats(MonsterNameList.toxicWorm,
                                                                               Constants.fifteenArmor,
                                                                                                 75,
-new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.wormAcidBarrageKey) as Ability),
+null /* uses a deprecated combat action, see Assets/src/DepricatedCombatActions: new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.wormAcidBarrageKey) as Ability) */,
                                                                     new Trait[] { 
                                                                                     TraitList.master,
                                                                                     TraitList.chaotic,
@@ -710,7 +710,7 @@ new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.
                                                                             TraitList.large,
                                                                             TraitList.chaotic
                                                                         },
-new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.stompKey) as Ability), 
+null /* uses a deprecated combat action, see Assets/src/DepricatedCombatActions: new ChargeUpAbility(TraitList.charged, AbilityList.getAbility(null, AbilityList.stompKey) as Ability) */, 
                 animationAudioClipDictionary: AnimationSFXDictionaryList.horseAudioDictionary));
                                                             
         enemyStatsDict.Add(NPCNameList.csalan, new LargeEnemyStats(NPCNameList.csalan,

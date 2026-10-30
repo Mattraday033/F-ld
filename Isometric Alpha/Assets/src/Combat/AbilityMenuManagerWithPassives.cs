@@ -13,7 +13,7 @@ public class AbilityMenuManagerWithPassives : AbilityMenuManager
 
     public void disableLockedPassiveButtons()
     {
-        int unlockedSlots = getActionArraySource().getPassiveSlotsUnlocked();
+        int unlockedSlots = getActionArraySource().passiveSlotsUnlocked;
 
         for (int index = 0; index < passiveButtons.Length; index++)
         {

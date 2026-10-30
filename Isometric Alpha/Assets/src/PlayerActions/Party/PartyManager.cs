@@ -42,7 +42,7 @@ public static class PartyManager
                                                      float.Parse(placedPosition[1]),
                                                      float.Parse(placedPosition[2]));
 
-            partyMember.stats.equippedItems = new EquippedItems(partyMember.stats, SaveBlueprint.extractEquippedItemsFromJson(partyMemberStatsWrapper.currentEquipment));
+            partyMember.stats.setEquippedItems(new EquippedItems(partyMember.stats, SaveBlueprint.extractEquippedItemsFromJson(partyMemberStatsWrapper.currentEquipment)));
 
             partyMemberDict.Add(partyMemberName, partyMember);
 
@@ -106,7 +106,7 @@ public static class PartyManager
         {
             if (partyMember != null && !(partyMember is null))
 
-                partyMember.stats.modifyCurrentHealth(partyMember.stats.getTotalHealth(), true);
+                partyMember.stats.modifyCurrentHealth(partyMember.stats.totalHealth, true);
         }
     }
 

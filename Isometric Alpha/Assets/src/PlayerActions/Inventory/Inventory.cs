@@ -195,7 +195,7 @@ public static class Inventory
 
         foreach (PartyMember partyMember in partyMembers)
         {
-            foreach (EquippableItem equippableItem in partyMember.stats.getEquippedItems())
+            foreach (EquippableItem equippableItem in partyMember.stats.equippedItems)
             {
                 if (equippableItem != null && equippableItem.getKey().Equals(key))
                 {

@@ -6,19 +6,9 @@ public class SuicideAttack : Attack
 {
 	public override bool killsCaster => true;
 
-	public SuicideAttack(Stats actor, Weapon mainHandWeapon, List<TargetingLogic> targetingLogics = null): base(actor, mainHandWeapon, targetingLogics)
+	public SuicideAttack(Stats actor, Weapon mainHandWeapon, Catalog<IQueuingUnit> queuingUnits = null, List<TargetingLogic> targetingLogics = null): base(actor, mainHandWeapon, queuingUnits, targetingLogics)
 	{
 
 	}
 	
-	public override void performCombatAction(List<Stats> targets)
-	{
-		base.performCombatAction(targets);
-		
-		Stats caster = actorStats;
-		
-		caster.modifyCurrentHealth(caster.getTotalHealth()*2);
-		
-		caster.setToDeadSprite();
-	}
 }

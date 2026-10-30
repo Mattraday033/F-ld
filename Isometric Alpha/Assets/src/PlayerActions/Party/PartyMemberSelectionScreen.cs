@@ -80,7 +80,7 @@ public class PartyMemberSelectionScreen : PopUpWindow
 			partyMemberButtons[buttonIndex].partyMemberSelectionScreen = this;
 			
 			if(itemQuantity <= 0 || 
-				partyMember.stats.currentHealth >= partyMember.stats.getTotalHealth())
+				partyMember.stats.currentHealth >= partyMember.stats.totalHealth)
 			{
 				partyMemberButtons[buttonIndex].setInteractibility(false);
 			}

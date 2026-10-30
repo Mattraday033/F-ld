@@ -344,7 +344,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         if (abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction != null &&
             abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction.needsItemQuantityPanel)
         {
-            Item sourceItem = abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction.getSourceItem();
+            Item sourceItem = abilityButtons[currentlySelectedAbilityIndex].loadedCombatAction.sourceItem;
             itemQuantityPanel.SetActive(true);
             itemQuantityText.text = "x" + Inventory.getItem(sourceItem.getKey()).getQuantity();
         }
@@ -367,7 +367,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
     {
         disableAllAbilityButtons();
 
-        populateAbilityMenuFromCombatActionArray(getActionArraySource().getActionArray().getActions());
+        populateAbilityMenuFromCombatActionArray(getActionArraySource().actionArray.getActions());
     }
 
     public Stats getActionArraySource()
@@ -508,7 +508,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
         {
             if (button.loadedCombatAction != null && button.enabled && !button.loadedCombatAction.usableWithoutItemsInInventory)
             {
-                if (button.loadedCombatAction.getSourceItem().getQuantity() == 0)
+                if (button.loadedCombatAction.sourceItem.getQuantity() == 0)
                 {
                     button.greyOutAbility();
                 }
@@ -630,7 +630,7 @@ public class AbilityMenuManager : MonoBehaviour, IHandlesAbilityWheelSelectionIn
 
     public CombatActionArray getStoredCombatActionArray()
     {
-        return getActionArraySource().getActionArray();
+        return getActionArraySource().actionArray;
     }
 
     public int getMaximumNumberOfCombatActions()

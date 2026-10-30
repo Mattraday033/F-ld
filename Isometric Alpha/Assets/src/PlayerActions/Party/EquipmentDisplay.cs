@@ -75,7 +75,7 @@ public class EquipmentDisplay : MonoBehaviour, ICounter
 
         for (int index = Weapon.mainHandSlotIndex; index < slotIconList.Count; index++)
         {
-            if(index >= Weapon.mainHandSlotIndex + OverallUIManager.getCurrentPartyMember().getWeaponSlots())
+            if(index >= Weapon.mainHandSlotIndex + OverallUIManager.getCurrentPartyMember().weaponSlots)
             {
                 slotIconList[index].gameObject.SetActive(false);
             } else
@@ -92,8 +92,8 @@ public class EquipmentDisplay : MonoBehaviour, ICounter
         for (int index = 0; index < OverallUIManager.getCurrentActionArray().getActions().Length; index++)
         {
             if (OverallUIManager.getCurrentActionArray().getActions()[index] != null &&
-                OverallUIManager.getCurrentActionArray().getActions()[index].getSourceItem() != null &&
-                OverallUIManager.getCurrentActionArray().getActions()[index].getSourceItem().isEquippable())
+                OverallUIManager.getCurrentActionArray().getActions()[index].sourceItem != null &&
+                OverallUIManager.getCurrentActionArray().getActions()[index].sourceItem.isEquippable())
             {
                 output[index] = OverallUIManager.getCurrentActionArray().getActions()[index] as Attack;
             }

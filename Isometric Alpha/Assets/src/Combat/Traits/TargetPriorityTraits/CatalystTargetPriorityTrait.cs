@@ -21,7 +21,9 @@ public class CatalystTargetPriorityTrait : TargetPriorityTrait
 	public override Selector findTargetLocation(Selector selector, List<Stats> listOfTargets)
 	{
 		
-		if(EvolveAbility.inAttackMode())
+		//uses deprecated combat actions (EvolveAbility), see Assets/src/DepricatedCombatActions; this is what its inAttackMode() did
+		// if(EvolveAbility.inAttackMode())
+		if(CombatStateManager.turnNumber % 2 == 1)
 		{
 			return damagingTargetTrait.findTargetLocation(selector, listOfTargets);
 		} else

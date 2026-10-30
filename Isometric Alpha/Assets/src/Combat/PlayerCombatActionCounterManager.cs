@@ -23,13 +23,19 @@ public class PlayerCombatActionCounterManager : MonoBehaviour
 		int panelIndex = 0;
 		foreach (CombatAction action in actionOrder)
 		{
-			if (!CombatGrid.combatantExistsAtCoords(action.actorCoords, out Stats combatant) 
-                || combatant.isDead)
+			//an actor no longer on the grid has nothing to count, so it's treated like a dead one
+			if (!CombatGrid.tryGetCombatantAt(action.actorCoords, out Combatant combatant))
+			{
+				deadActorFound = true;
+				continue;
+			}
+
+			if (combatant.stats.isDead)
 			{
 				deadActorFound = true;
 			}
 
-			if (combatant.costsPartyCombatActions)
+			if (combatant.stats.costsPartyCombatActions)
 			{
 				partyMemberCombatActionPanels[panelIndex].setToGreen();
 				panelIndex++;

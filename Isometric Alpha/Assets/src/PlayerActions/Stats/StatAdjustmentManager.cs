@@ -45,15 +45,15 @@ public class StatAdjustmentManager : MonoBehaviour
 			pointsToSpend = 1;
 			
 		} else {
-			currentStats[str] = PartyManager.getPlayerStats().getStrength();
-			currentStats[dex] = PartyManager.getPlayerStats().getDexterity();
-			currentStats[wis] = PartyManager.getPlayerStats().getWisdom();
-			currentStats[cha] = PartyManager.getPlayerStats().getCharisma();
+			currentStats[str] = PartyManager.getPlayerStats().totalStrength;
+			currentStats[dex] = PartyManager.getPlayerStats().totalDexterity;
+			currentStats[wis] = PartyManager.getPlayerStats().totalWisdom;
+			currentStats[cha] = PartyManager.getPlayerStats().totalCharisma;
 			
-			originalStats[str] = PartyManager.getPlayerStats().getStrength();
-			originalStats[dex] = PartyManager.getPlayerStats().getDexterity();
-			originalStats[wis] = PartyManager.getPlayerStats().getWisdom();
-			originalStats[cha] = PartyManager.getPlayerStats().getCharisma();
+			originalStats[str] = PartyManager.getPlayerStats().totalStrength;
+			originalStats[dex] = PartyManager.getPlayerStats().totalDexterity;
+			originalStats[wis] = PartyManager.getPlayerStats().totalWisdom;
+			originalStats[cha] = PartyManager.getPlayerStats().totalCharisma;
 			
 			pointsToSpend = 1;
 		}

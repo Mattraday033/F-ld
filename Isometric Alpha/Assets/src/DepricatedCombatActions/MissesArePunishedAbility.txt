@@ -1,0 +1,92 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+
+public class MissesArePunishedAbility : Ability
+{
+    private EffectAnimationType missEffectType;
+    private int missDamageMult = 3;
+
+	public override bool healsTarget => hasTargets();
+
+	public MissesArePunishedAbility(CombatActionSettings settings, int missDamageMult = 3, EffectAnimationType missEffectType = EffectAnimationType.Slash, List<TargetingLogic> targetingLogics = null):
+	base(settings, targetingLogics)
+	{
+        this.missDamageMult = missDamageMult;
+        this.missEffectType = missEffectType;
+	}
+
+    public override int findFinalDamage(Stats targetCombatant, bool isCrit)
+    {
+        int finalDamage = base.findFinalDamage(targetCombatant, isCrit);
+
+        if(!hasTargets())
+        {
+            finalDamage *= missDamageMult;
+        } 
+     
+        return finalDamage;
+    }
+
+    private bool hasTargets()
+    {
+        if(selector == null)
+        {
+            return false;
+        }
+
+        List<Stats> targets = selector.getAllTargets();
+
+        foreach (Stats targetCombatant in targets)
+        {
+            if (targetCombatant != null && !targetCombatant.isDead)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public override EffectAnimationType effectAnimationType
+    {
+        get
+        {
+            if(!hasTargets())
+            {
+                return missEffectType;
+            } else
+            {
+                return base.effectAnimationType;
+            }
+        }
+    }
+
+	public override string getRangeTitle()
+	{
+		return determineRangeIndex().ToFriendlyString();
+	}
+
+	public override SelectorTemplate getRangeTemplate()
+	{
+		return determineRangeIndex();
+	}
+
+	private SelectorTemplate determineRangeIndex()
+	{
+		if(CombatStateManager.turnNumber % 4 == 1)
+		{
+			return SelectorTemplate.ReverseHookOne; 	//northwest
+		} else if(CombatStateManager.turnNumber % 4 == 2)
+		{
+			return SelectorTemplate.HookOne; 			//northeast
+		} else if(CombatStateManager.turnNumber % 4 == 3)
+		{
+			return SelectorTemplate.ReverseL_One; 	//southeast
+		} else //CombatStateManager.turnNumber % 4 == 0
+		{
+			return SelectorTemplate.L_One; 				//southwest
+		} 
+	}
+}

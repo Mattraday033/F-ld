@@ -5,19 +5,37 @@ using UnityEngine;
 
 public class ItemCombatAction : CombatAction, IJSONConvertable
 {
-	private UsableItem sourceItem;
+	private UsableItem _SourceItem;
 
-	public override bool targetsAllySection => sourceItem.targetsAllySection();
-	public override bool requiresAnAction => sourceItem.useRequiresAnAction();
-	public override bool healsTarget => sourceItem.getAmountToHeal() > 0;
+	public override bool targetsAllySection => _SourceItem.targetsAllySection();
+	public override bool requiresAnAction => _SourceItem.useRequiresAnAction();
+	public override bool healsTarget => _SourceItem.getAmountToHeal() > 0;
 	public override bool usableWithoutItemsInInventory => false;
 	public override bool needsItemQuantityPanel => true;
 
-	public ItemCombatAction(Stats actor, UsableItem sourceItem, List<TargetingLogic> targetingLogics = null):
-    base(actor, SelectorFactory.buildByTemplate(sourceItem.getRangeTemplate()), targetingLogics)
+	//only ever a UsableItem; code here that needs UsableItem's own methods reads _SourceItem
+	public override Item sourceItem
 	{
-		this.sourceItem = sourceItem.clone() as UsableItem;
-        this.sourceItem.equipTarget = actor;
+		get
+		{
+			return _SourceItem;
+		}
+		set
+		{
+			_SourceItem = (UsableItem)value;
+		}
+	}
+
+	public ItemCombatAction(Stats actor, UsableItem sourceItem, Catalog<IQueuingUnit> queuingUnits = null, List<TargetingLogic> targetingLogics = null):
+    base(actor, SelectorFactory.buildByTemplate(sourceItem.getRangeTemplate()), queuingUnits, targetingLogics)
+	{
+		_SourceItem = sourceItem.clone() as UsableItem;
+        _SourceItem.equipTarget = actor;
+
+		if(_QueuingUnits[typeof(ChargeItemUse)].Count == 0)
+		{
+			_QueuingUnits.Add(new ChargeItemUse());
+		}
 	}
 
 	public override string getDisplayType()
@@ -25,41 +43,27 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		return AbilityList.itemActionTypeName;
 	}
 
-	public override string getKey()
-	{
-		return sourceItem.getKey();
-	}
+	public override string key => _SourceItem.getKey();
 
 	public override SelectorTemplate getRangeTemplate()
 	{
-		return sourceItem.getRangeTemplate();
-	}
-
-	public override Item getSourceItem()
-	{
-		return (Item)sourceItem;
+		return _SourceItem.getRangeTemplate();
 	}
 
 	public override int getQuantity()
 	{
-		return getSourceItem().getQuantity();
+		return sourceItem.getQuantity();
 	}
 
-	public override string getUseDescription()
-	{
-		return sourceItem.getUseDescription();
-	}
+	public override string useDescription => _SourceItem.getUseDescription();
 
-	public override void setSourceItem(Item sourceItem)
-	{
-		this.sourceItem = (UsableItem)sourceItem;
-	}
+	public override string loreDescription => _SourceItem.getLoreDescription();
 
-	public override string iconName => this.sourceItem.getIconName();
+	public override string iconName => _SourceItem.getIconName();
 
 	//item keys are written to be shown to the player
-	public override string displayName { get { return getKey(); } }
-	public override string uniqueName { get { return getKey(); } }
+	public override string displayName { get { return key; } }
+	public override string uniqueName { get { return key; } }
 
 	public override string getDamageTotalForDisplay()
 	{
@@ -73,7 +77,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 	public override string getDamageFormula()
 	{
-		return this.sourceItem.getDamageFormula();
+		return _SourceItem.getDamageFormula();
 	}
 
 	public override string getCritFormula()
@@ -83,7 +87,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 			return Constants.zeroRating;
 		}
 
-		return this.sourceItem.getCritFormula();
+		return _SourceItem.getCritFormula();
 	}
 
     public override string getFinalCritFormula()
@@ -91,50 +95,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
         return Constants.zeroRating;
     }
 
-    public override int findFinalDamage(Stats targetCombatant, bool isCrit)
-    {
-        if(healsTarget)
-        {
-            return sourceItem.getAmountToHeal();
-        }
-
-        return -1;
-    }
-
-	public override void performCombatAction(List<Stats> targets)
-	{
-		foreach (Stats targetCombatant in targets)
-		{
-			if (targetCombatant != null)
-			{
-				sourceItem.use(targetCombatant);
-                if(!inPreviewMode)
-                {
-                    foreach (GridCoords targetCoords in targetCombatant.positions)
-                    {
-                        AnimationTracker.loadInstantEffect(effectAnimationType,targetCoords, false, findFinalDamage(targetCombatant, false), healsTarget, false, null, actorCoords);
-                    }
-                }
-			}
-		}
-
-		if (!inPreviewMode)
-		{
-			Inventory.removeItem(sourceItem, 1);
-		}
-
-		if (Inventory.inventoryContainsItem(sourceItem.getKey()))
-		{
-			sourceItem = (UsableItem)Inventory.getItem(sourceItem.getKey());
-            sourceItem.equipTarget = actorStats;
-		}
-		else
-		{
-			sourceItem.setQuantity(0);
-		}
-	}
-
-    public override EffectAnimationType effectAnimationType => sourceItem.getEffectAnimationType();
+    public override EffectAnimationType effectAnimationType => _SourceItem.getEffectAnimationType();
 
 	public override void onAddToAbilityMenu() //for updating things like checking for source item quantity
 	{
@@ -143,47 +104,27 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 
 	private void updateSourceItemQuantity()
 	{
-		if (Inventory.inventoryContainsItem(getSourceItem().getKey()))
+		if (Inventory.inventoryContainsItem(sourceItem.getKey()))
 		{
-			sourceItem.setQuantity(Inventory.getItem(getSourceItem().getKey()).getQuantity());
+			_SourceItem.setQuantity(Inventory.getItem(sourceItem.getKey()).getQuantity());
 		}
 		else
 		{
-			sourceItem.setQuantity(0);
+			_SourceItem.setQuantity(0);
 		}
 	}
 
-	public override int getMaximumSlots()
-	{
-		return 1;
-	}
-
-	public override int getSaveType()
-	{
-		return (int)CombatActionSaveType.ItemCombatAction;
-	}
-
-	public override void activatingAction()
-	{
-		base.activatingAction();
-
-		if (sourceItem.getQuantity() <= 1)
-		{
-
-		}
-	}
+	public override int maximumSlots => 1;
 
     public override List<IDescribable> getRelatedDescribables()
     {
-        return sourceItem.getRelatedDescribables();
+        return _SourceItem.getRelatedDescribables();
     }
 
 	//convertToJson is for save files, you will never need to save an actions coords so actor/target coords are not saved
 	public override string convertToJson()
 	{
-		string itemJson = sourceItem.convertToJson();
-
-		return sourceItem.convertToJson().Substring(0, itemJson.Length - 1) + ",\"CombatActionSaveType\":\"" + getSaveType() + "\"}";
+		return _SourceItem.convertToJson();
 	}
 
 	public override void describeSelfFull(DescriptionPanel panel)
@@ -196,7 +137,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		DescriptionPanel.setText(panel.typeText, getDisplayType());
 		DescriptionPanel.setText(panel.amountText, getMaximumSlotsForDisplay());
 		DescriptionPanel.setText(panel.timerText, getMaximumCooldownForDisplay());
-		DescriptionPanel.setText(panel.useDescriptionText, getUseDescription());
+		DescriptionPanel.setText(panel.useDescriptionText, useDescription);
 		DescriptionPanel.setText(panel.typeText, getDisplayType());
 
 
@@ -214,7 +155,7 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
     {
         base.describeSelfRow(panel);
 
-        DescriptionPanel.setText(panel.statText, sourceItem.getQuantityForDisplay());
+        DescriptionPanel.setText(panel.statText, _SourceItem.getQuantityForDisplay());
 
         addSlotsTextToRow(panel);
     }
@@ -243,13 +184,18 @@ public class ItemCombatAction : CombatAction, IJSONConvertable
 		// 	buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(appliedTrait.getMaxRoundsLeftForDisplay()));
 		// }
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));
+		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(useDescription));
+
+		if (loreDescription.Length > 0)
+		{
+			buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(loreDescription));
+		}
 
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: iconName));
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getSourceItem().getTypeIconName()));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: sourceItem.getTypeIconName()));
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(getSourceItem().getQuantityForDisplay()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(sourceItem.getQuantityForDisplay()));
 
 		//buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getCritTotalForDisplay()));
 

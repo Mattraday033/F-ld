@@ -125,7 +125,7 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable, IAppearanceSou
         if (item.getSlotID() == Weapon.mainHandSlotIndex ||
                 item.getSlotID() < Armor.offHandSlotIndex)
         {
-            owner.getActionArray().unequipCombatAction(item.getKey());
+            owner.actionArray.unequipCombatAction(item.getKey());
         }
         else
         {
@@ -182,11 +182,11 @@ public class EquippedItems : StatBoostSourceCombiner, ICloneable, IAppearanceSou
         List<EquippableItem> equippedMainHandWeapons = new List<EquippableItem>();
         List<EquippableItem> equippedArmorPlusOffHand = new List<EquippableItem>();
 
-        foreach (CombatAction action in owner.getActionArray().getActions())
+        foreach (CombatAction action in owner.actionArray.getActions())
         {
-            if (action != null && action.getSourceItem() != null && action.getSourceItem().isEquippable())
+            if (action != null && action.sourceItem != null && action.sourceItem.isEquippable())
             {
-                equippedMainHandWeapons.Add(action.getSourceItem() as EquippableItem);
+                equippedMainHandWeapons.Add(action.sourceItem as EquippableItem);
             }
         }
 

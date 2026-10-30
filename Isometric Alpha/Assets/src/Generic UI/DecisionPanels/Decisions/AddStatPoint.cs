@@ -48,7 +48,7 @@ public class AddStatPoint : IDecision
             TutorialSequence.startTutorialSequence(TutorialSequenceList.addingAbilitiesTutorialSequenceKey);
         } 
         else if(!TutorialFlags.getFlag(TutorialSequenceList.companionSpecificAbilitiesTutorialSeenFlag) && 
-                    !targetStats.uniqueName.Contains(PartyManager.playerMarker) && targetStats.getLevel() >= Constants.sizeThree)
+                    !targetStats.uniqueName.Contains(PartyManager.playerMarker) && targetStats.level >= Constants.sizeThree)
         {
             if(AbilityGridSideTab.getDescribableListType() == DescribableList.CharacterSpecificAbilities)
             {

@@ -25,7 +25,7 @@ public class EnemyCombatActionManager : MonoBehaviour
 
         foreach (EnemyStats enemy in listOfEnemies)
 		{			
-			CombatAction enemyCombatAction = enemy.getCombatAction();
+			CombatAction enemyCombatAction = enemy.combatAction;
 
 			if(enemyCombatAction == null ||
                 Helpers.hasQuality<Trait>(enemy.traitContainer, t => t.isPacifist()) ||
@@ -43,7 +43,7 @@ public class EnemyCombatActionManager : MonoBehaviour
 			
 			enemyCombatAction.selector = selector;
 			
-			enemyCombatAction.queueingAction();
+			enemyCombatAction.performAllQueuingUnits();
 
 			if (enemyCombatAction.actorIsSlowed)
 			{
@@ -98,11 +98,11 @@ public class EnemyCombatActionManager : MonoBehaviour
 		
 		foreach(EnemyStats enemy in listOfEnemies)
 		{
-			double linkedPercentage = enemy.getLinkedPercentage();
+			double linkedPercentage = enemy.linkedPercentage;
 			
 			if(linkedPercentage > 0.0)
 			{
-                int linkDamage = (int) ((double) enemy.getTotalHealth() * linkedPercentage);
+                int linkDamage = (int) ((double) enemy.totalHealth * linkedPercentage);
 
                 foreach (GridCoords enemyCoords in enemy.positions)
                 {

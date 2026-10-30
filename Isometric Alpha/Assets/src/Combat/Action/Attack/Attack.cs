@@ -16,80 +16,38 @@ public class Attack : CombatAction, IJSONConvertable
         set
         {
             base.actorStats = value;
-            EquippableItem item = getSourceItem() as EquippableItem;
+            EquippableItem item = sourceItem as EquippableItem;
 
             item.equipTarget = value;
         }
     }
 
-    public Attack(Stats actor, Weapon mainHandWeapon, List<TargetingLogic> targetingLogics = null) :
-    base(actor, SelectorFactory.buildByTemplate(mainHandWeapon.getRangeTemplate()), targetingLogics)
+    public override Item sourceItem
+    {
+        get
+        {
+            return mainHandWeapon;
+        }
+        set
+        {
+            mainHandWeapon = (Weapon)value;
+        }
+    }
+
+    public Attack(Stats actor, Weapon mainHandWeapon, Catalog<IQueuingUnit> queuingUnits = null, List<TargetingLogic> targetingLogics = null) :
+    base(actor, SelectorFactory.buildByTemplate(mainHandWeapon.getRangeTemplate()), queuingUnits, targetingLogics)
     {
         this.mainHandWeapon = (Weapon) mainHandWeapon.clone();
         this.mainHandWeapon.setQuantity(1);
         this.mainHandWeapon.equipTarget = actor;
     }
 
-	public override void performCombatAction(List<Stats> targets)
-	{
-		if (!inPreviewMode)
-		{
-            foreach (Stats targetCombatant in targets)
-            {
-                if (targetCombatant != null && targetCombatant.isAlive)
-                {
-                    Exuberances.addExuberance(MultiStackProcType.RedKnife, singleExuberanceStack);
-                }
-            }
-        }
-        
-		base.performCombatAction(targets);
-
-		if (inPreviewMode)
-		{
-			return;
-		}
-
-		if(CombatStateManager.whoseTurn == WhoseTurn.Resolving && getSourceItem().appliesStanceStacks())
-		{
-            Stance.OnStanceApplyingWeaponAttack?.Invoke();
-        }
-
-        if(mainHandWeapon != null && mainHandWeapon.getIsTwoHanded())
-		{
-            AllyStats actor = actorStats as AllyStats;
-
-            if(actor != null && actor.equippedItems != null && actor.equippedItems.getOffHand() != null)
-            {
-                actorStats.addTrait(new AntiShieldTrait(actor.equippedItems.getOffHand()));
-            }
-        }
-	}
-
-	public override string getKey()
-	{
-		return getMainHandWeapon().getKey();
-	}
+	public override string key => getMainHandWeapon().getKey();
 
 	public override string iconName => getMainHandWeapon().getIconName();
 
 	public override string displayName { get { return getMainHandWeapon().displayName; } }
 	public override string uniqueName { get { return getMainHandWeapon().uniqueName; } }
-
-	public override int getSaveType()
-	{
-		return (int)CombatActionSaveType.Attack;
-	}
-
-	public override Item getSourceItem()
-	{
-		return (Item) mainHandWeapon;
-	}
-
-	public override void setSourceItem(Item sourceItem)
-	{
-		mainHandWeapon = (Weapon)sourceItem;
-	}
 
 	//an attack's trait comes from its weapon, which already hands back a clone
 	public override Trait appliedTrait
@@ -119,10 +77,10 @@ public class Attack : CombatAction, IJSONConvertable
 		return getMainHandWeapon().getRange();
 	}
 
-	public override string getUseDescription()
-	{
-		return getMainHandWeapon().getLoreDescription();
-	}
+	//a weapon has no use text of its own; its flavour text is the attack's loreDescription
+	public override string useDescription => "";
+
+	public override string loreDescription => getMainHandWeapon().getLoreDescription();
 
 	public override string getDamageFormula()
 	{
@@ -148,27 +106,16 @@ public class Attack : CombatAction, IJSONConvertable
         return allStats;
     }
 
-    public override void playEquipSFX()
-    {
-        Weapon sourceWeapon = getSourceItem() as Weapon;
-
-        sourceWeapon.playEquipSFX();
-    }
-
-    public override void playUnequipSFX()
-    {
-        playEquipSFX();
-    }
+    //the same weapon-change sound EquippableItem.playEquipSFX plays for a weapon, since weapons always sit in the main hand slot
+    public override SFXType equipSFX => AudioClipList.getRandomSFXInRange(SFXType.Weapon1, SFXType.Weapon3);
+    public override SFXType unequipSFX => equipSFX;
 
 	public override string getDisplayType()
 	{
 		return AbilityList.attackActionTypeName;
 	}
 
-	public override int getMaximumSlots()
-	{
-		return OverallUIManager.getCurrentPartyMember().getWeaponSlots();
-	}
+	public override int maximumSlots => OverallUIManager.getCurrentPartyMember().weaponSlots;
 
 	public override bool hasAvailableSlots(CombatActionArray combatActionArray)
 	{
@@ -178,12 +125,10 @@ public class Attack : CombatAction, IJSONConvertable
 	//convertToJson is for save files, you will never need to save an actions coords so actor/target coords are not saved
 	public override string convertToJson()
 	{
-		string itemJson = mainHandWeapon.convertToJson();
-
-		return mainHandWeapon.convertToJson().Substring(0, itemJson.Length - 1) + ",\"CombatActionSaveType\":\"" + getSaveType() + "}";
+		return mainHandWeapon.convertToJson();
 	}
 
-    public override EffectAnimationType effectAnimationType => getSourceItem().getEffectAnimationType();
+    public override EffectAnimationType effectAnimationType => sourceItem.getEffectAnimationType();
 
     public override int getQuantity()
     {
@@ -192,12 +137,12 @@ public class Attack : CombatAction, IJSONConvertable
 
 	private Weapon getMainHandWeapon()
 	{
-		return (Weapon)getSourceItem();
+		return (Weapon)sourceItem;
 	}
 
     private EquippableItem getOffHandWeapon()
     {
-        return actorStats.getEquippedItems().getOffHand();
+        return actorStats.equippedItems.getOffHand();
     }
 
 
@@ -210,7 +155,7 @@ public class Attack : CombatAction, IJSONConvertable
             case RowType.Equipment:
             case RowType.StatRequirements:
             case RowType.AbilityEditor:
-                return getSourceItem().getRowType(rowType);
+                return sourceItem.getRowType(rowType);
             default:
                 return base.getRowType(rowType);
         }
@@ -218,12 +163,12 @@ public class Attack : CombatAction, IJSONConvertable
 
 	public override GameObject getDescriptionPanelFull()
 	{
-		return getSourceItem().getDescriptionPanelFull();
+		return sourceItem.getDescriptionPanelFull();
 	}
 
 	public override GameObject getDecisionPanel()
 	{
-		return getSourceItem().getDecisionPanel();
+		return sourceItem.getDecisionPanel();
 	}
 
 	public override GameObject getDescriptionPanelFull(PanelType panelType)
@@ -232,7 +177,7 @@ public class Attack : CombatAction, IJSONConvertable
 		{
 			case PanelType.Standard:
 
-				return getSourceItem().getDescriptionPanelFull();
+				return sourceItem.getDescriptionPanelFull();
 
 			default:
 				return base.getDescriptionPanelFull(panelType);
@@ -241,13 +186,13 @@ public class Attack : CombatAction, IJSONConvertable
 
 	public override bool withinFilter(string[] filterParameters)
 	{
-		return getSourceItem().withinFilter(filterParameters);
+		return sourceItem.withinFilter(filterParameters);
 	}
 
 	public override void describeSelfFull(DescriptionPanel panel)
 	{
 		base.describeSelfFull(panel);
-		getSourceItem().describeSelfFull(panel);
+		sourceItem.describeSelfFull(panel);
 
 		// if (CombatStateManager.inCombat) //will use the item classes damage/crit display methods if not in combat
 		// {
@@ -257,7 +202,7 @@ public class Attack : CombatAction, IJSONConvertable
 
 		if (panel.amountText != null && !(panel.amountText is null))
 		{
-			panel.amountText.text = getMaximumSlots() + " Slot(s)";
+			panel.amountText.text = maximumSlots + " Slot(s)";
 		}
 
 		panel.setObjectBeingDescribed(this);
@@ -265,7 +210,7 @@ public class Attack : CombatAction, IJSONConvertable
 
 	public override void describeSelfRow(DescriptionPanel panel)
 	{
-		getSourceItem().describeSelfRow(panel);
+		sourceItem.describeSelfRow(panel);
 
         if(actorStats != null)
         {
@@ -280,7 +225,7 @@ public class Attack : CombatAction, IJSONConvertable
 
 	public override void setUpDecisionPanel(IDecisionPanel descisionPanel)
 	{
-		getSourceItem().setUpDecisionPanel(descisionPanel);
+		sourceItem.setUpDecisionPanel(descisionPanel);
 	}
 	
 	//IDescribableInBlocks methods
@@ -304,21 +249,29 @@ public class Attack : CombatAction, IJSONConvertable
 		// 	buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(appliedTrait.getMaxRoundsLeftForDisplay()));
 		// }
 
-		buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));
+		if (useDescription.Length > 0)
+		{
+			buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(useDescription));
+		}
+
+		if (loreDescription.Length > 0)
+		{
+			buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(loreDescription));
+		}
 
 		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: iconName));
 
-		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getSourceItem().getSlotIconName()));
+		buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: sourceItem.getSlotIconName()));
 
-        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: getSourceItem().getTypeIconName()));
+        buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: sourceItem.getTypeIconName()));
 
-		if (getSourceItem().appliesStanceStacks())
+		if (sourceItem.appliesStanceStacks())
 		{
 			buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: IconList.stanceWeaponIconName));
 		}
 
 
-		// buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(getSourceItem().getQuantityForDisplay())); // for testing purposes
+		// buildingBlocks.Add(DescriptionPanelBuildingBlock.getAmountBlock(sourceItem.getQuantityForDisplay())); // for testing purposes
 
 		//buildingBlocks.Add(DescriptionPanelBuildingBlock.getDurationBlock(getCritTotalForDisplay()));
 

@@ -71,7 +71,7 @@ public static class GemHoverManager
         {
             foreach(GridCoords coord in selector.getAllSelectorCoords())
             {
-                if(!CombatGrid.combatantExistsAtCoords(coord, out Stats combatant))
+                if(!CombatGrid.tryGetCombatantAt(coord, out Combatant combatant))
                 {
                     continue;
                 }
@@ -83,7 +83,7 @@ public static class GemHoverManager
                 } else
                 {
                     // Every tile this creature occupies.
-                    foreach(GridCoords occupied in combatant.positions)
+                    foreach(GridCoords occupied in combatant.stats.positions)
                     {
                         desired.Add(occupied);
                     }

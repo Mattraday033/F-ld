@@ -1,0 +1,81 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class KnockBackAbility : RepositionEnemyAbility
+{
+    private readonly static int targetCombatantIndex = 0;
+    private readonly static int landingCombatantIndex = 1;
+
+    private double damageMultiplierPerSquareMoved;
+
+    public override bool requiresTertiaryCoords => false;
+
+    public KnockBackAbility(CombatActionSettings settings, double damageMultiplierPerSquareMoved, List<TargetingLogic> targetingLogics = null) :
+    base(settings, targetingLogics)
+    {
+        this.damageMultiplierPerSquareMoved = damageMultiplierPerSquareMoved;
+    }
+
+    public override bool combatantToBeMovedExists(out Stats combatant)
+    {
+        return CombatGrid.combatantExistsAtCoords(getTargetCoords(), out combatant);
+    }
+
+    private GridCoords determineDestinationCoords()
+    {
+        GridCoords landingCoords = getTargetCoords().clone();
+
+        for (landingCoords.row = landingCoords.row; landingCoords.row > 0; landingCoords.row--)
+        {
+            if (CombatGrid.combatantExistsAtCoords(landingCoords.row - 1, landingCoords.col, out Stats combatant))
+            {
+                break;
+            }
+        }
+
+        return landingCoords;
+    }
+
+    private double getTotalDamageMultiplier()
+    {
+        return 1.0 + ((double)getSquaresMoved() * damageMultiplierPerSquareMoved);
+    }
+
+    private int getSquaresMoved()
+    {
+        return Math.Abs(getDestinationCoords().row - getTargetCoords().row);
+    }
+
+    public override int findFinalDamage(Stats targetCombatant, bool isCrit)
+    {
+        return (int) ((double) base.findFinalDamage(targetCombatant, isCrit) *  getTotalDamageMultiplier());
+    }
+
+    public override void queueingAction()
+    {
+        setTertiaryCoords(determineDestinationCoords());
+
+        base.queueingAction();
+    }
+
+    public override ScriptOnLanding landingScript
+    {
+        get
+        {
+            if (!inPreviewMode)
+            {
+                GridCoords secondTargetCoords = getDestinationCoords();
+                secondTargetCoords.row--;
+                return new KnockBackOnLanding(getTargetCoords(), getDestinationCoords(), secondTargetCoords);
+            } else
+            {
+                return null;
+            }
+        }
+    }
+
+    public override EffectAnimationType effectAnimationType => EffectAnimationType.Blunt;
+
+}

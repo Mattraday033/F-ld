@@ -165,7 +165,14 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
     //Every tile under a creature reaches the same answer, since the whole creature is checked rather than this one tile
     private void updateOutlineFromSelectors(List<Selector> visibleSelectors)
     {
-        if(!hasTargetStats(out Stats target) || target.isRepositionClone || outlineIsHeld(target))
+        if(!hasTargetCombatant(out Combatant combatant))
+        {
+            return;
+        }
+
+        Stats target = combatant.stats;
+
+        if(target.isRepositionClone || outlineIsHeld(target))
         {
             return;
         }
@@ -173,12 +180,13 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         //a mandatory target's fading highlight would otherwise go on to overwrite the outline set here
         CombatantHover.StopHighlightFadeMandatoryTarget.Invoke(target);
 
+        //the Combatant outlines every GameObject of its creature, not just the one on this tile
         if(!target.isDead && insideSelectors(target, visibleSelectors))
         {
-            target.setOutline();
+            combatant.setOutline();
         } else
         {
-            target.removeOutline();
+            combatant.removeOutline();
         }
     }
 
@@ -300,13 +308,13 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
         CombatHoverTileManager.GetHoverSelector.AddListener(getHoverSelector);
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive)
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetCombatant(out Combatant target) && target.stats.isAlive)
         {
             revealPriorityHeld = true;
 
             setHealthBarHovered(target, true);
 
-            CombatActionOrderRow.HighlightRow.Invoke(target, true);
+            CombatActionOrderRow.HighlightRow.Invoke(target.stats, true);
         }
 
         SelectorManager.declareSelectors();
@@ -322,21 +330,21 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
 
         CombatHoverTileManager.GetHoverSelector.RemoveListener(getHoverSelector);
 
-        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetStats(out Stats target) && target.isAlive)
+        if (CombatStateManager.whoseTurn == WhoseTurn.Player && hasTargetCombatant(out Combatant target) && target.stats.isAlive)
         {
             revealPriorityHeld = false;
 
             setHealthBarHovered(target, false);
 
-            CombatActionOrderRow.HighlightRow.Invoke(target, false);
+            CombatActionOrderRow.HighlightRow.Invoke(target.stats, false);
         }
 
         SelectorManager.declareSelectors();
     }
 
-    private void setHealthBarHovered(Stats target, bool isHovered)
+    private void setHealthBarHovered(Combatant target, bool isHovered)
     {
-        HealthBarManager healthBarManager = target.getHealthBarManager();
+        HealthBarManager healthBarManager = target.primaryHealthBar;
 
         if(healthBarManager != null)
         {
@@ -403,9 +411,17 @@ public class CombatHoverTile : CombatMouseHover, IPointerDownHandler, IPointerUp
         onEnemySide = CombatGrid.positionIsOnEnemySide(targetCoords);
     }
 
+    //the Combatant standing on this tile
+    private bool hasTargetCombatant(out Combatant combatant)
+    {
+        return CombatGrid.tryGetCombatantAt(targetCoords, out combatant);
+    }
+
     protected override bool hasTargetStats(out Stats target)
     {
-        return CombatGrid.combatantExistsAtCoords(targetCoords, out target);
+        target = hasTargetCombatant(out Combatant combatant) ? combatant.stats : null;
+
+        return target != null;
     }
 
     protected override GridCoords getTargetCoords()

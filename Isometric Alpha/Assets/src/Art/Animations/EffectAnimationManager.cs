@@ -47,11 +47,11 @@ public struct DamagePacket
 }
 
 //what AnimationData.animationCoroutine needs from the object it animates, and what AnimationTracker needs to track it
-public interface IAnimationManager
+public interface IAnimationManager : INameSource
 {
     public GameObject gameObject { get; }
 
-    //implementers take a key from AnimationTracker.getCurrentKey the first time it's read
+    //implementers take a key from INameSource.getCurrentKey the first time it's read
     public int key { get; }
 
     //a single fire animation's object is destroyed once it's removed from AnimationTracker
@@ -169,12 +169,19 @@ public class EffectAnimationManager : MonoBehaviour, IAnimationManager
         {
             if(_Key < 0)
             {
-                _Key = AnimationTracker.getCurrentKey();
+                _Key = INameSource.getCurrentKey();
             }
 
             return _Key;
         }
     }
+
+    #region INameSource
+
+    public string displayName { get { return gameObject.name; } }
+    public string uniqueName { get { return gameObject.name + "_" + key; } }
+
+    #endregion
 
     public bool singleFire { get { return true; } }
 

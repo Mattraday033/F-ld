@@ -5,10 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
-
-public enum CombatActionSaveType { Attack = 0, Ability = 1, ItemCombatAction = 2}
-
-public enum CombatAnimationType{ None, Projectile, Effect }
+using System.Text.RegularExpressions;
 
 public enum CombatActionState { NoAction, Calculation, Application, Animation }
 
@@ -195,9 +192,10 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
                 return _Selector;
             }
 
+            //the actorStats setter clears the selector for player-targeted actors, so build a fresh one on demand
             if(actorStats?.usePlayerTargeting ?? false)
             {
-                return _Selector;
+                return _Selector ??= SelectorFactory.buildByTemplate(getRangeTemplate());
             } else if(_Selector != null)
             {
                 return _Selector;
@@ -363,34 +361,58 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #endregion
 
+    #region Key and Descriptions
+
+    public abstract string key { get; }
+
+    public abstract string useDescription { get; }
+
+    //flavour text shown in italics on the action's description panel; empty for an action with none
+    public virtual string loreDescription => "";
+
+    #endregion
+
+    #region Slots
+
+    public abstract int maximumSlots { get; }
+
+    #endregion
+
+    #region Source Item
+
+    //the item the action comes from, such as an attack's weapon or a usable item. Null for an action with no item, which ignores sets
+    public virtual Item sourceItem
+    {
+        get
+        {
+            return null;
+        }
+        set
+        {
+            //empty on purpose
+        }
+    }
+
+    #endregion
+
     #region Constructors
 
-    public CombatAction(Stats actor, Selector selector, List<TargetingLogic> targetingLogics = null)
+    public CombatAction(Stats actor, Selector selector, Catalog<IQueuingUnit> queuingUnits = null, List<TargetingLogic> targetingLogics = null)
     {
-        //writes the backing fields so subclass actorStats and selector setters don't run before their own fields exist
         _ActorStats = actor;
         _Selector = selector;
         _TargetingLogics = targetingLogics ?? new List<TargetingLogic>();
+
+        //copied, so adding a ChargeActionCost in applySettings can't change a catalog the caller also gave to other actions
+        _QueuingUnits = queuingUnits != null ? new Catalog<IQueuingUnit>(queuingUnits.Values) : new Catalog<IQueuingUnit>();
     }
 
     #endregion
 
     #region Queueing Actions
 
-    public virtual void queueingAction()
-    {
-	    chargeActorActionCost();
-    }
-
-    public virtual void unqueueingAction()
-    {
-        refundActorActionCost();
-    }
-
-    public virtual void activatingAction()
-    {
-        //empty on purpose
-    }
+    protected Catalog<IQueuingUnit> _QueuingUnits;
+    public IEnumerable<IQueuingUnit> queuingUnits => _QueuingUnits.Values;
 
     #endregion
 
@@ -482,7 +504,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     protected virtual string gatherAllNonActionFormulas(FormulaDelegate<StatBoostSource> getFormula)
     {
-        string allStats = getAllOfOneStatFormula<StatBoostSource>(getStatSource().getAllStatBoosts(), t => getFormula(t));
+        string allStats = getAllOfOneStatFormula<StatBoostSource>(getStatSource().allStatBoosts, t => getFormula(t));
 
         return DamageCalculator.combineFormulas(getFormula(this), allStats);
     }
@@ -491,98 +513,13 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #region Perform Combat Action
 
-    // public List<Stats> findAllTargets()
-    // {
-    //     return null;
-    // }
-
-    // public List<IActionUnit> getAllActionUnits()
-    // {
-    //     return null;
-    // }
-
-    public virtual int findFinalDamage(Stats targetCombatant, bool isCrit)
-    {
-        int baseDamage = getDamageFormulaTotal();
-
-        if (targetCombatant == null || baseDamage == 0)
-        {
-            return -1;
-        }
-
-        Stats actor = actorStats;
-
-        if (isCrit)
-        {
-            baseDamage = (int)(baseDamage * actor.getCritDamageMultiplier());
-            baseDamage += (int)((float)targetCombatant.getTotalHealth() * actor.getDevastatingCriticalPercentage()); //will return 0f if not a devastatingCritical
-        }
-
-        if (CombatStateManager.isPlayerSurpriseRound())
-        {
-            baseDamage = (int)((float)baseDamage * actor.getSurpriseDamageMultiplier());
-        }
-
-        int finalDamage = 0;
-        
-        if(healsTarget)
-        {
-            finalDamage = targetCombatant.modifyIncomingHealing(baseDamage);
-        } else
-        {
-            finalDamage = targetCombatant.modifyIncomingDamage(baseDamage, actor.getArmorPenetration());
-        }
-
-        return finalDamage;
-    }
-
-    public virtual void performCombatAction() //virtual because some abilities target the ground below their targets, such as GroundEffectAbility
-    {
-        playActivationAnimation();
-
-        performCombatAction(selector.getAllTargets());
-    }
-
-    public virtual void performCombatAction(List<Stats> targets)
-    {
-        int projectileNumber = 1;
-
-        Dictionary<Stats, int> skipLog = new Dictionary<Stats, int>();
-
-        foreach (Stats targetCombatant in targets)
-        {
-            int skips = 0;
-
-            if (skipLog.ContainsKey(targetCombatant))
-            {
-                skips = skipLog[targetCombatant];
-                skipLog[targetCombatant]++;
-            }
-            else
-            {
-                skipLog.Add(targetCombatant, 1);
-            }
-
-            projectileNumber += sendProjectileAt(targetCombatant.getPositionToHit(selector, skips), targetCombatant, projectileNumber);
-
-            applyTrait(targetCombatant);
-        }
-    }
+    //only Clone replaces these, so each clone gets catalogs of its own
+    public Catalog<IActionUnit> actionCatalog { get; private set; } = new Catalog<IActionUnit>();
+    public Catalog<IAnimationUnit> animationCatalog { get; private set; } = new Catalog<IAnimationUnit>();
 
     #endregion
 
     #region Animations
-
-    public virtual void playActivationAnimation()
-    {
-        if(useSpecialAttackAnimation)
-        {
-            actorStats.playSpecialAttackAnimation();
-        } else
-        {
-            actorStats.playAttackAnimation();
-        }
-    }
 
     #region Animation Effects
 
@@ -599,169 +536,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         {
             _EffectAnimationType = value;
         }
-    }
-
-    public virtual void createEffectAnimation(GridCoords targetCoords, bool crit = false, int damageNumber = noDamage)
-    {
-        AnimationTracker.loadInstantEffect(effectAnimationType, targetCoords, crit, damageNumber, healsTarget, targetMustBeDead, landingScript, actorCoords);
-    }
-
-    public virtual int sendProjectileAt(GridCoords coords, Stats targetCombatant, int projectileNumber)
-    {
-        if (targetCombatant != null && getDamageFormula() != null &&
-            ((!targetMustBeDead && targetCombatant.isAlive) || (targetMustBeDead && !targetCombatant.isAlive)))
-        {
-            bool crit = DamageCalculator.isACrit(getCritFormula(), uniqueName);
-            int finalDamage = findFinalDamage(targetCombatant, crit);
-
-            if (!inPreviewMode)
-            {
-                if (crit && actorIsAlly)
-                {
-                    Exuberances.addExuberance(MultiStackProcType.YellowThorn, singleExuberanceStack);
-                }
-
-                if (healsTarget && actorIsAlly)
-                {
-                    Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
-                }
-
-                createEffectAnimation(coords, crit, finalDamage);
-            }
-
-            if (finalDamage >= 0)
-            {
-                targetCombatant.modifyCurrentHealth(finalDamage, healsTarget);
-            } 
-
-            return 1;
-        }
-
-        return 0;
-    }
-
-    public virtual int sendSecondaryProjectileAt(GridCoords coords, Stats targetCombatant, int projectileNumber)
-    {
-        if (targetCombatant != null && getDamageFormula() != null &&
-            ((!targetMustBeDead && targetCombatant.isAlive) || (targetMustBeDead && !targetCombatant.isAlive)))
-        {
-            bool crit = DamageCalculator.isACrit(getCritFormula(), uniqueName);
-            int finalDamage = findFinalDamage(targetCombatant, crit);
-
-            if (finalDamage >= 0)
-            {
-                if (!inPreviewMode)
-                {
-                    if (crit && actorIsAlly)
-                    {
-                        Exuberances.addExuberance(MultiStackProcType.YellowThorn, singleExuberanceStack);
-                    }
-
-                    if (healsTarget && actorIsAlly)
-                    {
-                        Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
-                    }
-
-                    createEffectAnimation(coords, crit, finalDamage);
-                }
-
-                targetCombatant.modifyCurrentHealth(finalDamage, healsTarget);
-
-                return 1;
-            }
-        }
-
-        return 0;
-    }
-
-    public int sendProjectileAt(GridCoords coords, Stats targetCombatant, int projectileNumber, bool noDamage)
-    {
-        if (targetCombatant != null && getDamageFormula() != null &&
-            ((!targetMustBeDead && targetCombatant.isAlive) || (targetMustBeDead && !targetCombatant.isAlive)))
-        {
-            bool crit = DamageCalculator.isACrit(getCritFormula(), uniqueName);
-            int finalDamage = findFinalDamage(targetCombatant, crit);
-            
-            targetCombatant.modifyCurrentHealth(finalDamage, healsTarget);
-
-            if (noDamage)
-            {
-                if (!inPreviewMode)
-                {
-                    if (crit)
-                    {
-                        Exuberances.addExuberance(MultiStackProcType.YellowThorn, singleExuberanceStack);
-                    }
-
-                    if (healsTarget && actorIsAlly)
-                    {
-                        Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
-                    }
-
-                    createEffectAnimation(coords, crit, finalDamage);
-                }
-
-                return 1;
-            }
-            else if (finalDamage >= 0)
-            {
-                if (!inPreviewMode)
-                {
-                    if (crit && actorIsAlly)
-                    {
-                        Exuberances.addExuberance(MultiStackProcType.YellowThorn, singleExuberanceStack);
-                    }
-
-                    if (healsTarget && actorIsAlly)
-                    {
-                        Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
-                    }
-
-                    createEffectAnimation(coords, crit, finalDamage);
-                }
-
-                return 1;
-            }
-        }
-
-        return 0;
-    }
-
-    public int sendProjectileAtSpace(GridCoords coords, int projectileNumber)
-    {
-        if (!inPreviewMode)
-        {
-            createEffectAnimation(coords);
-        }
-
-        return 1;
-    }
-
-    public int sendProjectileAt(GridCoords coords, Stats targetCombatant, int projectileNumber, int predeterminedDamage, bool predeterminedCrit)
-    {
-        if (targetCombatant != null &&
-            ((!targetMustBeDead && targetCombatant.isAlive) || (targetMustBeDead && !targetCombatant.isAlive)))
-        {
-            targetCombatant.modifyCurrentHealth(predeterminedDamage, healsTarget);
-
-            if (predeterminedDamage >= 0 && !inPreviewMode)
-            {
-                if (predeterminedCrit && actorIsAlly)
-                {
-                    Exuberances.addExuberance(MultiStackProcType.YellowThorn, singleExuberanceStack);
-                }
-
-                if (healsTarget && actorIsAlly)
-                {
-                    Exuberances.addExuberance(MultiStackProcType.GreenLeaf, singleExuberanceStack);
-                }
-
-                createEffectAnimation(coords, predeterminedCrit, predeterminedDamage);
-                return 1;
-            }
-        }
-
-        return 0;
     }
 
     #endregion
@@ -818,66 +592,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return listOfTraits;
     }
 
-    public virtual void applyTrait(Stats target, Trait traitToApply = null)
-    {
-        if(traitToApply == null)
-        {
-            traitToApply = appliedTrait;
-        }
-
-        if (target == null || traitToApply == null)
-        {
-            return;
-        }
-
-        if(checkForResistance(target, traitToApply))
-        {
-            foreach (GridCoords targetCoords in target.positions)
-            {
-                DamageNumberPopup.createResistPopUp(targetCoords, CombatGrid.getPositionAt(targetCoords), AnimationTracker.getInstance().damageNumberCanvas);
-            }
-            return;
-        }
-
-        traitToApply.traitApplier = actorStats;
-
-        if (!inPreviewMode && actorIsAlly && traitToApply.isBuff())
-        {
-            Exuberances.addExuberance(MultiStackProcType.BlueShield, singleExuberanceStack);
-        }
-
-        if (!inPreviewMode && actorIsAlly && traitToApply.isDebuff())
-        {
-            Exuberances.addExuberance(MultiStackProcType.YellowThorn, singleExuberanceStack);
-        }
-
-        target.addTrait(traitToApply);
-    }
-
-    private bool checkForResistance(Stats target, Trait traitToApply = null)
-    {
-        if(traitToApply == null)
-        {
-            traitToApply = appliedTrait;
-        }
-
-        if(!traitToApply.isDebuff())
-        {
-            return false;
-        }
-
-        if(traitToApply.traitType == TraitType.Wound && target.rollAgainstWoundResistance())
-        {
-            return true;
-        } 
-        
-        if(traitToApply.traitType == TraitType.Mental && target.rollAgainstMentalResistance())
-        {
-            return true;
-        } 
-
-        return false;
-    }
     #endregion
 
     #region Action Costs
@@ -908,11 +622,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     public bool hasActionCost => actionCosts.Count > 0;
 
-    protected void clearActionCosts()
-    {
-        actionCosts.Clear();
-    }
-
     #endregion
 
     #region Boolean Getters
@@ -931,37 +640,19 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
     #region Miscellaneous
 
-    public virtual bool actorIsPartOfAction(Stats actor)
-    {
-        if(actor == null)
-        {
-            return false;
-        }
-
-        return actor.Equals(actorStats);
-    }
-
-    public virtual void playEquipSFX()
-    {
-        AudioManager.playAudioClipAsSingleton(SFXType.ActionEquip);
-    }
-
-    public virtual void playUnequipSFX()
-    {
-        AudioManager.playAudioClipAsSingleton(SFXType.ActionUnequip);
-    }
+    //played through CombatActionUtil.playEquipSFX/playUnequipSFX
+    public virtual SFXType equipSFX => SFXType.ActionEquip;
+    public virtual SFXType unequipSFX => SFXType.ActionUnequip;
 
 
+    //overrides call this after their own settings, so the costs it checks are already set
     public virtual void applySettings(CombatActionSettings settings)
     {
-        //empty on purpose
-    }
-
-    public abstract string getUseDescription();
-
-    public virtual string getKey()
-    {
-        throw new IOException("The base class version of getKey() was called extraneously");
+        //an action with costs has to charge them when it's queued, unless it was given its own ChargeActionCost
+        if(_QueuingUnits[typeof(ChargeActionCost)].Count == 0 && hasActionCost)
+        {
+            _QueuingUnits.Add(new ChargeActionCost());
+        }
     }
 
 	public override bool Equals(object obj)
@@ -999,47 +690,27 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         inPreviewMode = true;
     }
 
-    public virtual int getSaveType()
-    {
-        throw new IOException("The base class version of getSaveType() was called extraneously");
-    }
-
-    public virtual Item getSourceItem()
-    {
-        return null;
-    }
-
-    public virtual void setSourceItem(Item sourceItem)
-    {
-
-    }
-
     public abstract string getDisplayType();
-
-    public virtual int getMaximumSlots()
-    {
-        return 1;
-    }
 
     public virtual void addSlotsTextToRow(DescriptionPanel panel)
     {
         CombatActionArray combatActionArray = OverallUIManager.getCurrentActionArray();
 
-        if(!ineligible() && getMaximumSlots() > 0 && combatActionArray != null)
+        if(!ineligible() && maximumSlots > 0 && combatActionArray != null)
         {
-            DescriptionPanel.setText(panel.slotsUsedText, combatActionArray.getSlotsUsedOnAction(this) + "/" + getMaximumSlots());
+            DescriptionPanel.setText(panel.slotsUsedText, combatActionArray.getSlotsUsedOnAction(this) + "/" + maximumSlots);
         }
     }
 
     public virtual string getMaximumSlotsForDisplay()
     {
-        if (getMaximumSlots() <= 0)
+        if (maximumSlots <= 0)
         {
             return noSlotsRequiredMessage;
         }
         else
         {
-            return getMaximumSlots() + " Slot(s)";
+            return maximumSlots + " Slot(s)";
         }
     }
 
@@ -1069,6 +740,10 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
     //convertToJson is for save files, you will never need to save an actions coords so actor/target coords are not saved
     public abstract string convertToJson();
 
+    //saves written before getSaveType() was retired end each action with a "CombatActionSaveType" tag, sometimes missing
+    //its closing quote. The type is now read from the json itself, so the tag is stripped and ignored
+    private static readonly Regex legacySaveTypeTag = new Regex(",\"CombatActionSaveType\":\"\\d\"?");
+
     public static CombatAction extractFromJson(Stats statsSource, string json)
     {
         if (json == null || json.ToLower().Equals("null"))
@@ -1076,21 +751,23 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
             return null;
         }
 
-        json = json.Replace("\"CombatActionSaveType\":\"0}", "\"CombatActionSaveType\":\"0\"}");
-        json = json.Replace("\"CombatActionSaveType\":\"1}", "\"CombatActionSaveType\":\"1\"}");
-        json = json.Replace("\"CombatActionSaveType\":\"2}", "\"CombatActionSaveType\":\"2\"}");
+        json = legacySaveTypeTag.Replace(json, "");
 
-        string[] kvps = json.Replace("{", "").Replace("}", "").Replace("\"", "").Split(",");
-        int saveType = int.Parse(kvps[kvps.Length - 1].Split(":")[1]);
-
-        switch (saveType)
+        if (json.Contains(Ability.sourceAbilityElementName))
         {
-            case (int)CombatActionSaveType.Attack:
-                return new Attack(statsSource, (Weapon)SaveBlueprint.convertJsonToItem(json));
-            case (int)CombatActionSaveType.Ability:
-                return AbilityList.getAbility(statsSource, kvps[0].Split(":")[1]);
-            case (int)CombatActionSaveType.ItemCombatAction:
-                return new ItemCombatAction(statsSource, (UsableItem)SaveBlueprint.convertJsonToItem(json));
+            //older ability json is missing its opening quote, so it's read by hand rather than as json
+            string abilityKey = json.Replace("{", "").Replace("}", "").Replace("\"", "").Split(":")[1];
+
+            return AbilityList.getAbility(statsSource, abilityKey);
+        }
+
+        //checked by type rather than through getCombatAction, so a weapon always loads as an Attack as it did before
+        switch (SaveBlueprint.convertJsonToItem(json))
+        {
+            case Weapon weapon:
+                return new Attack(statsSource, weapon);
+            case UsableItem usableItem:
+                return new ItemCombatAction(statsSource, usableItem);
             default:
                 return null;
         }
@@ -1122,6 +799,14 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
 
         //costs can be written through the indexer, so a clone gets its own copy rather than sharing the original's
         clone.actionCosts = new Dictionary<ActionCostType, int>(actionCosts);
+
+        //units belong to the run that made them, so a clone starts with empty catalogs rather than sharing the original's
+        clone.actionCatalog = new Catalog<IActionUnit>();
+        clone.animationCatalog = new Catalog<IAnimationUnit>();
+
+        //same entries in new lists, so adding or removing an entry on a clone leaves the original alone
+        clone._TargetingLogics = new List<TargetingLogic>(_TargetingLogics);
+        clone._QueuingUnits = new Catalog<IQueuingUnit>(_QueuingUnits.Values);
 
         return clone;
     }
@@ -1270,7 +955,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         DescriptionPanel.setText(panel.typeText, getDisplayType());
         DescriptionPanel.setText(panel.amountText, getMaximumSlotsForDisplay());
         DescriptionPanel.setText(panel.timerText, getMaximumCooldownForDisplay());
-        DescriptionPanel.setText(panel.useDescriptionText, getUseDescription());
+        DescriptionPanel.setText(panel.useDescriptionText, useDescription);
 
         DescriptionPanel.setImage(panel.iconPanel, iconSprite);
 
@@ -1323,22 +1008,6 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
         return caster.canPayActionCost(this);
     }
 
-    public void chargeActorActionCost()
-    {
-        if (hasActionCost)
-        {
-            actorStats.payActionCost(this);
-        }
-    }
-
-    public void refundActorActionCost()
-    {
-        if (hasActionCost)
-        {
-            actorStats.refundActionCost(this);
-        }
-    }
-
     public bool buildableWithBlocks()
     {
         return true;
@@ -1381,7 +1050,7 @@ public abstract class CombatAction : StatBoostSource, ICloneable, IJSONConvertab
             buildingBlocks.Add(DescriptionPanelBuildingBlock.getSlotsBlock(getMaximumSlotsForDisplay()));
         }
 
-        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getUseDescription()));
+        buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(useDescription));
 
         buildingBlocks.Add(new DescriptionPanelBuildingBlock(DescriptionPanelBuildingBlockType.Icon, iconName: iconName));
 

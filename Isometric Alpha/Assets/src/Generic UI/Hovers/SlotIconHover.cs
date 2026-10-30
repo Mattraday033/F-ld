@@ -335,7 +335,7 @@ public class SlotIconHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
                 if(OverallUIManager.getCurrentPartyMember() != null)
                 {
-                    relatedDescribables.Add(OverallUIManager.getCurrentPartyMember().getZoneOfInfluenceTrait());
+                    relatedDescribables.Add(OverallUIManager.getCurrentPartyMember().zoneOfInfluenceTrait);
                 }
 
                 break;

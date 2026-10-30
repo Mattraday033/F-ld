@@ -318,7 +318,7 @@ public static class OverallUIManager
             return null;
         }
 
-        return currentPartyMember.getActionArray();
+        return currentPartyMember.actionArray;
     }
 
     public static EquippedItems getCurrentEquippedItems()
@@ -330,6 +330,6 @@ public static class OverallUIManager
             return null;
         }
 
-        return currentPartyMember.getEquippedItems();
+        return currentPartyMember.equippedItems;
     }
 }

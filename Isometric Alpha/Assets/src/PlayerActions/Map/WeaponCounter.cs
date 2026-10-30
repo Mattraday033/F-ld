@@ -55,7 +55,7 @@ public class WeaponCounter : MonoBehaviour, ICounter
 
     public void updateCounter()
     {
-        counterText.text = OverallUIManager.getCurrentActionArray().getAmountOfWeaponCombatActions() + "/" + OverallUIManager.getCurrentPartyMember().getWeaponSlots();
+        counterText.text = OverallUIManager.getCurrentActionArray().getAmountOfWeaponCombatActions() + "/" + OverallUIManager.getCurrentPartyMember().weaponSlots;
     }
 
     public List<UnityEvent> getUpdateEvents()

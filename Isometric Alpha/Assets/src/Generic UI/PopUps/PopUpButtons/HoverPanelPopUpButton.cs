@@ -30,7 +30,10 @@ public class HoverPanelPopUpButton : PopUpButton
             currentCombatantWithPriority = null;
         } else
         {
-            CombatGrid.combatantExistsAtCoords(SelectorManager.getCurrentSelector().getCoords(), out currentCombatant);
+            if(CombatGrid.tryGetCombatantAt(SelectorManager.getCurrentSelector().getCoords(), out Combatant combatantAtSelector))
+            {
+                currentCombatant = combatantAtSelector.stats;
+            }
         }
 
         //a reposition placeholder stands in for its original on either path, so the panel sees them as the same combatant

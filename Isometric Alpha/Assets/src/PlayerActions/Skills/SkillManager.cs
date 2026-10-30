@@ -169,7 +169,7 @@ public abstract class SkillManager
 
     public static SkillType getHighestSkillType(AllyStats stats)
     {
-        switch(stats.getHighestStat())
+        switch(stats.highestStat)
         {
             case PrimaryStat.Dexterity:
                 return SkillType.Cunning;

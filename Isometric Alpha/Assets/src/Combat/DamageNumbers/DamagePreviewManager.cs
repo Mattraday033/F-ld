@@ -33,7 +33,7 @@ public static class DamagePreviewManager
         List<Stats> cloneTarget = new List<Stats>();
         cloneTarget.Add(stats.getPreviewClone());
 
-        actionClone.performCombatAction(cloneTarget);
+        CombatActionManager.runCombatAction(actionClone, cloneTarget);
 
         for (int index = 0; index < healthBarOccurances; index++)
         {

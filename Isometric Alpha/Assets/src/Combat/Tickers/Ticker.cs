@@ -52,7 +52,7 @@ public class Ticker : MonoBehaviour
 				continue;
 			}
 
-			CombatAction[] actions = ally.getActionArray().getActions();
+			CombatAction[] actions = ally.actionArray.getActions();
 
 			for(int index = 0; index < actions.Length && index < CombatActionArray.numberOfActivatablePlayerCombatActions; index++)
 			{

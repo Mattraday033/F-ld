@@ -25,7 +25,7 @@ public class PartyMemberHPPanel : MonoBehaviour
 	
 	public void updateHPText()
 	{
-		hpText.text = PartyManager.getPartyMember(partyMemberName).stats.currentHealth + "/" + PartyManager.getPartyMember(partyMemberName).stats.getTotalHealth();
+		hpText.text = PartyManager.getPartyMember(partyMemberName).stats.currentHealth + "/" + PartyManager.getPartyMember(partyMemberName).stats.totalHealth;
 		backgroundImage.color = Color.white;
 	}
 	

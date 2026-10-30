@@ -119,7 +119,7 @@ public class RepositionUIManager : MonoBehaviour, INeedsUpdateOnStateChange
 		} else
 		{
 			repositionCounterText.text = repositionManager.getRepositionsRemaining() + "/" +  
-										 PartyManager.getPlayerStats().getMaximumRepositionsPerCombat();
+										 PartyManager.getPlayerStats().maximumRepositionsPerCombat;
 		}
 	}
 
@@ -155,7 +155,7 @@ public class RepositionUIManager : MonoBehaviour, INeedsUpdateOnStateChange
 
 	private bool playerHasNotLearnedToReposition()
 	{
-		return PartyManager.getPlayerStats().getMaximumRepositionsPerCombat() <= 0;
+		return PartyManager.getPlayerStats().maximumRepositionsPerCombat <= 0;
 	}
 	
 	public void revealConfirmRepositionButton()

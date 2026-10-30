@@ -63,7 +63,7 @@ public class PartyPositionSpriteGridSquare : PartyPositionGridSquare, IPointerDo
     {
         image.color = ColorList.grey155;
         partyMemberSprite.enabled = true;
-        partyMemberSprite.sprite = characterInSquare.getSpriteIcon();
+        partyMemberSprite.sprite = characterInSquare.spriteIcon;
     }
 
     private void disablePartyMemberSprite()

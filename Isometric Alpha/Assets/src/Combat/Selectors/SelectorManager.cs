@@ -214,20 +214,21 @@ public class SelectorManager : MonoBehaviour
 	{
 		destroyPressEPrompt();
 
-		if (!CombatGrid.combatantExistsAtCoords(getCurrentSelectorCoords(), out Stats target) || target.isDead || 
+		if (!CombatGrid.tryGetCombatantAt(getCurrentSelectorCoords(), out Combatant target) || target.stats.isDead ||
             CombatActionManager.actorAlreadyHasCombatAction(getCurrentSelectorCoords()) ||
 			(CombatGrid.positionIsOnAlliedSide(getCurrentSelectorCoords()) && CombatActionManager.finishedChoosingPartyMemberCombatActions()))
 		{
 			return;
 		}
 
-		Combatant combatant = target.getCombatant();
+		//the prompt sits over the primary, the GameObject that carries the health bar
+		Combatant primary = target.primary;
 
-		if (combatant != null && currentSelector.singleTile() && GameObjectUtil.tagMatchesCriteria(combatant.gameObject, selectableAllyTagCriteria))
+		if (primary != null && currentSelector.singleTile() && GameObjectUtil.tagMatchesCriteria(target.gameObject, selectableAllyTagCriteria))
 		{
 			if (PlayerStateManager.currentActivity == CurrentActivity.ChoosingActor)
 			{
-				instance.pressEPrompt = Instantiate(Resources.Load<GameObject>(PrefabNames.combatSelectPrompt), combatant.promptParent);
+				instance.pressEPrompt = Instantiate(Resources.Load<GameObject>(PrefabNames.combatSelectPrompt), primary.promptParent);
 			}
 		}
 
@@ -367,7 +368,7 @@ public class SelectorManager : MonoBehaviour
 			}
 			else
 			{
-				loadedCombatAction.performCombatAction();
+				CombatActionManager.runCombatAction(loadedCombatAction);
 			}
 
 			if (loadedCombatAction.hasAssignedActor(out Stats loadedActorStats) && 
@@ -456,7 +457,7 @@ public class SelectorManager : MonoBehaviour
         }
         else
         {
-            loadedCombatAction.performCombatAction();
+            CombatActionManager.runCombatAction(loadedCombatAction);
         }
 
         AudioManager.playChooseActorAbilityLocationSFX();
@@ -470,9 +471,9 @@ public class SelectorManager : MonoBehaviour
 	{
 		//the shared menu is never null, so enemies and reposition placeholders have to be turned away here
 		if (!SelectionInfo.selectedAllyCanAct(currentSelector.getCoords()) ||
-            !CombatGrid.combatantExistsAtCoords(currentSelector.getCoords(), out Stats currentTarget) ||
-            !(currentTarget is AllyStats) ||
-            currentTarget.isRepositionClone)
+            !CombatGrid.tryGetCombatantAt(currentSelector.getCoords(), out Combatant currentTarget) ||
+            !(currentTarget.stats is AllyStats) ||
+            currentTarget.stats.isRepositionClone)
 		{
 			return;
 		}
@@ -481,7 +482,7 @@ public class SelectorManager : MonoBehaviour
 
 		if (currentAbilityManager != null && !currentAbilityManager.enabled)
 		{
-			currentAbilityManager.showFor(currentTarget);
+			currentAbilityManager.showFor(currentTarget.stats);
 
 			PlayerStateManager.setCurrentActivity(CurrentActivity.ChoosingAbility);
 		}
@@ -911,21 +912,21 @@ public static class SelectionInfo
 {
 	public static bool selectionIsAlly(GridCoords coords)
 	{
-		return CombatGrid.combatantExistsAtCoords(coords, out Stats target) && 
-                GameObjectUtil.tagMatchesCriteria(target.getCombatSprite(), SelectorManager.allyTagCriteria);
+		return CombatGrid.tryGetCombatantAt(coords, out Combatant target) &&
+                GameObjectUtil.tagMatchesCriteria(target.gameObject, SelectorManager.allyTagCriteria);
 	}
 
 	public static bool selectionIsPartyMember(GridCoords coords)
 	{
-		return CombatGrid.combatantExistsAtCoords(coords, out Stats target) &&
-                GameObjectUtil.tagMatchesCriteria(target.getCombatSprite(), new string[] { LayerAndTagManager.playerTag });
+		return CombatGrid.tryGetCombatantAt(coords, out Combatant target) &&
+                GameObjectUtil.tagMatchesCriteria(target.gameObject, new string[] { LayerAndTagManager.playerTag });
 	}
 
 	public static bool selectedAllyCanAct(GridCoords coords)
 	{
-		return CombatGrid.combatantExistsAtCoords(coords, out Stats actor) &&
-                actor.isAlive && 
-                !PlayerCombatActionManager.actorHasActionsInQueue(actor) 
+		return CombatGrid.tryGetCombatantAt(coords, out Combatant actor) &&
+                actor.stats.isAlive &&
+                !PlayerCombatActionManager.actorHasActionsInQueue(actor.stats)
                 && PlayerCombatActionCounterManager.playerHasActionsLeft();
 	}
 

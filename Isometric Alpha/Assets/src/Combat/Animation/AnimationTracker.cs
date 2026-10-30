@@ -33,9 +33,6 @@ public class AnimationTracker : MonoBehaviour
 
     private static AnimationTracker instance;
 
-    private static int currentKey = 0;
-
-
     [RuntimeInitializeOnLoadMethod]
     private static void initializeAnimationTracker()
     {
@@ -66,11 +63,6 @@ public class AnimationTracker : MonoBehaviour
         }
 
         currentAnimations = new Dictionary<int, IAnimationManager>();
-    }
-
-    public static int getCurrentKey()
-    {
-        return currentKey++;
     }
 
     public static void trackAnimation(int key, IAnimationManager tracker)
@@ -153,7 +145,7 @@ public class AnimationTracker : MonoBehaviour
 
 
         if(ignoreMissingTargets && 
-            (!CombatGrid.combatantExistsAtCoords(targetCoords, out Stats target) || (target.isDead && !targetCanBeDead)))
+            (!CombatGrid.tryGetCombatantAt(targetCoords, out Combatant target) || (target.stats.isDead && !targetCanBeDead)))
         {
             return;
         }

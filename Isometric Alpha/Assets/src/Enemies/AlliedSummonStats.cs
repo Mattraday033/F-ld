@@ -13,8 +13,16 @@ public class AlliedSummonStats : VolleyParticipantStats
 
     public override bool isPartOfVolley => partOfVolley;
 
+    #region Properties
+
+	public override Color outlineColor => ColorList.canBeInteractedWith;
+
+    public override int volleyAccuracy => PartyStats.getVolleyAccuracy();
+
+    #endregion
+
 	public AlliedSummonStats(EnemyStats enemyStats, bool partOfVolley = true): 
-		base(enemyStats.uniqueName, enemyStats.getTotalArmorRating(), enemyStats.getTotalHealth(), enemyStats.getCombatAction())
+		base(enemyStats.characterName, enemyStats.totalArmorRating, enemyStats.totalHealth, enemyStats.combatAction)
     {
         addTraits(enemyStats.traitContainer);
         setFoeTypeToSummoned();
@@ -43,16 +51,6 @@ public class AlliedSummonStats : VolleyParticipantStats
         }
 
         return new List<GridCoords> { CombatGrid.findRandomOpenSpaceInAllyZone() };
-    }
-	
-	public override Color getOutlineColor()
-	{
-		return ColorList.canBeInteractedWith;
-	}
-
-    public override int getVolleyAccuracy()
-    {
-        return PartyStats.getVolleyAccuracy();
     }
 
     //tagged as an NPC by CombatantSpawnDetails, which is how allied summons are told apart from party members

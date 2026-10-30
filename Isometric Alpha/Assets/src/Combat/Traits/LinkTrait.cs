@@ -30,25 +30,25 @@ public class LinkTrait : Trait
 
     public override void harmAllLinkedTargets(int incomingDamage)
     {
-        if(getTraitHolder() == null)
-        {
-            return;
-        }
+        // if(getTraitHolder() == null)
+        // {
+        //     return;
+        // }
 
-        int projectileNumber = 0;
+        // int projectileNumber = 0;
 
-        if (getTraitHolder().positions.Count > 0)
-        {
-            linkAction.actorStats = getTraitHolder();
-        }
+        // if (getTraitHolder().positions.Count > 0)
+        // {
+        //     linkAction.actorStats = getTraitHolder();
+        // }
 
-        foreach (Stats target in linkedTargets)
-        {
-            if(target != null && !target.isDead && target.positions.Count > 0)
-            {
-                projectileNumber += linkAction.sendProjectileAt(target.positions[0], target, projectileNumber, getDamageToDeal(incomingDamage), false);
-            }
-        }
+        // foreach (Stats target in linkedTargets)
+        // {
+        //     if(target != null && !target.isDead && target.positions.Count > 0)
+        //     {
+        //         projectileNumber += linkAction.sendProjectileAt(target.positions[0], target, projectileNumber, getDamageToDeal(incomingDamage), false);
+        //     }
+        // }
     }
 
     public override bool preventsCombatAction()

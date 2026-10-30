@@ -7,24 +7,27 @@ using UnityEngine;
 
 public class Ability: CombatAction, IJSONConvertable
 {
+	//the save file key an ability's json is stored under. CombatAction.extractFromJson looks for it to tell abilities apart from item actions
+	public const string sourceAbilityElementName = "sourceAbility";
+
 	private int requiredStatLevel = 1;
 	public string statKey = "";
 	
-	private string key;
-	
-	private string name;
-	
-	protected string useDescription;
+	private string _Key;
 
-	private string loreDescription;
-	
+	private string name;
+
+	private string _UseDescription;
+
+	private string _LoreDescription;
+
 	private string damageFormula;
 	
 	private string critFormula;
 	
 	private SelectorTemplate rangeTemplate;
 	
-	private int maximumSlots;
+	private int _MaximumSlots;
 	
 	private int maximumCooldown;
 	
@@ -41,8 +44,6 @@ public class Ability: CombatAction, IJSONConvertable
             _OnlyUsableDuringSurpriseRound = value;
         }
     }
-
-    private CombatAnimationType animationType;
 
     public override bool targetsAllySection => targetsOnlyAllies;
 
@@ -62,19 +63,19 @@ public class Ability: CombatAction, IJSONConvertable
             switch(statKeyChar)
             {
                 case AbilityList.levelKeyChar:
-                    currentStat = OverallUIManager.getCurrentPartyMember().getLevel();
+                    currentStat = OverallUIManager.getCurrentPartyMember().level;
                     break;
                 case AbilityList.strengthKeyChar:
-                    currentStat = OverallUIManager.getCurrentPartyMember().getStrength();
+                    currentStat = OverallUIManager.getCurrentPartyMember().totalStrength;
                     break;
                 case AbilityList.dexterityKeyChar:
-                    currentStat = OverallUIManager.getCurrentPartyMember().getDexterity();
+                    currentStat = OverallUIManager.getCurrentPartyMember().totalDexterity;
                     break;
                 case AbilityList.wisdomKeyChar:
-                    currentStat = OverallUIManager.getCurrentPartyMember().getWisdom();
+                    currentStat = OverallUIManager.getCurrentPartyMember().totalWisdom;
                     break;
                 case AbilityList.charismaKeyChar:
-                    currentStat = OverallUIManager.getCurrentPartyMember().getCharisma();
+                    currentStat = OverallUIManager.getCurrentPartyMember().totalCharisma;
                     break;
             }
 
@@ -82,19 +83,22 @@ public class Ability: CombatAction, IJSONConvertable
         }
     }
 
-    public Ability(CombatActionSettings settings, List<TargetingLogic> targetingLogics = null) :
-    base(null, SelectorFactory.buildByTemplate(settings.targetParams.rangeTemplate), targetingLogics)
+    //abilities don't come from an item
+    public override Item sourceItem => null;
+
+    public Ability(CombatActionSettings settings, Catalog<IQueuingUnit> queuingUnits = null, List<TargetingLogic> targetingLogics = null) :
+    base(null, SelectorFactory.buildByTemplate(settings.targetParams.rangeTemplate), queuingUnits, targetingLogics)
     {
         applySettings(settings);
     }
 
 	public override void applySettings(CombatActionSettings settings)
 	{
-		key = settings.key;
-		
+		_Key = settings.key;
+
 		name = settings.descriptionParams.name;
-		useDescription = settings.descriptionParams.useDescription;
-		loreDescription = settings.descriptionParams.loreDescription;
+		_UseDescription = settings.descriptionParams.useDescription;
+		_LoreDescription = settings.descriptionParams.loreDescription;
 		iconName = settings.descriptionParams.iconName;
 
 		damageFormula = settings.damageParams.damageFormula;
@@ -106,58 +110,60 @@ public class Ability: CombatAction, IJSONConvertable
         _SelfTargeting = settings.targetParams.selfTargeting;
         targetsOnlyAllies = settings.targetParams.targetsOnlyAllies;
 
-		maximumSlots = settings.frequencyParams.maximumSlots;
+		_MaximumSlots = settings.frequencyParams.maximumSlots;
 		maximumCooldown = settings.frequencyParams.maximumCooldown;
 		_OnlyUsableDuringSurpriseRound = settings.frequencyParams.onlyUsableDuringSurpriseRound;
-
-		clearActionCosts();
 
 		for (int index = 0; index < settings.costParams.costTypes.Length && index < settings.costParams.actionCosts.Length; index++)
 		{
 			this[settings.costParams.costTypes[index]] = settings.costParams.actionCosts[index];
 		}
 
-        animationType = settings.animationParams.animationType;
         _EffectAnimationType = settings.animationParams.effectAnimationType;
         useSpecialAttackAnimation = settings.animationParams.useSpecialAttackAnimation;
 
         _AppliedTrait = settings.appliedTrait;
+
+        base.applySettings(settings);
     }
 
 
 	public override string displayName { get { return name; } }
-	public override string uniqueName { get { return key; } }
-	
-	public override string getKey()
-	{
-		return key;
-	}
-	
-	public override string getUseDescription()
-	{
-        if(appliedTrait != null)
-        {
-            if(useDescription.Length <= 0)
-            {
-                return appliedTrait.getApplicationDescription();
-            } else
-            {
-                return useDescription + " " + appliedTrait.getApplicationDescription();
-            }
-        } else
-        {
-		    return useDescription;
-        }
-	}
-	
-	public string getLoreDescription()
-	{
-        if(loreDescription.Length <= 0)
-        {
-            return "";
-        }
+	public override string uniqueName { get { return _Key; } }
 
-		return "<i>" + loreDescription + "</i>";
+	public override string key => _Key;
+
+	public override string useDescription
+	{
+		get
+		{
+	        if(appliedTrait != null)
+	        {
+	            if(_UseDescription.Length <= 0)
+	            {
+	                return appliedTrait.getApplicationDescription();
+	            } else
+	            {
+	                return _UseDescription + " " + appliedTrait.getApplicationDescription();
+	            }
+	        } else
+	        {
+			    return _UseDescription;
+	        }
+		}
+	}
+	
+	public override string loreDescription
+	{
+		get
+		{
+			if(_LoreDescription.Length <= 0)
+			{
+				return "";
+			}
+
+			return "<i>" + _LoreDescription + "</i>";
+		}
 	}
 
 	public override string getRangeTitle()
@@ -168,7 +174,7 @@ public class Ability: CombatAction, IJSONConvertable
     //convertToJson is for save files, you will never need to save an actions coords so actor/target coords are not saved
     public override string convertToJson()
     {
-        return "{sourceAbility\":\"" + getKey() + "\",\"CombatActionSaveType\":\"" + getSaveType() + "}";
+        return "{\"" + sourceAbilityElementName + "\":\"" + key + "\"}";
     }
 
     public override EffectAnimationType effectAnimationType
@@ -216,12 +222,12 @@ public class Ability: CombatAction, IJSONConvertable
 			return Constants.zeroRating;
 		}
 
-        return DamageCalculator.combineFormulas(gatherAllNonActionFormulas(a => a.getDamageFormula()), "+" + actorStats.getBonusAbilityDamage());
+        return DamageCalculator.combineFormulas(gatherAllNonActionFormulas(a => a.getDamageFormula()), "+" + actorStats.bonusAbilityDamage);
     }
 
     protected override string gatherAllNonActionFormulas(FormulaDelegate<StatBoostSource> getFormula)
     {
-        string allStats = getAllOfOneStatFormula<StatBoostSource>(getStatSource().getAllStatBoosts(), t => getFormula(t));
+        string allStats = getAllOfOneStatFormula<StatBoostSource>(getStatSource().allStatBoosts, t => getFormula(t));
 
         AllyStats statSource = getStatSource() as AllyStats;
 
@@ -250,26 +256,13 @@ public class Ability: CombatAction, IJSONConvertable
 		return rangeTemplate;
 	}
 	
-	public override int getMaximumSlots()
-	{
-		return maximumSlots;
-	}
+	public override int maximumSlots => _MaximumSlots;
 	
 	public override string getDisplayType()
 	{
 		return AbilityList.abilityActionTypeName;
 	}
 
-	public override Item getSourceItem()
-	{
-		return null;
-	}
-
-	public override int getSaveType()
-	{
-		return (int) CombatActionSaveType.Ability;
-	}
-	
 	public override int getRequiredStatLevel()
 	{
 		//returns -1 if it doesn't require a stat level
@@ -331,9 +324,9 @@ public class Ability: CombatAction, IJSONConvertable
             buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getCostDescription()));
         }
 
-        if (getLoreDescription().Length > 0)
+        if (loreDescription.Length > 0)
         {
-            buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(getLoreDescription()));
+            buildingBlocks.Add(DescriptionPanelBuildingBlock.getDescriptionBlock(loreDescription));
         }
 
         return buildingBlocks;

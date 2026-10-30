@@ -131,25 +131,25 @@ public struct StatsWrapper
     {
         key = "" + partyMember.uniqueName;
 
-        level = partyMember.stats.getLevel();
+        level = partyMember.stats.level;
         currentHealth = partyMember.stats.currentHealth;
-        totalHealth = partyMember.stats.getTotalHealth();
+        totalHealth = partyMember.stats.totalHealth;
         canJoinParty = partyMember.canJoinParty;
 
         xp = partyMember.stats.xp;
 
-        strength = partyMember.stats.getStrengthWithoutBoosts();
-        dexterity = partyMember.stats.getDexterityWithoutBoosts();
-        wisdom = partyMember.stats.getWisdomWithoutBoosts();
-        charisma = partyMember.stats.getCharismaWithoutBoosts();
+        strength = partyMember.stats.strength;
+        dexterity = partyMember.stats.dexterity;
+        wisdom = partyMember.stats.wisdom;
+        charisma = partyMember.stats.charisma;
 
         placed = partyMember.placed;
 
         partyMemberPlacedPosition = partyMember.placedPosition.x + "_" + partyMember.placedPosition.y + "_" + partyMember.placedPosition.z;
         partyMemberFormationCoords = Formation.findLocationOfStats(partyMember.stats);
 
-        currentEquipment = SaveBlueprint.convertToJson(partyMember.stats.getEquippedItems().equippedItems);
-        combatActions = SaveBlueprint.convertToJson(partyMember.stats.getActionArray().getActions());
+        currentEquipment = SaveBlueprint.convertToJson(partyMember.stats.equippedItems.equippedItems);
+        combatActions = SaveBlueprint.convertToJson(partyMember.stats.actionArray.getActions());
     }
 
     public List<DescriptionPanelBuildingBlock> getDescriptionBuildingBlocks()

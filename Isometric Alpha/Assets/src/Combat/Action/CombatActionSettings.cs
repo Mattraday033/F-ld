@@ -187,14 +187,13 @@ public class AnimationParams
 {
     public const bool useSpecialAttack = true;
 
-    public CombatAnimationType animationType;
     public EffectAnimationType effectAnimationType;
     public bool useSpecialAttackAnimation = false;
 
 
     public static AnimationParams build()
     {
-        return build(CombatAnimationType.Effect);
+        return build(EffectAnimationType.Default);
     }
 
     public static AnimationParams build(bool useSpecialAttackAnimation)
@@ -206,21 +205,10 @@ public class AnimationParams
         return animationParams;
     }
 
-    public static AnimationParams build(CombatAnimationType animationType, EffectAnimationType effectAnimationType = EffectAnimationType.Default)
-    {
-        AnimationParams animationParams = new AnimationParams();
-
-        animationParams.animationType = animationType;
-        animationParams.effectAnimationType = effectAnimationType;
-
-        return animationParams;
-    }
-
     public static AnimationParams build(EffectAnimationType effectAnimationType, bool useSpecialAttackAnimation = false)
     {
         AnimationParams animationParams = new AnimationParams();
 
-        animationParams.animationType = CombatAnimationType.Effect;
         animationParams.effectAnimationType = effectAnimationType;
         animationParams.useSpecialAttackAnimation = useSpecialAttackAnimation;
 

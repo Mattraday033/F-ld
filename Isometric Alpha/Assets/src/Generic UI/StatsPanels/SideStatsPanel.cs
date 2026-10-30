@@ -17,10 +17,10 @@ public class SideStatsPanel : MonoBehaviour, IStatsPanel
 
 	public void updateStatsPanel()
 	{
-        levelText.text = "Level " + PartyManager.getPlayerStats().getLevel();
+        levelText.text = "Level " + PartyManager.getPlayerStats().level;
 
         currentHPText.text = PartyManager.getPlayerStats().currentHealth + "";
-		totalHPText.text = PartyManager.getPlayerStats().getTotalHealth() + "";
+		totalHPText.text = PartyManager.getPlayerStats().totalHealth + "";
 		
 		XPText.text = PartyManager.getPlayerStats().xp + "";
 		GPText.text = Purse.getCoinsInPurse() + Purse.moneySymbol;

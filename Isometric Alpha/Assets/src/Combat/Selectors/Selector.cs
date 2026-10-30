@@ -211,22 +211,16 @@ public class Selector : ICloneable
 		return getCoords().isWithinAllySection();
 	}
 	
+	//every GameObject of a combatant carries the same tag, so the one on the cell will do
 	public bool hasAtLeastOneTarget(string[] tagCriteria)
 	{
-		List<Stats> allTargets = getAllTargets();
-
         List<Stats> targetsQueuedToMove = new List<Stats>();
 
-		foreach (Stats stats in allTargets)
+		foreach (Combatant combatant in getAllTargets())
 		{
-            if(stats == null)
-            {
-                continue;
-            }
+            Stats stats = combatant.stats;
 
-			GameObject combatSprite = stats.getCombatSprite();
-
-			if (GameObjectUtil.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove)
+			if (GameObjectUtil.tagMatchesCriteria(combatant.gameObject, tagCriteria) && !stats.queuedToMove)
 			{
 				return true;
 			} else if(stats.queuedToMove)
@@ -256,19 +250,18 @@ public class Selector : ICloneable
 
 	public bool hasAtLeastOneLivingTarget(string[] tagCriteria)
 	{
-		List<Stats> allTargets = getAllTargets();
         List<Stats> targetsQueuedToMove = new List<Stats>();
 
-		foreach (Stats stats in allTargets)
+		foreach (Combatant combatant in getAllTargets())
 		{
+            Stats stats = combatant.stats;
+
 			if (stats.isDead)
 			{
 				continue;
 			}
 
-			GameObject combatSprite = stats.getCombatSprite();
-
-			if (GameObjectUtil.tagMatchesCriteria(combatSprite, tagCriteria) && !stats.queuedToMove)
+			if (GameObjectUtil.tagMatchesCriteria(combatant.gameObject, tagCriteria) && !stats.queuedToMove)
 			{
 				return true;
 			}else if(stats.queuedToMove)
@@ -288,9 +281,9 @@ public class Selector : ICloneable
 
 		foreach (GridCoords targetTileCoord in targetTileCoords)
 		{
-			if (CombatGrid.combatantExistsAtCoords(targetTileCoord, out Stats targetCombatant) &&
-                    Helpers.hasQuality<Trait>(targetCombatant.traitContainer, t => t.isMandatoryTarget()) &&
-                    !targetCombatant.queuedToMove)
+			if (CombatGrid.tryGetCombatantAt(targetTileCoord, out Combatant targetCombatant) &&
+                    Helpers.hasQuality<Trait>(targetCombatant.stats.traitContainer, t => t.isMandatoryTarget()) &&
+                    !targetCombatant.stats.queuedToMove)
 			{
 				return true;
 			}
@@ -314,14 +307,15 @@ public class Selector : ICloneable
 		return getCoords();
 	}
 
-	public List<Stats> getAllTargets()
+	//one entry per selector cell with a Combatant on it, so a multi cell combatant appears once per cell it covers
+	public List<Combatant> getAllTargets()
 	{
         GridCoords[] targetTileCoords = getAllSelectorCoords();
-        List<Stats> allActionTargets = new List<Stats>();
+        List<Combatant> allActionTargets = new List<Combatant>();
 
         foreach (GridCoords targetTileCoord in targetTileCoords)
         {
-			if(CombatGrid.combatantExistsAtCoords(targetTileCoord, out Stats target))
+			if(CombatGrid.tryGetCombatantAt(targetTileCoord, out Combatant target))
 			{
                 allActionTargets.Add(target);
             }
@@ -332,25 +326,16 @@ public class Selector : ICloneable
 
     public List<Stats> getAllPreviewTargetClones()
     {
-        List<Stats> allActionTargets = getAllTargets();
-		List<Stats> cloneTargets = new List<Stats>();
-
-        foreach (Stats target in allActionTargets)
-        {
-			cloneTargets.Add(target.getPreviewClone());
-        }
-
-        return cloneTargets;
+        return getAllTargets().Select(c => c.stats.getPreviewClone()).ToList();
     }
 
     public int countHealthBarOccurances(HealthBarManager healthBar)
     {
-        List<Stats> allActionTargets = getAllTargets();
         int healthBarOccurances = 0;
 
-        foreach (Stats target in allActionTargets)
+        foreach (Combatant target in getAllTargets())
         {
-			if(target.getHealthBarManager() == healthBar)
+			if(target.primaryHealthBar == healthBar)
             {
                 healthBarOccurances++;
             }
@@ -422,12 +407,12 @@ public class Selector : ICloneable
 		
 		foreach(GridCoords coords in allSelectorCoords)
 		{
-			if(CombatGrid.combatantExistsAtCoords(coords, out Stats target))
+			if(!CombatGrid.tryGetCombatantAt(coords, out Combatant target))
 			{
-				return false;
+				continue;
 			}
 
-			if(Helpers.hasQuality<Trait>(target.traitContainer, t => t.isImmobile())) 
+			if(Helpers.hasQuality<Trait>(target.stats.traitContainer, t => t.isImmobile()))
 			{
 				return true;
 			}

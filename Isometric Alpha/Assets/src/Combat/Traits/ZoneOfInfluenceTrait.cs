@@ -10,7 +10,7 @@ public class ZoneOfInfluenceTrait : Trait
 
 
 	public ZoneOfInfluenceTrait(AllyStats zoneOwner): 
-    base(zoneOwner.getNameWithoutPlayerMarker() + zoiTraitName, TraitType.Influence, iconName: HoverMessageList.zoneOfInfluenceKey)
+    base(zoneOwner.nameWithoutPlayerMarker + zoiTraitName, TraitType.Influence, iconName: HoverMessageList.zoneOfInfluenceKey)
     {
         traitApplier = zoneOwner;
     }

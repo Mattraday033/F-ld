@@ -34,7 +34,7 @@ public class GroundEffect
 	
     public void applyDamage()
     {
-        if(!CombatGrid.combatantExistsAtCoords(position, out Stats target))
+        if(!CombatGrid.tryGetCombatantAt(position, out Combatant target))
         {
             return;
         } else
@@ -44,7 +44,7 @@ public class GroundEffect
             DamageNumberPopup.create(position, damageDealt, CombatGrid.getPositionAt(position), DamageNumberPopup.getDirectionByTargetCoords(position),
                                     GroundEffectManager.getInstance().damageNumberCanvas, isNotACrit, doesNotHealTarget);
             
-            target.modifyCurrentHealth(damageDealt);
+            target.stats.modifyCurrentHealth(damageDealt);
         }
     }
 

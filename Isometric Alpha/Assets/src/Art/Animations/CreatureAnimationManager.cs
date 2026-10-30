@@ -41,12 +41,19 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
         {
             if(_Key < 0)
             {
-                _Key = AnimationTracker.getCurrentKey();
+                _Key = INameSource.getCurrentKey();
             }
 
             return _Key;
         }
     }
+
+    #region INameSource
+
+    public string displayName { get { return gameObject.name; } }
+    public string uniqueName { get { return gameObject.name + "_" + key; } }
+
+    #endregion
 
     //the character outlives its animations, so removing one from AnimationTracker mustn't destroy it
     public bool singleFire { get { return false; } }
@@ -493,8 +500,9 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
             {
                 foreach(INameSource nameSource in owner.GetComponents<INameSource>())
                 {
-                    //the icon manager only passes on another source's name, so it's skipped in favour of that source
-                    if(nameSource is OverHeadIconManager)
+                    //the icon manager only passes on another source's name, so it's skipped in favour of that source.
+                    //The animation managers only name their own GameObject, so they're skipped as well
+                    if(nameSource is OverHeadIconManager || nameSource is IAnimationManager)
                     {
                         continue;
                     }
@@ -591,12 +599,12 @@ public class CreatureAnimationManager : MonoBehaviour, IAnimationManager
         {
             Combatant ownerCombatant = combatant;
 
-            if(!CombatStateManager.inCombat || ownerCombatant == null)
+            if(!CombatStateManager.inCombat || ownerCombatant == null || ownerCombatant.stats == null)
             {
                 return false;
             }
 
-            switch(ownerCombatant.uniqueName)
+            switch(ownerCombatant.stats.characterName)
             {
                 case NPCNameList.captainAdela:
                     return true;

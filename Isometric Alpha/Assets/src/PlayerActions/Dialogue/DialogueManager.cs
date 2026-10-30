@@ -856,7 +856,7 @@ public class DialogueManager : MonoBehaviour
 
                     foreach (PartyMember partyMember in partyMembers)
                     {
-                        EquippedItems equippedItems = partyMember.stats.getEquippedItems();
+                        EquippedItems equippedItems = partyMember.stats.equippedItems;
 
                         for (int index = 0; index < EquippedItems.totalEquipmentSlots; index++)
                         {
