@@ -24,12 +24,21 @@ public interface IActionUnit
 
 public static class ActionUnitUtil
 {
-    //puts a see-through copy of the target on the grid where the move will take it.
+    //puts a see-through copy of the target on the grid where the move will take it, recording the action that wants it.
     //A move that leaves the target where it is gets none, since the copy would sit on top of the target
-    public static void generatePlaceholder(this MoveCombatant move)
+    public static void generatePlaceholder(this MoveCombatant move, CombatAction action)
     {
         if(move.newPositions[0].Equals(move.originalPositions[0]))
         {
+            return;
+        }
+
+        //another queued action already shows this target going here, so this action shares that placeholder
+        Combatant existing = move.findPlaceholder();
+
+        if(existing != null)
+        {
+            existing.placeholderActions.Add(action);
             return;
         }
 
@@ -57,6 +66,44 @@ public static class ActionUnitUtil
 
         //the only link from a placeholder back to its original: hovers, selectors and previews find the original through it
         move.target.repositionClone = placeholder;
+
+        placeholder.getCombatant().placeholderActions.Add(action);
+    }
+
+    //for an unqueued action: it stops depending on the placeholder, which is only removed once no queued action still shows it
+    public static void releasePlaceholder(this MoveCombatant move, CombatAction action)
+    {
+        Combatant placeholder = move.findPlaceholder();
+
+        if(placeholder == null)
+        {
+            return;
+        }
+
+        placeholder.placeholderActions.Remove(action);
+
+        if(placeholder.placeholderActions.Count > 0)
+        {
+            return;
+        }
+
+        move.removePlaceholder();
+    }
+
+    //the placeholder of the move's target standing on one of the move's destination cells, or null if there isn't one
+    private static Combatant findPlaceholder(this MoveCombatant move)
+    {
+        foreach(GridCoords cell in move.newPositions)
+        {
+            if(CombatGrid.tryGetCombatantAt(cell, out Combatant combatant) &&
+                combatant.isPlaceholder &&
+                combatant.stats.uniqueName.Equals(move.target.uniqueName))
+            {
+                return combatant;
+            }
+        }
+
+        return null;
     }
 
     //takes the placeholder generatePlaceholder made for this move off the grid and destroys it.
@@ -191,20 +238,28 @@ public class ChangeHealth : IActionUnit
 
     public List<IAnimationUnit> perform()
     {
+        if(target == null || 
+            target.isRepositionClone)
+        {
+            return new List<IAnimationUnit>();
+        }
+
         originalHealth = target.currentHealth;
 
         target.modifyCurrentHealth(damage, healing, false);
 
+        Combatant combatant = target.getCombatant();
+
         List<IAnimationUnit> output = new List<IAnimationUnit>()   {
-                                                    new CreateMessage(target.getCombatant(), damage.ToString())
+                                                    new CreateMessage(combatant, damage.ToString())
                                                 };
 
         if(target.isDead)
         {
-            output.Add(new StartAnimation(target.getCombatant(), CharacterAnimationType.Death));
+            output.Add(new StartAnimation(combatant, CharacterAnimationType.Death));
         } else
         {
-            output.Add(new StartAnimation(target.getCombatant(), CharacterAnimationType.Wounded));
+            output.Add(new StartAnimation(combatant, CharacterAnimationType.Wounded));
         }
 
         return output;

@@ -99,32 +99,41 @@ public class CombatActionManager : MonoBehaviour
         {
             //logs the message and full stack trace, so a failed action doesn't fail silently
             Debug.LogException(e);
-
-            switch(actionState)
+            try
             {
-                case CombatActionState.Calculation:
-                    return;
-                case CombatActionState.Application:
+                switch(actionState)
+                {
+                    case CombatActionState.Calculation:
+                        return;
+                    case CombatActionState.Application:
 
-                    //start at the unit that threw, since it may have partially applied before failing
-                    for(unitIndex = Math.Min(unitIndex, actionUnits.Count - 1); unitIndex >= 0; unitIndex--)
-                    {
-                        actionUnits[unitIndex].repeal();
-                    }
+                        //start at the unit that threw, since it may have partially applied before failing
+                        for(unitIndex = Math.Min(unitIndex, actionUnits.Count - 1); unitIndex >= 0; unitIndex--)
+                        {
+                            actionUnits[unitIndex].repeal();
+                        }
 
-                    return;
-                case CombatActionState.Animation:
+                        return;
+                    case CombatActionState.Animation:
 
-                    //start at the unit that threw, since it may have partially started before failing
-                    for(unitIndex = Math.Min(unitIndex, animationUnits.Count - 1); unitIndex >= 0; unitIndex--)
-                    {
-                        animationUnits[unitIndex].halt();
-                    }
+                        //start at the unit that threw, since it may have partially started before failing
+                        for(unitIndex = Math.Min(unitIndex, animationUnits.Count - 1); unitIndex >= 0; unitIndex--)
+                        {
+                            animationUnits[unitIndex].halt();
+                        }
 
-                    return;
-                default:
-                    return;
+                        return;
+                    default:
+                        return;
+                }
             }
+            catch
+            {
+                
+                Debug.LogError("Failure in the Exception Handler");
+                Debug.LogException(e);
+            }
+
         } finally
         {
             //runs on every exit, previews and failures included, so the next run starts from empty catalogs.

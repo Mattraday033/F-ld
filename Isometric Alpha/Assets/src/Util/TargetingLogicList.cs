@@ -77,10 +77,12 @@ public static class TargetingUtil
         //the face farthest from the dividing line is the shape's row closest to the back row
         int farthestRow = alliedSide ? newPositions.Max(p => p.row) : newPositions.Min(p => p.row);
 
-        //combatants touching that face stay where they are, but are still added so they take collision damage
+        //combatants touching that face stay where they are, but are still added so they take collision damage.
+        //Placeholders aren't combatants, so there's nothing to collide with
         foreach(GridCoords cell in newPositions.Where(p => p.row == farthestRow))
         {
             if(CombatGrid.tryGetCombatantAt(cell.row + direction, cell.col, out Combatant occupant) &&
+               !occupant.isPlaceholder &&
                !occupant.stats.Equals(stats) &&
                !collisionTargets.Any(m => m.target.Equals(occupant.stats)))
             {

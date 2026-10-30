@@ -28,7 +28,7 @@ public class GeneratePlaceholder : IQueuingUnit
     {
         foreach(MoveCombatant move in action.actionCatalog[typeof(MoveCombatant)])
         {
-            move.generatePlaceholder();
+            move.generatePlaceholder(action);
         }
 
         if(action.targetsAllySection)
@@ -37,13 +37,13 @@ public class GeneratePlaceholder : IQueuingUnit
         }
     }
 
-    //takes every placeholder onQueue made for this action off the grid and destroys it.
+    //releases every placeholder onQueue made or shared for this action; one is only destroyed once no other queued action shows it.
     //Runs before PushBack.onUnqueue clears the catalog, so the moves are still there to find them by
     public void onUnqueue(CombatAction action)
     {
         foreach(MoveCombatant move in action.actionCatalog[typeof(MoveCombatant)])
         {
-            move.removePlaceholder();
+            move.releasePlaceholder(action);
         }
 
         CombatActionManager.getInstance().promptLaterCombatActionsToReturnToPreviousTarget();

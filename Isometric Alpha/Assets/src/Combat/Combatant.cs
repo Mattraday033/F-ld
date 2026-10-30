@@ -18,6 +18,9 @@ public class Combatant : MonoBehaviour, INameSource
     public bool isPrimary { get; private set; }
     public bool isPlaceholder { get; private set; }
 
+    //the queued actions showing this placeholder, oldest first; only used when isPlaceholder
+    public readonly List<CombatAction> placeholderActions = new List<CombatAction>();
+
     //the Combatant carrying the Stats' health bar, which is this one unless the Stats is drawn on several cells
     public Combatant primary => isPrimary ? this : stats.getCombatant();
     public HealthBarManager primaryHealthBar => primary == null ? null : primary.healthBarManager;
